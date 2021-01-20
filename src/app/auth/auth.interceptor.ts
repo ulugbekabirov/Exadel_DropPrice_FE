@@ -4,19 +4,18 @@ import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   TOKEN_HEADER_KEY = 'Authorization';
-
   constructor(private authService: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = this.authService.getSession();
-    if (token) {
-      const clonedReq = req.clone({
-        headers: req.headers.set(this.TOKEN_HEADER_KEY, token)
+    const currentUser = this.authService.activeUserValue;
+    const isLoggedIn = currentUser && currentUser.token;
+    // need add filter by url
+    if (isLoggedIn) {
+      const clonedReq: HttpRequest<any> = req.clone({
+        headers: req.headers.set(this.TOKEN_HEADER_KEY, currentUser.token)
       });
       return next.handle(clonedReq);
     }
