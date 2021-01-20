@@ -3,8 +3,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { User } from './user';
-import { UserInfo } from './user-info';
+import { User } from '../models';
+import { AuthInfoResponse } from '../models';
 
 
 @Injectable({
@@ -13,32 +13,31 @@ import { UserInfo } from './user-info';
 export class AuthService {
   API_URL = 'http//localhost:4000';
   KEY_AUTH_TOKEN = 'key_auth_token';
-  private activeUserSubject: BehaviorSubject<UserInfo> = new BehaviorSubject<UserInfo>(null);
+  private activeUserSubject: BehaviorSubject<AuthInfoResponse> = new BehaviorSubject<AuthInfoResponse>(null);
 
   constructor(
     private http: HttpClient,
     private router: Router
   ) {}
 
-  get activeUserValue(): UserInfo {
+  get activeUserValue(): AuthInfoResponse {
     return this.activeUserSubject.value;
   }
 
-  private handleAuth(res: UserInfo): void {
+  private handleAuth(res: AuthInfoResponse): void {
     this.activeUserSubject.next(res);
     localStorage.setItem(this.KEY_AUTH_TOKEN, res.token);
   }
 
   handleError(error: HttpErrorResponse): Observable<any> {
-    console.log('Error', error.message);
     return throwError(error);
   }
 
-  login(user: User): Observable<UserInfo> {
-    return this.http.post<UserInfo>(`${this.API_URL}/api/authenticate/login`, user)
+  login(user: User): Observable<AuthInfoResponse> {
+    return this.http.post<AuthInfoResponse>(`${this.API_URL}/api/authenticate/login`, user)
       .pipe(
         catchError(this.handleError),
-        tap((res: UserInfo) => this.handleAuth(res))
+        tap((res: AuthInfoResponse) => this.handleAuth(res))
       );
   }
 
