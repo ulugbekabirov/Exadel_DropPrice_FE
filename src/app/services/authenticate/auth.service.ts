@@ -18,13 +18,13 @@ export class AuthService {
         shareReplay()
       );
   }
-  logout() {
+  logout(): void {
     localStorage.removeItem('key_token');
   }
-  getSession() {
+  getSession(): string {
     return localStorage.getItem('key_token');
   }
-  setSession(token) {
+  setSession(token: string): void {
     localStorage.setItem('key_token', token);
   }
 }
