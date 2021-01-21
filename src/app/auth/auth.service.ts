@@ -11,9 +11,11 @@ import { AuthInfoResponse } from '../models';
   providedIn: 'root'
 })
 export class AuthService {
-  API_URL = 'http//localhost:4000';
+  API_URL = 'http//localhost:4000/api';
+  AUTH_ENDPOINT = '/authenticate/login';
   KEY_AUTH_TOKEN = 'key_auth_token';
-  private activeUserSubject: BehaviorSubject<AuthInfoResponse> = new BehaviorSubject<AuthInfoResponse>(null);
+  private activeUserSubject: BehaviorSubject<AuthInfoResponse>
+    = new BehaviorSubject<AuthInfoResponse>(JSON.parse(localStorage.getItem(this.KEY_AUTH_TOKEN)));
 
   constructor(
     private http: HttpClient,
@@ -24,9 +26,9 @@ export class AuthService {
     return this.activeUserSubject.value;
   }
 
-  private handleAuth(res: AuthInfoResponse): void {
-    this.activeUserSubject.next(res);
-    localStorage.setItem(this.KEY_AUTH_TOKEN, res.token);
+  private handleAuth(authInfo: AuthInfoResponse): void {
+    localStorage.setItem(this.KEY_AUTH_TOKEN, JSON.stringify(authInfo));
+    this.activeUserSubject.next(authInfo);
   }
 
   handleError(error: HttpErrorResponse): Observable<any> {
@@ -34,16 +36,16 @@ export class AuthService {
   }
 
   login(user: User): Observable<AuthInfoResponse> {
-    return this.http.post<AuthInfoResponse>(`${this.API_URL}/api/authenticate/login`, user)
+    return this.http.post<AuthInfoResponse>(`${this.API_URL}${this.AUTH_ENDPOINT}`, user)
       .pipe(
         catchError(this.handleError),
-        tap((res: AuthInfoResponse) => this.handleAuth(res))
+        tap((authInfo: AuthInfoResponse) => this.handleAuth(authInfo))
       );
   }
 
   logout(): void {
+    localStorage.removeItem(this.KEY_AUTH_TOKEN);
     this.activeUserSubject.next(null);
     this.router.navigate(['/login']);
-    localStorage.removeItem(this.KEY_AUTH_TOKEN);
   }
 }
