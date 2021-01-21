@@ -5,6 +5,16 @@
 	"LANGUAGES": {
 		"EN": "English",
 		"RU": "Russian",
-		"TITLE": "Language"
-	}
+		"TITLE": "Change language"
+  },
+  "LOGIN": {
+    "TITLE": "Log In",
+    "EMAIL_LABEL": "Enter your email",
+    "REQUIRED_EMAIL": "Email is required",
+    "VALID_EMAIL": "Please enter a valid email address",
+    "PASSWORD_LABEL": "Enter your password",
+    "REQUIRED_PASSWORD":"Password is required",
+    "PASS_ERR_LENGTH": "Password should contain 6 characters",
+    "STRONG_PASS": "Password must including UPPER/lowercase and number"
+  }
 }
