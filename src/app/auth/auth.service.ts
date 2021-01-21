@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { User } from '../models';
+import { AuthUser } from '../models';
 import { AuthInfoResponse } from '../models';
 
 
@@ -35,7 +35,7 @@ export class AuthService {
     return throwError(error);
   }
 
-  login(user: User): Observable<AuthInfoResponse> {
+  login(user: AuthUser): Observable<AuthInfoResponse> {
     return this.http.post<AuthInfoResponse>(`${this.API_URL}${this.AUTH_ENDPOINT}`, user)
       .pipe(
         catchError(this.handleError),

@@ -11,10 +11,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   declarations: [
     AppComponent
   ],
-  imports: [git 
+  imports: [
     BrowserModule,
     HttpClientModule,
-    BrowserAnimationsModule,
+    // BrowserAnimationsModule,
     FlexLayoutModule
   ],
   providers: [
