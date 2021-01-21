@@ -18,8 +18,7 @@ export class AuthService {
   constructor(
     private restApi: ApiDataService,
     private router: Router
-  ) {
-  }
+  ) {}
 
   get activeUserValue(): AuthInfoResponse {
     return this.activeUserSubject.value;

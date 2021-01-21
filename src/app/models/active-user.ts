@@ -1,5 +1,6 @@
 export interface ActiveUser {
   id?: number;
+  role?: string;
   email?: string;
   firstName?: string;
   lastName?: string;
