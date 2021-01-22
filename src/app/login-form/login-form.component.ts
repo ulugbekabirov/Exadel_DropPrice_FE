@@ -40,6 +40,7 @@ export class LoginFormComponent implements OnInit {
       ],
     });
   }
+
   onSubmit() {
     console.warn(this.loginForm.value);
   }
@@ -50,9 +51,5 @@ export class LoginFormComponent implements OnInit {
 
   get password() {
     return this.loginForm.get('password');
-  }
-
-  login() {
-    console.log('Login is work');
   }
 }

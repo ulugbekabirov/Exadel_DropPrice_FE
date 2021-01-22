@@ -6,7 +6,6 @@
         <mat-form-field>
           <mat-label>{{ "LOGIN.EMAIL_LABEL" | translate }}</mat-label>
           <input matInput formControlName="email" />
-          <mat-hint>{{ "LOGIN.REQUIRED_EMAIL" | translate }}</mat-hint>
           <mat-error>{{ "LOGIN.VALID_EMAIL" | translate }} </mat-error>
         </mat-form-field>
         <mat-form-field>
@@ -25,7 +24,6 @@
           >
             <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
           </button>
-          <mat-hint>{{ "LOGIN.REQUIRED_PASSWORD" | translate }}</mat-hint>
           <mat-error *ngIf="password.hasError('minlength')">
             {{ "LOGIN.PASS_ERR_LENGTH" | translate }}
           </mat-error>
@@ -39,14 +37,13 @@
           color="primary"
           [disabled]="loginForm.invalid"
           type="submit"
-          (click)="login()"
         >
           {{ "LOGIN.TITLE" | translate }}
         </button>
       </form>
     </mat-card-content>
   </mat-card>
-  <div class="languages-select">
+  <!-- <div class="languages-select">
     <label>
       {{ "LANGUAGES.TITLE" | translate }}
       <select #langSelect (change)="translateService.use(langSelect.value)">
@@ -59,5 +56,5 @@
         </option>
       </select>
     </label>
-  </div>
+  </div> -->
 </div>
