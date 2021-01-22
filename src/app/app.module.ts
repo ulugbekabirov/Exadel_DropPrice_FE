@@ -20,14 +20,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 
-import { MissingTranslationService } from './missing-translation.service';
+import { MissingTranslationService } from './login-service/missing-translation.service';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { HomeComponent } from './home/home.component';
 
+
+
+import { routing } from './app.routing';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
 }
 @NgModule({
-  declarations: [AppComponent, LoginFormComponent],
+  declarations: [AppComponent, LoginFormComponent, HomeComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -41,6 +45,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatChipsModule,
     MatListModule,
     MatCardModule,
+    routing,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

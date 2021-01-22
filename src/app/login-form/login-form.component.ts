@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { User } from '../user';
+import { User } from '../Users/user';
 
 @Component({
   selector: 'app-login-form',
