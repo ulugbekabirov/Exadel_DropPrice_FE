@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { AuthUser } from '../models';
-import { AuthInfoResponse } from '../models';
+import { AuthInfo } from '../models';
 import { ApiDataService } from '../services/api-data.service';
 import { KEY_AUTH_TOKEN } from '../../constants';
 
@@ -13,33 +12,34 @@ import { KEY_AUTH_TOKEN } from '../../constants';
   providedIn: 'root'
 })
 export class AuthService {
-  private activeUserSubject: BehaviorSubject<AuthInfoResponse>
-    = new BehaviorSubject<AuthInfoResponse>(JSON.parse(localStorage.getItem(KEY_AUTH_TOKEN)));
+  private activeUserSubject: BehaviorSubject<AuthInfo>;
+  public activeUser: Observable<AuthInfo>;
 
   constructor(
     private restApi: ApiDataService,
-    private router: Router
-  ) {}
+  ) {
+    this.activeUserSubject = new BehaviorSubject<AuthInfo>(JSON.parse(localStorage.getItem(KEY_AUTH_TOKEN)));
+    this.activeUser = this.activeUserSubject.asObservable();
+  }
 
-  get activeUserValue(): AuthInfoResponse {
+  get activeUserValue(): AuthInfo {
     return this.activeUserSubject.value;
   }
 
-  private handleAuth(authInfo: AuthInfoResponse): void {
+  private handleAuth(authInfo: AuthInfo): void {
     localStorage.setItem(KEY_AUTH_TOKEN, JSON.stringify(authInfo));
     this.activeUserSubject.next(authInfo);
   }
 
-  login(user: AuthUser): Observable<AuthInfoResponse> {
+  login(user: AuthUser): Observable<AuthInfo> {
     return this.restApi.getAuth(user)
       .pipe(
-        tap((authInfo: AuthInfoResponse) => this.handleAuth(authInfo))
+        tap((authInfo: AuthInfo) => this.handleAuth(authInfo))
       );
   }
 
   logout(): void {
     localStorage.removeItem(KEY_AUTH_TOKEN);
     this.activeUserSubject.next(null);
-    this.router.navigate(['/login']);
   }
 }
