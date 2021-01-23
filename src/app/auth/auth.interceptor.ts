@@ -13,8 +13,7 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const currentUser = this.authService.activeUserValue;
     const isLoggedIn = currentUser && currentUser.token;
-    // need add filter by url
-    if (isLoggedIn) {
+    if (isLoggedIn && A) {
       const clonedReq: HttpRequest<any> = req.clone({
         headers: req.headers.set(TOKEN_HEADER_KEY, currentUser.token)
       });
