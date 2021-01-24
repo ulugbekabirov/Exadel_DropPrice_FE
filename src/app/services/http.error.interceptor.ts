@@ -16,16 +16,13 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         catchError((error: HttpErrorResponse) => {
           let errorMessage = '';
           if (error.error instanceof ErrorEvent) {
-            console.warn('client error');
             errorMessage = `Error: ${error.error.message}`;
           } else {
-            console.warn('server error');
             errorMessage = `Error Code: ${error.status},  Message: ${error.message}`;
             if (error.status === 401) {
               this.authService.logout();
             }
           }
-          console.warn(errorMessage);
           return throwError(errorMessage);
         })
       );
