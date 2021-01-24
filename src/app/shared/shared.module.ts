@@ -26,5 +26,17 @@ import { MatCardModule } from '@angular/material/card';
     MatCardModule,
     ReactiveFormsModule,
   ],
+  exports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatIconModule,
+    MatChipsModule,
+    MatListModule,
+    MatCardModule,
+    ReactiveFormsModule,
+  ],
 })
 export class SharedModule {}

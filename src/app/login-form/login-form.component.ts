@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from './../auth/auth.service';
 import { User } from '../user';
 
 @Component({
@@ -20,6 +21,7 @@ export class LoginFormComponent implements OnInit {
   colorControl = new FormControl('primary');
   hide = true;
   constructor(
+    private auth: AuthService,
     private fb: FormBuilder,
     public translateService: TranslateService
   ) {
@@ -42,7 +44,11 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.warn(this.loginForm.value);
+    this.auth
+      .login(this.loginForm.value)
+      .subscribe((x) => console.log('response', x));
+
+    this.loginForm.reset();
   }
 
   get email() {

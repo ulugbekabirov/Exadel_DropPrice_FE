@@ -1,3 +1,14 @@
+html,
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.login-wrapper {
+  height: 100%;
+}
+
 %login-form {
   max-width:400px;
   margin: 2em auto;
@@ -5,14 +16,14 @@
 mat-card {
   @extend %login-form;
   text-align: center;
-  vertical-align: middle;
+  // vertical-align: middle;
   padding: 50px;
+  min-width: 400px;
 }
 
 mat-form-field {
   display: block;
 }
-
 
 button {
   width: 100%;
