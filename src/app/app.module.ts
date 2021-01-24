@@ -7,9 +7,14 @@ import {
   MissingTranslationHandler,
 } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { AppComponent } from './app.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FlexLayoutModule } from '@angular/flex-layout';
+
+import { SharedModule } from './shared/shared.module';
+import { AuthInterceptor } from './auth/auth.interceptor';
+import { AppComponent } from './app.component';
+import { AuthService } from './auth/auth.service';
+import { HttpErrorInterceptor } from './services/http.error.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { MatInputModule } from '@angular/material/input';
@@ -35,7 +40,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FlexLayoutModule,
+    // FlexLayoutModule,
     HttpClientModule,
     ReactiveFormsModule,
     MatInputModule,
@@ -45,6 +50,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatChipsModule,
     MatListModule,
     MatCardModule,
+    SharedModule,
     routing,
     TranslateModule.forRoot({
       loader: {
@@ -58,7 +64,12 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
     }),
   ],
-  providers: [],
   bootstrap: [AppComponent],
+  providers: [
+    AuthService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
+  ],
 })
-export class AppModule {}
+export class AppModule {
+}
