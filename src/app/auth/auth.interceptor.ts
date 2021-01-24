@@ -2,7 +2,6 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { TOKEN_HEADER_KEY } from 'src/constants';
 import { AuthService } from './auth.service';
 import { AuthInfo } from '../models';
 

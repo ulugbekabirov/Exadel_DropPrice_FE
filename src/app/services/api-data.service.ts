@@ -12,16 +12,8 @@ import { environment } from '../../environments/environment';
 export class ApiDataService {
   constructor(private http: HttpClient) {}
 
-  handleError(error: HttpErrorResponse): Observable<any> {
-    return throwError(error);
-  }
-
   getAuth(user: AuthUser): Observable<AuthInfo> {
-    return this.http.post<AuthInfo>(`${environment.identityUrl}${AUTH_ENDPOINT}`, user)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      );
+    return this.http.post<AuthInfo>(`${environment.identityUrl}${AUTH_ENDPOINT}`, user);
   }
 
   getUserInfo(): Observable<ActiveUser> {
@@ -29,31 +21,4 @@ export class ApiDataService {
       .get<ActiveUser>(`${environment.identityUrl}${USER_INFO_ENDPOINT}`);
   }
 
-  // getVendorById(id: number): Observable<Vendor> {
-  //   return this.http
-  //     .get<Vendor>(`${API_URL}/${VENDORS_ENDPOINT}/${id}`)
-  //     .pipe(
-  //       catchError(this.handleError)
-  //     );
-  // }
-  //
-  // getDiscountById(id: number): Observable<Discount> {
-  //   return this.http
-  //     .get<Discount>(`${API_URL}/${DISCOUNTS_ENDPOINT}/${id}`);
-  // }
-  //
-  // getVendors(): Observable<Vendor[]> {
-  //   return this.http
-  //     .get<Vendor[]>(`${API_URL}/${VENDORS_ENDPOINT}`);
-  // }
-  //
-  // getDiscounts(): Observable<Discount[]> {
-  //   return this.http
-  //     .get<Discount[]>(`${API_URL}/${DISCOUNTS_ENDPOINT}`);
-  // }
-  //
-  // editVendor(id: number, vendor: Vendor): Observable<Vendor> {
-  //   return this.http
-  //     .put<Vendor>(`${API_URL}/${VENDORS_ENDPOINT}/${id}`, vendor);
-  // }
 }
