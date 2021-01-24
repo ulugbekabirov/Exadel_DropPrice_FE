@@ -7,6 +7,12 @@
 		"RU": "Русский",
 		"TITLE": "Изменить язык"
   },
+  "BUTTON":{
+    "LOGOUT" : "Выход"
+  },
+  "HEADER":{
+    "SELECTOR-TITLE" : "Язык"
+  },
   "LOGIN": {
     "TITLE": "Вход",
     "EMAIL_LABEL": "Введите электронный адрес*",
