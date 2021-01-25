@@ -7,6 +7,12 @@
 		"RU": "Русский",
 		"TITLE": "Изменить язык"
   },
+  "BUTTON":{
+    "LOGOUT" : "Выход"
+  },
+  "HEADER":{
+    "SELECTOR_TITLE" : "Язык"
+  },
   "LOGIN": {
     "TITLE": "Вход",
     "BTN_TITLE": "Войти",

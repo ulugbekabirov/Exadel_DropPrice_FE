@@ -3,10 +3,18 @@
 		"HEADER": "Ngx Translate Application Usage in Angular"
 	},
 	"LANGUAGES": {
+   
 		"EN": "English",
 		"RU": "Russian",
 		"TITLE": "Change language"
   },
+  "BUTTON":{
+    "LOGOUT" : "Logout"
+  },
+  "HEADER":{
+    "SELECTOR_TITLE" : "Language"
+  },
+
   "LOGIN": {
     "TITLE": "Log In",
     "BTN_TITLE": "Log In",

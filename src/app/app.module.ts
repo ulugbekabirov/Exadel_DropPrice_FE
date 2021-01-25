@@ -10,6 +10,7 @@ import {
   TranslateModule,
   MissingTranslationHandler,
 } from '@ngx-translate/core';
+import { FormsModule } from '@angular/forms';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AuthInterceptor } from './auth/auth.interceptor';
@@ -19,13 +20,15 @@ import { MissingTranslationService } from './missing-translation.service';
 
 import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { HeaderComponent } from './header/header.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
 }
 @NgModule({
-  declarations: [AppComponent, LoginFormComponent],
+  declarations: [AppComponent, LoginFormComponent, HeaderComponent],
   imports: [
+    FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -42,7 +45,6 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
     }),
   ],
-
   providers: [
     AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
