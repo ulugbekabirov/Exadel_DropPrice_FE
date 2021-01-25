@@ -1,7 +1,14 @@
 <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
-  <mat-card>
+  <mat-card fxLayout.xs="row" fxLayoutAlign.xs="center center">
     <mat-card-content>
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <form
+        fxLayoutGap.xs="30px"
+        fxLayout.xs="column"
+        fxLayoutAlign.xs="center start"
+        [formGroup]="loginForm"
+        #formDirective="ngForm"
+        (ngSubmit)="onSubmit(loginForm, formDirective)"
+      >
         <h2>{{ "LOGIN.TITLE" | translate }}</h2>
         <mat-form-field>
           <mat-label>{{ "LOGIN.EMAIL_LABEL" | translate }}</mat-label>
@@ -38,7 +45,7 @@
           [disabled]="loginForm.invalid"
           type="submit"
         >
-          {{ "LOGIN.TITLE" | translate }}
+          {{ "LOGIN.BTN_TITLE" | translate }}
         </button>
       </form>
     </mat-card-content>

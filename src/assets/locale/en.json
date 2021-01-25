@@ -9,6 +9,7 @@
   },
   "LOGIN": {
     "TITLE": "Log In",
+    "BTN_TITLE": "Log In",
     "EMAIL_LABEL": "Enter your email*",
     "VALID_EMAIL": "Please enter a valid email address",
     "PASSWORD_LABEL": "Enter your password*",

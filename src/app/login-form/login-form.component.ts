@@ -4,7 +4,9 @@ import {
   FormGroup,
   FormControl,
   Validators,
+  FormGroupDirective,
 } from '@angular/forms';
+
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from './../auth/auth.service';
 import { User } from '../user';
@@ -20,6 +22,7 @@ export class LoginFormComponent implements OnInit {
   errorMsg: string = '';
   colorControl = new FormControl('primary');
   hide = true;
+
   constructor(
     private auth: AuthService,
     private fb: FormBuilder,
@@ -43,12 +46,17 @@ export class LoginFormComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    this.auth
-      .login(this.loginForm.value)
-      .subscribe((x) => console.log('response', x));
+  onSubmit(formData: any, formDirective: FormGroupDirective) {
+    if (this.loginForm.valid) {
+      this.auth
+        .login(this.loginForm.value)
+        .subscribe((x) => console.log('response', x));
 
-    this.loginForm.reset();
+      formDirective.resetForm();
+      this.loginForm.reset();
+      // this.loginForm.markAsUntouched();
+      // this.loginForm.get('email').updateValueAndValidity();
+    }
   }
 
   get email() {

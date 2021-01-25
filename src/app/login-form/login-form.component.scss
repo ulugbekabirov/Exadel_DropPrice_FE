@@ -2,7 +2,7 @@ html,
 body {
 	height: 100%;
 	margin: 0;
-	padding: 0;
+  padding: 0;
 }
 
 .login-wrapper {
@@ -10,15 +10,20 @@ body {
 }
 
 %login-form {
-  max-width:400px;
+  max-width: 300px;
   margin: 2em auto;
 }
 mat-card {
   @extend %login-form;
   text-align: center;
-  // vertical-align: middle;
   padding: 50px;
   min-width: 400px;
+  @media screen and (device-aspect-ratio: 40/71) {
+    min-width: 300px;
+  }
+  h2{
+    align-self: center;
+  }
 }
 
 mat-form-field {

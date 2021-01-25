@@ -26,6 +26,7 @@ import { MatCardModule } from '@angular/material/card';
     MatCardModule,
     ReactiveFormsModule,
   ],
+
   exports: [
     CommonModule,
     FlexLayoutModule,
