@@ -17,10 +17,7 @@ import { User } from '../user';
   styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent implements OnInit {
-  user: User;
   loginForm: FormGroup;
-  errorMsg: string = '';
-  colorControl = new FormControl('primary');
   hide = true;
 
   constructor(
@@ -53,6 +50,7 @@ export class LoginFormComponent implements OnInit {
       formDirective.resetForm();
       this.loginForm.reset();
     }
+    return this.auth.login(this.loginForm.value);
   }
 
   get email() {
