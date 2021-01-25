@@ -22,10 +22,7 @@ export class LoginFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public translateService: TranslateService
-  ) {
-    translateService.addLangs(['ru', 'en']);
-    translateService.setDefaultLang('ru');
-  }
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({

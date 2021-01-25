@@ -13,17 +13,17 @@ import { AuthService } from '../auth/auth.service';
 
 export class HeaderComponent implements OnInit{
   public langs:string[] = environment.locales;
-  defaultLang:string = environment.defaultLocale;
-
-  ngOnInit(): void {
-    
-  }
+  defaultLang:string = localStorage.getItem('currentlang') ?? environment.defaultLocale;
+  
   constructor(public translateService: TranslateService,private auth: AuthService) {}
   languageHandler(selectedLang:string){
     this.translateService.use(selectedLang);
   }
   logoutHandler(){
-    console.log('called');
     this.auth.logout();
+  }
+  
+  ngOnInit(){
+  
   }
 }

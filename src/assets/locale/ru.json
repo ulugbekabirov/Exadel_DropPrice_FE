@@ -11,7 +11,7 @@
     "LOGOUT" : "Выход"
   },
   "HEADER":{
-    "SELECTOR-TITLE" : "Язык"
+    "SELECTOR_TITLE" : "Язык"
   },
   "LOGIN": {
     "TITLE": "Вход",

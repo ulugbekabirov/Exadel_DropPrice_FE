@@ -12,7 +12,7 @@
     "LOGOUT" : "Logout"
   },
   "HEADER":{
-    "SELECTOR-TITLE" : "Language"
+    "SELECTOR_TITLE" : "Language"
   },
 
   "LOGIN": {
