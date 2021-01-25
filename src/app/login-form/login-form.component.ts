@@ -2,14 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
-  FormControl,
   Validators,
   FormGroupDirective,
 } from '@angular/forms';
 
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from './../auth/auth.service';
-import { User } from '../user';
 
 @Component({
   selector: 'app-login-form',
@@ -17,10 +15,7 @@ import { User } from '../user';
   styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent implements OnInit {
-  user: User;
   loginForm: FormGroup;
-  errorMsg: string = '';
-  colorControl = new FormControl('primary');
   hide = true;
 
   constructor(
@@ -48,11 +43,8 @@ export class LoginFormComponent implements OnInit {
     });
   }
 
-  onSubmit(formData: any, formDirective: FormGroupDirective) {
-    if (this.loginForm.valid) {
-      formDirective.resetForm();
-      this.loginForm.reset();
-    }
+  onSubmit() {
+    this.auth.login(this.loginForm.value);
   }
 
   get email() {
@@ -61,5 +53,10 @@ export class LoginFormComponent implements OnInit {
 
   get password() {
     return this.loginForm.get('password');
+  }
+
+  resetLoginForm(formDirective: FormGroupDirective) {
+    formDirective.resetForm();
+    this.loginForm.reset();
   }
 }
