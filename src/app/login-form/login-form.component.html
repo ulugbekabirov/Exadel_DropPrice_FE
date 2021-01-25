@@ -1,7 +1,14 @@
-<div class="login-wrapper">
-  <mat-card>
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card fxLayout.xs="row" fxLayoutAlign.xs="center center">
     <mat-card-content>
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <form
+        fxLayoutGap.xs="30px"
+        fxLayout.xs="column"
+        fxLayoutAlign.xs="center start"
+        [formGroup]="loginForm"
+        #formDirective="ngForm"
+        (ngSubmit)="onSubmit(loginForm, formDirective)"
+      >
         <h2>{{ "LOGIN.TITLE" | translate }}</h2>
         <mat-form-field>
           <mat-label>{{ "LOGIN.EMAIL_LABEL" | translate }}</mat-label>
@@ -19,7 +26,7 @@
             mat-icon-button
             matSuffix
             (click)="hide = !hide"
-            [attr.aria-label]="'Hide password'"
+            [attr.aria-label]="'{{LOGIN.HIDE | translate}}'"
             [attr.aria-pressed]="hide"
           >
             <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
@@ -38,23 +45,9 @@
           [disabled]="loginForm.invalid"
           type="submit"
         >
-          {{ "LOGIN.TITLE" | translate }}
+          {{ "LOGIN.BTN_TITLE" | translate }}
         </button>
       </form>
     </mat-card-content>
   </mat-card>
-  <!-- <div class="languages-select">
-    <label>
-      {{ "LANGUAGES.TITLE" | translate }}
-      <select #langSelect (change)="translateService.use(langSelect.value)">
-        <option
-          *ngFor="let lang of translateService.getLangs()"
-          [value]="lang"
-          [selected]="lang === translateService.currentLang"
-        >
-          {{ lang }}
-        </option>
-      </select>
-    </label>
-  </div> -->
 </div>

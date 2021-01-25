@@ -11,15 +11,11 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
-
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     FlexLayoutModule,
-    FormsModule,
-    ReactiveFormsModule,
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
@@ -27,12 +23,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatChipsModule,
     MatListModule,
     MatCardModule,
+    ReactiveFormsModule,
   ],
+
   exports: [
     CommonModule,
     FlexLayoutModule,
-    FormsModule,
-    ReactiveFormsModule,
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
@@ -40,6 +36,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatChipsModule,
     MatListModule,
     MatCardModule,
-  ]
+    ReactiveFormsModule,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

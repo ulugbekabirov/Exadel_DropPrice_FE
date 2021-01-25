@@ -9,15 +9,17 @@ import { AuthInfo } from './models';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-
-
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'InternshipFe';
   private activeUser: AuthInfo;
-   ngOnInit(): void {
-      this.translateService.use(environment.defaultLocale);
-   }
-  constructor(private translateService: TranslateService,private auth: AuthService) {
-    this.auth.activeUser.subscribe(user => this.activeUser = user);
+  constructor(
+    private auth: AuthService,
+    private translateService: TranslateService
+  ) {
+    this.auth.activeUser.subscribe((user) => (this.activeUser = user));
+  }
+
+  ngOnInit(): void {
+    this.translateService.use(environment.defaultLocale);
   }
 }

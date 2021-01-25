@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   locales: ['en', 'ru'],
-  defaultLocale: 'ru',
+  defaultLocale: localStorage.getItem('currentLang') ?? 'ru',
   identityUrl: 'https://localhost:44360/api/'
 };
 
