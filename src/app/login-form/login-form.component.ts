@@ -40,7 +40,9 @@ export class LoginFormComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(8),
-          Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
+          Validators.pattern(
+            '^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\\D*\\d)[A-Za-z\\d!$%@#£€*?&]{8,}$'
+          ),
         ],
       ],
     });
@@ -48,14 +50,8 @@ export class LoginFormComponent implements OnInit {
 
   onSubmit(formData: any, formDirective: FormGroupDirective) {
     if (this.loginForm.valid) {
-      this.auth
-        .login(this.loginForm.value)
-        .subscribe((x) => console.log('response', x));
-
       formDirective.resetForm();
       this.loginForm.reset();
-      // this.loginForm.markAsUntouched();
-      // this.loginForm.get('email').updateValueAndValidity();
     }
   }
 
