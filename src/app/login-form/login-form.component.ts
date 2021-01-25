@@ -4,9 +4,16 @@ import {
   FormGroup,
   FormControl,
   Validators,
+  FormGroupDirective,
 } from '@angular/forms';
+
 import { TranslateService } from '@ngx-translate/core';
+<<<<<<< HEAD
 import { User } from '../Users/user';
+=======
+import { AuthService } from './../auth/auth.service';
+import { User } from '../user';
+>>>>>>> dev
 
 @Component({
   selector: 'app-login-form',
@@ -19,7 +26,9 @@ export class LoginFormComponent implements OnInit {
   errorMsg: string = '';
   colorControl = new FormControl('primary');
   hide = true;
+
   constructor(
+    private auth: AuthService,
     private fb: FormBuilder,
     public translateService: TranslateService
   ) {
@@ -35,14 +44,19 @@ export class LoginFormComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(8),
-          Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
+          Validators.pattern(
+            '^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\\D*\\d)[A-Za-z\\d!$%@#£€*?&]{8,}$'
+          ),
         ],
       ],
     });
   }
 
-  onSubmit() {
-    console.warn(this.loginForm.value);
+  onSubmit(formData: any, formDirective: FormGroupDirective) {
+    if (this.loginForm.valid) {
+      formDirective.resetForm();
+      this.loginForm.reset();
+    }
   }
 
   get email() {

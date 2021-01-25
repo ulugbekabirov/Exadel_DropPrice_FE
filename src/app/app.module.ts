@@ -1,16 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+
+import { SharedModule } from './shared/shared.module';
 import {
   TranslateLoader,
   TranslateModule,
   MissingTranslationHandler,
 } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { SharedModule } from './shared/shared.module';
+
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { AppComponent } from './app.component';
 import { AuthService } from './auth/auth.service';
@@ -29,11 +31,10 @@ import { MissingTranslationService } from './login-service/missing-translation.s
 import { LoginFormComponent } from './login-form/login-form.component';
 import { HomeComponent } from './home/home.component';
 
-
-
 import { routing } from './app.routing';
 import { UndefindeComponent } from './undefinde/undefinde.component';
-import { UndefinedComponent } from './undefined/undefined.component';
+
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
 }
@@ -42,16 +43,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    // FlexLayoutModule,
     HttpClientModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatIconModule,
-    MatChipsModule,
-    MatListModule,
-    MatCardModule,
+    SharedModule,
     SharedModule,
     routing,
     TranslateModule.forRoot({
@@ -66,12 +59,11 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
     }),
   ],
-  bootstrap: [AppComponent],
+
   providers: [
     AuthService,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
   ],
 })
-export class AppModule {
-}
+export class AppModule {}
