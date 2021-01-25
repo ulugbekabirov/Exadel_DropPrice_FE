@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  identityUrl: 'https://localhost:44360/api/'
+  locales: ['en', 'ru'],
+  defaultLocale: 'ru',
+  identityUrl: 'https://localhost:44360/api/',
 };
 
 /*
