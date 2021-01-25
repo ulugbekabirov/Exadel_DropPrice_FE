@@ -13,7 +13,7 @@
     "EMAIL_LABEL": "Enter your email*",
     "VALID_EMAIL": "Please enter a valid email address",
     "PASSWORD_LABEL": "Enter your password*",
-    "PASS_ERR_LENGTH": "Password should contain 6 characters",
+    "PASS_ERR_LENGTH": "Password should contain 8 characters",
     "STRONG_PASS": "Password must including UPPER/lowercase and number",
     "HIDE": "Hide password"
   }
