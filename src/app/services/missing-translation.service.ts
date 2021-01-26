@@ -9,7 +9,7 @@ import {
 })
 export class MissingTranslationService implements MissingTranslationHandler {
   constructor() {}
-  handle(params: MissingTranslationHandlerParams) {
+  handle(params: MissingTranslationHandlerParams): string {
     return `WARN: '${params.key}' is missing in '${params.translateService.currentLang}' locale`;
   }
 }
