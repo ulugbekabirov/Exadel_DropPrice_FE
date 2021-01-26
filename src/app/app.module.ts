@@ -18,26 +18,14 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { AppComponent } from './app.component';
 import { AuthService } from './auth/auth.service';
 import { HttpErrorInterceptor } from './services/http.error.interceptor';
-import { ReactiveFormsModule } from '@angular/forms';
 
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatButtonModule } from '@angular/material/button';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatCardModule } from '@angular/material/card';
 
 import { MissingTranslationService } from './login-service/missing-translation.service';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
-
 import { routing } from './app.routing';
-
 import { NotFoundComponent } from './not-found/not-found.component';
-
-
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
