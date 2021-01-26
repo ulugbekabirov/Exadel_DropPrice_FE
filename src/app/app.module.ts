@@ -15,8 +15,8 @@ import { AuthService } from './auth/auth.service';
 import { HttpErrorInterceptor } from './services/http.error.interceptor';
 import { AppComponent } from './app.component';
 import { MissingTranslationService } from './services/missing-translation.service';
-import { LoginFormComponent } from './components/login-form.component/login-form.component';
 import { HomeComponent } from './components/home.component/home.component';
+import { LoginFormComponent } from './components/login-form.component/login-form.component';
 import { HeaderComponent } from './components/header.component/header.component';
 import { AppRoutingModule } from './app-routing/app.routing.module';
 

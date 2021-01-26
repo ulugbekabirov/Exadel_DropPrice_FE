@@ -17,15 +17,13 @@ export class VerifyUserRolesDirective implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription.push(
-      this.rolesService.getRol
+      this.rolesService.getRoles()
         .subscribe(res => {
           if (!res.userRole) {
             this.viewContainerRef.clear();
           }
-          if (this.ifRoles) {
-            const index: number = res.userRole.findIndex((element: string): boolean => this.ifRoles.indexOf(element) !== -1);
-            index > 0 ? this.viewContainerRef.createEmbeddedView(this.templateRef) : this.viewContainerRef.clear();
-          }
+          const index: number = res.userRole.findIndex((element: string): boolean => this.ifRoles.indexOf(element) !== -1);
+          index > 0 ? this.viewContainerRef.createEmbeddedView(this.templateRef) : this.viewContainerRef.clear();
         })
     );
   }

@@ -47,7 +47,6 @@ export class LoginFormComponent implements OnInit {
   onSubmit(): void {
     this.auth.login(this.loginForm.value)
       .subscribe(res => {
-        console.log('USER', res);
         this.loginForm.reset();
         const returnUrl = this.route.snapshot.queryParams['/returnUrl'] || '/';
         this.router.navigate([returnUrl]);
@@ -61,9 +60,4 @@ export class LoginFormComponent implements OnInit {
   get password() {
     return this.loginForm.get('password');
   }
-
-  // resetLoginForm(formDirective: FormGroupDirective) {
-  //   formDirective.resetForm();
-  //   this.loginForm.reset();
-  // }
 }
