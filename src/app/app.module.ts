@@ -15,10 +15,10 @@ import { AuthService } from './auth/auth.service';
 import { HttpErrorInterceptor } from './services/http.error.interceptor';
 import { AppComponent } from './app.component';
 import { MissingTranslationService } from './services/missing-translation.service';
-import { LoginFormComponent } from './login-form/login-form.component';
-import { HomeComponent } from './home/home.component';
-import { HeaderComponent } from './header/header.component';
-import { AppRoutingModule } from './app.routing.module';
+import { LoginFormComponent } from './components/login-form.component/login-form.component';
+import { HomeComponent } from './components/home.component/home.component';
+import { HeaderComponent } from './components/header.component/header.component';
+import { AppRoutingModule } from './app-routing/app.routing.module';
 
 
 export function HttpLoaderFactory(http: HttpClient) {

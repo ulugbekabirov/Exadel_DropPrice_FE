@@ -10,7 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VerifyUserRolesDirective } from './directives/verify-user-roles.directive';
-import { NotFoundComponent } from '../not-found/not-found.component';
+import { NotFoundComponent } from './components/not-found.components/not-found.component';
 
 
 @NgModule({
