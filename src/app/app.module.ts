@@ -10,7 +10,6 @@ import {
   TranslateModule,
   MissingTranslationHandler,
 } from '@ngx-translate/core';
-import { FormsModule } from '@angular/forms';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { AuthService } from './auth/auth.service';

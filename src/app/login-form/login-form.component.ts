@@ -8,6 +8,7 @@ import {
 
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from './../auth/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -21,7 +22,9 @@ export class LoginFormComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private fb: FormBuilder,
-    public translateService: TranslateService
+    public translateService: TranslateService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
@@ -40,8 +43,13 @@ export class LoginFormComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    this.auth.login(this.loginForm.value);
+  onSubmit(): void {
+    this.auth.login(this.loginForm.value)
+      .subscribe(res => {
+        this.loginForm.reset();
+        const returnUrl = this.route.snapshot.queryParams['/returnUrl'] || '/';
+        this.router.navigate([returnUrl]);
+      });
   }
 
   get email() {

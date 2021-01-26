@@ -17,7 +17,7 @@ export class VerifyUserRolesDirective implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription.push(
-      this.rolesService.getRoles()
+      this.rolesService.getRol
         .subscribe(res => {
           if (!res.userRole) {
             this.viewContainerRef.clear();

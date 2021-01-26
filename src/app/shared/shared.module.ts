@@ -12,7 +12,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VerifyUserRolesDirective } from './directives/verify-user-roles.directive';
 
 @NgModule({
-  declarations: [VerifyUserRolesDirective],
+  declarations: [
+    VerifyUserRolesDirective
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -38,6 +40,7 @@ import { VerifyUserRolesDirective } from './directives/verify-user-roles.directi
     MatChipsModule,
     MatListModule,
     MatCardModule,
+    VerifyUserRolesDirective,
   ],
 })
 export class SharedModule {}
