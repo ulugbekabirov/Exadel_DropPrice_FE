@@ -43,8 +43,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
 }
 @NgModule({
-  declarations: [AppComponent, LoginFormComponent, HomeComponent, NotFoundComponent],
-  declarations: [AppComponent, LoginFormComponent, HeaderComponent],
+  declarations: [AppComponent, LoginFormComponent, HomeComponent, NotFoundComponent,HeaderComponent],
+
   imports: [
     FormsModule,
     BrowserModule,
