@@ -8,12 +8,9 @@ import {
 } from '@angular/forms';
 
 import { TranslateService } from '@ngx-translate/core';
-<<<<<<< HEAD
 import { User } from '../Users/user';
-=======
 import { AuthService } from './../auth/auth.service';
-import { User } from '../user';
->>>>>>> dev
+
 
 @Component({
   selector: 'app-login-form',

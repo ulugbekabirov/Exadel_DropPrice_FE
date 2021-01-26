@@ -3,26 +3,17 @@ import { HomeComponent } from './home';
 import { UndefinedComponent } from './undefined';
 import { LoginFormComponent } from './login-form';
 import { AuthGuard } from './guards';
-import { AuthInfo } from './models';
 
 const appRoutes: Routes = [
     {
-        path: 'admin',
-        component: HomeComponent,
+        path: '',
+        component: LoginFormComponent,
         canActivate: [AuthGuard],
-        data: { roles: [AuthInfo] }
     },
     {
-        path: 'user',
+        path: 'home',
         component: HomeComponent,
         canActivate: [AuthGuard],
-        // data: { roles: [Role.Admin] } 
-    },
-    {
-        path: 'moder',
-        component: HomeComponent,
-        canActivate: [AuthGuard],
-        // data: { roles: [Role.Admin] } 
     },
     {
         path: 'Undefined',

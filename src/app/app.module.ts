@@ -32,14 +32,14 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { HomeComponent } from './home/home.component';
 
 import { routing } from './app.routing';
-import { UndefindeComponent } from './undefinde/undefinde.component';
+
 
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
 }
 @NgModule({
-  declarations: [AppComponent, LoginFormComponent, HomeComponent, UndefindeComponent, UndefinedComponent],
+  declarations: [AppComponent, LoginFormComponent, HomeComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
