@@ -1,14 +1,14 @@
 ﻿import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home';
-import { UndefinedComponent } from './undefined';
+import { NotFoundComponent } from './not-found';
 import { LoginFormComponent } from './login-form';
 import { AuthGuard } from './guards';
 
 const appRoutes: Routes = [
     {
-        path: '',
-        component: LoginFormComponent,
-        canActivate: [AuthGuard],
+        path:'',
+        redirectTo: '/home',
+        pathMatch:'full'
     },
     {
         path: 'home',
@@ -16,12 +16,11 @@ const appRoutes: Routes = [
         canActivate: [AuthGuard],
     },
     {
-        path: 'Undefined',
-        component: UndefinedComponent
+        path: 'login',
+        component: LoginFormComponent,
     },
 
- 
-    { path: '**', redirectTo: 'Undefined' }
+    { path: '**', component: NotFoundComponent }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

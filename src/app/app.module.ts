@@ -33,13 +33,15 @@ import { HomeComponent } from './home/home.component';
 
 import { routing } from './app.routing';
 
+import { NotFoundComponent } from './not-found/not-found.component';
+
 
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
 }
 @NgModule({
-  declarations: [AppComponent, LoginFormComponent, HomeComponent],
+  declarations: [AppComponent, LoginFormComponent, HomeComponent, NotFoundComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -65,5 +67,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
   ],
+  bootstrap:[AppComponent]
 })
 export class AppModule {}
