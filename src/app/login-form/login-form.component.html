@@ -38,13 +38,11 @@
             {{ "LOGIN.STRONG_PASS" | translate }}
           </mat-error>
         </mat-form-field>
-
         <button
           mat-flat-button
           color="primary"
           [disabled]="loginForm.invalid"
           type="submit"
-          (click)="resetLoginForm(formDirective)"
         >
           {{ "LOGIN.BTN_TITLE" | translate }}
         </button>

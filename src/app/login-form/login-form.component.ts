@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from './../auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
@@ -46,6 +47,7 @@ export class LoginFormComponent implements OnInit {
   onSubmit(): void {
     this.auth.login(this.loginForm.value)
       .subscribe(res => {
+        console.log('USER', res);
         this.loginForm.reset();
         const returnUrl = this.route.snapshot.queryParams['/returnUrl'] || '/';
         this.router.navigate([returnUrl]);
@@ -60,8 +62,8 @@ export class LoginFormComponent implements OnInit {
     return this.loginForm.get('password');
   }
 
-  resetLoginForm(formDirective: FormGroupDirective) {
-    formDirective.resetForm();
-    this.loginForm.reset();
-  }
+  // resetLoginForm(formDirective: FormGroupDirective) {
+  //   formDirective.resetForm();
+  //   this.loginForm.reset();
+  // }
 }

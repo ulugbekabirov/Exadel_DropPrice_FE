@@ -10,10 +10,13 @@ import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VerifyUserRolesDirective } from './directives/verify-user-roles.directive';
+import { NotFoundComponent } from '../not-found/not-found.component';
+
 
 @NgModule({
   declarations: [
-    VerifyUserRolesDirective
+    VerifyUserRolesDirective,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
@@ -41,6 +44,7 @@ import { VerifyUserRolesDirective } from './directives/verify-user-roles.directi
     MatListModule,
     MatCardModule,
     VerifyUserRolesDirective,
+    NotFoundComponent
   ],
 })
 export class SharedModule {}

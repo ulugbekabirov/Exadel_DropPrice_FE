@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-
 import { SharedModule } from './shared/shared.module';
 import {
   TranslateLoader,
@@ -14,26 +13,32 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { AuthService } from './auth/auth.service';
 import { HttpErrorInterceptor } from './services/http.error.interceptor';
-import { MissingTranslationService } from './services/missing-translation.service';
-
 import { AppComponent } from './app.component';
+import { MissingTranslationService } from './services/missing-translation.service';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
+import { AppRoutingModule } from './app.routing.module';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
 }
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginFormComponent,
+    HomeComponent,
     HeaderComponent
   ],
+
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     SharedModule,
+    AppRoutingModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -48,9 +53,10 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [
     AuthService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}
