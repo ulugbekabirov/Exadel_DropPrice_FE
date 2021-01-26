@@ -1,8 +1,6 @@
-import { Role } from "./role";
-
-export class ActiveUser {
+export interface ActiveUser {
   id?: number;
-  Role: string;
+  role?: string;
   email?: string;
   firstName?: string;
   lastName?: string;

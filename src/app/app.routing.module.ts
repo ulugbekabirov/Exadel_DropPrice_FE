@@ -3,6 +3,7 @@ import { HomeComponent } from './home';
 import { NotFoundComponent } from './not-found';
 import { LoginFormComponent } from './login-form';
 import { AuthGuard } from './guards';
+import { NgModule } from '@angular/core';
 
 const appRoutes: Routes = [
     {
@@ -23,5 +24,9 @@ const appRoutes: Routes = [
     { path: '**', component: NotFoundComponent }
 ];
 
-export const routing = RouterModule.forRoot(appRoutes);
+@NgModule({
+    imports: [RouterModule.forRoot(appRoutes)],
+    exports: [RouterModule]
+    })
+    export class AppRoutingModule { }
 

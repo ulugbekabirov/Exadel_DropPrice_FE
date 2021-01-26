@@ -7,7 +7,6 @@ import {
 } from '@angular/forms';
 
 import { TranslateService } from '@ngx-translate/core';
-import { User } from '../Users/user';
 import { AuthService } from './../auth/auth.service';
 
 
