@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
-  FormControl,
   Validators,
   FormGroupDirective,
 } from '@angular/forms';
@@ -18,20 +17,14 @@ import { AuthService } from './../auth/auth.service';
   styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent implements OnInit {
-  user: User;
   loginForm: FormGroup;
-  errorMsg: string = '';
-  colorControl = new FormControl('primary');
   hide = true;
 
   constructor(
     private auth: AuthService,
     private fb: FormBuilder,
     public translateService: TranslateService
-  ) {
-    translateService.addLangs(['ru', 'en']);
-    translateService.setDefaultLang('ru');
-  }
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -49,11 +42,8 @@ export class LoginFormComponent implements OnInit {
     });
   }
 
-  onSubmit(formData: any, formDirective: FormGroupDirective) {
-    if (this.loginForm.valid) {
-      formDirective.resetForm();
-      this.loginForm.reset();
-    }
+  onSubmit() {
+    this.auth.login(this.loginForm.value);
   }
 
   get email() {
@@ -62,5 +52,10 @@ export class LoginFormComponent implements OnInit {
 
   get password() {
     return this.loginForm.get('password');
+  }
+
+  resetLoginForm(formDirective: FormGroupDirective) {
+    formDirective.resetForm();
+    this.loginForm.reset();
   }
 }

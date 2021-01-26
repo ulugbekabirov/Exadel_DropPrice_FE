@@ -10,6 +10,7 @@ import {
   TranslateModule,
   MissingTranslationHandler,
 } from '@ngx-translate/core';
+import { FormsModule } from '@angular/forms';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 
@@ -30,6 +31,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MissingTranslationService } from './login-service/missing-translation.service';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './header/header.component';
 
 import { routing } from './app.routing';
 
@@ -42,7 +44,9 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 @NgModule({
   declarations: [AppComponent, LoginFormComponent, HomeComponent, NotFoundComponent],
+  declarations: [AppComponent, LoginFormComponent, HeaderComponent],
   imports: [
+    FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -61,7 +65,6 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
     }),
   ],
-
   providers: [
     AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

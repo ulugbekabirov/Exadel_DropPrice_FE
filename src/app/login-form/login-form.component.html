@@ -7,7 +7,7 @@
         fxLayoutAlign.xs="center start"
         [formGroup]="loginForm"
         #formDirective="ngForm"
-        (ngSubmit)="onSubmit(loginForm, formDirective)"
+        (ngSubmit)="onSubmit()"
       >
         <h2>{{ "LOGIN.TITLE" | translate }}</h2>
         <mat-form-field>
@@ -43,6 +43,7 @@
           color="primary"
           [disabled]="loginForm.invalid"
           type="submit"
+          (click)="resetLoginForm(formDirective)"
         >
           {{ "LOGIN.BTN_TITLE" | translate }}
         </button>
