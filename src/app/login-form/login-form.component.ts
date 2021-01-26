@@ -9,6 +9,7 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from './../auth/auth.service';
 
+
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',

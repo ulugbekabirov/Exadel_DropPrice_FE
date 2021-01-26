@@ -10,11 +10,15 @@ import { MatCardModule } from '@angular/material/card';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { NotFoundComponent } from '../not-found'
 @NgModule({
-  declarations: [],
+  declarations: [
+    NotFoundComponent
+  ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
     MatInputModule,
     MatSelectModule,
@@ -23,11 +27,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatChipsModule,
     MatListModule,
     MatCardModule,
-    ReactiveFormsModule,
   ],
 
   exports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
     MatInputModule,
     MatSelectModule,
@@ -36,7 +41,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatChipsModule,
     MatListModule,
     MatCardModule,
-    ReactiveFormsModule,
+    NotFoundComponent
   ],
 })
 export class SharedModule {}
