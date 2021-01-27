@@ -10,7 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NotFoundComponent } from '../not-found'
+import { NotFoundComponent } from '../not-found';
 @NgModule({
   declarations: [
     NotFoundComponent

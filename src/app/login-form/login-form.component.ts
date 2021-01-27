@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
+  AbstractControl,
   Validators,
   FormGroupDirective,
 } from '@angular/forms';
@@ -41,19 +42,19 @@ export class LoginFormComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     this.auth.login(this.loginForm.value);
   }
 
-  get email() {
+  get email(): AbstractControl {
     return this.loginForm.get('email');
   }
 
-  get password() {
+  get password(): AbstractControl {
     return this.loginForm.get('password');
   }
 
-  resetLoginForm(formDirective: FormGroupDirective) {
+  resetLoginForm(formDirective: FormGroupDirective): void {
     formDirective.resetForm();
     this.loginForm.reset();
   }
