@@ -7,9 +7,9 @@ import { NgModule } from '@angular/core';
 
 const appRoutes: Routes = [
     {
-        path:'',
+        path: '',
         redirectTo: '/home',
-        pathMatch:'full'
+        pathMatch: 'full'
     },
     {
         path: 'home',
@@ -27,6 +27,5 @@ const appRoutes: Routes = [
 @NgModule({
     imports: [RouterModule.forRoot(appRoutes)],
     exports: [RouterModule]
-    })
-    export class AppRoutingModule { }
-
+})
+export class AppRoutingModule { }
