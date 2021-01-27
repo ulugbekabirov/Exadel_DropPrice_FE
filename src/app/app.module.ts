@@ -21,6 +21,7 @@ import { MissingTranslationService } from './missing-translation.service';
 import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { HeaderComponent } from './header/header.component';
+import { LanguageService } from './services/language.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -47,6 +48,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [
     AuthService,
+    LanguageService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
   ],
