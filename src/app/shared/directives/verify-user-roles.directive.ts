@@ -1,6 +1,6 @@
 import { Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { pluck, tap } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { pluck } from 'rxjs/operators';
 import { AuthService } from '../../auth/auth.service';
 
 @Directive({
@@ -9,7 +9,7 @@ import { AuthService } from '../../auth/auth.service';
 export class VerifyUserRolesDirective implements OnInit, OnDestroy {
   @Input() appVerifyUserRoles: string[];
   private subscription: Subscription;
-  activeUser$ = this.auth.activeUser;
+  activeUser$: Observable<any>;
 
   constructor(
     private templateRef: TemplateRef<any>,
@@ -19,23 +19,23 @@ export class VerifyUserRolesDirective implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.activeUser$ = this.auth.activeUser;
+
     this.subscription = this.activeUser$
       .pipe(
         pluck('userRole'),
-        tap(x => console.log('DIRECTIVE', x))
       )
       .subscribe(roles => {
         if (!this.activeUser$ || !roles || roles.length === 0) {
-          this.viewContainerRef.clear();
+          return this.viewContainerRef.clear();
         }
         const index = roles.findIndex((element) => this.appVerifyUserRoles.indexOf(element) !== -1);
         if (index < 0) {
-          this.viewContainerRef.clear();
+          return this.viewContainerRef.clear();
         } else {
-          this.viewContainerRef.createEmbeddedView(this.templateRef);
+          return this.viewContainerRef.createEmbeddedView(this.templateRef);
         }
       });
-
   }
 
   ngOnDestroy(): void {
