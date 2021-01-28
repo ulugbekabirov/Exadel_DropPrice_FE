@@ -11,7 +11,9 @@
     "LOGOUT" : "Выход"
   },
   "HEADER":{
-    "SELECTOR_TITLE" : "Язык"
+    "SELECTOR_TITLE" : "Язык",
+    "ADMIN_PANEL_LINK_TITLE": "Панель Администатора",
+    "MODERATOR_PANEL_LINK_TITLE": "Добавить Вендора"
   },
   "LOGIN": {
     "TITLE": "Вход",

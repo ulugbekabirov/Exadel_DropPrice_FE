@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../../auth/auth.service';
-import { VerifyUserRolesDirective } from '../../shared/directives/verify-user-roles.directive';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +10,7 @@ import { VerifyUserRolesDirective } from '../../shared/directives/verify-user-ro
 })
 
 
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   public langs: string[] = environment.locales;
   defaultLang: string = localStorage.getItem('currentLang') ?? environment.defaultLocale;
   activeUser$ = this.auth.activeUser;
@@ -19,9 +18,6 @@ export class HeaderComponent implements OnInit {
   constructor(
     public translateService: TranslateService,
     private auth: AuthService) {
-  }
-
-  ngOnInit(): void {
   }
 
   languageHandler(selectedLang: string): void {

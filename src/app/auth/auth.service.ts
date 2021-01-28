@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-
 import { AuthUser } from '../models';
 import { AuthInfo } from '../models';
 import { ApiDataService } from '../services/api-data.service';
@@ -24,14 +23,6 @@ export class AuthService {
 
   get activeUserValue(): AuthInfo {
     return this.activeUserSubject.value;
-  }
-
-  isAuthorized(): boolean {
-    return !!this.activeUser;
-  }
-
-  hasRole(role): boolean {
-    return this.isAuthorized() && this.activeUserValue.userRole === role;
   }
 
   private handleAuth(authInfo: AuthInfo): void {

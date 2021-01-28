@@ -1,22 +1,20 @@
 <div class="header">
-  <div class="logo">Logo</div>
-  <div class="right-side"
+  <a class="header__logo"
+     routerLink=""
+  >DropPrice</a>
+  <div class="header__nav"
        fxLayoutGap="20px"
        fxLayoutAlign="center center"
   >
     <a *appVerifyUserRoles='["Admin"]'
        mat-stroked-button
-       href="https://www.google.com/"
-       target="_blank"
     >
-      Панель Администратора
+      {{ "HEADER.ADMIN_PANEL_LINK_TITLE" | translate }}
     </a>
     <a *appVerifyUserRoles='["Moderator"]'
        mat-stroked-button
-       href="https://www.google.com/"
-       target="_blank"
     >
-      Добавить Вендора
+      {{ "HEADER.MODERATOR_PANEL_LINK_TITLE" | translate }}
     </a>
     <mat-form-field appearance="fill" class="language">
       <mat-label>{{ "HEADER.SELECTOR_TITLE" | translate }}</mat-label>
