@@ -4,11 +4,10 @@ import {
   FormGroup,
   AbstractControl,
   Validators,
-  FormGroupDirective,
 } from '@angular/forms';
-
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from './../auth/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -23,8 +22,11 @@ export class LoginFormComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private fb: FormBuilder,
-    public translateService: TranslateService
-  ) {}
+    public translateService: TranslateService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) {
+  }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -43,7 +45,12 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.auth.login(this.loginForm.value);
+    this.auth.login(this.loginForm.value)
+      .subscribe(() => {
+        this.loginForm.reset();
+        const returnUrl = this.route.snapshot.queryParams['/returnUrl'] || '/';
+        this.router.navigate([returnUrl]);
+      });
   }
 
   get email(): AbstractControl {
@@ -52,10 +59,5 @@ export class LoginFormComponent implements OnInit {
 
   get password(): AbstractControl {
     return this.loginForm.get('password');
-  }
-
-  resetLoginForm(formDirective: FormGroupDirective): void {
-    formDirective.resetForm();
-    this.loginForm.reset();
   }
 }
