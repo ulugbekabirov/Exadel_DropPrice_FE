@@ -1,6 +1,34 @@
-p {
-  font-size: 50px;
-  padding: 50px;
+.main-container{
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  width: 80%;
+  height: 90%;
+  left: 0;
+  right: 0;
+  margin:0 auto;
+  padding: 5px;
 }
+
+.search{
+  height: 30%;
+  padding: 5px;
+  border:1px solid black;
+}
+
+.discount-wrapper{
+  padding: 5px;
+  height: inherit;
+  border:1px solid black;
+}
+
+.example-form {
+  text-align: center;
+  min-width: 150px;
+  width: 100%;
+  
+  .search-input{
+    width: 80%;
+  }
+}
+
+

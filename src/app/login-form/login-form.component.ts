@@ -42,7 +42,11 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.auth.login(this.loginForm.value);
+    this.auth.login(this.loginForm.value).subscribe(data => {
+      console.log('data',data);
+      
+    })
+
   }
 
   get email() {
@@ -53,8 +57,8 @@ export class LoginFormComponent implements OnInit {
     return this.loginForm.get('password');
   }
 
-  resetLoginForm(formDirective: FormGroupDirective) {
-    formDirective.resetForm();
-    this.loginForm.reset();
-  }
+  // resetLoginForm(formDirective: FormGroupDirective) {
+  //   formDirective.resetForm();
+  //   this.loginForm.reset();
+  // }
 }

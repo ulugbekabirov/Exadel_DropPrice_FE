@@ -24,5 +24,10 @@
     "PASS_ERR_LENGTH": "Password should contain 8 characters",
     "STRONG_PASS": "Password must including UPPER/lowercase and number",
     "HIDE": "Hide password"
+  },
+  
+  "MAIN_PAGE":{
+    "SEARCH" : "Search"
   }
 }
+

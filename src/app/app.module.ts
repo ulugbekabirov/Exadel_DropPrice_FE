@@ -19,6 +19,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app.routing.module';
+import { DiscountComponent } from './home/components/discount/discount.component';
 
 
 
@@ -31,7 +32,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent, 
     LoginFormComponent, 
     HomeComponent, 
-    HeaderComponent],
+    HeaderComponent, DiscountComponent],
 
   imports: [
     BrowserModule,
