@@ -1,21 +1,23 @@
 <div class="header">
   <div class="logo">Logo</div>
-  <p>{{activeUser$ | async}}</p>
-  <a *appVerifyUserRoles='["Admin"]'
-    mat-raised-button
-     href="https://www.google.com/"
-     target="_blank"
+  <div class="right-side"
+       fxLayoutGap="20px"
+       fxLayoutAlign="center center"
   >
-    Панель Администратора
-  </a>
-  <a *appVerifyUserRoles='["Moderator"]'
-    mat-raised-button
-     href="https://www.google.com/"
-     target="_blank"
-  >
-    Добавить Вендора
-  </a>
-  <div class="right-side">
+    <a *appVerifyUserRoles='["Admin"]'
+       mat-stroked-button
+       href="https://www.google.com/"
+       target="_blank"
+    >
+      Панель Администратора
+    </a>
+    <a *appVerifyUserRoles='["Moderator"]'
+       mat-stroked-button
+       href="https://www.google.com/"
+       target="_blank"
+    >
+      Добавить Вендора
+    </a>
     <mat-form-field appearance="fill" class="language">
       <mat-label>{{ "HEADER.SELECTOR_TITLE" | translate }}</mat-label>
       <mat-select
@@ -28,11 +30,11 @@
       </mat-select>
     </mat-form-field>
     <button *ngIf="activeUser$ | async"
-      mat-raised-button
-      color="primary"
-      class="button"
-      (click)="logoutHandler()"
-      routerLink="/login"
+            mat-raised-button
+            color="primary"
+            class="button"
+            (click)="logoutHandler()"
+            routerLink="/login"
     >
       {{ "BUTTON.LOGOUT" | translate }}
     </button>
