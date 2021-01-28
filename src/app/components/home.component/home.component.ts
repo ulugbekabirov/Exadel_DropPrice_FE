@@ -20,7 +20,39 @@ export class HomeComponent implements OnInit {
     private resolver: ComponentFactoryResolver
   ) {
   }
-  
+
+  ngOnInit(): void {
+    if (!navigator.geolocation) {
+      console.log('Geolocation is not supported by your browser');
+    }
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log('lat', position.coords.latitude);
+      console.log('lon', position.coords.longitude);
+    });
+    this.watchPosition();
+  }
+
+  watchPosition() {
+    let desLat = 0;
+    let desLong = 0;
+    let id = navigator.geolocation.watchPosition(position => {
+      console.log('lat', position.coords.latitude);
+      console.log('lon', position.coords.longitude);
+      if (position.coords.latitude === desLat) {
+        navigator.geolocation.clearWatch(id);
+      }
+    }, (err) => {
+      console.log(err);
+    }, {
+      enableHighAccuracy: false,
+      timeout: 5000,
+      maximumAge: 0,
+    });
+  }
+
+  getUserInfo(): any {
+  }
+
   showModal(): void {
     const modalFactory = this.resolver.resolveComponentFactory(ModalComponent);
     this.refDir.containerRef.clear();
