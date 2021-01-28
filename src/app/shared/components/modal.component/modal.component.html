@@ -1,0 +1,25 @@
+<div class="shadow"></div>
+<mat-card class="modal">
+  <mat-card-header class="modal__title">
+    <mat-card-title>{{title}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-footer
+    fxLayoutGap="30px"
+    fxLayoutAlign="center center"
+  >
+    <button
+      mat-stroked-button
+      color="primary"
+      matSuffix
+      (click)="confirm.emit()"
+    >Да
+    </button>
+    <button
+      mat-stroked-button
+      color="warn"
+      matSuffix
+      (click)="abort.emit()"
+    >Нет
+    </button>
+  </mat-card-footer>
+</mat-card>

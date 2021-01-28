@@ -26,6 +26,14 @@ export class AuthService {
     return this.activeUserSubject.value;
   }
 
+  isAuthorized(): boolean {
+    return !!this.activeUser;
+  }
+
+  hasRole(role): boolean {
+    return this.isAuthorized() && this.activeUserValue.userRole === role;
+  }
+
   private handleAuth(authInfo: AuthInfo): void {
     localStorage.setItem(KEY_AUTH_TOKEN, JSON.stringify(authInfo));
     this.activeUserSubject.next(authInfo);

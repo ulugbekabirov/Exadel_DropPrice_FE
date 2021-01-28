@@ -1,5 +1,20 @@
 <div class="header">
   <div class="logo">Logo</div>
+  <p>{{activeUser$ | async}}</p>
+  <a *appVerifyUserRoles='["Admin"]'
+    mat-raised-button
+     href="https://www.google.com/"
+     target="_blank"
+  >
+    Панель Администратора
+  </a>
+  <a *appVerifyUserRoles='["Moderator"]'
+    mat-raised-button
+     href="https://www.google.com/"
+     target="_blank"
+  >
+    Добавить Вендора
+  </a>
   <div class="right-side">
     <mat-form-field appearance="fill" class="language">
       <mat-label>{{ "HEADER.SELECTOR_TITLE" | translate }}</mat-label>
@@ -12,7 +27,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <button
+    <button *ngIf="activeUser$ | async"
       mat-raised-button
       color="primary"
       class="button"

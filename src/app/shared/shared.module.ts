@@ -11,12 +11,16 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VerifyUserRolesDirective } from './directives/verify-user-roles.directive';
 import { NotFoundComponent } from './components/not-found.components/not-found.component';
+import { RefDirective } from './directives/ref.directive';
+import { ModalComponent } from './components/modal.component/modal.component';
 
 
 @NgModule({
   declarations: [
     VerifyUserRolesDirective,
-    NotFoundComponent
+    NotFoundComponent,
+    RefDirective,
+    ModalComponent,
   ],
   imports: [
     CommonModule,
@@ -44,7 +48,9 @@ import { NotFoundComponent } from './components/not-found.components/not-found.c
     MatListModule,
     MatCardModule,
     VerifyUserRolesDirective,
-    NotFoundComponent
+    NotFoundComponent,
+    RefDirective,
+    ModalComponent,
   ],
 })
 export class SharedModule {}

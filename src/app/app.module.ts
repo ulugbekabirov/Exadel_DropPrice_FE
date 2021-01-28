@@ -11,7 +11,6 @@ import {
 } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthInterceptor } from './auth/auth.interceptor';
-import { AuthService } from './auth/auth.service';
 import { HttpErrorInterceptor } from './services/http.error.interceptor';
 import { AppComponent } from './app.component';
 import { MissingTranslationService } from './services/missing-translation.service';
@@ -52,11 +51,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
   ],
   providers: [
-    AuthService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+
+export class AppModule {}
