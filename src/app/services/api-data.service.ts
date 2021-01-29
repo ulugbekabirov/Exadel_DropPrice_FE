@@ -21,4 +21,8 @@ export class ApiDataService {
       .get<ActiveUser>(`${environment.identityUrl}${USER_INFO_ENDPOINT}`);
   }
 
+  getDiscountInfo(){
+    //return this.http.get<Discount>(`${environment.identityUrl}${USER_INFO_ENDPOINT}`);
+  }
+
 }

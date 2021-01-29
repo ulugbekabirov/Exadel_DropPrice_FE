@@ -27,7 +27,17 @@
   },
   
   "MAIN_PAGE":{
-    "SEARCH" : "Search"
+    "SEARCH" : "Search",
+      "BUTTONS":{
+        "TALON" : "Talon"
+      },
+    "SORT" : {
+        "PARAM_SORT" : "sort by",
+        "LOCATION_SORT" : "location"
+    },
+    "DISCOUNT":{
+      "DIST_TRANSLATE": "m. left"
+    }
   }
 }
 

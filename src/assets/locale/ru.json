@@ -25,6 +25,16 @@
   },
 
   "MAIN_PAGE":{
-    "SEARCH" : "Поиск"
+    "SEARCH" : "Поиск",
+      "BUTTONS":{
+        "TALON" : "Талон"
+      },
+      "SORT" : {
+        "PARAM_SORT" : "Сортировать по",
+        "LOCATION_SORT" : "Локация"
+      },
+      "DISCOUNT":{
+        "DIST_TRANSLATE": "м. от вас"
+      }
   }
 }
