@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-
 import { AuthUser } from '../models';
 import { AuthInfo } from '../models';
 import { ApiDataService } from '../services/api-data.service';

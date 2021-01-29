@@ -1,5 +1,4 @@
 export interface Ticket {
-
   firstName: string;
   lastName: string;
   patronymic?: string;

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Location } from '@angular/common';
-import { Ticket } from '../models/ticket';
+import { Ticket } from '../../models/ticket';
 
 @Component({
   selector: 'app-ticket',
@@ -8,7 +8,7 @@ import { Ticket } from '../models/ticket';
   styleUrls: ['./ticket.component.scss']
 })
 
-export class TicketComponent implements OnInit {
+export class TicketComponent {
 
   ticket: Ticket = {
     firstName: 'Иванов',
@@ -24,9 +24,6 @@ export class TicketComponent implements OnInit {
   };
 
   constructor(private location: Location) {
-  }
-
-  ngOnInit(): void {
   }
 
   back(): void {
