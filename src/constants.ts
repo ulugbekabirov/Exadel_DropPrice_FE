@@ -5,3 +5,4 @@ export const VENDORS_ENDPOINT = 'vendors';
 export const DISCOUNTS_ENDPOINT = 'discounts';
 export const TOKEN_HEADER_KEY = 'Authorization';
 export const KEY_AUTH_TOKEN = 'key_auth_token';
+export const KEY_ACTIVE_USER = 'key_active_user';

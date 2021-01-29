@@ -5,6 +5,7 @@ import { AuthUser } from '../models';
 import { AuthInfo } from '../models';
 import { ApiDataService } from '../services/api-data.service';
 import { KEY_AUTH_TOKEN } from '../../constants';
+import { UserService } from '../services/user.service';
 
 
 @Injectable({
@@ -16,6 +17,7 @@ export class AuthService {
 
   constructor(
     private restApi: ApiDataService,
+    private userService: UserService,
   ) {
     this.activeUserSubject = new BehaviorSubject<AuthInfo>(JSON.parse(localStorage.getItem(KEY_AUTH_TOKEN)));
     this.activeUser = this.activeUserSubject.asObservable();
@@ -38,6 +40,7 @@ export class AuthService {
   }
 
   logout(): void {
+    this.userService.logout();
     localStorage.removeItem(KEY_AUTH_TOKEN);
     this.activeUserSubject.next(null);
   }

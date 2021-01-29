@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ApiDataService } from './api-data.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ActiveUser, AuthInfo } from '../models';
-import { KEY_AUTH_TOKEN } from '../../constants';
+import { ActiveUser } from '../models';
+import { KEY_ACTIVE_USER, KEY_AUTH_TOKEN } from '../../constants';
 import { tap } from 'rxjs/operators';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class UserService {
   constructor(
     private restApi: ApiDataService,
   ) {
-    this.activeUserSubject = new BehaviorSubject<ActiveUser>(JSON.parse(localStorage.getItem(KEY_AUTH_TOKEN)));
+    this.activeUserSubject = new BehaviorSubject<ActiveUser>(JSON.parse(localStorage.getItem(KEY_ACTIVE_USER)));
     this.activeUser = this.activeUserSubject.asObservable();
   }
 
@@ -32,7 +32,12 @@ export class UserService {
   }
 
   private handleActiveUser(user: ActiveUser): void {
-    localStorage.setItem(KEY_AUTH_TOKEN, JSON.stringify(user));
+    localStorage.setItem(KEY_ACTIVE_USER, JSON.stringify(user));
     this.activeUserSubject.next(user);
+  }
+
+  logout(): void {
+    localStorage.removeItem(KEY_ACTIVE_USER);
+    this.activeUserSubject.next(null);
   }
 }
