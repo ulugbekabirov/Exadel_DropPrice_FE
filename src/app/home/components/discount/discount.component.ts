@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-discount',
@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./discount.component.scss']
 })
 export class DiscountComponent implements OnInit {
+  
+  @Input() discountObj;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  talonHandler(){
+    console.log('d',this.discountObj);
+    alert('haven\'t done yet'); //...
   }
 
 }

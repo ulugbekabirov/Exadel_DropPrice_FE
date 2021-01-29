@@ -1,3 +1,51 @@
-.discount-module{
-    
+.flexible{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.discount{
+    display:flex;
+    justify-content: space-between;
+    left:0;
+    right:0;
+    margin: 5px auto 0px;
+    margin-top:10px;
+    padding-left: 35px;
+    padding-right: 35px;
+    width: 80%;
+    height: 150px;
+    border:1px solid lightgrey;
+    border-radius: 5px;
+    box-shadow: 0px 2px 3px 0px rgba(53, 52, 52, 0.5);;
+}
+.persent_of_discount{
+    color :red;
+}
+.left-side{
+    width: 30%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.right-side{
+    width: 30%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.vendors_info{
+
+    .vendor_name{
+        min-width: 100px;
+        border-bottom: 1px solid black;
+    }
+}
+.button{
+    min-width: 80px;
+    border-radius: 25px;
+}
+.persent_of_discount{
+    display: flex;
+    justify-content: flex-end;
 }

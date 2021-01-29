@@ -1,3 +1,23 @@
-<div class="discount-module">
-
+<div class="discount">
+    <div class="left-side">
+        <h1 class="discount_name">{{discountObj.discount_name}}</h1>
+        <div class="vendors_info">
+            <div class="vendor_name">{{discountObj.vendor_name}}</div>
+            <p class="vendor_distanse">{{discountObj.distanse}} {{"MAIN_PAGE.DISCOUNT.DIST_TRANSLATE" | translate}}</p>
+        </div>
+    </div>
+    <div class="right-side">
+        <h1 class="persent_of_discount">{{discountObj.discount}} %</h1>
+            <div class="flexible">
+                <p class="date_of_discount"> до {{discountObj.date}}</p>
+                <button
+                    mat-raised-button
+                    color="primary"
+                    class="button"
+                    (click)="talonHandler()"
+                    >
+                {{ "MAIN_PAGE.BUTTONS.TALON" | translate }}
+            </button>
+        </div>
+    </div>
 </div>

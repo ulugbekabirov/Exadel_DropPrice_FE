@@ -1,0 +1,21 @@
+<div class="discount-settings">
+    <mat-form-field >
+      <mat-label>{{"MAIN_PAGE.SORT.PARAM_SORT" | translate}}:</mat-label>
+      <mat-select>
+        <mat-option >
+         
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field >
+      <mat-label>{{"MAIN_PAGE.SORT.LOCATION_SORT" | translate}}:</mat-label>
+      <mat-select>
+        <mat-option >
+         
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+<div *ngFor="let discount of fakeDiscounts">
+    <app-discount [discountObj]="discount"></app-discount>
+</div>
