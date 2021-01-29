@@ -14,11 +14,11 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { HttpErrorInterceptor } from './services/http.error.interceptor';
 import { AppComponent } from './app.component';
 import { MissingTranslationService } from './services/missing-translation.service';
-import { HomeComponent } from './components/home.component/home.component';
-import { LoginFormComponent } from './components/login-form.component/login-form.component';
-import { HeaderComponent } from './components/header.component/header.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { HeaderComponent } from './components/header/header.component';
 import { AppRoutingModule } from './app-routing/app.routing.module';
-
+import { TicketComponent } from './components/ticket/ticket.component';
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -30,6 +30,7 @@ export function HttpLoaderFactory(http: HttpClient): any {
       LoginFormComponent,
       HomeComponent,
       HeaderComponent,
+      TicketComponent
     ],
     imports: [
       BrowserModule,

@@ -24,5 +24,20 @@
     "PASS_ERR_LENGTH": "Password should contain 8 characters",
     "STRONG_PASS": "Password must including UPPER/lowercase and number",
     "HIDE": "Hide password"
+  },
+
+  "TICKET": {
+    "TITLE": "Ticket",
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
+    "PATRONYMIC": "Patronymic",
+    "NAME_VENDOR": "Vendor name",
+    "PRODUCT_SERVICE": "Product/service",
+    "EMAIL": "Email",
+    "PHONE": "Contact number",
+    "PROMO_CODE": "Promo code (if available)",
+    "DISCOUNT": "Discount",
+    "CONFIRMATION_DATE": "Confirmation date",
+    "CLOSE": "Close"
   }
 }
