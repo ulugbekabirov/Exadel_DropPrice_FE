@@ -19,6 +19,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app.routing.module';
+import { TicketComponent } from './ticket/ticket.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -28,7 +29,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AppComponent,
     LoginFormComponent,
     HomeComponent,
-    HeaderComponent],
+    HeaderComponent,
+    TicketComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
