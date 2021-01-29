@@ -20,41 +20,40 @@ import { HeaderComponent } from './components/header.component/header.component'
 import { AppRoutingModule } from './app-routing/app.routing.module';
 
 
-export function HttpLoaderFactory(http: HttpClient) {
+export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginFormComponent,
-    HomeComponent,
-    HeaderComponent
-  ],
+    declarations: [
+      AppComponent,
+      LoginFormComponent,
+      HomeComponent,
+      HeaderComponent,
+    ],
+    imports: [
+      BrowserModule,
+      BrowserAnimationsModule,
+      HttpClientModule,
+      SharedModule,
+      AppRoutingModule,
+      TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient],
+        },
+        missingTranslationHandler: {
+          provide: MissingTranslationHandler,
+          useClass: MissingTranslationService,
+        },
+      }),
+    ],
+    providers: [
+      {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+      {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
+    ],
+    bootstrap: [AppComponent]
+  })
 
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    SharedModule,
-    AppRoutingModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
-      },
-      missingTranslationHandler: {
-        provide: MissingTranslationHandler,
-        useClass: MissingTranslationService,
-      },
-    }),
-  ],
-  providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
-  ],
-  bootstrap: [AppComponent]
-})
-
-export class AppModule {}
+  export class AppModule {}

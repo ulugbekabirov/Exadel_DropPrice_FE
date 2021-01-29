@@ -1,7 +1,7 @@
 import { Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { pluck } from 'rxjs/operators';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../auth/auth.service';
 
 @Directive({
   selector: '[appVerifyUserRoles]'

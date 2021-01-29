@@ -9,9 +9,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { VerifyUserRolesDirective } from './directives/verify-user-roles.directive';
+import { VerifyUserRolesDirective } from '../directives/verify-user-roles.directive';
 import { NotFoundComponent } from './components/not-found.components/not-found.component';
-import { RefDirective } from './directives/ref.directive';
+import { RefDirective } from '../directives/ref.directive';
 import { ModalComponent } from './components/modal.component/modal.component';
 
 
