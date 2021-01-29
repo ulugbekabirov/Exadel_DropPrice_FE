@@ -24,5 +24,21 @@
     "PASS_ERR_LENGTH": "Password should contain 8 characters",
     "STRONG_PASS": "Password must including UPPER/lowercase and number",
     "HIDE": "Hide password"
+  },
+
+  "MODERATOR_DASHBOARD": {
+    "NEW_VENDOR_FORM": "Vendor's add form",
+    "NEW_DISCOUNT_FORM": "Discount's add form"
+  },
+
+  "NEW_VENDOR_FORM": {
+    "NAME_LABEL": "Enter vendor's name*",
+    "ADRESS_LABEL": "Enter vendor's adress",
+    "ADRESS_PLACEHOLDER": "Ex. 17 Kensington Street",
+    "PHONE_NUMBER": "Enter vendor's phone number*",
+    "VALID_PHONE": "Enter the phone without spaces in the format '+COUNTRY_CODE-OPERATOR_CODE-NUMBER'",
+    "EMAIL_LABEL": "Enter vendor's email*",
+    "VALID_EMAIL": "Please enter a valid email address",
+    "BTN_TITLE": "Add"
   }
 }

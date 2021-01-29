@@ -19,6 +19,8 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app.routing.module';
+import { ModeratorDashboardComponent } from './moderator-dashboard/moderator-dashboard.component';
+import { NewVendorComponent } from './new-vendor/new-vendor.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -28,7 +30,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AppComponent,
     LoginFormComponent,
     HomeComponent,
-    HeaderComponent],
+    HeaderComponent,
+    ModeratorDashboardComponent,
+    NewVendorComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -52,6 +57,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

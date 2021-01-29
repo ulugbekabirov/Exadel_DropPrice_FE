@@ -7,14 +7,13 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotFoundComponent } from '../not-found';
 @NgModule({
-  declarations: [
-    NotFoundComponent
-  ],
+  declarations: [NotFoundComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -27,6 +26,7 @@ import { NotFoundComponent } from '../not-found';
     MatChipsModule,
     MatListModule,
     MatCardModule,
+    MatTabsModule,
   ],
 
   exports: [
@@ -41,7 +41,8 @@ import { NotFoundComponent } from '../not-found';
     MatChipsModule,
     MatListModule,
     MatCardModule,
-    NotFoundComponent
+    MatTabsModule,
+    NotFoundComponent,
   ],
 })
 export class SharedModule {}

@@ -1,31 +1,37 @@
-﻿import { Routes, RouterModule } from '@angular/router';
+﻿import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home';
 import { NotFoundComponent } from './not-found';
 import { LoginFormComponent } from './login-form';
+import { ModeratorDashboardComponent } from './moderator-dashboard/moderator-dashboard.component';
 import { AuthGuard } from './guards';
-import { NgModule } from '@angular/core';
 
 const appRoutes: Routes = [
-    {
-        path: '',
-        redirectTo: '/home',
-        pathMatch: 'full'
-    },
-    {
-        path: 'home',
-        component: HomeComponent,
-        canActivate: [AuthGuard],
-    },
-    {
-        path: 'login',
-        component: LoginFormComponent,
-    },
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full',
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'login',
+    component: LoginFormComponent,
+  },
+  {
+    path: 'moderator-dashboard',
+    component: ModeratorDashboardComponent,
+    canActivate: [AuthGuard],
+  },
 
-    { path: '**', component: NotFoundComponent }
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(appRoutes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(appRoutes)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
