@@ -1,0 +1,35 @@
+$header_color:rgb(82, 137, 255);
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    width:auto;
+    height: 50px;
+    align-items: center;
+    background-color: $header_color;
+    padding: 10px 10px 10px 50px;
+
+  &__logo {
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    font-style: normal;
+    line-height: 28px;
+    color: #ffffff;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    .language{
+      width: 100px;
+      height: 50px;
+      font-size: 14px;
+      color: white;
+    }
+
+  }
+
+}

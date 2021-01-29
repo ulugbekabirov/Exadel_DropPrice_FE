@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormGroup,
-  AbstractControl,
   Validators,
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { AuthService } from './../auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 

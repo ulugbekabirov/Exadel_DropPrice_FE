@@ -11,47 +11,50 @@ import {
 } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthInterceptor } from './auth/auth.interceptor';
-import { AppComponent } from './app.component';
-import { AuthService } from './auth/auth.service';
 import { HttpErrorInterceptor } from './services/http.error.interceptor';
-import { MissingTranslationService } from './login-service/missing-translation.service';
-import { LoginFormComponent } from './login-form/login-form.component';
-import { HomeComponent } from './home/home.component';
-import { HeaderComponent } from './header/header.component';
-import { AppRoutingModule } from './app.routing.module';
+import { AppComponent } from './app.component';
+import { MissingTranslationService } from './services/missing-translation.service';
+import { HomeComponent } from './components/home/home.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { HeaderComponent } from './components/header/header.component';
+import { AppRoutingModule } from './app-routing/app.routing.module';
+import { TicketComponent } from './components/ticket/ticket.component';
 
-export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
 }
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginFormComponent,
-    HomeComponent,
-    HeaderComponent],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    SharedModule,
-    AppRoutingModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
-      },
-      missingTranslationHandler: {
-        provide: MissingTranslationHandler,
-        useClass: MissingTranslationService,
-      },
-    }),
-  ],
-  providers: [
-    AuthService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
-  ],
-  bootstrap: [AppComponent]
-})
-export class AppModule {}
+    declarations: [
+      AppComponent,
+      LoginFormComponent,
+      HomeComponent,
+      HeaderComponent,
+      TicketComponent
+    ],
+    imports: [
+      BrowserModule,
+      BrowserAnimationsModule,
+      HttpClientModule,
+      SharedModule,
+      AppRoutingModule,
+      TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient],
+        },
+        missingTranslationHandler: {
+          provide: MissingTranslationHandler,
+          useClass: MissingTranslationService,
+        },
+      }),
+    ],
+    providers: [
+      {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+      {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
+    ],
+    bootstrap: [AppComponent]
+  })
+
+  export class AppModule {}
