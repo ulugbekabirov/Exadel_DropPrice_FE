@@ -21,6 +21,7 @@ import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app.routing.module';
 import { DiscountComponent } from './home/components/discount/discount.component';
 import { DiscountListComponent } from './home/components/discount-list/discount-list.component';
+import { SearchTagComponent } from './home/components/search-tag/search-tag.component';
 
 
 
@@ -33,7 +34,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent, 
     LoginFormComponent, 
     HomeComponent, 
-    HeaderComponent, DiscountComponent, DiscountListComponent],
+    HeaderComponent, 
+    DiscountComponent, 
+    DiscountListComponent,
+    SearchTagComponent,
+  ],
 
   imports: [
     BrowserModule,

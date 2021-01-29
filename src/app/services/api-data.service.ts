@@ -24,5 +24,8 @@ export class ApiDataService {
   getDiscountInfo(){
     //return this.http.get<Discount>(`${environment.identityUrl}${USER_INFO_ENDPOINT}`);
   }
-
+  getCardsByTag(tag: string){
+    console.log(`getCardsByTag: ${tag}`);
+    //return this.http.get<Discount>(`${environment.identityUrl}${USER_INFO_ENDPOINT}`);
+  }
 }
