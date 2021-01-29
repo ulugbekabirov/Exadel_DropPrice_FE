@@ -1,11 +1,11 @@
 export interface Discount {
-  id?: number;
-  name?: string;
-  description?: string;
-  discountAmount?: number;
-  startDate?: Date;
-  endDate?: Date;
-  activityStatus?: boolean;
-  promoCode?: string;
-  imagePath?: string;
+  discountId: number;
+  vendorId: number;
+  discountName: string;
+  vendorName: string;
+  discountMetres: number;
+  discountRating: number;
+  discountAmount: number;
+  endDate: Date;
+  isSaved: boolean;
 }
