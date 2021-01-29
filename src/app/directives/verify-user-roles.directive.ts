@@ -1,7 +1,7 @@
 import { Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { pluck } from 'rxjs/operators';
-import { AuthService } from '../auth/auth.service';
+import { UserService } from '../services/user.service';
 
 @Directive({
   selector: '[appVerifyUserRoles]'
@@ -14,16 +14,16 @@ export class VerifyUserRolesDirective implements OnInit, OnDestroy {
   constructor(
     private templateRef: TemplateRef<any>,
     private viewContainerRef: ViewContainerRef,
-    private auth: AuthService
+    private userService: UserService
   ) {
   }
 
   ngOnInit(): void {
-    this.activeUser$ = this.auth.activeUser;
+    this.activeUser$ = this.userService.activeUser;
 
     this.subscription = this.activeUser$
       .pipe(
-        pluck('userRole'),
+        pluck('roles'),
       )
       .subscribe(roles => {
         if (!this.activeUser$ || !roles || roles.length === 0) {

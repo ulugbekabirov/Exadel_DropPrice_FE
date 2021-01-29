@@ -5,7 +5,6 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -22,7 +21,6 @@ export class LoginFormComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private fb: FormBuilder,
-    public translateService: TranslateService,
     private router: Router,
     private route: ActivatedRoute,
   ) {
@@ -46,7 +44,8 @@ export class LoginFormComponent implements OnInit {
 
   onSubmit(): void {
     this.auth.login(this.loginForm.value)
-      .subscribe(() => {
+      .subscribe((x) => {
+        console.log(console.log('AfterMergeMap', x));
         this.loginForm.reset();
         const returnUrl = this.route.snapshot.queryParams['/returnUrl'] || '/';
         this.router.navigate([returnUrl]);

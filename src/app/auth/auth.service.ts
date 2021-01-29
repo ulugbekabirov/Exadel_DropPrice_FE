@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { AuthUser } from '../models';
+import { concatMap, tap } from 'rxjs/operators';
+import { ActiveUser, AuthUser } from '../models';
 import { AuthInfo } from '../models';
 import { ApiDataService } from '../services/api-data.service';
 import { KEY_AUTH_TOKEN } from '../../constants';
@@ -32,10 +32,17 @@ export class AuthService {
     this.activeUserSubject.next(authInfo);
   }
 
-  login(user: AuthUser): Observable<AuthInfo> {
+  login(user: AuthUser): Observable<ActiveUser> {
     return this.restApi.getAuth(user)
       .pipe(
-        tap((authInfo: AuthInfo) => this.handleAuth(authInfo))
+        tap(x => console.log('BeforeMergeMap', x)),
+        tap((authInfo: AuthInfo) => this.handleAuth(authInfo)),
+        concatMap(
+          results => {
+            console.log('mergeMap', results);
+            return this.userService.getUserInfo();
+          }
+        )
       );
   }
 

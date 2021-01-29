@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiDataService } from './api-data.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ActiveUser } from '../models';
-import { KEY_ACTIVE_USER, KEY_AUTH_TOKEN } from '../../constants';
+import { KEY_ACTIVE_USER } from '../../constants';
 import { tap } from 'rxjs/operators';
 
 @Injectable({
@@ -27,7 +27,6 @@ export class UserService {
     return this.restApi.getUserInfo()
       .pipe(
         tap((user: ActiveUser) => this.handleActiveUser(user)),
-        tap((user: ActiveUser) => console.log('Active User', user))
       );
   }
 
