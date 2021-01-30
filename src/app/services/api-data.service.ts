@@ -24,26 +24,15 @@ export class ApiDataService {
     return this.http.get<ActiveUser>(`${environment.identityUrl}${USER_INFO_ENDPOINT}`);
   }
 
-  getDiscounts(skip, take, longitude, latitude, sortBy): Observable<any> {
-    return this.http.get<any>(`${environment.identityUrl}${GET_DISCOUNTS_ENDPOINT}`, {
-      params: new HttpParams()
-        .set('skip', skip)
-        .set('take', take)
-        .set('longitude', longitude)
-        .set('latitude', latitude)
-        .set('sortBy', sortBy)
-    });
+  getDiscounts(options): Observable<any> {
+    return this.http.get<any>(`${environment.identityUrl}${GET_DISCOUNTS_ENDPOINT}`, options);
   }
 
   getTowns(): Observable<any> {
     return this.http.get<any>(`${environment.identityUrl}${GET_TOWNS_ENDPOINT}`);
   }
 
-  getTags(skip, take): Observable<any> {
-    return this.http.get<any>(`${environment.identityUrl}${GET_TAGS_ENDPOINT}`, {
-      params: new HttpParams()
-        .set('skip', skip)
-        .set('take', take)
-    });
+  getTags(options): Observable<any> {
+    return this.http.get<any>(`${environment.identityUrl}${GET_TAGS_ENDPOINT}`, options);
   }
 }
