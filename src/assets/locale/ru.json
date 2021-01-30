@@ -11,7 +11,9 @@
     "LOGOUT" : "Выход"
   },
   "HEADER":{
-    "SELECTOR_TITLE" : "Язык"
+    "SELECTOR_TITLE" : "Язык",
+    "ADMIN_PANEL_LINK_TITLE": "Панель Администатора",
+    "MODERATOR_PANEL_LINK_TITLE": "Добавить Вендора"
   },
   "LOGIN": {
     "TITLE": "Вход",
@@ -37,6 +39,20 @@
       },
       "DISCOUNT":{
         "DIST_TRANSLATE": "м. от вас"
-      }
+      },
+      
+  "TICKET": {
+    "TITLE": "Талон",
+    "FIRST_NAME": "Фамилия",
+    "LAST_NAME": "Имя",
+    "PATRONYMIC": "Отчество",
+    "NAME_VENDOR": "Наименование вендора",
+    "PRODUCT_SERVICE": "Товар/услуга",
+    "EMAIL": "Электронная почта",
+    "PHONE": "Контактный телефон",
+    "PROMO_CODE": "Промокод (при наличии)",
+    "DISCOUNT": "Скидка",
+    "CONFIRMATION_DATE": "Дата подтверждения",
+    "CLOSE": "Закрыть"
   }
 }

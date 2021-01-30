@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from 'src/app/auth/auth.service';
+import { LanguageService } from 'src/app/services/language.service';
 import { environment } from 'src/environments/environment';
 
-import { AuthService } from '../auth/auth.service';
-import { LanguageService } from '../services/language.service';
+//import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +20,8 @@ export class HeaderComponent {
   constructor(
     public translateService: TranslateService,
     private auth: AuthService,
-    private langServise: LanguageService) {}
+    private langServise: LanguageService
+    ) {}
 
   languageHandler(selectedLang:string){
     this.langServise.setLanguageTolS(selectedLang);

@@ -11,33 +11,33 @@ import {
 } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthInterceptor } from './auth/auth.interceptor';
-import { AppComponent } from './app.component';
-import { AuthService } from './auth/auth.service';
 import { HttpErrorInterceptor } from './services/http.error.interceptor';
-import { MissingTranslationService } from './login-service/missing-translation.service';
-import { LoginFormComponent } from './login-form/login-form.component';
-import { HomeComponent } from './home/home.component';
-import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app.routing.module';
-import { DiscountComponent } from './home/components/discount/discount.component';
-import { DiscountListComponent } from './home/components/discount-list/discount-list.component';
 import { LanguageService } from './services/language.service';
+import { AppComponent } from './app.component';
+import { TicketComponent } from './components/ticket/ticket.component';
+import { AuthService } from './auth/auth.service';
+import { HomeComponent } from './components/home/home.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { MissingTranslationService } from './services/missing-translation.service';
+import { HeaderComponent } from './components/header/header.component';
+import { DiscountComponent } from './components/home/components/discount/discount.component';
+import { DiscountListComponent } from './components/home/components/discount-list/discount-list.component';
+import { SearchTagComponent } from './components/home/components/search-tag/search-tag.component';
+import { SearchBarComponent } from './components/home/components/search-bar/search-bar.component';
 
-import { SearchTagComponent } from './home/components/search-tag/search-tag.component';
-import { SearchBarComponent } from './home/components/search-bar/search-bar.component';
-
-
-
-export function HttpLoaderFactory(http: HttpClient) {
+export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
 }
+
 @NgModule({
   declarations: [
     AppComponent, 
     LoginFormComponent, 
-    HomeComponent, 
-    HeaderComponent, 
+    HomeComponent,
+    HeaderComponent,
     DiscountComponent, 
+    TicketComponent,
     DiscountListComponent,
     SearchTagComponent,
     SearchBarComponent,
@@ -69,4 +69,5 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   bootstrap:[AppComponent]
 })
+
 export class AppModule {}

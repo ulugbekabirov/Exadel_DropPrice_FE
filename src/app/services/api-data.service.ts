@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, pipe, throwError } from 'rxjs';
-import { catchError, map, retry } from 'rxjs/operators';
-import { ActiveUser, AuthInfo, AuthUser, Discount, Vendor } from '../models';
-import { API_URL, AUTH_ENDPOINT, DISCOUNTS_ENDPOINT, USER_INFO_ENDPOINT, VENDORS_ENDPOINT } from '../../constants';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { ActiveUser, AuthInfo, AuthUser } from '../models';
+import { AUTH_ENDPOINT, USER_INFO_ENDPOINT } from '../../constants';
 import { environment } from '../../environments/environment';
 
 @Injectable({

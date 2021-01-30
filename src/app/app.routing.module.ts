@@ -1,9 +1,9 @@
 ﻿import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home';
-import { NotFoundComponent } from './not-found';
-import { LoginFormComponent } from './login-form';
-import { AuthGuard } from './guards';
+//import { AuthGuard } from './guards';
 import { NgModule } from '@angular/core';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { NotFoundComponent } from './shared/components/not-found.components/not-found.component';
+import { HomeComponent } from './components/home/home.component';
 
 const appRoutes: Routes = [
     {
@@ -18,7 +18,7 @@ const appRoutes: Routes = [
     },
     {
         path: 'login',
-        component: LoginFormComponent,
+        component: LoginFormComponent
     },
 
     { path: '**', component: NotFoundComponent }

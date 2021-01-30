@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ApiDataService } from '../../../services/api-data.service';
+import { ApiDataService } from 'src/app/services/api-data.service';
+
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',

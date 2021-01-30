@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormGroup,
   Validators,
-  FormGroupDirective,
 } from '@angular/forms';
-
 import { TranslateService } from '@ngx-translate/core';
-import { AuthService } from './../auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -22,8 +22,11 @@ export class LoginFormComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private fb: FormBuilder,
-    public translateService: TranslateService
-  ) {}
+    public translateService: TranslateService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) {
+  }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -41,24 +44,20 @@ export class LoginFormComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    this.auth.login(this.loginForm.value).subscribe(data => {
-      console.log('data',data);
-      
-    })
-
+  onSubmit(): void {
+    this.auth.login(this.loginForm.value)
+      .subscribe(() => {
+        this.loginForm.reset();
+        const returnUrl = this.route.snapshot.queryParams['/returnUrl'] || '/';
+        this.router.navigate([returnUrl]);
+      });
   }
 
-  get email() {
+  get email(): AbstractControl {
     return this.loginForm.get('email');
   }
 
-  get password() {
+  get password(): AbstractControl {
     return this.loginForm.get('password');
   }
-
-  // resetLoginForm(formDirective: FormGroupDirective) {
-  //   formDirective.resetForm();
-  //   this.loginForm.reset();
-  // }
 }

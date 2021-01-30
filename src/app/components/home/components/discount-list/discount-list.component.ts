@@ -8,6 +8,8 @@ import { ApiDataService } from 'src/app/services/api-data.service';
 })
 export class DiscountListComponent implements OnInit {
   sortSettings:string[] = ['alphabet','distanse','vendor'];
+  deafaultSetting:string = this.sortSettings[0];
+
   fakeDiscounts = [
     {
       id : 1,
