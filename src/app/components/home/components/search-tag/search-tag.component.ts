@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ApiDataService } from 'src/app/services/api-data.service';
+import { Tag } from '../../../../models';
 
 @Component({
   selector: 'app-search-tag',
@@ -9,7 +10,7 @@ import { ApiDataService } from 'src/app/services/api-data.service';
 })
 export class SearchTagComponent implements OnInit {
 
-  @Input() searchTagObj;
+  @Input() searchTagObj: Tag;
 
   newTags: string;
   tags: string[] = [

@@ -1,6 +1,6 @@
 
 <!-- <button (click)="getCardsByTag('test')">ghhghj</button> -->
 
-<button *ngFor="let newTags of tags" (click)="getCardsByTag(newTags)">
-  {{ newTags }}
+<button *ngFor="let tag of searchTagObj" (click)="getCardsByTag(newTags)">
+  {{ tag.tagName }}
 </button>

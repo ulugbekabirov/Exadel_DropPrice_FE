@@ -30,7 +30,7 @@ export class LoginFormComponent implements OnInit {
   ) {
   }
   showModal(): void {
-    let position = {
+    const position = {
       latitude: 0,
       longitude: 0,
     };

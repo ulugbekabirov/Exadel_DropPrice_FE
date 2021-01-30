@@ -1,8 +1,6 @@
-<h2>Добро пожаловать на главную страницу</h2>
-
 <div class="main-container">
   <app-search-bar></app-search-bar>
-  <app-search-tag></app-search-tag>
+  <app-search-tag [searchTagObj]="tags"></app-search-tag>
   <div class="discount-wrapper">
     <app-discount-list></app-discount-list>
   </div>

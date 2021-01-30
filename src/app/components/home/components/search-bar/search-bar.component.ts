@@ -8,7 +8,7 @@ import { ApiDataService } from 'src/app/services/api-data.service';
   providers: [ApiDataService]
 })
 export class SearchBarComponent implements OnInit {
-  
+
   @Input() searchBarObj;
 
   constructor() {}

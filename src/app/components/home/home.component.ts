@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   activeUser$: Observable<ActiveUser>;
   activeUser;
   private subscription: Subscription;
+  tags;
 
   constructor(
     private discountsService: DiscountsService,
@@ -36,7 +37,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         console.log('res2', res2);
         console.log('res3', res3);
       })
-    ).subscribe(x => console.log('x', x));
+    ).subscribe(([res1, res2, res3]) => {
+      this.tags = res2;
+    });
   }
 
   ngOnDestroy(): void {

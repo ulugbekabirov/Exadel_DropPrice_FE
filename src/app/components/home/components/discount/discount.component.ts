@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Discount } from '../../../../models';
 
 @Component({
   selector: 'app-discount',
@@ -6,12 +7,12 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./discount.component.scss']
 })
 export class DiscountComponent implements OnInit {
-  
-  @Input() discountObj;
 
-  staticHeartLink:string = '/assets/img/heart.png';
-  favoriteHeartLink:string = '/assets/img/favorite.png';
-  currentHeartStatus:string = this.staticHeartLink;
+  @Input() discountObj: Discount;
+
+  staticHeartLink = '/assets/img/heart.png';
+  favoriteHeartLink = '/assets/img/favorite.png';
+  currentHeartStatus: string = this.staticHeartLink;
 
   constructor() { }
 
@@ -19,12 +20,13 @@ export class DiscountComponent implements OnInit {
   }
 
   addToFavorites(){
-    if(this.currentHeartStatus === this.staticHeartLink)
+    if (this.currentHeartStatus === this.staticHeartLink) {
       this.currentHeartStatus = this.favoriteHeartLink;
-    else this.currentHeartStatus = this.staticHeartLink;
+    }
+    else { this.currentHeartStatus = this.staticHeartLink; }
   }
   talonHandler(){
-    alert('haven\'t done yet'); //...
+    alert('haven\'t done yet'); // ...
   }
 
 }

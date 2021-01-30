@@ -8,7 +8,7 @@ export class LanguageService {
   public langs: string[] = environment.locales;
   public defaultLang: string = environment.defaultLocale;
 
-  protected nameInLS: string = 'currentLang';
+  protected nameInLS = 'currentLang';
 
   getCurrentLang() {
     return localStorage.getItem(this.nameInLS) ?? this.defaultLang;
