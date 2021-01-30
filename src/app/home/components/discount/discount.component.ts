@@ -9,13 +9,21 @@ export class DiscountComponent implements OnInit {
   
   @Input() discountObj;
 
+  staticHeartLink:string = '/assets/img/heart.png';
+  favoriteHeartLink:string = '/assets/img/favorite.png';
+  currentHeartStatus:string = this.staticHeartLink;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  addToFavorites(){
+    if(this.currentHeartStatus === this.staticHeartLink)
+      this.currentHeartStatus = this.favoriteHeartLink;
+    else this.currentHeartStatus = this.staticHeartLink;
+  }
   talonHandler(){
-    console.log('d',this.discountObj);
     alert('haven\'t done yet'); //...
   }
 

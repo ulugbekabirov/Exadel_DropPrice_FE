@@ -30,7 +30,9 @@
         "TALON" : "Талон"
       },
       "SORT" : {
-        "PARAM_SORT" : "Сортировать по",
+        "PARAM_SORT"  : {
+          "TITLE" :"сортировать по"
+        },
         "LOCATION_SORT" : "Локация"
       },
       "DISCOUNT":{

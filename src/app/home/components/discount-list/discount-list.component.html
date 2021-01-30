@@ -1,9 +1,9 @@
 <div class="discount-settings">
     <mat-form-field >
-      <mat-label>{{"MAIN_PAGE.SORT.PARAM_SORT" | translate}}:</mat-label>
+      <mat-label>{{"MAIN_PAGE.SORT.PARAM_SORT.TITLE" | translate}}:</mat-label>
       <mat-select>
-        <mat-option >
-         
+        <mat-option *ngFor="let option of sortSettings; let index">
+          {{option}}
         </mat-option>
       </mat-select>
     </mat-form-field>

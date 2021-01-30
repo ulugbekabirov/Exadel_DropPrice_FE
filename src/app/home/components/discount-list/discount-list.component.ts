@@ -7,6 +7,7 @@ import { ApiDataService } from 'src/app/services/api-data.service';
   styleUrls: ['./discount-list.component.scss']
 })
 export class DiscountListComponent implements OnInit {
+  sortSettings:string[] = ['alphabet','distanse','vendor'];
   fakeDiscounts = [
     {
       id : 1,

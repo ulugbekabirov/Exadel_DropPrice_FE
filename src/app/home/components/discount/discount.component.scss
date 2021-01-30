@@ -1,12 +1,9 @@
 .flexible{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .discount{
     display:flex;
-    justify-content: space-between;
     left:0;
     right:0;
     margin: 5px auto 0px;
@@ -14,6 +11,7 @@
     padding-left: 35px;
     padding-right: 35px;
     width: 80%;
+    min-width: 400px;
     height: 150px;
     border:1px solid lightgrey;
     border-radius: 5px;
@@ -25,14 +23,10 @@
 .left-side{
     width: 30%;
     display:flex;
-    flex-direction: column;
-    justify-content: space-evenly;
 }
 .right-side{
     width: 30%;
     display:flex;
-    flex-direction: column;
-    justify-content: space-evenly;
 }
 .vendors_info{
 
@@ -47,5 +41,18 @@
 }
 .persent_of_discount{
     display: flex;
-    justify-content: flex-end;
+}
+
+.img{
+    width: 40px;
+    height: 40px;
+}
+.rating-block{
+    font-size: 25px;
+    margin-left: 10px;
+    h2{
+        position: relative;
+        top:4px;
+        font-size: 20px;
+    }
 }

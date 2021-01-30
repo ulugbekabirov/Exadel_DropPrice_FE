@@ -32,7 +32,9 @@
         "TALON" : "Talon"
       },
     "SORT" : {
-        "PARAM_SORT" : "sort by",
+        "PARAM_SORT" : {
+          "TITLE" :"sort by"
+        },
         "LOCATION_SORT" : "location"
     },
     "DISCOUNT":{
