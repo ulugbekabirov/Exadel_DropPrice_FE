@@ -31,6 +31,8 @@ export class UserService {
   }
 
   private handleActiveUser(user: ActiveUser): void {
+    user.userLongitude = 0;
+    user.userLatitude = 0;
     localStorage.setItem(KEY_ACTIVE_USER, JSON.stringify(user));
     this.activeUserSubject.next(user);
   }

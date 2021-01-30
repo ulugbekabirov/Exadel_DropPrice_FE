@@ -19,6 +19,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { HeaderComponent } from './components/header/header.component';
 import { AppRoutingModule } from './app-routing/app.routing.module';
 import { TicketComponent } from './components/ticket/ticket.component';
+import { FakeBackendInterceptor } from './fake-back-end/fake-back-end.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -53,6 +54,7 @@ export function HttpLoaderFactory(http: HttpClient): any {
     providers: [
       {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
       {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
+      {provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true}
     ],
     bootstrap: [AppComponent]
   })
