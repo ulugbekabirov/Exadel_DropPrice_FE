@@ -22,7 +22,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { DiscountComponent } from './home/components/discount/discount.component';
 import { DiscountListComponent } from './home/components/discount-list/discount-list.component';
 import { SearchTagComponent } from './home/components/search-tag/search-tag.component';
-
+import { SearchBarComponent } from './home/components/search-bar/search-bar.component';
 
 
 
@@ -38,6 +38,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DiscountComponent, 
     DiscountListComponent,
     SearchTagComponent,
+    SearchBarComponent,
   ],
 
   imports: [
