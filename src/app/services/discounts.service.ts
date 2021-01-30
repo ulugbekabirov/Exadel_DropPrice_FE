@@ -11,7 +11,7 @@ export class DiscountsService {
     private restApi: ApiDataService,
   ) {}
 
-  getDiscounts({skip, take, longitude, latitude, sortBy}): Observable<any> {
-    return this.restApi.getDiscounts({skip, take, longitude, latitude, sortBy});
+  getDiscounts(skip, take, longitude, latitude, sortBy): Observable<any> {
+    return this.restApi.getDiscounts(skip, take, longitude, latitude, sortBy);
   }
 }
