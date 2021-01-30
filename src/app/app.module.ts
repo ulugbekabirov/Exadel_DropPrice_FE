@@ -21,6 +21,7 @@ import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app.routing.module';
 import { DiscountComponent } from './home/components/discount/discount.component';
 import { DiscountListComponent } from './home/components/discount-list/discount-list.component';
+import { LanguageService } from './services/language.service';
 
 
 
@@ -54,6 +55,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
   ],
   providers: [
+    LanguageService,
     AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
