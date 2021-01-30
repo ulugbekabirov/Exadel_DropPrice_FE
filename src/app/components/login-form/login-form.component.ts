@@ -45,7 +45,6 @@ export class LoginFormComponent implements OnInit {
   onSubmit(): void {
     this.auth.login(this.loginForm.value)
       .subscribe((x) => {
-        console.log(console.log('AfterMergeMap', x));
         this.loginForm.reset();
         const returnUrl = this.route.snapshot.queryParams['/returnUrl'] || '/';
         this.router.navigate([returnUrl]);

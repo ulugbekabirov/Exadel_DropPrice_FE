@@ -35,11 +35,9 @@ export class AuthService {
   login(user: AuthUser): Observable<ActiveUser> {
     return this.restApi.getAuth(user)
       .pipe(
-        tap(x => console.log('BeforeMergeMap', x)),
         tap((authInfo: AuthInfo) => this.handleAuth(authInfo)),
         concatMap(
-          results => {
-            console.log('mergeMap', results);
+          () => {
             return this.userService.getUserInfo();
           }
         )
