@@ -1,17 +1,17 @@
 {
-	"COMMON": {
-		"HEADER": "Пример использования библиотеки Ngx Translate"
-	},
-	"LANGUAGES": {
-		"EN": "Английский",
-		"RU": "Русский",
-		"TITLE": "Изменить язык"
+  "COMMON": {
+    "HEADER": "Пример использования библиотеки Ngx Translate"
   },
-  "BUTTON":{
-    "LOGOUT" : "Выход"
+  "LANGUAGES": {
+    "EN": "Английский",
+    "RU": "Русский",
+    "TITLE": "Изменить язык"
   },
-  "HEADER":{
-    "SELECTOR_TITLE" : "Язык",
+  "BUTTON": {
+    "LOGOUT": "Выход"
+  },
+  "HEADER": {
+    "SELECTOR_TITLE": "Язык",
     "ADMIN_PANEL_LINK_TITLE": "Панель Администатора",
     "MODERATOR_PANEL_LINK_TITLE": "Добавить Вендора"
   },
@@ -25,18 +25,33 @@
     "STRONG_PASS": "Пароль должен содержать заглавные и строчные буквы, цифры",
     "HIDE": "Скрыть пароль"
   },
-  "TICKET": {
-    "TITLE": "Талон",
-    "FIRST_NAME": "Фамилия",
-    "LAST_NAME": "Имя",
-    "PATRONYMIC": "Отчество",
-    "NAME_VENDOR": "Наименование вендора",
-    "PRODUCT_SERVICE": "Товар/услуга",
-    "EMAIL": "Электронная почта",
-    "PHONE": "Контактный телефон",
-    "PROMO_CODE": "Промокод (при наличии)",
-    "DISCOUNT": "Скидка",
-    "CONFIRMATION_DATE": "Дата подтверждения",
-    "CLOSE": "Закрыть"
+  "MAIN_PAGE": {
+    "SEARCH": "Поиск",
+    "BUTTONS": {
+      "TALON": "Талон"
+    },
+    "SORT": {
+      "PARAM_SORT": {
+        "TITLE": "сортировать по"
+      },
+      "LOCATION_SORT": "Локация"
+    },
+    "DISCOUNT": {
+      "DIST_TRANSLATE": "м. от вас"
+    },
+    "TICKET": {
+      "TITLE": "Талон",
+      "FIRST_NAME": "Фамилия",
+      "LAST_NAME": "Имя",
+      "PATRONYMIC": "Отчество",
+      "NAME_VENDOR": "Наименование вендора",
+      "PRODUCT_SERVICE": "Товар/услуга",
+      "EMAIL": "Электронная почта",
+      "PHONE": "Контактный телефон",
+      "PROMO_CODE": "Промокод (при наличии)",
+      "DISCOUNT": "Скидка",
+      "CONFIRMATION_DATE": "Дата подтверждения",
+      "CLOSE": "Закрыть"
+    }
   }
 }

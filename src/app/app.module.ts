@@ -13,13 +13,17 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HttpErrorInterceptor } from './services/http.error.interceptor';
 import { AppComponent } from './app.component';
-import { MissingTranslationService } from './services/missing-translation.service';
 import { HomeComponent } from './components/home/home.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
+import { MissingTranslationService } from './services/missing-translation.service';
 import { HeaderComponent } from './components/header/header.component';
 import { AppRoutingModule } from './app-routing/app.routing.module';
 import { TicketComponent } from './components/ticket/ticket.component';
 import { FakeBackendInterceptor } from './fake-back-end/fake-back-end.interceptor';
+import { DiscountComponent } from './components/home/components/discount/discount.component';
+import { DiscountListComponent } from './components/home/components/discount-list/discount-list.component';
+import { SearchTagComponent } from './components/home/components/search-tag/search-tag.component';
+import { SearchBarComponent } from './components/home/components/search-bar/search-bar.component';
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -31,7 +35,11 @@ export function HttpLoaderFactory(http: HttpClient): any {
       LoginFormComponent,
       HomeComponent,
       HeaderComponent,
-      TicketComponent
+      TicketComponent,
+      DiscountComponent,
+      DiscountListComponent,
+      SearchTagComponent,
+      SearchBarComponent,
     ],
     imports: [
       BrowserModule,
@@ -59,4 +67,4 @@ export function HttpLoaderFactory(http: HttpClient): any {
     bootstrap: [AppComponent]
   })
 
-  export class AppModule {}
+export class AppModule {}
