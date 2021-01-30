@@ -4,5 +4,11 @@
       <mat-label>{{ "MAIN_PAGE.SEARCH" | translate }}</mat-label>
       <input matInput />
     </mat-form-field>
+    <mat-form-field class="dropdown" appearance="fill">
+      <select matNativeControl required>
+        <option value="tag">По тегу</option>
+        <option value="vendor">По вендору</option>
+      </select>
+    </mat-form-field>
   </form>
 </div>
