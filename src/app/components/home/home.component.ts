@@ -21,8 +21,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private discountsService: DiscountsService,
     private userService: UserService,
     private restApi: ApiDataService,
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.activeUser$ = this.userService.activeUser;

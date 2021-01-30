@@ -12,7 +12,7 @@
         <h2>{{ "LOGIN.TITLE" | translate }}</h2>
         <mat-form-field>
           <mat-label>{{ "LOGIN.EMAIL_LABEL" | translate }}</mat-label>
-          <input matInput formControlName="email" />
+          <input matInput formControlName="email"/>
           <mat-error>{{ "LOGIN.VALID_EMAIL" | translate }} </mat-error>
         </mat-form-field>
         <mat-form-field>
@@ -46,7 +46,14 @@
         >
           {{ "LOGIN.BTN_TITLE" | translate }}
         </button>
+        <div>
+          <button
+            (click)="showModal()">show modal
+          </button>
+        </div>
       </form>
     </mat-card-content>
   </mat-card>
+  <ng-template appRef></ng-template>
 </div>
+
