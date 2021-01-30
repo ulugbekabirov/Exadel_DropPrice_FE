@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DiscountsService } from '../../services/discounts.service';
-import { UserService } from '../../services/user.service';
 import { forkJoin, Observable, Subscription } from 'rxjs';
-import { ActiveUser } from '../../models';
-import { ApiDataService } from '../../services/api-data.service';
 import { tap } from 'rxjs/operators';
+import { ActiveUser } from 'src/app/models';
+import { DiscountsService } from 'src/app/services/discounts.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -20,16 +19,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(
     private discountsService: DiscountsService,
     private userService: UserService,
-    private restApi: ApiDataService,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.activeUser$ = this.userService.activeUser;
     this.subscription = this.activeUser$
       .subscribe(user => this.activeUser = user);
     forkJoin(
-      this.restApi.getTowns(),
-      this.restApi.getTags(0, 10),
+      this.discountsService.getTowns(),
+      this.discountsService.getTags(0, 10),
       this.discountsService.getDiscounts(0, 10, this.activeUser.longitude, this.activeUser.latitude, 'dist'),
     ).pipe(
       tap(([res1, res2, res3]) => {
