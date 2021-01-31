@@ -1,7 +1,7 @@
 export interface ActiveUser {
-  id?: number;
-  email?: string;
-  roles?: string[];
-  latitude?: number;
-  longitude?: number;
+  roles: string[];
+  officeLatitude?: number;
+  officeLongitude?: number;
+  userLatitude: number;
+  userLongitude: number;
 }
