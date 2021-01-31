@@ -3,8 +3,9 @@ export interface Discount {
   vendorId: number;
   discountName: string;
   vendorName: string;
-  discountMetres: number;
+  distance: number;
   discountRating: number;
+  vendorRating: number;
   discountAmount: number;
   endDate: Date;
   isSaved: boolean;
