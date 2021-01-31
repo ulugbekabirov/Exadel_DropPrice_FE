@@ -12,7 +12,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authUser: AuthInfo = this.authService.authUserValue;
-    console.log('authUser', authUser);
     const isLoggedIn = authUser && authUser.token;
     const isApiUrl = req.url.startsWith(environment.webApiUrl);
     if (isLoggedIn && isApiUrl) {
