@@ -5,7 +5,6 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -22,7 +21,6 @@ export class LoginFormComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private fb: FormBuilder,
-    public translateService: TranslateService,
     private router: Router,
     private route: ActivatedRoute,
   ) {

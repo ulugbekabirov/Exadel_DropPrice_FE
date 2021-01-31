@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
-import { Ticket } from '../../models/ticket';
+import { Ticket } from '../../models';
 
 @Component({
   selector: 'app-ticket',
