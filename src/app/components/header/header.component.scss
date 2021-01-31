@@ -3,12 +3,11 @@ $header_color:rgb(82, 137, 255);
 .header{
     display: flex;
     justify-content: space-between;
-    width:auto;
     height: 50px;
     align-items: center;
     background-color: $header_color;
-    padding: 10px 10px 10px 50px;
-  color: #ffffff;
+    padding: 10px 50px;
+    color: #ffffff;
 
   &__logo {
     text-decoration: none;

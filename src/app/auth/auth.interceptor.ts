@@ -14,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const activeUser: AuthInfo = this.authService.activeUserValue;
     const isLoggedIn = activeUser && activeUser.token;
-    const isApiUrl = req.url.startsWith(environment.identityUrl);
+    const isApiUrl = req.url.startsWith(environment.webApi);
     if (isLoggedIn && isApiUrl) {
       const clonedReq: HttpRequest<any> = req.clone({
         headers: req.headers.set('Authorization', `Bearer ${activeUser.token}`)

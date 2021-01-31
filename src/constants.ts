@@ -1,6 +1,6 @@
 export const API_URL = 'http//localhost:44360/api';
 export const AUTH_ENDPOINT = 'login';
-export const USER_INFO_ENDPOINT = 'getUserInfo';
+export const USER_INFO_ENDPOINT = 'user';
 export const VENDORS_ENDPOINT = 'vendors';
 export const GET_DISCOUNTS_ENDPOINT = 'discounts';
 export const GET_TOWNS_ENDPOINT = 'towns';

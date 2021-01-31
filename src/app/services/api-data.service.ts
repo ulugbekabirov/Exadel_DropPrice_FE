@@ -21,19 +21,19 @@ export class ApiDataService {
   }
 
   getUserInfo(): Observable<ActiveUser> {
-    return this.http.get<ActiveUser>(`${environment.identityUrl}${USER_INFO_ENDPOINT}`);
+    return this.http.get<ActiveUser>(`${environment.webApi}${USER_INFO_ENDPOINT}`);
   }
 
   getDiscounts(options): Observable<any> {
-    return this.http.get<any>(`${environment.identityUrl}${GET_DISCOUNTS_ENDPOINT}`, options);
+    return this.http.get<any>(`${environment.webApi}${GET_DISCOUNTS_ENDPOINT}`, options);
   }
 
   getTowns(): Observable<any> {
-    return this.http.get<any>(`${environment.identityUrl}${GET_TOWNS_ENDPOINT}`);
+    return this.http.get<any>(`${environment.webApi}${GET_TOWNS_ENDPOINT}`);
   }
 
   getTags(options): Observable<any> {
-    return this.http.get<any>(`${environment.identityUrl}${GET_TAGS_ENDPOINT}`, options);
+    return this.http.get<any>(`${environment.webApi}${GET_TAGS_ENDPOINT}`, options);
   }
 
 }

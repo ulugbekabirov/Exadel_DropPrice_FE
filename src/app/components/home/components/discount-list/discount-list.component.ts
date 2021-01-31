@@ -70,8 +70,8 @@ export class DiscountListComponent implements OnInit, OnDestroy {
       .subscribe(user => this.activeUser = user);
     forkJoin(
       this.discountsService.getTowns(),
-      this.discountsService.getTags(0, 10),
-      this.discountsService.getDiscounts(0, 10, this.activeUser.longitude, this.activeUser.latitude, 'dist'),
+      this.discountsService.getTags(0, 2),
+      this.discountsService.getDiscounts(0, 5, this.activeUser.officeLongitude, this.activeUser.officeLatitude, 'dist'),
     ).pipe(
       tap(([res1, res2, res3]) => {
         console.log('res1', res1);
