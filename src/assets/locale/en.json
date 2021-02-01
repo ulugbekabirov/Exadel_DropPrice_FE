@@ -12,8 +12,8 @@
   },
   "HEADER": {
     "SELECTOR_TITLE": "Language",
-    "ADMIN_PANEL_LINK_TITLE": "Administrator",
-    "MODERATOR_PANEL_LINK_TITLE": "Moderator"
+    "ADMIN_PANEL_LINK_TITLE": "View statistics",
+    "MODERATOR_PANEL_LINK_TITLE": "Add Vendor"
   },
   "LOGIN": {
     "TITLE": "Log In",

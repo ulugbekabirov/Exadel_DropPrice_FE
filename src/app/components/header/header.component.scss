@@ -96,7 +96,7 @@ $header_height: 4em;
       }
     }
 
-    @media screen and (max-width: 660px) {
+    @media screen and (max-width: 700px) {
       display: flex;
     }
   }
@@ -132,7 +132,7 @@ $header_height: 4em;
       border-radius: 0;
       margin-bottom: .6em;
 
-      @media screen and (min-width: 660px) {
+      @media screen and (min-width: 700px) {
         font-weight: 500;
         font-size: 1.2em;
         letter-spacing: initial;
@@ -153,8 +153,11 @@ $header_height: 4em;
         cursor: pointer;
         padding: .5em .1em;
 
+        &:hover {
+          color: burlywood;
+        }
 
-        @media screen and (min-width: 660px) {
+        @media screen and (min-width: 700px) {
           font-size: 1.4em;
           font-weight: 500;
         }
@@ -172,10 +175,15 @@ $header_height: 4em;
       &__icon {
         color: white;
         font-size: 2.4em;
+        cursor: pointer;
+
+        &:hover {
+          color: burlywood;
+        }
       }
     }
 
-    @media screen and (min-width: 660px) {
+    @media screen and (min-width: 700px) {
       position: initial;
       display: flex;
       height: auto;

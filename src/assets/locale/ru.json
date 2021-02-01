@@ -12,8 +12,8 @@
   },
   "HEADER":{
     "SELECTOR_TITLE" : "Язык",
-    "ADMIN_PANEL_LINK_TITLE": "Администратор",
-    "MODERATOR_PANEL_LINK_TITLE": "Модератор"
+    "ADMIN_PANEL_LINK_TITLE": "Статистика",
+    "MODERATOR_PANEL_LINK_TITLE": "Добавить Вендора"
   },
   "LOGIN": {
     "TITLE": "Вход",
