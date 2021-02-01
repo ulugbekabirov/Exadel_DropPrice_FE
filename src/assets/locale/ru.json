@@ -12,7 +12,7 @@
   },
   "HEADER":{
     "SELECTOR_TITLE" : "Язык",
-    "ADMIN_PANEL_LINK_TITLE": "Администатор",
+    "ADMIN_PANEL_LINK_TITLE": "Администратор",
     "MODERATOR_PANEL_LINK_TITLE": "Модератор"
   },
   "LOGIN": {

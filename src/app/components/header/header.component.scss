@@ -1,5 +1,5 @@
 $bg_header_color: #1C68C0;
-$header_height: 4.4em;
+$header_height: 4em;
 
 .header {
   font-size: 1rem;
@@ -192,7 +192,7 @@ $header_height: 4.4em;
     font-size: 1rem;
 
     @media screen and (min-width: 1600px) {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
 
       @media screen and (min-width: 1900px) {
         font-size: 1.6rem;
