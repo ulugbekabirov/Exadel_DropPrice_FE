@@ -78,7 +78,6 @@ export class LoginFormComponent implements OnInit {
     this.auth.login(this.loginForm.value)
       .subscribe((x) => {
         this.loginForm.reset();
-        this.showModal();
         const returnUrl = this.route.snapshot.queryParams['/returnUrl'] || '/';
         this.router.navigate([returnUrl]);
       });

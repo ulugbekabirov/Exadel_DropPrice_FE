@@ -9,8 +9,11 @@
     </mat-form-field>
     <mat-form-field >
       <mat-label>{{"MAIN_PAGE.SORT.LOCATION_SORT" | translate}}:</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let town of towns">
+      <mat-select
+      (selectionChange)="selectLocation($event.value)"
+      >
+        <mat-option [value]="activeUser">Моя локация</mat-option>
+        <mat-option *ngFor="let town of towns" [value]="town">
           {{town.townName}}
         </mat-option>
       </mat-select>

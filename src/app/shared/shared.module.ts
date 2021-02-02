@@ -13,6 +13,7 @@ import { VerifyUserRolesDirective } from '../directives/verify-user-roles.direct
 import { NotFoundComponent } from './components/not-found.components/not-found.component';
 import { RefDirective } from '../directives/ref.directive';
 import { ModalComponent } from './components/modal.component/modal.component';
+import { MetersToKilometersPipe } from '../pipes/meters-to-kilometers.pipe';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { ModalComponent } from './components/modal.component/modal.component';
     NotFoundComponent,
     RefDirective,
     ModalComponent,
+    MetersToKilometersPipe,
   ],
   imports: [
     CommonModule,
@@ -51,6 +53,7 @@ import { ModalComponent } from './components/modal.component/modal.component';
     NotFoundComponent,
     RefDirective,
     ModalComponent,
+    MetersToKilometersPipe,
   ],
 })
 export class SharedModule {}

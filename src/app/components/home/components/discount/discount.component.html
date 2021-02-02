@@ -12,7 +12,7 @@
     </div>
     <div class="vendors_info">
       <div class="vendor_name">{{discountObj.vendorName}}</div>
-      <p class="vendor_distanse">{{discountObj.distance}} {{"MAIN_PAGE.DISCOUNT.DIST_TRANSLATE" | translate}}</p>
+      <p class="vendor_distanse">{{discountObj.distance | metersToKilometers}} {{"MAIN_PAGE.DISCOUNT.DIST_TRANSLATE" | translate}}</p>
     </div>
   </div>
   <div fxLayout='column' fxLayoutAlign="space-evenly" class="right-side">
@@ -28,14 +28,5 @@
         {{ "MAIN_PAGE.BUTTONS.TALON" | translate }}
       </button>
     </div>
-  </div>
-  <div *appVerifyUserRoles='["Moderator"]'
-    fxLayoutAlign="center center"
-  >
-    <a
-       mat-stroked-button
-    >
-      Edit
-    </a>
   </div>
 </div>

@@ -25,7 +25,7 @@
     "STRONG_PASS": "Password must including UPPER/lowercase and number",
     "HIDE": "Hide password"
   },
-  
+
   "MAIN_PAGE":{
     "SEARCH" : "Search",
       "BUTTONS":{
@@ -38,7 +38,7 @@
         "LOCATION_SORT" : "location"
     },
     "DISCOUNT":{
-      "DIST_TRANSLATE": "m. left"
+      "DIST_TRANSLATE": "left"
     }
   },
 

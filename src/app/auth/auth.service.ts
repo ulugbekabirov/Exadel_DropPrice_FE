@@ -38,7 +38,6 @@ export class AuthService {
         tap((authInfo: AuthInfo) => this.handleAuth(authInfo)),
         concatMap(
           (token) => {
-            console.log('auth', token);
             return this.userService.getUserInfo();
           }
         )

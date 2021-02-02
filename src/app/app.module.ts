@@ -19,7 +19,6 @@ import { MissingTranslationService } from './services/missing-translation.servic
 import { HeaderComponent } from './components/header/header.component';
 import { AppRoutingModule } from './app-routing/app.routing.module';
 import { TicketComponent } from './components/ticket/ticket.component';
-import { FakeBackendInterceptor } from './fake-back-end/fake-back-end.interceptor';
 import { DiscountComponent } from './components/home/components/discount/discount.component';
 import { DiscountListComponent } from './components/home/components/discount-list/discount-list.component';
 import { SearchTagComponent } from './components/home/components/search-tag/search-tag.component';

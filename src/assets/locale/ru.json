@@ -37,7 +37,7 @@
       "LOCATION_SORT": "Локация"
     },
     "DISCOUNT": {
-      "DIST_TRANSLATE": "м. от вас"
+      "DIST_TRANSLATE": "от вас"
     },
     "TICKET": {
       "TITLE": "Талон",

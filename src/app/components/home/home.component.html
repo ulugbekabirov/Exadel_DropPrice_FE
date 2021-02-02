@@ -2,6 +2,11 @@
   <app-search-bar></app-search-bar>
   <app-search-tag [searchTagObj]="tags"></app-search-tag>
   <div class="discount-wrapper">
-    <app-discount-list></app-discount-list>
+    <app-discount-list
+    [discounts]="discounts"
+    [towns]="towns"
+    (locationChange)="onLocationChange($event)"
+    [activeUser]="activeUser"
+    ></app-discount-list>
   </div>
 </div>
