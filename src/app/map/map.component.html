@@ -1,0 +1,15 @@
+<agm-map
+  [latitude]="this.coordinate.latitude"
+  [longitude]="this.coordinate.longitude"
+  [zoom]="zoom"
+  (mapClick)="onChoseLocation($event)"
+>
+  <agm-marker
+    *ngFor="let coord of this.coordinates"
+    [latitude]="coord.latitude"
+    [longitude]="coord.longitude"
+    [label]="'M'"
+  ></agm-marker>
+</agm-map>
+
+<button mat-button (click)="getCoordinats()">Add point</button>

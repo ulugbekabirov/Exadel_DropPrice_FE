@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment.prod';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -9,6 +10,7 @@ import {
   TranslateModule,
   MissingTranslationHandler,
 } from '@ngx-translate/core';
+import { AgmCoreModule } from '@agm/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { AppComponent } from './app.component';
@@ -21,6 +23,7 @@ import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app.routing.module';
 import { ModeratorDashboardComponent } from './moderator-dashboard/moderator-dashboard.component';
 import { NewVendorComponent } from './new-vendor/new-vendor.component';
+import { MapComponent } from './map/map.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -33,6 +36,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     HeaderComponent,
     ModeratorDashboardComponent,
     NewVendorComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +54,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         provide: MissingTranslationHandler,
         useClass: MissingTranslationService,
       },
+    }),
+    AgmCoreModule.forRoot({
+      apiKey: environment.googleMapApi,
     }),
   ],
   providers: [

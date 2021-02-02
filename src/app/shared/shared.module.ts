@@ -12,6 +12,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotFoundComponent } from '../not-found';
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+
 @NgModule({
   declarations: [NotFoundComponent],
   imports: [
@@ -27,7 +29,9 @@ import { NotFoundComponent } from '../not-found';
     MatListModule,
     MatCardModule,
     MatTabsModule,
+    AgmCoreModule,
   ],
+  providers: [GoogleMapsAPIWrapper],
 
   exports: [
     CommonModule,
