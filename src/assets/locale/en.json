@@ -39,6 +39,8 @@
     "VALID_PHONE": "Enter the phone without spaces in the format '+COUNTRY_CODE-OPERATOR_CODE-NUMBER'",
     "EMAIL_LABEL": "Enter vendor's email*",
     "VALID_EMAIL": "Please enter a valid email address",
+    "SOCIAL_NETWORK_LABEL": "Enter vendor's social network",
+    "VALID_SOCIAL_NETWORK": "Please enter a valid url address",
     "BTN_TITLE": "Add"
   }
 }

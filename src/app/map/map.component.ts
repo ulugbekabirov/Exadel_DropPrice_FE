@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { SalesCoordinate } from '../models/sales-coordinate';
-declare let google: any;
 
 @Component({
   selector: 'app-map',
@@ -9,6 +8,7 @@ declare let google: any;
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit {
+  @Output() data: EventEmitter<any> = new EventEmitter<any>();
   zoom = 13;
   coordinate: SalesCoordinate = {
     latitude: 53.9,
@@ -30,5 +30,6 @@ export class MapComponent implements OnInit {
     };
     this.coordinates.push(latlng);
     console.log(this.coordinates);
+    this.data.emit(this.coordinates);
   }
 }

@@ -14,6 +14,7 @@ import {
 export class NewVendorComponent implements OnInit {
   hide = false;
   newVendorForm: FormGroup;
+  coordinates: [];
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
@@ -30,18 +31,24 @@ export class NewVendorComponent implements OnInit {
         ],
       ],
       email: ['', [Validators.required, Validators.email]],
+      social_network: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            /^(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$/
+          ),
+        ],
+      ],
     });
   }
 
   onSubmit() {
     console.log(this.newVendorForm.value);
+    // console.log(this.coordinates);
   }
-
-  addField() {
-    // this.fb.group({
-    //   additional_adress: [''],
-    // });
-    console.log('Sdfsd');
+  eventHandler(data) {
+    this.coordinates = data;
   }
 
   get name(): AbstractControl {
@@ -58,5 +65,9 @@ export class NewVendorComponent implements OnInit {
 
   get email(): AbstractControl {
     return this.newVendorForm.get('email');
+  }
+
+  get social_network(): AbstractControl {
+    return this.newVendorForm.get('social_network');
   }
 }

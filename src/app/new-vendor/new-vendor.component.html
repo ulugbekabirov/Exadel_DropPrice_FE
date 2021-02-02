@@ -11,79 +11,18 @@
           <mat-label>{{ "NEW_VENDOR_FORM.NAME_LABEL" | translate }}</mat-label>
           <input matInput formControlName="name" />
         </mat-form-field>
-        <div
-          class="test"
-          fxLayout="row"
-          fxLayoutAlign="space-evenly end"
-          fxLayoutGap="5px"
-        >
-          <mat-form-field>
-            <mat-label>{{
-              "NEW_VENDOR_FORM.ADRESS_LABEL" | translate
-            }}</mat-label>
-            <textarea
-              matInput
-              formControlName="adress"
-              required
-              placeholder="{{
-                'NEW_VENDOR_FORM.ADRESS_PLACEHOLDER' | translate
-              }}"
-            ></textarea>
-          </mat-form-field>
-          <div class="example-button-container">
-            <mat-icon (click)="hide = !hide">add</mat-icon>
-          </div>
-        </div>
-        <div class="test" *ngIf="hide">
-          <mat-form-field>
-            <mat-label>{{
-              "NEW_VENDOR_FORM.ADRESS_LABEL" | translate
-            }}</mat-label>
-            <textarea
-              matInput
-              formControlName="adress"
-              placeholder="{{
-                'NEW_VENDOR_FORM.ADRESS_PLACEHOLDER' | translate
-              }}"
-            ></textarea>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>{{
-              "NEW_VENDOR_FORM.ADRESS_LABEL" | translate
-            }}</mat-label>
-            <textarea
-              matInput
-              formControlName="adress"
-              placeholder="{{
-                'NEW_VENDOR_FORM.ADRESS_PLACEHOLDER' | translate
-              }}"
-            ></textarea>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>{{
-              "NEW_VENDOR_FORM.ADRESS_LABEL" | translate
-            }}</mat-label>
-            <textarea
-              matInput
-              formControlName="adress"
-              placeholder="{{
-                'NEW_VENDOR_FORM.ADRESS_PLACEHOLDER' | translate
-              }}"
-            ></textarea>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>{{
-              "NEW_VENDOR_FORM.ADRESS_LABEL" | translate
-            }}</mat-label>
-            <textarea
-              matInput
-              formControlName="adress"
-              placeholder="{{
-                'NEW_VENDOR_FORM.ADRESS_PLACEHOLDER' | translate
-              }}"
-            ></textarea>
-          </mat-form-field>
-        </div>
+
+        <mat-form-field>
+          <mat-label>{{
+            "NEW_VENDOR_FORM.ADRESS_LABEL" | translate
+          }}</mat-label>
+          <textarea
+            matInput
+            formControlName="adress"
+            required
+            placeholder="{{ 'NEW_VENDOR_FORM.ADRESS_PLACEHOLDER' | translate }}"
+          ></textarea>
+        </mat-form-field>
 
         <mat-form-field>
           <mat-label>{{
@@ -101,6 +40,15 @@
             >{{ "NEW_VENDOR_FORM.VALID_EMAIL" | translate }}
           </mat-error>
         </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{
+            "NEW_VENDOR_FORM.SOCIAL_NETWORK_LABEL" | translate
+          }}</mat-label>
+          <input matInput formControlName="social_network" />
+          <mat-error
+            >{{ "NEW_VENDOR_FORM.VALID_SOCIAL_NETWORK" | translate }}
+          </mat-error>
+        </mat-form-field>
         <button
           mat-flat-button
           color="primary"
@@ -113,3 +61,4 @@
     </mat-card-content>
   </mat-card>
 </div>
+<app-map (data)="eventHandler($event)"></app-map>
