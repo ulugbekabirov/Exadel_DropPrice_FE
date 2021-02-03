@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ApiDataService } from './api-data.service';
-import { BehaviorSubject, from, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, } from 'rxjs';
 import { ActiveUser } from '../models';
 import { KEY_ACTIVE_USER } from '../../constants';
-import { map, switchMap, tap } from 'rxjs/operators';
-import { error } from '../fake-back-end/helpers';
+import { map, tap } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -28,39 +28,38 @@ export class UserService {
     return this.restApi.getUserInfo()
       .pipe(
         map((user: ActiveUser) => this.getUserPosition(user)),
-        tap((user: ActiveUser) => this.handleActiveUser(user)),
+        map((user: ActiveUser) => this.handleActiveUser(user)),
         tap((user: ActiveUser) => console.log('USER3', user)),
       );
   }
 
-  private handleActiveUser(user: ActiveUser): void {
+  private handleActiveUser(user: ActiveUser): any {
     localStorage.setItem(KEY_ACTIVE_USER, JSON.stringify(user));
     this.activeUserSubject.next(user);
-
+    return user;
   }
 
   getUserPosition(user: ActiveUser): any {
+    const updateUser: ActiveUser = {...user};
     if (!navigator.geolocation) {
-      console.log('Geolocation is not supported by your browser');
-      return user;
-    }
-    const updateUser = Object.assign({}, user);
+        console.log('Geolocation is not supported by your browser');
+        return updateUser;
+      }
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        // this.set('longitude', position.coords.longitude);
-        // this.set('latitude', position.coords.latitude);
         Object.assign(updateUser, {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude
         });
-      });
+      },
+      (error) => {
+        console.log(error);
+      },
+      {
+        timeout: 5000
+      }
+    );
     return updateUser;
-  }
-
-  set(name: string, field: any): void {
-    this.activeUserSubject.next({
-      ...this.activeUserValue, [name]: field
-    });
   }
 
   logout(): void {

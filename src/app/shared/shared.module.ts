@@ -14,6 +14,9 @@ import { NotFoundComponent } from './components/not-found.components/not-found.c
 import { RefDirective } from '../directives/ref.directive';
 import { ModalComponent } from './components/modal.component/modal.component';
 import { MetersToKilometersPipe } from '../pipes/meters-to-kilometers.pipe';
+import { DiscountsListComponent } from './components/discounts-list/discounts-list.component';
+import { DiscountsListItemComponent } from './components/discounts-list-item/discounts-list-item.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -23,6 +26,8 @@ import { MetersToKilometersPipe } from '../pipes/meters-to-kilometers.pipe';
     RefDirective,
     ModalComponent,
     MetersToKilometersPipe,
+    DiscountsListComponent,
+    DiscountsListItemComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +41,7 @@ import { MetersToKilometersPipe } from '../pipes/meters-to-kilometers.pipe';
     MatChipsModule,
     MatListModule,
     MatCardModule,
+    TranslateModule,
   ],
   exports: [
     CommonModule,
@@ -54,6 +60,8 @@ import { MetersToKilometersPipe } from '../pipes/meters-to-kilometers.pipe';
     RefDirective,
     ModalComponent,
     MetersToKilometersPipe,
+    DiscountsListComponent,
+    DiscountsListItemComponent,
   ],
 })
 export class SharedModule {}

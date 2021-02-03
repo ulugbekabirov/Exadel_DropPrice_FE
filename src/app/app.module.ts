@@ -19,10 +19,7 @@ import { MissingTranslationService } from './services/missing-translation.servic
 import { HeaderComponent } from './components/header/header.component';
 import { AppRoutingModule } from './app-routing/app.routing.module';
 import { TicketComponent } from './components/ticket/ticket.component';
-import { DiscountComponent } from './components/home/components/discount/discount.component';
-import { DiscountListComponent } from './components/home/components/discount-list/discount-list.component';
-import { SearchTagComponent } from './components/home/components/search-tag/search-tag.component';
-import { SearchBarComponent } from './components/home/components/search-bar/search-bar.component';
+
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -35,10 +32,6 @@ export function HttpLoaderFactory(http: HttpClient): any {
       HomeComponent,
       HeaderComponent,
       TicketComponent,
-      DiscountComponent,
-      DiscountListComponent,
-      SearchTagComponent,
-      SearchBarComponent,
     ],
     imports: [
       BrowserModule,
@@ -61,7 +54,6 @@ export function HttpLoaderFactory(http: HttpClient): any {
     providers: [
       {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
       {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
-      // {provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true}
     ],
     bootstrap: [AppComponent]
   })

@@ -8,3 +8,30 @@ export const GET_TAGS_ENDPOINT = 'tags';
 export const TOKEN_HEADER_KEY = 'Authorization';
 export const KEY_AUTH_TOKEN = 'key_auth_token';
 export const KEY_ACTIVE_USER = 'key_active_user';
+
+export const SORT_BY =[
+  {
+    name: 'По возрастанию рейтинга',
+    sortBy: 'DiscountRatingAsc',
+  },
+  {
+    name: 'По убыванию рейтинга',
+    sortBy: 'DiscountRatingDesc',
+  },
+  {
+    name: 'По расстоянию',
+    sortBy: 'DistanceAsc',
+  },
+  {
+    name: 'По расстоянию',
+    sortBy: 'DistanceDesc',
+  },
+  {
+    name: 'По алфавиту',
+    sortBy: 'AlphabetAsc',
+  },
+  {
+    name: 'По алфавиту',
+    sortBy: 'AlphabetDesc',
+  },
+];

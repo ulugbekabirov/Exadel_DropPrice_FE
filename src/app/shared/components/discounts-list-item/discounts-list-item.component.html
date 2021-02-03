@@ -4,21 +4,21 @@
       class="flexible"
       (click)="addToFavorites()"
     >
-      <h1 class="discount_name">{{discountObj.discountName}}</h1>
+      <h1 class="discount_name">{{discount.discountName}}</h1>
       <img src={{currentHeartStatus}} alt="favorite" class="img">
       <div class="flexible rating-block">
-        <h2>{{discountObj.discountRating}}</h2> <img src="assets/img/star.png" alt="rating" class="img">
+        <h2>{{discount.discountRating}}</h2> <img src="assets/img/star.png" alt="rating" class="img">
       </div>
     </div>
     <div class="vendors_info">
-      <div class="vendor_name">{{discountObj.vendorName}}</div>
-      <p class="vendor_distanse">{{discountObj.distance | metersToKilometers}} {{"MAIN_PAGE.DISCOUNT.DIST_TRANSLATE" | translate}}</p>
+      <div class="vendor_name">{{discount.vendorName}}</div>
+      <p class="vendor_distanse">{{discount.distanceInMeters | metersToKilometers}} {{"MAIN_PAGE.DISCOUNT.DIST_TRANSLATE" | translate}}</p>
     </div>
   </div>
   <div fxLayout='column' fxLayoutAlign="space-evenly" class="right-side">
-    <h1 class="persent_of_discount" fxLayoutAlign="flex-end"><b>{{discountObj.discountAmount}} %</b></h1>
+    <h1 class="persent_of_discount" fxLayoutAlign="flex-end"><b>{{discount.discountAmount}} %</b></h1>
     <div class="flexible" fxLayoutAlign="space-between">
-      <p class="date_of_discount"> до {{discountObj.endDate | date:"dd/MM/yyyy"}}</p>
+      <p class="date_of_discount"> до {{discount.endDate | date:"dd/MM/yyyy"}}</p>
       <button
         mat-raised-button
         color="primary"

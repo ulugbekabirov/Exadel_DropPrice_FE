@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { concatMap, switchMap, tap } from 'rxjs/operators';
+import { concatMap, tap } from 'rxjs/operators';
 import { ActiveUser, AuthUser } from '../models';
 import { AuthInfo } from '../models';
 import { ApiDataService } from '../services/api-data.service';
@@ -37,7 +37,7 @@ export class AuthService {
       .pipe(
         tap((authInfo: AuthInfo) => this.handleAuth(authInfo)),
         concatMap(
-          (token) => {
+          () => {
             return this.userService.getUserInfo();
           }
         )

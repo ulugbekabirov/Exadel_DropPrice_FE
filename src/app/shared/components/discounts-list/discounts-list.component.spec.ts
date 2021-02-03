@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DiscountListComponent } from './discount-list.component';
+import { DiscountsListComponent } from './discounts-list.component';
 
-describe('DiscountListComponent', () => {
-  let component: DiscountListComponent;
-  let fixture: ComponentFixture<DiscountListComponent>;
+describe('DiscountsListComponent', () => {
+  let component: DiscountsListComponent;
+  let fixture: ComponentFixture<DiscountsListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DiscountListComponent ]
+      declarations: [ DiscountsListComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DiscountListComponent);
+    fixture = TestBed.createComponent(DiscountsListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

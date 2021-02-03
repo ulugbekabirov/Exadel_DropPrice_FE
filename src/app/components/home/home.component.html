@@ -1,12 +1,12 @@
 <div class="main-container">
-  <app-search-bar></app-search-bar>
-  <app-search-tag [searchTagObj]="tags"></app-search-tag>
   <div class="discount-wrapper">
-    <app-discount-list
-    [discounts]="discounts"
-    [towns]="towns"
-    (locationChange)="onLocationChange($event)"
-    [activeUser]="activeUser"
-    ></app-discount-list>
+    <app-discounts-list
+      [discounts]="discounts"
+      [towns]="towns"
+      (locationChange)="onLocationChange($event)"
+      (sortChange)="onSortChange($event)"
+      [activeUser]="activeUser"
+      [sortBy]="sortBy"
+    ></app-discounts-list>
   </div>
 </div>

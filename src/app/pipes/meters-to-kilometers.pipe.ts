@@ -12,5 +12,4 @@ export class MetersToKilometersPipe implements PipeTransform {
       return distance + 'm.';
     }
   }
-
 }

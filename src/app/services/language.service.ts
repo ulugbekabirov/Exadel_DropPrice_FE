@@ -10,15 +10,15 @@ export class LanguageService {
 
   protected nameInLS = 'currentLang';
 
-  getCurrentLang() {
+  getCurrentLang(): any {
     return localStorage.getItem(this.nameInLS) ?? this.defaultLang;
   }
 
-  setLanguageTolS(selectedLang: string) {
+  setLanguageTolS(selectedLang: string): void {
     localStorage.setItem(this.nameInLS, selectedLang);
   }
 
-  removeLanguageFromLS() {
+  removeLanguageFromLS(): void {
     localStorage.removeItem(this.nameInLS);
   }
 }
