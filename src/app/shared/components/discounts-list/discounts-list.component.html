@@ -1,24 +1,24 @@
 <div class="discounts-list">
-  <h3>
+  <h3 class="discounts-list__title">
     <ng-content></ng-content>
   </h3>
   <div class="discounts-list__settings">
     <mat-form-field>
-      <mat-label>{{"MAIN_PAGE.SORT.PARAM_SORT.TITLE" | translate}}:</mat-label>
+      <mat-label>{{"MAIN_PAGE.FILTER.SORT_BY.TITLE" | translate}}:</mat-label>
       <mat-select
         (selectionChange)="selectSort($event)"
       >
         <mat-option *ngFor="let sort of sortBy" [value]="sort">
-          {{sort.name}}
+          {{sort.name | translate}}
         </mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>{{"MAIN_PAGE.SORT.LOCATION_SORT" | translate}}:</mat-label>
+      <mat-label>{{"MAIN_PAGE.FILTER.LOCATION_SORT.TITLE" | translate}}:</mat-label>
       <mat-select
         (selectionChange)="selectLocation($event)"
       >
-        <mat-option [value]="activeUser">Моя локация</mat-option>
+        <mat-option [value]="activeCoords">Моя локация</mat-option>
         <mat-option *ngFor="let town of towns" [value]="town">
           {{town.townName}}
         </mat-option>
@@ -31,6 +31,5 @@
         [discount]="discount"
       ></app-discounts-list-item>
     </li>
-    >
   </ul>
 </div>

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActiveUser, Discount, Town } from '../../../models';
+import { Discount, LocationCoords, Town } from '../../../models';
 
 @Component({
   selector: 'app-discounts-list',
@@ -7,11 +7,11 @@ import { ActiveUser, Discount, Town } from '../../../models';
   styleUrls: ['./discounts-list.component.scss']
 })
 export class DiscountsListComponent {
-  @Input() discounts: Discount[];
   @Output() locationChange = new EventEmitter<any>();
   @Output() sortChange = new EventEmitter<any>();
+  @Input() discounts: Discount[];
   @Input() towns: Town[];
-  @Input() activeUser: ActiveUser;
+  @Input() activeCoords: LocationCoords;
   @Input() sortBy;
 
   selectLocation(loc): void {

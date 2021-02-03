@@ -4,6 +4,8 @@ import { tap } from 'rxjs/operators';
 import { DiscountsService } from 'src/app/services/discounts.service';
 import { UserService } from 'src/app/services/user.service';
 import { SORT_BY } from '../../../constants';
+import { ActiveUser, Discount, LocationCoords, Tag, Town } from '../../models';
+
 
 @Component({
   selector: 'app-home',
@@ -11,15 +13,15 @@ import { SORT_BY } from '../../../constants';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  activeUser;
-  tags;
-  towns;
-  discounts;
-  private subscription: Subscription;
-  activeUser$: Observable<any>;
   sortBy = SORT_BY;
-  activeSort;
-  activeCoords;
+  activeUser: ActiveUser;
+  tags: Tag[];
+  towns: Town[];
+  discounts: Discount[];
+  activeUser$: Observable<ActiveUser>;
+  activeSort: string;
+  activeCoords: LocationCoords;
+  private subscription: Subscription;
 
   constructor(
     private discountsService: DiscountsService,
@@ -30,10 +32,26 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.activeUser$ = this.userService.activeUser;
     this.subscription = this.activeUser$.pipe(
-    ).subscribe(user => this.activeUser = user);
+    ).subscribe(user => {
+      console.log('ACTIVE_USER', user);
+      this.activeUser = user;
+      this.activeSort = 'DistanceAsc';
+      if (user.latitude && user.longitude) {
+        this.activeCoords = {
+          latitude: user.latitude,
+          longitude: user.longitude,
+        };
+      } else {
+        this.activeCoords = {
+          latitude: user.officeLatitude,
+          longitude: user.officeLongitude,
+        };
+      }
+
+    });
     const towns$ = this.discountsService.getTowns();
     const tags$ = this.discountsService.getTags(0, 20);
-    const discounts$ = this.discountsService.getDiscounts(0, 10, this.activeUser.officeLongitude, this.activeUser.officeLatitude, 'DistanceAsc');
+    const discounts$ = this.discountsService.getDiscounts(0, 10, this.activeCoords.longitude, this.activeCoords.latitude, this.activeSort);
     forkJoin(
       [towns$, tags$, discounts$]
     ).pipe(
@@ -46,6 +64,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.towns = towns;
       this.tags = tags;
       this.discounts = discounts;
+      console.log('this', this);
     });
   }
 
@@ -61,7 +80,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onSortChange({value: {sortBy}}): void {
     this.activeSort = sortBy;
-    this.discountsService.getDiscounts(0, 10, this.activeCoords.longitude, this.activeCoords.longitude, this.activeSort)
+    this.discountsService.getDiscounts(0, 10, this.activeCoords.longitude, this.activeCoords.latitude, this.activeSort)
       .subscribe(res => this.discounts = res);
   }
 }

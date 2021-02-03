@@ -1,8 +1,1 @@
-$background:rgb(122, 204, 231);
-
-*{
-    box-sizing: border-box;
-}
-body{
-    background-color: $background;
-}
+@import "src/_variables";

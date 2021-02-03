@@ -30,11 +30,32 @@
     "BUTTONS": {
       "TALON": "Талон"
     },
-    "SORT": {
-      "PARAM_SORT": {
-        "TITLE": "сортировать по"
+    "FILTER": {
+      "SORT_BY": {
+        "TITLE": "сортировать по",
+        "DISCOUNT_RATING_ASC": {
+          "NAME": "Рейтинг - по возрастанию"
+        },
+        "DISCOUNT_RATING_DESC": {
+          "NAME": "Рейтинг - по убыванию"
+        },
+        "DISTANCE_ASC": {
+          "NAME": "Расстояние - по возрастанию"
+        },
+        "DISTANCE_DESC": {
+          "NAME": "Расстояние - по убыванию"
+        },
+        "ALPHABET_ASC": {
+          "NAME": "Алфавит - А до Я"
+        },
+        "ALPHABET_DESC": {
+          "NAME": "Алфавит - А до Я"
+        }
       },
-      "LOCATION_SORT": "Локация"
+      "LOCATION_SORT": {
+        "TITLE": "локация",
+        "": "Моё местоположение"
+      }
     },
     "DISCOUNT": {
       "DIST_TRANSLATE": "от вас"

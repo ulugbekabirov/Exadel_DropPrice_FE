@@ -1,8 +1,16 @@
 .discounts-list {
+  font-size: 1rem;
+  padding: 2em;
+
+  &__title {
+    font-size: 1.4em;
+    text-align: center;
+    font-weight: bold;
+  }
 
   &__settings {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
   }
 }
 

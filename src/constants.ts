@@ -7,29 +7,29 @@ export const GET_TAGS_ENDPOINT = 'tags';
 export const KEY_AUTH_TOKEN = 'key_auth_token';
 export const KEY_ACTIVE_USER = 'key_active_user';
 
-export const SORT_BY =[
+export const SORT_BY = [
   {
-    name: 'По возрастанию рейтинга',
+    name: 'MAIN_PAGE.FILTER.SORT_BY.DISCOUNT_RATING_ASC.NAME',
     sortBy: 'DiscountRatingAsc',
   },
   {
-    name: 'По убыванию рейтинга',
+    name: 'MAIN_PAGE.FILTER.SORT_BY.DISCOUNT_RATING_DESC.NAME',
     sortBy: 'DiscountRatingDesc',
   },
   {
-    name: 'По расстоянию',
+    name: 'MAIN_PAGE.FILTER.SORT_BY.DISTANCE_ASC.NAME',
     sortBy: 'DistanceAsc',
   },
   {
-    name: 'По расстоянию',
+    name: 'MAIN_PAGE.FILTER.SORT_BY.DISTANCE_DESC.NAME',
     sortBy: 'DistanceDesc',
   },
   {
-    name: 'По алфавиту',
+    name: 'MAIN_PAGE.FILTER.SORT_BY.ALPHABET_ASC.NAME',
     sortBy: 'AlphabetAsc',
   },
   {
-    name: 'По алфавиту',
+    name: 'MAIN_PAGE.FILTER.SORT_BY.ALPHABET_DESC.NAME',
     sortBy: 'AlphabetDesc',
   },
 ];

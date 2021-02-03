@@ -25,23 +25,41 @@
     "STRONG_PASS": "Password must including UPPER/lowercase and number",
     "HIDE": "Hide password"
   },
-
-  "MAIN_PAGE":{
-    "SEARCH" : "Search",
-      "BUTTONS":{
-        "TALON" : "Talon"
-      },
-    "SORT" : {
-        "PARAM_SORT" : {
-          "TITLE" :"sort by"
-        },
-        "LOCATION_SORT" : "location"
+  "MAIN_PAGE": {
+    "SEARCH": "Search",
+    "BUTTONS": {
+      "TALON": "Talon"
     },
-    "DISCOUNT":{
+    "FILTER": {
+      "SORT_BY": {
+        "TITLE": "sort by",
+        "DISCOUNT_RATING_ASC": {
+          "NAME": "Rating - Low to High"
+        },
+        "DISCOUNT_RATING_DESC": {
+          "NAME": "Rating - High to Low"
+        },
+        "DISTANCE_ASC": {
+          "NAME": "Distance - Low to High"
+        },
+        "DISTANCE_DESC": {
+          "NAME": "Distance - High to Low"
+        },
+        "ALPHABET_ASC": {
+          "NAME": "Alphabet - A to Z"
+        },
+        "ALPHABET_DESC": {
+          "NAME": "Alphabet - Z to A"
+        }
+      },
+      "LOCATION_SORT": {
+        "TITLE": "location"
+      }
+    },
+    "DISCOUNT": {
       "DIST_TRANSLATE": "left"
     }
   },
-
   "TICKET": {
     "TITLE": "Ticket",
     "FIRST_NAME": "First name",
