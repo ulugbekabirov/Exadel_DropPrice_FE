@@ -2,6 +2,7 @@ import { Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } fr
 import { Observable, Subscription } from 'rxjs';
 import { pluck } from 'rxjs/operators';
 import { UserService } from '../services/user.service';
+import { ActiveUser } from '../models';
 
 @Directive({
   selector: '[appVerifyUserRoles]'
@@ -9,7 +10,7 @@ import { UserService } from '../services/user.service';
 export class VerifyUserRolesDirective implements OnInit, OnDestroy {
   @Input() appVerifyUserRoles: string[];
   private subscription: Subscription;
-  activeUser$: Observable<any>;
+  activeUser$: Observable<ActiveUser>;
 
   constructor(
     private templateRef: TemplateRef<any>,

@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { forkJoin, Observable, Subscription } from 'rxjs';
-import { map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { DiscountsService } from 'src/app/services/discounts.service';
 import { UserService } from 'src/app/services/user.service';
 import { SORT_BY } from '../../../constants';
-
 
 @Component({
   selector: 'app-home',

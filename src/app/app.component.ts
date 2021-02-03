@@ -10,19 +10,18 @@ import { LanguageService } from './services/language.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  private activeUser: AuthInfo;
+  private authUser: AuthInfo;
   title = 'InternshipFe';
 
   constructor(
      private translateService: TranslateService,
      private auth: AuthService,
      private langService: LanguageService
-  ) {
-    this.auth.activeUser.subscribe(user => this.activeUser = user);
+  )  {
+    this.auth.authUser.subscribe(user => this.authUser = user);
   }
 
   ngOnInit(): void {
     this.translateService.use(this.langService.getCurrentLang());
   }
-
 }

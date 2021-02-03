@@ -44,7 +44,7 @@ export class LoginFormComponent implements OnInit {
 
   onSubmit(): void {
     this.auth.login(this.loginForm.value)
-      .subscribe((x) => {
+      .subscribe(() => {
         this.loginForm.reset();
         const returnUrl = this.route.snapshot.queryParams['/returnUrl'] || '/';
         this.router.navigate([returnUrl]);

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../../auth/auth.service';
+import { AuthInfo } from '../../models';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +15,7 @@ import { AuthService } from '../../auth/auth.service';
 export class HeaderComponent {
   public langs: string[] = environment.locales;
   defaultLang: string = localStorage.getItem('currentLang') ?? environment.defaultLocale;
-  activeUser$ = this.auth.activeUser;
+  authUser$: Observable<AuthInfo> = this.auth.authUser;
 
   constructor(
     public translateService: TranslateService,

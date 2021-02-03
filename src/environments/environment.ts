@@ -7,7 +7,7 @@ export const environment = {
   locales: ['en', 'ru'],
   defaultLocale: 'ru',
   identityUrl: 'https://localhost:44360/api/',
-  webApi: 'https://localhost:44395/api/'
+  webApiUrl: 'https://localhost:44395/api/',
 };
 
 /*
