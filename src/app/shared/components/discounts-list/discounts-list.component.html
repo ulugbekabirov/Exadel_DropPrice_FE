@@ -1,6 +1,9 @@
 <div class="discounts-list">
-  <div class="discount-settings">
-    <mat-form-field >
+  <h3>
+    <ng-content></ng-content>
+  </h3>
+  <div class="discounts-list__settings">
+    <mat-form-field>
       <mat-label>{{"MAIN_PAGE.SORT.PARAM_SORT.TITLE" | translate}}:</mat-label>
       <mat-select
         (selectionChange)="selectSort($event)"
@@ -10,7 +13,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field >
+    <mat-form-field>
       <mat-label>{{"MAIN_PAGE.SORT.LOCATION_SORT" | translate}}:</mat-label>
       <mat-select
         (selectionChange)="selectLocation($event)"
@@ -22,14 +25,12 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <h3>
-    <ng-content></ng-content>
-  </h3>
   <ul>
     <li *ngFor="let discount of discounts">
       <app-discounts-list-item
         [discount]="discount"
       ></app-discounts-list-item>
     </li>
+    >
   </ul>
 </div>

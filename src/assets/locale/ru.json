@@ -10,9 +10,9 @@
   "BUTTON": {
     "LOGOUT": "Выход"
   },
-  "HEADER": {
-    "SELECTOR_TITLE": "Язык",
-    "ADMIN_PANEL_LINK_TITLE": "Панель Администатора",
+  "HEADER":{
+    "SELECTOR_TITLE" : "Язык",
+    "ADMIN_PANEL_LINK_TITLE": "Статистика",
     "MODERATOR_PANEL_LINK_TITLE": "Добавить Вендора"
   },
   "LOGIN": {

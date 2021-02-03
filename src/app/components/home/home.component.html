@@ -1,5 +1,4 @@
 <div class="main-container">
-  <div class="discount-wrapper">
     <app-discounts-list
       [discounts]="discounts"
       [towns]="towns"
@@ -7,6 +6,7 @@
       (sortChange)="onSortChange($event)"
       [activeUser]="activeUser"
       [sortBy]="sortBy"
-    ></app-discounts-list>
-  </div>
+    >
+      Доступные скидки
+    </app-discounts-list>
 </div>

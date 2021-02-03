@@ -1,4 +1,8 @@
-.discount-settings{
-  display: flex;
-  justify-content: space-between;
+.discounts-list {
+
+  &__settings {
+    display: flex;
+    justify-content: space-between;
+  }
 }
+

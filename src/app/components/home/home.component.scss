@@ -1,26 +1,7 @@
-.flex {
-  display: flex;
-}
+@import "src/variables";
 
 .main-container {
   display: flex;
   flex-direction: column;
-  width: 60%;
-  height: 90%;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  padding: 5px;
-}
-
-.search {
-  height: 30%;
-  padding: 5px;
-}
-
-.discount-wrapper {
-  display: flex;
-  flex-direction: column;
-  padding: 5px;
-  height: inherit;
+  margin-top: $header_height;
 }
