@@ -1,12 +1,33 @@
-$ticket-background:#FBFBFB;
+@import "src/variables";
+
+
+.shadow {
+  position:  fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .4);
+}
 
 .ticket-wrapper {
-  height: 90%;
+  //height: 90%;
+  position:  fixed;
+
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .4);
 }
 
 .ticket {
-  position: relative;
-  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  box-sizing:border-box;
   max-width: 460px;
   width: 100%;
   height: 565px;
@@ -15,7 +36,7 @@ $ticket-background:#FBFBFB;
   border-radius: 10px;
   background:$ticket-background;
   box-shadow: 2px 2px 15px 0 #AB9B0D;
-  
+
   &:before,
   &:after {
     content: '';
@@ -25,12 +46,12 @@ $ticket-background:#FBFBFB;
     max-width: 450px;
     width: 100%;
   }
-  
+
   &:before {
     top: -5px;
     background: radial-gradient(circle, transparent, transparent 50%, $ticket-background 50%,$ticket-background 100% ) -7px -8px / 16px 16px repeat-x,
   }
-  
+
   &:after {
     bottom: -5px;
     background: radial-gradient(circle, transparent, transparent 50%, $ticket-background 50%, $ticket-background 100% ) -7px -2px / 16px 16px repeat-x,

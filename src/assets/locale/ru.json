@@ -60,20 +60,20 @@
     "DISCOUNT_CARD": {
       "DISTANCE": "от вас",
       "DATE": "до"
-    },
-    "TICKET": {
-      "TITLE": "Талон",
-      "FIRST_NAME": "Фамилия",
-      "LAST_NAME": "Имя",
-      "PATRONYMIC": "Отчество",
-      "NAME_VENDOR": "Наименование вендора",
-      "PRODUCT_SERVICE": "Товар/услуга",
-      "EMAIL": "Электронная почта",
-      "PHONE": "Контактный телефон",
-      "PROMO_CODE": "Промокод (при наличии)",
-      "DISCOUNT": "Скидка",
-      "CONFIRMATION_DATE": "Дата подтверждения",
-      "CLOSE": "Закрыть"
     }
+  },
+  "TICKET": {
+    "TITLE": "Талон",
+    "FIRST_NAME": "Фамилия",
+    "LAST_NAME": "Имя",
+    "PATRONYMIC": "Отчество",
+    "NAME_VENDOR": "Наименование вендора",
+    "PRODUCT_SERVICE": "Товар/услуга",
+    "EMAIL": "Электронная почта",
+    "PHONE": "Контактный телефон",
+    "PROMO_CODE": "Промокод (при наличии)",
+    "DISCOUNT": "Скидка",
+    "CONFIRMATION_DATE": "Дата подтверждения",
+    "CLOSE": "Закрыть"
   }
 }

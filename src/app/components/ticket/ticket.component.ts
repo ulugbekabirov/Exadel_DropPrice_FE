@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Location } from '@angular/common';
 import { Ticket } from '../../models';
 
@@ -19,14 +19,13 @@ export class TicketComponent {
     email: 'sm@gmail.com',
     phone: '+375(29)111-11-11',
     discountAmount: 30,
-    endDate: new Date (),
-    promoCode:  'Бинго'
+    endDate: new Date(),
+    promoCode: 'Бинго'
   };
 
-  constructor(private location: Location) {
-  }
+  @Output() closeTicket = new EventEmitter<boolean>();
 
   back(): void {
-    this.location.back();
+    this.closeTicket.emit(true);
   }
 }
