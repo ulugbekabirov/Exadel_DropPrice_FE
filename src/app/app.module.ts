@@ -24,6 +24,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { ModeratorDashboardComponent } from './moderator-dashboard/moderator-dashboard.component';
 import { NewVendorComponent } from './new-vendor/new-vendor.component';
 import { MapComponent } from './map/map.component';
+import { NewDiscountComponent } from './new-discount/new-discount.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -37,6 +38,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ModeratorDashboardComponent,
     NewVendorComponent,
     MapComponent,
+    NewDiscountComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,36 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card fxLayout.xs="row" fxLayoutAlign.xs="center center">
+    <mat-card-content>
+      <form [formGroup]="newDiscountForm" (ngSubmit)="onSubmit()">
+        <div>Value: {{ newDiscountForm.value | json }}</div>
+
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Discount name"
+            formControl="discount_name"
+          />
+        </mat-form-field>
+
+        <div formArrayName="pointsOfSales">
+          <div
+            *ngFor="let point of pointOfSalesForms.controls; let i = index"
+            [formGroupName]="i"
+          >
+            <mat-form-field>
+              <input matInput placeholder="name" formControlName="name" />
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="adress" formControlName="adress" />
+            </mat-form-field>
+
+            <mat-icon (click)="deletePoint(i)">delete</mat-icon>
+          </div>
+        </div>
+
+        <mat-icon (click)="addPoint()">add</mat-icon>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

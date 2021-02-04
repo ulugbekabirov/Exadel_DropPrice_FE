@@ -15,7 +15,7 @@ export class MapComponent implements OnInit {
     longitude: 27.5667,
   };
 
-  coordinates: SalesCoordinate[] = [];
+  // coordinates: SalesCoordinate[] = [];
   constructor() {}
   ngOnInit() {}
   onChoseLocation(event) {
@@ -28,8 +28,9 @@ export class MapComponent implements OnInit {
       latitude: this.coordinate.latitude,
       longitude: this.coordinate.longitude,
     };
-    this.coordinates.push(latlng);
-    console.log(this.coordinates);
-    this.data.emit(this.coordinates);
+    // this.coordinates.push(latlng);
+    // console.log(this.coordinates);
+    // this.data.emit(this.coordinates);
+    this.data.emit(latlng);
   }
 }

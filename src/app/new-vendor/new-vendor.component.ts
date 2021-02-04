@@ -14,7 +14,8 @@ import {
 export class NewVendorComponent implements OnInit {
   hide = false;
   newVendorForm: FormGroup;
-  coordinates: [];
+  // coordinates: [];
+  coordinate: any;
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
@@ -45,10 +46,11 @@ export class NewVendorComponent implements OnInit {
 
   onSubmit() {
     console.log(this.newVendorForm.value);
-    // console.log(this.coordinates);
+    console.log(this.coordinate);
+    console.log(Object.assign(this.newVendorForm.value, this.coordinate));
   }
   eventHandler(data) {
-    this.coordinates = data;
+    this.coordinate = data;
   }
 
   get name(): AbstractControl {
