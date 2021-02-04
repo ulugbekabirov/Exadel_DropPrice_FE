@@ -10,11 +10,14 @@ import { AuthInfo } from './models';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  private activeUser: AuthInfo;
+  private authUser: AuthInfo;
   title = 'InternshipFe';
 
-  constructor(private translateService: TranslateService, private auth: AuthService) {
-    this.auth.activeUser.subscribe(user => this.activeUser = user);
+  constructor(
+    private translateService: TranslateService,
+    private auth: AuthService
+  ) {
+    this.auth.authUser.subscribe(user => this.authUser = user);
   }
 
   ngOnInit(): void {

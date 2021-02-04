@@ -8,14 +8,23 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NotFoundComponent } from '../not-found';
+import { VerifyUserRolesDirective } from '../directives/verify-user-roles.directive';
+import { NotFoundComponent } from './components/not-found.components/not-found.component';
+import { RefDirective } from '../directives/ref.directive';
+import { ModalComponent } from './components/modal.component/modal.component';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 
 @NgModule({
-  declarations: [NotFoundComponent],
+  declarations: [
+    VerifyUserRolesDirective,
+    NotFoundComponent,
+    RefDirective,
+    ModalComponent,
+  ],
+
   imports: [
     CommonModule,
     FormsModule,
@@ -31,6 +40,7 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
     MatTabsModule,
     AgmCoreModule,
   ],
+
   providers: [GoogleMapsAPIWrapper],
 
   exports: [
@@ -46,7 +56,10 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
     MatListModule,
     MatCardModule,
     MatTabsModule,
+    VerifyUserRolesDirective,
     NotFoundComponent,
+    RefDirective,
+    ModalComponent,
   ],
 })
 export class SharedModule {}

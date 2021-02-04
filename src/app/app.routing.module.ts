@@ -1,10 +1,9 @@
-﻿import { NgModule } from '@angular/core';
+﻿import { HomeComponent } from './components/home/home.component';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home';
-import { NotFoundComponent } from './not-found';
-import { LoginFormComponent } from './login-form';
-import { ModeratorDashboardComponent } from './moderator-dashboard/moderator-dashboard.component';
-import { AuthGuard } from './guards';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { ModeratorDashboardComponent } from './components/moderator-dashboard/moderator-dashboard.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const appRoutes: Routes = [
   {
@@ -26,8 +25,6 @@ const appRoutes: Routes = [
     component: ModeratorDashboardComponent,
     canActivate: [AuthGuard],
   },
-
-  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

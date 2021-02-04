@@ -1,24 +1,35 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, pipe, throwError } from 'rxjs';
-import { catchError, map, retry } from 'rxjs/operators';
-import { ActiveUser, AuthInfo, AuthUser, Discount, Vendor } from '../models';
-import { API_URL, AUTH_ENDPOINT, DISCOUNTS_ENDPOINT, USER_INFO_ENDPOINT, VENDORS_ENDPOINT } from '../../constants';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { ActiveUser, AuthInfo, AuthUser } from '../models';
+import { AUTH_ENDPOINT, GET_DISCOUNTS_ENDPOINT, GET_TAGS_ENDPOINT, GET_TOWNS_ENDPOINT, USER_INFO_ENDPOINT } from '../../constants';
 import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiDataService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getAuth(user: AuthUser): Observable<AuthInfo> {
     return this.http.post<AuthInfo>(`${environment.identityUrl}${AUTH_ENDPOINT}`, user);
   }
 
   getUserInfo(): Observable<ActiveUser> {
-    return this.http
-      .get<ActiveUser>(`${environment.identityUrl}${USER_INFO_ENDPOINT}`);
+    return this.http.get<ActiveUser>(`${environment.webApiUrl}${USER_INFO_ENDPOINT}`);
   }
 
+  getDiscounts(options): Observable<any> {
+    return this.http.get<any>(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}`, options);
+  }
+
+  getTowns(): Observable<any> {
+    return this.http.get<any>(`${environment.webApiUrl}${GET_TOWNS_ENDPOINT}`);
+  }
+
+  getTags(options): Observable<any> {
+    return this.http.get<any>(`${environment.webApiUrl}${GET_TAGS_ENDPOINT}`, options);
+  }
 }

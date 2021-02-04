@@ -13,27 +13,30 @@ import {
 import { AgmCoreModule } from '@agm/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthInterceptor } from './auth/auth.interceptor';
-import { AppComponent } from './app.component';
-import { AuthService } from './auth/auth.service';
 import { HttpErrorInterceptor } from './services/http.error.interceptor';
-import { MissingTranslationService } from './login-service/missing-translation.service';
-import { LoginFormComponent } from './login-form/login-form.component';
-import { HomeComponent } from './home/home.component';
-import { HeaderComponent } from './header/header.component';
-import { AppRoutingModule } from './app.routing.module';
-import { ModeratorDashboardComponent } from './moderator-dashboard/moderator-dashboard.component';
-import { NewVendorComponent } from './new-vendor/new-vendor.component';
-import { MapComponent } from './map/map.component';
 
-export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+import { AppComponent } from './app.component';
+import { MissingTranslationService } from './services/missing-translation.service';
+import { HomeComponent } from './components/home/home.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { HeaderComponent } from './components/header/header.component';
+import { AppRoutingModule } from './app-routing/app.routing.module';
+import { TicketComponent } from './components/ticket/ticket.component';
+import { ModeratorDashboardComponent } from './components/moderator-dashboard/moderator-dashboard.component';
+import { NewVendorComponent } from './components/new-vendor/new-vendor.component';
+import { MapComponent } from './components/map/map.component';
+
+export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
 }
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginFormComponent,
     HomeComponent,
     HeaderComponent,
+    TicketComponent,
     ModeratorDashboardComponent,
     NewVendorComponent,
     MapComponent,
@@ -60,7 +63,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     }),
   ],
   providers: [
-    AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
   ],
