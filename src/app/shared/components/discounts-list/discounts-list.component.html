@@ -1,10 +1,9 @@
 <div class="discounts-box">
-  <h3 class="discounts-box__title">
-    <ng-content></ng-content>
-  </h3>
   <div class="discounts-box__settings">
     <mat-form-field>
-      <mat-label>{{"MAIN_PAGE.FILTER.SORT_BY.TITLE" | translate}}:</mat-label>
+      <mat-label
+        fxLayoutAlign="center center"
+      >{{"MAIN_PAGE.FILTER.SORT_BY.TITLE" | translate}}:</mat-label>
       <mat-select
         (selectionChange)="selectSort($event)"
       >
@@ -14,7 +13,11 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>{{"MAIN_PAGE.FILTER.LOCATION_SORT.TITLE" | translate}}:</mat-label>
+      <mat-label
+        fxLayoutAlign="space-around center"
+      >
+        <mat-icon class="location__icon">room</mat-icon>
+        {{"MAIN_PAGE.FILTER.LOCATION_SORT.TITLE" | translate}}:</mat-label>
       <mat-select
         (selectionChange)="selectLocation($event)"
       >

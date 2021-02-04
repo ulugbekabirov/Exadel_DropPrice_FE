@@ -18,10 +18,11 @@
     margin-bottom: 1em;
 
     &_title {
-      margin: 0;
       color: $discount_card_text_color;
       font-size: 2em;
       font-weight: 500;
+      margin: 0;
+      padding: 0;
     }
 
     &_favourite {
@@ -169,7 +170,6 @@
     @media (min-width: 991.98px) {
       font-size: 1rem;
       @media (min-width: 1199.98px) {
-        font-size: 1.1rem;
         @media (min-width: 1599.98px) {
           font-size: 1.2rem;
         }
