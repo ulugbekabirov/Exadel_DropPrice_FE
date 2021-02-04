@@ -33,8 +33,4 @@ export class ApiDataService {
     return this.http.get<any>(`${environment.webApiUrl}${GET_TAGS_ENDPOINT}`, options);
   }
 
-  getDiscountsBySearch(options): Observable<any> {
-    return this.http.get<any>(`${environment.webApiUrl}${GET_TAGS_ENDPOINT}`, options);
-  }
-
 }

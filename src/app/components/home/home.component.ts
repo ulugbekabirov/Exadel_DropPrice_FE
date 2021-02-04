@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
     const towns$ = this.discountsService.getTowns();
     const tags$ = this.discountsService.getTags(0, 20);
-    const discounts$ = this.discountsService.getDiscounts(0, 10, this.activeCoords.longitude, this.activeCoords.latitude, this.activeSort);
+    const discounts$ = this.discountsService.getDiscounts(0, 5, this.activeCoords.longitude, this.activeCoords.latitude, this.activeSort);
     forkJoin(
       [towns$, tags$, discounts$]
     ).pipe(
@@ -74,13 +74,13 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onLocationChange({value: {latitude, longitude}}): void {
     this.activeCoords = {latitude, longitude};
-    this.discountsService.getDiscounts(0, 10, this.activeCoords.longitude, this.activeCoords.latitude, this.activeSort)
+    this.discountsService.getDiscounts(0, 5, this.activeCoords.longitude, this.activeCoords.latitude, this.activeSort)
       .subscribe(res => this.discounts = res);
   }
 
   onSortChange({value: {sortBy}}): void {
     this.activeSort = sortBy;
-    this.discountsService.getDiscounts(0, 10, this.activeCoords.longitude, this.activeCoords.latitude, this.activeSort)
+    this.discountsService.getDiscounts(0, 5, this.activeCoords.longitude, this.activeCoords.latitude, this.activeSort)
       .subscribe(res => this.discounts = res);
   }
 }

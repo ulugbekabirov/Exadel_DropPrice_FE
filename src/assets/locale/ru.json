@@ -10,8 +10,8 @@
   "BUTTON": {
     "LOGOUT": "Выход"
   },
-  "HEADER":{
-    "SELECTOR_TITLE" : "Язык",
+  "HEADER": {
+    "SELECTOR_TITLE": "Язык",
     "ADMIN_PANEL_LINK_TITLE": "Статистика",
     "MODERATOR_PANEL_LINK_TITLE": "Добавить Вендора"
   },
@@ -28,7 +28,7 @@
   "MAIN_PAGE": {
     "SEARCH": "Поиск",
     "BUTTONS": {
-      "TALON": "Талон"
+      "TICKET": "Талон"
     },
     "FILTER": {
       "SORT_BY": {
@@ -57,8 +57,9 @@
         "": "Моё местоположение"
       }
     },
-    "DISCOUNT": {
-      "DIST_TRANSLATE": "от вас"
+    "DISCOUNT_CARD": {
+      "DISTANCE": "от вас",
+      "DATE": "до"
     },
     "TICKET": {
       "TITLE": "Талон",
