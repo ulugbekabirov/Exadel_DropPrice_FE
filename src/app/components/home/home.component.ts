@@ -33,7 +33,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.activeUser$ = this.userService.activeUser;
     this.subscription = this.activeUser$.pipe(
     ).subscribe(user => {
-      console.log('ACTIVE_USER', user);
       this.activeUser = user;
       this.activeSort = 'DistanceAsc';
       if (user.latitude && user.longitude) {
@@ -56,15 +55,11 @@ export class HomeComponent implements OnInit, OnDestroy {
       [towns$, tags$, discounts$]
     ).pipe(
       tap(([towns, tags, discounts]) => {
-        console.log('res1', towns);
-        console.log('res2', tags);
-        console.log('res3', discounts);
       })
     ).subscribe(([towns, tags, discounts]) => {
       this.towns = towns;
       this.tags = tags;
       this.discounts = discounts;
-      console.log('this', this);
     });
   }
 

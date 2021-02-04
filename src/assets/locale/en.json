@@ -57,7 +57,7 @@
       }
     },
     "DISCOUNT_CARD": {
-      "DISTANCE": "left",
+      "DISTANCE": "from you",
       "DATE": "before"
     }
   },

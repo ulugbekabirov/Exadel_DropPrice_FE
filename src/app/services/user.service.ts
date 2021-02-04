@@ -29,7 +29,6 @@ export class UserService {
       .pipe(
         map((user: ActiveUser) => this.getUserPosition(user)),
         map((user: ActiveUser) => this.handleActiveUser(user)),
-        tap((user: ActiveUser) => console.log('USER3', user)),
       );
   }
 
