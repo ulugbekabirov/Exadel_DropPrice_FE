@@ -11,10 +11,8 @@
     (mapClick)="onChoseLocation($event)"
   >
     <agm-marker
-      *ngFor="let coord of this.coordinates"
-      [latitude]="coord.latitude"
-      [longitude]="coord.longitude"
-      [label]="'M'"
+      [latitude]="this.coordinate.latitude"
+      [longitude]="this.coordinate.longitude"
     ></agm-marker>
   </agm-map>
 

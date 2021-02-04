@@ -15,21 +15,18 @@ export class MapComponent implements OnInit {
     longitude: 27.5667,
   };
 
-  coordinates: SalesCoordinate[] = [];
   constructor() {}
   ngOnInit() {}
   onChoseLocation(event) {
     this.coordinate.latitude = event.coords.lat;
     this.coordinate.longitude = event.coords.lng;
-    console.log(event);
   }
   getCoordinats() {
-    let latlng = {
+    this.coordinate = {
       latitude: this.coordinate.latitude,
       longitude: this.coordinate.longitude,
     };
-    this.coordinates.push(latlng);
-    console.log(this.coordinates);
-    this.data.emit(this.coordinates);
+    this.data.emit(this.coordinate);
+    console.log(this.coordinate);
   }
 }

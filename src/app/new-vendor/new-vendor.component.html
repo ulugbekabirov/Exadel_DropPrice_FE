@@ -5,6 +5,7 @@
         [formGroup]="newVendorForm"
         (ngSubmit)="onSubmit()"
         fxLayout="column"
+        fxLayoutGap="15px"
         fxLayoutAlign="center start"
       >
         <mat-form-field>
@@ -61,4 +62,3 @@
     </mat-card-content>
   </mat-card>
 </div>
-<app-map (data)="eventHandler($event)"></app-map>
