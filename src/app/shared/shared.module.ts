@@ -7,6 +7,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VerifyUserRolesDirective } from '../directives/verify-user-roles.directive';
@@ -17,7 +19,7 @@ import { MetersToKilometersPipe } from '../pipes/meters-to-kilometers.pipe';
 import { DiscountsListComponent } from './components/discounts-list/discounts-list.component';
 import { DiscountsListItemComponent } from './components/discounts-list-item/discounts-list-item.component';
 import { TranslateModule } from '@ngx-translate/core';
-
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { TranslateModule } from '@ngx-translate/core';
     DiscountsListComponent,
     DiscountsListItemComponent,
   ],
+
   imports: [
     CommonModule,
     FormsModule,
@@ -42,7 +45,12 @@ import { TranslateModule } from '@ngx-translate/core';
     MatListModule,
     MatCardModule,
     TranslateModule,
+    MatTabsModule,
+    AgmCoreModule,
   ],
+
+  providers: [GoogleMapsAPIWrapper],
+
   exports: [
     CommonModule,
     FormsModule,
@@ -55,6 +63,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatChipsModule,
     MatListModule,
     MatCardModule,
+    MatTabsModule,
     VerifyUserRolesDirective,
     NotFoundComponent,
     RefDirective,
@@ -64,4 +73,5 @@ import { TranslateModule } from '@ngx-translate/core';
     DiscountsListItemComponent,
   ],
 })
-export class SharedModule {}
+export class SharedModule {
+}
