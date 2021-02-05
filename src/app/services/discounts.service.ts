@@ -39,11 +39,19 @@ export class DiscountsService {
     return this.restApi.getTags(options);
   }
 
-  getTicket(id): Observable<Ticket> {
+  getTicket(discId): Observable<Ticket> {
     const options: { params: HttpParams } = {
       params: new HttpParams()
-        .set('discountId', id)
+        .set('discountId', discId)
     };
     return this.restApi.getTicket(options);
+  }
+
+  updateIsSavedDiscount(discId): Observable<any> {
+    const options: { params: HttpParams } = {
+      params: new HttpParams()
+        .set('discountId', discId)
+    };
+    return this.restApi.updateIsSavedDiscount(options);
   }
 }

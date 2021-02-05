@@ -36,6 +36,7 @@ export class TicketComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log('ttttt', this.ticket$);
   }
 
   back(): void {

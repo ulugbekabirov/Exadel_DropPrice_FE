@@ -7,7 +7,7 @@ export const GET_TAGS_ENDPOINT = 'tags';
 export const KEY_AUTH_TOKEN = 'key_auth_token';
 export const KEY_ACTIVE_USER = 'key_active_user';
 export const GET_TICKET_ENDPOINT = 'tickets';
-export const PUT_IS_SAVED_DISCOUNTS_ENDPOINT = '/id/save';
+export const PUT_IS_SAVED_DISCOUNTS_ENDPOINT = 'save';
 
 export const SORT_BY = [
   {
