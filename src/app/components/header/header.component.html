@@ -1,10 +1,17 @@
-<div class="header">
+<header class="header"
+        fxLayoutAlign="space-between center"
+>
   <a class="header__logo"
      routerLink=""
   >DropPrice</a>
+  <span class="header__hamburger"
+        (click)="toggleActive()"
+        [ngClass]="active ? 'active' : ''"
+  >
+    <span class="bar"></span>
+  </span>
   <div class="header__nav"
-       fxLayoutGap="20px"
-       fxLayoutAlign="center center"
+       [ngClass]="active ? 'active' : ''"
   >
     <a *appVerifyUserRoles='["Admin"]'
        mat-stroked-button
@@ -16,25 +23,35 @@
     >
       {{ "HEADER.MODERATOR_PANEL_LINK_TITLE" | translate }}
     </a>
-    <mat-form-field appearance="fill" class="language">
-      <mat-label>{{ "HEADER.SELECTOR_TITLE" | translate }}</mat-label>
-      <mat-select
-        [(ngModel)]="defaultLang"
-        (selectionChange)="languageHandler($event.value)"
-      >
-        <mat-option *ngFor="let lang of langs" [value]="lang">
-          {{ lang }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <button *ngIf="authUser$ | async"
-            mat-raised-button
-            color="primary"
-            class="button"
-            (click)="logoutHandler()"
-            routerLink="/login"
+    <div class="profile"
+         fxLayoutAlign="space-around center"
+         fxLayoutGap=".5em"
     >
-      {{ "BUTTON.LOGOUT" | translate }}
-    </button>
+      <mat-icon class="profile__icon"
+                fxLayoutAlign="center center"
+      >person
+      </mat-icon>
+      <select
+        [(ngModel)]="defaultLang"
+        (change)="languageHandler(defaultLang)"
+        class="profile__language_selector"
+      >
+        <option *ngFor="let lang of langs" [value]="lang" class="profile__language_option">
+          {{lang}}
+        </option>
+      </select>
+      <button *ngIf="authUser$ | async"
+              mat-icon-button
+              aria-label="logout icon"
+              fxLayoutAlign="center center"
+              (click)="logoutHandler()"
+              routerLink="/login"
+      >
+        <mat-icon class="profile__icon"
+                  fxLayoutAlign="center center"
+        >exit_to_app
+        </mat-icon>
+      </button>
+    </div>
   </div>
-</div>
+</header>

@@ -8,6 +8,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ModalComponent {
   @Input() title = '';
   @Input() content;
-  @Output() confirm = new EventEmitter<void>();
-  @Output() abort = new EventEmitter<void>();
+  @Output() confirm = new EventEmitter<boolean>();
+  @Output() abort = new EventEmitter<boolean>();
 }

@@ -15,6 +15,10 @@ import { VerifyUserRolesDirective } from '../directives/verify-user-roles.direct
 import { NotFoundComponent } from './components/not-found.components/not-found.component';
 import { RefDirective } from '../directives/ref.directive';
 import { ModalComponent } from './components/modal.component/modal.component';
+import { MetersToKilometersPipe } from '../pipes/meters-to-kilometers.pipe';
+import { DiscountsListComponent } from './components/discounts-list/discounts-list.component';
+import { DiscountsListItemComponent } from './components/discounts-list-item/discounts-list-item.component';
+import { TranslateModule } from '@ngx-translate/core';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 
 @NgModule({
@@ -23,6 +27,9 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
     NotFoundComponent,
     RefDirective,
     ModalComponent,
+    MetersToKilometersPipe,
+    DiscountsListComponent,
+    DiscountsListItemComponent,
   ],
 
   imports: [
@@ -37,6 +44,7 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
     MatChipsModule,
     MatListModule,
     MatCardModule,
+    TranslateModule,
     MatTabsModule,
     AgmCoreModule,
   ],
@@ -60,6 +68,10 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
     NotFoundComponent,
     RefDirective,
     ModalComponent,
+    MetersToKilometersPipe,
+    DiscountsListComponent,
+    DiscountsListItemComponent,
   ],
 })
-export class SharedModule {}
+export class SharedModule {
+}

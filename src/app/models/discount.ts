@@ -3,7 +3,7 @@ export interface Discount {
   vendorId: number;
   discountName: string;
   vendorName: string;
-  distance: number;
+  distanceInMeters: number;
   discountRating: number;
   vendorRating: number;
   discountAmount: number;

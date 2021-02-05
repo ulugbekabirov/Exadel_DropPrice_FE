@@ -16,15 +16,16 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { HttpErrorInterceptor } from './services/http.error.interceptor';
 
 import { AppComponent } from './app.component';
-import { MissingTranslationService } from './services/missing-translation.service';
 import { HomeComponent } from './components/home/home.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
+import { MissingTranslationService } from './services/missing-translation.service';
 import { HeaderComponent } from './components/header/header.component';
 import { AppRoutingModule } from './app-routing/app.routing.module';
 import { TicketComponent } from './components/ticket/ticket.component';
 import { ModeratorDashboardComponent } from './components/moderator-dashboard/moderator-dashboard.component';
 import { NewVendorComponent } from './components/new-vendor/new-vendor.component';
 import { MapComponent } from './components/map/map.component';
+
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');

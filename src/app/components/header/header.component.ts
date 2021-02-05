@@ -16,6 +16,7 @@ export class HeaderComponent {
   public langs: string[] = environment.locales;
   defaultLang: string = localStorage.getItem('currentLang') ?? environment.defaultLocale;
   authUser$: Observable<AuthInfo> = this.auth.authUser;
+  active: boolean;
 
   constructor(
     public translateService: TranslateService,
@@ -29,5 +30,9 @@ export class HeaderComponent {
 
   logoutHandler(): void {
     this.auth.logout();
+  }
+
+  toggleActive(): boolean {
+    return this.active = !this.active;
   }
 }

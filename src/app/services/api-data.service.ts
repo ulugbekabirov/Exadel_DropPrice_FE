@@ -32,4 +32,5 @@ export class ApiDataService {
   getTags(options): Observable<any> {
     return this.http.get<any>(`${environment.webApiUrl}${GET_TAGS_ENDPOINT}`, options);
   }
+
 }

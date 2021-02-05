@@ -12,8 +12,8 @@
   },
   "HEADER": {
     "SELECTOR_TITLE": "Language",
-    "ADMIN_PANEL_LINK_TITLE": "Admin Panel",
-    "MODERATOR_PANEL_LINK_TITLE": "Add New Vendor"
+    "ADMIN_PANEL_LINK_TITLE": "View statistics",
+    "MODERATOR_PANEL_LINK_TITLE": "Add Vendor"
   },
   "LOGIN": {
     "TITLE": "Log In",
@@ -25,13 +25,46 @@
     "STRONG_PASS": "Password must including UPPER/lowercase and number",
     "HIDE": "Hide password"
   },
-
-
+  "MAIN_PAGE": {
+    "SEARCH": "Search",
+    "BUTTONS": {
+      "TICKET": "Ticket"
+    },
+    "FILTER": {
+      "SORT_BY": {
+        "TITLE": "sort by",
+        "DISCOUNT_RATING_ASC": {
+          "NAME": "Rating - Low to High"
+        },
+        "DISCOUNT_RATING_DESC": {
+          "NAME": "Rating - High to Low"
+        },
+        "DISTANCE_ASC": {
+          "NAME": "Distance - Low to High"
+        },
+        "DISTANCE_DESC": {
+          "NAME": "Distance - High to Low"
+        },
+        "ALPHABET_ASC": {
+          "NAME": "Alphabet - A to Z"
+        },
+        "ALPHABET_DESC": {
+          "NAME": "Alphabet - Z to A"
+        }
+      },
+      "LOCATION_SORT": {
+        "TITLE": "location"
+      }
+    },
+    "DISCOUNT_CARD": {
+      "DISTANCE": "from you",
+      "DATE": "before"
+    }
+  },
   "MODERATOR_DASHBOARD": {
     "NEW_VENDOR_FORM": "Vendor's add form",
     "NEW_DISCOUNT_FORM": "Discount's add form"
   },
-
   "NEW_VENDOR_FORM": {
     "NAME_LABEL": "Enter vendor's name*",
     "ADRESS_LABEL": "Enter vendor's adress",
@@ -44,7 +77,6 @@
     "VALID_SOCIAL_NETWORK": "Please enter a valid url address",
     "BTN_TITLE": "Add"
   },
-  
   "TICKET": {
     "TITLE": "Ticket",
     "FIRST_NAME": "First name",
@@ -58,6 +90,5 @@
     "DISCOUNT": "Discount",
     "CONFIRMATION_DATE": "Confirmation date",
     "CLOSE": "Close"
-
   }
 }
