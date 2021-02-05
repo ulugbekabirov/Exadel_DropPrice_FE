@@ -1,39 +1,29 @@
 @import "src/variables";
 
-
 .shadow {
-  position:  fixed;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
   width: 100vw;
   height: 100vh;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
-  background: rgba(0, 0, 0, .4);
-}
-
-.ticket-wrapper {
-  //height: 90%;
-  position:  fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
+  margin: auto;
+  display: flex;
   background: rgba(0, 0, 0, .4);
 }
 
 .ticket {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0);
-  box-sizing:border-box;
+  box-sizing: border-box;
   max-width: 460px;
   width: 100%;
   height: 565px;
   margin: 0 auto;
   padding: 20px;
   border-radius: 10px;
-  background:$ticket-background;
+  background: $ticket-background;
   box-shadow: 2px 2px 15px 0 #AB9B0D;
 
   &:before,
@@ -89,7 +79,7 @@
   width: 35%;
 }
 
-.ticket-discount{
+.ticket-discount {
   font-size: 20px;
 
   .discount-amount {

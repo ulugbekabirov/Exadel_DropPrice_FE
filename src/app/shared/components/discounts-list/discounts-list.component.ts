@@ -1,15 +1,18 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Discount, LocationCoords, Town } from '../../../models';
 
 @Component({
   selector: 'app-discounts-list',
   templateUrl: './discounts-list.component.html',
-  styleUrls: ['./discounts-list.component.scss']
+  styleUrls: ['./discounts-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class DiscountsListComponent {
   @Output() locationChange = new EventEmitter<any>();
   @Output() sortChange = new EventEmitter<any>();
   @Output() getTicket = new EventEmitter<any>();
+  @Output() toggleFavourites = new EventEmitter<any>();
   @Input() discounts: Discount[];
   @Input() towns: Town[];
   @Input() activeCoords: LocationCoords;
@@ -25,5 +28,9 @@ export class DiscountsListComponent {
 
   requestTicket(discountId: any): void {
     this.getTicket.emit(discountId);
+  }
+
+  getToggleFavourites(id: number): void {
+    this.toggleFavourites.emit(id);
   }
 }

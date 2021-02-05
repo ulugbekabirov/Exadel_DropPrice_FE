@@ -11,8 +11,7 @@ export class DiscountsService {
 
   constructor(
     private restApi: ApiDataService,
-  ) {
-  }
+  ) {}
 
   getDiscounts(skip, take, longitude, latitude, sortBy?): Observable<any> {
     const options: { params: HttpParams } = {
@@ -52,6 +51,6 @@ export class DiscountsService {
       params: new HttpParams()
         .set('discountId', discId)
     };
-    return this.restApi.updateIsSavedDiscount(options);
+    return this.restApi.updateIsSavedDiscount(discId);
   }
 }
