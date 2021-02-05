@@ -7,13 +7,15 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VerifyUserRolesDirective } from '../directives/verify-user-roles.directive';
 import { NotFoundComponent } from './components/not-found.components/not-found.component';
 import { RefDirective } from '../directives/ref.directive';
 import { ModalComponent } from './components/modal.component/modal.component';
-
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { ModalComponent } from './components/modal.component/modal.component';
     RefDirective,
     ModalComponent,
   ],
+
   imports: [
     CommonModule,
     FormsModule,
@@ -34,7 +37,12 @@ import { ModalComponent } from './components/modal.component/modal.component';
     MatChipsModule,
     MatListModule,
     MatCardModule,
+    MatTabsModule,
+    AgmCoreModule,
   ],
+
+  providers: [GoogleMapsAPIWrapper],
+
   exports: [
     CommonModule,
     FormsModule,
@@ -47,6 +55,7 @@ import { ModalComponent } from './components/modal.component/modal.component';
     MatChipsModule,
     MatListModule,
     MatCardModule,
+    MatTabsModule,
     VerifyUserRolesDirective,
     NotFoundComponent,
     RefDirective,

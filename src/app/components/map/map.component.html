@@ -1,0 +1,22 @@
+<div
+  class="map-wrapper"
+  fxLayoutGap.xs="10px"
+  fxLayout.xs="column"
+  fxLayoutAlign.xs="center center"
+>
+  <agm-map
+    [latitude]="this.coordinate.latitude"
+    [longitude]="this.coordinate.longitude"
+    [zoom]="zoom"
+    (mapClick)="onChoseLocation($event)"
+  >
+    <agm-marker
+      [latitude]="this.coordinate.latitude"
+      [longitude]="this.coordinate.longitude"
+    ></agm-marker>
+  </agm-map>
+
+  <button mat-raised-button color="accent" (click)="getCoordinats()">
+    Add point
+  </button>
+</div>

@@ -1,0 +1,49 @@
+html,
+body {
+	height: 100%;
+	margin: 0;
+  padding: 0;
+}
+
+.login-wrapper {
+  height: 100%;
+}
+
+%login-form {
+  max-width: 300px;
+  margin: 2em auto;
+}
+mat-card {
+  @extend %login-form;
+  text-align: center;
+  padding: 50px;
+  min-width: 200px;
+  @media screen and (device-aspect-ratio: 40/71) {
+    min-width: 300px;
+  }
+  h2{
+    align-self: center;
+  }
+}
+
+mat-form-field {
+  display: block;
+  width: 100%;
+}
+
+.test{
+  width: 100%;
+}
+button {
+  width: 100%;
+  margin-top: 20px;
+}
+
+mat-icon{
+  cursor: pointer;
+  color: rgb(46, 77, 128);
+}
+mat-icon:focus, mat-icon:active {
+  opacity: .7;
+}
+
