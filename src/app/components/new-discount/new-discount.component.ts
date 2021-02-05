@@ -1,13 +1,12 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { 
-  AbstractControl, 
-  FormArray, 
-  FormBuilder, 
-  FormControl, 
-  FormGroup, 
-  FormGroupDirective, 
-  Validators, 
-  ValidationErrors 
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+  ValidationErrors
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
@@ -27,7 +26,7 @@ export interface Tag {
 })
 
 export class NewDiscountComponent implements OnInit {
-  
+
   newDiscountForm: FormGroup;
 
   tagsArray: Tag[] = [];
@@ -38,14 +37,14 @@ export class NewDiscountComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   isChecked = true;
 
-  vendors: string[] = ['Astra', 'BacardiGroup', 'Citrus', 'DriverPlus','Eshko', 'Focus', 'Green', 'Hudson', 'SportBet','Sportmaster'];
+  vendors: string[] = ['Astra', 'BacardiGroup', 'Citrus', 'DriverPlus', 'Eshko', 'Focus', 'Green', 'Hudson', 'SportBet', 'Sportmaster'];
   filteredVendors: Observable<string[]>;
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocompleteModule;
-  
+
   constructor(
-    public translateService: TranslateService, 
+    public translateService: TranslateService,
     public fb: FormBuilder,
   ) {}
 
@@ -59,9 +58,9 @@ export class NewDiscountComponent implements OnInit {
       promoCode: [''],
       startDate: ['', [Validators.required]],
       endDate: ['', [Validators.required]],
-      tags: this.fb.array([]),
+      tags: this.fb.array([], Validators.required),
       activityStatus: [true, [Validators.requiredTrue]]
-    })
+    });
 
     this.filteredVendors = this.newDiscountForm.get('vendorName').valueChanges
       .pipe(
@@ -76,7 +75,7 @@ export class NewDiscountComponent implements OnInit {
       return { requireMatch: true };
     }
     return null;
-  } 
+  }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -84,12 +83,24 @@ export class NewDiscountComponent implements OnInit {
     return this.vendors.filter(vendor => vendor.toLowerCase().indexOf(filterValue) === 0);
   }
 
+  private duplicate(control: AbstractControl): ValidationErrors | null {
+    const selection: any = control.value;
+    if (this.tags && this.tags.value.indexOf(selection) < 0) {
+      return {duplicate: true };
+    }
+    return null;
+  }
+
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
 
     if ((value || '').trim()) {
-      this.tags.push(new FormControl(value.trim()));
+      const index =  this.tags.value.includes(value);
+
+      if (!index) {
+        this.tags.push(new FormControl(value.trim()));
+      }
     }
 
     if (input) {
@@ -97,21 +108,33 @@ export class NewDiscountComponent implements OnInit {
     }
   }
 
-  remove(tag: Tag): void {
-    const index = this.tagsArray.indexOf(tag);
+  remove(tag: any): void {
+    const index = this.tags.value.indexOf(tag.value);
 
     if (index >= 0) {
-      this.tagsArray.splice(index, 1);
+      this.tags.value.splice(index, 1);
     }
+
+    this.tags.controls.forEach((item, index ) => {
+      if (item.value === tag.value) {
+        this.tags.controls.splice(index, 1);
+      }
+    });
+    console.log(this.tags);
+    console.log(this.tagsArray);
   }
 
   submit(): void {
     this.newDiscountForm.value;
-    console.log("Form Submitted!", this.newDiscountForm.value);
+    console.log('Form Submitted!', this.newDiscountForm.value);
     this.newDiscountForm.reset();
+
     for (const control in this.newDiscountForm.controls) {
       this.newDiscountForm.controls[control].setErrors(null);
     }
+
+    this.tags.controls = [];
+    console.log(this.tags);
   }
 
   get vendorName(): AbstractControl {

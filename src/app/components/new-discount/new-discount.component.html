@@ -80,7 +80,7 @@
                     [removable]="removable" 
                     (removed)="remove(tag)"
                     [FormControl] = "tags.controls[i]">
-                    {{tag}}  
+                    {{tag.value}}  
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
             <input placeholder="{{ 'NEW_DISCOUNT.PLACEHOLDER_NEW_TAG' | translate }}"
