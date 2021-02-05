@@ -55,6 +55,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       [towns$, tags$, discounts$]
     ).pipe(
       tap(([towns, tags, discounts]) => {
+        console.log(discounts);
       })
     ).subscribe(([towns, tags, discounts]) => {
       this.towns = towns;
@@ -77,5 +78,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.activeSort = sortBy;
     this.discountsService.getDiscounts(0, 5, this.activeCoords.longitude, this.activeCoords.latitude, this.activeSort)
       .subscribe(res => this.discounts = res);
+  }
+
+  getTicket(id): any {
+    return this.discountsService.getTicket(id);
   }
 }

@@ -1,8 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ActiveUser, AuthInfo, AuthUser } from '../models';
-import { AUTH_ENDPOINT, GET_DISCOUNTS_ENDPOINT, GET_TAGS_ENDPOINT, GET_TOWNS_ENDPOINT, USER_INFO_ENDPOINT } from '../../constants';
+import { ActiveUser, AuthInfo, AuthUser, Ticket } from '../models';
+import {
+  AUTH_ENDPOINT,
+  GET_DISCOUNTS_ENDPOINT,
+  GET_TAGS_ENDPOINT,
+  GET_TICKET_ENDPOINT,
+  GET_TOWNS_ENDPOINT, PUT_IS_SAVED_DISCOUNTS_ENDPOINT,
+  USER_INFO_ENDPOINT
+} from '../../constants';
 import { environment } from '../../environments/environment';
 
 
@@ -31,6 +38,14 @@ export class ApiDataService {
 
   getTags(options): Observable<any> {
     return this.http.get<any>(`${environment.webApiUrl}${GET_TAGS_ENDPOINT}`, options);
+  }
+
+  getTicket(options): Observable<any> {
+    return this.http.get<any>(`${environment.webApiUrl}${GET_TICKET_ENDPOINT}`, options);
+  }
+
+  updateIsSavedDiscount(id): Observable<any> {
+    return this.http.put(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}${PUT_IS_SAVED_DISCOUNTS_ENDPOINT}`, id);
   }
 
 }

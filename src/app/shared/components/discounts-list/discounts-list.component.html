@@ -32,6 +32,7 @@
     <li *ngFor="let discount of discounts">
       <app-discounts-list-item
         [discount]="discount"
+        (requestTicket)="requestTicket($event)"
       ></app-discounts-list-item>
     </li>
   </ul>

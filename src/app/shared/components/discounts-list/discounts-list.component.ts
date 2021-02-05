@@ -9,6 +9,7 @@ import { Discount, LocationCoords, Town } from '../../../models';
 export class DiscountsListComponent {
   @Output() locationChange = new EventEmitter<any>();
   @Output() sortChange = new EventEmitter<any>();
+  @Output() getTicket = new EventEmitter<any>();
   @Input() discounts: Discount[];
   @Input() towns: Town[];
   @Input() activeCoords: LocationCoords;
@@ -20,5 +21,9 @@ export class DiscountsListComponent {
 
   selectSort(sortBy): void {
     this.sortChange.emit(sortBy);
+  }
+
+  requestTicket(discountId: any): void {
+    this.getTicket.emit(discountId);
   }
 }
