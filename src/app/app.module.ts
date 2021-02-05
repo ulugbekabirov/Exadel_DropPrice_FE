@@ -19,6 +19,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { HeaderComponent } from './components/header/header.component';
 import { AppRoutingModule } from './app-routing/app.routing.module';
 import { TicketComponent } from './components/ticket/ticket.component';
+import { NewDiscountComponent } from './components/new-discount/new-discount.component';
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -30,7 +31,8 @@ export function HttpLoaderFactory(http: HttpClient): any {
       LoginFormComponent,
       HomeComponent,
       HeaderComponent,
-      TicketComponent
+      TicketComponent,
+      NewDiscountComponent
     ],
     imports: [
       BrowserModule,

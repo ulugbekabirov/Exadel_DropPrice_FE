@@ -38,5 +38,27 @@
     "DISCOUNT": "Скидка",
     "CONFIRMATION_DATE": "Дата подтверждения",
     "CLOSE": "Закрыть"
+  },
+  "NEW_DISCOUNT": {
+    "NAME_VENDOR": "Наименование поставщика услуги/товара*",
+    "NAME_VENDOR_ERROR": "Выберите наименование поставщика из доступных вариантов*",
+    "PRODUCT_SERVICE": "Наименование товара/услуги*",
+    "DESCRIPTION": "Описание",
+    "AMOUNT_DISCOUNT": "Размер скидки*",
+    "DISCOUNT_VALIDITY_DATE": "Дата действия скидки*",
+    "PROMO_CODE": "Промокод",
+    "LABEL_TAGS": "Теги*",
+    "BTN_TITLE": "Добавить",
+    "PLACEHOLDER_VENDOR_NAME": "Введите наименование поставщика услуги/товара",
+    "PLACEHOLDER_PRODUCT_SERVICE": "Введите наименование услуги/товара",
+    "PLACEHOLDER_DESCRIPTION": "Введите описание",
+    "PLACEHOLDER_PERCENT": "Укажите процент",
+    "PLACEHOLDER_PROMO_CODE": "Введите промокод",
+    "PLACEHOLDER_START_DATE": "начало",
+    "PLACEHOLDER_END_DATE": "окончание",
+    "PLACEHOLDER_NEW_TAG": "Введите тег",
+    "DATE_START_END": "Cрок действия скидки*",
+    "MIN_MAX_PERCENT": "Диапазон",
+    "ACTIVITY_STATUS": "Статус активности скидки"
   }
 }

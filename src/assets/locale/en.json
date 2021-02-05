@@ -39,5 +39,28 @@
     "DISCOUNT": "Discount",
     "CONFIRMATION_DATE": "Confirmation date",
     "CLOSE": "Close"
+  },
+
+  "NEW_DISCOUNT": {
+    "NAME_VENDOR": "Vendor name*",
+    "NAME_VENDOR_ERROR": "The vendor must be selected from the available options",
+    "PRODUCT_SERVICE": "Product or service name*",
+    "DESCRIPTION": "Description",
+    "AMOUNT_DISCOUNT": "Discount amount*",
+    "DISCOUNT_VALIDITY_DATE": "Discount validity date*",
+    "PROMO_CODE": "Promo code",
+    "LABEL_TAGS": "Tags*",
+    "BTN_TITLE": "Add",
+    "PLACEHOLDER_VENDOR_NAME": "Enter the vendor name",
+    "PLACEHOLDER_PRODUCT_SERVICE": "Enter the product or service name",
+    "PLACEHOLDER_DESCRIPTION": "Enter description",
+    "PLACEHOLDER_PERCENT": "Enter the percent",
+    "PLACEHOLDER_PROMO_CODE": "Enter your promo code",
+    "PLACEHOLDER_START_DATE": "start",
+    "PLACEHOLDER_END_DATE": "end",
+    "PLACEHOLDER_NEW_TAG": "Enter a new tag",
+    "DATE_START_END": "Validity period*",
+    "MIN_MAX_PERCENT": "Range",
+    "ACTIVITY_STATUS": "Discount activity status"
   }
 }
