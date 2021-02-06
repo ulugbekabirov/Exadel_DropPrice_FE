@@ -35,7 +35,6 @@ export function HttpLoaderFactory(http: HttpClient): any {
   declarations: [
     AppComponent,
     LoginFormComponent,
-    HomeComponent,
     HeaderComponent,
     TicketComponent,
     ModeratorDashboardComponent,

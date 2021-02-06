@@ -25,4 +25,8 @@ export class DiscountsListItemComponent {
       this.refDir.containerRef.clear();
     });
   }
+
+  addToFavorites():void {
+
+  }
 }
