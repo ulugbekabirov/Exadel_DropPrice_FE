@@ -14,11 +14,13 @@
        [ngClass]="active ? 'active' : ''"
   >
     <a *appVerifyUserRoles='["Admin"]'
+       routerLink="/home/statistics"
        mat-stroked-button
     >
       {{ "HEADER.ADMIN_PANEL_LINK_TITLE" | translate }}
     </a>
     <a *appVerifyUserRoles='["Moderator"]'
+       routerLink="/home/moderator"
        mat-stroked-button
     >
       {{ "HEADER.MODERATOR_PANEL_LINK_TITLE" | translate }}
@@ -29,6 +31,7 @@
     >
       <mat-icon class="profile__icon"
                 fxLayoutAlign="center center"
+                routerLink="/home/user-profile"
       >person
       </mat-icon>
       <select

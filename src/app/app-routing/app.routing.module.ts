@@ -9,7 +9,9 @@ const appRoutes: Routes = [
     redirectTo: '/home',
     pathMatch: 'full'
   },
-  {path: 'home', loadChildren: () => import('../home/home.module.js').then((m => m.HomeModule)),},
+  {path: 'home', loadChildren: () => import('../home/home.module.js')
+      .then((m => m.HomeModule)),
+  },
   {
     path: 'login',
     component: LoginFormComponent,

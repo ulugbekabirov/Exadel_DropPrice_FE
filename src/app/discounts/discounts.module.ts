@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { DiscountsListComponent } from '../shared/components/discounts-list/discounts-list.component';
+import { DiscountComponent } from './components/discount/discount.component';
 
 const routes: Routes = [
   {
@@ -25,7 +26,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    DiscountComponent,
+  ],
   imports: [
     RouterModule.forChild(routes),
     SharedModule

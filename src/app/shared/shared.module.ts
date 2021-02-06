@@ -73,5 +73,4 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
     DiscountsListItemComponent,
   ],
 })
-export class SharedModule {
-}
+export class SharedModule {}
