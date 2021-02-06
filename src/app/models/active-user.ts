@@ -4,4 +4,8 @@ export interface ActiveUser {
   officeLongitude?: number;
   latitude: number;
   longitude: number;
+  fio: string;
+  phone: string;
+  email: string;
+  office: string;
 }

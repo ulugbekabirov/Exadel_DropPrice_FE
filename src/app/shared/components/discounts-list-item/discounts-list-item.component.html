@@ -11,7 +11,7 @@
     <mat-icon class="discount-card__header_favourite"
               fxLayoutAlign="center center"
               [ngStyle]="{'color': discount.isSaved ? '#FF473E' : '#A38D8B'}"
-              (click)="addToFavorites()"
+              (click)="toggleFavorites(discount.discountId)"
     >favorite
     </mat-icon>
     <div class="discount-card__header_rating"
@@ -68,13 +68,10 @@
          fxLayoutAlign="center center"
     >
       <button class="action__ticket"
-              (click)="ticketHandler()"
+              (click)="ticketHandler(discount.discountId)"
       >
         {{ "MAIN_PAGE.BUTTONS.TICKET" | translate }}
       </button>
     </div>
   </div>
-
 </div>
-<ng-template appRef></ng-template>
-

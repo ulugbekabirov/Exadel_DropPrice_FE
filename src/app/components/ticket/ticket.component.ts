@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { Location } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Ticket } from '../../models';
 
 @Component({
@@ -10,20 +9,8 @@ import { Ticket } from '../../models';
 
 export class TicketComponent {
 
-  ticket: Ticket = {
-    firstName: 'Иванов',
-    lastName: 'Иван',
-    patronymic: 'Иванович',
-    nameDiscount: 'Кроссовки',
-    nameVendor: 'Спортмастер',
-    email: 'sm@gmail.com',
-    phone: '+375(29)111-11-11',
-    discountAmount: 30,
-    endDate: new Date(),
-    promoCode: 'Бинго'
-  };
-
   @Output() closeTicket = new EventEmitter<boolean>();
+  @Input() ticket: Ticket;
 
   back(): void {
     this.closeTicket.emit(true);
