@@ -6,3 +6,4 @@ export * from './active-user';
 export * from './ticket';
 export * from './town';
 export * from './tag';
+export * from './location-coords';

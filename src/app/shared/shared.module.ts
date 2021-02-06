@@ -7,6 +7,8 @@ import { MatChipsModule, MatChipInputEvent } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VerifyUserRolesDirective } from '../directives/verify-user-roles.directive';
@@ -18,6 +20,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MetersToKilometersPipe } from '../pipes/meters-to-kilometers.pipe';
+import { DiscountsListComponent } from './components/discounts-list/discounts-list.component';
+import { DiscountsListItemComponent } from './components/discounts-list-item/discounts-list-item.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -25,7 +32,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     NotFoundComponent,
     RefDirective,
     ModalComponent,
+    MetersToKilometersPipe,
+    DiscountsListComponent,
+    DiscountsListItemComponent,
   ],
+
   imports: [
     CommonModule,
     FormsModule,
@@ -43,7 +54,13 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatChipsModule,
     MatListModule,
     MatCardModule,
+    TranslateModule,
+    MatTabsModule,
+    AgmCoreModule,
   ],
+
+  providers: [GoogleMapsAPIWrapper],
+
   exports: [
     CommonModule,
     FormsModule,
@@ -61,10 +78,15 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatChipsModule,
     MatListModule,
     MatCardModule,
+    MatTabsModule,
     VerifyUserRolesDirective,
     NotFoundComponent,
     RefDirective,
     ModalComponent,
+    MetersToKilometersPipe,
+    DiscountsListComponent,
+    DiscountsListItemComponent,
   ],
 })
-export class SharedModule {}
+export class SharedModule {
+}

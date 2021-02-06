@@ -1,0 +1,80 @@
+<div class="discount-card">
+  <div class="discount-card__header"
+       fxLayout="row"
+       fxLayoutAlign="center center"
+       fxLayoutGap="1em"
+  >
+    <h2 class="discount-card__header_title"
+
+    >{{discount.discountName}}
+    </h2>
+    <mat-icon class="discount-card__header_favourite"
+              fxLayoutAlign="center center"
+              [ngStyle]="{'color': discount.isSaved ? '#FF473E' : '#A38D8B'}"
+              (click)="addToFavorites()"
+    >favorite
+    </mat-icon>
+    <div class="discount-card__header_rating"
+         fxLayout="row"
+         fxLayoutAlign="center center"
+         fxLayoutGap=".3em"
+    >
+    <span class="rating__amount"
+          fxLayoutAlign="center center"
+    >
+          {{discount.discountRating}}
+    </span>
+      <mat-icon class="rating__icon"
+                fxLayoutAlign="center center"
+      >star_rate
+      </mat-icon>
+    </div>
+  </div>
+  <div class="discount-card__vendor"
+       fxLayoutAlign="flex-start center"
+  >
+    <a class="discount-card__vendor_link">
+      {{discount.vendorName}}
+    </a>
+  </div>
+  <div class="discount-card__distance">
+    <span>{{discount.distanceInMeters | metersToKilometers}}</span>
+    <span>{{"MAIN_PAGE.DISCOUNT_CARD.DISTANCE" | translate}}</span>
+  </div>
+  <div class="discount-card__amount"
+       fxLayoutAlign="center center"
+  >
+    <span class="discount-card__amount_text">
+          {{discount.discountAmount}}
+    </span>
+    <span class="discount-card__amount_symbol">
+      %
+    </span>
+  </div>
+  <div class="discount-card__footer"
+       fxLayoutAlign="center center"
+       fxLayout="row"
+       fxLayoutGap="1em"
+  >
+    <div class="discount-card__footer_endDate"
+         fxLayoutAlign="center center"
+         fxLayout="row"
+         fxLayoutGap=".5em"
+    >
+      <span>{{ "MAIN_PAGE.DISCOUNT_CARD.DATE" | translate }}</span>
+      <span>{{discount.endDate | date:"dd.MM.yyyy"}}</span>
+    </div>
+    <div class="discount-card__footer_action"
+         fxLayoutAlign="center center"
+    >
+      <button class="action__ticket"
+              (click)="ticketHandler()"
+      >
+        {{ "MAIN_PAGE.BUTTONS.TICKET" | translate }}
+      </button>
+    </div>
+  </div>
+
+</div>
+<ng-template appRef></ng-template>
+

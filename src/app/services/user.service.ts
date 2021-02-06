@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ApiDataService } from './api-data.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, } from 'rxjs';
 import { ActiveUser } from '../models';
 import { KEY_ACTIVE_USER } from '../../constants';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -26,13 +27,38 @@ export class UserService {
   getUserInfo(): Observable<ActiveUser> {
     return this.restApi.getUserInfo()
       .pipe(
-        tap((user: ActiveUser) => this.handleActiveUser(user)),
+        map((user: ActiveUser) => this.getUserPosition(user)),
+        map((user: ActiveUser) => this.handleActiveUser(user)),
       );
   }
 
-  private handleActiveUser(user: ActiveUser): void {
+  private handleActiveUser(user: ActiveUser): any {
     localStorage.setItem(KEY_ACTIVE_USER, JSON.stringify(user));
     this.activeUserSubject.next(user);
+    return user;
+  }
+
+  getUserPosition(user: ActiveUser): any {
+    const updateUser: ActiveUser = {...user};
+    if (!navigator.geolocation) {
+        console.log('Geolocation is not supported by your browser');
+        return updateUser;
+      }
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        Object.assign(updateUser, {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        });
+      },
+      (error) => {
+        console.log(error);
+      },
+      {
+        timeout: 5000
+      }
+    );
+    return updateUser;
   }
 
   logout(): void {

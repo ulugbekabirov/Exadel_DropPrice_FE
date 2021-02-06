@@ -1,0 +1,64 @@
+<div class="new-vendor-wrapper">
+  <mat-card>
+    <mat-card-content>
+      <form
+        [formGroup]="newVendorForm"
+        (ngSubmit)="onSubmit()"
+        fxLayout="column"
+        fxLayoutGap="15px"
+        fxLayoutAlign="center start"
+      >
+        <mat-form-field>
+          <mat-label>{{ "NEW_VENDOR_FORM.NAME_LABEL" | translate }}</mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>{{
+            "NEW_VENDOR_FORM.ADRESS_LABEL" | translate
+          }}</mat-label>
+          <textarea
+            matInput
+            formControlName="adress"
+            required
+            placeholder="{{ 'NEW_VENDOR_FORM.ADRESS_PLACEHOLDER' | translate }}"
+          ></textarea>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>{{
+            "NEW_VENDOR_FORM.PHONE_NUMBER" | translate
+          }}</mat-label>
+          <input matInput formControlName="number" type="tel" />
+          <mat-error
+            >{{ "NEW_VENDOR_FORM.VALID_PHONE" | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{ "NEW_VENDOR_FORM.EMAIL_LABEL" | translate }}</mat-label>
+          <input matInput formControlName="email" />
+          <mat-error
+            >{{ "NEW_VENDOR_FORM.VALID_EMAIL" | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{
+            "NEW_VENDOR_FORM.SOCIAL_NETWORK_LABEL" | translate
+          }}</mat-label>
+          <input matInput formControlName="social_network" />
+          <mat-error
+            >{{ "NEW_VENDOR_FORM.VALID_SOCIAL_NETWORK" | translate }}
+          </mat-error>
+        </mat-form-field>
+        <button
+          mat-flat-button
+          color="primary"
+          [disabled]="newVendorForm.invalid"
+          type="submit"
+        >
+          {{ "NEW_VENDOR_FORM.BTN_TITLE" | translate }}
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

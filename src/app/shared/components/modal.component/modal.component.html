@@ -4,10 +4,10 @@
     <mat-card-title>{{title}}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <b>Latitude:</b> {{content.latitude}}
+    <b>Latitude:</b> {{content?.latitude}}
   </mat-card-content>
   <mat-card-content>
-    <b>Longitude:</b> {{content.longitude}}
+    <b>Longitude:</b> {{content?.longitude}}
   </mat-card-content>
   <mat-card-footer
     fxLayoutGap="30px"
@@ -17,14 +17,14 @@
       mat-stroked-button
       color="primary"
       matSuffix
-      (click)="confirm.emit()"
+      (click)="confirm.emit(true)"
     >Да
     </button>
     <button
       mat-stroked-button
       color="warn"
       matSuffix
-      (click)="abort.emit()"
+      (click)="abort.emit(false)"
     >Нет
     </button>
   </mat-card-footer>

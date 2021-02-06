@@ -1,1 +1,10 @@
-<h2>Добро пожаловать на главную страницу</h2>
+<div class="main-container">
+    <app-discounts-list
+      [discounts]="discounts"
+      [towns]="towns"
+      (locationChange)="onLocationChange($event)"
+      (sortChange)="onSortChange($event)"
+      [activeCoords]="activeCoords"
+      [sortBy]="sortBy"
+    ></app-discounts-list>
+</div>

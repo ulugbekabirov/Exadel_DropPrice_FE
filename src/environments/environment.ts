@@ -5,9 +5,10 @@
 export const environment = {
   production: false,
   locales: ['en', 'ru'],
-  defaultLocale: localStorage.getItem('currentLang') ?? 'ru',
+  defaultLocale: 'ru',
   identityUrl: 'https://localhost:44360/api/',
   webApiUrl: 'https://localhost:44395/api/',
+  googleMapApi: 'AIzaSyAV9lV_tJu_h60k4vDfpcSjaVMHfw2aEqw',
 };
 
 /*

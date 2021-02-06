@@ -12,8 +12,8 @@ export class DiscountsService {
     private restApi: ApiDataService,
   ) {}
 
-  getDiscounts(skip, take, longitude, latitude, sortBy): Observable<any> {
-    const options: {params: HttpParams} = {
+  getDiscounts(skip, take, longitude, latitude, sortBy?): Observable<any> {
+    const options: { params: HttpParams } = {
       params: new HttpParams()
         .set('skip', skip)
         .set('take', take)
@@ -29,7 +29,7 @@ export class DiscountsService {
   }
 
   getTags(skip, take): Observable<any> {
-    const options: {params: HttpParams} = {
+    const options: { params: HttpParams } = {
       params: new HttpParams()
         .set('skip', skip)
         .set('take', take)
