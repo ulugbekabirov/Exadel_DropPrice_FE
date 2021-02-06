@@ -37,5 +37,13 @@
     "SOCIAL_NETWORK_LABEL": "Добавьте соц. сеть поставщика услуг*",
     "VALID_SOCIAL_NETWORK": "Неверный aдрес ссылки",
     "BTN_TITLE": "Добавить"
+  },
+
+  "NEW_DISCOUNT_FORM": {
+    "NAME_LABEL": "Введите название места*",
+    "ADRESS_LABEL": "Введите адрес места*",
+    "ADRESS_PLACEHOLDER": "Пр. ул. Ольшевского 11",
+    "POINTS_TITLE": "Нажмите для добавления данных локации:",
+    "MAP_TITLE": "Отметьте точку на карте:"
   }
 }

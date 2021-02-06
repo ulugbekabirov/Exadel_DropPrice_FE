@@ -2,8 +2,6 @@
   <mat-card fxLayout.xs="row" fxLayoutAlign.xs="center center">
     <mat-card-content>
       <form [formGroup]="newDiscountForm" (ngSubmit)="onSubmit()">
-        <div>Value: {{ newDiscountForm.value | json }}</div>
-
         <mat-form-field>
           <input
             matInput
@@ -12,17 +10,35 @@
           />
         </mat-form-field>
 
+        <div class="points_title">
+          <h4>{{ "NEW_DISCOUNT_FORM.POINTS_TITLE" | translate }}</h4>
+        </div>
+
         <div formArrayName="pointsOfSales">
           <div
             *ngFor="let point of pointOfSalesForms.controls; let i = index"
             [formGroupName]="i"
+            fxLayoutGap="20px"
+            fxLayoutAlign="space-around center"
           >
             <mat-form-field>
-              <input matInput placeholder="name" formControlName="name" />
+              <mat-label>{{
+                "NEW_DISCOUNT_FORM.NAME_LABEL" | translate
+              }}</mat-label>
+              <input matInput formControlName="name" />
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput placeholder="adress" formControlName="adress" />
+              <mat-label>{{
+                "NEW_DISCOUNT_FORM.ADRESS_LABEL" | translate
+              }}</mat-label>
+              <input
+                matInput
+                placeholder="{{
+                  'NEW_DISCOUNT_FORM.ADRESS_PLACEHOLDER' | translate
+                }}"
+                formControlName="adress"
+              />
             </mat-form-field>
 
             <mat-icon (click)="deletePoint(i)">delete</mat-icon>
@@ -34,3 +50,9 @@
     </mat-card-content>
   </mat-card>
 </div>
+<div>
+  <h4>{{ "NEW_DISCOUNT_FORM.MAP_TITLE" | translate }}</h4>
+</div>
+<app-map *ngIf="!hide"></app-map>
+
+<div>Value: {{ newDiscountForm.value | json }}</div>

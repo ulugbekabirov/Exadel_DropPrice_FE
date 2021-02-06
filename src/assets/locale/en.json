@@ -42,5 +42,13 @@
     "SOCIAL_NETWORK_LABEL": "Enter vendor's social network",
     "VALID_SOCIAL_NETWORK": "Please enter a valid url address",
     "BTN_TITLE": "Add"
+  },
+
+  "NEW_DISCOUNT_FORM": {
+    "NAME_LABEL": "Enter location's name*",
+    "ADRESS_LABEL": "Enter location's adress*",
+    "ADRESS_PLACEHOLDER": "Ex. 17 Kensington Street",
+    "POINTS_TITLE": "Click to add location details:",
+    "MAP_TITLE": "Mark a point on the map:"
   }
 }

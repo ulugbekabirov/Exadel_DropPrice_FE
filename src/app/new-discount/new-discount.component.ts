@@ -4,6 +4,7 @@ import {
   FormGroup,
   FormArray,
   AbstractControl,
+  Validators,
 } from '@angular/forms';
 @Component({
   selector: 'app-new-discount',
@@ -11,6 +12,7 @@ import {
   styleUrls: ['./new-discount.component.scss'],
 })
 export class NewDiscountComponent implements OnInit {
+  hide = true;
   newDiscountForm: FormGroup;
   obj: any;
   constructor(private fb: FormBuilder) {}
@@ -27,13 +29,14 @@ export class NewDiscountComponent implements OnInit {
   }
 
   addPoint() {
+    this.hide = false;
     const point = this.fb.group({
-      name: '',
-      adress: '',
+      name: ['', [Validators.required]],
+      adress: ['', [Validators.required]],
     });
     this.pointOfSalesForms.push(point);
-    this.obj = { latitude: 12, longitude: 2 };
-    console.log(Object.assign(point.value, this.obj));
+    // this.obj = { latitude: 12, longitude: 2 };
+    // console.log(Object.assign(point.value, this.obj));
   }
 
   deletePoint(i) {
