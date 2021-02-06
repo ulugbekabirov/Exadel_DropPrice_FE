@@ -22,10 +22,10 @@ import { MissingTranslationService } from './services/missing-translation.servic
 import { HeaderComponent } from './components/header/header.component';
 import { AppRoutingModule } from './app-routing/app.routing.module';
 import { TicketComponent } from './components/ticket/ticket.component';
+import { NewDiscountComponent } from './components/new-discount/new-discount.component';
 import { ModeratorDashboardComponent } from './components/moderator-dashboard/moderator-dashboard.component';
 import { NewVendorComponent } from './components/new-vendor/new-vendor.component';
 import { MapComponent } from './components/map/map.component';
-
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -41,6 +41,7 @@ export function HttpLoaderFactory(http: HttpClient): any {
     ModeratorDashboardComponent,
     NewVendorComponent,
     MapComponent,
+    NewDiscountComponent
   ],
   imports: [
     BrowserModule,
