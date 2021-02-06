@@ -1,0 +1,65 @@
+mat-card {
+  width: 100%;
+  max-width: 530px;
+}
+
+.new-discount-wrapper {
+  height: 91%;
+  background: #DEEBFA;
+}
+
+.new-discount-title {
+  text-align: center;
+}
+
+.form {
+  max-width: 600px;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mat-card {
+  padding: 55px;
+}
+
+.discount-description {
+  height: 100px;
+}
+
+.discount-amount {
+  width: 100%;
+  max-width: 150px;
+}
+
+.promo-code {
+  margin-left: 20px;
+}
+
+:host ::ng-deep {
+  .mat-form-field-wrapper {
+    width: 100%;
+  }
+  .mat-form-field-flex {
+    background-color: transparent;
+  }
+  div.mat-form-field-flex {
+    padding: 0;
+  }
+}
+
+button {
+  width: 100%;
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 660px) {
+  mat-card-content {
+    font-weight: normal;
+    font-size: 14px;
+    letter-spacing: initial;
+    margin: 0;
+  }
+}

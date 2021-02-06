@@ -1,17 +1,20 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { forkJoin, Observable, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { DiscountsService } from 'src/app/services/discounts.service';
 import { UserService } from 'src/app/services/user.service';
-import { SORT_BY } from '../../../constants';
-import { ActiveUser, Discount, LocationCoords, Tag, Town } from '../../models';
+import { SORT_BY } from '../../../../constants';
+import { ActiveUser, Discount, LocationCoords, Tag, Town } from '../../../models';
+import { RefDirective } from '../../../directives/ref.directive';
+import { TicketComponent } from '../../../components/ticket/ticket.component';
 
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
+
 export class HomeComponent implements OnInit, OnDestroy {
   sortBy = SORT_BY;
   activeUser: ActiveUser;
@@ -23,9 +26,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   activeCoords: LocationCoords;
   private subscription: Subscription;
 
+  @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
+
   constructor(
     private discountsService: DiscountsService,
     private userService: UserService,
+    private resolver: ComponentFactoryResolver,
   ) {
   }
 
@@ -77,5 +83,29 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.activeSort = sortBy;
     this.discountsService.getDiscounts(0, 5, this.activeCoords.longitude, this.activeCoords.latitude, this.activeSort)
       .subscribe(res => this.discounts = res);
+  }
+
+  getTicket(discountId): void {
+    const ticketFactory = this.resolver.resolveComponentFactory(TicketComponent);
+    this.refDir.containerRef.clear();
+    this.discountsService.getTicket(discountId)
+      .subscribe(ticket => {
+        component.instance.ticket = ticket;
+      });
+    const component = this.refDir.containerRef.createComponent(ticketFactory);
+    component.instance.closeTicket.subscribe(() => {
+      this.refDir.containerRef.clear();
+    });
+  }
+
+  changeFavourites(id: number): void {
+    this.discountsService.updateIsSavedDiscount(id)
+      .subscribe(resp => {
+        this.discounts = this.discounts.map((discount: Discount) => {
+          return discount.discountId === resp.discountID
+            ? {...discount, isSaved: resp.isSaved}
+            : {...discount};
+        });
+      });
   }
 }

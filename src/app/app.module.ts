@@ -25,11 +25,10 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { MissingTranslationService } from './services/missing-translation.service';
 import { HeaderComponent } from './components/header/header.component';
 import { TicketComponent } from './components/ticket/ticket.component';
+import { NewDiscountComponent } from './components/new-discount/new-discount.component';
 import { NewVendorComponent } from './components/new-vendor/new-vendor.component';
 import { MapComponent } from './components/map/map.component';
-import { DiscountDetailComponent } from './components/discount-detail/discount-detail.component';
 import { VendorDetailComponent } from './components/vendor-detail/vendor-detail.component';
-
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -43,8 +42,8 @@ export function HttpLoaderFactory(http: HttpClient): any {
     TicketComponent,
     NewVendorComponent,
     MapComponent,
-    DiscountDetailComponent,
     VendorDetailComponent,
+    NewDiscountComponent
   ],
   imports: [
     BrowserModule,

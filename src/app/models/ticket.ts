@@ -2,11 +2,11 @@ export interface Ticket {
   firstName: string;
   lastName: string;
   patronymic?: string;
-  nameDiscount: string;
-  nameVendor: string;
-  email: string;
-  phone: string;
+  discountName: string;
+  vendorName: string;
+  vendorEmail: string;
+  vendorPhone: string;
   discountAmount: number;
-  endDate: Date;
+  orderDate: Date;
   promoCode?: string;
 }

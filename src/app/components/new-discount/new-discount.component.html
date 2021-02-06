@@ -1,0 +1,107 @@
+<div class="new-discount-wrapper" fxLayout="column" fxLayoutAlign="center center">
+  <mat-card class="new-discount" fxLayout.xs="column" fxLayoutAlign.xs="center center">
+    <mat-card-content> 
+      <form class="form"
+          fxLayout.xs="column"
+          fxLayoutAlign.xs="center start" 
+          [formGroup]="newDiscountForm"
+          #formDirective="ngForm"
+          (ngSubmit)="submit()">
+        <div class="full-width" fxLayout="column" fxLayoutAlign="center center">
+          <mat-form-field class="full-width">
+            <mat-label>{{ "NEW_DISCOUNT.NAME_VENDOR" | translate }}</mat-label>
+            <input type="text" 
+                    matInput formControlName="vendorName"  
+                    [matAutocomplete]="auto" 
+                    placeholder="{{ 'NEW_DISCOUNT.PLACEHOLDER_VENDOR_NAME' | translate }}">
+              <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredVendors | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="vendorName.errors?.requireMatch">{{ "NEW_DISCOUNT.NAME_VENDOR_ERROR" | translate }}</mat-error>
+          </mat-form-field>
+        
+          <mat-form-field class="full-width product-service">
+            <mat-label>{{ "NEW_DISCOUNT.PRODUCT_SERVICE" | translate }}</mat-label>
+            <input matInput placeholder="{{ 'NEW_DISCOUNT.PLACEHOLDER_PRODUCT_SERVICE' | translate }}" formControlName="discountName">
+          </mat-form-field> 
+        </div>
+        
+        <mat-form-field class="full-width" [ngStyle]="{'margin-bottom.px': 20}">
+          <mat-label>{{ "NEW_DISCOUNT.DESCRIPTION" | translate }}</mat-label>
+          <textarea  class="discount-description" 
+                      formControlName="description"
+                      matInput 
+                      #description 
+                      placeholder="{{ 'NEW_DISCOUNT.DESCRIPTION' | translate }}" 
+                      maxlength="5000">
+          </textarea>
+          <mat-hint class="description-limit">{{description.value.length}} / 5000</mat-hint>
+        </mat-form-field>
+
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <mat-form-field class="discount-amount">
+            <mat-label>{{ "NEW_DISCOUNT.AMOUNT_DISCOUNT" | translate}}</mat-label>
+            <input matInput type="number" 
+                    placeholder="{{ 'NEW_DISCOUNT.PLACEHOLDER_PERCENT' | translate }}" 
+                    formControlName="discountAmount" 
+                    min="1" 
+                    max="100">
+            <span matSuffix>%</span>
+            <mat-error *ngIf="discountAmount.invalid">{{ 'NEW_DISCOUNT.MIN_MAX_PERCENT' | translate }}: 1-100%</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="full-width promo-code">
+            <mat-label>{{ "NEW_DISCOUNT.PROMO_CODE" | translate}}</mat-label>
+            <input matInput
+                    placeholder="{{ 'NEW_DISCOUNT.PLACEHOLDER_PROMO_CODE' | translate }}"
+                    formControlName="promoCode">
+          </mat-form-field>
+        </div>
+    
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'NEW_DISCOUNT.DATE_START_END' | translate }}</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate formControlName="startDate" placeholder="{{ 'NEW_DISCOUNT.PLACEHOLDER_START_DATE' | translate }}">
+            <input matEndDate formControlName="endDate" placeholder="{{ 'NEW_DISCOUNT.PLACEHOLDER_END_DATE' | translate }}">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+          <mat-error *ngIf="startDate.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+          <mat-error *ngIf="endDate.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="chip-list" fxLayout="row" formArrayName="tags">
+          <mat-label>{{'NEW_DISCOUNT.LABEL_TAGS' | translate}}</mat-label>
+          <mat-chip-list  #chipList aria-label="Tag selection">
+            <mat-chip  [selectable]="selectable"
+                    *ngFor="let tag of tags.controls; index as i"
+                    [removable]="removable" 
+                    (removed)="remove(tag)"
+                    [FormControl] = "tags.controls[i]">
+                    {{tag.value}}  
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="{{ 'NEW_DISCOUNT.PLACEHOLDER_NEW_TAG' | translate }}"
+                   [matChipInputFor]="chipList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   [matChipInputAddOnBlur]="addOnBlur"
+                   (matChipInputTokenEnd)="add($event)">
+          </mat-chip-list>
+        </mat-form-field>
+
+        <mat-slide-toggle formControlName="activityStatus" color="man" fxLayout="column" fxLayoutAlign="center center">{{ 'NEW_DISCOUNT.ACTIVITY_STATUS' | translate }}</mat-slide-toggle>
+
+        <button
+          mat-flat-button
+          color="primary"
+          [disabled]="newDiscountForm.invalid"
+          type="submit"
+        >
+          {{ "NEW_DISCOUNT.BTN_TITLE" | translate }}
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

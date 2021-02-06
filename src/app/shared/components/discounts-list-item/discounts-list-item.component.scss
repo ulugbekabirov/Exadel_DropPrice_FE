@@ -25,9 +25,16 @@
     }
 
     &_favourite {
-      font-size: 2.6em;
+      font-size: 2.8em;
       color: $isSaved_true_bg_color;
       cursor: pointer;
+      will-change: transform;
+      transition: transform .1s ease-in-out;
+
+      &:hover {
+        transform: scale(1.1, 1.1);
+        color: $isSaved_true_bg_color_hover;
+      }
     }
 
     &_rating {

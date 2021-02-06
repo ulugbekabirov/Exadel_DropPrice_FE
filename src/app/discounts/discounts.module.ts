@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
-import { DiscountsListComponent } from '../shared/components/discounts-list/discounts-list.component';
-import { DiscountComponent } from './components/discount/discount.component';
+import { DiscountsComponent } from './components/discounts/discounts.component';
+import { DiscountDetailComponent } from './components/discount-detail/discount-detail.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: DiscountsListComponent,
+    component: DiscountsComponent,
     // children: [
     //   { path: '', component: DiscountsHomeComponent },
     //   { path: 'new', component: DiscountEditComponent },
@@ -27,7 +27,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    DiscountComponent,
+    DiscountsComponent,
+    DiscountDetailComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
