@@ -17,10 +17,10 @@
     <mat-chip
       #chips="matChip"
       *ngFor="let newTags of tags"
-      (click)="getCardsByTag(newTags, chips)"
+      (click)="getCardsByTag(newTags?.tagName, chips)"
     >
       <mat-icon *ngIf="chips.selected">check</mat-icon>
-      {{ newTags }}
+      {{ newTags?.tagName }}
     </mat-chip>
   </mat-chip-list>
 </div>

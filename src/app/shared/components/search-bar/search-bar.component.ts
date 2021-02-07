@@ -43,10 +43,8 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
   addSearch(): void{
     this.searchs.pop();
-
     this.searchs.push(new SearchBar(this.userQuestion, this.tagsName));
     this.searchQuery.emit(this.searchs[0]);
-    console.log(this.searchs);
   }
 
   getCardsByTag(tag: string, chip: any): void {
