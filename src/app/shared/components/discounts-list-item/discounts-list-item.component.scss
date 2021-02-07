@@ -22,12 +22,13 @@
       font-weight: 500;
       margin: 0;
       padding: 0;
+      outline: none;
       cursor: pointer;
       will-change: transform;
       transition: transform .1s ease-in-out;
 
       &:hover {
-        transform: scale(1.1, 1.1);
+        transform: scale(1.05, 1.05);
       }
     }
 
@@ -69,16 +70,20 @@
 
     padding-bottom: 1em;
 
-    &_link {
+    &_link, &:visited {
       display: block;
       font-size: 1.4em;
       font-weight: 500;
       padding: .5em .5em .2em;
+      color: $discount_card_text_color;
       cursor: pointer;
       border-bottom: 2px solid transparent;
+      will-change: transform;
+      transition: transform .1s ease-in-out;
 
       &:hover {
-        border-bottom: 2px solid $discount_card_text_color;
+        //border-bottom: 2px solid $discount_card_text_color;
+        transform: scale(1.1, 1.1);
       }
     }
 

@@ -72,7 +72,17 @@ export class DiscountsService {
     return this.restApi.getVendorsDiscounts(vendorId, options);
   }
 
-  searchDiscounts(options): Observable<any> {
+  searchDiscounts({skip, take, longitude, latitude, sortBy, searchQuery, tags}): Observable<any> {
+    const options: { params: HttpParams } = {
+      params: new HttpParams()
+        .set('skip', skip)
+        .set('take', take)
+        .set('longitude', longitude)
+        .set('latitude', latitude)
+        .set('sortBy', sortBy)
+        .set('searchQuery', searchQuery)
+        .set('tags', tags)
+    };
     return this.restApi.searchDiscounts(options);
   }
 }

@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { DiscountsService } from '../../services/discounts.service';
 import { Discount } from '../../models';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-discount-detail',
   templateUrl: './discount-detail.component.html',
   styleUrls: ['./discount-detail.component.scss']
 })
-export class DiscountDetailComponent implements OnInit {
+export class DiscountDetailComponent implements OnInit, OnDestroy {
 
   discount: Discount;
+  subscription: Subscription;
 
   constructor(
     private router: Router,
@@ -21,12 +23,16 @@ export class DiscountDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap
+    this.subscription = this.route.paramMap
       .pipe(
-        switchMap((params) => {
+        switchMap((params): Observable<Discount> => {
           return this.discountsService.getDiscountById(+params.get('id'));
         })
       ).subscribe(data => this.discount = data);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

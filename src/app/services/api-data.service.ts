@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ActiveUser, AuthInfo, AuthUser, Ticket, Vendor } from '../models';
+import { ActiveUser, AuthInfo, AuthUser, Vendor } from '../models';
 import {
   AUTH_ENDPOINT,
   GET_DISCOUNTS_ENDPOINT,
