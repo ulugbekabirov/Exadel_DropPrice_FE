@@ -14,20 +14,21 @@ import { AgmCoreModule } from '@agm/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HttpErrorInterceptor } from './services/http.error.interceptor';
-import { AppRoutingModule } from './app-routing/app.routing.module';
-import { ModeratorModule } from './moderator/moderator.module';
-import { StatisticsModule } from './statistics/statistics.module';
-import { UserProfileModule } from './user-profile/user-profile.module';
-import { HomeModule } from './home/home.module';
 
 import { AppComponent } from './app.component';
+import { HomeComponent } from './components/home/home.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { MissingTranslationService } from './services/missing-translation.service';
 import { HeaderComponent } from './components/header/header.component';
+import { AppRoutingModule } from './app-routing/app.routing.module';
 import { TicketComponent } from './components/ticket/ticket.component';
 import { NewDiscountComponent } from './components/new-discount/new-discount.component';
+import { ModeratorDashboardComponent } from './components/moderator-dashboard/moderator-dashboard.component';
 import { NewVendorComponent } from './components/new-vendor/new-vendor.component';
 import { MapComponent } from './components/map/map.component';
+import { DiscountDetailComponent } from './components/discount-detail/discount-detail.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { VendorDetailComponent } from './components/vendor-detail/vendor-detail.component';
 
 export function HttpLoaderFactory(http: HttpClient): any {
@@ -38,22 +39,23 @@ export function HttpLoaderFactory(http: HttpClient): any {
   declarations: [
     AppComponent,
     LoginFormComponent,
+    HomeComponent,
     HeaderComponent,
     TicketComponent,
+    ModeratorDashboardComponent,
     NewVendorComponent,
     MapComponent,
-    VendorDetailComponent,
-    NewDiscountComponent
+    NewDiscountComponent,
+    DiscountDetailComponent,
+    StatisticsComponent,
+    UserProfileComponent,
+    VendorDetailComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     SharedModule,
-    // ModeratorModule,
-    HomeModule,
-    StatisticsModule,
-    UserProfileModule,
     AppRoutingModule,
     TranslateModule.forRoot({
       useDefaultLang: true,

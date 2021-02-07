@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { ApiDataService } from './api-data.service';
 import { Observable } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
-import { Ticket } from '../models';
+import { Ticket, Vendor } from '../models';
+import { environment } from '../../environments/environment';
+import { GET_DISCOUNTS_ENDPOINT, GET_VENDORS_ENDPOINT } from '../../constants';
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +54,25 @@ export class DiscountsService {
         .set('discountId', discId)
     };
     return this.restApi.updateIsSavedDiscount(discId);
+  }
+
+  getDiscountById(discountId): Observable<any> {
+    return this.restApi.getDiscountById(discountId);
+  }
+
+  getVendors(): Observable<Vendor[]> {
+    return this.restApi.getVendors();
+  }
+
+  getVendorById(vendorId): Observable<any> {
+    return this.restApi.getVendorById(vendorId);
+  }
+
+  getVendorsDiscounts(vendorId, options): Observable<any> {
+    return this.restApi.getVendorsDiscounts(vendorId, options);
+  }
+
+  searchDiscounts(options): Observable<any> {
+    return this.restApi.searchDiscounts(options);
   }
 }

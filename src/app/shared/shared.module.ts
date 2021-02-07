@@ -25,6 +25,7 @@ import { DiscountsListComponent } from './components/discounts-list/discounts-li
 import { DiscountsListItemComponent } from './components/discounts-list-item/discounts-list-item.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { Router, RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
   ],
 
   imports: [
+    RouterModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -62,6 +64,7 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
   providers: [GoogleMapsAPIWrapper],
 
   exports: [
+    RouterModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

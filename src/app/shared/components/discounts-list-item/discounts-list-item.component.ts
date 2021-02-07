@@ -25,8 +25,4 @@ export class DiscountsListItemComponent {
   toggleFavorites(discountId: number): void {
     this.changeFavourites.emit(discountId);
   }
-
-  addToFavorites():void {
-
-  }
 }

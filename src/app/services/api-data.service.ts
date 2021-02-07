@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ActiveUser, AuthInfo, AuthUser, Ticket } from '../models';
+import { ActiveUser, AuthInfo, AuthUser, Ticket, Vendor } from '../models';
 import {
   AUTH_ENDPOINT,
   GET_DISCOUNTS_ENDPOINT,
   GET_TAGS_ENDPOINT,
   GET_TICKET_ENDPOINT,
-  GET_TOWNS_ENDPOINT, PUT_IS_SAVED_DISCOUNTS_ENDPOINT,
+  GET_TOWNS_ENDPOINT,
+  GET_VENDORS_ENDPOINT,
+  PUT_IS_SAVED_DISCOUNTS_ENDPOINT,
   USER_INFO_ENDPOINT
 } from '../../constants';
 import { environment } from '../../environments/environment';
@@ -46,6 +48,26 @@ export class ApiDataService {
 
   updateIsSavedDiscount(id): Observable<any> {
     return this.http.get(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${id}/${PUT_IS_SAVED_DISCOUNTS_ENDPOINT}`);
+  }
+
+  getDiscountById(discountId): Observable<any> {
+    return this.http.get(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${discountId}`);
+  }
+
+  getVendors(): Observable<Vendor[]> {
+    return this.http.get<Vendor[]>(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}`);
+  }
+
+  getVendorById(vendorId): Observable<any> {
+    return this.http.get(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}`);
+  }
+
+  getVendorsDiscounts(vendorId, options): Observable<any> {
+    return this.http.get(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}/discounts`, options);
+  }
+
+  searchDiscounts(options): Observable<any> {
+    return this.http.get(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/search`, options);
   }
 
 }

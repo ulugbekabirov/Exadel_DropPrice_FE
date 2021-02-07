@@ -1,4 +1,4 @@
-@import "src/variables";
+@import "../../../../variables";
 
 .discount-card {
   font-size: 1rem;
@@ -7,6 +7,8 @@
   padding: 1.2em;
   box-shadow: 0 5px 5px rgba(207, 204, 204, 0.25);
   cursor: pointer;
+  position: relative;
+  z-index: -2;
 
   &:hover {
     background: #faf8f8;

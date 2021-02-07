@@ -3,10 +3,10 @@ import { forkJoin, Observable, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { DiscountsService } from 'src/app/services/discounts.service';
 import { UserService } from 'src/app/services/user.service';
-import { SORT_BY } from '../../../../constants';
-import { ActiveUser, Discount, LocationCoords, Tag, Town } from '../../../models';
-import { RefDirective } from '../../../directives/ref.directive';
-import { TicketComponent } from '../../../components/ticket/ticket.component';
+import { SORT_BY } from '../../../constants';
+import { ActiveUser, Discount, LocationCoords, Tag, Town } from '../../models';
+import { RefDirective } from '../../directives/ref.directive';
+import { TicketComponent } from '../ticket/ticket.component';
 
 
 @Component({

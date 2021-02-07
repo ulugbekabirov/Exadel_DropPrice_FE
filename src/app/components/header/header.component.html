@@ -14,13 +14,13 @@
        [ngClass]="active ? 'active' : ''"
   >
     <a *appVerifyUserRoles='["Admin"]'
-       routerLink="/home/statistics"
+       routerLink="/statistics"
        mat-stroked-button
     >
       {{ "HEADER.ADMIN_PANEL_LINK_TITLE" | translate }}
     </a>
     <a *appVerifyUserRoles='["Moderator"]'
-       routerLink="/home/moderator"
+       routerLink="/add-new"
        mat-stroked-button
     >
       {{ "HEADER.MODERATOR_PANEL_LINK_TITLE" | translate }}
@@ -29,9 +29,11 @@
          fxLayoutAlign="space-around center"
          fxLayoutGap=".5em"
     >
-      <mat-icon class="profile__icon"
+      <mat-icon *ngIf="authUser$ | async"
+                class="profile__icon"
                 fxLayoutAlign="center center"
-                routerLink="/home/user-profile"
+                routerLink="/user-profile"
+                routerLinkActive="acive"
       >person
       </mat-icon>
       <select
@@ -48,7 +50,6 @@
               aria-label="logout icon"
               fxLayoutAlign="center center"
               (click)="logoutHandler()"
-              routerLink="/login"
       >
         <mat-icon class="profile__icon"
                   fxLayoutAlign="center center"
