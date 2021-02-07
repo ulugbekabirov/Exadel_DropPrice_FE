@@ -112,6 +112,10 @@
     "PLACEHOLDER_NEW_TAG": "Enter a new tag",
     "DATE_START_END": "Validity period*",
     "MIN_MAX_PERCENT": "Range",
-    "ACTIVITY_STATUS": "Discount activity status"
+    "ACTIVITY_STATUS": "Discount activity status",
+    "NAME_LABEL": "Enter location's name*",
+    "ADRESS_LABEL": "Enter location's adress*",
+    "ADRESS_PLACEHOLDER": "Ex. 17 Kensington Street",
+    "POINTS_TITLE": "Click to add location details:"
   }
 }
