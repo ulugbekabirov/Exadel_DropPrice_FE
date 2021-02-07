@@ -1,11 +1,13 @@
-mat-card {
-  width: 100%;
-  max-width: 530px;
-}
+
 
 .new-discount-wrapper {
   height: 91%;
   background: #DEEBFA;
+
+  mat-card {
+    width: 100%;
+    max-width: 530px;
+  }
 }
 
 .new-discount-title {
@@ -15,28 +17,26 @@ mat-card {
 .form {
   max-width: 600px;
   width: 100%;
+
+  .discount-description {
+    height: 100px;
+  }
+  
+  .discount-amount {
+    width: 100%;
+    max-width: 150px;
+  }
+  
+  .promo-code {
+    margin-left: 20px;
+  }
 }
 
 .full-width {
   width: 100%;
 }
 
-.mat-card {
-  padding: 55px;
-}
 
-.discount-description {
-  height: 100px;
-}
-
-.discount-amount {
-  width: 100%;
-  max-width: 150px;
-}
-
-.promo-code {
-  margin-left: 20px;
-}
 
 :host ::ng-deep {
   .mat-form-field-wrapper {
@@ -62,4 +62,8 @@ button {
     letter-spacing: initial;
     margin: 0;
   }
+}
+
+mat-icon{
+  cursor: pointer;
 }

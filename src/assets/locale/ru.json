@@ -112,6 +112,10 @@
     "PLACEHOLDER_NEW_TAG": "Введите тег",
     "DATE_START_END": "Cрок действия скидки*",
     "MIN_MAX_PERCENT": "Диапазон",
-    "ACTIVITY_STATUS": "Статус активности скидки"
+    "ACTIVITY_STATUS": "Статус активности скидки",
+    "NAME_LABEL": "Введите название места*",
+    "ADRESS_LABEL": "Введите адрес места*",
+    "ADRESS_PLACEHOLDER": "Пр. ул. Ольшевского 11",
+    "POINTS_TITLE": "Нажмите для добавления данных локации:"
   }
 }

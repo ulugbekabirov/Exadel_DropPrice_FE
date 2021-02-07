@@ -24,6 +24,11 @@
       font-weight: 500;
       margin: 0;
       padding: 0;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.1, 1.1);
+      }
     }
 
     &_favourite {
