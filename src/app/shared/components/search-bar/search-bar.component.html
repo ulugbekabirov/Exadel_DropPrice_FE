@@ -1,0 +1,26 @@
+<div class="search">
+  <form class="example-form">
+    <mat-form-field class="search-input">
+      <mat-label>{{ "MAIN_PAGE.SEARCH" | translate }}</mat-label>
+      <input
+        matInput
+        class="form-control"
+        [(ngModel)]="userQuestion"
+        type="text"
+        name="userQuestion"
+        id="userQuestions"
+        (ngModelChange)="userNext($event)"
+      />
+    </mat-form-field>
+  </form>
+  <mat-chip-list selectable multiple aria-label="Fish selection">
+    <mat-chip
+      #chips="matChip"
+      *ngFor="let newTags of tags"
+      (click)="getCardsByTag(newTags, chips)"
+    >
+      <mat-icon *ngIf="chips.selected">check</mat-icon>
+      {{ newTags }}
+    </mat-chip>
+  </mat-chip-list>
+</div>

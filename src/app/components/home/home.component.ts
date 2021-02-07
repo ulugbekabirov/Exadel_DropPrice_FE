@@ -108,4 +108,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
       });
   }
+  search(searchBar) {
+    console.log(searchBar)
+    this.discountsService.searchDiscounts({})
+    .subscribe(res => this.discounts = res)
+  }
 }

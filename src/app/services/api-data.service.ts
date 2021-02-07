@@ -44,6 +44,10 @@ export class ApiDataService {
     return this.http.get<any>(`${environment.webApiUrl}${GET_TICKET_ENDPOINT}`, options);
   }
 
+  searchDiscounts(options): Observable<any> {
+    return this.http.get<any>(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/search`, options);
+  }
+  
   updateIsSavedDiscount(id): Observable<any> {
     return this.http.get(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${id}/${PUT_IS_SAVED_DISCOUNTS_ENDPOINT}`);
   }

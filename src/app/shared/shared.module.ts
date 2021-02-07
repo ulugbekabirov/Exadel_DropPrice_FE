@@ -25,6 +25,7 @@ import { DiscountsListComponent } from './components/discounts-list/discounts-li
 import { DiscountsListItemComponent } from './components/discounts-list-item/discounts-list-item.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { SearchBarComponent} from './components/search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
     MetersToKilometersPipe,
     DiscountsListComponent,
     DiscountsListItemComponent,
+    SearchBarComponent
   ],
 
   imports: [
@@ -86,6 +88,7 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
     MetersToKilometersPipe,
     DiscountsListComponent,
     DiscountsListItemComponent,
+    SearchBarComponent
   ],
 })
 export class SharedModule {
