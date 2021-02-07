@@ -1,15 +1,13 @@
-<div class="main-container">
-    <app-discounts-list
-      [discounts]="discounts"
-      [towns]="towns"
-      (locationChange)="onLocationChange($event)"
-      (getTicket)="getTicket($event)"
-      (sortChange)="onSortChange($event)"
-      (toggleFavourites)="changeFavourites($event)"
-      [activeCoords]="activeCoords"
-      [sortBy]="sortBy"
+<app-discounts-list
+  [discounts]="discounts"
+  [towns]="towns"
+  (locationChange)="onLocationChange($event)"
+  (getTicket)="getTicket($event)"
+  (sortChange)="onSortChange($event)"
+  (toggleFavourites)="changeFavourites($event)"
+  [activeCoords]="activeCoords"
+  [sortBy]="sortBy"
 
-    ></app-discounts-list>
-</div>
+></app-discounts-list>
 <ng-template appRef></ng-template>
 

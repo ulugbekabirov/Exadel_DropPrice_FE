@@ -1,4 +1,4 @@
-@import "../../../../variables";
+@import "src/variables";
 
 .discount-card {
   font-size: 1rem;
@@ -7,8 +7,6 @@
   padding: 1.2em;
   box-shadow: 0 5px 5px rgba(207, 204, 204, 0.25);
   cursor: pointer;
-  position: relative;
-  z-index: -2;
 
   &:hover {
     background: #faf8f8;
@@ -25,6 +23,8 @@
       margin: 0;
       padding: 0;
       cursor: pointer;
+      will-change: transform;
+      transition: transform .1s ease-in-out;
 
       &:hover {
         transform: scale(1.1, 1.1);
@@ -75,10 +75,10 @@
       font-weight: 500;
       padding: .5em .5em .2em;
       cursor: pointer;
-      border-bottom: 1px solid transparent;
+      border-bottom: 2px solid transparent;
 
       &:hover {
-        border-bottom: 1px solid $discount_card_text_color;
+        border-bottom: 2px solid $discount_card_text_color;
       }
     }
 

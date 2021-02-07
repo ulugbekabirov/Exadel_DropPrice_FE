@@ -6,13 +6,15 @@
   >
     <h2 class="discount-card__header_title"
         [routerLink]="[discount.discountId]"
-    >{{discount.discountName}}
+    >
+      {{discount.discountName}}
     </h2>
     <mat-icon class="discount-card__header_favourite"
               fxLayoutAlign="center center"
               [ngStyle]="{'color': discount.isSaved ? '#FF473E' : '#A38D8B'}"
               (click)="toggleFavorites(discount.discountId)"
-    >favorite
+    >
+      favorite
     </mat-icon>
     <div class="discount-card__header_rating"
          fxLayout="row"
@@ -60,8 +62,7 @@
   >
     <div class="discount-card__footer_endDate"
          fxLayoutAlign="center center"
-         fxLayout="row" .
-
+         fxLayout="row"
          fxLayoutGap=".5em"
     >
       <span>{{ "MAIN_PAGE.DISCOUNT_CARD.DATE" | translate }}</span>

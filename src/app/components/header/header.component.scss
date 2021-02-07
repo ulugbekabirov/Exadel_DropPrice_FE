@@ -3,7 +3,7 @@
 .header {
   font-size: 1rem;
   width: 100%;
-  height: $header_height;
+  min-height: $header_height;
   align-items: center;
   background: $bg_header_color;
   padding: .5em 1em .5em 3em;
