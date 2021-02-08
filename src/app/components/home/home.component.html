@@ -1,3 +1,4 @@
+<app-search-bar [tags]="tags" (searchQuery)="search($event)"></app-search-bar>
 <app-discounts-list
   [discounts]="discounts"
   [towns]="towns"
@@ -7,7 +8,6 @@
   (toggleFavourites)="changeFavourites($event)"
   [activeCoords]="activeCoords"
   [sortBy]="sortBy"
-
+  (toggleCoordinates)="changeCoords()"
 ></app-discounts-list>
 <ng-template appRef></ng-template>
-

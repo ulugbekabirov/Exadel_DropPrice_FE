@@ -1,6 +1,6 @@
 import { Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { forkJoin, Observable, Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { DiscountsService } from 'src/app/services/discounts.service';
 import { UserService } from 'src/app/services/user.service';
 import { SORT_BY } from '../../../constants';
@@ -17,6 +17,8 @@ import { TicketComponent } from '../ticket/ticket.component';
 
 export class HomeComponent implements OnInit, OnDestroy {
   sortBy = SORT_BY;
+  searchQuery;
+  searchTags;
   activeUser: ActiveUser;
   tags: Tag[];
   towns: Town[];
@@ -52,11 +54,10 @@ export class HomeComponent implements OnInit, OnDestroy {
           longitude: user.officeLongitude,
         };
       }
-
     });
     const towns$ = this.discountsService.getTowns();
-    const tags$ = this.discountsService.getTags(0, 20);
-    const discounts$ = this.discountsService.getDiscounts(0, 5, this.activeCoords.longitude, this.activeCoords.latitude, this.activeSort);
+    const tags$ = this.discountsService.getTags(0, 10);
+    const discounts$ = this.discountsService.getDiscounts(0, 10, this.activeCoords.longitude, this.activeCoords.latitude, this.activeSort);
     forkJoin(
       [towns$, tags$, discounts$]
     ).pipe(
@@ -73,15 +74,36 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  changeCoords(): void {
+    if (!navigator.geolocation) {
+      console.log('Geolocation is not supported by your browser');
+    }
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+          this.activeCoords.latitude = position.coords.latitude;
+          this.activeCoords.longitude =  position.coords.longitude;
+      },
+      (error) => {
+        console.log(error);
+      },
+      {
+        timeout: 5000
+      }
+    );
+    this.discountsService.getDiscounts(0, 10, this.activeCoords.longitude, this.activeCoords.latitude, this.activeSort)
+      .subscribe(res => this.discounts = res);
+
+  }
+
   onLocationChange({value: {latitude, longitude}}): void {
     this.activeCoords = {latitude, longitude};
-    this.discountsService.getDiscounts(0, 5, this.activeCoords.longitude, this.activeCoords.latitude, this.activeSort)
+    this.discountsService.getDiscounts(0, 10, this.activeCoords.longitude, this.activeCoords.latitude, this.activeSort)
       .subscribe(res => this.discounts = res);
   }
 
   onSortChange({value: {sortBy}}): void {
     this.activeSort = sortBy;
-    this.discountsService.getDiscounts(0, 5, this.activeCoords.longitude, this.activeCoords.latitude, this.activeSort)
+    this.discountsService.getDiscounts(0, 10, this.activeCoords.longitude, this.activeCoords.latitude, this.activeSort)
       .subscribe(res => this.discounts = res);
   }
 
@@ -107,5 +129,21 @@ export class HomeComponent implements OnInit, OnDestroy {
             : {...discount};
         });
       });
+  }
+
+  search(searches): void {
+    const {name, tag} = searches;
+    this.searchQuery = name;
+    this.searchTags = tag;
+    this.discountsService.searchDiscounts({
+      skip: 0,
+      take: 10,
+      longitude: this.activeCoords.longitude,
+      latitude: this.activeCoords.latitude,
+      sortBy: this.activeSort,
+      searchQuery: this.searchQuery,
+      tags: this.searchTags
+    })
+      .subscribe(res => this.discounts = res);
   }
 }

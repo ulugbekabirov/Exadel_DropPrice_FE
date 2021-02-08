@@ -58,6 +58,7 @@ export class UserService {
         timeout: 5000
       }
     );
+    console.log('updateUser', updateUser);
     return updateUser;
   }
 

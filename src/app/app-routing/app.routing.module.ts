@@ -17,18 +17,11 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
   },
   {path: 'home/:id', component: DiscountDetailComponent},
-  {
-    path: 'login',
-    component: LoginFormComponent,
-  },
-  {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
-  },
+  {path: 'login', component: LoginFormComponent},
   {path: 'statistics', component: StatisticsComponent},
   {path: 'add-new', component: ModeratorDashboardComponent},
   {path: 'user-profile', component: UserProfileComponent},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', component: NotFoundComponent}
 ];
 

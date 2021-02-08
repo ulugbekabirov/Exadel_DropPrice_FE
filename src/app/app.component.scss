@@ -5,7 +5,9 @@ main {
     font-size: 1rem;
     display: flex;
     flex-direction: column;
-    margin-top: $header_height;
+    justify-content: center;
+    align-items: center;
+    margin-top: $header_height * 2;
     padding: 1em;
 
     @media (min-width: 575.98px) {

@@ -21,7 +21,7 @@
       <mat-select
         (selectionChange)="selectLocation($event)"
       >
-        <mat-option [value]="activeCoords">Моя локация</mat-option>
+        <mat-option (click)="myCoords($event)">Моя локация</mat-option>
         <mat-option *ngFor="let town of towns" [value]="town">
           {{town.townName}}
         </mat-option>

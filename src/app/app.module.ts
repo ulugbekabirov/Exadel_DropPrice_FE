@@ -30,6 +30,7 @@ import { DiscountDetailComponent } from './components/discount-detail/discount-d
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { VendorDetailComponent } from './components/vendor-detail/vendor-detail.component';
+import { DiscountsComponent } from './components/discounts/discounts.component';
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -49,7 +50,8 @@ export function HttpLoaderFactory(http: HttpClient): any {
     DiscountDetailComponent,
     StatisticsComponent,
     UserProfileComponent,
-    VendorDetailComponent
+    VendorDetailComponent,
+    DiscountsComponent
   ],
   imports: [
     BrowserModule,

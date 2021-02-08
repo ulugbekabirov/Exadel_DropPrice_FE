@@ -13,6 +13,7 @@ export class DiscountsListComponent {
   @Output() sortChange = new EventEmitter<any>();
   @Output() getTicket = new EventEmitter<any>();
   @Output() toggleFavourites = new EventEmitter<any>();
+  @Output() toggleCoordinates = new EventEmitter<any>();
   @Input() discounts: Discount[];
   @Input() towns: Town[];
   @Input() activeCoords: LocationCoords;
@@ -32,5 +33,9 @@ export class DiscountsListComponent {
 
   getToggleFavourites(id: number): void {
     this.toggleFavourites.emit(id);
+  }
+
+  myCoords($event: MouseEvent): void {
+    this.toggleCoordinates.emit($event);
   }
 }

@@ -17,9 +17,6 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { Vendor } from '../../models';
 import { DiscountsService } from '../../services/discounts.service';
 
-export interface Tag {
-  name: string;
-}
 
 @Component({
   selector: 'app-new-discount',
@@ -29,7 +26,7 @@ export interface Tag {
 export class NewDiscountComponent implements OnInit, OnDestroy {
   newDiscountForm: FormGroup;
   hide = true;
-  tagsArray: Tag[] = [];
+  tagsArray: string[];
   visible = true;
   selectable = true;
   removable = true;
@@ -48,16 +45,21 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     public translateService: TranslateService,
     public fb: FormBuilder,
     private discountService: DiscountsService,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.subscription = this.discountService.getVendors()
       .pipe(
-        map(value => {})
+        map(value => {
+          const vendorsNames = value.map(v => (v.vendorName));
+          console.log(vendorsNames);
+          return vendorsNames;
+        })
       )
-      // .subscribe(vendors => console.log('vendors', vendors));
-      .subscribe(vendors => this.vendors = vendors);
-
+      .subscribe(vendors => {
+        this.vendors = vendors;
+      });
     this.newDiscountForm = this.fb.group({
       vendorName: ['', [Validators.required, this.requireMatch.bind(this)]],
       discountName: ['', [Validators.required]],
