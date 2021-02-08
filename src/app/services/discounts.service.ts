@@ -26,7 +26,8 @@ export class DiscountsService {
 
   constructor(
     private restApi: ApiDataService,
-  ) {}
+  ) {
+  }
 
   get value(): any {
     return this.subject.value;

@@ -130,8 +130,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
       });
   }
-
-  search(searches): void {
+  onSearchQueryChange(searches): void {
     const {name, tag} = searches;
     this.searchQuery = name;
     this.searchTags = tag;

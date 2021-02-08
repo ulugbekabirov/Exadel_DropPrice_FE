@@ -32,7 +32,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   @Input() tags: Tag[];
-  @Output() searchQuery = new EventEmitter<any>();
+  @Output() searchQueryChange = new EventEmitter<any>();
 
   userNext(evt): void {
     return this.userQuestionUpdate.next(evt);
@@ -41,7 +41,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   addSearch(): void {
     this.searches.pop();
     this.searches.push(new SearchBar(this.userQuestion, this.tagsName));
-    this.searchQuery.emit(this.searches[0]);
+    this.searchQueryChange.emit(this.searches[0]);
   }
 
   getCardsByTag(tag: string, chip: any): void {
