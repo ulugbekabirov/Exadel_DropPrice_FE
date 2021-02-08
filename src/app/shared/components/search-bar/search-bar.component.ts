@@ -1,17 +1,17 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { ApiDataService } from '../../../services/api-data.service';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { HomeComponent } from '../../../components/home/home.component'
+import { Tag } from '../../../models';
 
 
-export class SearchBar{
+export class SearchBar {
   constructor(
     public name: string,
     public tag: string[] = [],
-)
-  {}
+  ) {
+  }
 }
 
 @Component({
@@ -23,28 +23,24 @@ export class SearchBar{
 
 export class SearchBarComponent implements OnInit, OnDestroy {
 
-  constructor(private apiDataService: ApiDataService) {}
-
   public consoleMessages: string[] = [];
   public userQuestion: string;
   public userQuestionUpdate = new Subject<string>();
-  public searchs: SearchBar[] = [];
+  public searches: SearchBar[] = [];
   public tagsName: string[] = [];
   private subscription: Subscription;
 
-  @Input()
-  tags;
-  @Output()
-  searchQuery = new EventEmitter<any>();
+  @Input() tags: Tag[];
+  @Output() searchQueryChange = new EventEmitter<any>();
 
   userNext(evt): void {
-    return this.userQuestionUpdate.next(evt)
+    return this.userQuestionUpdate.next(evt);
   }
 
-  addSearch(): void{
-    this.searchs.pop();
-    this.searchs.push(new SearchBar(this.userQuestion, this.tagsName));
-    this.searchQuery.emit(this.searchs[0]);
+  addSearch(): void {
+    this.searches.pop();
+    this.searches.push(new SearchBar(this.userQuestion, this.tagsName));
+    this.searchQueryChange.emit(this.searches[0]);
   }
 
   getCardsByTag(tag: string, chip: any): void {
@@ -57,12 +53,12 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     }
 
     this.addSearch();
-    
+
   }
 
   ngOnInit(): void {
     this.subscription = this.userQuestionUpdate.pipe(
-      debounceTime(400),
+      debounceTime(1000),
       distinctUntilChanged())
       .subscribe(value => {
         this.consoleMessages.pop();
@@ -71,7 +67,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 }

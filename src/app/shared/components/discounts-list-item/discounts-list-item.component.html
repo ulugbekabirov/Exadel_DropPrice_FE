@@ -5,16 +5,23 @@
        fxLayoutGap="1em"
   >
     <h2 class="discount-card__header_title"
-
-    >{{discount.discountName}}
+        [routerLink]="[discount.discountId]"
+        matTooltip="Подробнее о Скидке"
+        matTooltipPosition="right"
+    >
+      {{discount.discountName}}
     </h2>
-    <mat-icon class="discount-card__header_favourite"
+  </div>
+  <div class="discount-card__rating">
+    <mat-icon class="discount-card__rating_favourite"
               fxLayoutAlign="center center"
+              matTooltip="Toggle Favourites"
               [ngStyle]="{'color': discount.isSaved ? '#FF473E' : '#A38D8B'}"
               (click)="toggleFavorites(discount.discountId)"
-    >favorite
+    >
+      favorite
     </mat-icon>
-    <div class="discount-card__header_rating"
+    <div class="discount-card__rating_rating"
          fxLayout="row"
          fxLayoutAlign="center center"
          fxLayoutGap=".3em"
@@ -22,18 +29,22 @@
     <span class="rating__amount"
           fxLayoutAlign="center center"
     >
-          {{discount.discountRating}}
+          {{discount.discountRating ? discount.discountRating.toFixed() : discount.discountRating}}
     </span>
       <mat-icon class="rating__icon"
                 fxLayoutAlign="center center"
-      >star_rate
+      >{{discount.discountRating ? 'star_rate' : 'star_border'}}
       </mat-icon>
     </div>
   </div>
   <div class="discount-card__vendor"
        fxLayoutAlign="flex-start center"
   >
-    <a class="discount-card__vendor_link">
+    <a class="discount-card__vendor_link"
+       [routerLink]="[discount.discountId]"
+       matTooltip="Подробнее о Скидке"
+       matTooltipPosition="right"
+    >
       {{discount.vendorName}}
     </a>
   </div>
@@ -68,6 +79,7 @@
          fxLayoutAlign="center center"
     >
       <button class="action__ticket"
+              matTooltip="Take Ticket"
               (click)="ticketHandler(discount.discountId)"
       >
         {{ "MAIN_PAGE.BUTTONS.TICKET" | translate }}
@@ -75,3 +87,5 @@
     </div>
   </div>
 </div>
+
+

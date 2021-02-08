@@ -1,6 +1,6 @@
 import { Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { forkJoin, Observable, Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { forkJoin, Observable, Subject, Subscription } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
 import { DiscountsService } from 'src/app/services/discounts.service';
 import { UserService } from 'src/app/services/user.service';
 import { SORT_BY } from '../../../constants';
@@ -22,9 +22,18 @@ export class HomeComponent implements OnInit, OnDestroy {
   towns: Town[];
   discounts: Discount[];
   activeUser$: Observable<ActiveUser>;
-  activeSort: string;
   activeCoords: LocationCoords;
+  activeData = {
+    skip: 0,
+    take: 10,
+    longitude: 0,
+    latitude: 0,
+    sortBy: 'DistanceAsc',
+    searchQuery: '',
+    tags: []
+  };
   private subscription: Subscription;
+  private unsubscribe$ = new Subject<void>();
 
   @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
 
@@ -37,58 +46,64 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.activeUser$ = this.userService.activeUser;
-    this.subscription = this.activeUser$.pipe(
-    ).subscribe(user => {
-      this.activeUser = user;
-      this.activeSort = 'DistanceAsc';
-      if (user.latitude && user.longitude) {
-        this.activeCoords = {
-          latitude: user.latitude,
-          longitude: user.longitude,
-        };
-      } else {
-        this.activeCoords = {
-          latitude: user.officeLatitude,
-          longitude: user.officeLongitude,
-        };
-      }
-
-    });
+    this.activeUser$.pipe(
+      takeUntil(this.unsubscribe$)
+    )
+      .subscribe(user => {
+        this.activeUser = user;
+        this.activeData.sortBy = 'DistanceAsc';
+        this.activeData.latitude = user.officeLatitude;
+        this.activeData.longitude = user.officeLongitude;
+      });
     const towns$ = this.discountsService.getTowns();
-    const tags$ = this.discountsService.getTags(0, 20);
-    const discounts$ = this.discountsService.getDiscounts(0, 5, this.activeCoords.longitude, this.activeCoords.latitude, this.activeSort);
-    forkJoin(
-      [towns$, tags$, discounts$]
-    ).pipe(
-      tap(([towns, tags, discounts]) => {
-      })
-    ).subscribe(([towns, tags, discounts]) => {
-      this.towns = towns;
-      this.tags = tags;
-      this.discounts = discounts;
-    });
+    const tags$ = this.discountsService.getTags(0, 10);
+    const discounts$ = this.discountsService.getDiscounts(this.activeData);
+    forkJoin([towns$, tags$, discounts$]).pipe(
+      takeUntil(this.unsubscribe$)
+    )
+      .subscribe(([towns, tags, discounts]) => {
+        this.towns = towns;
+        this.tags = tags;
+        this.discounts = discounts;
+      });
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  changeCoords(): void {
+    this.userService.getLocation()
+      .then(res => {
+        this.activeData.latitude = res.latitude;
+        this.activeData.longitude = res.longitude;
+      }).then(res => {
+      this.discountsService.getDiscounts(this.activeData).pipe(
+        takeUntil(this.unsubscribe$)
+      )
+        .subscribe(data => this.discounts = data);
+    });
   }
 
   onLocationChange({value: {latitude, longitude}}): void {
-    this.activeCoords = {latitude, longitude};
-    this.discountsService.getDiscounts(0, 5, this.activeCoords.longitude, this.activeCoords.latitude, this.activeSort)
+    this.activeData.latitude = latitude;
+    this.activeData.longitude = longitude;
+    this.discountsService.getDiscounts(this.activeData).pipe(
+      takeUntil(this.unsubscribe$)
+    )
       .subscribe(res => this.discounts = res);
   }
 
   onSortChange({value: {sortBy}}): void {
-    this.activeSort = sortBy;
-    this.discountsService.getDiscounts(0, 5, this.activeCoords.longitude, this.activeCoords.latitude, this.activeSort)
+    this.activeData.sortBy = sortBy;
+    this.discountsService.getDiscounts(this.activeData).pipe(
+      takeUntil(this.unsubscribe$)
+    )
       .subscribe(res => this.discounts = res);
   }
 
   getTicket(discountId): void {
     const ticketFactory = this.resolver.resolveComponentFactory(TicketComponent);
     this.refDir.containerRef.clear();
-    this.discountsService.getTicket(discountId)
+    this.discountsService.getTicket(discountId).pipe(
+      takeUntil(this.unsubscribe$)
+    )
       .subscribe(ticket => {
         component.instance.ticket = ticket;
       });
@@ -99,7 +114,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   changeFavourites(id: number): void {
-    this.discountsService.updateIsSavedDiscount(id)
+    this.discountsService.updateIsSavedDiscount(id).pipe(
+      takeUntil(this.unsubscribe$)
+    )
       .subscribe(resp => {
         this.discounts = this.discounts.map((discount: Discount) => {
           return discount.discountId === resp.discountID
@@ -108,9 +125,18 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
       });
   }
-  search(searches) { 
-    const { name, tag } = searches;
-    this.discountsService.searchDiscounts(0, 10, this.activeCoords.longitude, this.activeCoords.latitude, this.activeSort, name, tag)
-    .subscribe(res => this.discounts = res)
+
+  onSearchQueryChange(searches): void {
+    const {name, tag} = searches;
+    this.activeData.searchQuery = name;
+    this.activeData.tags = [...tag];
+    this.discountsService.searchDiscounts(this.activeData).pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe(res => this.discounts = res);
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

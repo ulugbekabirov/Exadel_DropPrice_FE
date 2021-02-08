@@ -25,7 +25,9 @@ import { DiscountsListComponent } from './components/discounts-list/discounts-li
 import { DiscountsListItemComponent } from './components/discounts-list-item/discounts-list-item.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
-import { SearchBarComponent} from './components/search-bar/search-bar.component';
+import { Router, RouterModule } from '@angular/router';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { SearchBarComponent} from './components/search-bar/search-bar.component'
   ],
 
   imports: [
+    RouterModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -59,11 +62,13 @@ import { SearchBarComponent} from './components/search-bar/search-bar.component'
     TranslateModule,
     MatTabsModule,
     AgmCoreModule,
+    MatTooltipModule,
   ],
 
   providers: [GoogleMapsAPIWrapper],
 
   exports: [
+    RouterModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -88,7 +93,8 @@ import { SearchBarComponent} from './components/search-bar/search-bar.component'
     MetersToKilometersPipe,
     DiscountsListComponent,
     DiscountsListItemComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    MatTooltipModule,
   ],
 })
 export class SharedModule {
