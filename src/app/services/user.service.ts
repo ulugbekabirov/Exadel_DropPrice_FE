@@ -3,7 +3,7 @@ import { ApiDataService } from './api-data.service';
 import { BehaviorSubject, Observable, } from 'rxjs';
 import { ActiveUser } from '../models';
 import { KEY_ACTIVE_USER } from '../../constants';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({

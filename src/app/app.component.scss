@@ -7,7 +7,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: $header_height * 2;
+    margin-top: $header_height;
     padding: 1em;
 
     @media (min-width: 575.98px) {
