@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { ActiveUser } from '../../models';
 import { UserService } from '../../services/user.service';
 
@@ -10,7 +10,7 @@ import { UserService } from '../../services/user.service';
 })
 export class UserProfileComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
-  private activeUser: ActiveUser;
+  activeUser: ActiveUser;
 
   constructor(
     private userService: UserService,

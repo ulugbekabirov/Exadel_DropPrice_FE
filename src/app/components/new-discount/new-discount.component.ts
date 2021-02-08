@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import {
   AbstractControl,
   FormArray,
@@ -9,24 +9,25 @@ import {
   ValidationErrors,
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, Subscription } from 'rxjs';
-import { map, pluck, startWith } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { Vendor } from '../../models';
-import { DiscountsService } from '../../services/discounts.service';
 
+export interface Tag {
+  name: string;
+}
 
 @Component({
   selector: 'app-new-discount',
   templateUrl: './new-discount.component.html',
   styleUrls: ['./new-discount.component.scss'],
 })
-export class NewDiscountComponent implements OnInit, OnDestroy {
+export class NewDiscountComponent implements OnInit {
   newDiscountForm: FormGroup;
   hide = true;
-  tagsArray: string[];
+  tagsArray: Tag[] = [];
   visible = true;
   selectable = true;
   removable = true;
@@ -34,32 +35,29 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   isChecked = true;
 
-  vendors?;
-
+  vendors: string[] = [
+    'Astra',
+    'BacardiGroup',
+    'Citrus',
+    'DriverPlus',
+    'Eshko',
+    'Focus',
+    'Green',
+    'Hudson',
+    'SportBet',
+    'Sportmaster',
+  ];
   filteredVendors: Observable<string[]>;
-  subscription: Subscription;
+
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocompleteModule;
 
   constructor(
     public translateService: TranslateService,
-    public fb: FormBuilder,
-    private discountService: DiscountsService,
-  ) {
-  }
+    public fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.subscription = this.discountService.getVendors()
-      .pipe(
-        map(value => {
-          const vendorsNames = value.map(v => (v.vendorName));
-          console.log(vendorsNames);
-          return vendorsNames;
-        })
-      )
-      .subscribe(vendors => {
-        this.vendors = vendors;
-      });
     this.newDiscountForm = this.fb.group({
       vendorName: ['', [Validators.required, this.requireMatch.bind(this)]],
       discountName: ['', [Validators.required]],
@@ -217,9 +215,5 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
 
   get pointOfSalesForms() {
     return this.newDiscountForm.get('pointsOfSales') as FormArray;
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }

@@ -26,7 +26,7 @@ import { DiscountsListItemComponent } from './components/discounts-list-item/dis
 import { TranslateModule } from '@ngx-translate/core';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { Router, RouterModule } from '@angular/router';
-import { SearchBarComponent} from './components/search-bar/search-bar.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
@@ -97,4 +97,5 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTooltipModule,
   ],
 })
-export class SharedModule {}
+export class SharedModule {
+}

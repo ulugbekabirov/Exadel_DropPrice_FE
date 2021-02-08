@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ApiDataService } from './api-data.service';
-import { BehaviorSubject, Observable, } from 'rxjs';
+import { BehaviorSubject, from, Observable, } from 'rxjs';
 import { ActiveUser } from '../models';
 import { KEY_ACTIVE_USER } from '../../constants';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 
 @Injectable({
@@ -28,38 +28,44 @@ export class UserService {
     return this.restApi.getUserInfo()
       .pipe(
         map((user: ActiveUser) => this.getUserPosition(user)),
-        map((user: ActiveUser) => this.handleActiveUser(user)),
       );
   }
 
   private handleActiveUser(user: ActiveUser): any {
-    localStorage.setItem(KEY_ACTIVE_USER, JSON.stringify(user));
     this.activeUserSubject.next(user);
-    return user;
+    localStorage.setItem(KEY_ACTIVE_USER, JSON.stringify(user));
+  }
+
+  getLocation(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      if (!navigator.geolocation) {
+        reject(Error('No support for geolocation'));
+        return;
+      }
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const longitude = position.coords.longitude;
+          const latitude = position.coords.latitude;
+          resolve({latitude, longitude});
+        },
+        (error) => {
+          reject(error);
+        },
+        {timeout: 5000});
+    });
   }
 
   getUserPosition(user: ActiveUser): any {
-    const updateUser: ActiveUser = {...user};
-    if (!navigator.geolocation) {
-        console.log('Geolocation is not supported by your browser');
-        return updateUser;
-      }
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        Object.assign(updateUser, {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
+    this.getLocation()
+      .then(res => {
+        return Object.assign({...user}, {
+          latitude: res.latitude,
+          longitude: res.longitude
         });
-      },
-      (error) => {
-        console.log(error);
-      },
-      {
-        timeout: 5000
-      }
-    );
-    console.log('updateUser', updateUser);
-    return updateUser;
+      })
+      .then(res => {
+        this.handleActiveUser(res);
+      });
   }
 
   logout(): void {

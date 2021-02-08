@@ -29,7 +29,6 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
         })
       ).subscribe(data => {
         this.vendor = data;
-        console.log('VENDOR', this.vendor);
       });
   }
 

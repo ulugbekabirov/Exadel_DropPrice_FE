@@ -3,7 +3,6 @@ import { ApiDataService } from '../../../services/api-data.service';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { HomeComponent } from '../../../components/home/home.component';
 import { Tag } from '../../../models';
 
 

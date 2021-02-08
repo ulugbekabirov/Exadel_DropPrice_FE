@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -7,6 +7,8 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
+import { ActiveUser } from '../../models';
 
 
 @Component({
@@ -14,9 +16,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss'],
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
   hide = true;
+  private subscription: Subscription;
 
   constructor(
     private auth: AuthService,
@@ -43,12 +46,12 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.auth.login(this.loginForm.value)
-      .subscribe(() => {
-        this.loginForm.reset();
-        const returnUrl = this.route.snapshot.queryParams['/returnUrl'] || '/';
-        this.router.navigate([returnUrl]);
-      });
+    const auth$: Observable<ActiveUser> = this.auth.login(this.loginForm.value);
+    this.subscription = auth$.subscribe(() => {
+      const returnUrl = this.route.snapshot.queryParams['/returnUrl'] || '/';
+      this.router.navigate([returnUrl]);
+      this.loginForm.reset();
+    });
   }
 
   get email(): AbstractControl {
@@ -57,5 +60,9 @@ export class LoginFormComponent implements OnInit {
 
   get password(): AbstractControl {
     return this.loginForm.get('password');
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

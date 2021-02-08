@@ -14,6 +14,7 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
 
   discount: Discount;
   subscription: Subscription;
+  activeUser;
 
   constructor(
     private router: Router,
