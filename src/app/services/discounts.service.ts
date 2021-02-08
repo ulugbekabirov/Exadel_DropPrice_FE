@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
 import { ApiDataService } from './api-data.service';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
-import { Ticket } from '../models';
+import { Ticket, Vendor } from '../models';
+import { pluck } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DiscountsService {
-
   constructor(
     private restApi: ApiDataService,
-  ) {}
+  ) {
+  }
 
-  getDiscounts(skip, take, longitude, latitude, sortBy?): Observable<any> {
+  getDiscounts({skip, take, longitude, latitude, sortBy}): Observable<any> {
     const options: { params: HttpParams } = {
       params: new HttpParams()
         .set('skip', skip)
@@ -39,25 +41,37 @@ export class DiscountsService {
   }
 
   getTicket(discId): Observable<Ticket> {
-    const options: { params: HttpParams } = {
-      params: new HttpParams()
-        .set('discountId', discId)
-    };
-    return this.restApi.getTicket(options);
+    return this.restApi.getTicket(discId);
   }
 
   updateIsSavedDiscount(discId): Observable<any> {
-    const options: { params: HttpParams } = {
-      params: new HttpParams()
-        .set('discountId', discId)
-    };
     return this.restApi.updateIsSavedDiscount(discId);
   }
-  searchDiscounts(skip, take, longitude, latitudem, sortBy, searchQuery, tags): void {
+
+  getDiscountById(discountId): Observable<any> {
+    return this.restApi.getDiscountById(discountId);
+  }
+
+  getVendors(): Observable<Vendor[]> {
+    return this.restApi.getVendors();
+  }
+
+  getVendorById(vendorId): Observable<any> {
+    return this.restApi.getVendorById(vendorId);
+  }
+
+  getVendorsDiscounts(vendorId, options): Observable<any> {
+    return this.restApi.getVendorsDiscounts(vendorId, options);
+  }
+
+  searchDiscounts(params): Observable<any> {
+    const paramsObj = {};
+    Object.keys({...params}).filter(value => typeof params[value] !== 'undefined').forEach(param => {
+      paramsObj[param] = params[param];
+    });
     const options: { params: HttpParams } = {
-      params: new HttpParams()
-        .set('searchQuery', searchQuery)
+      params: new HttpParams({fromObject: paramsObj})
     };
-    this.restApi.searchDiscounts(options);
+    return this.restApi.searchDiscounts(options);
   }
 }

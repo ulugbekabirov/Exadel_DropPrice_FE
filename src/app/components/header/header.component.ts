@@ -29,6 +29,7 @@ export class HeaderComponent {
   }
 
   logoutHandler(): void {
+    this.toggleActive();
     this.auth.logout();
   }
 

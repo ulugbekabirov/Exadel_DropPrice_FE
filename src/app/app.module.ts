@@ -26,6 +26,11 @@ import { NewDiscountComponent } from './components/new-discount/new-discount.com
 import { ModeratorDashboardComponent } from './components/moderator-dashboard/moderator-dashboard.component';
 import { NewVendorComponent } from './components/new-vendor/new-vendor.component';
 import { MapComponent } from './components/map/map.component';
+import { DiscountDetailComponent } from './components/discount-detail/discount-detail.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { VendorDetailComponent } from './components/vendor-detail/vendor-detail.component';
+import { DiscountsComponent } from './components/discounts/discounts.component';
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -41,7 +46,12 @@ export function HttpLoaderFactory(http: HttpClient): any {
     ModeratorDashboardComponent,
     NewVendorComponent,
     MapComponent,
-    NewDiscountComponent
+    NewDiscountComponent,
+    DiscountDetailComponent,
+    StatisticsComponent,
+    UserProfileComponent,
+    VendorDetailComponent,
+    DiscountsComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +60,7 @@ export function HttpLoaderFactory(http: HttpClient): any {
     SharedModule,
     AppRoutingModule,
     TranslateModule.forRoot({
+      useDefaultLang: true,
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
