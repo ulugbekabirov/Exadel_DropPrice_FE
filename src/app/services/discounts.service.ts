@@ -53,4 +53,11 @@ export class DiscountsService {
     };
     return this.restApi.updateIsSavedDiscount(discId);
   }
+  searchDiscounts(skip, take, longitude, latitudem, sortBy, searchQuery, tags): void {
+    const options: { params: HttpParams } = {
+      params: new HttpParams()
+        .set('searchQuery', searchQuery)
+    };
+    this.restApi.searchDiscounts(options);
+  }
 }
