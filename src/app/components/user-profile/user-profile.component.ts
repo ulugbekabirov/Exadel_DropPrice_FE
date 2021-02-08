@@ -18,7 +18,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.userService.activeUser
-      .pipe()
       .subscribe(data => this.activeUser = data);
   }
 
