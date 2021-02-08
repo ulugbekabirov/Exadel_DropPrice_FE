@@ -44,8 +44,8 @@ export class DiscountsService {
     return this.restApi.getTicket(discId);
   }
 
-  updateIsSavedDiscount(discId): Observable<any> {
-    return this.restApi.updateIsSavedDiscount(discId);
+  updateIsSavedDiscount(discountId): Observable<any> {
+    return this.restApi.updateIsSavedDiscount(discountId);
   }
 
   getDiscountById(discountId): Observable<any> {
@@ -73,5 +73,9 @@ export class DiscountsService {
       params: new HttpParams({fromObject: paramsObj})
     };
     return this.restApi.searchDiscounts(options);
+  }
+
+  putDiscountInArchive(discountId): Observable<any> {
+    return this.restApi.putDiscountInArchive(discountId);
   }
 }

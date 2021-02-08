@@ -9,6 +9,7 @@ export const KEY_AUTH_TOKEN = 'key_auth_token';
 export const KEY_ACTIVE_USER = 'key_active_user';
 export const GET_TICKET_ENDPOINT = 'createTicket';
 export const PUT_IS_SAVED_DISCOUNTS_ENDPOINT = 'save';
+export const PUT_ARCHIVE_DISCOUNTS_ENDPOINT = 'archive';
 export const SEARCH_DISCOUNTS_ENDPOINT = 'search';
 
 export const SORT_BY = [

@@ -8,7 +8,7 @@ import {
   GET_TAGS_ENDPOINT,
   GET_TICKET_ENDPOINT,
   GET_TOWNS_ENDPOINT, GET_VENDOR_DISCOUNTS_ENDPOINT,
-  GET_VENDORS_ENDPOINT,
+  GET_VENDORS_ENDPOINT, PUT_ARCHIVE_DISCOUNTS_ENDPOINT,
   PUT_IS_SAVED_DISCOUNTS_ENDPOINT, SEARCH_DISCOUNTS_ENDPOINT,
   USER_INFO_ENDPOINT
 } from '../../constants';
@@ -68,6 +68,10 @@ export class ApiDataService {
 
   getVendorsDiscounts(vendorId, options): Observable<any> {
     return this.http.get(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}/${GET_VENDOR_DISCOUNTS_ENDPOINT}`, options);
+  }
+
+  putDiscountInArchive(id): Observable<any> {
+    return this.http.put(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${id}/${PUT_ARCHIVE_DISCOUNTS_ENDPOINT}`, null);
   }
 
 }
