@@ -14,6 +14,9 @@ import { map, startWith } from 'rxjs/operators';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+
+import { MapComponent } from './../map/map.component';
 
 export interface Tag {
   name: string;
@@ -54,7 +57,8 @@ export class NewDiscountComponent implements OnInit {
 
   constructor(
     public translateService: TranslateService,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -152,8 +156,30 @@ export class NewDiscountComponent implements OnInit {
     this.pointOfSalesForms.removeAt(i);
   }
 
-  addLocation(i) {
+  openDialog(i) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+
+    dialogConfig.data = {
+      id: i,
+    };
+
+    dialogConfig.minHeight = '800px';
+    dialogConfig.minWidth = '1000px';
+    this.dialog.open(MapComponent, dialogConfig);
     console.log(`ADD location to ${i} object`);
+    const dialogRef = this.dialog.open(MapComponent, dialogConfig);
+    dialogRef
+      .afterClosed()
+      .subscribe((data) =>
+        console.log(
+          'Dialog output:',
+          Object.assign(this.pointOfSalesForms[i], data)
+        )
+      );
+    console.log(this.pointOfSalesForms.value);
+    console.log(this.pointOfSalesForms[0]);
+    console.log(dialogConfig.data);
   }
 
   submit(): void {

@@ -3,6 +3,7 @@
   fxLayout="column"
   fxLayoutAlign="center center"
 >
+  <div>{{ this.newDiscountForm.value | json }}</div>
   <mat-card
     class="new-discount"
     fxLayout.xs="column"
@@ -195,7 +196,7 @@
                 formControlName="adress"
               />
             </mat-form-field>
-            <mat-icon (click)="addLocation(i)">add_location_alt</mat-icon>
+            <mat-icon (click)="openDialog(i)">add_location_alt</mat-icon>
             <mat-icon (click)="deletePoint(i)">delete</mat-icon>
           </div>
         </div>

@@ -1,4 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { SalesCoordinate } from '../../models/sales-coordinate';
 
@@ -15,6 +16,11 @@ export class MapComponent {
     longitude: 27.5667,
   };
 
+  constructor(
+    private dialogRef: MatDialogRef<MapComponent>,
+    @Inject(MAT_DIALOG_DATA) data
+  ) {}
+
   onChoseLocation(event): void {
     this.coordinate.latitude = event.coords.lat;
     this.coordinate.longitude = event.coords.lng;
@@ -26,5 +32,11 @@ export class MapComponent {
     };
     this.data.emit(this.coordinate);
     console.log(this.coordinate);
+
+    this.dialogRef.close(this.coordinate);
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 }

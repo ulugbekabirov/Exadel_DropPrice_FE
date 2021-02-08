@@ -1,3 +1,4 @@
+import { MapComponent } from './../components/map/map.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
@@ -8,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -38,7 +40,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MetersToKilometersPipe,
     DiscountsListComponent,
     DiscountsListItemComponent,
-    SearchBarComponent
+    SearchBarComponent,
   ],
 
   imports: [
@@ -63,6 +65,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTabsModule,
     AgmCoreModule,
     MatTooltipModule,
+    MatDialogModule,
   ],
 
   providers: [GoogleMapsAPIWrapper],
@@ -95,7 +98,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     DiscountsListItemComponent,
     SearchBarComponent,
     MatTooltipModule,
+    MatDialogModule,
   ],
+  entryComponents: [MapComponent],
 })
-export class SharedModule {
-}
+export class SharedModule {}
