@@ -1,14 +1,24 @@
 <article class="discount-detail">
 
   <section class="discount-detail__header">
+
+    <div class="discount-detail__header_rating">
+      <mat-icon class="rating__icon"
+                fxLayoutAlign="center center"
+                *ngFor="let star of rating"
+      >{{star ? 'star_rate' : 'star_border'}}
+      </mat-icon>
+    </div>
+
     <h2 class="discount-detail__header_title">
       {{discount?.discountName}}
     </h2>
+
     <mat-icon class="discount-detail__header_favourite"
               fxLayoutAlign="center center"
               matTooltip="Toggle Favourites"
-              [ngStyle]="{'color': discount?.isSaved ? '$isSaved_true_bg_color' : '$isSaved_false_bg_color'}"
-              (click)="toggleFavorites(discount.discountId)"
+              [ngStyle]="{'color': discount?.isSaved ? '#FF6347' : '#A38D8B'}"
+              (click)="toggleFavorites(discount?.discountId)"
     >
       favorite
     </mat-icon>
@@ -18,7 +28,9 @@
 
     <mat-card class="discount-content">
 
-      <h3 class="discount-content__vendor">
+      <h3 class="discount-content__vendor"
+          matTooltip="Vendor"
+      >
         {{discount?.vendorName}}
       </h3>
 
@@ -135,22 +147,27 @@
     </span>
     <mat-icon class="rating__icon"
               fxLayoutAlign="center center"
+              matTooltip="Оцкеить скидку"
     >{{'star_rate'}}
     </mat-icon>
     <mat-icon class="rating__icon"
               fxLayoutAlign="center center"
+              matTooltip="Оцкеить скидку"
     >{{'star_rate'}}
     </mat-icon>
     <mat-icon class="rating__icon"
               fxLayoutAlign="center center"
+              matTooltip="Оценить скидку"
     >{{'star_rate'}}
     </mat-icon>
     <mat-icon class="rating__icon"
               fxLayoutAlign="center center"
+              matTooltip="Оцкеить скидку"
     >{{'star_border'}}
     </mat-icon>
     <mat-icon class="rating__icon"
               fxLayoutAlign="center center"
+              matTooltip="Оцкеить скидку"
     >{{'star_border'}}
     </mat-icon>
   </section>
@@ -160,19 +177,21 @@
             class="action__button"
             mat-flat-button
             matTooltip="Edit Discount"
-            (click)="editDiscount(discount.discountId)"
+            (click)="editDiscount(discount?.discountId)"
     >
       {{ 'Edit' }}
     </button>
     <button class="action__button"
             mat-flat-button
             matTooltip="Take Ticket"
-            (click)="ticketHandler(discount.discountId)"
+            (click)="ticketHandler(discount?.discountId)"
     >
       {{ "MAIN_PAGE.BUTTONS.TICKET" | translate }}
     </button>
   </section>
 
 </article>
+<ng-template appRef></ng-template>
+
 
 

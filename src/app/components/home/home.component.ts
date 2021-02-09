@@ -7,6 +7,7 @@ import { SORT_BY } from '../../../constants';
 import { ActiveUser, Discount, LocationCoords, Tag, Town } from '../../models';
 import { RefDirective } from '../../directives/ref.directive';
 import { TicketComponent } from '../ticket/ticket.component';
+import { TicketService } from '../../services/ticket.service';
 
 
 @Component({
@@ -32,7 +33,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     searchQuery: '',
     tags: []
   };
-  private subscription: Subscription;
   private unsubscribe$ = new Subject<void>();
 
   @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(
     private discountsService: DiscountsService,
     private userService: UserService,
-    private resolver: ComponentFactoryResolver,
+    private ticketService: TicketService,
   ) {
   }
 
@@ -98,19 +98,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe(res => this.discounts = res);
   }
 
-  getTicket(discountId): void {
-    const ticketFactory = this.resolver.resolveComponentFactory(TicketComponent);
-    this.refDir.containerRef.clear();
-    this.discountsService.getTicket(discountId).pipe(
-      takeUntil(this.unsubscribe$)
-    )
-      .subscribe(ticket => {
-        component.instance.ticket = ticket;
-      });
-    const component = this.refDir.containerRef.createComponent(ticketFactory);
-    component.instance.closeTicket.subscribe(() => {
-      this.refDir.containerRef.clear();
-    });
+  getTicket(discountId: number): void {
+    this.ticketService.getTicket(discountId, this.refDir);
   }
 
   changeFavourites(id: number): void {

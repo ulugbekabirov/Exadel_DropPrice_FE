@@ -23,9 +23,9 @@
   }
 
   &__hamburger {
-    height: $header_height / 2;
-    width: $header_height / 2;
-    border: 2px solid white;
+    height: $header_height / 1.5;
+    width: $header_height / 1.5;
+    border: .18em solid white;
     border-radius: 50%;
     position: relative;
     display: none;
@@ -41,12 +41,12 @@
       height: 100%;
       width: 100%;
       border-radius: 50%;
-      border: 2px solid white;
+      border: .18em solid white;
       animation: puls 3s ease infinite;
     }
 
     .bar {
-      height: 2px;
+      height: .16em;
       width: 1.1em;
       position: relative;
       background-color: white;

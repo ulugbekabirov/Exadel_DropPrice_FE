@@ -15,8 +15,13 @@ const appRoutes: Routes = [
     path: 'home',
     component: HomeComponent,
     canActivate: [AuthGuard],
+    // children: [
+    //   {path: 'discounts/:id', component: DiscountDetailComponent},
+    //   {path: 'vendors/:id', component: VendorDetailComponent},
+    // ]
   },
   {path: 'home/:id', component: DiscountDetailComponent},
+  // {path: 'vendor/:id', component: VendorDetailComponent},
   {path: 'login', component: LoginFormComponent},
   {path: 'statistics',
     component: StatisticsComponent,

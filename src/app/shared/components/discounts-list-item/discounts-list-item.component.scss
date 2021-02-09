@@ -2,7 +2,7 @@
 
 .discount-card {
   font-size: .8rem;
-  background: $discount_card_bg_color;
+  background: #ffffff;
   border-radius: 0 0 .8em .8em;
   padding: 1em;
   box-shadow: 0 .6em .5em rgba(28,104,192, .25);
@@ -10,7 +10,7 @@
   will-change: box-shadow;
 
   &:hover {
-    background: $discount_card_hover_bg_color;
+    background: #ffffff;
     box-shadow: 0 .8em .5em rgba(28, 104, 192, .35);
   }
 

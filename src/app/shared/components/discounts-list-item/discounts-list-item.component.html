@@ -30,7 +30,7 @@
     <mat-icon class="discount-card__rating_favourite"
               fxLayoutAlign="center center"
               matTooltip="Toggle Favourites"
-              [ngStyle]="{'color': discount.isSaved ? '$isSaved_true_bg_color' : '$isSaved_false_bg_color'}"
+              [ngStyle]="{'color': discount.isSaved ? '#FF6347' : '#A38D8B'}"
               (click)="toggleFavorites(discount.discountId)"
     >
       favorite

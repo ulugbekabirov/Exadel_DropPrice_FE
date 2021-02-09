@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ApiDataService } from './api-data.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
-import { Ticket, Vendor } from '../models';
-import { pluck } from 'rxjs/operators';
+import { Vendor } from '../models';
 
 
 @Injectable({
@@ -38,10 +37,6 @@ export class DiscountsService {
         .set('take', take)
     };
     return this.restApi.getTags(options);
-  }
-
-  getTicket(discId): Observable<Ticket> {
-    return this.restApi.getTicket(discId);
   }
 
   updateIsSavedDiscount(discountId): Observable<any> {
