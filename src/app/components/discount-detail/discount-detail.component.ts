@@ -44,8 +44,6 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  editDiscount(discountId: number): void {}
-
   ticketHandler(discountId: number): void {
     this.ticketService.getTicket(discountId, this.refDir);
   }
