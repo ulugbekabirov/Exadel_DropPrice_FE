@@ -2,7 +2,6 @@
   <div class="discount-card__header"
        fxLayout="row"
        fxLayoutAlign="center center"
-       fxLayoutGap="1em"
   >
     <h2 class="discount-card__header_title"
         [routerLink]="[discount.discountId]"
@@ -13,14 +12,6 @@
     </h2>
   </div>
   <div class="discount-card__rating">
-    <mat-icon class="discount-card__rating_favourite"
-              fxLayoutAlign="center center"
-              matTooltip="Toggle Favourites"
-              [ngStyle]="{'color': discount.isSaved ? '#FF473E' : '#A38D8B'}"
-              (click)="toggleFavorites(discount.discountId)"
-    >
-      favorite
-    </mat-icon>
     <div class="discount-card__rating_rating"
          fxLayout="row"
          fxLayoutAlign="center center"
@@ -36,6 +27,14 @@
       >{{discount.discountRating ? 'star_rate' : 'star_border'}}
       </mat-icon>
     </div>
+    <mat-icon class="discount-card__rating_favourite"
+              fxLayoutAlign="center center"
+              matTooltip="Toggle Favourites"
+              [ngStyle]="{'color': discount.isSaved ? '$isSaved_true_bg_color' : '$isSaved_false_bg_color'}"
+              (click)="toggleFavorites(discount.discountId)"
+    >
+      favorite
+    </mat-icon>
   </div>
   <div class="discount-card__vendor"
        fxLayoutAlign="flex-start center"
@@ -79,6 +78,7 @@
          fxLayoutAlign="center center"
     >
       <button class="action__ticket"
+              mat-flat-button
               matTooltip="Take Ticket"
               (click)="ticketHandler(discount.discountId)"
       >

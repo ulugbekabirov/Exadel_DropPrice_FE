@@ -1,5 +1,178 @@
-<div>
-  <p>discount-detail works!</p>
-  <pre>{{discount | json}}</pre>
-</div>
+<article class="discount-detail">
+
+  <section class="discount-detail__header">
+    <h2 class="discount-detail__header_title">
+      {{discount?.discountName}}
+    </h2>
+    <mat-icon class="discount-detail__header_favourite"
+              fxLayoutAlign="center center"
+              matTooltip="Toggle Favourites"
+              [ngStyle]="{'color': discount?.isSaved ? '$isSaved_true_bg_color' : '$isSaved_false_bg_color'}"
+              (click)="toggleFavorites(discount.discountId)"
+    >
+      favorite
+    </mat-icon>
+  </section>
+
+  <section class="discount-detail__content">
+
+    <mat-card class="discount-content">
+
+      <h3 class="discount-content__vendor">
+        {{discount?.vendorName}}
+      </h3>
+
+      <div class="discount-content__description">
+        <p class="discount-content__description_text">
+          {{discount?.description}}
+        </p>
+      </div>
+      <p class="discount-content__amount"
+         fxLayout="row"
+         fxLayoutAlign="start center"
+         fxLayoutGap="1em"
+      >
+        <span class="discount-content__amount_label"
+              fxLayoutAlign="start center"
+              fxFlex="30"
+        >
+          Скидка:
+        </span>
+        <span
+          fxLayoutAlign="start center"
+          fxFlex="70"
+        >
+          <span class="discount-content__amount_text">
+          {{discount?.discountAmount}}
+        </span>
+          <span class="discount-content__amount_symbol">
+          %
+        </span>
+        </span>
+      </p>
+
+      <p class="discount-content__promoCode"
+         fxLayout="row"
+         fxLayoutAlign="start center"
+         fxLayoutGap="1em"
+      >
+        <span class="discount-content__promoCode_label"
+              fxFlex="30"
+              fxLayoutAlign="start center"
+        >
+          промо код:
+        </span>
+        <span class="discount-content__promoCode_text"
+              fxLayoutAlign="start center"
+              fxFlex="70"
+        >
+          {{discount?.promoCode}}
+        </span>
+      </p>
+
+      <p class="discount-content__address"
+         fxLayout="row"
+         fxLayoutAlign="start center"
+         fxLayoutGap="1em"
+      >
+        <span class="discount-content__address_label"
+              fxFlex="20"
+        >
+          Адрес:
+        </span>
+        <span class="discount-content__address_text"
+              fxFlex="80"
+        >
+          {{discount?.address}}
+        </span>
+      </p>
+
+      <p class="discount-content__distance">
+        <span>{{"MAIN_PAGE.DISCOUNT_CARD.DISTANCE" | translate}}: </span>
+        <span>{{discount?.distanceInMeters | metersToKilometers}}</span>
+      </p>
+
+      <div class="discount-content__date"
+           fxLayout="column"
+           fxLayoutAlign="center start"
+           fxLayoutGap="1em"
+      >
+        <div
+          fxFlex="50"
+          fxLayoutAlign="start center"
+        >
+          <span class="discount-content__date_label">от: </span>
+          <span class="discount-content__date_start">
+          {{discount?.startDate | date:"dd.MM.yyyy"}}
+        </span>
+        </div>
+        <div
+          fxFlex="50"
+          fxLayoutAlign="end center"
+        >
+          <span class="discount-content__date_label">до: </span>
+          <span class="discount-content__date_end">
+          {{discount?.endDate | date:"dd.MM.yyyy"}}
+        </span>
+        </div>
+      </div>
+
+      <mat-chip-list class="discount-content__tags">
+        <mat-chip *ngFor="let tag of discount?.tags"
+                  class="discount-content__tags_tag"
+        >
+          # {{tag}}
+        </mat-chip>
+      </mat-chip-list>
+
+    </mat-card>
+
+  </section>
+
+  <section class="discount-detail__rating">
+    <span class="rating__label">
+      {{'Оценить: '}}
+    </span>
+    <mat-icon class="rating__icon"
+              fxLayoutAlign="center center"
+    >{{'star_rate'}}
+    </mat-icon>
+    <mat-icon class="rating__icon"
+              fxLayoutAlign="center center"
+    >{{'star_rate'}}
+    </mat-icon>
+    <mat-icon class="rating__icon"
+              fxLayoutAlign="center center"
+    >{{'star_rate'}}
+    </mat-icon>
+    <mat-icon class="rating__icon"
+              fxLayoutAlign="center center"
+    >{{'star_border'}}
+    </mat-icon>
+    <mat-icon class="rating__icon"
+              fxLayoutAlign="center center"
+    >{{'star_border'}}
+    </mat-icon>
+  </section>
+
+  <section class="discount-detail__actions">
+    <button *appVerifyUserRoles='["Moderator"]'
+            class="action__button"
+            mat-flat-button
+            matTooltip="Edit Discount"
+            (click)="editDiscount(discount.discountId)"
+    >
+      {{ 'Edit' }}
+    </button>
+    <button class="action__button"
+            mat-flat-button
+            matTooltip="Take Ticket"
+            (click)="ticketHandler(discount.discountId)"
+    >
+      {{ "MAIN_PAGE.BUTTONS.TICKET" | translate }}
+    </button>
+  </section>
+
+</article>
+
 

@@ -29,11 +29,25 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
         switchMap((params): Observable<Discount> => {
           return this.discountsService.getDiscountById(+params.get('id'));
         })
-      ).subscribe(data => this.discount = data);
+      ).subscribe(data => {
+        this.discount = data;
+        console.log('discount', data);
+      });
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
+  ticketHandler(discountId: number) {
+
+  }
+
+  editDiscount(discountId: number) {
+
+  }
+
+  toggleFavorites(discountId: number) {
+
+  }
 }
