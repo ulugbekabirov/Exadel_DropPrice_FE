@@ -26,6 +26,10 @@
     flex-direction: column;
     gap: 1.5em;
 
+    li {
+      margin-bottom: 1em;
+    }
+
     @media screen and (min-width: 700px) {
 
       &::-webkit-scrollbar-track {
