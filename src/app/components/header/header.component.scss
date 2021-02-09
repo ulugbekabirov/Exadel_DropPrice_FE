@@ -118,11 +118,10 @@
 
     &.active {
       left: 0;
-      color: tomato;
     }
 
     a {
-      color: #ffffff;
+      color: $header_link_color;
       font-weight: 600;
       font-style: normal;
       font-size: 1.3em;
@@ -135,8 +134,8 @@
 
       @media screen and (min-width: 700px) {
         font-weight: 500;
-        font-size: 1.2em;
-        letter-spacing: initial;
+        font-size: 1em;
+        letter-spacing: inherit;
         border-right: 1px solid white;
         margin: 0;
       }
@@ -156,7 +155,7 @@
         padding: .5em .1em;
 
         &:hover {
-          color: burlywood;
+          color: $header_profile_color_hover;
         }
 
         @media screen and (min-width: 700px) {
@@ -166,7 +165,7 @@
       }
 
       &__language_option {
-        color: white;
+        color: $header_link_color;
         background: $bg_header_color;
         border-radius: 3px;
         border: 3px solid white;
@@ -175,15 +174,19 @@
       }
 
       &__icon {
-        color: white;
+        color: $header_link_color;
         font-size: 2.4em;
         cursor: pointer;
         outline: none;
 
         &:hover {
-          color: burlywood;
+          color: $header_profile_color_hover;
         }
       }
+    }
+
+    .active_link {
+      color: $header_link_active;
     }
 
     @media screen and (min-width: 700px) {

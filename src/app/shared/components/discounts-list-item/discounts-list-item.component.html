@@ -3,12 +3,14 @@
        fxLayout="row"
        fxLayoutAlign="center center"
   >
-    <h2 class="discount-card__header_title"
+    <h2 class="discount-card__header_title">
+      <a
         [routerLink]="[discount.discountId]"
         matTooltip="Подробнее о Скидке"
         matTooltipPosition="right"
-    >
-      {{discount.discountName}}
+      >
+        {{discount.discountName}}
+      </a>
     </h2>
   </div>
   <div class="discount-card__rating">

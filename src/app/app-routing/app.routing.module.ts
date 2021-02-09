@@ -5,7 +5,6 @@ import { NotFoundComponent } from '../shared/components/not-found.components/not
 import { HomeComponent } from '../components/home/home.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { DiscountDetailComponent } from '../components/discount-detail/discount-detail.component';
-import { VendorDetailComponent } from '../components/vendor-detail/vendor-detail.component';
 import { StatisticsComponent } from '../components/statistics/statistics.component';
 import { ModeratorDashboardComponent } from '../components/moderator-dashboard/moderator-dashboard.component';
 import { UserProfileComponent } from '../components/user-profile/user-profile.component';
@@ -15,13 +14,8 @@ const appRoutes: Routes = [
     path: 'home',
     component: HomeComponent,
     canActivate: [AuthGuard],
-    // children: [
-    //   {path: 'discounts/:id', component: DiscountDetailComponent},
-    //   {path: 'vendors/:id', component: VendorDetailComponent},
-    // ]
   },
   {path: 'home/:id', component: DiscountDetailComponent},
-  // {path: 'vendor/:id', component: VendorDetailComponent},
   {path: 'login', component: LoginFormComponent},
   {path: 'statistics',
     component: StatisticsComponent,

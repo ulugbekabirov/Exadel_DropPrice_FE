@@ -36,11 +36,12 @@
     }
 
     &_title {
-      font-size: 1em;
+      font-size: 1.2em;
       font-weight: 500;
       align-self: center;
       text-align: center;
       margin: 0;
+      color: $discount_detail_text_color;
     }
 
     @media screen and (min-width: 767.98px) {
@@ -64,17 +65,27 @@
 
   &__content {
 
-    box-shadow: 0 .6em .5em rgba(28,104,192, .25);
+    box-shadow: 0 .6em .5em rgba(28, 104, 192, .25);
 
     .discount-content {
+
       &__vendor {
-        font-size: 1.2em;
-        font-weight: 600;
+        align-self: start;
+        font-size: 1.6em;
+        font-weight: 500;
         line-height: 1.5em;
         letter-spacing: .06em;
         margin: 0;
         padding: 1em 0;
         cursor: pointer;
+
+        a {
+          color: $discount_detail_text_color;
+
+          &:hover {
+            color: #000000;
+          }
+        }
       }
 
       &__description {
@@ -88,8 +99,9 @@
           letter-spacing: .06em;
           padding: .5em 1em;
           margin: 0 2em;
-          border-right: 1px solid $bg_header_color;
-          border-left: 1px solid $bg_header_color;
+          color: $discount_detail_text_color;
+          border-right: 2px solid $bg_header_color;
+          border-left: 2px solid $bg_header_color;
         }
       }
 
@@ -101,6 +113,7 @@
           font-weight: 600;
           letter-spacing: .1em;
           text-transform: uppercase;
+          color: $discount_detail_text_color;
         }
 
         &_text, &_symbol {
@@ -117,12 +130,14 @@
       &__promoCode {
 
         padding-bottom: 1em;
+        color: $discount_detail_text_color;
 
         &_label {
           font-size: 1.2em;
           font-weight: 600;
           letter-spacing: .1em;
           text-transform: uppercase;
+          color: $discount_detail_text_color;
         }
 
         &_text {
@@ -144,6 +159,7 @@
           font-size: 1.2em;
           padding-right: 1em;
           border-right: 1px solid #000000;
+          color: $discount_detail_text_color;
         }
 
         &_text {
@@ -151,6 +167,7 @@
           font-weight: 500;
           line-height: 1.5em;
           letter-spacing: .06em;
+          color: $discount_detail_text_color;
         }
       }
 
@@ -162,12 +179,14 @@
           font-weight: 500;
           font-size: 1.2em;
           margin-right: 1em;
+          color: $discount_detail_text_color;
         }
 
         :last-child {
           font-size: 1.5em;
           font-weight: 600;
           letter-spacing: .1em;
+          color: $discount_detail_text_color;
         }
 
         @media screen and (min-width: 767.98px) {
@@ -178,16 +197,24 @@
 
         padding-bottom: 2em;
 
+        p {
+          font-weight: 500;
+          font-size: 1.2em;
+          color: $discount_detail_text_color;
+        }
+
         &_label {
           font-weight: 500;
           font-size: 1.2em;
           padding-right: 1em;
+          color: $discount_detail_text_color;
         }
 
         &_end, &_start {
           font-size: 1.2em;
           font-weight: 600;
           letter-spacing: .1em;
+          color: $discount_detail_text_color;
         }
 
         @media screen and (min-width: 767.98px) {
@@ -195,7 +222,6 @@
           flex-direction: column;
           align-items: end;
           justify-content: flex-end;
-
         }
       }
 
@@ -212,7 +238,7 @@
           color: #ffffff;
           background: $ticket_button_bg_color;
           cursor: pointer;
-          box-shadow: 0 .4em .3em rgba(28,104,192, .25);
+          box-shadow: 0 .4em .3em rgba(28, 104, 192, .25);
 
           :hover {
             color: #ffffff;
@@ -233,6 +259,7 @@
     .rating__label {
       font-size: 1.4em;
       font-weight: 500;
+      color: $discount_detail_text_color;
     }
 
     .rating__icon {
@@ -252,10 +279,10 @@
     padding-bottom: 2em;
 
     .action__button {
-      font-size: 1em;
+      font-size: 1rem;
       letter-spacing: .08em;
       font-weight: 500;
-      min-width: 10em;
+      min-width: 8em;
       white-space: nowrap;
       overflow: hidden;
       border-radius: 1em;
@@ -263,7 +290,7 @@
       border: 1px solid $ticket_button_bg_color;
       background: $ticket_button_bg_color;
       color: $ticket_button_text_color;
-      box-shadow: 0 .4em .3em rgba(28,104,192, .25);
+      box-shadow: 0 .4em .3em rgba(28, 104, 192, .25);
       cursor: pointer;
       outline: none;
     }

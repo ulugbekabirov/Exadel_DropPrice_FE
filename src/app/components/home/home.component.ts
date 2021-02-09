@@ -1,12 +1,11 @@
-import { Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { forkJoin, Observable, Subject, Subscription } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { forkJoin, Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { DiscountsService } from 'src/app/services/discounts.service';
 import { UserService } from 'src/app/services/user.service';
 import { SORT_BY } from '../../../constants';
 import { ActiveUser, Discount, LocationCoords, Tag, Town } from '../../models';
 import { RefDirective } from '../../directives/ref.directive';
-import { TicketComponent } from '../ticket/ticket.component';
 import { TicketService } from '../../services/ticket.service';
 
 
@@ -50,6 +49,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       takeUntil(this.unsubscribe$)
     )
       .subscribe(user => {
+        if (!user) {
+          return;
+        }
         this.activeUser = user;
         this.activeData.sortBy = 'DistanceAsc';
         this.activeData.latitude = user.officeLatitude;

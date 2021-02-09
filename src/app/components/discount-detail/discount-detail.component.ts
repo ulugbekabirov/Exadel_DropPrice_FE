@@ -1,11 +1,10 @@
-import { ChangeDetectorRef, Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { DiscountsService } from '../../services/discounts.service';
 import { Discount } from '../../models';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { RefDirective } from '../../directives/ref.directive';
-import { TicketComponent } from '../ticket/ticket.component';
 import { TicketService } from '../../services/ticket.service';
 
 @Component({
@@ -41,14 +40,11 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
         return;
       }
       this.discount = discount;
-      console.log('discount', discount);
       this.rating = new Array(Number(this.discount.discountRating)).fill('star');
     });
   }
 
-  editDiscount(discountId: number): void {
-
-  }
+  editDiscount(discountId: number): void {}
 
   ticketHandler(discountId: number): void {
     this.ticketService.getTicket(discountId, this.refDir);

@@ -3,7 +3,7 @@
 .discount-card {
   font-size: .8rem;
   background: #ffffff;
-  border-radius: 0 0 .8em .8em;
+  border-radius: .8em;
   padding: 1em;
   box-shadow: 0 .6em .5em rgba(28,104,192, .25);
   cursor: pointer;
@@ -30,8 +30,15 @@
       will-change: transform;
       transition: transform .1s ease-in-out;
 
+      a {
+        color: $discount_card_text_color;
+        &:hover {
+          color: #000000;
+        }
+      }
+
       &:hover {
-        transform: scale(1.05, 1.05);
+        transform: scale(1.03, 1.03);
       }
     }
 
@@ -69,6 +76,7 @@
           font-size: 2.2em;
           font-weight: 500;
           font-style: italic;
+          color: $discount_card_text_color;
         }
 
         &__icon {
@@ -102,7 +110,8 @@
       transition: transform .1s ease-in-out;
 
       &:hover {
-        transform: scale(1.1, 1.1);
+        transform: scale(1.05, 1.05);
+        color: #000000;
       }
     }
 
@@ -120,12 +129,14 @@
       font-size: 1.5em;
       font-weight: 600;
       letter-spacing: .1em;
+      color: $discount_card_text_color;
     }
 
     :last-child {
       font-weight: 500;
       font-size: 1.2em;
       margin-left: .5em;
+      color: $discount_card_text_color;
     }
 
     @media screen and (min-width: 767.98px) {
@@ -163,25 +174,29 @@
       :first-child {
         font-size: 1em;
         font-weight: 500;
+        color: $discount_card_text_color;
       }
 
       :last-child {
         font-weight: 500;
         font-size: 1.2em;
+        color: $discount_card_text_color;
       }
     }
 
     &_action {
       .action__ticket {
-        font-size: 1.6em;
+        font-size: 1rem;
+        letter-spacing: .1em;
         font-weight: 700;
-        min-width: 10em;
+        min-width: 8em;
         white-space: nowrap;
         overflow: hidden;
         border-radius: 1em;
-        padding: .2em 1.2em;
+        padding: .2em 1em;
         border: 1px solid $ticket_button_bg_color;
         background: $ticket_button_bg_color;
+        box-shadow: 0 .3em .2em rgba(28,104,192, .25);
         color: $ticket_button_text_color;
         cursor: pointer;
         outline: none;

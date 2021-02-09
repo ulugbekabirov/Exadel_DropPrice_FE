@@ -91,7 +91,6 @@
     "CONFIRMATION_DATE": "Confirmation date",
     "CLOSE": "Close"
   },
-
   "NEW_DISCOUNT": {
     "NAME_VENDOR": "Vendor name*",
     "NAME_VENDOR_ERROR": "The vendor must be selected from the available options",
@@ -117,5 +116,17 @@
     "ADRESS_LABEL": "Enter location's adress*",
     "ADRESS_PLACEHOLDER": "Ex. 17 Kensington Street",
     "POINTS_TITLE": "Click to add location details:"
+  },
+  "DISCOUNT_DETAIL": {
+    "AMOUNT_LABEL": "discount",
+    "PROMO_CODE_LABEL": "Promo Code",
+    "ADDRESS_LABEL": "address",
+    "DISTANCE": "from you",
+    "DATES_LABEL": "validity period",
+    "START_DATE": "from",
+    "END_DATE": "to",
+    "ASSESSMENT_LABEL": "Estimate",
+    "EDIT_BUTTON_LABEL": "Edit",
+    "TICKET_BUTTON_LABEL": "Ticket"
   }
 }
