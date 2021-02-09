@@ -13,7 +13,7 @@ import {
   USER_INFO_ENDPOINT
 } from '../../constants';
 import { environment } from '../../environments/environment';
-
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +39,10 @@ export class ApiDataService {
   }
 
   getTags(options): Observable<any> {
-    return this.http.get<any>(`${environment.webApiUrl}${GET_TAGS_ENDPOINT}`, options);
+    return this.http.get<any>(`${environment.webApiUrl}${GET_TAGS_ENDPOINT}`, options).pipe(map(tags=>{
+      console.log(tags);
+      return tags;
+    }));
   }
 
   getTicket(discountId): Observable<any> {

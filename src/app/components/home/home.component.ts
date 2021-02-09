@@ -62,6 +62,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       takeUntil(this.unsubscribe$)
     )
       .subscribe(([towns, tags, discounts]) => {
+        console.log('теги',tags);
         this.towns = towns;
         this.tags = tags;
         this.discounts = discounts;
