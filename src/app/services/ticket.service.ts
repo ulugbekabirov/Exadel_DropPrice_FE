@@ -12,7 +12,7 @@ export class TicketService {
     private restApi: ApiDataService,
   ) { }
 
-  getTicket(discountId: number, ref, ): any {
+  getTicket(discountId: number, ref): any {
     const ticketFactory = this.resolver.resolveComponentFactory(TicketComponent);
     ref.containerRef.clear();
     const component = ref.containerRef.createComponent(ticketFactory);
