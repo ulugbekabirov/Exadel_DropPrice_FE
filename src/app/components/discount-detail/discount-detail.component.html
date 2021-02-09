@@ -1,5 +1,208 @@
-<div>
-  <p>discount-detail works!</p>
-  <pre>{{discount | json}}</pre>
-</div>
+<article class="discount-detail">
+
+  <section class="discount-detail__header">
+
+    <div class="discount-detail__header_rating">
+      <mat-icon class="rating__icon"
+                fxLayoutAlign="center center"
+                *ngFor="let star of rating"
+      >{{star ? 'star_rate' : 'star_border'}}
+      </mat-icon>
+    </div>
+
+    <h2 class="discount-detail__header_title">
+      {{discount?.discountName}}
+    </h2>
+
+    <mat-icon class="discount-detail__header_favourite"
+              fxLayoutAlign="center center"
+              matTooltip="Toggle Favourites"
+              [ngStyle]="{'color': discount?.isSaved ? '#FF6347' : '#A38D8B'}"
+              (click)="toggleFavorites(discount?.discountId)"
+    >
+      favorite
+    </mat-icon>
+  </section>
+
+  <section class="discount-detail__content">
+
+    <mat-card class="discount-content">
+      <h3 class="discount-content__vendor">
+        <a
+          [routerLink]="[discount?.vendorId]"
+          matTooltip="Vendor"
+        >
+          {{discount?.vendorName}}
+        </a>
+      </h3>
+
+      <div class="discount-content__description">
+        <p class="discount-content__description_text">
+          {{discount?.description}}
+        </p>
+      </div>
+      <p class="discount-content__amount"
+         fxLayout="row"
+         fxLayoutAlign="start center"
+         fxLayoutGap="1em"
+      >
+        <span class="discount-content__amount_label"
+              fxLayoutAlign="start center"
+              fxFlex="30"
+        >
+          {{ "DISCOUNT_DETAIL.AMOUNT_LABEL" | translate }}:
+        </span>
+        <span
+          fxLayoutAlign="start center"
+          fxFlex="70"
+        >
+          <span class="discount-content__amount_text">
+          {{discount?.discountAmount}}
+        </span>
+          <span class="discount-content__amount_symbol">
+          %
+        </span>
+        </span>
+      </p>
+
+      <p class="discount-content__promoCode"
+         fxLayout="row"
+         fxLayoutAlign="start center"
+         fxLayoutGap="1em"
+      >
+        <span class="discount-content__promoCode_label"
+              fxFlex="30"
+              fxLayoutAlign="start center"
+        >
+          {{ "DISCOUNT_DETAIL.PROMO_CODE_LABEL" | translate }}:
+        </span>
+        <span class="discount-content__promoCode_text"
+              fxLayoutAlign="start center"
+              fxFlex="70"
+        >
+          {{discount?.promoCode}}
+        </span>
+      </p>
+
+      <p class="discount-content__address"
+         fxLayout="row"
+         fxLayoutAlign="start center"
+         fxLayoutGap="1em"
+      >
+        <span class="discount-content__address_label"
+              fxFlex="20"
+        >
+          {{ "DISCOUNT_DETAIL.ADDRESS_LABEL" | translate }}
+        </span>
+        <span class="discount-content__address_text"
+              fxFlex="80"
+        >
+          {{discount?.address}}
+        </span>
+      </p>
+
+      <p class="discount-content__distance">
+        <span
+          fxFlex="20"
+        >{{ "DISCOUNT_DETAIL.DISTANCE" | translate }}: </span>
+        <span>{{discount?.distanceInMeters | metersToKilometers}}</span>
+      </p>
+
+      <div class="discount-content__date"
+           fxLayout="column"
+           fxLayoutAlign="center start"
+           fxLayoutGap="1em"
+      >
+        <p>{{ "DISCOUNT_DETAIL.DATES_LABEL" | translate }}</p>
+        <div fxLayoutAlign="start center"
+             fxFill
+        >
+          <span class="discount-content__date_label"
+                fxFlex="20"
+          >
+            {{ "DISCOUNT_DETAIL.START_DATE" | translate }}:
+          </span>
+          <span class="discount-content__date_start">
+          {{discount?.startDate | date:"dd.MM.yyyy"}}
+        </span>
+        </div>
+        <div fxLayoutAlign="start center"
+             fxFill
+        >
+          <span class="discount-content__date_label"
+                fxFlex="20"
+          >
+            {{ "DISCOUNT_DETAIL.END_DATE" | translate }}:
+          </span>
+          <span class="discount-content__date_end">
+          {{discount?.endDate | date:"dd.MM.yyyy"}}
+        </span>
+        </div>
+      </div>
+
+      <mat-chip-list class="discount-content__tags">
+        <mat-chip *ngFor="let tag of discount?.tags"
+                  class="discount-content__tags_tag"
+        >
+          # {{tag}}
+        </mat-chip>
+      </mat-chip-list>
+
+    </mat-card>
+
+  </section>
+
+  <section class="discount-detail__rating">
+    <span class="rating__label">
+      {{ "DISCOUNT_DETAIL.ASSESSMENT_LABEL" | translate }}
+    </span>
+    <mat-icon class="rating__icon"
+              fxLayoutAlign="center center"
+              matTooltip="Rate Discount"
+    >{{'star_rate'}}
+    </mat-icon>
+    <mat-icon class="rating__icon"
+              fxLayoutAlign="center center"
+              matTooltip="Rate Discount"
+    >{{'star_rate'}}
+    </mat-icon>
+    <mat-icon class="rating__icon"
+              fxLayoutAlign="center center"
+              matTooltip="Rate Discount"
+    >{{'star_rate'}}
+    </mat-icon>
+    <mat-icon class="rating__icon"
+              fxLayoutAlign="center center"
+              matTooltip="Rate Discount"
+    >{{'star_border'}}
+    </mat-icon>
+    <mat-icon class="rating__icon"
+              fxLayoutAlign="center center"
+              matTooltip="Rate Discount"
+    >{{'star_border'}}
+    </mat-icon>
+  </section>
+
+  <section class="discount-detail__actions">
+    <button *appVerifyUserRoles='["Moderator"]'
+            class="action__button"
+            mat-flat-button
+            matTooltip="Edit Discount"
+            routerLink="edit"
+    >
+      {{ "DISCOUNT_DETAIL.EDIT_BUTTON_LABEL" | translate }}
+    </button>
+    <button class="action__button"
+            mat-flat-button
+            matTooltip="Take Ticket"
+            (click)="ticketHandler(discount?.discountId)"
+    >
+      {{ "DISCOUNT_DETAIL.TICKET_BUTTON_LABEL" | translate }}
+    </button>
+  </section>
+
+</article>
+<ng-template appRef></ng-template>
+
+
 

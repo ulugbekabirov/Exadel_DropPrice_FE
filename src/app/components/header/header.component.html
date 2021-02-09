@@ -15,12 +15,14 @@
   >
     <a *appVerifyUserRoles='["Admin"]'
        routerLink="/statistics"
+       routerLinkActive="active_link"
        mat-stroked-button
     >
       {{ "HEADER.ADMIN_PANEL_LINK_TITLE" | translate }}
     </a>
     <a *appVerifyUserRoles='["Moderator"]'
        routerLink="/add-new"
+       routerLinkActive="active_link"
        mat-stroked-button
     >
       {{ "HEADER.MODERATOR_PANEL_LINK_TITLE" | translate }}
@@ -33,7 +35,7 @@
                 class="profile__icon"
                 fxLayoutAlign="center center"
                 routerLink="/user-profile"
-                routerLinkActive="acive"
+                routerLinkActive="active_link"
                 matTooltip="User Profile"
       >person
       </mat-icon>
