@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DiscountsService } from '../../services/discounts.service';
-import { Vendor } from '../../models';
-import { Observable, Subscription } from 'rxjs';
+import { DiscountsService } from '../../../services/discounts.service';
+import { Vendor } from '../../../models';
+import { Observable, Subject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-vendor-detail',
@@ -12,7 +12,7 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class VendorDetailComponent implements OnInit, OnDestroy {
   vendor: Vendor;
-  subscription: Subscription;
+  private unsubscribe$ = new Subject<void>();
 
   constructor(
     private router: Router,
@@ -22,18 +22,23 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription = this.route.paramMap
+    this.route.paramMap
       .pipe(
         switchMap((params): Observable<Vendor> => {
           return this.discountsService.getVendorById(+params.get('id'));
-        })
-      ).subscribe(data => {
-        this.vendor = data;
+        }),
+        takeUntil(this.unsubscribe$)
+      ).subscribe((vendor: Vendor) => {
+        if (!vendor) {
+          return;
+        }
+        this.vendor = vendor;
       });
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
 }

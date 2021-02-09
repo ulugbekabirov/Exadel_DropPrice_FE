@@ -35,7 +35,7 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
           return this.discountsService.getDiscountById(+params.get('id'));
         }),
         takeUntil(this.unsubscribe$)
-      ).subscribe(discount => {
+      ).subscribe((discount: Discount) => {
       if (!discount) {
         return;
       }
