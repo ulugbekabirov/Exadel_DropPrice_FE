@@ -196,16 +196,30 @@
                 formControlName="adress"
               />
             </mat-form-field>
-            <mat-icon (click)="openDialog(i)">add_location_alt</mat-icon>
+            <mat-icon
+              [ngStyle]="{
+                color:
+                  !pointOfSalesForms.value[i].latitude ||
+                  !pointOfSalesForms.value[i].longitude
+                    ? 'red'
+                    : 'black'
+              }"
+              (click)="openDialog(i)"
+              >add_location_alt</mat-icon
+            >
             <mat-icon (click)="deletePoint(i)">delete</mat-icon>
           </div>
         </div>
-
         <mat-icon (click)="addPoint()">add</mat-icon>
+        <div *ngIf="this.coordinateIsEmpty" class="test">
+          <mat-error>{{
+            "NEW_DISCOUNT.EMPTYCOORDINATES" | translate
+          }}</mat-error>
+        </div>
         <button
           mat-flat-button
           color="primary"
-          [disabled]="!newDiscountForm.valid"
+          [disabled]="!newDiscountForm.valid || this.coordinateIsEmpty"
           type="submit"
         >
           {{ "NEW_DISCOUNT.BTN_TITLE" | translate }}

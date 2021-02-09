@@ -116,6 +116,7 @@
     "NAME_LABEL": "Enter location's name*",
     "ADRESS_LABEL": "Enter location's adress*",
     "ADRESS_PLACEHOLDER": "Ex. 17 Kensington Street",
-    "POINTS_TITLE": "Click to add location details:"
+    "POINTS_TITLE": "Click to add location details:",
+    "EMPTYCOORDINATES": "Please, put a point on the map, click adding location icon"
   }
 }

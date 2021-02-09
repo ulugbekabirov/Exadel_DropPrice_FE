@@ -4,20 +4,29 @@
   fxLayout.xs="column"
   fxLayoutAlign.xs="center center"
 >
-  <mat-icon (click)="close()">close</mat-icon>
-  <agm-map
-    [latitude]="this.coordinate.latitude"
-    [longitude]="this.coordinate.longitude"
-    [zoom]="zoom"
-    (mapClick)="onChoseLocation($event)"
-  >
-    <agm-marker
+  <mat-icon mat-dialog-close (click)="close()">close</mat-icon>
+  <div mat-dialog-content>
+    <agm-map
       [latitude]="this.coordinate.latitude"
       [longitude]="this.coordinate.longitude"
-    ></agm-marker>
-  </agm-map>
+      [zoom]="zoom"
+      (mapClick)="onChoseLocation($event)"
+    >
+      <agm-marker
+        [latitude]="this.coordinate.latitude"
+        [longitude]="this.coordinate.longitude"
+      ></agm-marker>
+    </agm-map>
+  </div>
 
-  <button mat-raised-button color="accent" (click)="getCoordinats()">
-    Add point
-  </button>
+  <mat-dialog-actions>
+    <button
+      mat-raised-button
+      color="accent"
+      [mat-dialog-close]="true"
+      (click)="getCoordinats()"
+    >
+      Add point
+    </button>
+  </mat-dialog-actions>
 </div>

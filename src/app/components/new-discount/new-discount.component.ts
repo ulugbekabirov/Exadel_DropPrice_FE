@@ -1,3 +1,4 @@
+import { logging } from 'protractor';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import {
   AbstractControl,
@@ -29,7 +30,7 @@ export interface Tag {
 })
 export class NewDiscountComponent implements OnInit {
   newDiscountForm: FormGroup;
-  hide = true;
+  coordinateIsEmpty = true;
   tagsArray: Tag[] = [];
   visible = true;
   selectable = true;
@@ -145,7 +146,6 @@ export class NewDiscountComponent implements OnInit {
   }
 
   addPoint() {
-    this.hide = false;
     const point = this.fb.group({
       name: ['', [Validators.required]],
       adress: ['', [Validators.required]],
@@ -153,21 +153,31 @@ export class NewDiscountComponent implements OnInit {
     this.pointOfSalesForms.push(point);
   }
 
-  deletePoint(i) {
-    this.pointOfSalesForms.removeAt(i);
+  deletePoint(currentSaleObj) {
+    this.pointOfSalesForms.removeAt(currentSaleObj);
+    this.coordinateIsEmpty = true;
   }
 
-  openDialog(i) {
+  openDialog(currentSaleObj) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.minHeight = '800px';
     dialogConfig.minWidth = '100%';
     dialogConfig.direction = 'rtl';
+
+    console.log(this.pointOfSalesForms);
+    dialogConfig.data = {
+      latitude: this.pointOfSalesForms.value[currentSaleObj].latitude,
+      longitude: this.pointOfSalesForms.value[currentSaleObj].longitude,
+    };
     this.dialog.open(MapComponent, dialogConfig);
     const dialogRef = this.dialog.open(MapComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
-      console.log(Object.assign(this.pointOfSalesForms.value[i], data));
+      console.log(
+        Object.assign(this.pointOfSalesForms.value[currentSaleObj], data)
+      );
     });
+    this.coordinateIsEmpty = false;
   }
 
   submit(): void {
