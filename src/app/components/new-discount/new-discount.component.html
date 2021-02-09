@@ -205,7 +205,7 @@
         <button
           mat-flat-button
           color="primary"
-          [disabled]="newDiscountForm.invalid"
+          [disabled]="!newDiscountForm.valid"
           type="submit"
         >
           {{ "NEW_DISCOUNT.BTN_TITLE" | translate }}

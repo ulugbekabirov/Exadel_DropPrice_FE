@@ -84,6 +84,7 @@ export class NewDiscountComponent implements OnInit {
         startWith(''),
         map((name) => (name ? this._filter(name) : this.vendors.slice()))
       );
+    this.addPoint();
   }
 
   private requireMatch(control: AbstractControl): ValidationErrors | null {
@@ -159,38 +160,29 @@ export class NewDiscountComponent implements OnInit {
   openDialog(i) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
-
-    dialogConfig.data = {
-      id: i,
-    };
-
     dialogConfig.minHeight = '800px';
-    dialogConfig.minWidth = '1000px';
+    dialogConfig.minWidth = '100%';
+    dialogConfig.direction = 'rtl';
     this.dialog.open(MapComponent, dialogConfig);
-    console.log(`ADD location to ${i} object`);
     const dialogRef = this.dialog.open(MapComponent, dialogConfig);
-    dialogRef
-      .afterClosed()
-      .subscribe((data) =>
-        console.log(
-          'Dialog output:',
-          Object.assign(this.pointOfSalesForms[i], data)
-        )
-      );
-    console.log(this.pointOfSalesForms.value);
-    console.log(this.pointOfSalesForms[0]);
-    console.log(dialogConfig.data);
+    dialogRef.afterClosed().subscribe((data) => {
+      console.log(Object.assign(this.pointOfSalesForms.value[i], data));
+    });
   }
 
   submit(): void {
+    // if (!this.pointOfSalesForms.value[0].hasOwnProperty('longitude')) {
+    // }
     this.newDiscountForm.value;
     console.log('Form Submitted!', this.newDiscountForm.value);
+
     this.newDiscountForm.reset();
 
     for (const control in this.newDiscountForm.controls) {
       this.newDiscountForm.controls[control].setErrors(null);
     }
 
+    this.pointOfSalesForms.controls = [];
     this.tags.controls = [];
     console.log(this.tags);
   }

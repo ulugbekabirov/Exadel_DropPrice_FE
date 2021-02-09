@@ -4,6 +4,7 @@
   fxLayout.xs="column"
   fxLayoutAlign.xs="center center"
 >
+  <mat-icon (click)="close()">close</mat-icon>
   <agm-map
     [latitude]="this.coordinate.latitude"
     [longitude]="this.coordinate.longitude"
@@ -19,5 +20,4 @@
   <button mat-raised-button color="accent" (click)="getCoordinats()">
     Add point
   </button>
-  <button class="mat-raised-button" (click)="close()">Close</button>
 </div>

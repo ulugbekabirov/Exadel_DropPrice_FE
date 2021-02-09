@@ -9,7 +9,6 @@ import { SalesCoordinate } from '../../models/sales-coordinate';
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent {
-  @Output() data: EventEmitter<any> = new EventEmitter<any>();
   zoom = 13;
   coordinate: SalesCoordinate = {
     latitude: 53.9,
@@ -30,9 +29,6 @@ export class MapComponent {
       latitude: this.coordinate.latitude,
       longitude: this.coordinate.longitude,
     };
-    this.data.emit(this.coordinate);
-    console.log(this.coordinate);
-
     this.dialogRef.close(this.coordinate);
   }
 
