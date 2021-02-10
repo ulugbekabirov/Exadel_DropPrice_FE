@@ -49,7 +49,7 @@
           "NAME": "Алфавит - А до Я"
         },
         "ALPHABET_DESC": {
-          "NAME": "Алфавит - А до Я"
+          "NAME": "Алфавит - Я до А"
         }
       },
       "LOCATION_SORT": {
@@ -124,5 +124,17 @@
     "ADD_LOCATION": "Добавить локацию",
     "OPEN_MAP": "Открыть карту",
     "DELETE_LOCATION": "Удалить локацию"
+  },
+  "DISCOUNT_DETAIL": {
+    "AMOUNT_LABEL": "Скидка",
+    "PROMO_CODE_LABEL": "Промо Код",
+    "ADDRESS_LABEL": "адрес",
+    "DISTANCE": "от вас",
+    "DATES_LABEL": "срок действия",
+    "START_DATE": "от",
+    "END_DATE": "до",
+    "ASSESSMENT_LABEL": "Оценить",
+    "EDIT_BUTTON_LABEL": "Редактировать",
+    "TICKET_BUTTON_LABEL": "Талон"
   }
 }

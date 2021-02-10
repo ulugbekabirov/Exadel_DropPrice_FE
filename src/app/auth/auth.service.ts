@@ -6,6 +6,7 @@ import { AuthInfo } from '../models';
 import { ApiDataService } from '../services/api-data.service';
 import { KEY_AUTH_TOKEN } from '../../constants';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -18,6 +19,7 @@ export class AuthService {
   constructor(
     private restApi: ApiDataService,
     private userService: UserService,
+    private router: Router,
   ) {
     this.authUserSubject = new BehaviorSubject<AuthInfo>(JSON.parse(localStorage.getItem(KEY_AUTH_TOKEN)));
     this.authUser = this.authUserSubject.asObservable();
@@ -48,5 +50,6 @@ export class AuthService {
     this.userService.logout();
     localStorage.removeItem(KEY_AUTH_TOKEN);
     this.authUserSubject.next(null);
+    this.router.navigate(['/login']);
   }
 }
