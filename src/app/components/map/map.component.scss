@@ -1,12 +1,18 @@
-agm-map{
-  height: 600px;
-  width: 100%;
+.map-wrapper{
+  max-height: 100%;
+  max-width: 100%;
+
+  agm-map{
+    height: 600px;
+    width: 100%;
+  }
+  
+  mat-icon{
+    cursor: pointer;
+  }
+  
+  button {
+    margin-top: 10px;
+  }  
 }
 
-mat-icon{
-  cursor: pointer;
-}
-
-button {
-  margin-top: 10px;
-}

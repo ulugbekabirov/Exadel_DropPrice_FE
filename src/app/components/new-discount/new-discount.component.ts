@@ -1,4 +1,3 @@
-import { logging } from 'protractor';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import {
   AbstractControl,
@@ -170,7 +169,7 @@ export class NewDiscountComponent implements OnInit {
       latitude: this.pointOfSalesForms.value[currentSaleObj].latitude,
       longitude: this.pointOfSalesForms.value[currentSaleObj].longitude,
     };
-    this.dialog.open(MapComponent, dialogConfig);
+
     const dialogRef = this.dialog.open(MapComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
       console.log(
@@ -181,8 +180,6 @@ export class NewDiscountComponent implements OnInit {
   }
 
   submit(): void {
-    // if (!this.pointOfSalesForms.value[0].hasOwnProperty('longitude')) {
-    // }
     this.newDiscountForm.value;
     console.log('Form Submitted!', this.newDiscountForm.value);
 

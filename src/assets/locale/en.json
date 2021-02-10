@@ -118,5 +118,9 @@
     "ADRESS_PLACEHOLDER": "Ex. 17 Kensington Street",
     "POINTS_TITLE": "Click to add location details:",
     "EMPTYCOORDINATES": "Please, put a point on the map, click adding location icon"
+  },
+
+  "MAP": {
+    "ADD_POINT_BTN": "Add point"
   }
 }

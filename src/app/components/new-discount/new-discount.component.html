@@ -3,7 +3,6 @@
   fxLayout="column"
   fxLayoutAlign="center center"
 >
-  <div>{{ this.newDiscountForm.value | json }}</div>
   <mat-card
     class="new-discount"
     fxLayout.xs="column"
@@ -211,7 +210,7 @@
           </div>
         </div>
         <mat-icon (click)="addPoint()">add</mat-icon>
-        <div *ngIf="this.coordinateIsEmpty" class="test">
+        <div *ngIf="coordinateIsEmpty" class="test">
           <mat-error>{{
             "NEW_DISCOUNT.EMPTYCOORDINATES" | translate
           }}</mat-error>
@@ -219,7 +218,7 @@
         <button
           mat-flat-button
           color="primary"
-          [disabled]="!newDiscountForm.valid || this.coordinateIsEmpty"
+          [disabled]="!newDiscountForm.valid || coordinateIsEmpty"
           type="submit"
         >
           {{ "NEW_DISCOUNT.BTN_TITLE" | translate }}
