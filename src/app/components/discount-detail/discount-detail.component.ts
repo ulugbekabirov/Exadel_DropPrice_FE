@@ -1,9 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { DiscountsService } from '../../services/discounts.service';
 import { Discount } from '../../models';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { RefDirective } from '../../directives/ref.directive';
+import { TicketService } from '../../services/ticket.service';
 
 @Component({
   selector: 'app-discount-detail',
@@ -13,27 +15,50 @@ import { Observable, Subscription } from 'rxjs';
 export class DiscountDetailComponent implements OnInit, OnDestroy {
 
   discount: Discount;
-  subscription: Subscription;
-  activeUser;
+  private unsubscribe$ = new Subject<void>();
+  rating;
+
+  @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private discountsService: DiscountsService
+    private discountsService: DiscountsService,
+    private ticketService: TicketService,
   ) {
   }
 
   ngOnInit(): void {
-    this.subscription = this.route.paramMap
+    this.route.paramMap
       .pipe(
         switchMap((params): Observable<Discount> => {
           return this.discountsService.getDiscountById(+params.get('id'));
-        })
-      ).subscribe(data => this.discount = data);
+        }),
+        takeUntil(this.unsubscribe$)
+      ).subscribe(discount => {
+      if (!discount) {
+        return;
+      }
+      this.discount = discount;
+      this.rating = new Array(Number(this.discount.discountRating)).fill('star');
+    });
+  }
+
+  ticketHandler(discountId: number): void {
+    this.ticketService.getTicket(discountId, this.refDir);
+  }
+
+  toggleFavorites(discountId: number): void {
+    this.discountsService.updateIsSavedDiscount(discountId).pipe(
+      takeUntil(this.unsubscribe$)
+    )
+      .subscribe(resp => {
+        this.discount = {...this.discount, isSaved: resp.isSaved};
+      });
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
-
 }

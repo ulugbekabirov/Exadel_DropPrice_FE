@@ -135,16 +135,16 @@ export class NewDiscountComponent implements OnInit {
       this.tags.value.splice(index, 1);
     }
 
-    this.tags.controls.forEach((item, index) => {
+    this.tags.controls.forEach((item, indx) => {
       if (item.value === tag.value) {
-        this.tags.controls.splice(index, 1);
+        this.tags.controls.splice(indx, 1);
       }
     });
     console.log(this.tags);
     console.log(this.tagsArray);
   }
 
-  addPoint() {
+  addPoint(): void {
     const point = this.fb.group({
       name: ['', [Validators.required]],
       adress: ['', [Validators.required]],
@@ -152,12 +152,12 @@ export class NewDiscountComponent implements OnInit {
     this.pointOfSalesForms.push(point);
   }
 
-  deletePoint(currentSaleObj) {
+  deletePoint(currentSaleObj): void {
     this.pointOfSalesForms.removeAt(currentSaleObj);
     this.coordinateIsEmpty = true;
   }
 
-  openDialog(currentSaleObj) {
+  openDialog(currentSaleObj): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.minHeight = '800px';
@@ -180,7 +180,6 @@ export class NewDiscountComponent implements OnInit {
   }
 
   submit(): void {
-    this.newDiscountForm.value;
     console.log('Form Submitted!', this.newDiscountForm.value);
 
     this.newDiscountForm.reset();
@@ -238,7 +237,7 @@ export class NewDiscountComponent implements OnInit {
     return this.pointOfSalesForms.get('adress');
   }
 
-  get pointOfSalesForms() {
+  get pointOfSalesForms(): any {
     return this.newDiscountForm.get('pointsOfSales') as FormArray;
   }
 }

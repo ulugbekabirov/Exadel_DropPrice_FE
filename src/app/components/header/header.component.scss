@@ -6,8 +6,8 @@
   min-height: $header_height;
   align-items: center;
   background: $bg_header_color;
-  padding: .5em 1em .5em 3em;
   position: fixed;
+  padding: 0 .5em 0 1em;
   z-index: 99;
   top: 0;
   left: 0;
@@ -23,9 +23,9 @@
   }
 
   &__hamburger {
-    height: $header_height / 2;
-    width: $header_height / 2;
-    border: 2px solid white;
+    height: $header_height / 1.5;
+    width: $header_height / 1.5;
+    border: .18em solid white;
     border-radius: 50%;
     position: relative;
     display: none;
@@ -41,12 +41,12 @@
       height: 100%;
       width: 100%;
       border-radius: 50%;
-      border: 2px solid white;
+      border: .18em solid white;
       animation: puls 3s ease infinite;
     }
 
     .bar {
-      height: 2px;
+      height: .16em;
       width: 1.1em;
       position: relative;
       background-color: white;
@@ -118,11 +118,10 @@
 
     &.active {
       left: 0;
-      color: tomato;
     }
 
     a {
-      color: #ffffff;
+      color: $header_link_color;
       font-weight: 600;
       font-style: normal;
       font-size: 1.3em;
@@ -135,8 +134,8 @@
 
       @media screen and (min-width: 700px) {
         font-weight: 500;
-        font-size: 1.2em;
-        letter-spacing: initial;
+        font-size: 1em;
+        letter-spacing: inherit;
         border-right: 1px solid white;
         margin: 0;
       }
@@ -156,7 +155,7 @@
         padding: .5em .1em;
 
         &:hover {
-          color: burlywood;
+          color: $header_profile_color_hover;
         }
 
         @media screen and (min-width: 700px) {
@@ -166,7 +165,7 @@
       }
 
       &__language_option {
-        color: white;
+        color: $header_link_color;
         background: $bg_header_color;
         border-radius: 3px;
         border: 3px solid white;
@@ -175,15 +174,19 @@
       }
 
       &__icon {
-        color: white;
+        color: $header_link_color;
         font-size: 2.4em;
         cursor: pointer;
         outline: none;
 
         &:hover {
-          color: burlywood;
+          color: $header_profile_color_hover;
         }
       }
+    }
+
+    .active_link {
+      color: $header_link_active;
     }
 
     @media screen and (min-width: 700px) {

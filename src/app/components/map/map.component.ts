@@ -34,7 +34,7 @@ export class MapComponent {
     this.dialogRef.close(this.coordinate);
   }
 
-  close() {
+  close(): void {
     this.dialogRef.close();
   }
 }
