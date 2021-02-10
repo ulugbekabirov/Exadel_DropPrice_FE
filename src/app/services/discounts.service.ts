@@ -55,7 +55,14 @@ export class DiscountsService {
     return this.restApi.getVendorById(vendorId);
   }
 
-  getVendorsDiscounts(vendorId, options): Observable<any> {
+  getVendorsDiscounts(vendorId, params): Observable<any> {
+    const paramsObj = {};
+    Object.keys({...params}).filter(value => typeof params[value] !== 'undefined').forEach(param => {
+      paramsObj[param] = params[param];
+    });
+    const options: { params: HttpParams } = {
+      params: new HttpParams({fromObject: paramsObj})
+    };
     return this.restApi.getVendorsDiscounts(vendorId, options);
   }
 

@@ -127,6 +127,7 @@
     "END_DATE": "to",
     "ASSESSMENT_LABEL": "Assess",
     "EDIT_BUTTON_LABEL": "Edit",
+    "ARCHIVE_BUTTON_LABEL": "Archive",
     "TICKET_BUTTON_LABEL": "Ticket"
   }
 }

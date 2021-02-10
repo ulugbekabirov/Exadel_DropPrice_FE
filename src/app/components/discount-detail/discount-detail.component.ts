@@ -61,4 +61,10 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
+
+  archiveDiscount(discountId: number): void {
+    this.discountsService.putDiscountInArchive(discountId).pipe(
+    )
+      .subscribe(x => console.log('xxx', x));
+  }
 }
