@@ -130,7 +130,7 @@ export class NewDiscountComponent implements OnInit {
     });
   }
 
-  addPoint() {
+  addPoint() :void {
     this.hide = false;
     const point = this.fb.group({
       name: ['', [Validators.required]],
@@ -139,11 +139,11 @@ export class NewDiscountComponent implements OnInit {
     this.pointOfSalesForms.push(point);
   }
 
-  deletePoint(i) {
+  deletePoint(i) :void {
     this.pointOfSalesForms.removeAt(i);
   }
 
-  addLocation(i) {
+  addLocation(i) :void {
     console.log(`ADD location to ${i} object`);
   }
 

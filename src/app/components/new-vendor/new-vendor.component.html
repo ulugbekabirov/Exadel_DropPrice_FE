@@ -6,13 +6,13 @@
         (ngSubmit)="onSubmit()"
         fxLayout="column"
         fxLayoutAlign="space-between"
-        fxLayoutGap.xs="5px"
         class="new-vendor-form"
       >
         <div  fxLayout="row" 
               fxLayoutGap="30px"
               fxLayoutAlign="center center"
-              fxLayout.xs="column" >
+              fxLayout.lt-md="column"
+              fxLayoutGap.xs="5px" >
           <mat-form-field>
             <mat-label>{{ 
               "NEW_VENDOR_FORM.NAME_LABEL" | translate 
@@ -75,8 +75,8 @@
       
         <div fxLayout="row"
              fxLayoutGap="25px"
-             fxLayout.sm="column"
-             fxLayoutGap.xs="0"
+             fxLayout.lt-md="column"
+             fxLayoutGap.xs="5px"
              formGroupName="social_network"
              class="new-vendor-form__social-network"
              >

@@ -17,6 +17,7 @@
              fxLayoutGap="30px"
              fxLayoutAlign="center center"
              fxLayout.xs="column" 
+             fxLayoutGap.xs="5px"
         >
           <mat-form-field class="full-width">
             <mat-label>{{ 
@@ -144,14 +145,15 @@
 
         </div>
 
-        <mat-form-field class="chip-list" fxLayout="row" formArrayName="tags">
+        <mat-form-field class="chip-list" 
+                        fxLayout="row" 
+                        formArrayName="tags">
           <mat-label>{{ "NEW_DISCOUNT_FORM.LABEL_TAGS" | translate }}</mat-label>
-          <input
-            placeholder="{{ 'NEW_DISCOUNT_FORM.PLACEHOLDER_NEW_TAG' | translate }}"
-            [matChipInputFor]="chipList"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            [matChipInputAddOnBlur]="addOnBlur"
-            (matChipInputTokenEnd)="add($event)"
+          <input placeholder="{{ 'NEW_DISCOUNT_FORM.PLACEHOLDER_NEW_TAG' | translate }}"
+                 [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event)"
           />
           <mat-chip-list #chipList aria-label="Tag selection">
             <mat-chip
