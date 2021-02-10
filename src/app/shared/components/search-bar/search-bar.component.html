@@ -1,7 +1,9 @@
 <div class="search">
   <form class="example-form">
     <mat-form-field class="search-input">
-      <mat-label>{{ "MAIN_PAGE.SEARCH" | translate }}</mat-label>
+      <mat-label class="searchLable">{{
+        "MAIN_PAGE.SEARCH" | translate
+      }}</mat-label>
       <input
         matInput
         class="form-control"
@@ -11,17 +13,22 @@
         id="userQuestions"
         (ngModelChange)="userNext($event)"
       />
+      <mat-icon class="search__icon" fxLayoutAlign="center center"
+        >{{ "search" }}
+      </mat-icon>
     </mat-form-field>
   </form>
-  {{ tags }}
-  <mat-chip-list selectable multiple aria-label="Fish selection">
-    <mat-chip
-      #chips="matChip"
-      *ngFor="let newTags of tags"
-      (click)="getCardsByTag(newTags?.tagName, chips)"
-    >
-      <mat-icon *ngIf="chips.selected">check</mat-icon>
-      {{ newTags?.tagName }}
-    </mat-chip>
-  </mat-chip-list>
+  <div class="list-wrapper">
+    <mat-chip-list selectable multiple aria-label="Fish selection">
+      <mat-chip
+        class="ChipsStyle"
+        #chips="matChip"
+        *ngFor="let newTags of tags"
+        (click)="getCardsByTag(newTags?.tagName, chips)"
+      >
+        <mat-icon *ngIf="chips.selected">check</mat-icon>
+        {{ newTags?.tagName }}
+      </mat-chip>
+    </mat-chip-list>
+  </div>
 </div>

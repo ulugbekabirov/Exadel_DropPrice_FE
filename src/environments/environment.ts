@@ -6,8 +6,8 @@ export const environment = {
   production: false,
   locales: ['en', 'ru'],
   defaultLocale: 'ru',
-  identityUrl: 'http://localhost:44360/api/',
-  webApiUrl: 'http://localhost:44395/api/',
+  identityUrl: 'https://localhost:44360/api/',
+  webApiUrl: 'https://localhost:44395/api/',
   googleMapApi: 'AIzaSyAV9lV_tJu_h60k4vDfpcSjaVMHfw2aEqw',
 };
 

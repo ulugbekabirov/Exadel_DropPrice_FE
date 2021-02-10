@@ -1,3 +1,5 @@
+@import "src/variables";
+
 .example-form {
   text-align: center;
   min-width: 150px;
@@ -6,7 +8,12 @@
   margin: 0 auto;
 
   .search-input {
+    position: relative;
     width: 100%;
+  }
+  .searchLable {
+    font-size: 26px;
+    padding: 20px 0;
   }
 }
 .example-form .dropdown {
@@ -15,7 +22,7 @@
 }
 .search {
   //margin-top: 132px;
-  padding: 20px 100px;
+  padding: 20px 30px;
 }
 mat-icon {
   height: 20px;
@@ -23,3 +30,31 @@ mat-icon {
   font-size: 20px;
   margin-right: 5px;
 }
+.mat-standard-chip {
+  padding: 20px 30px;
+}
+.ChipsStyle {
+  background-color: white;
+}
+.list-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.form-control {
+  margin-top: 0.5em;
+}
+.list-wrapper {
+  height: 120px;
+  overflow-y: auto;
+  padding: 0px 4px;
+}
+.search__icon {
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+  font-size: 35px;
+  color: $discount_card_text_color;
+}
+// <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+// <path d="M9.81248 0.46814C12.3265 0.46814 14.7376 1.46683 16.5153 3.24452C18.293 5.02221 19.2916 7.43327 19.2916 9.94731C19.2916 12.2952 18.4312 14.4536 17.0166 16.1161L17.4104 16.5098H18.5625L25.8541 23.8015L23.6666 25.989L16.375 18.6973V17.5452L15.9812 17.1515C14.2612 18.6197 12.0739 19.4263 9.81248 19.4265C7.29845 19.4265 4.88738 18.4278 3.1097 16.6501C1.33201 14.8724 0.333313 12.4613 0.333313 9.94731C0.333313 7.43327 1.33201 5.02221 3.1097 3.24452C4.88738 1.46683 7.29845 0.46814 9.81248 0.46814ZM9.81248 3.38481C6.16665 3.38481 3.24998 6.30147 3.24998 9.94731C3.24998 13.5931 6.16665 16.5098 9.81248 16.5098C13.4583 16.5098 16.375 13.5931 16.375 9.94731C16.375 6.30147 13.4583 3.38481 9.81248 3.38481Z" fill="#655B5A"/>
+// </svg>

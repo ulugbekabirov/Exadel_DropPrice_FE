@@ -5,7 +5,6 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { Tag } from '../../../models';
 
-
 export class SearchBar {
   constructor(
     public name: string,
