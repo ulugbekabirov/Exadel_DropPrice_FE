@@ -9,8 +9,7 @@ export class SearchBar {
   constructor(
     public name: string,
     public tag: string[] = [],
-  ) {
-  }
+  ) {}
 }
 
 @Component({
