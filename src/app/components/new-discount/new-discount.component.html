@@ -194,66 +194,69 @@
 
         <div formArrayName="pointsOfSales">
           <div
-            class="points"
             *ngFor="let point of pointOfSalesForms.controls; let i = index"
             [formGroupName]="i"
-            fxLayoutAlign="space-between"
-            fxLayout.xs="column"
           >
-            <mat-form-field class="points__name">
-              <mat-label>{{
-                "NEW_DISCOUNT_FORM.NAME_LABEL" | translate
-              }}</mat-label>
-              <input matInput formControlName="name" />
-            </mat-form-field>
+            <div
+              class="points"
+              fxLayoutAlign="start center"
+              fxLayout.xs="center center"
+            >
+              <mat-form-field class="point__name">
+                <mat-label>{{
+                  "NEW_DISCOUNT_FORM.NAME_LABEL" | translate
+                }}</mat-label>
+                <input matInput formControlName="name" />
+              </mat-form-field>
 
-            <mat-form-field class="points__address">
-              <mat-label>{{
-                "NEW_DISCOUNT_FORM.ADDRESS_LABEL" | translate
-              }}</mat-label>
-              <input
-                matInput
-                placeholder="{{
-                  'NEW_DISCOUNT_FORM.ADDRESS_PLACEHOLDER' | translate
-                }}"
-                formControlName="address"
-              />
-            </mat-form-field>
-
-            <div class="points__icons" fxLayoutGap="10px">
-              <mat-icon
-                [ngStyle]="{
-                  color:
-                    !pointOfSalesForms.value[i].latitude ||
-                    !pointOfSalesForms.value[i].longitude
-                      ? 'red'
-                      : 'black'
-                }"
-                (click)="openDialog(i)"
-                matTooltip="{{ 'NEW_DISCOUNT_FORM.OPEN_MAP' | translate }}"
-                aria-label="Icon that displays a tooltip when focused or hovered over"
-                >add_location_alt >add_location_alt</mat-icon
-              >
-              <mat-icon
-                (click)="deletePoint(i)"
-                matTooltip="{{
-                  'NEW_DISCOUNT_FORM.DELETE_LOCATION' | translate
-                }}"
-                aria-label="Icon that displays a tooltip when focused or hovered over"
-                >delete</mat-icon
-              >
+              <mat-form-field class="point__address">
+                <mat-label>{{
+                  "NEW_DISCOUNT_FORM.ADDRESS_LABEL" | translate
+                }}</mat-label>
+                <input
+                  matInput
+                  placeholder="{{
+                    'NEW_DISCOUNT_FORM.ADDRESS_PLACEHOLDER' | translate
+                  }}"
+                  formControlName="address"
+                />
+              </mat-form-field>
+              <div class="icons" fxLayout="row" fxLayoutAlign="center center">
+                <mat-icon
+                  [ngStyle]="{
+                    color:
+                      !pointOfSalesForms.value[i].latitude ||
+                      !pointOfSalesForms.value[i].longitude
+                        ? 'red'
+                        : 'black'
+                  }"
+                  (click)="openDialog(i)"
+                  matTooltip="{{ 'NEW_DISCOUNT_FORM.OPEN_MAP' | translate }}"
+                  aria-label="Icon that displays a tooltip when focused or hovered over"
+                  >add_location_alt</mat-icon
+                >
+                <mat-icon
+                  (click)="deletePoint(i)"
+                  matTooltip="{{
+                    'NEW_DISCOUNT_FORM.DELETE_LOCATION' | translate
+                  }}"
+                  aria-label="Icon that displays a tooltip when focused or hovered over"
+                  >delete</mat-icon
+                >
+              </div>
             </div>
           </div>
         </div>
+
         <mat-icon
           (click)="addPoint()"
           matTooltip="{{ 'NEW_DISCOUNT_FORM.ADD_LOCATION' | translate }}"
           aria-label="Icon that displays a tooltip when focused or hovered over"
           >add</mat-icon
         >
-        <div *ngIf="coordinateIsEmpty" class="test">
+        <div *ngIf="coordinateIsEmpty" class="empty_error">
           <mat-error>{{
-            "NEW_DISCOUNT.EMPTYCOORDINATES" | translate
+            "NEW_DISCOUNT_FORM.EMPTYCOORDINATES" | translate
           }}</mat-error>
         </div>
 
