@@ -1,0 +1,113 @@
+@import "src/variables";
+
+.vendors {
+  display: grid;
+  gap: 1em;
+
+  .vendors-detail {
+
+    font-size: 1rem;
+    flex: 1 0 auto;
+
+    &__header {
+
+      margin-bottom: 1em;
+
+      &_title {
+        margin: 0;
+        font-size: 1.3em;
+      }
+
+      .rating {
+        &__amount {
+          font-size: 2em;
+          font-weight: 500;
+          font-style: italic;
+          color: $discount_card_text_color;
+        }
+
+        &__icon {
+          font-size: 2em;
+          color: $discountRating_star_color;
+        }
+      }
+    }
+
+    &__content {
+      .vendor-content {
+
+        padding: 2em;
+
+        &__field {
+
+          width: 100%;
+
+          &_label {
+            font-size: 1.1em;
+            font-style: normal;
+            font-weight: 600;
+          }
+
+          &_text {
+            font-size: 1.2em;
+            font-style: italic;
+            font-weight: 500;
+            padding-left: 1em;
+          }
+
+          &:not(:last-child) {
+            border-bottom: 1px solid #000000;
+            margin-bottom: 2em;
+          }
+        }
+      }
+
+
+    }
+
+    &__actions {
+
+      margin-top: 2em;
+
+      &_button {
+        font-size: 1rem;
+        width: 100%;
+        display: block;
+        letter-spacing: .1em;
+        font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        border-radius: .5em;
+        border: 1px solid $ticket_button_bg_color;
+        background: $ticket_button_bg_color;
+        box-shadow: 0 .3em .2em rgba(28, 104, 192, .25);
+        color: $ticket_button_text_color;
+        cursor: pointer;
+        outline: none;
+
+        &:hover {
+          border: 1px solid burlywood;
+        }
+      }
+    }
+
+    @media screen and (min-width: 767.98px) {
+      grid-column: 1/2;
+    }
+  }
+
+  .vendors-discounts {
+
+
+    @media screen and (min-width: 767.98px) {
+      grid-column: 2/4;
+    }
+  }
+
+  @media screen and (min-width: 767.98px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+

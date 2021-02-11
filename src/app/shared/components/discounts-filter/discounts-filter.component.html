@@ -1,0 +1,13 @@
+<mat-form-field>
+  <mat-label
+    fxLayoutAlign="center center"
+  >{{"MAIN_PAGE.FILTER.SORT_BY.TITLE" | translate}}:
+  </mat-label>
+  <mat-select
+    (selectionChange)="selectSort($event)"
+  >
+    <mat-option *ngFor="let sort of sortBy" [value]="sort">
+      {{sort.name | translate}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

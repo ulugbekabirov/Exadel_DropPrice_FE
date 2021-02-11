@@ -1,20 +1,14 @@
-<div class="vendor"
-     fxLayout="row"
-     fxLayoutAlign="start start"
-     fxLayoutGap="1em"
->
-  <article class="vendor-detail"
-  fxFlex="30"
-  >
-    <section class="vendor-detail__header"
+<div class="vendors">
+  <article class="vendors-detail">
+    <section class="vendors-detail__header"
              fxLayout="row"
              fxLayoutAlign="center center"
              fxLayoutGap="1em"
     >
-      <div class="vendor-detail__header_title">
+      <h3 class="vendors-detail__header_title">
         {{'Рейтинг вендора: '}}
-      </div>
-      <div class="vendor-detail__header_rating"
+      </h3>
+      <div class="vendors-detail__header_rating"
            fxLayout="row"
            fxLayoutAlign="center center"
            fxLayoutGap=".3em"
@@ -30,37 +24,26 @@
         </mat-icon>
       </div>
     </section>
-    <section class="vendor-detail__content">
+    <section class="vendors-detail__content">
       <mat-card class="vendor-content">
-        <div class="vendor-content__field">
-          <mat-form-field>
-            <p class="vendor-content__field_label"
+        <mat-form-field class="vendor-content__field">
+          <p class="vendor-content__field_label"
+          >
+            {{'Наименование вендора:'}}
+          </p>
+          <mat-select
+            (selectionChange)="selectVendor($event)"
+          >
+            <mat-option
+              [value]="vendor?.vendorId"
             >
-              {{'Наименование вендора:'}}
-            </p>
-            <mat-select
-              (selectionChange)="selectVendor($event)"
-            >
-              <mat-option
-                [value]="vendor?.vendorId"
-              >
-                {{vendor?.vendorName}}
-              </mat-option>
-              <mat-option *ngFor="let vend of vendors" [value]="vend.vendorId">
-                {{vend.vendorName}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <!--        <p class="vendor-content__field_label"-->
-          <!--        >-->
-          <!--          {{'Наименование вендора:'}}-->
-          <!--        </p>-->
-          <!--        <p class="vendor-content__field_text"-->
-          <!--           contenteditable="true"-->
-          <!--        >-->
-          <!--          {{vendor?.vendorName}}-->
-          <!--        </p>-->
-        </div>
+              {{vendor?.vendorName}}
+            </mat-option>
+            <mat-option *ngFor="let vend of vendors" [value]="vend.vendorId">
+              {{vend.vendorName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
         <div class="vendor-content__field">
           <p class="vendor-content__field_label">
             {{'Адрес:'}}
@@ -96,25 +79,29 @@
       </mat-card>
 
     </section>
-    <section class="vendor_detail__actions">
+    <section class="vendors-detail__actions">
       <button *appVerifyUserRoles='["Moderator"]'
-              class="vendor_detail__actions_button"
+              class="vendors-detail__actions_button"
+              mat-flat-button
+              matTooltip="Edit Discount"
       >
         {{'Редактировать'}}
       </button>
     </section>
   </article>
-  <app-discounts-list
-    fxFlex="70"
-    [discounts]="vendorDiscounts"
-    [towns]="towns"
-    (locationChange)="onLocationChange($event)"
-    (getTicket)="getTicket($event)"
-    (sortChange)="onSortChange($event)"
-    (toggleFavourites)="changeFavourites($event)"
-    [activeCoords]="activeCoords"
-    [sortBy]="sortBy"
-    (toggleCoordinates)="changeCoords()"
-  ></app-discounts-list>
+  <article class="vendors-discounts">
+    <app-discounts-list
+      [discounts]="vendorDiscounts"
+      [towns]="towns"
+      (locationChange)="onLocationChange($event)"
+      (getTicket)="getTicket($event)"
+      (sortChange)="onSortChange($event)"
+      (toggleFavourites)="changeFavourites($event)"
+      [activeCoords]="activeCoords"
+      [sortBy]="sortBy"
+      (toggleCoordinates)="changeCoords()"
+    ></app-discounts-list>
+  </article>
 </div>
 <ng-template appRef></ng-template>
+

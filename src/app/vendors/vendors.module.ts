@@ -5,7 +5,12 @@ import { VendorDetailComponent } from './components/vendor-detail/vendor-detail.
 import { VendorsComponent } from './components/vendors/vendors.component';
 
 const routes: Routes = [
-  {path: ':id', component: VendorDetailComponent}
+  {path: '',
+    component: VendorsComponent,
+    children: [
+      {path: ':id', component: VendorDetailComponent}
+    ]
+  }
 ];
 
 @NgModule({

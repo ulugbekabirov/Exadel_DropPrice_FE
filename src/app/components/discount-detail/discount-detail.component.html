@@ -1,4 +1,18 @@
 <article class="discount-detail">
+  <a class="go-back__link"
+     fxLayoutAlign="center center"
+     fxLayoutGap=".5em"
+     matTooltip="Gp Back"
+     (click)="goBack()"
+  >
+    <mat-icon class="go-back__link_icon">
+      reply
+    </mat-icon>
+    <span class="go-back__link_text">
+      go back
+    </span>
+  </a>
+
 
   <section class="discount-detail__header">
 
@@ -29,7 +43,7 @@
     <mat-card class="discount-content">
       <h3 class="discount-content__vendor">
         <a
-          routerLink="../../vendors/{{discount?.vendorId}}"
+          [routerLink]="['../../vendors/', discount?.vendorId]"
           matTooltip="Vendor"
         >
           {{discount?.vendorName}}

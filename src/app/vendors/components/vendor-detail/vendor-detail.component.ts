@@ -15,6 +15,7 @@ import { UserService } from '../../../services/user.service';
   styleUrls: ['./vendor-detail.component.scss']
 })
 export class VendorDetailComponent implements OnInit, OnDestroy {
+  path: '../../';
   sortBy = SORT_BY;
   activeUser: ActiveUser;
   tags: Tag[];

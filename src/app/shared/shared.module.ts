@@ -29,6 +29,7 @@ import { RouterModule } from '@angular/router';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TicketComponent } from './components/ticket/ticket.component';
+import { DiscountsFilterComponent } from './components/discounts-filter/discounts-filter.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { TicketComponent } from './components/ticket/ticket.component';
     DiscountsListComponent,
     DiscountsListItemComponent,
     SearchBarComponent,
-    TicketComponent
+    TicketComponent,
+    DiscountsFilterComponent
   ],
 
   imports: [

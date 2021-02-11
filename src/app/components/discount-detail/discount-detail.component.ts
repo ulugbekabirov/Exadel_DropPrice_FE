@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { DiscountsService } from '../../services/discounts.service';
@@ -25,6 +26,7 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private discountsService: DiscountsService,
     private ticketService: TicketService,
+    private location: Location
   ) {
   }
 
@@ -66,5 +68,9 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
     this.discountsService.putDiscountInArchive(discountId).pipe(
     )
       .subscribe(x => console.log('xxx', x));
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }
