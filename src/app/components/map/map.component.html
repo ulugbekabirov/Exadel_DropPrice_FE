@@ -1,9 +1,4 @@
-<div
-  class="map-wrapper"
-  fxLayoutGap.xs="10px"
-  fxLayout.xs="column"
-  fxLayoutAlign.xs="center center"
->
+<div class="map-wrapper" fxLayoutGap.xs="10px" fxLayout.xs="column">
   <mat-icon mat-dialog-close (click)="close()">close</mat-icon>
   <div mat-dialog-content>
     <agm-map
@@ -19,7 +14,7 @@
     </agm-map>
   </div>
 
-  <mat-dialog-actions>
+  <mat-dialog-actions fxLayoutAlign="start center">
     <button
       mat-raised-button
       color="accent"

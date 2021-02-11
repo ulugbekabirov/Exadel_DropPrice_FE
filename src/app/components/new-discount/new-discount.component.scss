@@ -48,15 +48,26 @@ mat-card {
   width: 100%;
 }
 
-.points {
-  &__name,
-  &__address {
-    width: 40%;
-    margin-right: 30px;
+.points{
+  margin-bottom: 10px;
+  @media screen and (max-width: 660px) {
+    flex-wrap: wrap;
   }
-  &__icons {
-    margin-top: 13px;
+  .point {
+    &__name,
+    &__address {
+      width: 100%;
+      margin-right: 30px;
+      @media screen and (max-width: 660px) {
+        width: 100%;
+      }
+    }   
   }
+}
+
+.empty_error{
+  display: block;
+  margin-top: 10px;
 }
 
 button {
@@ -84,8 +95,6 @@ mat-icon{
     width: 100%;;
   }
   .mat-form-field-infix {
-    // width: 100%;
-    // min-width: 240px;
     display: contents;
   }
 }
