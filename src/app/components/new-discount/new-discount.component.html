@@ -1,6 +1,7 @@
-<div class="new-discount-wrapper"
-     fxLayout="column"
-     fxLayoutAlign="center center"
+<div
+  class="new-discount-wrapper"
+  fxLayout="column"
+  fxLayoutAlign="center center"
 >
   <mat-card>
     <mat-card-content>
@@ -12,16 +13,17 @@
         #formDirective="ngForm"
         (ngSubmit)="submit()"
       >
-        <div class="full-width" 
-             fxLayout="row" 
-             fxLayoutGap="30px"
-             fxLayoutAlign="center center"
-             fxLayout.xs="column" 
-             fxLayoutGap.xs="5px"
+        <div
+          class="full-width"
+          fxLayout="row"
+          fxLayoutGap="30px"
+          fxLayoutAlign="center center"
+          fxLayout.xs="column"
+          fxLayoutGap.xs="5px"
         >
           <mat-form-field class="full-width">
-            <mat-label>{{ 
-              "NEW_DISCOUNT_FORM.NAME_VENDOR" | translate 
+            <mat-label>{{
+              "NEW_DISCOUNT_FORM.NAME_VENDOR" | translate
             }}</mat-label>
             <input
               type="text"
@@ -60,7 +62,9 @@
         </div>
 
         <mat-form-field class="full-width">
-          <mat-label>{{ "NEW_DISCOUNT_FORM.DESCRIPTION" | translate }}</mat-label>
+          <mat-label>{{
+            "NEW_DISCOUNT_FORM.DESCRIPTION" | translate
+          }}</mat-label>
           <textarea
             class="form__discount-description"
             formControlName="descriptionDiscount"
@@ -74,18 +78,24 @@
           >
         </mat-form-field>
 
-        <div class="form__discount-details"
-             fxLayout="row"  
-             fxLayoutAlign="space-between" 
-             fxLayoutGap="30px"
-             fxLayout.xs="column"
-             fxLayoutGap.xs="0">
+        <div
+          class="form__discount-details"
+          fxLayout="row"
+          fxLayoutAlign="space-between"
+          fxLayoutGap="30px"
+          fxLayout.xs="column"
+          fxLayoutGap.xs="0"
+        >
           <mat-form-field class="form__discount-details-amount">
-            <mat-label>{{ "NEW_DISCOUNT_FORM.AMOUNT_DISCOUNT" | translate }}</mat-label>
+            <mat-label>{{
+              "NEW_DISCOUNT_FORM.AMOUNT_DISCOUNT" | translate
+            }}</mat-label>
             <input
               matInput
               type="number"
-              placeholder="{{ 'NEW_DISCOUNT_FORM.PLACEHOLDER_PERCENT' | translate }}"
+              placeholder="{{
+                'NEW_DISCOUNT_FORM.PLACEHOLDER_PERCENT' | translate
+              }}"
               formControlName="discountAmount"
               min="1"
               max="100"
@@ -98,26 +108,36 @@
           </mat-form-field>
 
           <mat-form-field class="promo-code">
-            <mat-label>{{ "NEW_DISCOUNT_FORM.PROMO_CODE" | translate }}</mat-label>
+            <mat-label>{{
+              "NEW_DISCOUNT_FORM.PROMO_CODE" | translate
+            }}</mat-label>
             <input
               matInput
-              placeholder="{{'NEW_DISCOUNT_FORM.PLACEHOLDER_PROMO_CODE' | translate}}"
+              placeholder="{{
+                'NEW_DISCOUNT_FORM.PLACEHOLDER_PROMO_CODE' | translate
+              }}"
               formControlName="promoCode"
             />
           </mat-form-field>
 
-          <mat-form-field class="date" >
-            <mat-label class="date__label">{{ "NEW_DISCOUNT_FORM.DATE_START_END" | translate }}</mat-label>
+          <mat-form-field class="date">
+            <mat-label class="date__label">{{
+              "NEW_DISCOUNT_FORM.DATE_START_END" | translate
+            }}</mat-label>
             <mat-date-range-input [rangePicker]="picker">
               <input
                 matStartDate
                 formControlName="startDate"
-                placeholder="{{'NEW_DISCOUNT_FORM.PLACEHOLDER_START_DATE' | translate}}"
+                placeholder="{{
+                  'NEW_DISCOUNT_FORM.PLACEHOLDER_START_DATE' | translate
+                }}"
               />
               <input
                 matEndDate
                 formControlName="endDate"
-                placeholder="{{ 'NEW_DISCOUNT_FORM.PLACEHOLDER_END_DATE' | translate }}"
+                placeholder="{{
+                  'NEW_DISCOUNT_FORM.PLACEHOLDER_END_DATE' | translate
+                }}"
               />
             </mat-date-range-input>
             <mat-datepicker-toggle
@@ -126,34 +146,33 @@
             ></mat-datepicker-toggle>
             <mat-date-range-picker #picker></mat-date-range-picker>
             <mat-error *ngIf="startDate.hasError('matStartDateInvalid')">
-              {{ NEW_DISCOUNT_FORM.START_DATE_ERROR | translate}}
+              {{ NEW_DISCOUNT_FORM.START_DATE_ERROR | translate }}
             </mat-error>
             <mat-error *ngIf="endDate.hasError('matEndDateInvalid')"
-              >{{ NEW_DISCOUNT_FORM.END_DATE_ERROR | translate}}
+              >{{ NEW_DISCOUNT_FORM.END_DATE_ERROR | translate }}
             </mat-error>
           </mat-form-field>
 
-          <div  class="activity-date" fxLayout="row">
+          <div class="activity-date" fxLayout="row">
             {{ "NEW_DISCOUNT_FORM.ACTIVITY_STATUS" | translate }}
-          
-            <mat-slide-toggle
-              formControlName="activityStatus"
-              color="primary"
-            > 
+
+            <mat-slide-toggle formControlName="activityStatus" color="primary">
             </mat-slide-toggle>
           </div>
-
         </div>
 
-        <mat-form-field class="chip-list" 
-                        fxLayout="row" 
-                        formArrayName="tags">
-          <mat-label>{{ "NEW_DISCOUNT_FORM.LABEL_TAGS" | translate }}</mat-label>
-          <input placeholder="{{ 'NEW_DISCOUNT_FORM.PLACEHOLDER_NEW_TAG' | translate }}"
-                 [matChipInputFor]="chipList"
-                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                 [matChipInputAddOnBlur]="addOnBlur"
-                (matChipInputTokenEnd)="add($event)"
+        <mat-form-field class="chip-list" fxLayout="row" formArrayName="tags">
+          <mat-label>{{
+            "NEW_DISCOUNT_FORM.LABEL_TAGS" | translate
+          }}</mat-label>
+          <input
+            placeholder="{{
+              'NEW_DISCOUNT_FORM.PLACEHOLDER_NEW_TAG' | translate
+            }}"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)"
           />
           <mat-chip-list #chipList aria-label="Tag selection">
             <mat-chip
@@ -181,42 +200,67 @@
             fxLayoutAlign="space-between"
             fxLayout.xs="column"
           >
-            
             <mat-form-field class="points__name">
-              <mat-label>{{ "NEW_DISCOUNT_FORM.NAME_LABEL" | translate }}</mat-label>
+              <mat-label>{{
+                "NEW_DISCOUNT_FORM.NAME_LABEL" | translate
+              }}</mat-label>
               <input matInput formControlName="name" />
             </mat-form-field>
 
             <mat-form-field class="points__address">
-              <mat-label>{{ "NEW_DISCOUNT_FORM.ADDRESS_LABEL" | translate }}</mat-label>
-              <input matInput
-                    placeholder="{{ 'NEW_DISCOUNT_FORM.ADDRESS_PLACEHOLDER' | translate }}"
-                    formControlName="address"
+              <mat-label>{{
+                "NEW_DISCOUNT_FORM.ADDRESS_LABEL" | translate
+              }}</mat-label>
+              <input
+                matInput
+                placeholder="{{
+                  'NEW_DISCOUNT_FORM.ADDRESS_PLACEHOLDER' | translate
+                }}"
+                formControlName="address"
               />
             </mat-form-field>
-            
+
             <div class="points__icons" fxLayoutGap="10px">
-              <mat-icon (click)="addLocation(i)" 
-                        matTooltip="{{ 'NEW_DISCOUNT_FORM.OPEN_MAP' | translate }}"
-                        aria-label="Icon that displays a tooltip when focused or hovered over">add_location_alt
-              </mat-icon>
-              <mat-icon (click)="deletePoint(i)"
-                        matTooltip="{{ 'NEW_DISCOUNT_FORM.DELETE_LOCATION' | translate }}"
-                        aria-label="Icon that displays a tooltip when focused or hovered over">delete
-              </mat-icon>
+              <mat-icon
+                [ngStyle]="{
+                  color:
+                    !pointOfSalesForms.value[i].latitude ||
+                    !pointOfSalesForms.value[i].longitude
+                      ? 'red'
+                      : 'black'
+                }"
+                (click)="openDialog(i)"
+                matTooltip="{{ 'NEW_DISCOUNT_FORM.OPEN_MAP' | translate }}"
+                aria-label="Icon that displays a tooltip when focused or hovered over"
+                >add_location_alt >add_location_alt</mat-icon
+              >
+              <mat-icon
+                (click)="deletePoint(i)"
+                matTooltip="{{
+                  'NEW_DISCOUNT_FORM.DELETE_LOCATION' | translate
+                }}"
+                aria-label="Icon that displays a tooltip when focused or hovered over"
+                >delete</mat-icon
+              >
             </div>
           </div>
         </div>
+        <mat-icon
+          (click)="addPoint()"
+          matTooltip="{{ 'NEW_DISCOUNT_FORM.ADD_LOCATION' | translate }}"
+          aria-label="Icon that displays a tooltip when focused or hovered over"
+          >add</mat-icon
+        >
+        <div *ngIf="coordinateIsEmpty" class="test">
+          <mat-error>{{
+            "NEW_DISCOUNT.EMPTYCOORDINATES" | translate
+          }}</mat-error>
+        </div>
 
-        <mat-icon (click)="addPoint()"
-                  matTooltip="{{ 'NEW_DISCOUNT_FORM.ADD_LOCATION' | translate }}"
-                  aria-label="Icon that displays a tooltip when focused or hovered over">
-                  add
-        </mat-icon>
         <button
           mat-flat-button
           color="primary"
-          [disabled]="newDiscountForm.invalid"
+          [disabled]="!newDiscountForm.valid || coordinateIsEmpty"
           type="submit"
         >
           {{ "NEW_DISCOUNT_FORM.BTN_TITLE" | translate }}

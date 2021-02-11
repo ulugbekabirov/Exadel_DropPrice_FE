@@ -122,7 +122,11 @@
     "POINTS_TITLE": "Click to add location details:",
     "ADD_LOCATION": "Add the location",
     "OPEN_MAP": "Open the map",
-    "DELETE_LOCATION": "Delete the location"
+    "DELETE_LOCATION": "Delete the location",
+    "EMPTYCOORDINATES": "Please, put a point on the map, click adding location icon"
+  },
+  "MAP": {
+    "ADD_POINT_BTN": "Add point"
   },
   "DISCOUNT_DETAIL": {
     "AMOUNT_LABEL": "discount",
