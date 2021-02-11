@@ -35,7 +35,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   isChecked = true;
-
+  coordinateIsEmpty = true;
   vendorsList: Vendor[];
   filteredList: Vendor[];
   filteredVendors: Observable<Vendor[]>;
