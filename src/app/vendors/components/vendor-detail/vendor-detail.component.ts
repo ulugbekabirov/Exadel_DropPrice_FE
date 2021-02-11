@@ -8,6 +8,7 @@ import { SORT_BY } from '../../../../constants';
 import { TicketService } from '../../../services/ticket.service';
 import { RefDirective } from '../../../directives/ref.directive';
 import { UserService } from '../../../services/user.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-vendor-detail',
@@ -15,7 +16,6 @@ import { UserService } from '../../../services/user.service';
   styleUrls: ['./vendor-detail.component.scss']
 })
 export class VendorDetailComponent implements OnInit, OnDestroy {
-  path: '../../';
   sortBy = SORT_BY;
   activeUser: ActiveUser;
   tags: Tag[];
@@ -35,9 +35,9 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
     sortBy: 'DistanceAsc',
   };
   vendorDiscounts;
+  vendorName = new FormControl('fff');
 
   @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
-
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -76,6 +76,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
       }
       this.vendor = vendor;
       this.vendors = vendors;
+      this.selected = vendor.vendorName;
       this.towns = towns;
       this.vendorDiscounts = vendDisc;
       console.log(this.vendor);

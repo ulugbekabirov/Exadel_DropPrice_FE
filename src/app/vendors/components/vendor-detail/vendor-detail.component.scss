@@ -55,7 +55,7 @@
             padding-left: 1em;
           }
 
-          &:not(:last-child) {
+          &:not(:last-child, :first-child) {
             border-bottom: 1px solid #000000;
             margin-bottom: 2em;
           }

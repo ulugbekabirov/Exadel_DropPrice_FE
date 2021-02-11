@@ -26,24 +26,27 @@
     </section>
     <section class="vendors-detail__content">
       <mat-card class="vendor-content">
-        <mat-form-field class="vendor-content__field">
+        <div class="vendor-content__field">
           <p class="vendor-content__field_label"
           >
             {{'Наименование вендора:'}}
           </p>
-          <mat-select
-            (selectionChange)="selectVendor($event)"
-          >
-            <mat-option
-              [value]="vendor?.vendorId"
+          <mat-form-field class="vendor-content__field">
+            <mat-select
+              [formControl]="vendorName"
             >
-              {{vendor?.vendorName}}
-            </mat-option>
-            <mat-option *ngFor="let vend of vendors" [value]="vend.vendorId">
-              {{vend.vendorName}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+<!--              <mat-option-->
+<!--                [value]="vendor?.vendorId"-->
+<!--              >-->
+<!--                {{selected}}-->
+<!--              </mat-option>-->
+              <mat-option *ngFor="let vend of vendors" [value]="vend.vendorId">
+                {{vend.vendorName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
         <div class="vendor-content__field">
           <p class="vendor-content__field_label">
             {{'Адрес:'}}
