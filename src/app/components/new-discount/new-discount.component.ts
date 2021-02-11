@@ -154,7 +154,7 @@ export class NewDiscountComponent implements OnInit {
   openDialog(currentSaleObj): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
-    dialogConfig.minHeight = '800px';
+    dialogConfig.minHeight = '400px';
     dialogConfig.minWidth = '100%';
     dialogConfig.direction = 'rtl';
 
