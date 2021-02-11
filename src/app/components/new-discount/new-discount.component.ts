@@ -9,12 +9,14 @@ import {
   ValidationErrors,
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { DiscountsService } from '../../services/discounts.service';
+
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 export interface Tag {
   name: string;
 }
@@ -47,6 +49,7 @@ export class NewDiscountComponent implements OnInit {
     'SportBet',
     'Sportmaster',
   ];
+
   filteredVendors: Observable<string[]>;
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
@@ -54,24 +57,22 @@ export class NewDiscountComponent implements OnInit {
 
   constructor(
     public translateService: TranslateService,
-    public fb: FormBuilder
+    public fb: FormBuilder,
   ) {}
 
   ngOnInit(): void {
+
     this.newDiscountForm = this.fb.group({
       vendorName: ['', [Validators.required, this.requireMatch.bind(this)]],
       discountName: ['', [Validators.required]],
-      description: ['', [Validators.required]],
-      discountAmount: [
-        '',
-        [Validators.required, Validators.min(1), Validators.max(100)],
-      ],
+      descriptionDiscount: ['', [Validators.required]],
+      discountAmount: ['', [Validators.required, Validators.min(1), Validators.max(100)]],
       promoCode: [''],
       startDate: ['', [Validators.required]],
       endDate: ['', [Validators.required]],
       tags: this.fb.array([], Validators.required),
       activityStatus: [true, [Validators.requiredTrue]],
-      pointsOfSales: this.fb.array([]),
+      pointsOfSales: this.fb.array([], Validators.required),
     });
 
     this.filteredVendors = this.newDiscountForm
@@ -96,14 +97,6 @@ export class NewDiscountComponent implements OnInit {
     return this.vendors.filter(
       (vendor) => vendor.toLowerCase().indexOf(filterValue) === 0
     );
-  }
-
-  private duplicate(control: AbstractControl): ValidationErrors | null {
-    const selection: any = control.value;
-    if (this.tags && this.tags.value.indexOf(selection) < 0) {
-      return { duplicate: true };
-    }
-    return null;
   }
 
   add(event: MatChipInputEvent): void {
@@ -135,24 +128,22 @@ export class NewDiscountComponent implements OnInit {
         this.tags.controls.splice(index, 1);
       }
     });
-    console.log(this.tags);
-    console.log(this.tagsArray);
   }
 
-  addPoint() {
+  addPoint() :void {
     this.hide = false;
     const point = this.fb.group({
       name: ['', [Validators.required]],
-      adress: ['', [Validators.required]],
+      address: ['', [Validators.required]],
     });
     this.pointOfSalesForms.push(point);
   }
 
-  deletePoint(i) {
+  deletePoint(i) :void {
     this.pointOfSalesForms.removeAt(i);
   }
 
-  addLocation(i) {
+  addLocation(i) :void {
     console.log(`ADD location to ${i} object`);
   }
 
@@ -166,7 +157,6 @@ export class NewDiscountComponent implements OnInit {
     }
 
     this.tags.controls = [];
-    console.log(this.tags);
   }
 
   get vendorName(): AbstractControl {
@@ -177,8 +167,8 @@ export class NewDiscountComponent implements OnInit {
     return this.newDiscountForm.get('discountName');
   }
 
-  get description(): AbstractControl {
-    return this.newDiscountForm.get('description');
+  get descriptionDiscount(): AbstractControl {
+    return this.newDiscountForm.get('descriptionDiscount');
   }
 
   get discountAmount(): AbstractControl {
@@ -209,11 +199,11 @@ export class NewDiscountComponent implements OnInit {
     return this.pointOfSalesForms.get('name');
   }
 
-  get adress(): AbstractControl {
-    return this.pointOfSalesForms.get('adress');
+  get address(): AbstractControl {
+    return this.pointOfSalesForms.get('address');
   }
 
-  get pointOfSalesForms() {
+  get pointOfSalesForms(): FormArray {
     return this.newDiscountForm.get('pointsOfSales') as FormArray;
   }
 }

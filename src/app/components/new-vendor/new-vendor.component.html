@@ -5,51 +5,118 @@
         [formGroup]="newVendorForm"
         (ngSubmit)="onSubmit()"
         fxLayout="column"
-        fxLayoutGap="15px"
-        fxLayoutAlign="center start"
+        fxLayoutAlign="space-between"
+        class="new-vendor-form"
       >
-        <mat-form-field>
-          <mat-label>{{ "NEW_VENDOR_FORM.NAME_LABEL" | translate }}</mat-label>
-          <input matInput formControlName="name" />
-        </mat-form-field>
+        <div  fxLayout="row" 
+              fxLayoutGap="30px"
+              fxLayoutAlign="center center"
+              fxLayout.lt-md="column"
+              fxLayoutGap.xs="5px" >
+          <mat-form-field>
+            <mat-label>{{ 
+              "NEW_VENDOR_FORM.NAME_LABEL" | translate 
+            }}</mat-label>
+            <input matInput formControlName="name" />
+          </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>{{
-            "NEW_VENDOR_FORM.ADRESS_LABEL" | translate
-          }}</mat-label>
+          <mat-form-field>
+            <mat-label>{{
+              "NEW_VENDOR_FORM.ADDRESS_LABEL" | translate
+            }}</mat-label>
+            <input
+              matInput
+              formControlName="address"
+              required
+              placeholder="{{ 'NEW_VENDOR_FORM.ADDRESS_PLACEHOLDER' | translate }}"
+            />
+          </mat-form-field>
+        </div>
+
+        <mat-form-field class="full-width">
+          <mat-label>{{ "NEW_VENDOR_FORM.DESCRIPTION" | translate }}</mat-label>
           <textarea
+            class="new-vendor-form__description"
+            formControlName="descriptionVendor"
             matInput
-            formControlName="adress"
-            required
-            placeholder="{{ 'NEW_VENDOR_FORM.ADRESS_PLACEHOLDER' | translate }}"
-          ></textarea>
+            #description
+            maxlength="5000"
+          >
+          </textarea>
+          <mat-hint class="description-limit">{{ description.value.length }} / 5000</mat-hint>
         </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>{{
-            "NEW_VENDOR_FORM.PHONE_NUMBER" | translate
-          }}</mat-label>
-          <input matInput formControlName="number" type="tel" />
-          <mat-error
-            >{{ "NEW_VENDOR_FORM.VALID_PHONE" | translate }}
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>{{ "NEW_VENDOR_FORM.EMAIL_LABEL" | translate }}</mat-label>
-          <input matInput formControlName="email" />
-          <mat-error
-            >{{ "NEW_VENDOR_FORM.VALID_EMAIL" | translate }}
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>{{
-            "NEW_VENDOR_FORM.SOCIAL_NETWORK_LABEL" | translate
-          }}</mat-label>
-          <input matInput formControlName="social_network" />
-          <mat-error
-            >{{ "NEW_VENDOR_FORM.VALID_SOCIAL_NETWORK" | translate }}
-          </mat-error>
-        </mat-form-field>
+        <div fxLayout="row"
+             fxLayout.xs="column"
+             fxLayoutGap="30px"
+
+             class="new-vendor-form__details"
+        >
+          <mat-form-field>
+            <mat-label>{{
+              "NEW_VENDOR_FORM.PHONE_NUMBER" | translate
+            }}</mat-label>
+            <input matInput formControlName="number" type="tel" />
+            <mat-icon matSuffix>phone</mat-icon>
+            <mat-error
+              >{{ "NEW_VENDOR_FORM.VALID_PHONE" | translate }}
+            </mat-error>
+          </mat-form-field>
+          
+          <mat-form-field>
+            <mat-label>{{ "NEW_VENDOR_FORM.EMAIL_LABEL" | translate }}</mat-label>
+            <input matInput formControlName="email" />
+            <mat-icon matSuffix>alternate_email</mat-icon>
+            <mat-error
+              >{{ "NEW_VENDOR_FORM.VALID_EMAIL" | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      
+        <div fxLayout="row"
+             fxLayoutGap="25px"
+             fxLayout.lt-md="column"
+             fxLayoutGap.xs="5px"
+             formGroupName="social_network"
+             class="new-vendor-form__social-network"
+             >
+          <mat-form-field>
+            <mat-label>Facebook</mat-label>
+            <input formControlName="facebook" matInput/>
+            <mat-error
+              >{{ "NEW_VENDOR_FORM.VALID_SOCIAL_NETWORK" | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Instagram</mat-label>
+            <input formControlName="instagram" matInput/>
+            <mat-error
+              >{{ "NEW_VENDOR_FORM.VALID_SOCIAL_NETWORK" | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>{{
+              "NEW_VENDOR_FORM.WEBSITE_LABEL" | translate
+            }}</mat-label>
+            <input formControlName="website" matInput/>
+            <mat-error
+              >{{ "NEW_VENDOR_FORM.VALID_SOCIAL_NETWORK" | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>{{
+              "NEW_VENDOR_FORM.OTHER_SOCIAL_NETWORK_LABEL" | translate
+            }}</mat-label>
+            <input formControlName="otherSocialLink" matInput/>
+            <mat-error
+              >{{ "NEW_VENDOR_FORM.VALID_SOCIAL_NETWORK" | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        
         <button
           mat-flat-button
           color="primary"

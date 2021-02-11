@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -54,6 +55,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSlideToggleModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatTooltipModule,
     MatButtonModule,
     MatIconModule,
     MatChipsModule,
@@ -80,6 +82,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSlideToggleModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatTooltipModule,
     MatButtonModule,
     MatIconModule,
     MatChipsModule,
