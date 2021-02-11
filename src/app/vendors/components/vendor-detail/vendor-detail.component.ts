@@ -8,7 +8,7 @@ import { SORT_BY } from '../../../../constants';
 import { TicketService } from '../../../services/ticket.service';
 import { RefDirective } from '../../../directives/ref.directive';
 import { UserService } from '../../../services/user.service';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-vendor-detail',
@@ -35,7 +35,8 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
     sortBy: 'DistanceAsc',
   };
   vendorDiscounts;
-  vendorName = new FormControl('fff');
+  selectedValue = null;
+  foodControl;
 
   @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
   constructor(
@@ -44,10 +45,12 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
     private discountsService: DiscountsService,
     private ticketService: TicketService,
     private userService: UserService,
+    private fb: FormBuilder,
   ) {
   }
 
   ngOnInit(): void {
+
     this.vendors$ = this.discountsService.getVendors();
     const towns$ = this.discountsService.getTowns();
     const tags$ = this.discountsService.getTags(0, 10);
@@ -76,14 +79,16 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
       }
       this.vendor = vendor;
       this.vendors = vendors;
-      this.selected = vendor.vendorName;
       this.towns = towns;
+      this.foodControl = new FormControl(this.vendor.vendorName);
+      this.selectedValue = vendor;
       this.vendorDiscounts = vendDisc;
       console.log(this.vendor);
     });
   }
 
   selectVendor({value}: any): void {
+    console.log(value);
     if (!value) {
       return;
     }

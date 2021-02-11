@@ -32,14 +32,15 @@
             {{'Наименование вендора:'}}
           </p>
           <mat-form-field class="vendor-content__field">
+<!--            <mat-label>-->
+<!--              {{vendor?.vendorName}}-->
+<!--            </mat-label>-->
             <mat-select
-              [formControl]="vendorName"
+              [formControl]="foodControl"
+              (selectionChange)="selectVendor($event)"
             >
-<!--              <mat-option-->
-<!--                [value]="vendor?.vendorId"-->
-<!--              >-->
-<!--                {{selected}}-->
-<!--              </mat-option>-->
+
+              <mat-option>None</mat-option>
               <mat-option *ngFor="let vend of vendors" [value]="vend.vendorId">
                 {{vend.vendorName}}
               </mat-option>
