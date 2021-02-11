@@ -18,7 +18,6 @@ export class MapComponent {
     private dialogRef: MatDialogRef<MapComponent>,
     @Inject(MAT_DIALOG_DATA) data
   ) {
-    console.log(data);
     if (data.latitude && data.longitude) {
       this.coordinate.latitude = data.latitude;
       this.coordinate.longitude = data.longitude;
@@ -30,7 +29,6 @@ export class MapComponent {
     this.coordinate.longitude = event.coords.lng;
   }
   getCoordinats(): void {
-    console.log(this.coordinate);
     this.dialogRef.close(this.coordinate);
   }
 

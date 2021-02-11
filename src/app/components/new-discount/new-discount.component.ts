@@ -140,8 +140,6 @@ export class NewDiscountComponent implements OnInit {
         this.tags.controls.splice(indx, 1);
       }
     });
-    console.log(this.tags);
-    console.log(this.tagsArray);
   }
 
   addPoint(): void {
@@ -164,7 +162,6 @@ export class NewDiscountComponent implements OnInit {
     dialogConfig.minWidth = '100%';
     dialogConfig.direction = 'rtl';
 
-    console.log(this.pointOfSalesForms);
     dialogConfig.data = {
       latitude: this.pointOfSalesForms.value[currentSaleObj].latitude,
       longitude: this.pointOfSalesForms.value[currentSaleObj].longitude,
@@ -172,15 +169,13 @@ export class NewDiscountComponent implements OnInit {
 
     const dialogRef = this.dialog.open(MapComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
-      console.log(
-        Object.assign(this.pointOfSalesForms.value[currentSaleObj], data)
-      );
+      Object.assign(this.pointOfSalesForms.value[currentSaleObj], data);
     });
     this.coordinateIsEmpty = false;
   }
 
   submit(): void {
-    console.log('Form Submitted!', this.newDiscountForm.value);
+    this.newDiscountForm.value;
 
     this.newDiscountForm.reset();
 
@@ -190,7 +185,6 @@ export class NewDiscountComponent implements OnInit {
 
     this.pointOfSalesForms.controls = [];
     this.tags.controls = [];
-    console.log(this.tags);
   }
 
   get vendorName(): AbstractControl {
