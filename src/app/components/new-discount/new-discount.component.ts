@@ -9,11 +9,17 @@ import {
   ValidationErrors,
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { DiscountsService } from '../../services/discounts.service';
+
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
+import { MapComponent } from './../map/map.component';
 
 export interface Tag {
   name: string;
@@ -26,7 +32,7 @@ export interface Tag {
 })
 export class NewDiscountComponent implements OnInit {
   newDiscountForm: FormGroup;
-  hide = true;
+  coordinateIsEmpty = true;
   tagsArray: Tag[] = [];
   visible = true;
   selectable = true;
@@ -47,6 +53,7 @@ export class NewDiscountComponent implements OnInit {
     'SportBet',
     'Sportmaster',
   ];
+
   filteredVendors: Observable<string[]>;
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
@@ -54,14 +61,15 @@ export class NewDiscountComponent implements OnInit {
 
   constructor(
     public translateService: TranslateService,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.newDiscountForm = this.fb.group({
       vendorName: ['', [Validators.required, this.requireMatch.bind(this)]],
       discountName: ['', [Validators.required]],
-      description: ['', [Validators.required]],
+      descriptionDiscount: ['', [Validators.required]],
       discountAmount: [
         '',
         [Validators.required, Validators.min(1), Validators.max(100)],
@@ -71,7 +79,7 @@ export class NewDiscountComponent implements OnInit {
       endDate: ['', [Validators.required]],
       tags: this.fb.array([], Validators.required),
       activityStatus: [true, [Validators.requiredTrue]],
-      pointsOfSales: this.fb.array([]),
+      pointsOfSales: this.fb.array([], Validators.required),
     });
 
     this.filteredVendors = this.newDiscountForm
@@ -80,6 +88,7 @@ export class NewDiscountComponent implements OnInit {
         startWith(''),
         map((name) => (name ? this._filter(name) : this.vendors.slice()))
       );
+    this.addPoint();
   }
 
   private requireMatch(control: AbstractControl): ValidationErrors | null {
@@ -96,14 +105,6 @@ export class NewDiscountComponent implements OnInit {
     return this.vendors.filter(
       (vendor) => vendor.toLowerCase().indexOf(filterValue) === 0
     );
-  }
-
-  private duplicate(control: AbstractControl): ValidationErrors | null {
-    const selection: any = control.value;
-    if (this.tags && this.tags.value.indexOf(selection) < 0) {
-      return { duplicate: true };
-    }
-    return null;
   }
 
   add(event: MatChipInputEvent): void {
@@ -130,43 +131,56 @@ export class NewDiscountComponent implements OnInit {
       this.tags.value.splice(index, 1);
     }
 
-    this.tags.controls.forEach((item, index) => {
+    this.tags.controls.forEach((item, indx) => {
       if (item.value === tag.value) {
-        this.tags.controls.splice(index, 1);
+        this.tags.controls.splice(indx, 1);
       }
     });
-    console.log(this.tags);
-    console.log(this.tagsArray);
   }
 
-  addPoint() {
-    this.hide = false;
+  addPoint(): void {
     const point = this.fb.group({
       name: ['', [Validators.required]],
-      adress: ['', [Validators.required]],
+      address: ['', [Validators.required]],
     });
     this.pointOfSalesForms.push(point);
   }
 
-  deletePoint(i) {
-    this.pointOfSalesForms.removeAt(i);
+  deletePoint(currentSaleObj): void {
+    this.pointOfSalesForms.removeAt(currentSaleObj);
+    this.coordinateIsEmpty = true;
   }
 
-  addLocation(i) {
-    console.log(`ADD location to ${i} object`);
+  openDialog(currentSaleObj): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.minHeight = '800px';
+    dialogConfig.minWidth = '100%';
+    dialogConfig.direction = 'rtl';
+
+    dialogConfig.data = {
+      latitude: this.pointOfSalesForms.value[currentSaleObj].latitude,
+      longitude: this.pointOfSalesForms.value[currentSaleObj].longitude,
+    };
+
+    const dialogRef = this.dialog.open(MapComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((data) => {
+      Object.assign(this.pointOfSalesForms.value[currentSaleObj], data);
+    });
+    this.coordinateIsEmpty = false;
   }
 
   submit(): void {
     this.newDiscountForm.value;
-    console.log('Form Submitted!', this.newDiscountForm.value);
+
     this.newDiscountForm.reset();
 
     for (const control in this.newDiscountForm.controls) {
       this.newDiscountForm.controls[control].setErrors(null);
     }
 
+    this.pointOfSalesForms.controls = [];
     this.tags.controls = [];
-    console.log(this.tags);
   }
 
   get vendorName(): AbstractControl {
@@ -177,8 +191,8 @@ export class NewDiscountComponent implements OnInit {
     return this.newDiscountForm.get('discountName');
   }
 
-  get description(): AbstractControl {
-    return this.newDiscountForm.get('description');
+  get descriptionDiscount(): AbstractControl {
+    return this.newDiscountForm.get('descriptionDiscount');
   }
 
   get discountAmount(): AbstractControl {
@@ -209,11 +223,11 @@ export class NewDiscountComponent implements OnInit {
     return this.pointOfSalesForms.get('name');
   }
 
-  get adress(): AbstractControl {
-    return this.pointOfSalesForms.get('adress');
+  get address(): AbstractControl {
+    return this.pointOfSalesForms.get('address');
   }
 
-  get pointOfSalesForms() {
+  get pointOfSalesForms(): FormArray {
     return this.newDiscountForm.get('pointsOfSales') as FormArray;
   }
 }

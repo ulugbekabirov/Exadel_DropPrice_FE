@@ -62,18 +62,20 @@
     }
   },
   "MODERATOR_DASHBOARD": {
-    "NEW_VENDOR_FORM": "Vendor's add form",
-    "NEW_DISCOUNT_FORM": "Discount's add form"
+    "NEW_VENDOR_FORM": "Vendor adding form",
+    "NEW_DISCOUNT_FORM": "Discount adding form"
   },
   "NEW_VENDOR_FORM": {
-    "NAME_LABEL": "Enter vendor's name*",
-    "ADRESS_LABEL": "Enter vendor's adress",
-    "ADRESS_PLACEHOLDER": "Ex. 17 Kensington Street",
-    "PHONE_NUMBER": "Enter vendor's phone number*",
+    "NAME_LABEL": "Vendor name*",
+    "ADDRESS_LABEL": "Vendor address",
+    "DESCRIPTION": "Vendor description",
+    "ADDRESS_PLACEHOLDER": "Ex.: 17 Kensington Street",
+    "PHONE_NUMBER": "Vendor phone number*",
     "VALID_PHONE": "Enter the phone without spaces in the format '+COUNTRY_CODE-OPERATOR_CODE-NUMBER'",
-    "EMAIL_LABEL": "Enter vendor's email*",
+    "EMAIL_LABEL": "Vendor email*",
     "VALID_EMAIL": "Please enter a valid email address",
-    "SOCIAL_NETWORK_LABEL": "Enter vendor's social network",
+    "WEBSITE_LABEL": "Vendor website",
+    "OTHER_SOCIAL_NETWORK_LABEL": "Other social networks",
     "VALID_SOCIAL_NETWORK": "Please enter a valid url address",
     "BTN_TITLE": "Add"
   },
@@ -82,7 +84,7 @@
     "FIRST_NAME": "First name",
     "LAST_NAME": "Last name",
     "PATRONYMIC": "Patronymic",
-    "NAME_VENDOR": "Vendor name",
+    "NAME_VENDOR": "Vendor's name",
     "PRODUCT_SERVICE": "Product/service",
     "EMAIL": "Email",
     "PHONE": "Contact number",
@@ -91,11 +93,11 @@
     "CONFIRMATION_DATE": "Confirmation date",
     "CLOSE": "Close"
   },
-  "NEW_DISCOUNT": {
+  "NEW_DISCOUNT_FORM": {
     "NAME_VENDOR": "Vendor name*",
     "NAME_VENDOR_ERROR": "The vendor must be selected from the available options",
     "PRODUCT_SERVICE": "Product or service name*",
-    "DESCRIPTION": "Description",
+    "DESCRIPTION": "Discount description",
     "AMOUNT_DISCOUNT": "Discount amount*",
     "DISCOUNT_VALIDITY_DATE": "Discount validity date*",
     "PROMO_CODE": "Promo code",
@@ -110,12 +112,21 @@
     "PLACEHOLDER_END_DATE": "end",
     "PLACEHOLDER_NEW_TAG": "Enter a new tag",
     "DATE_START_END": "Validity period*",
+    "START_DATE_ERROR": "Invalid start date",
+    "END_DATE_ERROR": "Invalid end date",
     "MIN_MAX_PERCENT": "Range",
-    "ACTIVITY_STATUS": "Discount activity status",
+    "ACTIVITY_STATUS": "Discount activity:",
     "NAME_LABEL": "Enter location's name*",
-    "ADRESS_LABEL": "Enter location's adress*",
-    "ADRESS_PLACEHOLDER": "Ex. 17 Kensington Street",
-    "POINTS_TITLE": "Click to add location details:"
+    "ADDRESS_LABEL": "Enter location's address*",
+    "ADDRESS_PLACEHOLDER": "Example: London, 17 Kensington Street",
+    "POINTS_TITLE": "Click to add location details:",
+    "ADD_LOCATION": "Add the location",
+    "OPEN_MAP": "Open the map",
+    "DELETE_LOCATION": "Delete the location",
+    "EMPTYCOORDINATES": "Please, put a point on the map, click adding location icon"
+  },
+  "MAP": {
+    "ADD_POINT_BTN": "Add point"
   },
   "DISCOUNT_DETAIL": {
     "AMOUNT_LABEL": "discount",
