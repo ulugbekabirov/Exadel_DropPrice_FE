@@ -13,7 +13,6 @@ import {
   USER_INFO_ENDPOINT
 } from '../../constants';
 import { environment } from '../../environments/environment';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
