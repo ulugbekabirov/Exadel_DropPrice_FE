@@ -1,4 +1,5 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import {
   AbstractControl,
   FormArray,
@@ -10,23 +11,21 @@ import {
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { DiscountsService } from '../../services/discounts.service';
+import { Vendor } from '../../models';
 
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, debounceTime, filter} from 'rxjs/operators';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatTooltipModule } from '@angular/material/tooltip';
 export interface Tag {
   name: string;
 }
-
 @Component({
   selector: 'app-new-discount',
   templateUrl: './new-discount.component.html',
   styleUrls: ['./new-discount.component.scss'],
 })
-export class NewDiscountComponent implements OnInit {
+export class NewDiscountComponent implements OnInit, OnDestroy {
   newDiscountForm: FormGroup;
   hide = true;
   tagsArray: Tag[] = [];
@@ -37,20 +36,10 @@ export class NewDiscountComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   isChecked = true;
 
-  vendors: string[] = [
-    'Astra',
-    'BacardiGroup',
-    'Citrus',
-    'DriverPlus',
-    'Eshko',
-    'Focus',
-    'Green',
-    'Hudson',
-    'SportBet',
-    'Sportmaster',
-  ];
-
-  filteredVendors: Observable<string[]>;
+  vendorsList: Vendor[];
+  filteredList: Vendor[];
+  filteredVendors: Observable<Vendor[]>;
+  private subscription: Subscription;
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocompleteModule;
@@ -58,9 +47,15 @@ export class NewDiscountComponent implements OnInit {
   constructor(
     public translateService: TranslateService,
     public fb: FormBuilder,
+    private discountService: DiscountsService,
   ) {}
 
   ngOnInit(): void {
+
+    this.subscription = this.discountService.getVendors()
+      .subscribe(res => {
+        this.vendorsList = this.filteredList = res;
+    });
 
     this.newDiscountForm = this.fb.group({
       vendorName: ['', [Validators.required, this.requireMatch.bind(this)]],
@@ -75,28 +70,30 @@ export class NewDiscountComponent implements OnInit {
       pointsOfSales: this.fb.array([], Validators.required),
     });
 
-    this.filteredVendors = this.newDiscountForm
-      .get('vendorName')
-      .valueChanges.pipe(
-        startWith(''),
-        map((name) => (name ? this._filter(name) : this.vendors.slice()))
-      );
+    this.vendorNameDetectChanges();
+  }
+
+  vendorNameDetectChanges(): void {
+    this.newDiscountForm.get('vendorName').valueChanges.pipe(
+      debounceTime(300),
+      startWith('')
+    )
+    .subscribe(
+      (data) => {
+        if (!this.vendorsList || !data ) {
+          this.filteredList = this.vendorsList;
+          return;
+        }
+        this.filteredList = this.vendorsList.filter(value => value.vendorName.includes(data) );
+      });
   }
 
   private requireMatch(control: AbstractControl): ValidationErrors | null {
     const selection: any = control.value;
-    if (this.vendors && this.vendors.indexOf(selection) < 0) {
-      return { requireMatch: true };
+    if (this.vendorsList && this.vendorsList.find(x => x.vendorName.includes(selection))) {
+      return null;
     }
-    return null;
-  }
-
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.vendors.filter(
-      (vendor) => vendor.toLowerCase().indexOf(filterValue) === 0
-    );
+    return { requireMatch: true };
   }
 
   add(event: MatChipInputEvent): void {
@@ -123,14 +120,14 @@ export class NewDiscountComponent implements OnInit {
       this.tags.value.splice(index, 1);
     }
 
-    this.tags.controls.forEach((item, index) => {
+    this.tags.controls.forEach((item, indx) => {
       if (item.value === tag.value) {
-        this.tags.controls.splice(index, 1);
+        this.tags.controls.splice(indx, 1);
       }
     });
   }
 
-  addPoint() :void {
+  addPoint(): void {
     this.hide = false;
     const point = this.fb.group({
       name: ['', [Validators.required]],
@@ -139,17 +136,16 @@ export class NewDiscountComponent implements OnInit {
     this.pointOfSalesForms.push(point);
   }
 
-  deletePoint(i) :void {
+  deletePoint(i): void {
     this.pointOfSalesForms.removeAt(i);
   }
 
-  addLocation(i) :void {
+  addLocation(i): void {
     console.log(`ADD location to ${i} object`);
   }
 
   submit(): void {
     this.newDiscountForm.value;
-    console.log('Form Submitted!', this.newDiscountForm.value);
     this.newDiscountForm.reset();
 
     for (const control in this.newDiscountForm.controls) {
@@ -205,5 +201,9 @@ export class NewDiscountComponent implements OnInit {
 
   get pointOfSalesForms(): FormArray {
     return this.newDiscountForm.get('pointsOfSales') as FormArray;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

@@ -25,6 +25,10 @@ export class DiscountsService {
     return this.restApi.getDiscounts(options);
   }
 
+  getVendors(): Observable<any> {
+    return this.restApi.getVendors();
+  }
+
   getTowns(): Observable<any> {
     return this.restApi.getTowns();
   }

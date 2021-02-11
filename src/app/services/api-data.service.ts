@@ -8,7 +8,8 @@ import {
   GET_TAGS_ENDPOINT,
   GET_TICKET_ENDPOINT,
   GET_TOWNS_ENDPOINT, PUT_IS_SAVED_DISCOUNTS_ENDPOINT,
-  USER_INFO_ENDPOINT
+  USER_INFO_ENDPOINT,
+  VENDORS_ENDPOINT
 } from '../../constants';
 import { environment } from '../../environments/environment';
 
@@ -42,6 +43,10 @@ export class ApiDataService {
 
   getTicket(options): Observable<any> {
     return this.http.get<any>(`${environment.webApiUrl}${GET_TICKET_ENDPOINT}`, options);
+  }
+
+  getVendors(): Observable<any> {
+    return this.http.get<any>(`${environment.webApiUrl}${VENDORS_ENDPOINT}`);
   }
 
   updateIsSavedDiscount(id): Observable<any> {
