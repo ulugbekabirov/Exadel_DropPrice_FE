@@ -10,6 +10,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -29,7 +30,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { Router, RouterModule } from '@angular/router';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
-import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -56,6 +56,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSlideToggleModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatTooltipModule,
     MatButtonModule,
     MatIconModule,
     MatChipsModule,
@@ -83,6 +84,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSlideToggleModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatTooltipModule,
     MatButtonModule,
     MatIconModule,
     MatChipsModule,
