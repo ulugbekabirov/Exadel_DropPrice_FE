@@ -26,7 +26,7 @@ export class DiscountsService {
     return this.restApi.getDiscounts(options);
   }
 
-  getVendors(): Observable<any> {
+  getVendors(): Observable<Vendor[]> {
     return this.restApi.getVendors();
   }
 
@@ -47,19 +47,29 @@ export class DiscountsService {
     return this.restApi.updateIsSavedDiscount(discountId);
   }
 
-  getDiscountById(discountId): Observable<any> {
-    return this.restApi.getDiscountById(discountId);
+  getDiscountById(discountId, params): Observable<any> {
+    const paramsObj = {};
+    Object.keys({...params}).filter(value => typeof params[value] !== 'undefined').forEach(param => {
+      paramsObj[param] = params[param];
+    });
+    const options: { params: HttpParams } = {
+      params: new HttpParams({fromObject: paramsObj})
+    };
+    return this.restApi.getDiscountById(discountId, options);
   }
-
-  // getVendors(): Observable<Vendor[]> {
-  //   return this.restApi.getVendors();
-  // }
 
   getVendorById(vendorId): Observable<any> {
     return this.restApi.getVendorById(vendorId);
   }
 
-  getVendorsDiscounts(vendorId, options): Observable<any> {
+  getVendorsDiscounts(vendorId, params): Observable<any> {
+    const paramsObj = {};
+    Object.keys({...params}).filter(value => typeof params[value] !== 'undefined').forEach(param => {
+      paramsObj[param] = params[param];
+    });
+    const options: { params: HttpParams } = {
+      params: new HttpParams({fromObject: paramsObj})
+    };
     return this.restApi.getVendorsDiscounts(vendorId, options);
   }
 
@@ -76,5 +86,9 @@ export class DiscountsService {
 
   putDiscountInArchive(discountId): Observable<any> {
     return this.restApi.putDiscountInArchive(discountId);
+  }
+
+  postDiscount(discount): any {
+    return this.restApi.postDiscount(discount);
   }
 }

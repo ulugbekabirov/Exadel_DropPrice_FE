@@ -1,4 +1,18 @@
 <article class="discount-detail">
+  <a class="go-back__link"
+     fxLayoutAlign="center center"
+     fxLayoutGap=".5em"
+     matTooltip="Gp Back"
+     (click)="goBack()"
+  >
+    <mat-icon class="go-back__link_icon">
+      reply
+    </mat-icon>
+    <span class="go-back__link_text">
+      go back
+    </span>
+  </a>
+
 
   <section class="discount-detail__header">
 
@@ -29,7 +43,7 @@
     <mat-card class="discount-content">
       <h3 class="discount-content__vendor">
         <a
-          [routerLink]="[discount?.vendorId]"
+          [routerLink]="['../../vendors/', discount?.vendorId]"
           matTooltip="Vendor"
         >
           {{discount?.vendorName}}
@@ -184,6 +198,13 @@
   </section>
 
   <section class="discount-detail__actions">
+    <button class="action__button"
+            mat-flat-button
+            matTooltip="Take Ticket"
+            (click)="ticketHandler(discount?.discountId)"
+    >
+      {{ "DISCOUNT_DETAIL.TICKET_BUTTON_LABEL" | translate }}
+    </button>
     <button *appVerifyUserRoles='["Moderator"]'
             class="action__button"
             mat-flat-button
@@ -192,12 +213,14 @@
     >
       {{ "DISCOUNT_DETAIL.EDIT_BUTTON_LABEL" | translate }}
     </button>
-    <button class="action__button"
+    <button *appVerifyUserRoles='["Moderator"]'
+            class="action__button"
             mat-flat-button
-            matTooltip="Take Ticket"
-            (click)="ticketHandler(discount?.discountId)"
+            matTooltip="Archive Discount"
+            (click)="archiveDiscount(discount?.discountId)"
+            [ngStyle]="{'backgroundColor': discount?.activityStatus ? '#4A94EB' : '#FF6347'}"
     >
-      {{ "DISCOUNT_DETAIL.TICKET_BUTTON_LABEL" | translate }}
+      {{ "DISCOUNT_DETAIL.ARCHIVE_BUTTON_LABEL" | translate }}
     </button>
   </section>
 

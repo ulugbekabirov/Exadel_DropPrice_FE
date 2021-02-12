@@ -30,7 +30,7 @@
               matInput
               formControlName="vendorName"
               [matAutocomplete]="auto"
-              
+
               placeholder="{{
                 'NEW_DISCOUNT_FORM.PLACEHOLDER_VENDOR_NAME' | translate
               }}"
@@ -68,7 +68,7 @@
           }}</mat-label>
           <textarea
             class="form__discount-description"
-            formControlName="descriptionDiscount"
+            formControlName="description"
             matInput
             #description
             maxlength="5000"
@@ -193,7 +193,7 @@
           <h4>{{ "NEW_DISCOUNT_FORM.POINTS_TITLE" | translate }}</h4>
         </div>
 
-        <div formArrayName="pointsOfSales">
+        <div formArrayName="pointOfSales">
           <div
             *ngFor="let point of pointOfSalesForms.controls; let i = index"
             [formGroupName]="i"

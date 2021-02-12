@@ -28,8 +28,10 @@ import { DiscountsListComponent } from './components/discounts-list/discounts-li
 import { DiscountsListItemComponent } from './components/discounts-list-item/discounts-list-item.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { TicketComponent } from './components/ticket/ticket.component';
+
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     DiscountsListComponent,
     DiscountsListItemComponent,
     SearchBarComponent,
+    TicketComponent,
   ],
 
   imports: [

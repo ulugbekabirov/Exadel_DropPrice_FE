@@ -139,6 +139,23 @@
     "END_DATE": "до",
     "ASSESSMENT_LABEL": "Оценить",
     "EDIT_BUTTON_LABEL": "Редактировать",
+    "ARCHIVE_BUTTON_LABEL": "Архивировать",
     "TICKET_BUTTON_LABEL": "Талон"
+  },
+  "VENDOR_PAGE": {
+    "PAGE_TITLE": "Информация о вендоре",
+    "VENDOR_DETAIL": {
+      "DETAIL_RATING_LABEL": "Рейтинг вендора",
+      "DETAIL_CONTENT": {
+        "VENDOR_NAME": "Наименование вендора",
+        "VENDOR_ADDRESS": "Адрес",
+        "VENDOR_EMAIL": "Электронная почта",
+        "VENDOR_PHONE": "Контактный телефон",
+        "VENDOR_SOCIALS": "Социальные сети"
+      },
+      "DETAIL_ACTIONS": {
+        "EDIT": "Редактировать"
+      }
+    }
   }
 }

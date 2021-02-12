@@ -138,6 +138,23 @@
     "END_DATE": "to",
     "ASSESSMENT_LABEL": "Assess",
     "EDIT_BUTTON_LABEL": "Edit",
+    "ARCHIVE_BUTTON_LABEL": "Archive",
     "TICKET_BUTTON_LABEL": "Ticket"
+  },
+  "VENDOR_PAGE": {
+    "PAGE_TITLE": "About vendor",
+    "VENDOR_DETAIL": {
+      "DETAIL_RATING_LABEL": "Vendor rating",
+      "DETAIL_CONTENT": {
+        "VENDOR_NAME": "Vendor Name",
+        "VENDOR_ADDRESS": "Address",
+        "VENDOR_EMAIL": "E-Mail",
+        "VENDOR_PHONE": "Phone",
+        "VENDOR_SOCIALS": "Socials"
+      },
+      "DETAIL_ACTIONS": {
+        "EDIT": "Edit"
+      }
+    }
   }
 }
