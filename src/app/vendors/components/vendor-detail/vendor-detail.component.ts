@@ -3,7 +3,7 @@ import { switchMap, takeUntil } from 'rxjs/operators';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { DiscountsService } from '../../../services/discounts.service';
 import { forkJoin, Observable, Subject } from 'rxjs';
-import { Discount, LocationCoords, Town, Vendor } from '../../../models';
+import { Discount, Town, Vendor } from '../../../models';
 import { SORT_BY } from '../../../../constants';
 import { TicketService } from '../../../services/ticket.service';
 import { RefDirective } from '../../../directives/ref.directive';

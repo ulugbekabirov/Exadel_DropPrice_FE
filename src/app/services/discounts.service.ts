@@ -26,7 +26,7 @@ export class DiscountsService {
     return this.restApi.getDiscounts(options);
   }
 
-  getVendors(): Observable<any> {
+  getVendors(): Observable<Vendor[]> {
     return this.restApi.getVendors();
   }
 
@@ -50,10 +50,6 @@ export class DiscountsService {
   getDiscountById(discountId): Observable<any> {
     return this.restApi.getDiscountById(discountId);
   }
-
-  // getVendors(): Observable<Vendor[]> {
-  //   return this.restApi.getVendors();
-  // }
 
   getVendorById(vendorId): Observable<any> {
     return this.restApi.getVendorById(vendorId);

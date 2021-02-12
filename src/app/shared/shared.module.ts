@@ -31,7 +31,6 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { RouterModule } from '@angular/router';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { TicketComponent } from './components/ticket/ticket.component';
-import { DiscountsFilterComponent } from './components/discounts-filter/discounts-filter.component';
 
 
 @NgModule({
@@ -45,7 +44,6 @@ import { DiscountsFilterComponent } from './components/discounts-filter/discount
     DiscountsListItemComponent,
     SearchBarComponent,
     TicketComponent,
-    DiscountsFilterComponent
   ],
 
   imports: [
