@@ -65,7 +65,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     this.newDiscountForm = this.fb.group({
       vendorName: ['', [Validators.required, this.requireMatch.bind(this)]],
       discountName: ['', [Validators.required]],
-      descriptionDiscount: ['', [Validators.required]],
+      description: ['', [Validators.required]],
       discountAmount: [
         '',
         [Validators.required, Validators.min(1), Validators.max(100)],
@@ -75,7 +75,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
       endDate: ['', [Validators.required]],
       tags: this.fb.array([], Validators.required),
       activityStatus: [true, [Validators.requiredTrue]],
-      pointsOfSales: this.fb.array([], Validators.required),
+      pointOfSales: this.fb.array([], Validators.required),
     });
     this.addPoint();
     this.vendorNameDetectChanges();
@@ -168,10 +168,10 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
   }
 
   submit(): void {
-    this.newDiscountForm.value;
-
+    const newDiscount = this.newDiscountForm.value;
+    this.discountService.postDiscount(newDiscount)
+      .subscribe(res => console.log('res', res));
     this.newDiscountForm.reset();
-
     for (const control in this.newDiscountForm.controls) {
       this.newDiscountForm.controls[control].setErrors(null);
     }
@@ -188,8 +188,8 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     return this.newDiscountForm.get('discountName');
   }
 
-  get descriptionDiscount(): AbstractControl {
-    return this.newDiscountForm.get('descriptionDiscount');
+  get description(): AbstractControl {
+    return this.newDiscountForm.get('description');
   }
 
   get discountAmount(): AbstractControl {
@@ -225,7 +225,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
   }
 
   get pointOfSalesForms(): FormArray {
-    return this.newDiscountForm.get('pointsOfSales') as FormArray;
+    return this.newDiscountForm.get('pointOfSales') as FormArray;
   }
 
   ngOnDestroy(): void {

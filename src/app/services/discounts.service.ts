@@ -87,4 +87,8 @@ export class DiscountsService {
   putDiscountInArchive(discountId): Observable<any> {
     return this.restApi.putDiscountInArchive(discountId);
   }
+
+  postDiscount(discount): any {
+    return this.restApi.postDiscount(discount);
+  }
 }

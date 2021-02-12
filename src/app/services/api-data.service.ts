@@ -10,6 +10,7 @@ import {
   GET_TOWNS_ENDPOINT,
   GET_VENDOR_DISCOUNTS_ENDPOINT,
   GET_VENDORS_ENDPOINT,
+  POST_DISCOUNTS_ENDPOINT,
   PUT_ARCHIVE_DISCOUNTS_ENDPOINT,
   PUT_IS_SAVED_DISCOUNTS_ENDPOINT,
   SEARCH_DISCOUNTS_ENDPOINT,
@@ -74,6 +75,10 @@ export class ApiDataService {
 
   putDiscountInArchive(id): Observable<any> {
     return this.http.put(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${id}/${PUT_ARCHIVE_DISCOUNTS_ENDPOINT}`, null);
+  }
+
+  postDiscount(discount): any {
+    return this.http.post(`${environment.webApiUrl}${POST_DISCOUNTS_ENDPOINT}`, discount);
   }
 
 }
