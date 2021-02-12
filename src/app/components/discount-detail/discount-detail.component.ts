@@ -7,6 +7,7 @@ import { Discount } from '../../models';
 import { Observable, Subject } from 'rxjs';
 import { RefDirective } from '../../directives/ref.directive';
 import { TicketService } from '../../services/ticket.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-discount-detail',
@@ -18,6 +19,12 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
   discount: Discount;
   private unsubscribe$ = new Subject<void>();
   rating;
+  reqOpt = {
+    skip: 0,
+    take: 10,
+    longitude: this.userService.activeUserValue.officeLongitude,
+    latitude: this.userService.activeUserValue.officeLatitude,
+  };
 
   @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
 
@@ -26,7 +33,8 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private discountsService: DiscountsService,
     private ticketService: TicketService,
-    private location: Location
+    private location: Location,
+    private userService: UserService,
   ) {
   }
 
@@ -34,7 +42,7 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
     this.route.paramMap
       .pipe(
         switchMap((params): Observable<Discount> => {
-          return this.discountsService.getDiscountById(+params.get('id'));
+          return this.discountsService.getDiscountById(+params.get('id'), this.reqOpt);
         }),
         takeUntil(this.unsubscribe$)
       ).subscribe((discount: Discount) => {
@@ -42,7 +50,9 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
         return;
       }
       this.discount = discount;
-      this.rating = new Array(Number(this.discount.discountRating)).fill('star');
+      const lengthRating = this.discount.discountRating ? Number(this.discount.discountRating.toFixed()) : 0;
+      this.rating = new Array(lengthRating).fill('star');
+      console.log(this.rating)
     });
   }
 

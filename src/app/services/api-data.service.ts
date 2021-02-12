@@ -56,8 +56,8 @@ export class ApiDataService {
     return this.http.put(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${id}/${PUT_IS_SAVED_DISCOUNTS_ENDPOINT}`, null);
   }
 
-  getDiscountById(discountId): Observable<any> {
-    return this.http.get(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${discountId}`);
+  getDiscountById(discountId, options): Observable<any> {
+    return this.http.get(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${discountId}`, options);
   }
 
   getVendors(): Observable<Vendor[]> {

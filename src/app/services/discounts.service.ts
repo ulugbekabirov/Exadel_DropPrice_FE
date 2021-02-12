@@ -47,8 +47,15 @@ export class DiscountsService {
     return this.restApi.updateIsSavedDiscount(discountId);
   }
 
-  getDiscountById(discountId): Observable<any> {
-    return this.restApi.getDiscountById(discountId);
+  getDiscountById(discountId, params): Observable<any> {
+    const paramsObj = {};
+    Object.keys({...params}).filter(value => typeof params[value] !== 'undefined').forEach(param => {
+      paramsObj[param] = params[param];
+    });
+    const options: { params: HttpParams } = {
+      params: new HttpParams({fromObject: paramsObj})
+    };
+    return this.restApi.getDiscountById(discountId, options);
   }
 
   getVendorById(vendorId): Observable<any> {
