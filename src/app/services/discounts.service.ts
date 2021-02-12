@@ -26,6 +26,10 @@ export class DiscountsService {
     return this.restApi.getDiscounts(options);
   }
 
+  getVendors(): Observable<any> {
+    return this.restApi.getVendors();
+  }
+
   getTowns(): Observable<any> {
     return this.restApi.getTowns();
   }
@@ -47,9 +51,9 @@ export class DiscountsService {
     return this.restApi.getDiscountById(discountId);
   }
 
-  getVendors(): Observable<Vendor[]> {
-    return this.restApi.getVendors();
-  }
+  // getVendors(): Observable<Vendor[]> {
+  //   return this.restApi.getVendors();
+  // }
 
   getVendorById(vendorId): Observable<any> {
     return this.restApi.getVendorById(vendorId);
