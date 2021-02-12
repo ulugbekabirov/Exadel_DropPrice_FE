@@ -36,7 +36,7 @@
             [(ngModel)]="selectedVendorId"
             (change)="selectVendor(selectedVendorId)"
           >
-            <option *ngFor="let vend of vendors" [value]="vend.vendorId"
+            <option *ngFor="let vend of vendorsList" [value]="vend.vendorId"
                     [selected]="vend.vendorId === selectedVendorId"
             >
               {{vend.vendorName}}

@@ -52,7 +52,6 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
       this.discount = discount;
       const lengthRating = this.discount.discountRating ? Number(this.discount.discountRating.toFixed()) : 0;
       this.rating = new Array(lengthRating).fill('star');
-      console.log(this.rating)
     });
   }
 
@@ -76,6 +75,7 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
 
   archiveDiscount(discountId: number): void {
     this.discountsService.putDiscountInArchive(discountId).pipe(
+      takeUntil(this.unsubscribe$)
     )
       .subscribe(resp => {
         this.discount = {...this.discount, activityStatus: resp.activityStatus};

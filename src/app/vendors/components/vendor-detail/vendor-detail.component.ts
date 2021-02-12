@@ -25,8 +25,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
     longitude: this.userService.activeUserValue.longitude,
     latitude: this.userService.activeUserValue.latitude,
   };
-  vendors: Vendor[];
-  vendors$: Observable<Vendor[]>;
+  vendorsList: Vendor[];
   reqOpt = {
     skip: 0,
     take: 10,
@@ -49,16 +48,14 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.vendors$ = this.discountsService.getVendors();
-    const towns$ = this.discountsService.getTowns();
     this.route.paramMap
       .pipe(
         switchMap((params: ParamMap): any => {
           const vendId: number = +params.get('id');
           return forkJoin(
             this.discountsService.getVendorById(vendId),
-            this.vendors$,
-            towns$,
+            this.discountsService.getVendors(),
+            this.discountsService.getTowns(),
             this.discountsService.getVendorsDiscounts(vendId, this.reqOpt)
           );
         }),
@@ -71,7 +68,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
       const json = JSON.parse(this.vendor.socialLinks);
       this.vendorSocials = Object.keys(json).map(key => ({name: key, path: json[key]}));
       this.selectedVendorId = vendor.vendorId;
-      this.vendors = vendors;
+      this.vendorsList = vendors;
       this.towns = towns;
       this.vendorDiscounts = vendDisc;
     });
