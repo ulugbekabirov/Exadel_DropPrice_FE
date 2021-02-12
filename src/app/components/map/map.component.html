@@ -1,22 +1,27 @@
-<div
-  class="map-wrapper"
-  fxLayoutGap.xs="10px"
-  fxLayout.xs="column"
-  fxLayoutAlign.xs="center center"
->
-  <agm-map
-    [latitude]="this.coordinate.latitude"
-    [longitude]="this.coordinate.longitude"
-    [zoom]="zoom"
-    (mapClick)="onChoseLocation($event)"
-  >
-    <agm-marker
-      [latitude]="this.coordinate.latitude"
-      [longitude]="this.coordinate.longitude"
-    ></agm-marker>
-  </agm-map>
+<div class="map-wrapper" fxLayoutGap.xs="10px" fxLayout.xs="column">
+  <mat-icon mat-dialog-close (click)="close()">close</mat-icon>
+  <div mat-dialog-content>
+    <agm-map
+      [latitude]="coordinate.latitude"
+      [longitude]="coordinate.longitude"
+      [zoom]="zoom"
+      (mapClick)="onChoseLocation($event)"
+    >
+      <agm-marker
+        [latitude]="coordinate.latitude"
+        [longitude]="coordinate.longitude"
+      ></agm-marker>
+    </agm-map>
+  </div>
 
-  <button mat-raised-button color="accent" (click)="getCoordinats()">
-    Add point
-  </button>
+  <mat-dialog-actions fxLayoutAlign="start center">
+    <button
+      mat-raised-button
+      color="accent"
+      [mat-dialog-close]="true"
+      (click)="getCoordinats()"
+    >
+      {{ "MAP.ADD_POINT_BTN" | translate }}
+    </button>
+  </mat-dialog-actions>
 </div>

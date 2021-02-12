@@ -93,7 +93,6 @@
     "CONFIRMATION_DATE": "Confirmation date",
     "CLOSE": "Close"
   },
-
   "NEW_DISCOUNT_FORM": {
     "NAME_VENDOR": "Vendor name*",
     "NAME_VENDOR_ERROR": "The vendor must be selected from the available options",
@@ -123,6 +122,22 @@
     "POINTS_TITLE": "Click to add location details:",
     "ADD_LOCATION": "Add the location",
     "OPEN_MAP": "Open the map",
-    "DELETE_LOCATION": "Delete the location"
+    "DELETE_LOCATION": "Delete the location",
+    "EMPTYCOORDINATES": "Please, put a point on the map, click adding location icon"
+  },
+  "MAP": {
+    "ADD_POINT_BTN": "Add point"
+  },
+  "DISCOUNT_DETAIL": {
+    "AMOUNT_LABEL": "discount",
+    "PROMO_CODE_LABEL": "Promo Code",
+    "ADDRESS_LABEL": "address",
+    "DISTANCE": "from you",
+    "DATES_LABEL": "validity period",
+    "START_DATE": "from",
+    "END_DATE": "to",
+    "ASSESSMENT_LABEL": "Assess",
+    "EDIT_BUTTON_LABEL": "Edit",
+    "TICKET_BUTTON_LABEL": "Ticket"
   }
 }

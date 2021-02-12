@@ -1,3 +1,4 @@
+import { MapComponent } from './../components/map/map.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
@@ -8,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -26,6 +28,8 @@ import { DiscountsListComponent } from './components/discounts-list/discounts-li
 import { DiscountsListItemComponent } from './components/discounts-list-item/discounts-list-item.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { Router, RouterModule } from '@angular/router';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -36,9 +40,11 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
     MetersToKilometersPipe,
     DiscountsListComponent,
     DiscountsListItemComponent,
+    SearchBarComponent,
   ],
 
   imports: [
+    RouterModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -59,11 +65,14 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
     TranslateModule,
     MatTabsModule,
     AgmCoreModule,
+    MatTooltipModule,
+    MatDialogModule,
   ],
 
   providers: [GoogleMapsAPIWrapper],
 
   exports: [
+    RouterModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -89,7 +98,10 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
     MetersToKilometersPipe,
     DiscountsListComponent,
     DiscountsListItemComponent,
+    SearchBarComponent,
+    MatTooltipModule,
+    MatDialogModule,
   ],
+  entryComponents: [MapComponent],
 })
-export class SharedModule {
-}
+export class SharedModule {}

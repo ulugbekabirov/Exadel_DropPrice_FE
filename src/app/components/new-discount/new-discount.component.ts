@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import {
   AbstractControl,
   FormArray,
@@ -13,10 +13,15 @@ import { TranslateService } from '@ngx-translate/core';
 import { DiscountsService } from '../../services/discounts.service';
 import { Vendor } from '../../models';
 
-import { map, startWith, debounceTime, filter} from 'rxjs/operators';
+import { startWith, debounceTime, filter} from 'rxjs/operators';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
+import { MapComponent } from './../map/map.component';
+
 export interface Tag {
   name: string;
 }
@@ -27,7 +32,7 @@ export interface Tag {
 })
 export class NewDiscountComponent implements OnInit, OnDestroy {
   newDiscountForm: FormGroup;
-  hide = true;
+  coordinateIsEmpty = true;
   tagsArray: Tag[] = [];
   visible = true;
   selectable = true;
@@ -38,7 +43,6 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
 
   vendorsList: Vendor[];
   filteredList: Vendor[];
-  filteredVendors: Observable<Vendor[]>;
   private subscription: Subscription;
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
@@ -47,6 +51,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
   constructor(
     public translateService: TranslateService,
     public fb: FormBuilder,
+    private dialog: MatDialog,
     private discountService: DiscountsService,
   ) {}
 
@@ -61,7 +66,10 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
       vendorName: ['', [Validators.required, this.requireMatch.bind(this)]],
       discountName: ['', [Validators.required]],
       descriptionDiscount: ['', [Validators.required]],
-      discountAmount: ['', [Validators.required, Validators.min(1), Validators.max(100)]],
+      discountAmount: [
+        '',
+        [Validators.required, Validators.min(1), Validators.max(100)],
+      ],
       promoCode: [''],
       startDate: ['', [Validators.required]],
       endDate: ['', [Validators.required]],
@@ -69,7 +77,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
       activityStatus: [true, [Validators.requiredTrue]],
       pointsOfSales: this.fb.array([], Validators.required),
     });
-
+    this.addPoint();
     this.vendorNameDetectChanges();
   }
 
@@ -90,7 +98,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
 
   private requireMatch(control: AbstractControl): ValidationErrors | null {
     const selection: any = control.value;
-    if (this.vendorsList && this.vendorsList.find(x => x.vendorName.includes(selection))) {
+    if (this.vendorsList && this.vendorsList.find(item => item.vendorName.includes(selection))) {
       return null;
     }
     return { requireMatch: true };
@@ -128,7 +136,6 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
   }
 
   addPoint(): void {
-    this.hide = false;
     const point = this.fb.group({
       name: ['', [Validators.required]],
       address: ['', [Validators.required]],
@@ -136,22 +143,40 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     this.pointOfSalesForms.push(point);
   }
 
-  deletePoint(i): void {
-    this.pointOfSalesForms.removeAt(i);
+  deletePoint(currentSaleObj): void {
+    this.pointOfSalesForms.removeAt(currentSaleObj);
+    this.coordinateIsEmpty = true;
   }
 
-  addLocation(i): void {
-    console.log(`ADD location to ${i} object`);
+  openDialog(currentSaleObj): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.minHeight = '400px';
+    dialogConfig.minWidth = '100%';
+    dialogConfig.direction = 'rtl';
+
+    dialogConfig.data = {
+      latitude: this.pointOfSalesForms.value[currentSaleObj].latitude,
+      longitude: this.pointOfSalesForms.value[currentSaleObj].longitude,
+    };
+
+    const dialogRef = this.dialog.open(MapComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((data) => {
+      Object.assign(this.pointOfSalesForms.value[currentSaleObj], data);
+    });
+    this.coordinateIsEmpty = false;
   }
 
   submit(): void {
     this.newDiscountForm.value;
+
     this.newDiscountForm.reset();
 
     for (const control in this.newDiscountForm.controls) {
       this.newDiscountForm.controls[control].setErrors(null);
     }
 
+    this.pointOfSalesForms.controls = [];
     this.tags.controls = [];
   }
 

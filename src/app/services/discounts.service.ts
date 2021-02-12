@@ -2,18 +2,19 @@ import { Injectable } from '@angular/core';
 import { ApiDataService } from './api-data.service';
 import { Observable } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
-import { Ticket } from '../models';
+import { Vendor } from '../models';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DiscountsService {
-
   constructor(
     private restApi: ApiDataService,
-  ) {}
+  ) {
+  }
 
-  getDiscounts(skip, take, longitude, latitude, sortBy?): Observable<any> {
+  getDiscounts({skip, take, longitude, latitude, sortBy}): Observable<any> {
     const options: { params: HttpParams } = {
       params: new HttpParams()
         .set('skip', skip)
@@ -42,19 +43,38 @@ export class DiscountsService {
     return this.restApi.getTags(options);
   }
 
-  getTicket(discId): Observable<Ticket> {
-    const options: { params: HttpParams } = {
-      params: new HttpParams()
-        .set('discountId', discId)
-    };
-    return this.restApi.getTicket(options);
+  updateIsSavedDiscount(discountId): Observable<any> {
+    return this.restApi.updateIsSavedDiscount(discountId);
   }
 
-  updateIsSavedDiscount(discId): Observable<any> {
+  getDiscountById(discountId): Observable<any> {
+    return this.restApi.getDiscountById(discountId);
+  }
+
+  // getVendors(): Observable<Vendor[]> {
+  //   return this.restApi.getVendors();
+  // }
+
+  getVendorById(vendorId): Observable<any> {
+    return this.restApi.getVendorById(vendorId);
+  }
+
+  getVendorsDiscounts(vendorId, options): Observable<any> {
+    return this.restApi.getVendorsDiscounts(vendorId, options);
+  }
+
+  searchDiscounts(params): Observable<any> {
+    const paramsObj = {};
+    Object.keys({...params}).filter(value => typeof params[value] !== 'undefined').forEach(param => {
+      paramsObj[param] = params[param];
+    });
     const options: { params: HttpParams } = {
-      params: new HttpParams()
-        .set('discountId', discId)
+      params: new HttpParams({fromObject: paramsObj})
     };
-    return this.restApi.updateIsSavedDiscount(discId);
+    return this.restApi.searchDiscounts(options);
+  }
+
+  putDiscountInArchive(discountId): Observable<any> {
+    return this.restApi.putDiscountInArchive(discountId);
   }
 }
