@@ -30,16 +30,17 @@
               matInput
               formControlName="vendorName"
               [matAutocomplete]="auto"
+              
               placeholder="{{
                 'NEW_DISCOUNT_FORM.PLACEHOLDER_VENDOR_NAME' | translate
               }}"
             />
             <mat-autocomplete #auto="matAutocomplete">
               <mat-option
-                *ngFor="let option of filteredVendors | async"
-                [value]="option"
+                *ngFor="let option of filteredList"
+                [value]="option.vendorName"
               >
-                {{ option }}
+                {{ option.vendorName }}
               </mat-option>
             </mat-autocomplete>
             <mat-error *ngIf="vendorName.errors?.requireMatch">{{
