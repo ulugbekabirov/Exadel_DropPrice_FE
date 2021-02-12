@@ -218,6 +218,7 @@
             mat-flat-button
             matTooltip="Archive Discount"
             (click)="archiveDiscount(discount?.discountId)"
+            [ngStyle]="{'backgroundColor': discount?.activityStatus ? '#4A94EB' : '#FF6347'}"
     >
       {{ "DISCOUNT_DETAIL.ARCHIVE_BUTTON_LABEL" | translate }}
     </button>

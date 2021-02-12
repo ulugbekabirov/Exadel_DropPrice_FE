@@ -3,6 +3,7 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { VendorDetailComponent } from './components/vendor-detail/vendor-detail.component';
 import { VendorsComponent } from './components/vendors/vendors.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {path: '',
@@ -21,6 +22,7 @@ const routes: Routes = [
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
+    TranslateModule,
   ],
   exports: [
     RouterModule

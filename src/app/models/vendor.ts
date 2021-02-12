@@ -4,6 +4,7 @@ export interface Vendor {
   address: string;
   email: string;
   phone: string;
-  socials: string;
+  socialLinks: string;
   vendorRating: number;
+  ticketCount: number;
 }
