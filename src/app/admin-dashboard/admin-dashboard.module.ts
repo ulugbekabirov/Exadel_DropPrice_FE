@@ -3,14 +3,16 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../guards/auth.guard';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
-  {path: '', component: StatisticsComponent, canActivate: [AuthGuard]}
+  {path: '', component: AdminDashboardComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
   declarations: [
-    StatisticsComponent
+    StatisticsComponent,
+    AdminDashboardComponent
   ],
   imports: [
     SharedModule,

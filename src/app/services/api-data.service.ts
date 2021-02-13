@@ -14,7 +14,8 @@ import {
   PUT_ARCHIVE_DISCOUNTS_ENDPOINT,
   PUT_IS_SAVED_DISCOUNTS_ENDPOINT,
   SEARCH_DISCOUNTS_ENDPOINT,
-  USER_INFO_ENDPOINT
+  USER_INFO_ENDPOINT,
+  POST_VENDORS_ENDPOINT
 } from '../../constants';
 import { environment } from '../../environments/environment';
 
@@ -79,6 +80,10 @@ export class ApiDataService {
 
   postDiscount(discount): any {
     return this.http.post(`${environment.webApiUrl}${POST_DISCOUNTS_ENDPOINT}`, discount);
+  }
+
+  postVendor(vendor): any {
+    return this.http.post(`${environment.webApiUrl}${POST_VENDORS_ENDPOINT}`, vendor);
   }
 
 }

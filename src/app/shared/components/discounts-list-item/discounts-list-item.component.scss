@@ -58,12 +58,12 @@
       color: $isSaved_true_bg_color;
       cursor: pointer;
       will-change: transform;
-      transition: transform .1s ease-in-out;
+      //transition: transform .1s ease-in-out;
 
-      &:hover {
-        transform: scale(1.1, 1.1);
-        color: $isSaved_true_bg_color_hover;
-      }
+      //&:hover {
+      //  transform: scale(1.1, 1.1);
+      //  color: $isSaved_true_bg_color_hover;
+      //}
     }
 
     &_rating {

@@ -52,12 +52,12 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     public translateService: TranslateService,
     public fb: FormBuilder,
     private dialog: MatDialog,
-    private discountService: DiscountsService,
+    private discountsService: DiscountsService,
   ) {}
 
   ngOnInit(): void {
 
-    this.subscription = this.discountService.getVendors()
+    this.subscription = this.discountsService.getVendors()
       .subscribe(res => {
         this.vendorsList = this.filteredList = res;
     });
@@ -169,7 +169,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
 
   submit(): void {
     const newDiscount = this.newDiscountForm.value;
-    this.discountService.postDiscount(newDiscount)
+    this.discountsService.postDiscount(newDiscount)
       .subscribe(res => console.log('res', res));
     this.newDiscountForm.reset();
     for (const control in this.newDiscountForm.controls) {

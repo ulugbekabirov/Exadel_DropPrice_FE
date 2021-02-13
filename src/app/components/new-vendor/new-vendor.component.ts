@@ -5,6 +5,7 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
+import { DiscountsService } from '../../services/discounts.service';
 
 @Component({
   selector: 'app-new-vendor',
@@ -14,14 +15,17 @@ import {
 export class NewVendorComponent implements OnInit {
   newVendorForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private discountsService: DiscountsService
+  ) {}
 
   ngOnInit(): void {
     this.newVendorForm = this.fb.group({
       name: ['', [Validators.required]],
       address: [''],
-      descriptionVendor: [''],
-      number: [
+      description: [''],
+      phone: [
         '',
         [
           Validators.required,
@@ -41,7 +45,9 @@ export class NewVendorComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.newVendorForm.value;
+    const newVendor = this.newVendorForm.value;
+    this.discountsService.postVendor(newVendor)
+      .subscribe(res => console.log('res', res));
     this.newVendorForm.reset();
     for (const control in this.newVendorForm.controls) {
       this.newVendorForm.controls[control].setErrors(null);
@@ -56,7 +62,7 @@ export class NewVendorComponent implements OnInit {
     return this.newVendorForm.get('address');
   }
 
-  get number(): AbstractControl {
+  get phone(): AbstractControl {
     return this.newVendorForm.get('number');
   }
 

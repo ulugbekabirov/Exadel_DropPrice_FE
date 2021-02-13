@@ -91,4 +91,7 @@ export class DiscountsService {
   postDiscount(discount): any {
     return this.restApi.postDiscount(discount);
   }
+  postVendor(vendor): any {
+    return this.restApi.postVendor(vendor);
+  }
 }
