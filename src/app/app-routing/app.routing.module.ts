@@ -6,6 +6,7 @@ import { HomeComponent } from '../components/home/home.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { DiscountDetailComponent } from '../components/discount-detail/discount-detail.component';
 import { ModeratorDashboardComponent } from '../components/moderator-dashboard/moderator-dashboard.component';
+import { NewDiscountComponent } from '../components/new-discount/new-discount.component';
 
 const appRoutes: Routes = [
   {
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
     component: ModeratorDashboardComponent,
     canActivate: [AuthGuard],
   },
+  {path: 'discounts/edit/:id', component: NewDiscountComponent},
   {path: '', redirectTo: '/', pathMatch: 'full'},
   {path: '**', component: NotFoundComponent}
 ];

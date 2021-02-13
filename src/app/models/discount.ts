@@ -12,6 +12,6 @@ export interface Discount {
   promoCode?: string;
   activityStatus: boolean;
   isSaved: boolean;
-  address: string;
+  pointOfSales: object[];
   tags: string[];
 }

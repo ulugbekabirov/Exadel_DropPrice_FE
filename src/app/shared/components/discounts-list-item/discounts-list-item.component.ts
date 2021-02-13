@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { Discount } from '../../../models';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-discounts-list-item',
   templateUrl: './discounts-list-item.component.html',
@@ -14,6 +16,8 @@ import { Discount } from '../../../models';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DiscountsListItemComponent {
+
+  constructor(private _router: Router){}
   @Input() discount: Discount;
   @Output() requestTicket = new EventEmitter<any>();
   @Output() changeFavourites = new EventEmitter<any>();
@@ -24,5 +28,8 @@ export class DiscountsListItemComponent {
 
   toggleFavorites(discountId: number): void {
     this.changeFavourites.emit(discountId);
+  }
+  onEditDiscount(discountId: number){
+    this._router.navigate(['discounts/edit', discountId])
   }
 }

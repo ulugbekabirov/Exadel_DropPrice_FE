@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { DiscountsService } from '../../services/discounts.service';
+
 import { Vendor } from '../../models';
 
 import { startWith, debounceTime, filter} from 'rxjs/operators';
@@ -21,6 +22,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { MapComponent } from './../map/map.component';
+import { ActivatedRoute } from '@angular/router';
+import { Discount } from './../../models/discount';
 
 export interface Tag {
   name: string;
@@ -53,6 +56,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     public fb: FormBuilder,
     private dialog: MatDialog,
     private discountService: DiscountsService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -79,6 +83,32 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     });
     this.addPoint();
     this.vendorNameDetectChanges();
+    this.route.paramMap.subscribe(params => {
+      const discId = +params.get('id');
+      if(discId) {
+        this.getDiscount(discId);
+      }
+    })
+  }
+
+  getDiscount(id:number) {
+    this.discountService.getDiscountById(id, {}).subscribe(
+      (discount: Discount) => this.editDiscount(discount),
+      (err:any) => console.log(err)
+    );
+  }
+
+  editDiscount(discount: Discount) {
+    this.newDiscountForm.patchValue({
+      vendorName: discount.vendorName,
+      discountName: discount.discountName,
+      description: discount.description,
+      discountAmount: discount.discountAmount,
+      promoCode: discount.promoCode,
+      startDate: discount.startDate,
+      endDate: discount.endDate,
+      tags: discount.tags
+    });
   }
 
   vendorNameDetectChanges(): void {

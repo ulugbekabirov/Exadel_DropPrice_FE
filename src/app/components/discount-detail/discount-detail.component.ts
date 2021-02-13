@@ -9,13 +9,14 @@ import { RefDirective } from '../../directives/ref.directive';
 import { TicketService } from '../../services/ticket.service';
 import { UserService } from '../../services/user.service';
 
+
 @Component({
   selector: 'app-discount-detail',
   templateUrl: './discount-detail.component.html',
   styleUrls: ['./discount-detail.component.scss']
 })
 export class DiscountDetailComponent implements OnInit, OnDestroy {
-
+  address ="Mock adress, delete it soon"
   discount: Discount;
   private unsubscribe$ = new Subject<void>();
   rating;
