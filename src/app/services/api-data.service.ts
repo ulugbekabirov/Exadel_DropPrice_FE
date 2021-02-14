@@ -86,4 +86,8 @@ export class ApiDataService {
     return this.http.post(`${environment.webApiUrl}${POST_VENDORS_ENDPOINT}`, vendor);
   }
 
+  searchVendors(options): any {
+    return this.http.get(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/search`, options);
+  }
+
 }

@@ -1,0 +1,191 @@
+@import "src/variables";
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700&display=swap");
+
+
+.sidebar {
+  font-size: 1rem;
+  position: fixed;
+  top: $main_header_height;;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+  width: $admin_sidebar_width;
+  color: $admin_sidebar_txtColor;
+  background: $admin_sidebar_bgColor;
+  padding-top: 1em;
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+
+    .logo-link {
+      align-self: center;
+      margin: 2em auto 0;
+
+      img {
+        display: block;
+        max-width: 8em;
+
+        @media screen and (max-width: 767px) {
+          margin: 0;
+          height: 2.2em;
+        }
+      }
+
+
+    }
+
+    .toggle-mob-menu {
+      display: none;
+      margin-left: .4em;
+      padding: .3em;
+      margin-top: $main_header_height;
+      background: $admin_content_blockColor;
+      border-radius: $border-radius;
+
+      svg {
+        fill: $black;
+        transition: transform 0.2s;
+      }
+
+      @media screen and (max-width: 767px) {
+        display: block;
+      }
+    }
+
+    .admin-sidebar__menu {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+
+      li {
+        > * {
+          width: 100%;
+          padding: .8em 1em;
+        }
+
+        a,
+        button {
+          color: inherit;
+          background: none;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          padding-left: 1em;
+          font-size: 0.9rem;
+          transition: background 0.2s, color 0.2s;
+
+          svg {
+            width: 20px;
+            height: 20px;
+            fill: $admin_sidebar_txtColor;
+            margin-right: .7em;
+            transition: fill 0.2s;
+          }
+
+          &:hover,
+          &focus {
+            background: $admin_sidebar_bgColor_hover;
+            color: $blue;
+            outline: none;
+
+            svg {
+              fill: $blue;
+            }
+          }
+        }
+
+        &:nth-last-child(2) {
+          margin-bottom: 2.2em;
+        }
+
+        &:last-child {
+          margin-top: auto;
+          margin-bottom: 1.3em;
+        }
+      }
+
+      .admin-sidebar__menu_heading {
+        h3 {
+          text-transform: uppercase;
+          letter-spacing: 0.15em;
+          font-size: .8rem;
+          margin: .8em 0 0;
+          color: $admin_sidebar_headingColor;
+        }
+      }
+
+      @media screen and (max-width: 767px) {
+        position: absolute;
+        left: 6em;
+        top: 10em;
+        margin-top: 0;
+        z-index: 2;
+        border-radius: $border-radius;
+        background: $admin_sidebar_bgColor;
+        visibility: hidden;
+        opacity: 0;
+        transform: scale(0.95);
+        transition: all 0.2s;
+      }
+    }
+
+    &.mobile-opened {
+      .toggle-mob-menu {
+        svg {
+          transform: rotate(180deg);
+        }
+      }
+
+      .admin-sidebar__menu {
+        transform: scale(1);
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      flex-direction: row;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    position: static;
+    width: 100%;
+    padding: .6em;
+
+  }
+
+  @media screen and (min-width: 768px) {
+    &.collapsed {
+      width: $admin_sidebar_width_collapsed;
+
+      nav {
+        .logo-link,
+        span,
+        .admin-sidebar__menu_heading {
+          display: none;
+
+          li {
+            > * {
+              padding: .6em;
+            }
+          }
+
+          svg {
+            margin-right: 0;
+          }
+
+        }
+
+        .collapse-btn {
+          svg {
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+  }
+}

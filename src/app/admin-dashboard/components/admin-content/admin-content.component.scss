@@ -1,0 +1,39 @@
+@import "src/variables";
+
+.content {
+  font-size: 1rem;
+  position: relative;
+  min-height: 100vh;
+  padding: 2em;
+  color: $admin_content_txtColor;
+  background: $admin_content_bgColor;
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2em;
+
+    > article {
+      display: flex;
+      height: 20em;
+      background: $admin_content_bgColor;
+      border-radius: $border-radius;
+      box-shadow: $box-shadow;
+
+      &:first-child,
+      &:last-child {
+        grid-column: 1 / -1;
+      }
+
+      @media screen and (max-width: 400px) {
+
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      position: static;
+      width: 100%;
+    }
+  }
+}

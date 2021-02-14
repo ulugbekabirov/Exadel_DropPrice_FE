@@ -1,1 +1,19 @@
-<p>admin-dashboard works!</p>
+<article class="admin-dashboard"
+         ngClass="{{collapseSidebar ? 'collapsed' : ''}}"
+>
+  <div class="admin-dashboard__sidebar">
+    <app-admin-sidebar
+    (changeCollapse)="onWidthChange($event)"
+    ></app-admin-sidebar>
+  </div>
+  <div class="admin-dashboard__search">
+    <app-admin-search
+    [searchTerm]="searchTerm"
+    ></app-admin-search>
+  </div>
+  <div class="admin-dashboard__outlet">
+    <app-admin-content
+    [searchResults$]="searchResults$"
+    ></app-admin-content>
+  </div>
+</article>

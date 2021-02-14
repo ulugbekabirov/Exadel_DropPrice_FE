@@ -158,5 +158,19 @@
       }
     }
   },
-  "BUTTON_BACK_LOCATION": "назад"
+  "BUTTON_BACK_LOCATION": "назад",
+  "ADMIN_DASHBOARD": {
+    "SIDEBAR": {
+      "ADMIN": "Статистика",
+      "SETTINGS": "Настройки",
+      "VENDORS": "Вендоры",
+      "DISCOUNTS": "Скидки",
+      "OPTIONS": "Опции",
+      "COLLAPSE": "Свернуть"
+    },
+    "SEARCH": {
+      "SEARCH_BY": "Искать по"
+    },
+    "CONTENT": ""
+  }
 }

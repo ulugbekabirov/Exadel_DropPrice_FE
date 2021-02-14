@@ -90,8 +90,8 @@
               padding-left: .5em;
 
               &:hover {
-                border-left: .2em solid $bg_header_color;
-                color: $bg_header_color;
+                border-left: .2em solid $main_header_bgColor;
+                color: $main_header_bgColor;
               }
             }
           }

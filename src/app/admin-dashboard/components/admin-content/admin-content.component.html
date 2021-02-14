@@ -1,0 +1,22 @@
+<ng-content></ng-content>
+<section class="content">
+  <section class="grid">
+    <article>
+      <div id="search-component">
+        <h4>Vendors Searches</h4>
+        <ul class="search-result">
+          <li *ngFor="let vendor of searchResults$ | async" >
+            {{vendor | json}}
+          </li>
+        </ul>
+      </div>
+    </article>
+    <article></article>
+    <article></article>
+    <article></article>
+    <article></article>
+    <article></article>
+    <article></article>
+    <article></article>
+  </section>
+</section>

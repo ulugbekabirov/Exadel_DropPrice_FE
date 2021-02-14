@@ -135,8 +135,8 @@
           padding: .5em 1em;
           margin: 0 2em;
           color: $discount_detail_text_color;
-          border-right: 2px solid $bg_header_color;
-          border-left: 2px solid $bg_header_color;
+          border-right: 2px solid $main_header_bgColor;
+          border-left: 2px solid $main_header_bgColor;
         }
       }
 
@@ -181,7 +181,7 @@
           font-style: italic;
           font-weight: 600;
           letter-spacing: .1em;
-          color: $bg_header_color;
+          color: $main_header_bgColor;
         }
       }
 

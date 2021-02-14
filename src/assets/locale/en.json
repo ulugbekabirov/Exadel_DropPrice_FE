@@ -157,5 +157,19 @@
       }
     }
   },
-  "BUTTON_BACK_LOCATION": "go back"
+  "BUTTON_BACK_LOCATION": "go back",
+  "ADMIN_DASHBOARD": {
+    "SIDEBAR": {
+      "ADMIN": "Admin",
+      "SETTINGS": "Settings",
+      "VENDORS": "Vendors",
+      "DISCOUNTS": "Discounts",
+      "OPTIONS": "Options",
+      "COLLAPSE": "Collapse"
+    },
+    "SEARCH": {
+      "SEARCH_BY": "Search by"
+    },
+    "CONTENT": ""
+  }
 }

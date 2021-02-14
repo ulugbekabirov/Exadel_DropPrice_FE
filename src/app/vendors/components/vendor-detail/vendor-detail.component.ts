@@ -88,6 +88,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
       .subscribe(([vendor, discounts]) => {
         this.vendorDiscounts = discounts;
         this.vendor = vendor;
+        console.log('current', this.vendor);
       });
   }
 

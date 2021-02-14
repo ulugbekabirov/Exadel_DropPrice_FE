@@ -1,0 +1,26 @@
+@import "src/variables";
+
+.admin-dashboard {
+  font-size: 1rem;
+  position: relative;
+  top: $main_header_height;
+  left: 0;
+  display: grid;
+  grid-template-columns: $admin_sidebar_width auto;
+
+  &__sidebar {
+    grid-column: 1/2;
+  }
+
+  &__search {
+    grid-column: 2/3;
+  }
+
+  &__outlet {
+    grid-column: 2/3;
+  }
+
+  &.collapsed {
+    grid-template-columns: $admin_sidebar_width_collapsed auto;
+  }
+}
