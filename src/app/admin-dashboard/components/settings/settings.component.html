@@ -1,26 +1,13 @@
 <section class="settings">
-  <section class="grid">
-    <article *ngFor="let config of configs$ | async"
+  <div class="grid">
+    <article *ngFor="let setting of settings$ | async"
              class="config"
     >
-      <mat-card>
-        <mat-card-title>
-          {{'Изменить '}}{{config.configName}}
-        </mat-card-title>
-        <mat-form-field appearance="fill">
-          <mat-label>{{config.configName}}</mat-label>
-          <mat-select [formControl]="configRadius"
-          >
-            <mat-option *ngFor="let radius of defaultRadiusValues$ | async" [value]="radius">
-              {{radius | metersToKilometers}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-card-content>
-          <mat-card-subtitle>{{config.configName}} in kilometers now.:</mat-card-subtitle>
-          {{radiusSelected$ | async | metersToKilometers}}
-        </mat-card-content>
-      </mat-card>
+      <app-setting-item
+      [setting]="setting"
+      [settingEdit]="settingEdit"
+      (onSettingChange)="changeSetting($event)"
+      ></app-setting-item>
     </article>
-  </section>
+  </div>
 </section>

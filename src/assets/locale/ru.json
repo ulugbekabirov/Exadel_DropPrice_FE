@@ -160,6 +160,7 @@
   },
   "BUTTON_BACK_LOCATION": "назад",
   "ADMIN_DASHBOARD": {
+    "SETTINGS": "Изменить",
     "SIDEBAR": {
       "ADMIN": "Статистика",
       "SETTINGS": "Настройки",

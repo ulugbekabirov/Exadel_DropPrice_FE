@@ -19,11 +19,11 @@ export const SEARCH_DISCOUNTS_ENDPOINT = 'search';
 export const SORT_BY = [
   {
     name: 'MAIN_PAGE.FILTER.SORT_BY.DISCOUNT_RATING_ASC.NAME',
-    sortBy: 'DiscountRatingAsc',
+    sortBy: 'RatingAsc',
   },
   {
     name: 'MAIN_PAGE.FILTER.SORT_BY.DISCOUNT_RATING_DESC.NAME',
-    sortBy: 'DiscountRatingDesc',
+    sortBy: 'RatingDesc',
   },
   {
     name: 'MAIN_PAGE.FILTER.SORT_BY.DISTANCE_ASC.NAME',

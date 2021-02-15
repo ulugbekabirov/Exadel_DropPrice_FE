@@ -10,35 +10,22 @@
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     grid-gap: 2em;
+    justify-items: stretch;
+    align-items: stretch;
 
     > article {
       display: flex;
-      //height: 20em;
+      width: 100%;
       background: $admin_content_bgColor;
       border-radius: $border-radius;
       box-shadow: $box-shadow;
-
-      mat-card {
-        width: 100%;
-        height: auto;
-      }
-
-      &:first-child,
-      &:last-child {
-        grid-column: 1 / -1;
-      }
-
-      @media screen and (max-width: 400px) {
-
-        grid-column: 1 / -1;
-      }
     }
+  }
 
-    @media screen and (max-width: 767px) {
-      position: static;
-      width: 100%;
-    }
+  @media screen and (max-width: 767px) {
+    position: static;
+    width: 100%;
   }
 }

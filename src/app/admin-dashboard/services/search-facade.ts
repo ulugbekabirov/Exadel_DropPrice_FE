@@ -113,7 +113,6 @@ export class SearchFacade {
     const searchTerm$ = this.sortStore.searchQuery$.pipe(
       debounceTime(debounceMs),
       distinctUntilChanged(),
-      tap(x => console.log('dfrdfvfcv', x))
     );
     const sortBy$ = combineLatest(this.sortStore.sortRatingSelected$, this.sortStore.sortTicketCountSelected$).pipe(
       debounceTime(debounceMs),

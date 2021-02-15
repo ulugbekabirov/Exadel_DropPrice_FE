@@ -32,6 +32,8 @@ const SEARCH_INITIAL_STATE = {
   take: 10,
 };
 
+// ['TicketCountAsc', 'RatingDesc'];
+
 export class BehaviorSubjectItem<T> {
   readonly subject: BehaviorSubject<T>;
   readonly value$: Observable<T>;

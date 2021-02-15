@@ -14,6 +14,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { SettingItemComponent } from './components/setting-item/setting-item.component';
 
 const routes: Routes = [
   {path: '',
@@ -39,6 +40,7 @@ const routes: Routes = [
     AdminContentComponent,
     AdminSearchComponent,
     SettingsComponent,
+    SettingItemComponent,
   ],
   imports: [
     SharedModule,

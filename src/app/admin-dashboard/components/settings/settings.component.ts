@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiDataService } from '../../../services/api-data.service';
-import { FormControl } from '@angular/forms';
-import { switchMap, tap } from 'rxjs/operators';
-import { SettingsService } from '../../services/settings.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Setting } from '../../../models/setting';
 import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-settings',
@@ -11,26 +11,21 @@ import { Observable } from 'rxjs';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-  configs$;
-  configRadius = new FormControl();
-  defaultRadiusValues$: Observable<any>;
-  radiusSelected$: Observable<any>;
+  settings$: Observable<Setting[]>;
+  settingEdit: FormGroup = new FormGroup({
+    settingValue: new FormControl('', Validators.required)
+  });
 
   constructor(
     private api: ApiDataService,
-    private settingsService: SettingsService
-  ) {
-    this.configs$ = this.api.getApiConfigs();
-    this.defaultRadiusValues$ = this.settingsService.radiusData$;
-    this.radiusSelected$ = this.settingsService.radiusSelected$;
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.configRadius.valueChanges.subscribe(next => this.settingsService.setRadiusSelected(next));
-    this.radiusSelected$.pipe(
-      switchMap(result => {
-        return this.api.putApiConfig(1, result)
-      })
-    ).subscribe();
+    this.settings$ = this.api.getApiConfigs();
+  }
+
+  changeSetting(configId: number): void {
+    const {settingValue} = this.settingEdit.value;
+    this.api.putApiConfig(configId, settingValue);
   }
 }

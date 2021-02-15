@@ -159,6 +159,7 @@
   },
   "BUTTON_BACK_LOCATION": "go back",
   "ADMIN_DASHBOARD": {
+    "SETTINGS": "Change",
     "SIDEBAR": {
       "ADMIN": "Statistics",
       "SETTINGS": "Settings",
