@@ -2,7 +2,7 @@ export interface Vendor {
   vendorId: number;
   vendorName: string;
   address: string;
-  descriptionVendor: string;
+  description: string;
   email: string;
   phone: string;
   socialLinks: {

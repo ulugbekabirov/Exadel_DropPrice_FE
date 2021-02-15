@@ -18,6 +18,7 @@ import { Vendor } from './../../models/vendor';
 })
 export class NewVendorComponent implements OnInit {
   newVendorForm: FormGroup;
+  vendor: Vendor;
 
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -27,7 +28,7 @@ export class NewVendorComponent implements OnInit {
     this.newVendorForm = this.fb.group({
       name: ['', [Validators.required]],
       address: [''],
-      descriptionVendor: [''],
+      description: [''],
       number: [
         '',
         [
@@ -62,19 +63,32 @@ export class NewVendorComponent implements OnInit {
   }
 
   editVendor(vendor: Vendor){
-    console.log(vendor.socialLinks.instagram)
+    
+    // const json = JSON.parse(vendor.socialLinks);
+   
+    console.log(JSON.parse(JSON.stringify(vendor.socialLinks)))
+    
+    const social_links = JSON.parse(JSON.stringify(vendor.socialLinks))
+    console.log(social_links.facebook)
+    console.log(vendor)
     this.newVendorForm.patchValue({
       name: vendor.vendorName,
       address: vendor.address,
-      descriptionVendor:vendor.descriptionVendor,
+      description: vendor.description,
       number: vendor.phone,
       email: vendor.email,
-      social_networkGroup:{
-        instagram: vendor.socialLinks.instagram,
-        facebook: vendor.socialLinks.facebook,
-        website:  vendor.socialLinks.website,
-        otherSocialLink: vendor.socialLinks.otherSocialLink
-    },
+      social_network: {
+        instagram: social_links.instagram,
+        facebook: social_links.facebook,
+        website: social_links.website,
+        otherSocialLink: social_links.otherSocialLink
+      }
+    //   social_networkGroup:{
+    //     instagram: vendor.socialLinks.instagram,
+    //     facebook: vendor.socialLinks.facebook,
+    //     website:  vendor.socialLinks.website,
+    //     otherSocialLink: vendor.socialLinks.otherSocialLink
+    // },
     });
   }
   
