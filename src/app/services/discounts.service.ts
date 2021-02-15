@@ -58,6 +58,10 @@ export class DiscountsService {
     return this.restApi.getDiscountById(discountId, options);
   }
 
+  getPointsOfSalesByDiscountId(discountId) {
+    return this.restApi.getPointsOfSalesByDiscountId(discountId);
+  }
+
   getVendorById(vendorId): Observable<any> {
     return this.restApi.getVendorById(vendorId);
   }

@@ -14,7 +14,8 @@ import {
   PUT_ARCHIVE_DISCOUNTS_ENDPOINT,
   PUT_IS_SAVED_DISCOUNTS_ENDPOINT,
   SEARCH_DISCOUNTS_ENDPOINT,
-  USER_INFO_ENDPOINT
+  USER_INFO_ENDPOINT,
+  GET_POINTOFSALES_ENDPOINT
 } from '../../constants';
 import { environment } from '../../environments/environment';
 
@@ -59,6 +60,10 @@ export class ApiDataService {
 
   getDiscountById(discountId, options): Observable<any> {
     return this.http.get(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${discountId}`, options);
+  }
+
+  getPointsOfSalesByDiscountId(discountId): Observable<any>{
+    return this.http.get(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${discountId}/${GET_POINTOFSALES_ENDPOINT}`);
   }
 
   getVendors(): Observable<Vendor[]> {

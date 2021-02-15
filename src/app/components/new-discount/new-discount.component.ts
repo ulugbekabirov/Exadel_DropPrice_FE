@@ -91,6 +91,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
       const discId = +params.get('id');
       if(discId) {
         this.getDiscount(discId);
+        this.getPointsOfSales(discId);
       }
     })
   }
@@ -105,36 +106,16 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     );
   }
 
+  getPointsOfSales(id:number) {
+    this.discountService.getPointsOfSalesByDiscountId(id).subscribe(
+      (discount: Discount) => {
+        this.editDiscountPoints(discount);
+      },
+      (err: any) => console.log(err)
+    )
+  }
+
   editDiscount(discount: Discount) {
-    //  setTimeout(() => {
-    //   this.newDiscountForm.setValue({
-    //     vendorName: discount.vendorName,
-    //     discountName: discount.discountName,
-    //     description: discount.description,
-    //     discountAmount: discount.discountAmount,
-    //     activityStatus: true,
-    //     promoCode: discount.promoCode,
-    //     startDate: discount.startDate,
-    //     endDate: discount.endDate,
-    //     tags: discount.tags,
-    //     pointOfSales: [{name: "AKkd", adress:"afafa"}]
-    //   });
-    // }, 10000);
-   
-  //   this.newDiscountForm.patchValue({
-  //     vendorName: discount.vendorName,
-  //     discountName: discount.discountName,
-  //     description: discount.description,
-  //     discountAmount: discount.discountAmount,
-  //     promoCode: discount.promoCode,
-  //     startDate: discount.startDate,
-  //     endDate: discount.endDate,
-  //   });
-  //  console.log(this.newDiscountForm.value);
-  //  console.log(discount.tags);
-  //  this.tags.setValue(discount.tags)
-
-
   this.newDiscountForm.patchValue({
         vendorName: discount.vendorName,
         discountName: discount.discountName,
@@ -144,25 +125,18 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
         startDate: discount.startDate,
         endDate: discount.endDate,    
       });
-      // console.log(discount.tags);
-      
-      // let i = 0;
-      
-      // for (let tag of discount.tags) {
-      //   let tagsArray = <FormArray>this.newDiscountForm.controls["tags"];
-      //   console.log(tagsArray)
-      //   tagsArray.controls[i].patchValue(tag);
-      //   i++;
-      // }
-   
-      // let i = 0;
-      //  for (let tag of discount.tags) {
-      //   let newTags = this.newDiscountForm.get("newTags") as FormArray;
-      //   console.log(newTags.setControl(i, new FormControl("")));
-      //   i++;
-      //  }
-     
 
+      if(discount.tags) {
+        for(let tag of discount.tags){
+          (<FormArray>this.newDiscountForm.get('tags')).push(
+            new FormControl(tag, Validators.required)
+          )
+        }
+      }
+  }
+  
+  editDiscountPoints(discount: Discount){
+    console.log(discount);
   }
 
   updateDiscount(){

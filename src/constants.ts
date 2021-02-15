@@ -12,6 +12,7 @@ export const GET_TICKET_ENDPOINT = 'createTicket';
 export const PUT_IS_SAVED_DISCOUNTS_ENDPOINT = 'save';
 export const PUT_ARCHIVE_DISCOUNTS_ENDPOINT = 'archive';
 export const SEARCH_DISCOUNTS_ENDPOINT = 'search';
+export const GET_POINTOFSALES_ENDPOINT = 'pointOfSales';
 
 export const SORT_BY = [
   {
