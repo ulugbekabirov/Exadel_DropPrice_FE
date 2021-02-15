@@ -1,5 +1,10 @@
-import { Component, Input, OnInit, } from '@angular/core';
-import { SearchFacadeService } from '../../services/search-facade.service';
+import { Component, EventEmitter, Input, OnInit, Output, } from '@angular/core';
+import { SearchFacade } from '../../services/search-facade';
+import { SortStore } from '../../services/sort-store';
+import { DiscountSortsStore } from '../../services/discount-sorts-store';
+import { FormControl } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, startWith, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admin-search',
@@ -7,21 +12,24 @@ import { SearchFacadeService } from '../../services/search-facade.service';
   styleUrls: ['./admin-search.component.scss']
 })
 export class AdminSearchComponent implements OnInit {
-  @Input() searchTerm;
+  searchTerm = new FormControl();
+  @Output() onEmitSearchTerm = new EventEmitter();
+  @Input() initialValue;
 
-  constructor(
-    private facade: SearchFacadeService
-  ) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    // this.facade.searchCriteria$.pipe(
-    //   take(1)).subscribe(
-    //   criteria => {
-    //     // this.searchTerm.patchValue(criteria.searchQuery, {emitEvent: false});
-    //     // this.searchTerm.patchValue(criteria.sortBy, {emitEvent: false});
-    //     // this.searchTerm.patchValue(criteria.take, {emitEvent: false});
-    //     // this.searchTerm.patchValue(criteria.skip, {emitEvent: false});
-    //   });
+    this.throttle(this.searchTerm.valueChanges).pipe(
+    ).subscribe(next => this.onEmitSearchTerm.emit(next));
+    this.initialValue.subscribe(next => {
+        console.log('patch', next);
+        this.searchTerm.patchValue(next)
+      }
+    );
+  }
+
+  throttle(source$: Observable<string>): any {
+    return source$.pipe(debounceTime(350), distinctUntilChanged(), startWith(''));
   }
 }

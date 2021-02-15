@@ -14,14 +14,13 @@ export class DiscountsService {
   ) {
   }
 
-  getDiscounts({skip, take, longitude, latitude, sortBy}): Observable<any> {
+  getDiscounts(params): Observable<any> {
+    const paramsObj = {};
+    Object.keys({...params}).filter(value => typeof params[value] !== 'undefined').forEach(param => {
+      paramsObj[param] = params[param];
+    });
     const options: { params: HttpParams } = {
-      params: new HttpParams()
-        .set('skip', skip)
-        .set('take', take)
-        .set('longitude', longitude)
-        .set('latitude', latitude)
-        .set('sortBy', sortBy)
+      params: new HttpParams({fromObject: paramsObj})
     };
     return this.restApi.getDiscounts(options);
   }
@@ -91,7 +90,20 @@ export class DiscountsService {
   postDiscount(discount): any {
     return this.restApi.postDiscount(discount);
   }
+
   postVendor(vendor): any {
     return this.restApi.postVendor(vendor);
+  }
+
+  searchStatsDiscount(terms): any {
+    const paramsObj = {};
+    Object.keys({...terms}).filter(value => typeof terms[value] !== 'undefined').forEach(param => {
+      paramsObj[param] = terms[param];
+    });
+    const options: { params: HttpParams } = {
+      params: new HttpParams({fromObject: paramsObj})
+    };
+    console.log('options', options);
+    return this.restApi.searchStatsDiscounts(options);
   }
 }

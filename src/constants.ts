@@ -1,4 +1,6 @@
 export const AUTH_ENDPOINT = 'login';
+export const CONFIGS = 'configs';
+export const CHANGE_CONFIGS = 'changeConfigs';
 export const USER_INFO_ENDPOINT = 'user';
 export const GET_VENDORS_ENDPOINT = 'vendors';
 export const POST_VENDORS_ENDPOINT = 'vendors';

@@ -18,11 +18,12 @@
   nav {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     min-height: 100%;
 
     .logo-link {
-      align-self: center;
-      margin: 2em auto 0;
+      align-self: start;
+      margin: 2em .7em 0;
 
       img {
         display: block;
@@ -83,7 +84,13 @@
             fill: $admin_sidebar_txtColor;
             margin-right: .7em;
             transition: fill 0.2s;
+
+          &:last-child {
+            margin-left: auto;
+            display: none;
+            transform: rotate(180deg);
           }
+        }
 
           &:hover,
           &focus {
@@ -104,6 +111,18 @@
         &:last-child {
           margin-top: auto;
           margin-bottom: 1.3em;
+        }
+
+        .link_active {
+          background: $admin_sidebar_bgColor_active;
+          color: $admin_sidebar_txtColor_active;
+
+          svg {
+            fill: $admin_sidebar_txtColor_active;
+            &:last-child {
+              display: block;
+            }
+          }
         }
       }
 

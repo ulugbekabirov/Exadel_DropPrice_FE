@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ActiveUser, AuthInfo, AuthUser, Vendor } from '../models';
 import {
@@ -15,7 +15,7 @@ import {
   PUT_IS_SAVED_DISCOUNTS_ENDPOINT,
   SEARCH_DISCOUNTS_ENDPOINT,
   USER_INFO_ENDPOINT,
-  POST_VENDORS_ENDPOINT
+  POST_VENDORS_ENDPOINT, CONFIGS, CHANGE_CONFIGS
 } from '../../constants';
 import { environment } from '../../environments/environment';
 
@@ -90,4 +90,19 @@ export class ApiDataService {
     return this.http.get(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/search`, options);
   }
 
+  searchStatsDiscounts(options): any {
+    return this.http.get(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/stats/search`, options);
+  }
+
+  getApiConfigs(): any {
+    return this.http.get(`${environment.webApiUrl}${CONFIGS}`);
+  }
+
+  putApiConfig(configId, opt): any {
+    console.log(opt);
+    return this.http.put(`${environment.webApiUrl}${CHANGE_CONFIGS}/${configId}`, {
+      id: configId,
+      value: opt
+    });
+  }
 }

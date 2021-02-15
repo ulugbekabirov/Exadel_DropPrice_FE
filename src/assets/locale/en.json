@@ -160,7 +160,7 @@
   "BUTTON_BACK_LOCATION": "go back",
   "ADMIN_DASHBOARD": {
     "SIDEBAR": {
-      "ADMIN": "Admin",
+      "ADMIN": "Statistics",
       "SETTINGS": "Settings",
       "VENDORS": "Vendors",
       "DISCOUNTS": "Discounts",

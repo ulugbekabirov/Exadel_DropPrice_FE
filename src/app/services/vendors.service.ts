@@ -11,19 +11,15 @@ export class VendorsService {
 
   constructor( private restApi: ApiDataService, ) { }
 
-  searchVendors(term): Observable<any>{
-    console.log('this.activeData', term);
-
+  searchVendors(terms): Observable<any>{
     const paramsObj = {};
-    Object.keys({...term}).filter(value => typeof term[value] !== 'undefined').forEach(param => {
-      paramsObj[param] = term[param];
+    Object.keys({...terms}).filter(value => typeof terms[value] !== 'undefined').forEach(param => {
+      paramsObj[param] = terms[param];
     });
     const options: { params: HttpParams } = {
       params: new HttpParams({fromObject: paramsObj})
     };
-
     console.log('options', options);
-    return of([term]);
-    // return this.restApi.searchVendors(options);
+    return this.restApi.searchVendors(options);
   }
 }

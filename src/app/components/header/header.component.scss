@@ -7,7 +7,7 @@
   align-items: center;
   background: $main_header_bgColor;
   position: fixed;
-  padding: 0 .5em 0 1em;
+  padding: 0 1.5em 0 2em;
   z-index: 99;
   top: 0;
   left: 0;
@@ -216,16 +216,16 @@
 
   @media (min-width: 991.98px) {
 
-    padding: 0 calc(50vw - 480px);
+    //padding: 0 calc(50vw - 480px);
 
     @media screen and (min-width: 1200px) {
 
       font-size: 1rem;
-      padding: 0 calc(50vw - 590px);
+      //padding: 0 calc(50vw - 590px);
 
       @media screen and (min-width: 1600px) {
 
-        padding: 0 calc(50vw - 690px);
+        //padding: 0 calc(50vw - 690px);
 
         @media screen and (min-width: 1900px) {
 

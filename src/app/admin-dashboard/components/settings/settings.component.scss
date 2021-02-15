@@ -1,6 +1,6 @@
 @import "src/variables";
 
-.content {
+.settings {
   font-size: 1rem;
   position: relative;
   min-height: 100vh;
@@ -19,12 +19,12 @@
       background: $admin_content_bgColor;
       border-radius: $border-radius;
       box-shadow: $box-shadow;
-      div {
+
+      mat-card {
         width: 100%;
-        table {
-          width: 100%;
-        }
+        height: auto;
       }
+
       &:first-child,
       &:last-child {
         grid-column: 1 / -1;

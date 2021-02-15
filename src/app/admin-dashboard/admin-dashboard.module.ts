@@ -9,12 +9,25 @@ import { AdminSearchComponent } from './components/admin-search/admin-search.com
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { SearchFacadeService } from './services/search-facade.service';
+import { SearchFacade } from './services/search-facade';
+import { SettingsComponent } from './components/settings/settings.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 const routes: Routes = [
   {path: '',
     component: AdminDashboardComponent,
     canActivate: [AuthGuard],
+    children: [
+      // {
+      //   path: 'stats/:name',
+      //   component: AdminContentComponent
+      // },
+      {path: 'vendors', component: AdminContentComponent},
+      {path: 'discounts', component: StatisticsComponent},
+      {path: 'settings', component: SettingsComponent}
+    ]
   }
 ];
 
@@ -24,19 +37,23 @@ const routes: Routes = [
     AdminDashboardComponent,
     AdminSidebarComponent,
     AdminContentComponent,
-    AdminSearchComponent
+    AdminSearchComponent,
+    SettingsComponent,
   ],
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
     TranslateModule,
     MatToolbarModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
   exports: [
     RouterModule
   ],
   providers: [
-    SearchFacadeService
+    SearchFacade
   ]
 })
 export class AdminDashboardModule { }
