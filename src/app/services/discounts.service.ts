@@ -91,4 +91,8 @@ export class DiscountsService {
   postDiscount(discount): any {
     return this.restApi.postDiscount(discount);
   }
+
+  updateDiscount(id:number):any {
+   return this.restApi.updateIsSavedDiscount(id);
+  }
 }

@@ -8,6 +8,7 @@ import {
   FormGroup,
   Validators,
   ValidationErrors,
+  FormArrayName,
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { DiscountsService } from '../../services/discounts.service';
@@ -24,6 +25,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MapComponent } from './../map/map.component';
 import { ActivatedRoute } from '@angular/router';
 import { Discount } from './../../models/discount';
+import { TestService } from './../../test.service';
 
 export interface Tag {
   name: string;
@@ -35,6 +37,7 @@ export interface Tag {
 })
 export class NewDiscountComponent implements OnInit, OnDestroy {
   newDiscountForm: FormGroup;
+  discount: Discount;
   coordinateIsEmpty = true;
   tagsArray: Tag[] = [];
   visible = true;
@@ -56,7 +59,8 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     public fb: FormBuilder,
     private dialog: MatDialog,
     private discountService: DiscountsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private testService: TestService
   ) {}
 
   ngOnInit(): void {
@@ -93,22 +97,76 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
 
   getDiscount(id:number) {
     this.discountService.getDiscountById(id, {}).subscribe(
-      (discount: Discount) => this.editDiscount(discount),
+      (discount: Discount) =>{
+        this.editDiscount(discount);
+        this.discount = discount;
+      },
       (err:any) => console.log(err)
     );
   }
 
   editDiscount(discount: Discount) {
-    this.newDiscountForm.patchValue({
-      vendorName: discount.vendorName,
-      discountName: discount.discountName,
-      description: discount.description,
-      discountAmount: discount.discountAmount,
-      promoCode: discount.promoCode,
-      startDate: discount.startDate,
-      endDate: discount.endDate,
-      tags: discount.tags
-    });
+    //  setTimeout(() => {
+    //   this.newDiscountForm.setValue({
+    //     vendorName: discount.vendorName,
+    //     discountName: discount.discountName,
+    //     description: discount.description,
+    //     discountAmount: discount.discountAmount,
+    //     activityStatus: true,
+    //     promoCode: discount.promoCode,
+    //     startDate: discount.startDate,
+    //     endDate: discount.endDate,
+    //     tags: discount.tags,
+    //     pointOfSales: [{name: "AKkd", adress:"afafa"}]
+    //   });
+    // }, 10000);
+   
+  //   this.newDiscountForm.patchValue({
+  //     vendorName: discount.vendorName,
+  //     discountName: discount.discountName,
+  //     description: discount.description,
+  //     discountAmount: discount.discountAmount,
+  //     promoCode: discount.promoCode,
+  //     startDate: discount.startDate,
+  //     endDate: discount.endDate,
+  //   });
+  //  console.log(this.newDiscountForm.value);
+  //  console.log(discount.tags);
+  //  this.tags.setValue(discount.tags)
+
+
+  this.newDiscountForm.patchValue({
+        vendorName: discount.vendorName,
+        discountName: discount.discountName,
+        description: discount.description,
+        discountAmount: discount.discountAmount,
+        promoCode: discount.promoCode,
+        startDate: discount.startDate,
+        endDate: discount.endDate,    
+      });
+      // console.log(discount.tags);
+      
+      // let i = 0;
+      
+      // for (let tag of discount.tags) {
+      //   let tagsArray = <FormArray>this.newDiscountForm.controls["tags"];
+      //   console.log(tagsArray)
+      //   tagsArray.controls[i].patchValue(tag);
+      //   i++;
+      // }
+   
+      // let i = 0;
+      //  for (let tag of discount.tags) {
+      //   let newTags = this.newDiscountForm.get("newTags") as FormArray;
+      //   console.log(newTags.setControl(i, new FormControl("")));
+      //   i++;
+      //  }
+     
+
+  }
+
+  updateDiscount(){
+   
   }
 
   vendorNameDetectChanges(): void {
