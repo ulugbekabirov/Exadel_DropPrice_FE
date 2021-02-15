@@ -16,12 +16,6 @@ describe('SearchBarComponent (deep tests)', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    TAGS = [
-      { id: 1, Tagsname: 'Спорт'},
-      { id: 2, Tagsname: 'Суши' },
-      { id: 3, Tagsname: 'Ролики'}
-    ];
-
     await TestBed.configureTestingModule({
       declarations: [ SearchBarComponent ]
     })
@@ -34,6 +28,12 @@ describe('SearchBarComponent (deep tests)', () => {
     });
 
   it('should render each Chips as a SearchBarComponent', () => {
+    TAGS = [
+      { id: 1, Tagsname: 'Спорт'},
+      { id: 2, Tagsname: 'Суши' },
+      { id: 3, Tagsname: 'Ролики'}
+    ];
+
     mockTagsService.getTags.and.returnValue(of(TAGS));
 
     fixture.detectChanges();
