@@ -31,6 +31,10 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   @Input() tags: Tag[];
   @Output() searchQueryChange = new EventEmitter<any>();
 
+  userNext(evt): void {
+    return this.userQuestionUpdate.next(evt);
+  }
+
   addSearch(): void {
     this.searches.pop();
     this.searches.push(new SearchBar(this.userQuestion, this.tagsName));
@@ -41,7 +45,6 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     chip.toggleSelected();
     if (this.tagsName.indexOf(tag) > -1) {
       this.tagsName.splice(this.tagsName.indexOf(tag), 1);
-
     } else {
       this.tagsName.push(tag);
     }
