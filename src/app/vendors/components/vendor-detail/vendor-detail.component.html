@@ -93,6 +93,7 @@
               class="vendors-detail__actions_button"
               mat-flat-button
               matTooltip="Edit Discount"
+              (click)="onEditVendor(vendor.vendorId)"
       >
         {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_ACTIONS.EDIT" | translate}}
       </button>

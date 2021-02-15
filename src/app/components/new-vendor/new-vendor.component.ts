@@ -6,6 +6,11 @@ import {
   AbstractControl,
 } from '@angular/forms';
 
+import { ActivatedRoute } from '@angular/router';
+
+import { DiscountsService } from 'src/app/services/discounts.service';
+import { Vendor } from './../../models/vendor';
+
 @Component({
   selector: 'app-new-vendor',
   templateUrl: './new-vendor.component.html',
@@ -14,7 +19,9 @@ import {
 export class NewVendorComponent implements OnInit {
   newVendorForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private discountService: DiscountsService)  {}
 
   ngOnInit(): void {
     this.newVendorForm = this.fb.group({
@@ -38,7 +45,39 @@ export class NewVendorComponent implements OnInit {
         otherSocialLink: ['', [Validators.pattern(/^(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$/)]]
       })
     });
+    this.route.paramMap.subscribe(params =>{
+      const vendId = +params.get('id');
+      if(vendId) {
+        this.getVendor(vendId);
+      }
+    });
   }
+
+  getVendor(id: number){
+    this.discountService.getVendorById(id).subscribe(
+      (vendor: Vendor)=> this.editVendor(vendor),
+      (err: any) => console.log(err)
+    );
+
+  }
+
+  editVendor(vendor: Vendor){
+    console.log(vendor.socialLinks.instagram)
+    this.newVendorForm.patchValue({
+      name: vendor.vendorName,
+      address: vendor.address,
+      descriptionVendor:vendor.descriptionVendor,
+      number: vendor.phone,
+      email: vendor.email,
+      social_networkGroup:{
+        instagram: vendor.socialLinks.instagram,
+        facebook: vendor.socialLinks.facebook,
+        website:  vendor.socialLinks.website,
+        otherSocialLink: vendor.socialLinks.otherSocialLink
+    },
+    });
+  }
+  
 
   onSubmit(): void {
     this.newVendorForm.value;
