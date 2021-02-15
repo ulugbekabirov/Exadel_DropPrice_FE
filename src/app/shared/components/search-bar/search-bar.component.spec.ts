@@ -17,9 +17,9 @@ describe('SearchBarComponent (deep tests)', () => {
     fixture.detectChanges();
 
     TAGS = [
-      { id: 1, Tagsname: 'Спорт', },
+      { id: 1, Tagsname: 'Спорт'},
       { id: 2, Tagsname: 'Суши' },
-      { id: 3, Tagsname: 'Ролики' }
+      { id: 3, Tagsname: 'Ролики'}
     ];
 
     await TestBed.configureTestingModule({
@@ -30,7 +30,7 @@ describe('SearchBarComponent (deep tests)', () => {
     });
 
     it('should create', () => {
-      expect(SearchBarComponent).toBeTruthy();
+      expect(component).toBeTruthy();
     });
 
   it('should render each Chips as a SearchBarComponent', () => {
