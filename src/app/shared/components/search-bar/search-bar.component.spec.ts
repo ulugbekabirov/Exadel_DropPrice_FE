@@ -27,11 +27,11 @@ describe('SearchBarComponent (deep tests)', () => {
     })
     .compileComponents();
     fixture = TestBed.createComponent(SearchBarComponent);
-  });
+    });
 
-  it('should create', () => {
-    expect(SearchBarComponent).toBeTruthy();
-  });
+    it('should create', () => {
+      expect(SearchBarComponent).toBeTruthy();
+    });
 
   it('should render each Chips as a SearchBarComponent', () => {
     mockTagsService.getTags.and.returnValue(of(TAGS));
@@ -40,10 +40,9 @@ describe('SearchBarComponent (deep tests)', () => {
 
     const SearchBarComponentDEs = fixture.debugElement.queryAll(By.directive(SearchBarComponent));
     expect(SearchBarComponentDEs.length).toEqual(3);
-    for(let i=0; i < SearchBarComponentDEs.length; i++) {
+    for (let i = 0; i < SearchBarComponentDEs.length; i++) {
       expect(SearchBarComponentDEs[i].componentInstance).toEqual(TAGS[i]);
     }
   });
-
 });
 
