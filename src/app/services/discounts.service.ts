@@ -62,8 +62,8 @@ export class DiscountsService {
     return this.restApi.getVendorById(vendorId);
   }
 
-  updateVendor(vendorId, vendor): Observable<any> {
-    return this.restApi.updateVendor(vendorId, vendor);
+  updateVendor(vendor, vendorId): Observable<any> {
+    return this.restApi.updateVendor(vendor, vendorId);
   }
 
   getVendorsDiscounts(vendorId, params): Observable<any> {

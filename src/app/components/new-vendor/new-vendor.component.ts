@@ -11,15 +11,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DiscountsService } from 'src/app/services/discounts.service';
 import { Vendor } from './../../models/vendor';
 import { Location } from '@angular/common';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-new-vendor',
   templateUrl: './new-vendor.component.html',
   styleUrls: ['./new-vendor.component.scss'],
 })
-export class NewVendorComponent implements OnInit {
+export class NewVendorComponent implements OnInit { 
   newVendorForm: FormGroup;
   vendor: Vendor;
+  vendId: any;
 
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -36,7 +38,7 @@ export class NewVendorComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.pattern(/^((8|\+3)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/),
+          Validators.pattern(/^((8|\+7|\+3)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/),
         ],
       ],
       email: ['', [Validators.required, Validators.email]],
@@ -47,63 +49,51 @@ export class NewVendorComponent implements OnInit {
         otherSocialLink: ['', [Validators.pattern(/^(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$/)]]
       })
     });
-    this.route.paramMap.subscribe(params =>{
-      const vendId = +params.get('id');
-      if(vendId) {
-        this.getVendor(vendId);
-      }
-    });
+
+    this.route.paramMap
+    .pipe(
+      switchMap((params: any) => {
+        this.vendId = +params.get("id");
+        return this.discountService.getVendorById(this.vendId)
+      }),
+    ).subscribe((vendor) => {
+      console.log(vendor.socialLinks)
+      const json = JSON.parse(vendor.socialLinks);
+      this.newVendorForm.patchValue({
+        name: vendor.vendorName,
+        address: vendor.address,
+        description: vendor.description,
+        number: vendor.phone.trim(),
+        email: vendor.email,
+        social_network: {
+          instagram: (json["Instagram"]).trim(),
+          facebook: (json["Facebook"]).trim(),
+          website: (json["WebSite"]).trim(),
+          otherSocialLink: (json["Vk"]).trim()
+        }
+      });
+    })
   }
 
-  getVendor(id: number){
-    this.discountService.getVendorById(id).subscribe(
-      (vendor: Vendor)=> {
-        this.editVendor(vendor),
-        this.vendor = vendor
-      },
-      (err: any) => console.log(err)
-    );
-
-  }
-
-  editVendor(vendor: Vendor){ 
-    const json = JSON.parse(vendor.socialLinks)
-    console.log(json)
-    console.log(vendor)
-    console.log(json["Instagram"])
-    this.newVendorForm.patchValue({
-      name: vendor.vendorName,
-      address: vendor.address,
-      description: vendor.description,
-      number: vendor.phone,
-      email: vendor.email,
-      social_network: {
-        instagram: (json["Instagram"]).trim(),
-        facebook: (json["Facebook"]).trim(),
-        website: (json["WebSite"]).trim(),
-        otherSocialLink: (json["Vk"]).trim()
-      }
-    });
-  }
-  
-  updateVendor(id: number, vendor: Vendor){
-    this.discountService.updateVendor(id, vendor).subscribe(()=> this.goBack());
-  }
-
-  goBack(): void {
+  goBack() {
     this.location.back();
   }
 
   onSubmit(): void {
     if((this.router.url).includes("edit")){
-      
+      const newSocial = JSON.stringify(this.newVendorForm.value.social_network);
+      this.newVendorForm.value.social_network = newSocial;
+      const updateVendor: Vendor = this.newVendorForm.value;
+      console.log(updateVendor)
+      this.discountService.updateVendor(updateVendor, this.vendId).subscribe(() => this.goBack());
     } else {
       this.newVendorForm.value;
-      this.newVendorForm.reset();
+      
+    }
+    this.newVendorForm.reset();
       for (const control in this.newVendorForm.controls) {
         this.newVendorForm.controls[control].setErrors(null);
       }
-    }
   }
 
   get name(): AbstractControl {
