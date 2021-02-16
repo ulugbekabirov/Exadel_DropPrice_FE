@@ -69,6 +69,10 @@ export class ApiDataService {
     return this.http.get(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}`);
   }
 
+  updateVendor(vendorId, vendor): Observable<any> {
+    return this.http.put(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}`,vendor)
+  }
+
   getVendorsDiscounts(vendorId, options): Observable<any> {
     return this.http.get(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}/${GET_VENDOR_DISCOUNTS_ENDPOINT}`, options);
   }
