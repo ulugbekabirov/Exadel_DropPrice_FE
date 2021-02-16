@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output, } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, startWith, switchMap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, startWith } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -8,7 +8,7 @@ import { Observable, Subscription } from 'rxjs';
   templateUrl: './admin-search.component.html',
   styleUrls: ['./admin-search.component.scss']
 })
-export class AdminSearchComponent implements OnInit {
+export class AdminSearchComponent implements OnInit, OnDestroy {
   searchTerm = new FormControl();
   @Output() onEmitSearchTerm = new EventEmitter();
   @Input() initialValue;
