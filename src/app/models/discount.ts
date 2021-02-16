@@ -12,6 +12,9 @@ export interface Discount {
   promoCode?: string;
   activityStatus: boolean;
   isSaved: boolean;
-  address: string;
+  pointOfSales: [{
+    name: string,
+    address: string
+  }];
   tags: string[];
 }

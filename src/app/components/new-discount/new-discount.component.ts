@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import {
   AbstractControl,
@@ -11,14 +11,14 @@ import {
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { DiscountsService } from '../../services/discounts.service';
-import { Vendor } from '../../models';
+import { Vendor, Discount } from '../../models';
 
-import { startWith, debounceTime, filter} from 'rxjs/operators';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { startWith, debounceTime} from 'rxjs/operators';
+import { ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { MapComponent } from './../map/map.component';
 
@@ -29,6 +29,7 @@ export interface Tag {
   selector: 'app-new-discount',
   templateUrl: './new-discount.component.html',
   styleUrls: ['./new-discount.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NewDiscountComponent implements OnInit, OnDestroy {
   newDiscountForm: FormGroup;
@@ -38,11 +39,14 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
   selectable = true;
   removable = true;
   addOnBlur = true;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  readonly separatorKeysCodes: number[] = [ENTER];
   isChecked = true;
 
   vendorsList: Vendor[];
   filteredList: Vendor[];
+  pointNameList: Discount[];
+  filteredPointNameList: Discount[];
+
   private subscription: Subscription;
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
@@ -53,6 +57,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     public fb: FormBuilder,
     private dialog: MatDialog,
     private discountService: DiscountsService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -62,10 +67,17 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
         this.vendorsList = this.filteredList = res;
     });
 
+    this.subscription = this.discountService.getPointOfSales()
+      .subscribe(res => {
+        this.pointNameList = this.filteredPointNameList = res.sort((a, b) => {
+          return a.name < b.name ? -1 : 1;
+        });
+    });
+
     this.newDiscountForm = this.fb.group({
       vendorName: ['', [Validators.required, this.requireMatch.bind(this)]],
       discountName: ['', [Validators.required]],
-      descriptionDiscount: ['', [Validators.required]],
+      description: ['', [Validators.minLength(40), Validators.required]],
       discountAmount: [
         '',
         [Validators.required, Validators.min(1), Validators.max(100)],
@@ -75,10 +87,11 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
       endDate: ['', [Validators.required]],
       tags: this.fb.array([], Validators.required),
       activityStatus: [true, [Validators.requiredTrue]],
-      pointsOfSales: this.fb.array([], Validators.required),
+      pointOfSales: this.fb.array([], Validators.required),
     });
     this.addPoint();
     this.vendorNameDetectChanges();
+    // this.pointOfSalesDetectChanges();
   }
 
   vendorNameDetectChanges(): void {
@@ -92,7 +105,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
           this.filteredList = this.vendorsList;
           return;
         }
-        this.filteredList = this.vendorsList.filter(value => value.vendorName.includes(data) );
+        this.filteredList = this.vendorsList.filter(value => value.vendorName.includes(data));
       });
   }
 
@@ -103,6 +116,29 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     }
     return { requireMatch: true };
   }
+
+  //TODO add filter of points
+  // pointOfSalesDetectChanges(): void {
+  //   const pointOfSalesControl = this.newDiscountForm.controls.pointOfSales as FormArray;
+  //   pointOfSalesControl.valueChanges.subscribe(
+  //     (data) => {
+  //       if (!this.pointNameList || !data) {
+  //         this.filteredPointNameList = this.pointNameList;
+  //         return;
+  //       }
+  //       this.filteredPointNameList = this.pointNameList.filter(value => value.pointOfSales.includes(data));
+  //       console.log(this.filteredPointNameList);
+  //       console.log(data);
+  //     })
+  // }
+
+  // private requireMatchPoint(control: AbstractControl): ValidationErrors | null {
+  //   const selection: any = control.value;
+  //   if (this.pointNameList && this.pointNameList.find(item => item.pointOfSales.includes(selection))) {
+  //     return null;
+  //   }
+  //   return { requireMatchPoint: true };
+  // }
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -167,15 +203,22 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     this.coordinateIsEmpty = false;
   }
 
+  openSnackBar(message="Successfully saved!", action = '') {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      panelClass: ['snack-bar-color'],
+      horizontalPosition: 'center'
+    });
+  }
+
   submit(): void {
     this.newDiscountForm.value;
-
+    this.openSnackBar();
     this.newDiscountForm.reset();
 
     for (const control in this.newDiscountForm.controls) {
       this.newDiscountForm.controls[control].setErrors(null);
     }
-
     this.pointOfSalesForms.controls = [];
     this.tags.controls = [];
   }
@@ -188,8 +231,8 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     return this.newDiscountForm.get('discountName');
   }
 
-  get descriptionDiscount(): AbstractControl {
-    return this.newDiscountForm.get('descriptionDiscount');
+  get description(): AbstractControl {
+    return this.newDiscountForm.get('description');
   }
 
   get discountAmount(): AbstractControl {
@@ -225,7 +268,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
   }
 
   get pointOfSalesForms(): FormArray {
-    return this.newDiscountForm.get('pointsOfSales') as FormArray;
+    return this.newDiscountForm.get('pointOfSales') as FormArray;
   }
 
   ngOnDestroy(): void {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ActiveUser, AuthInfo, AuthUser, Vendor } from '../models';
+import { ActiveUser, AuthInfo, AuthUser, Vendor, Discount } from '../models';
 import {
   AUTH_ENDPOINT,
   GET_DISCOUNTS_ENDPOINT,
@@ -10,7 +10,8 @@ import {
   GET_TOWNS_ENDPOINT, GET_VENDOR_DISCOUNTS_ENDPOINT,
   GET_VENDORS_ENDPOINT, PUT_ARCHIVE_DISCOUNTS_ENDPOINT,
   PUT_IS_SAVED_DISCOUNTS_ENDPOINT, SEARCH_DISCOUNTS_ENDPOINT,
-  USER_INFO_ENDPOINT
+  USER_INFO_ENDPOINT,
+  GET_POINT_OF_SALES
 } from '../../constants';
 import { environment } from '../../environments/environment';
 
@@ -67,6 +68,10 @@ export class ApiDataService {
 
   getVendorsDiscounts(vendorId, options): Observable<any> {
     return this.http.get(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}/${GET_VENDOR_DISCOUNTS_ENDPOINT}`, options);
+  }
+  
+  getPointOfSales(): Observable<any>  {
+    return this.http.get(`${environment.webApiUrl}${GET_POINT_OF_SALES}`);
   }
 
   putDiscountInArchive(id): Observable<any> {

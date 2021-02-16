@@ -11,6 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -62,6 +63,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     MatChipsModule,
     MatListModule,
     MatCardModule,
+    MatSnackBarModule,
     TranslateModule,
     MatTabsModule,
     AgmCoreModule,
@@ -89,6 +91,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     MatIconModule,
     MatChipsModule,
     MatListModule,
+    MatSnackBarModule,
     MatCardModule,
     MatTabsModule,
     VerifyUserRolesDirective,

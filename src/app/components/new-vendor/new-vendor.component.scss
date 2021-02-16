@@ -1,9 +1,10 @@
+@import "src/variables";
+
 html,
 body {
 	height: 100%;
 	margin: 0;
   padding: 0;
-  overflow: hidden;
 }
 
 %form {
@@ -14,7 +15,6 @@ body {
 
 mat-card {
   @extend %form;
-    text-align: center;
     padding: 25px 50px;
     min-width: 200px;
   @media screen and (device-aspect-ratio: 40/71) {
@@ -51,5 +51,9 @@ mat-icon:focus, mat-icon:active {
 button {
   width: 100%;
   margin-top: 20px;
+}
+
+.snack-bar-color {
+  background-color: $snack-bar-color;
 }
 

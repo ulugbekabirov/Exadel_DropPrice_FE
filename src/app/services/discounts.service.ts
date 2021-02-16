@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
 import { Vendor } from '../models';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -51,9 +50,9 @@ export class DiscountsService {
     return this.restApi.getDiscountById(discountId);
   }
 
-  // getVendors(): Observable<Vendor[]> {
-  //   return this.restApi.getVendors();
-  // }
+  getPointOfSales(): Observable<any> {
+    return this.restApi.getPointOfSales();
+  }
 
   getVendorById(vendorId): Observable<any> {
     return this.restApi.getVendorById(vendorId);

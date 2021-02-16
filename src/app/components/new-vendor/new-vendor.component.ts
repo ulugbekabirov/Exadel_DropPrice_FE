@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
   Validators,
   AbstractControl,
 } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-new-vendor',
   templateUrl: './new-vendor.component.html',
   styleUrls: ['./new-vendor.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NewVendorComponent implements OnInit {
   newVendorForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.newVendorForm = this.fb.group({
@@ -40,8 +42,17 @@ export class NewVendorComponent implements OnInit {
     });
   }
 
+  openSnackBar(message="Successfully saved!", action = '') {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      panelClass: ['snack-bar-color'],
+      horizontalPosition: 'center'
+    });
+  }
+
   onSubmit(): void {
     this.newVendorForm.value;
+    this.openSnackBar();
     this.newVendorForm.reset();
     for (const control in this.newVendorForm.controls) {
       this.newVendorForm.controls[control].setErrors(null);
