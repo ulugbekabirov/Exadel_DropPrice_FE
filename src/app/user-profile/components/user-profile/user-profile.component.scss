@@ -1,45 +1,31 @@
-.user-profile-card {
+@import "src/variables";
+
+.user-profile {
   font-size: 1rem;
-  background: #fff;
+  position: relative;
+  min-height: 100vh;
+  padding: 2em;
+  color: $user_profile_content_txtColor;
+  background: $user_profile_content_bgColor;
 
-  img {
-    background: #fff;
-  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 2em;
+    justify-items: stretch;
+    align-items: stretch;
 
-  &__content {
-    &_field {
-
+    > article {
       display: flex;
-      gap: 1rem;
-      justify-content: flex-start;
-      align-items: center;
-
-      &_icon {
-        font-size: 2rem;
-        background: rgba(0, 0, 0, .54);
-      }
-
-      span {
-        &:last-child {
-          font-size: 1.1em;
-          letter-spacing: .06em;
-        }
-      }
+      width: 100%;
+      background: $user_profile_content_bgColor;
+      border-radius: $border-radius;
+      box-shadow: $box-shadow;
     }
   }
 
-  mat-card-subtitle {
-    border-bottom: 1px solid rgba(0, 0, 0, .54);;
-  }
-
-  .user-profile-card__icon {
-    font-size: 2rem;
-    cursor: pointer;
-    outline: none;
-    color: rgba(0, 0, 0, .54);
-
-    &:hover {
-      color: rgba(0, 0, 0, .94);
-    }
+  @media screen and (max-width: 767px) {
+    position: static;
+    width: 100%;
   }
 }

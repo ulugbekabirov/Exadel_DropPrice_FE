@@ -1,0 +1,59 @@
+<mat-card class="user-profile-card">
+  <mat-card-header>
+    <div mat-card-avatar>
+      <img mat-card-avatar src="../../../../assets/img/user-avatar.png" alt="Avatar">
+    </div>
+    <mat-card-title>{{activeUser.fio}}</mat-card-title>
+    <mat-card-subtitle>Software Developer</mat-card-subtitle>
+  </mat-card-header>
+  <!--  <img mat-card-image src="../../../../assets/img/user-avatar.png" alt="Photo user">-->
+  <mat-card-content class="user-profile-card__content">
+    <p class="user-profile-card__content_field">
+      <span>
+      <mat-icon class="user-profile-card__content_icon"
+                fxLayoutAlign="center center"
+      >business
+      </mat-icon>
+    </span>
+      <span>
+        {{activeUser.office}}
+      </span>
+    </p>
+    <p class="user-profile-card__content_field">
+      <span>
+        <mat-icon class="user-profile-card__content_icon"
+                  fxLayoutAlign="end center"
+        >phone
+      </mat-icon>
+    </span>
+      <span>
+         {{activeUser.phone}}
+      </span>
+    </p>
+    <p class="user-profile-card__content_field">
+      <span>
+      <mat-icon class="user-profile-card__content_icon"
+                fxLayoutAlign="center center"
+      >mail_outline
+      </mat-icon>
+    </span>
+      <span>
+        {{activeUser.email}}
+      </span>
+    </p>
+  </mat-card-content>
+  <mat-card-actions
+    fxLayoutAlign="start center"
+  >
+    <button mat-icon-button
+            aria-label="share"
+            fxLayoutAlign="center center"
+    >
+      <mat-icon class="user-profile-card__icon"
+                matTooltip="share"
+                fxLayoutAlign="center center"
+      >share
+      </mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
