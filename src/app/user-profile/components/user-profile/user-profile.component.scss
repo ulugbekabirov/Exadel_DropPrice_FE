@@ -1,0 +1,45 @@
+.user-profile-card {
+  font-size: 1rem;
+  background: #fff;
+
+  img {
+    background: #fff;
+  }
+
+  &__content {
+    &_field {
+
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-start;
+      align-items: center;
+
+      &_icon {
+        font-size: 2rem;
+        background: rgba(0, 0, 0, .54);
+      }
+
+      span {
+        &:last-child {
+          font-size: 1.1em;
+          letter-spacing: .06em;
+        }
+      }
+    }
+  }
+
+  mat-card-subtitle {
+    border-bottom: 1px solid rgba(0, 0, 0, .54);;
+  }
+
+  .user-profile-card__icon {
+    font-size: 2rem;
+    cursor: pointer;
+    outline: none;
+    color: rgba(0, 0, 0, .54);
+
+    &:hover {
+      color: rgba(0, 0, 0, .94);
+    }
+  }
+}
