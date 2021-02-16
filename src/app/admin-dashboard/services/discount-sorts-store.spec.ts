@@ -1,4 +1,4 @@
-import { DiscountSortsStore } from './discount-sorts-store';
+import { DiscountSortsStore } from './discounts-sorts-store';
 
 describe('DiscountSortsStore', () => {
   it('should create an instance', () => {

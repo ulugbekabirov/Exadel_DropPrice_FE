@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminContentComponent } from './admin-content.component';
+import { DiscountsStatisticComponent } from './discounts-statistic.component';
 
-describe('AdminContentComponent', () => {
-  let component: AdminContentComponent;
-  let fixture: ComponentFixture<AdminContentComponent>;
+describe('DiscountsStatisticComponent', () => {
+  let component: DiscountsStatisticComponent;
+  let fixture: ComponentFixture<DiscountsStatisticComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminContentComponent ]
+      declarations: [ DiscountsStatisticComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AdminContentComponent);
+    fixture = TestBed.createComponent(DiscountsStatisticComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

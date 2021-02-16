@@ -2,12 +2,13 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { DiscountsService } from '../../../services/discounts.service';
-import { forkJoin, Observable, Subject } from 'rxjs';
+import { forkJoin, Subject } from 'rxjs';
 import { Discount, Town, Vendor } from '../../../models';
 import { SORT_BY } from '../../../../constants';
 import { TicketService } from '../../../services/ticket.service';
 import { RefDirective } from '../../../directives/ref.directive';
 import { UserService } from '../../../services/user.service';
+import { VendorsService } from '../../../services/vendors.service';
 
 @Component({
   selector: 'app-vendor-detail',
@@ -42,6 +43,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private discountsService: DiscountsService,
+    private vendorsService: VendorsService,
     private ticketService: TicketService,
     private userService: UserService,
   ) {
@@ -53,10 +55,10 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
         switchMap((params: ParamMap): any => {
           const vendId: number = +params.get('id');
           return forkJoin(
-            this.discountsService.getVendorById(vendId),
-            this.discountsService.getVendors(),
+            this.vendorsService.getVendorById(vendId),
+            this.vendorsService.getVendors(),
             this.discountsService.getTowns(),
-            this.discountsService.getVendorsDiscounts(vendId, this.reqOpt)
+            this.vendorsService.getVendorsDiscounts(vendId, this.reqOpt)
           );
         }),
         takeUntil(this.unsubscribe$)
@@ -79,8 +81,8 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
       return;
     }
     forkJoin(
-      this.discountsService.getVendorById(value),
-      this.discountsService.getVendorsDiscounts(value, this.reqOpt)
+      this.vendorsService.getVendorById(value),
+      this.vendorsService.getVendorsDiscounts(value, this.reqOpt)
     )
       .pipe(
         takeUntil(this.unsubscribe$),
@@ -98,7 +100,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
         this.reqOpt.latitude = res.latitude;
         this.reqOpt.longitude = res.longitude;
       }).then(res => {
-      this.discountsService.getVendorsDiscounts(this.vendor.vendorId, this.reqOpt).pipe(
+      this.vendorsService.getVendorsDiscounts(this.vendor.vendorId, this.reqOpt).pipe(
         takeUntil(this.unsubscribe$)
       )
         .subscribe(data => this.vendorDiscounts = data);
@@ -120,7 +122,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
 
   onSortChange({value: {sortBy}}): void {
     this.reqOpt.sortBy = sortBy;
-    this.discountsService.getVendorsDiscounts(this.vendor.vendorId, this.reqOpt).pipe(
+    this.vendorsService.getVendorsDiscounts(this.vendor.vendorId, this.reqOpt).pipe(
       takeUntil(this.unsubscribe$)
     )
       .subscribe(res => this.vendorDiscounts = res);
@@ -133,7 +135,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
   onLocationChange({value: {latitude, longitude}}): void {
     this.reqOpt.latitude = latitude;
     this.reqOpt.longitude = longitude;
-    this.discountsService.getVendorsDiscounts(this.vendor.vendorId, this.reqOpt).pipe(
+    this.vendorsService.getVendorsDiscounts(this.vendor.vendorId, this.reqOpt).pipe(
       takeUntil(this.unsubscribe$)
     )
       .subscribe(res => this.vendorDiscounts = res);

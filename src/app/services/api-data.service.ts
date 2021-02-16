@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ActiveUser, AuthInfo, AuthUser, Vendor } from '../models';
 import {
@@ -99,7 +99,6 @@ export class ApiDataService {
   }
 
   putApiConfig(configId, opt): any {
-    console.log(opt);
     return this.http.put(`${environment.webApiUrl}${CHANGE_CONFIGS}/${configId}`, {
       id: configId,
       value: opt

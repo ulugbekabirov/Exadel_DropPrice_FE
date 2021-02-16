@@ -6,6 +6,7 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { DiscountsService } from '../../services/discounts.service';
+import { VendorsService } from '../../services/vendors.service';
 
 @Component({
   selector: 'app-new-vendor',
@@ -17,7 +18,8 @@ export class NewVendorComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private discountsService: DiscountsService
+    private discountsService: DiscountsService,
+    private vendorsService: VendorsService
   ) {}
 
   ngOnInit(): void {
@@ -46,7 +48,7 @@ export class NewVendorComponent implements OnInit {
 
   onSubmit(): void {
     const newVendor = this.newVendorForm.value;
-    this.discountsService.postVendor(newVendor)
+    this.vendorsService.postVendor(newVendor)
       .subscribe(res => console.log('res', res));
     this.newVendorForm.reset();
     for (const control in this.newVendorForm.controls) {
