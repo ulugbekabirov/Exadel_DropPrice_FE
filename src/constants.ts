@@ -1,8 +1,11 @@
 export const AUTH_ENDPOINT = 'login';
+export const CONFIGS = 'configs';
+export const CHANGE_CONFIGS = 'changeConfigs';
 export const USER_INFO_ENDPOINT = 'user';
 export const USER_SAVED_ENDPOINT = 'saved';
 export const USER_TICKETS_ENDPOINT = 'tickets';
 export const GET_VENDORS_ENDPOINT = 'vendors';
+export const POST_VENDORS_ENDPOINT = 'vendors';
 export const GET_VENDOR_DISCOUNTS_ENDPOINT = 'discounts';
 export const GET_DISCOUNTS_ENDPOINT = 'discounts';
 export const POST_DISCOUNTS_ENDPOINT = 'discounts';
@@ -18,11 +21,11 @@ export const SEARCH_DISCOUNTS_ENDPOINT = 'search';
 export const SORT_BY = [
   {
     name: 'MAIN_PAGE.FILTER.SORT_BY.DISCOUNT_RATING_ASC.NAME',
-    sortBy: 'DiscountRatingAsc',
+    sortBy: 'RatingAsc',
   },
   {
     name: 'MAIN_PAGE.FILTER.SORT_BY.DISCOUNT_RATING_DESC.NAME',
-    sortBy: 'DiscountRatingDesc',
+    sortBy: 'RatingDesc',
   },
   {
     name: 'MAIN_PAGE.FILTER.SORT_BY.DISTANCE_ASC.NAME',

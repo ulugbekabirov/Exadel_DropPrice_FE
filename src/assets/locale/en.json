@@ -156,5 +156,37 @@
         "EDIT": "Edit"
       }
     }
+  },
+  "BUTTON_BACK_LOCATION": "go back",
+  "ADMIN_DASHBOARD": {
+    "SETTINGS": "Change",
+    "SIDEBAR": {
+      "ADMIN": "Statistics",
+      "SETTINGS": "Settings",
+      "VENDORS": "Vendors",
+      "DISCOUNTS": "Discounts",
+      "OPTIONS": "Options",
+      "COLLAPSE": "Collapse"
+    },
+    "SORT": {
+      "LABEL": {
+        "RATING": "Sort by rating",
+        "TICKET": "Sort by tickets"
+      },
+      "ASC": "ascending",
+      "DESC": "descending"
+    },
+    "STATS": {
+      "TABLE": {
+        "NAME": "Name",
+        "RATING": "Rating",
+        "TICKETS": "Tickets",
+        "EMAIL": "E-mail"
+      }
+    },
+    "SEARCH": {
+      "SEARCH_BY": "Search by"
+    },
+    "CONTENT": ""
   }
 }
