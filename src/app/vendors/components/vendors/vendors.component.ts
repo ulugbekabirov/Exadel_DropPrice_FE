@@ -5,11 +5,5 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './vendors.component.html',
   styleUrls: ['./vendors.component.scss']
 })
-export class VendorsComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class VendorsComponent {
 }
