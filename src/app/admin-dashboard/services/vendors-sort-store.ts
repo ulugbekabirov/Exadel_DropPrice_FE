@@ -31,7 +31,7 @@ export class VendorsSortStore {
   private subject = new BehaviorSubject<SortState>(SEARCH_INITIAL_STATE);
   private store = this.subject.asObservable().pipe(distinctUntilChanged());
 
-  get value() {
+  get value(): any {
     return this.subject.value;
   }
 

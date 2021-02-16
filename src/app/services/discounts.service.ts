@@ -10,8 +10,7 @@ import { HttpParams } from '@angular/common/http';
 export class DiscountsService {
   constructor(
     private restApi: ApiDataService,
-  ) {
-  }
+  ) {}
 
   getDiscounts(params): Observable<any> {
     const paramsObj = {};
