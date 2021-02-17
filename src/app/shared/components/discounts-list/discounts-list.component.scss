@@ -1,8 +1,8 @@
 @import "src/variables";
 
 .discounts-box {
+
   font-size: 1rem;
-  padding-top: 2em;
 
   &__title {
     font-size: 1.5em;
@@ -21,7 +21,7 @@
   }
 
   &__list {
-    padding: 0 2em;
+    padding: 0 1em;
     display: flex;
     flex-direction: column;
     gap: 1.5em;

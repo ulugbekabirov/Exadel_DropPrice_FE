@@ -3,6 +3,8 @@
 
 
 * {
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
 }
 
@@ -12,23 +14,34 @@ html, body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: $bg_body_color;
+  font: 1rem/1.5 "Roboto", sans-serif;
+  background-color: $body_bgColor;
 }
 
 ul,
 ol {
   list-style: none;
-  margin: 0;
-  padding: 0;
 }
 
-a {
+button,
+input {
+  border: none;
+  outline: none;
+}
+
+a,
+button {
   text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 
   &:visited {
     color: initial;
   }
+}
+
+svg {
+  display: block;
 }
 
 

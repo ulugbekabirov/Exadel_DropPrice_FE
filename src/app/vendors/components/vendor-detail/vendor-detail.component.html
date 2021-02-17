@@ -1,0 +1,116 @@
+<div class="vendors">
+  <article class="vendors-detail">
+    <section class="vendors-detail__header"
+             fxLayout="row"
+             fxLayoutAlign="center center"
+             fxLayoutGap="1em"
+    >
+      <h3 class="vendors-detail__header_title">
+        {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_RATING_LABEL" | translate}}
+      </h3>
+      <div class="vendors-detail__header_rating"
+           fxLayout="row"
+           fxLayoutAlign="center center"
+           fxLayoutGap=".3em"
+      >
+      <span class="rating__amount"
+            fxLayoutAlign="center center"
+      >
+          {{vendor?.vendorRating ? vendor?.vendorRating.toFixed(1) : vendor?.vendorRating}}
+    </span>
+        <mat-icon class="rating__icon"
+                  fxLayoutAlign="center center"
+        >{{vendor?.vendorRating ? 'star_rate' : 'star_border'}}
+        </mat-icon>
+      </div>
+    </section>
+    <section class="vendors-detail__content">
+      <div class="vendor-content">
+        <div class="vendor-content__field">
+          <p class="vendor-content__field_label"
+          >
+            {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_NAME" | translate}}
+          </p>
+
+          <select
+            [(ngModel)]="selectedVendorId"
+            (change)="selectVendor(selectedVendorId)"
+          >
+            <option *ngFor="let vend of vendorsList" [value]="vend.vendorId"
+                    [selected]="vend.vendorId === selectedVendorId"
+            >
+              {{vend.vendorName}}
+            </option>
+          </select>
+        </div>
+        <div class="vendor-content__field">
+          <p class="vendor-content__field_label">
+            {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_ADDRESS" | translate}}
+
+          </p>
+          <p class="vendor-content__field_text">
+            {{vendor?.address}}
+          </p>
+        </div>
+        <div class="vendor-content__field">
+          <p class="vendor-content__field_label">
+            {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_EMAIL" | translate}}
+          </p>
+          <p class="vendor-content__field_text">
+            {{vendor?.email}}
+          </p>
+        </div>
+        <div class="vendor-content__field">
+          <p class="vendor-content__field_label">
+            {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_PHONE" | translate}}
+
+          </p>
+          <p class="vendor-content__field_text">
+            {{vendor?.phone}}
+          </p>
+        </div>
+        <div class="vendor-content__field">
+          <p class="vendor-content__field_label">
+            {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_SOCIALS" | translate}}
+
+          </p>
+          <ul class="vendor-content__field_text">
+            <li *ngFor="let social of vendorSocials">
+              <a
+                href="{{social.path}}"
+                target="_blank"
+                title="{{social.name}}"
+              >
+                {{social.name}}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="vendors-detail__actions">
+      <button *appVerifyUserRoles='["Moderator"]'
+              class="vendors-detail__actions_button"
+              mat-flat-button
+              matTooltip="Edit Discount"
+      >
+        {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_ACTIONS.EDIT" | translate}}
+      </button>
+    </section>
+  </article>
+  <article class="vendors-discounts">
+    <app-discounts-list
+      [discounts]="vendorDiscounts"
+      [towns]="towns"
+      (locationChange)="onLocationChange($event)"
+      (getTicket)="getTicket($event)"
+      (sortChange)="onSortChange($event)"
+      (toggleFavourites)="changeFavourites($event)"
+      [activeCoords]="activeCoords"
+      [sortBy]="sortBy"
+      (toggleCoordinates)="changeCoords()"
+    ></app-discounts-list>
+  </article>
+</div>
+<ng-template appRef></ng-template>
+

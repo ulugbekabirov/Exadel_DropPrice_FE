@@ -9,6 +9,41 @@
   gap: 1em;
   margin-top: 1em;
 
+  .go-back__link {
+    font-size: 1rem;
+    background: $ticket_button_bg_color;
+    align-self: flex-start;
+    cursor: pointer;
+    padding: .3em 1em;
+    border-radius: 1em;
+    overflow: hidden;
+
+    &_icon {
+
+      background: inherit;
+      color: #ffffff;
+      will-change: transform;
+      transition: transform .1s ease-in-out;
+    }
+
+    &_text {
+
+      background: inherit;
+      color: #ffffff;
+      cursor: pointer;
+      display: block;
+    }
+
+    &:hover {
+
+      .go-back__link_icon {
+        background: inherit;
+        transform: scale(1.1, 1.1);
+        color: $isSaved_true_bg_color_hover;
+      }
+    }
+  }
+
   &__header {
     display: flex;
     justify-content: flex-start;
@@ -18,7 +53,7 @@
     padding: 1em;
 
     @media screen and (min-width: 767.98px) {
-      padding: 1em 2em;
+      padding: 0 2em 1em;
     }
 
     &_rating {
@@ -100,8 +135,8 @@
           padding: .5em 1em;
           margin: 0 2em;
           color: $discount_detail_text_color;
-          border-right: 2px solid $bg_header_color;
-          border-left: 2px solid $bg_header_color;
+          border-right: 2px solid $main_header_bgColor;
+          border-left: 2px solid $main_header_bgColor;
         }
       }
 
@@ -146,7 +181,7 @@
           font-style: italic;
           font-weight: 600;
           letter-spacing: .1em;
-          color: $bg_header_color;
+          color: $main_header_bgColor;
         }
       }
 

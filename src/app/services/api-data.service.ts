@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ActiveUser, AuthInfo, AuthUser, Vendor, Discount } from '../models';
+import { ActiveUser, AuthInfo, AuthUser, Vendor, } from '../models';
 import {
   AUTH_ENDPOINT,
   GET_DISCOUNTS_ENDPOINT,
   GET_TAGS_ENDPOINT,
   GET_TICKET_ENDPOINT,
-  GET_TOWNS_ENDPOINT, GET_VENDOR_DISCOUNTS_ENDPOINT,
-  GET_VENDORS_ENDPOINT, PUT_ARCHIVE_DISCOUNTS_ENDPOINT,
-  PUT_IS_SAVED_DISCOUNTS_ENDPOINT, SEARCH_DISCOUNTS_ENDPOINT,
+  GET_POINT_OF_SALES,
+  GET_TOWNS_ENDPOINT,
+  GET_VENDOR_DISCOUNTS_ENDPOINT,
+  GET_VENDORS_ENDPOINT,
+  POST_DISCOUNTS_ENDPOINT,
+  PUT_ARCHIVE_DISCOUNTS_ENDPOINT,
+  PUT_IS_SAVED_DISCOUNTS_ENDPOINT,
+  SEARCH_DISCOUNTS_ENDPOINT,
   USER_INFO_ENDPOINT,
-  GET_POINT_OF_SALES
+  POST_VENDORS_ENDPOINT, CONFIGS, CHANGE_CONFIGS
 } from '../../constants';
 import { environment } from '../../environments/environment';
 
@@ -54,8 +59,8 @@ export class ApiDataService {
     return this.http.put(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${id}/${PUT_IS_SAVED_DISCOUNTS_ENDPOINT}`, null);
   }
 
-  getDiscountById(discountId): Observable<any> {
-    return this.http.get(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${discountId}`);
+  getDiscountById(discountId, options): Observable<any> {
+    return this.http.get(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${discountId}`, options);
   }
 
   getVendors(): Observable<Vendor[]> {
@@ -78,4 +83,30 @@ export class ApiDataService {
     return this.http.put(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${id}/${PUT_ARCHIVE_DISCOUNTS_ENDPOINT}`, null);
   }
 
+  postDiscount(discount): any {
+    return this.http.post(`${environment.webApiUrl}${POST_DISCOUNTS_ENDPOINT}`, discount);
+  }
+
+  postVendor(vendor): any {
+    return this.http.post(`${environment.webApiUrl}${POST_VENDORS_ENDPOINT}`, vendor);
+  }
+
+  searchVendors(options): any {
+    return this.http.get(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/search`, options);
+  }
+
+  searchStatsDiscounts(options): any {
+    return this.http.get(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/stats/search`, options);
+  }
+
+  getApiConfigs(): any {
+    return this.http.get(`${environment.webApiUrl}${CONFIGS}`);
+  }
+
+  putApiConfig(configId, opt): any {
+    return this.http.put(`${environment.webApiUrl}${CHANGE_CONFIGS}/${configId}`, {
+      id: configId,
+      value: opt
+    });
+  }
 }

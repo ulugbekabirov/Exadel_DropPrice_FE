@@ -5,7 +5,7 @@
   >
     <h2 class="discount-card__header_title">
       <a
-        [routerLink]="[discount.discountId]"
+        [routerLink]="['/discounts', discount.discountId]"
         matTooltip="Подробнее о Скидке"
         matTooltipPosition="right"
       >
@@ -42,7 +42,7 @@
        fxLayoutAlign="flex-start center"
   >
     <a class="discount-card__vendor_link"
-       [routerLink]="[discount.discountId]"
+       [routerLink]="['/vendors', discount.vendorId]"
        matTooltip="Подробнее о Скидке"
        matTooltipPosition="right"
     >

@@ -3,14 +3,17 @@
 .header {
   font-size: 1rem;
   width: 100%;
-  min-height: $header_height;
+  min-height: $main_header_height;
   align-items: center;
-  background: $bg_header_color;
+  background: $main_header_bgColor;
   position: fixed;
-  padding: 0 .5em 0 1em;
+  padding: 0 1.5em 0 2em;
   z-index: 99;
   top: 0;
   left: 0;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2),
+  0 6px 10px 0 rgba(0, 0, 0, .14),
+  0 1px 18px 0 rgb(0, 0, 0, .12);
 
   &__logo {
     text-decoration: none;
@@ -23,8 +26,8 @@
   }
 
   &__hamburger {
-    height: $header_height / 1.5;
-    width: $header_height / 1.5;
+    height: $main_header_height / 1.5;
+    width: $main_header_height / 1.5;
     border: .18em solid white;
     border-radius: 50%;
     position: relative;
@@ -121,10 +124,10 @@
     }
 
     a {
-      color: $header_link_color;
-      font-weight: 600;
+      color: $main_header_txtColor;
+      font-weight: 400;
       font-style: normal;
-      font-size: 1.3em;
+      font-size: 1rem;
       line-height: 24px;
       letter-spacing: .2em;
       border: none;
@@ -132,9 +135,19 @@
       border-radius: 0;
       margin-bottom: .6em;
 
+      &:hover,
+      &focus {
+        color: $main_header_items_hover;
+        outline: none;
+
+        svg {
+          fill: $blue;
+        }
+      }
+
       @media screen and (min-width: 700px) {
-        font-weight: 500;
-        font-size: 1em;
+        font-weight: 400;
+        font-size: 1rem;
         letter-spacing: inherit;
         border-right: 1px solid white;
         margin: 0;
@@ -147,7 +160,7 @@
       &__language_selector {
         border: none;
         outline: none;
-        color: white;
+        color: $main_header_txtColor;
         background: transparent;
         font-size: 1.5em;
         font-weight: 600;
@@ -155,7 +168,7 @@
         padding: .5em .1em;
 
         &:hover {
-          color: $header_profile_color_hover;
+          color: $main_header_profile_txtColor_hover;
         }
 
         @media screen and (min-width: 700px) {
@@ -165,28 +178,28 @@
       }
 
       &__language_option {
-        color: $header_link_color;
-        background: $bg_header_color;
-        border-radius: 3px;
+        color: $main_header_txtColor;
+        background: $main_header_bgColor;
+        border-radius: $border-radius;
         border: 3px solid white;
         outline: 3px solid white;
         cursor: pointer;
       }
 
       &__icon {
-        color: $header_link_color;
-        font-size: 2.4em;
+        color: $main_header_txtColor;
+        font-size: 2em;
         cursor: pointer;
         outline: none;
 
         &:hover {
-          color: $header_profile_color_hover;
+          color: $main_header_profile_txtColor_hover;
         }
       }
     }
 
     .active_link {
-      color: $header_link_active;
+      color: $main_header_link_active;
     }
 
     @media screen and (min-width: 700px) {
@@ -203,21 +216,20 @@
 
   @media (min-width: 991.98px) {
 
-    padding: 0 calc(50vw - 480px);
+    //padding: 0 calc(50vw - 480px);
 
     @media screen and (min-width: 1200px) {
 
       font-size: 1rem;
-      padding: 0 calc(50vw - 590px);
+      //padding: 0 calc(50vw - 590px);
 
       @media screen and (min-width: 1600px) {
 
-        font-size: 1.1rem;
-        padding: 0 calc(50vw - 690px);
+        //padding: 0 calc(50vw - 690px);
 
         @media screen and (min-width: 1900px) {
 
-          font-size: 1.4rem;
+          font-size: 1.2rem;
         }
       }
     }

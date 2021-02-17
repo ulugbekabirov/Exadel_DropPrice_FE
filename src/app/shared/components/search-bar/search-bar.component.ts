@@ -45,13 +45,10 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     chip.toggleSelected();
     if (this.tagsName.indexOf(tag) > -1) {
       this.tagsName.splice(this.tagsName.indexOf(tag), 1);
-
     } else {
       this.tagsName.push(tag);
     }
-
     this.addSearch();
-
   }
 
   ngOnInit(): void {
@@ -63,6 +60,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
         this.consoleMessages.push(value);
         this.addSearch();
       });
+
   }
 
   ngOnDestroy(): void {

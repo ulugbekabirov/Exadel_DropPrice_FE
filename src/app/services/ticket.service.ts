@@ -1,5 +1,5 @@
 import { ComponentFactoryResolver, Injectable } from '@angular/core';
-import { TicketComponent } from '../components/ticket/ticket.component';
+import { TicketComponent } from '../shared/components/ticket/ticket.component';
 import { ApiDataService } from './api-data.service';
 
 @Injectable({

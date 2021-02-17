@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation, ElementRef } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -6,6 +6,8 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DiscountsService } from '../../services/discounts.service';
+import { VendorsService } from '../../services/vendors.service';
 
 @Component({
   selector: 'app-new-vendor',
@@ -16,14 +18,19 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class NewVendorComponent implements OnInit {
   newVendorForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private snackBar: MatSnackBar) {}
+  constructor(
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar,
+    private discountsService: DiscountsService,
+    private vendorsService: VendorsService
+  ) {}
 
   ngOnInit(): void {
     this.newVendorForm = this.fb.group({
       name: ['', [Validators.required]],
       address: [''],
-      descriptionVendor: [''],
-      number: [
+      description: [''],
+      phone: [
         '',
         [
           Validators.required,
@@ -51,8 +58,10 @@ export class NewVendorComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.newVendorForm.value;
+    const newVendor = this.newVendorForm.value;
     this.openSnackBar();
+    this.vendorsService.postVendor(newVendor)
+      .subscribe(res => console.log('res', res));
     this.newVendorForm.reset();
     for (const control in this.newVendorForm.controls) {
       this.newVendorForm.controls[control].setErrors(null);
@@ -67,7 +76,7 @@ export class NewVendorComponent implements OnInit {
     return this.newVendorForm.get('address');
   }
 
-  get number(): AbstractControl {
+  get phone(): AbstractControl {
     return this.newVendorForm.get('number');
   }
 

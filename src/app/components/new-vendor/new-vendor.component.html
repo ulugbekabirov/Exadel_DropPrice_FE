@@ -8,14 +8,14 @@
         fxLayoutAlign="space-between"
         class="new-vendor-form"
       >
-        <div  fxLayout="row" 
+        <div  fxLayout="row"
               fxLayoutGap="30px"
               fxLayoutAlign="center center"
               fxLayout.lt-md="column"
               fxLayoutGap.xs="5px" >
           <mat-form-field>
-            <mat-label>{{ 
-              "NEW_VENDOR_FORM.NAME_LABEL" | translate 
+            <mat-label>{{
+              "NEW_VENDOR_FORM.NAME_LABEL" | translate
             }}</mat-label>
             <input matInput formControlName="name" />
           </mat-form-field>
@@ -37,7 +37,7 @@
           <mat-label>{{ "NEW_VENDOR_FORM.DESCRIPTION" | translate }}</mat-label>
           <textarea
             class="new-vendor-form__description"
-            formControlName="descriptionVendor"
+            formControlName="description"
             matInput
             #description
             maxlength="5000"
@@ -56,13 +56,13 @@
             <mat-label>{{
               "NEW_VENDOR_FORM.PHONE_NUMBER" | translate
             }}</mat-label>
-            <input matInput formControlName="number" type="tel" />
+            <input matInput formControlName="phone" type="tel" />
             <mat-icon matSuffix>phone</mat-icon>
             <mat-error
               >{{ "NEW_VENDOR_FORM.VALID_PHONE" | translate }}
             </mat-error>
           </mat-form-field>
-          
+
           <mat-form-field>
             <mat-label>{{ "NEW_VENDOR_FORM.EMAIL_LABEL" | translate }}</mat-label>
             <input matInput formControlName="email" />
@@ -72,7 +72,7 @@
             </mat-error>
           </mat-form-field>
         </div>
-      
+
         <div fxLayout="row"
              fxLayoutGap="25px"
              fxLayout.lt-md="column"
@@ -116,7 +116,7 @@
             </mat-error>
           </mat-form-field>
         </div>
-        
+
         <button
           mat-flat-button
           color="primary"

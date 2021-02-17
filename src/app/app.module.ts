@@ -21,15 +21,11 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { MissingTranslationService } from './services/missing-translation.service';
 import { HeaderComponent } from './components/header/header.component';
 import { AppRoutingModule } from './app-routing/app.routing.module';
-import { TicketComponent } from './components/ticket/ticket.component';
 import { NewDiscountComponent } from './components/new-discount/new-discount.component';
 import { ModeratorDashboardComponent } from './components/moderator-dashboard/moderator-dashboard.component';
 import { NewVendorComponent } from './components/new-vendor/new-vendor.component';
 import { MapComponent } from './components/map/map.component';
 import { DiscountDetailComponent } from './components/discount-detail/discount-detail.component';
-import { StatisticsComponent } from './components/statistics/statistics.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { VendorDetailComponent } from './components/vendor-detail/vendor-detail.component';
 import { DiscountsComponent } from './components/discounts/discounts.component';
 
 export function HttpLoaderFactory(http: HttpClient): any {
@@ -42,15 +38,11 @@ export function HttpLoaderFactory(http: HttpClient): any {
     LoginFormComponent,
     HomeComponent,
     HeaderComponent,
-    TicketComponent,
     ModeratorDashboardComponent,
     NewVendorComponent,
     MapComponent,
     NewDiscountComponent,
     DiscountDetailComponent,
-    StatisticsComponent,
-    UserProfileComponent,
-    VendorDetailComponent,
     DiscountsComponent
   ],
   imports: [

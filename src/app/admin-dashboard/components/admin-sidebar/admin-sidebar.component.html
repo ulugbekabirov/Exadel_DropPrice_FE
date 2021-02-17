@@ -1,0 +1,129 @@
+<svg style="display:none;">
+  <symbol id="down" viewBox="0 0 16 16">
+    <polygon points="3.81 4.38 8 8.57 12.19 4.38 13.71 5.91 8 11.62 2.29 5.91 3.81 4.38"/>
+  </symbol>
+  <symbol id="collection" viewBox="0 0 16 16">
+    <rect width="7" height="7"/>
+    <rect y="9" width="7" height="7"/>
+    <rect x="9" width="7" height="7"/>
+    <rect x="9" y="9" width="7" height="7"/>
+  </symbol>
+  <symbol id="comments" viewBox="0 0 16 16">
+    <path d="M0,16.13V2H15V13H5.24ZM1,3V14.37L5,12h9V3Z"/>
+    <rect x="3" y="5" width="9" height="1"/>
+    <rect x="3" y="7" width="7" height="1"/>
+    <rect x="3" y="9" width="5" height="1"/>
+  </symbol>
+  <symbol id="discount" viewBox="0 0 16 16">
+    <svg viewBox="0 0 448 512">
+      <path fill="currentColor"
+            d="M112 224c61.9 0 112-50.1 112-112S173.9 0 112 0 0 50.1 0 112s50.1 112 112 112zm0-160c26.5 0 48 21.5 48 48s-21.5 48-48 48-48-21.5-48-48 21.5-48 48-48zm224 224c-61.9 0-112 50.1-112 112s50.1 112 112 112 112-50.1 112-112-50.1-112-112-112zm0 160c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zM392.3.2l31.6-.1c19.4-.1 30.9 21.8 19.7 37.8L77.4 501.6a23.95 23.95 0 0 1-19.6 10.2l-33.4.1c-19.5 0-30.9-21.9-19.7-37.8l368-463.7C377.2 4 384.5.2 392.3.2z"></path>
+    </svg>
+  </symbol>
+  <symbol id="settings" viewBox="0 0 16 16">
+    <rect x="9.78" y="5.34" width="1" height="7.97"/>
+    <polygon points="7.79 6.07 10.28 1.75 12.77 6.07 7.79 6.07"/>
+    <rect x="4.16" y="1.75" width="1" height="7.97"/>
+    <polygon points="7.15 8.99 4.66 13.31 2.16 8.99 7.15 8.99"/>
+    <rect x="1.28" width="1" height="4.97"/>
+    <polygon points="3.28 4.53 1.78 7.13 0.28 4.53 3.28 4.53"/>
+    <rect x="12.84" y="11.03" width="1" height="4.97"/>
+    <polygon points="11.85 11.47 13.34 8.88 14.84 11.47 11.85 11.47"/>
+  </symbol>
+  <symbol id="collapse" viewBox="0 0 16 16">
+    <polygon points="11.62 3.81 7.43 8 11.62 12.19 10.09 13.71 4.38 8 10.09 2.29 11.62 3.81"/>
+  </symbol>
+</svg>
+<section class="sidebar"
+         ngClass="{{collapsed ? 'collapsed' : ''}}"
+>
+  <nav
+    ngClass="{{mobileOpened ? 'mobile-opened' : ''}}"
+  >
+    <a class="logo-link" routerLink="">
+      <img src="../../../../assets/img/logo-company.svg" alt="Flexadel logo">
+    </a>
+    <button
+      class="toggle-mob-menu"
+      aria-expanded="false"
+      aria-label="open menu"
+      (click)="toddleMobile($event)"
+    >
+      <svg width="20" height="20" aria-hidden="true">
+        <use xlink:href="#down"></use>
+      </svg>
+    </button>
+    <ul class="admin-sidebar__menu">
+      <li class="admin-sidebar__menu_heading">
+        <h3>
+          {{"ADMIN_DASHBOARD.SIDEBAR.ADMIN" | translate}}
+        </h3>
+      </li>
+      <li>
+        <a [routerLink]="['vendors']"
+           routerLinkActive="link_active"
+        >
+          <svg>
+            <use xlink:href="#collection"></use>
+          </svg>
+          <span>
+            {{"ADMIN_DASHBOARD.SIDEBAR.VENDORS" | translate}}
+          </span>
+          <svg aria-hidden="true">
+            <use xlink:href="#collapse"></use>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['discounts']"
+           routerLinkActive="link_active"
+        >
+          <svg>
+            <use xlink:href="#discount"></use>
+          </svg>
+          <span>
+            {{"ADMIN_DASHBOARD.SIDEBAR.DISCOUNTS" | translate}}
+          </span>
+          <svg aria-hidden="true">
+            <use xlink:href="#collapse"></use>
+          </svg>
+        </a>
+      </li>
+      <li class="admin-sidebar__menu_heading">
+        <h3>
+          {{"ADMIN_DASHBOARD.SIDEBAR.OPTIONS" | translate}}
+        </h3>
+      </li>
+      <li>
+        <a [routerLink]="['settings']"
+        routerLinkActive="link_active"
+        >
+          <svg>
+            <use xlink:href="#settings"></use>
+          </svg>
+          <span>
+            {{"ADMIN_DASHBOARD.SIDEBAR.SETTINGS" | translate}}
+          </span>
+          <svg aria-hidden="true">
+            <use xlink:href="#collapse"></use>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <button
+          (click)="collapseSidebar()"
+          ngClass="{{collapsed ? 'collapsed' : ''}}"
+          class="collapse-btn"
+          aria-expanded="true"
+          aria-label="collapse menu">
+          <svg aria-hidden="true">
+            <use xlink:href="#collapse"></use>
+          </svg>
+          <span>
+            {{"ADMIN_DASHBOARD.SIDEBAR.COLLAPSE" | translate}}
+          </span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+</section>
