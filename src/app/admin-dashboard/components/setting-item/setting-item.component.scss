@@ -1,0 +1,10 @@
+@import "src/variables";
+
+:host {
+  width: 100%;
+}
+
+mat-card {
+  width: 100%;
+  height: auto;
+}

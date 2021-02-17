@@ -13,14 +13,14 @@ import { TranslateService } from '@ngx-translate/core';
 import { DiscountsService } from '../../services/discounts.service';
 import { Vendor } from '../../models';
 
-import { startWith, debounceTime, filter} from 'rxjs/operators';
+import { startWith, debounceTime } from 'rxjs/operators';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { MapComponent } from './../map/map.component';
+import { VendorsService } from '../../services/vendors.service';
 
 export interface Tag {
   name: string;
@@ -52,12 +52,13 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     public translateService: TranslateService,
     public fb: FormBuilder,
     private dialog: MatDialog,
-    private discountService: DiscountsService,
+    private discountsService: DiscountsService,
+    private vendorsService: VendorsService,
   ) {}
 
   ngOnInit(): void {
 
-    this.subscription = this.discountService.getVendors()
+    this.subscription = this.vendorsService.getVendors()
       .subscribe(res => {
         this.vendorsList = this.filteredList = res;
     });
@@ -169,7 +170,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
 
   submit(): void {
     const newDiscount = this.newDiscountForm.value;
-    this.discountService.postDiscount(newDiscount)
+    this.discountsService.postDiscount(newDiscount)
       .subscribe(res => console.log('res', res));
     this.newDiscountForm.reset();
     for (const control in this.newDiscountForm.controls) {

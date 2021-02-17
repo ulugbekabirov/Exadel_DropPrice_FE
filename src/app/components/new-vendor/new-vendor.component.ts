@@ -5,10 +5,12 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
+import { DiscountsService } from '../../services/discounts.service';
+import { VendorsService } from '../../services/vendors.service';
 
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { DiscountsService } from 'src/app/services/discounts.service';
+
 import { Vendor } from './../../models/vendor';
 import { Location } from '@angular/common';
 import { switchMap } from 'rxjs/operators';
@@ -23,18 +25,22 @@ export class NewVendorComponent implements OnInit {
   vendor: Vendor;
   vendId: any;
 
+
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
     private discountService: DiscountsService,
+    private vendorsService: VendorsService,
     private router: Router,
     private location: Location)  {}
+
 
   ngOnInit(): void {
     this.newVendorForm = this.fb.group({
       name: ['', [Validators.required]],
       address: [''],
       description: [''],
-      number: [
+      phone: [
+
         '',
         [
           Validators.required,
@@ -54,7 +60,7 @@ export class NewVendorComponent implements OnInit {
     .pipe(
       switchMap((params: any) => {
         this.vendId = +params.get("id");
-        return this.discountService.getVendorById(this.vendId)
+        return this.vendorsService.getVendorById(this.vendId)
       }),
     ).subscribe((vendor) => {
       console.log(vendor.socialLinks)
@@ -63,7 +69,7 @@ export class NewVendorComponent implements OnInit {
         name: vendor.vendorName,
         address: vendor.address,
         description: vendor.description,
-        number: vendor.phone.trim(),
+        phone: vendor.phone.trim(),
         email: vendor.email,
         social_network: {
           instagram: (json["Instagram"]).trim(),
@@ -80,20 +86,26 @@ export class NewVendorComponent implements OnInit {
   }
 
   onSubmit(): void {
+    const newSocial = JSON.stringify(this.newVendorForm.value.social_network);
+    this.newVendorForm.value.social_network = newSocial;
     if((this.router.url).includes("edit")){
-      const newSocial = JSON.stringify(this.newVendorForm.value.social_network);
-      this.newVendorForm.value.social_network = newSocial;
       const updateVendor: Vendor = this.newVendorForm.value;
       console.log(updateVendor)
-      this.discountService.updateVendor(updateVendor, this.vendId).subscribe(() => this.goBack());
+      this.vendorsService.updateVendor(updateVendor, this.vendId).subscribe(() => this.goBack());
     } else {
-      this.newVendorForm.value;
-      
+
+    const newVendor = this.newVendorForm.value;
+    this.vendorsService.postVendor(newVendor)
+      .subscribe(res => console.log('res', res));
+    this.newVendorForm.reset();
+    for (const control in this.newVendorForm.controls) {
+      this.newVendorForm.controls[control].setErrors(null);
     }
     this.newVendorForm.reset();
-      for (const control in this.newVendorForm.controls) {
+    for (const control in this.newVendorForm.controls) {
         this.newVendorForm.controls[control].setErrors(null);
       }
+    }
   }
 
   get name(): AbstractControl {
@@ -104,7 +116,7 @@ export class NewVendorComponent implements OnInit {
     return this.newVendorForm.get('address');
   }
 
-  get number(): AbstractControl {
+  get phone(): AbstractControl {
     return this.newVendorForm.get('number');
   }
 
