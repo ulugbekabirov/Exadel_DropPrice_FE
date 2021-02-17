@@ -79,21 +79,23 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
   onEditVendor(vendorId: number): void {
     this.router.navigate(['/vendors/edit', vendorId]);
   }
-  selectVendor(value: any): void {
-    if (!value) {
+
+  selectVendor(vendorId: any): void {
+    if (!vendorId) {
       return;
     }
-    forkJoin(
-      this.vendorsService.getVendorById(value),
-      this.vendorsService.getVendorsDiscounts(value, this.reqOpt)
-    )
-      .pipe(
-        takeUntil(this.unsubscribe$),
-      )
-      .subscribe(([vendor, discounts]) => {
-        this.vendorDiscounts = discounts;
-        this.vendor = vendor;
-      });
+    this.router.navigate(['/vendors', vendorId]);
+    // forkJoin(
+    //   this.vendorsService.getVendorById(value),
+    //   this.vendorsService.getVendorsDiscounts(value, this.reqOpt)
+    // )
+    //   .pipe(
+    //     takeUntil(this.unsubscribe$),
+    //   )
+    //   .subscribe(([vendor, discounts]) => {
+    //     this.vendorDiscounts = discounts;
+    //     this.vendor = vendor;
+    //   });
   }
 
   changeCoords(): void {
