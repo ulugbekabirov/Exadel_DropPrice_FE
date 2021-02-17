@@ -48,7 +48,7 @@ export class NewVendorComponent implements OnInit {
         ],
       ],
       email: ['', [Validators.required, Validators.email]],
-      social_network: this.fb.group ({
+      socialLinks: this.fb.group ({
         instagram:  ['', [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]],
         facebook: ['', [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]],
         website: ['', [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]],
@@ -63,6 +63,7 @@ export class NewVendorComponent implements OnInit {
         return this.vendorsService.getVendorById(this.vendId);
       }),
     ).subscribe((vendor) => {
+      console.log('vendor', vendor);
       const json = JSON.parse(vendor.socialLinks);
       this.newVendorForm.patchValue({
         name: vendor.vendorName,
@@ -70,7 +71,7 @@ export class NewVendorComponent implements OnInit {
         description: vendor.description,
         phone: vendor.phone.trim(),
         email: vendor.email,
-        social_network: {
+        socialLinks: {
           instagram: (json.Instagram).trim(),
           facebook: (json.Facebook).trim(),
           website: (json.WebSite).trim(),
@@ -85,8 +86,8 @@ export class NewVendorComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const newSocial = JSON.stringify(this.newVendorForm.value.social_network);
-    this.newVendorForm.value.social_network = newSocial;
+    const newSocial = JSON.stringify(this.newVendorForm.value.socialLinks);
+    this.newVendorForm.value.socialLinks = newSocial;
     if ((this.router.url).includes('edit')){
       const updateVendor: Vendor = this.newVendorForm.value;
       this.vendorsService.updateVendor(updateVendor, this.vendId).subscribe(() => this.goBack());
@@ -123,7 +124,7 @@ export class NewVendorComponent implements OnInit {
   }
 
   get social_network(): AbstractControl {
-    return this.newVendorForm.get('social_network');
+    return this.newVendorForm.get('socialLinks');
   }
 
   get instagram(): AbstractControl {
