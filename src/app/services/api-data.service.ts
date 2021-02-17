@@ -86,7 +86,7 @@ export class ApiDataService {
     return this.http.post(`${environment.webApiUrl}${POST_DISCOUNTS_ENDPOINT}`, discount);
   }
 
-  postVendor(vendor): any {
+  createVendor(vendor): any {
     return this.http.post(`${environment.webApiUrl}${POST_VENDORS_ENDPOINT}`, vendor);
   }
 
