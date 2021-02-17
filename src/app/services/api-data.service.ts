@@ -71,8 +71,6 @@ export class ApiDataService {
   }
 
   updateVendor(vendor, vendorId): Observable<any> {
-    console.log(vendorId, vendor);
-    console.log(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}`);
     return this.http.put(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}`, vendor);
   }
 

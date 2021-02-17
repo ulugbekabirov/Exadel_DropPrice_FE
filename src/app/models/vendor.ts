@@ -8,10 +8,10 @@ export interface Vendor {
   socialLinks: {
     instagram: string,
     facebook: string,
-    website:  string,
+    website: string,
     otherSocialLink: string,
-  },
- 
+  };
+
   vendorRating: number;
   ticketCount: number;
 }

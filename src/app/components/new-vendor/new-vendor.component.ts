@@ -20,18 +20,18 @@ import { switchMap } from 'rxjs/operators';
   templateUrl: './new-vendor.component.html',
   styleUrls: ['./new-vendor.component.scss'],
 })
-export class NewVendorComponent implements OnInit { 
+export class NewVendorComponent implements OnInit {
   newVendorForm: FormGroup;
   vendor: Vendor;
   vendId: any;
 
 
   constructor(private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private discountService: DiscountsService,
-    private vendorsService: VendorsService,
-    private router: Router,
-    private location: Location)  {}
+              private route: ActivatedRoute,
+              private discountService: DiscountsService,
+              private vendorsService: VendorsService,
+              private router: Router,
+              private location: Location)  {}
 
 
   ngOnInit(): void {
@@ -44,7 +44,7 @@ export class NewVendorComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.pattern(/^((8|\+7|\+3)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/),
+          Validators.pattern(/^((8|\+7|\+3|\+9|)*\d{0,3}[\- ]?)*\d{0,3}?(\(?\d{1,3}\)?[\- ]?)?[\d\- ]{7,10}$/),
         ],
       ],
       email: ['', [Validators.required, Validators.email]],
@@ -59,11 +59,10 @@ export class NewVendorComponent implements OnInit {
     this.route.paramMap
     .pipe(
       switchMap((params: any) => {
-        this.vendId = +params.get("id");
-        return this.vendorsService.getVendorById(this.vendId)
+        this.vendId = +params.get('id');
+        return this.vendorsService.getVendorById(this.vendId);
       }),
     ).subscribe((vendor) => {
-      console.log(vendor.socialLinks)
       const json = JSON.parse(vendor.socialLinks);
       this.newVendorForm.patchValue({
         name: vendor.vendorName,
@@ -72,13 +71,13 @@ export class NewVendorComponent implements OnInit {
         phone: vendor.phone.trim(),
         email: vendor.email,
         social_network: {
-          instagram: (json["Instagram"]).trim(),
-          facebook: (json["Facebook"]).trim(),
-          website: (json["WebSite"]).trim(),
-          otherSocialLink: (json["Vk"]).trim()
+          instagram: (json.Instagram).trim(),
+          facebook: (json.Facebook).trim(),
+          website: (json.WebSite).trim(),
+          otherSocialLink: (json.Vk).trim()
         }
       });
-    })
+    });
   }
 
   goBack() {
@@ -88,9 +87,8 @@ export class NewVendorComponent implements OnInit {
   onSubmit(): void {
     const newSocial = JSON.stringify(this.newVendorForm.value.social_network);
     this.newVendorForm.value.social_network = newSocial;
-    if((this.router.url).includes("edit")){
+    if ((this.router.url).includes('edit')){
       const updateVendor: Vendor = this.newVendorForm.value;
-      console.log(updateVendor)
       this.vendorsService.updateVendor(updateVendor, this.vendId).subscribe(() => this.goBack());
     } else {
 
