@@ -1,7 +1,6 @@
 @import "src/variables";
 
 .discount-detail {
-
   font-size: 1rem;
   display: flex;
   flex-direction: column;
@@ -14,20 +13,18 @@
     background: $ticket_button_bg_color;
     align-self: flex-start;
     cursor: pointer;
-    padding: .3em 1em;
+    padding: 0.3em 1em;
     border-radius: 1em;
     overflow: hidden;
 
     &_icon {
-
       background: inherit;
       color: #ffffff;
       will-change: transform;
-      transition: transform .1s ease-in-out;
+      transition: transform 0.1s ease-in-out;
     }
 
     &_text {
-
       background: inherit;
       color: #ffffff;
       cursor: pointer;
@@ -35,7 +32,6 @@
     }
 
     &:hover {
-
       .go-back__link_icon {
         background: inherit;
         transform: scale(1.1, 1.1);
@@ -61,7 +57,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: .4em;
+      gap: 0.4em;
 
       .rating__icon {
         font-size: 2em;
@@ -89,7 +85,7 @@
       color: $isSaved_true_bg_color;
       cursor: pointer;
       will-change: transform;
-      transition: transform .1s ease-in-out;
+      transition: transform 0.1s ease-in-out;
 
       &:hover {
         transform: scale(1.1, 1.1);
@@ -99,17 +95,15 @@
   }
 
   &__content {
-
-    box-shadow: 0 .6em .5em rgba(28, 104, 192, .25);
+    box-shadow: 0 0.6em 0.5em rgba(28, 104, 192, 0.25);
 
     .discount-content {
-
       &__vendor {
         align-self: start;
         font-size: 1.6em;
         font-weight: 500;
         line-height: 1.5em;
-        letter-spacing: .06em;
+        letter-spacing: 0.06em;
         margin: 0;
         padding: 1em 0;
         cursor: pointer;
@@ -124,15 +118,14 @@
       }
 
       &__description {
-
         padding-bottom: 2em;
 
         &_text {
           font-size: 1em;
           font-weight: 500;
           line-height: 1.5em;
-          letter-spacing: .06em;
-          padding: .5em 1em;
+          letter-spacing: 0.06em;
+          padding: 0.5em 1em;
           margin: 0 2em;
           color: $discount_detail_text_color;
           border-right: 2px solid $main_header_bgColor;
@@ -146,12 +139,13 @@
         &_label {
           font-size: 1.2em;
           font-weight: 600;
-          letter-spacing: .1em;
+          letter-spacing: 0.1em;
           text-transform: uppercase;
           color: $discount_detail_text_color;
         }
 
-        &_text, &_symbol {
+        &_text,
+        &_symbol {
           font-size: 2.6em;
           font-weight: 800;
           font-style: italic;
@@ -163,14 +157,13 @@
       }
 
       &__promoCode {
-
         padding-bottom: 1em;
         color: $discount_detail_text_color;
 
         &_label {
           font-size: 1.2em;
           font-weight: 600;
-          letter-spacing: .1em;
+          letter-spacing: 0.1em;
           text-transform: uppercase;
           color: $discount_detail_text_color;
         }
@@ -180,13 +173,12 @@
           text-transform: uppercase;
           font-style: italic;
           font-weight: 600;
-          letter-spacing: .1em;
+          letter-spacing: 0.1em;
           color: $main_header_bgColor;
         }
       }
 
       &__address {
-
         padding-bottom: 1em;
 
         &_label {
@@ -201,13 +193,12 @@
           font-size: 1em;
           font-weight: 500;
           line-height: 1.5em;
-          letter-spacing: .06em;
+          letter-spacing: 0.06em;
           color: $discount_detail_text_color;
         }
       }
 
       &__distance {
-
         padding-bottom: 1em;
 
         :first-child {
@@ -220,7 +211,7 @@
         :last-child {
           font-size: 1.5em;
           font-weight: 600;
-          letter-spacing: .1em;
+          letter-spacing: 0.1em;
           color: $discount_detail_text_color;
         }
 
@@ -229,7 +220,6 @@
       }
 
       &__date {
-
         padding-bottom: 2em;
 
         p {
@@ -245,15 +235,15 @@
           color: $discount_detail_text_color;
         }
 
-        &_end, &_start {
+        &_end,
+        &_start {
           font-size: 1.2em;
           font-weight: 600;
-          letter-spacing: .1em;
+          letter-spacing: 0.1em;
           color: $discount_detail_text_color;
         }
 
         @media screen and (min-width: 767.98px) {
-
           flex-direction: column;
           align-items: end;
           justify-content: flex-end;
@@ -261,26 +251,24 @@
       }
 
       &__tags {
-
         &_tag {
           display: flex;
           justify-content: center;
           text-transform: uppercase;
           font-weight: 400;
           align-items: center;
-          padding: .4em 2em;
+          padding: 0.4em 2em;
           min-width: 8em;
           color: #ffffff;
           background: $ticket_button_bg_color;
           cursor: pointer;
-          box-shadow: 0 .4em .3em rgba(28, 104, 192, .25);
+          box-shadow: 0 0.4em 0.3em rgba(28, 104, 192, 0.25);
 
           :hover {
             color: #ffffff;
           }
         }
       }
-
     }
   }
 
@@ -302,7 +290,6 @@
       color: $discountRating_star_color;
       cursor: pointer;
     }
-
   }
 
   &__actions {
@@ -315,26 +302,63 @@
 
     .action__button {
       font-size: 1rem;
-      letter-spacing: .08em;
+      letter-spacing: 0.08em;
       font-weight: 500;
       min-width: 8em;
       white-space: nowrap;
       overflow: hidden;
       border-radius: 1em;
-      padding: .2em 1em;
+      padding: 0.2em 1em;
       border: 1px solid $ticket_button_bg_color;
       background: $ticket_button_bg_color;
       color: $ticket_button_text_color;
-      box-shadow: 0 .4em .3em rgba(28, 104, 192, .25);
+      box-shadow: 0 0.4em 0.3em rgba(28, 104, 192, 0.25);
       cursor: pointer;
       outline: none;
     }
-
   }
 
   @media screen and (min-width: 767.98px) {
     margin-top: 2em;
     font-size: 1.1rem;
   }
+}
+.cont {
+  width: 93%;
+  max-width: 350px;
+  text-align: center;
+  margin: 4% auto;
+  padding: 30px 0;
+  background: #111;
+  color: #eee;
+  border-radius: 5px;
+  border: thin solid #444;
+  overflow: hidden;
+}
 
+div.stars {
+  width: 270px;
+  display: inline-block;
+}
+.rating-list {
+  li {
+    cursor: pointer;
+    font-size: 40px;
+    float: right;
+    color: #ddd;
+    padding: 10px 5px;
+    &:hover {
+      color: #ffd700;
+      ~ {
+        li {
+          color: #ffd700;
+        }
+      }
+    }
+  }
+  li.selected {
+    color: #ffd700;
+  }
+  display: inline-block;
+  list-style: none;
 }

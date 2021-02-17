@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { Tag } from '../../../models';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 export class SearchBar {
   constructor(
@@ -20,6 +21,9 @@ export class SearchBar {
 })
 
 export class SearchBarComponent implements OnInit, OnDestroy {
+  
+  rating3: number;
+  public form: FormGroup
 
   public consoleMessages: string[] = [];
   public userQuestion: string;
@@ -30,6 +34,18 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
   @Input() tags: Tag[];
   @Output() searchQueryChange = new EventEmitter<any>();
+
+  ngOnChanges(changes: any) {
+    let tagsCurrenValue = changes.tags.currentValue;
+    if (tagsCurrenValue && tagsCurrenValue.length) {
+      console.log('dddd', tagsCurrenValue);
+      setTimeout(()=> {
+        let event = new Event("click");
+        let first = document.querySelector('mat-chip');
+        first.dispatchEvent(event);
+      }, 0)
+    } 
+  }
 
   userNext(evt): void {
     return this.userQuestionUpdate.next(evt);
