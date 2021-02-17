@@ -98,8 +98,12 @@ mat-icon{
   }
 }
 
-.snack-bar-color {
-  background-color: $snack-bar-color;
+.snackbar-color-success {
+  background-color: $snackbar-color-success;
+}
+
+.snackbar-color-error {
+  background-color: $snackbar-color-error;
 }
 
 @media screen and (max-width: 960px) {

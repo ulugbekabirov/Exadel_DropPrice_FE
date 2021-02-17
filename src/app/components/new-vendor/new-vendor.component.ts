@@ -5,9 +5,12 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DiscountsService } from '../../services/discounts.service';
 import { VendorsService } from '../../services/vendors.service';
+import { Vendor } from './../../models/vendor';
 
 @Component({
   selector: 'app-new-vendor',
@@ -40,7 +43,7 @@ export class NewVendorComponent implements OnInit {
         ],
       ],
       email: ['', [Validators.required, Validators.email]],
-      social_network: this.fb.group ({
+      socialLinks: this.fb.group ({
         instagram:  ['', [Validators.pattern(/^(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$/)]],
         facebook: ['', [Validators.pattern(/^(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$/)]],
         website: ['', [Validators.pattern(/^(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$/)]],
@@ -49,19 +52,40 @@ export class NewVendorComponent implements OnInit {
     });
   }
 
-  openSnackBar(message="Successfully saved!", action = '') {
+  successSnackBar(message: string, action: any) {
     this.snackBar.open(message, action, {
       duration: 3000,
-      panelClass: ['snack-bar-color'],
+      panelClass: ['snackbar-color-success'],
+      horizontalPosition: 'center'
+    });
+  }
+
+  errorSnackBar(message: string, action: any) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      panelClass: ['snackbar-color-error'],
       horizontalPosition: 'center'
     });
   }
 
   onSubmit(): void {
-    const newVendor = this.newVendorForm.value;
-    this.openSnackBar();
-    this.vendorsService.postVendor(newVendor)
-      .subscribe(res => console.log('res', res));
+    const newSocial = JSON.stringify(this.newVendorForm.value.socialLinks);
+    const reqVendorModel: Vendor = { ...this.newVendorForm.value, socialLinks: newSocial }
+    const newVendor = reqVendorModel;
+
+    this.vendorsService.createVendor(newVendor)
+      .pipe(
+        catchError(error => {
+          this.errorSnackBar("Not saved!", '');
+          return throwError(error);
+        })
+      )
+      .subscribe(
+          res => console.log('HTTP response', res),
+          error => console.log('HTTP Error', error),
+          () => this.successSnackBar("Successfully saved!", '')
+      );
+
     this.newVendorForm.reset();
     for (const control in this.newVendorForm.controls) {
       this.newVendorForm.controls[control].setErrors(null);
@@ -76,6 +100,10 @@ export class NewVendorComponent implements OnInit {
     return this.newVendorForm.get('address');
   }
 
+  get description(): AbstractControl {
+    return this.newVendorForm.get('description');
+  }
+
   get phone(): AbstractControl {
     return this.newVendorForm.get('number');
   }
@@ -84,8 +112,8 @@ export class NewVendorComponent implements OnInit {
     return this.newVendorForm.get('email');
   }
 
-  get social_network(): AbstractControl {
-    return this.newVendorForm.get('social_network');
+  get socialLinks(): AbstractControl {
+    return this.newVendorForm.get('socialLinks');
   }
 
   get instagram(): AbstractControl {

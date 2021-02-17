@@ -13,7 +13,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { DiscountsService } from '../../services/discounts.service';
 import { Vendor, Discount } from '../../models';
 
-import { startWith, debounceTime} from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { startWith, debounceTime, catchError } from 'rxjs/operators';
 import { ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -204,20 +205,37 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     this.coordinateIsEmpty = false;
   }
 
-  openSnackBar(message="Successfully saved!", action = '') {
+  successSnackBar(message: string, action: any) {
     this.snackBar.open(message, action, {
       duration: 3000,
-      panelClass: ['snack-bar-color'],
+      panelClass: ['snackbar-color-success'],
+      horizontalPosition: 'center'
+    });
+  }
+
+  errorSnackBar(message: string, action: any) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      panelClass: ['snack-bar-color-error'],
       horizontalPosition: 'center'
     });
   }
 
   submit(): void {
-
-    this.openSnackBar();
     const newDiscount = this.newDiscountForm.value;
     this.discountsService.postDiscount(newDiscount)
-      .subscribe(res => console.log('res', res));
+      .pipe(
+        catchError(error => {
+          this.errorSnackBar("Not saved!", '');
+          return throwError(error);
+        })
+      )
+      .subscribe(
+          res => console.log('HTTP response', res),
+          error => console.log('HTTP Error', error),
+          () => this.successSnackBar("Successfully saved!", '')
+      );
+      
     this.newDiscountForm.reset();
     for (const control in this.newDiscountForm.controls) {
       this.newDiscountForm.controls[control].setErrors(null);

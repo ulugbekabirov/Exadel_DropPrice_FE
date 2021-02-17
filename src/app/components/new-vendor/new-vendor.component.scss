@@ -27,7 +27,7 @@ mat-card {
 
 .new-vendor-form {
   &__details,
-  &__social-network {
+  &__social-links {
     margin-top: 10px;
   }
   &__description {
@@ -44,6 +44,7 @@ mat-icon{
   cursor: pointer;
   color: rgb(46, 77, 128);
 }
+
 mat-icon:focus, mat-icon:active {
   opacity: .7;
 }
@@ -53,7 +54,10 @@ button {
   margin-top: 20px;
 }
 
-.snack-bar-color {
-  background-color: $snack-bar-color;
+.snackbar-color-success {
+  background-color: $snackbar-color-success;
 }
 
+.snackbar-color-error {
+  background-color: $snackbar-color-error;
+}

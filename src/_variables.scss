@@ -12,7 +12,7 @@ $discount_card_bg_color: #DEEBFA;
 $discount_card_hover_bg_color: #DEEBFA;
 $discount_card_text_color: #655B5A;
 $isSaved_true_bg_color: #FF473E;
-$isSaved_true_bg_color_hover: #FF6347;
+$isSaved_true_bg_color_hover: #000000;
 $isSaved_false_bg_color: #A38D8B;
 $discountAmount_text_color: #FF0000;
 $discountRating_star_color: #c1af11;
@@ -26,7 +26,8 @@ $discount_detail_text_color: #655B5A;
 
 $ticket-background: #FBFBFB;
 
-$snack-bar-color:#64ca60;
+$snackbar-color-success: #64ca60;
+$snackbar-color-error: #FF473E;
 
 $admin_sidebar_bgColor: #1C67C0;
 $admin_sidebar_bgColor_hover: #093E7D;
