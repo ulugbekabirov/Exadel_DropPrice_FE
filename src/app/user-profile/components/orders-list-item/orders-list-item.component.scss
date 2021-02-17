@@ -1,0 +1,50 @@
+.list-item {
+  position: relative;
+  padding: 10px 20px;
+
+  &:nth-child(2n) {
+    background: #f5f4f5;
+  }
+
+  p {
+    font-size: 18px;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  span {
+    color: #807d82;
+  }
+
+  &__isExpired {
+    width: 22px;
+    height: 20px;
+    position: absolute;
+    top: 27px;
+    right: 20px;
+    background: url("https://www.pinclipart.com/picdir/middle/359-3597400_download-transparent-favorite-icon-clipart.png") no-repeat 0 0;
+    background-size: 20px 20px;
+    cursor: pointer;
+
+    &.active {
+      background: url("https://www.searchpng.com/wp-content/uploads/2019/02/favorite-icon-715x715.png") no-repeat 0 0;
+      background-size: 20px 20px;
+    }
+  }
+
+  &__discountActive {
+    width: 22px;
+    height: 20px;
+    position: absolute;
+    top: 27px;
+    right: 50px;
+    cursor: pointer;
+    background: url("https://png.pngtree.com/png-vector/20190514/ourmid/pngtree-headphone-icon-vector-for-website-png-image_1039955.jpg") no-repeat 0 0;
+    background-size: 20px 20px;
+
+    &.active {
+      background: url("https://p1.hiclipart.com/preview/466/650/508/android-lollipop-icons-play-music-orange-headphone-icon-png-clipart.jpg") no-repeat 0 0;
+      background-size: 20px 20px;
+    }
+  }
+}

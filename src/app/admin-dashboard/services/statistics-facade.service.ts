@@ -62,8 +62,7 @@ export class StatisticsFacadeService {
         return this.discountsService.searchStatsDiscount({searchQuery, sortBy, take, skip}).pipe(
         );
       })
-    )
-      .subscribe(this.updateSearchResults.bind(this));
+    ).subscribe(this.updateSearchResults.bind(this));
     return this.searchResults$;
   }
 

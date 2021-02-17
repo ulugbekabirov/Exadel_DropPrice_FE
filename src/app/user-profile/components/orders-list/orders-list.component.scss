@@ -1,0 +1,17 @@
+:host {
+  width: 100%;
+}
+
+.orders-list {
+  background: #fff;
+  box-shadow: 0 16px 24px 0 rgba(0,0,0,.1);
+  border-radius: 4px;
+  overflow: hidden;
+
+  h3 {
+    background: rgba(0, 0, 0, .04);
+    color: rgba(0, 0, 0, 1);
+    padding: 10px;
+    text-align: center;
+  }
+}

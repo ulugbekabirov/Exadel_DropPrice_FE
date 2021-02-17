@@ -53,9 +53,7 @@ export class VendorStatisticsComponent implements OnInit, AfterViewInit, OnDestr
     this.dataSource.paginator = this.paginator;
     this.paginator.page.pipe(
       takeUntil(this.unsubscribe$)
-    ).subscribe(next => {
-      this.sortStore.set('take', next.pageSize);
-    });
+    ).subscribe(next => this.sortStore.set('take', next.pageSize));
   }
 
   ngOnDestroy(): void {

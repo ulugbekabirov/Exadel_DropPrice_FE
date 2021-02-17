@@ -1,0 +1,10 @@
+<div class="orders-list">
+  <h3>
+    <ng-content></ng-content>
+  </h3>
+  <ul>
+    <app-orders-list-item *ngFor="let ticket of tickets$ | async"
+                          [ticket]="ticket">
+    </app-orders-list-item>
+  </ul>
+</div>

@@ -1,0 +1,11 @@
+<li class="list-item">
+  <p>{{ ticket?.discountName }}</p>
+  <span>{{ ticket?.vendorName }}</span>
+  <div class="list-item__isExpired"
+       [class.active]="ticket.isExpired">
+  </div>
+  <div class="list-item__discountActive"
+       [class.active]="ticket.isExpired">
+    <!--        {{ticket?.orderDate | date:'medium'}}-->
+  </div>
+</li>

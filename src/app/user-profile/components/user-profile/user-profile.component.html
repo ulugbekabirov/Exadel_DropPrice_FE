@@ -5,6 +5,20 @@
         [activeUser]="activeUser"
       ></app-user-card>
     </article>
+    <article>
+      <app-orders-list
+      [tickets$]="orders"
+      >
+        Ordered Tickets
+      </app-orders-list>
+    </article>
+    <article>
+      <app-saved-list
+      [discounts$]="discounts"
+      >
+        Saved Discounts
+      </app-saved-list>
+    </article>
   </div>
 </section>
 

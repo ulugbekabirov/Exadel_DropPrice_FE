@@ -108,11 +108,12 @@ export class ApiDataService {
     });
   }
 
-  getUserSavedDiscounts(): Observable<any> {
-    return this.http.get(`${environment.webApiUrl}${USER_INFO_ENDPOINT}${USER_SAVED_ENDPOINT}`);
+  getUserSavedDiscounts(options): Observable<any> {
+    console.log('options', options);
+    return this.http.get(`${environment.webApiUrl}${USER_INFO_ENDPOINT}/${USER_SAVED_ENDPOINT}`, options);
   }
 
-  getUserTickets(): Observable<any> {
-    return this.http.get(`${environment.webApiUrl}${USER_INFO_ENDPOINT}${USER_TICKETS_ENDPOINT}`);
+  getUserTickets(options): Observable<any> {
+    return this.http.get(`${environment.webApiUrl}${USER_INFO_ENDPOINT}/${USER_TICKETS_ENDPOINT}`, options);
   }
 }
