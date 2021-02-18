@@ -104,5 +104,8 @@ export class ApiDataService {
       value: opt
     });
   }
-
+  setRating(indexId, rating): any {
+    console.log('setRating', indexId.discountId, rating);
+    return this.http.post(`${environment.webApiUrl}${POST_DISCOUNTS_ENDPOINT}`, indexId.discountId, rating);
+  }
 }

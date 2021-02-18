@@ -81,8 +81,7 @@ export class DiscountsService {
     return this.restApi.searchStatsDiscounts(options);
   }
 
-  setRating(vendor, rating): any {
-    // return this.http.post(`${environment.webApiUrl}${POST_VENDORS_ENDPOINT}`, vendor);
-    console.log('setRating', vendor.discountId, rating);
+  setRating(indexId, rating): any {
+    return this.restApi.setRating(indexId, rating);
   }
 }
