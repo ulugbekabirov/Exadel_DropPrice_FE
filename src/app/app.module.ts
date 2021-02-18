@@ -27,11 +27,7 @@ import { NewVendorComponent } from './components/new-vendor/new-vendor.component
 import { MapComponent } from './components/map/map.component';
 import { DiscountDetailComponent } from './components/discount-detail/discount-detail.component';
 import { DiscountsComponent } from './components/discounts/discounts.component';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-// import { NgxStarRatingModule } from 'ngx-star-rating';
-
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -55,7 +51,6 @@ export function HttpLoaderFactory(http: HttpClient): any {
     BrowserAnimationsModule,
     HttpClientModule,
     SharedModule,
-    // NgxStarRatingModule, 
     FormsModule,      
     ReactiveFormsModule,
     AppRoutingModule,
