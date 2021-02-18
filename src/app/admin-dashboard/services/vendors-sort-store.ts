@@ -45,6 +45,5 @@ export class VendorsSortStore {
     this.subject.next({
       ...this.value, [name]: state
     });
-    console.log(this.subject.value);
   }
 }

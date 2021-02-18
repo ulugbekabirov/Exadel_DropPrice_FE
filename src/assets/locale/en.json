@@ -194,6 +194,10 @@
       "SAVED": "Saved Discounts",
       "ORDERED": "Ordered Tickets"
     },
+    "LIST_ITEM": {
+      "DATE_BEFORE": "before",
+      "DATE_ORDER": "order"
+    },
     "TICKET_BUTTON": {
       "SHOW_TICKET": "Show Ticket",
       "ORDER_TICKET": "Order Ticket"

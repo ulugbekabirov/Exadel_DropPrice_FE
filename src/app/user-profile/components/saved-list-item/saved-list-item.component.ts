@@ -1,11 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Discount } from '../../../models';
 
 @Component({
   selector: 'app-saved-list-item',
   templateUrl: './saved-list-item.component.html',
-  styleUrls: ['./saved-list-item.component.scss']
+  styleUrls: ['./saved-list-item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class SavedListItemComponent {
   @Input() discount: Discount;
   @Output() requestTicket = new EventEmitter<any>();

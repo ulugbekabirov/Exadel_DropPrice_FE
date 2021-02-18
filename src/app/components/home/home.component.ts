@@ -69,7 +69,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.towns = towns;
         this.tags = tags;
         this.discounts = discounts;
-        console.log('this.discounts', this.discounts);
       });
   }
 

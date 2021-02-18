@@ -1,4 +1,6 @@
-<li class="list-item">
+<li class="list-item"
+    [class.isExpired]="ticket.isExpired || !ticket.discountActivity"
+>
   <p class="list-item__title" [routerLink]="['/discounts', ticket.discountId]"
      matTooltip="Подробнее о Скидке"
      matTooltipPosition="above"
@@ -13,9 +15,11 @@
     {{ ticket?.vendorName }}
   </p>
   <p class="list-item__date">
-    <!--    <span class="list-item__date_label">-->
-    <!--      order date:-->
-    <!--    </span>-->
+        <span class="list-item__date_label">
+          <small>
+            {{"USER_PROFILE.LIST_ITEM.DATE_ORDER" | translate}}:
+          </small>
+        </span>
     <span class="list-item__date_text"
     >
       <small>{{ticket.orderDate | date: 'medium'}}</small>
@@ -34,10 +38,8 @@
       </mat-icon>
     </div>
 
-    <div class="list-item__actions_ticket"
-         [class.active]="ticket.isExpired">
-      <button *ngIf="ticket.discountActivity"
-              class="action__ticket"
+    <div class="list-item__actions_ticket">
+      <button class="action__ticket"
               matTooltip="Ticket"
               (click)="ticketHandler(ticket.discountId)"
               [class.discountInActive]="!ticket.discountActivity"
@@ -45,8 +47,8 @@
       >
         {{
         ticket.isExpired
-          ? ("USER_PROFILE.TICKET_BUTTON.SHOW_TICKET" | translate)
-          : ("USER_PROFILE.TICKET_BUTTON.ORDER_TICKET" | translate)
+          ? ("USER_PROFILE.TICKET_BUTTON.ORDER_TICKET" | translate)
+          : ("USER_PROFILE.TICKET_BUTTON.SHOW_TICKET" | translate)
         }}
       </button>
     </div>

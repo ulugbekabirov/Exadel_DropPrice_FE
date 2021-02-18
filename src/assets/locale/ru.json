@@ -195,6 +195,10 @@
       "SAVED": "Избранные Скидки",
       "ORDERED": "История Заказов"
     },
+    "LIST_ITEM": {
+      "DATE_BEFORE": "до",
+      "DATE_ORDER": "заказан"
+    },
     "TICKET_BUTTON": {
       "SHOW_TICKET": "Показать Талон",
       "ORDER_TICKET": "Заказать Талон"

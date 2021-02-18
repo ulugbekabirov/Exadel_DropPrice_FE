@@ -5,6 +5,7 @@ import { UserService } from '../../../services/user.service';
 import { UserFacadeService } from '../../services/user-facade.service';
 import { TicketService } from '../../../services/ticket.service';
 import { RefDirective } from '../../../directives/ref.directive';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-profile',
@@ -32,7 +33,10 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     this.activeUser$ = this.userService.activeUser;
     this.orders$ = this.facade.select('tickets');
-    this.discounts$ = this.facade.select('discounts');
+    this.discounts$ = this.facade.select('discounts').pipe(
+      filter(Boolean),
+      map((discounts: Discount[]) => discounts.filter(discount => discount.isSaved))
+    );
   }
 
   getTicket(discountId: number): void {

@@ -47,7 +47,6 @@ export class UserFacadeService {
     this.subject.next({
       ...this.value, [name]: state
     });
-    console.log('VALUE', this.subject.value);
   }
 
   getUserSavedDiscounts(debounceMs = 500): any {
@@ -94,7 +93,6 @@ export class UserFacadeService {
   orderTicket(discountId, ref): void {
     this.restApi.getTicket(discountId).pipe(
     ).subscribe(ticket => {
-      console.log('next', ticket);
       this.ticketService.createTicket(ticket, ref);
       this.getUserOrderedDiscounts();
     });

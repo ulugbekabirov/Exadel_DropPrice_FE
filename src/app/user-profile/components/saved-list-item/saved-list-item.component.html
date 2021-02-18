@@ -1,4 +1,6 @@
-<li class="list-item">
+<li class="list-item"
+    [class.isExpired]="!discount.activityStatus"
+>
   <p class="list-item__title" [routerLink]="['/discounts', discount.discountId]"
      matTooltip="Подробнее о Скидке"
      matTooltipPosition="above"
@@ -12,10 +14,20 @@
   >
     {{ discount?.vendorName }}
   </p>
+  <p class="list-item__discountAmount">
+    <span class="list-item__discountAmount_text">
+          {{discount.discountAmount}}
+    </span>
+    <span class="list-item__discountAmount_symbol">
+      %
+    </span>
+  </p>
   <p class="list-item__date">
-    <!--    <span class="list-item__date_label">-->
-    <!--      order date:-->
-    <!--    </span>-->
+        <span class="list-item__date_label">
+         <small>
+           {{"USER_PROFILE.LIST_ITEM.DATE_BEFORE" | translate}}:
+         </small>
+        </span>
     <span class="list-item__date_text"
     >
       <small>{{discount.endDate | date: 'medium'}}</small>

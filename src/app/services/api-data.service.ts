@@ -109,7 +109,6 @@ export class ApiDataService {
   }
 
   getUserSavedDiscounts(options): Observable<any> {
-    console.log('options', options);
     return this.http.get(`${environment.webApiUrl}${USER_INFO_ENDPOINT}/${USER_SAVED_ENDPOINT}`, options);
   }
 

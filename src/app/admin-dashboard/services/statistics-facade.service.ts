@@ -61,7 +61,6 @@ export class StatisticsFacadeService {
       switchMap(([searchQuery, sortBy, take, skip]) => {
         return this.discountsService.searchStatsDiscount({searchQuery, sortBy, take, skip}).pipe(
           pluck('discountDTOs'),
-          tap(x => console.log('Discounts', x))
         );
       })
     ).subscribe(this.updateSearchResults.bind(this));
@@ -93,7 +92,6 @@ export class StatisticsFacadeService {
         return this.vendorsService.searchVendors({searchQuery, sortBy, take, skip}).pipe(
           // tap(({totalNumberOfVendors}) => this.vendorsSortStore.set('totalNumberOfVendors', totalNumberOfVendors)),
           pluck('vendorDTOs'),
-          tap(x => console.log('Vendors', x)),
         );
       })
     )
