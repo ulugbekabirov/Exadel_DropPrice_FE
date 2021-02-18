@@ -18,7 +18,7 @@ const appRoutes: Routes = [
   {path: 'login', component: LoginFormComponent},
   {path: 'vendors', loadChildren: () => import('../vendors/vendors.module').then(m => m.VendorsModule)},
   {path: 'user-profile', loadChildren: () => import('../user-profile/user-profile.module').then(m => m.UserProfileModule)},
-  {path: 'statistics', loadChildren: () => import('../admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule)},
+  {path: 'admin', loadChildren: () => import('../admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule)},
   {path: 'add-new',
     component: ModeratorDashboardComponent,
     canActivate: [AuthGuard],

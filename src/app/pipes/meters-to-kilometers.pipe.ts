@@ -5,11 +5,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class MetersToKilometersPipe implements PipeTransform {
 
-  transform(distance: number, extension: string = 'km'): unknown {
-    if (distance > 1000) {
-      return (distance / 1000).toFixed(2) + ' km.';
+  transform(distance: number | string, extension: string = 'km'): unknown {
+    const distNum: number = Number(distance);
+    if (distNum > 1000) {
+      return (distNum / 1000).toFixed(2) + ' km.';
     } else {
-      return distance + ' m.';
+      return distNum + ' m.';
     }
   }
 }

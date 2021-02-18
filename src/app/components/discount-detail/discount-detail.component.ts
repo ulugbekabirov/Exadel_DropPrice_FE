@@ -50,6 +50,8 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
       if (!discount) {
         return;
       }
+      console.log(discount);
+
       this.discount = discount;
       const lengthRating = this.discount.discountRating ? Number(this.discount.discountRating.toFixed()) : 0;
       this.rating = new Array(lengthRating).fill('star');

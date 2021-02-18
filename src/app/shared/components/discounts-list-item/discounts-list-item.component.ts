@@ -9,7 +9,6 @@ import { Discount } from '../../../models';
 
 import { Router } from '@angular/router';
 
-import { TestService } from './../../../test.service';
 
 @Component({
   selector: 'app-discounts-list-item',
@@ -19,7 +18,7 @@ import { TestService } from './../../../test.service';
 })
 export class DiscountsListItemComponent {
 
-  constructor(private _router: Router, private testService: TestService){}
+  constructor(private _router: Router){}
   @Input() discount: Discount;
   @Output() requestTicket = new EventEmitter<any>();
   @Output() changeFavourites = new EventEmitter<any>();
