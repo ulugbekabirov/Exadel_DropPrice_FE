@@ -15,7 +15,8 @@ import {
   PUT_IS_SAVED_DISCOUNTS_ENDPOINT,
   SEARCH_DISCOUNTS_ENDPOINT,
   USER_INFO_ENDPOINT,
-  POST_VENDORS_ENDPOINT, CONFIGS, CHANGE_CONFIGS
+  POST_VENDORS_ENDPOINT, CONFIGS, CHANGE_CONFIGS,
+  PUT_ASSESS_DISCOUNTS_ENDPOINT
 } from '../../constants';
 import { environment } from '../../environments/environment';
 
@@ -104,8 +105,7 @@ export class ApiDataService {
       value: opt
     });
   }
-  setRating(indexId, rating): any {
-    console.log('setRating', indexId.discountId, rating);
-    return this.http.post(`${environment.webApiUrl}${POST_DISCOUNTS_ENDPOINT}`, indexId.discountId, rating);
+  putRating(indexId, rating): any {
+    return this.http.put(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${indexId.discountId}/${PUT_ASSESS_DISCOUNTS_ENDPOINT}`, rating);
   }
 }

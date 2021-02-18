@@ -81,7 +81,7 @@ export class DiscountsService {
     return this.restApi.searchStatsDiscounts(options);
   }
 
-  setRating(indexId, rating): any {
-    return this.restApi.setRating(indexId, rating);
+  putRating(indexId, rating): any {
+    return this.restApi.putRating(indexId, rating);
   }
 }

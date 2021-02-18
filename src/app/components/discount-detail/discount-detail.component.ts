@@ -93,7 +93,8 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
 
   countStar(star): void {
     this.selectedValue = star;
-    this.discountsService.setRating(this.discount, this.selectedValue);
+    this.discountsService.putRating(this.discount, this.selectedValue);
+    
   }
 
   addClass(star): void {
