@@ -15,7 +15,7 @@ import { DiscountsService } from '../../services/discounts.service';
 
 import { Vendor } from '../../models';
 
-import { startWith, debounceTime } from 'rxjs/operators';
+import { startWith, debounceTime, switchMap } from 'rxjs/operators';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -23,7 +23,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { MapComponent } from './../map/map.component';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Discount } from './../../models/discount';
 
 import { VendorsService } from '../../services/vendors.service';
@@ -48,6 +48,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   isChecked = true;
+  discId: number;
 
   vendorsList: Vendor[];
   filteredList: Vendor[];
@@ -61,6 +62,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     public fb: FormBuilder,
     private dialog: MatDialog,
     private route: ActivatedRoute,
+    private router: Router,
     private discountsService: DiscountsService,
     private vendorsService: VendorsService,
   ) {}
@@ -89,60 +91,34 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     });
     this.addPoint();
     this.vendorNameDetectChanges();
-    this.route.paramMap.subscribe(params => {
-      const discId = +params.get('id');
-      if(discId) {
-        this.getDiscount(discId);
-        this.getPointsOfSales(discId);
-      }
-    })
-  }
 
-  getDiscount(id:number) {
-    this.discountsService.getDiscountById(id, {}).subscribe(
-      (discount: Discount) =>{
-        this.editDiscount(discount);
-        this.discount = discount;
-      },
-      (err:any) => console.log(err)
-    );
-  }
-
-  getPointsOfSales(id:number) {
-    this.discountsService.getPointsOfSalesByDiscountId(id).subscribe(
-      (discount: Discount) => {
-        this.editDiscountPoints(discount);
-      },
-      (err: any) => console.log(err)
-    )
-  }
-
-  editDiscount(discount: Discount) {
-  this.newDiscountForm.patchValue({
-        vendorName: discount.vendorName,
-        discountName: discount.discountName,
-        description: discount.description,
-        discountAmount: discount.discountAmount,
-        promoCode: discount.promoCode,
-        startDate: discount.startDate,
-        endDate: discount.endDate,    
-      });
-
-      if(discount.tags) {
-        for(let tag of discount.tags){
-          (<FormArray>this.newDiscountForm.get('tags')).push(
-            new FormControl(tag, Validators.required)
-          )
-        }
-      }
-  }
+    if((this.router.url).includes('edit')) {
+      this.route.paramMap
+      .pipe(
+        switchMap((params: any) => {
+          this.discId = +params.get("id");
+          return this.discountsService.getDiscountById(this.discId, {});
+        }),
+      ).subscribe((discount) => {
+        this.newDiscountForm.patchValue({
+          vendorName: discount.vendorName,
+          discountName: discount.discountName,
+          description: discount.description,
+          discountAmount: discount.discountAmount,
+          promoCode: discount.promoCode,
+          startDate: discount.startDate,
+          endDate: discount.endDate,    
+        });
   
-  editDiscountPoints(discount: Discount){
-    console.log(discount);
-  }
-
-  updateDiscount(){
-   
+        if(discount.tags) {
+          for(let tag of discount.tags){
+            (<FormArray>this.newDiscountForm.get('tags')).push(
+              new FormControl(tag, Validators.required)
+            )
+          }
+        }
+      })
+    }
   }
 
   vendorNameDetectChanges(): void {

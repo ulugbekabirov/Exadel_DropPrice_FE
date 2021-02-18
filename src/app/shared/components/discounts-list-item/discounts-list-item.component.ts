@@ -5,11 +5,9 @@ import {
   Input,
   Output
 } from '@angular/core';
-import { Discount } from '../../../models';
-
 import { Router } from '@angular/router';
 
-
+import { Discount } from '../../../models';
 @Component({
   selector: 'app-discounts-list-item',
   templateUrl: './discounts-list-item.component.html',
