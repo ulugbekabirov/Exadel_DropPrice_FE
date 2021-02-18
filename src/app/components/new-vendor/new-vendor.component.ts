@@ -48,37 +48,43 @@ export class NewVendorComponent implements OnInit {
         ],
       ],
       email: ['', [Validators.required, Validators.email]],
-      socialLinks: this.fb.group ({
-        instagram:  ['', [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]],
+      socialLinks: this.fb.group({
+        instagram: ['', [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]],
         facebook: ['', [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]],
         website: ['', [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]],
         otherSocialLink: ['', [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]]
       })
     });
 
-    this.route.paramMap
-    .pipe(
-      switchMap((params: any) => {
-        this.vendId = +params.get('id');
-        return this.vendorsService.getVendorById(this.vendId);
-      }),
-    ).subscribe((vendor) => {
-      console.log('vendor', vendor);
-      const json = JSON.parse(vendor.socialLinks);
-      this.newVendorForm.patchValue({
-        name: vendor.vendorName,
-        address: vendor.address,
-        description: vendor.description,
-        phone: vendor.phone.trim(),
-        email: vendor.email,
-        socialLinks: {
-          instagram: (json.Instagram).trim(),
-          facebook: (json.Facebook).trim(),
-          website: (json.WebSite).trim(),
-          otherSocialLink: (json.Vk).trim()
-        }
-      });
-    });
+    if ((this.router.url).includes('edit')) {
+      this.route.paramMap
+        .pipe(
+          switchMap((params: any) => {
+            this.vendId = +params.get('id');
+            return this.vendorsService.getVendorById(this.vendId);
+          }),
+        ).subscribe((vendor) => {
+          const json = JSON.parse(vendor.socialLinks)
+          for (let key in json) {
+            if (json[key]) {
+              json[key] = json[key].trim();
+            }
+          }
+          this.newVendorForm.patchValue({
+            name: vendor.vendorName,
+            address: vendor.address,
+            description: vendor.description,
+            phone: vendor.phone.trim(),
+            email: vendor.email,
+            socialLinks: {
+              instagram: (json.instagram),
+              facebook: (json.facebook),
+              website: (json.webSite),
+              otherSocialLink: (json.vk)
+            }
+          });
+        });
+    }
   }
 
   goBack() {
@@ -87,23 +93,18 @@ export class NewVendorComponent implements OnInit {
 
   onSubmit(): void {
     const newSocial = JSON.stringify(this.newVendorForm.value.socialLinks);
-    this.newVendorForm.value.socialLinks = newSocial;
-    if ((this.router.url).includes('edit')){
-      const updateVendor: Vendor = this.newVendorForm.value;
+    const reqVendorModel: Vendor = { ...this.newVendorForm.value, socialLinks: newSocial }
+    if ((this.router.url).includes('edit')) {
+      const updateVendor: Vendor = reqVendorModel;
       this.vendorsService.updateVendor(updateVendor, this.vendId).subscribe(() => this.goBack());
     } else {
-
-    const newVendor = this.newVendorForm.value;
-    this.vendorsService.postVendor(newVendor)
-      .subscribe(res => console.log('res', res));
-    this.newVendorForm.reset();
-    for (const control in this.newVendorForm.controls) {
-      this.newVendorForm.controls[control].setErrors(null);
+      const newVendor = reqVendorModel;
+      this.vendorsService.createVendor(newVendor)
+        .subscribe(res => console.log('res', res));
     }
     this.newVendorForm.reset();
     for (const control in this.newVendorForm.controls) {
-        this.newVendorForm.controls[control].setErrors(null);
-      }
+      this.newVendorForm.controls[control].setErrors(null);
     }
   }
 
@@ -113,6 +114,10 @@ export class NewVendorComponent implements OnInit {
 
   get address(): AbstractControl {
     return this.newVendorForm.get('address');
+  }
+
+  get description(): AbstractControl {
+    return this.newVendorForm.get('description');
   }
 
   get phone(): AbstractControl {
