@@ -8,14 +8,13 @@ import { Observable, Subject } from 'rxjs';
 import { RefDirective } from '../../directives/ref.directive';
 import { TicketService } from '../../services/ticket.service';
 import { UserService } from '../../services/user.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-discount-detail',
   templateUrl: './discount-detail.component.html',
   styleUrls: ['./discount-detail.component.scss']
-  
 })
+
 export class DiscountDetailComponent implements OnInit, OnDestroy {
 
   discount: Discount;
@@ -27,6 +26,8 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
     longitude: this.userService.activeUserValue.officeLongitude,
     latitude: this.userService.activeUserValue.officeLatitude,
   };
+  stars: number[] = [1, 2, 3, 4, 5];
+  selectedValue: number = 0;
 
   @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
 
@@ -38,7 +39,6 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
     private location: Location,
     private userService: UserService,
   ) {
-
   }
 
   ngOnInit(): void {
@@ -52,12 +52,11 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
       if (!discount) {
         return;
       }
-      console.log(discount);
 
       this.discount = discount;
       const lengthRating = this.discount.discountRating ? Number(this.discount.discountRating.toFixed()) : 0;
       this.rating = new Array(lengthRating).fill('star');
-      this.selectedValue = this.rating.length ;
+      this.selectedValue = this.rating.length;
     });
   }
 
@@ -92,9 +91,6 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
     this.location.back();
   }
 
-  stars: number[] = [1, 2, 3, 4, 5];
-  selectedValue: number = 0;
-  
   countStar(star) {
     this.selectedValue = star;
     this.discountsService.setRating(this.discount, this.selectedValue);

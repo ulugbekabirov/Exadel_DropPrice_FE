@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { Tag } from '../../../models';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 export class SearchBar {
   constructor(
@@ -38,7 +38,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   ngOnChanges(changes: any) {
     let tagsCurrenValue = changes.tags.currentValue;
     if (tagsCurrenValue && tagsCurrenValue.length) {
-      console.log('dddd', tagsCurrenValue);
+
       setTimeout(()=> {
         let event = new Event("click");
         let first = document.querySelector('mat-chip');

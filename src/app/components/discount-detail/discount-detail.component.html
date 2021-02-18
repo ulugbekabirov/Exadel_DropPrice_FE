@@ -151,7 +151,7 @@
     </mat-card>
   </section>
 
-  <section class="discount-detail__rating">
+  <section *ngIf="discount?.isOrdered" class="discount-detail__rating">
     <span class="rating__label">
       {{ "DISCOUNT_DETAIL.ASSESSMENT_LABEL" | translate }}
     </span>
