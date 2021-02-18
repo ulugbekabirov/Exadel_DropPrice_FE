@@ -21,9 +21,8 @@ export class SearchBar {
 })
 
 export class SearchBarComponent implements OnInit, OnDestroy {
-  
   rating3: number;
-  public form: FormGroup
+  public form: FormGroup;
 
   public consoleMessages: string[] = [];
   public userQuestion: string;
@@ -35,16 +34,16 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   @Input() tags: Tag[];
   @Output() searchQueryChange = new EventEmitter<any>();
 
-  ngOnChanges(changes: any) {
-    let tagsCurrenValue = changes.tags.currentValue;
+  ngOnChanges(changes: any): void {
+    const tagsCurrenValue = changes.tags.currentValue;
     if (tagsCurrenValue && tagsCurrenValue.length) {
 
-      setTimeout(()=> {
-        let event = new Event("click");
-        let first = document.querySelector('mat-chip');
+      setTimeout(() => {
+        const event = new Event("click");
+        const first = document.querySelector('mat-chip');
         first.dispatchEvent(event);
-      }, 0)
-    } 
+      }, 0);
+    }
   }
 
   userNext(evt): void {

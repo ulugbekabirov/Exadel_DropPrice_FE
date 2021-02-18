@@ -91,21 +91,22 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
     this.location.back();
   }
 
-  countStar(star) {
+  countStar(star): void {
     this.selectedValue = star;
     this.discountsService.setRating(this.discount, this.selectedValue);
   }
-  
-  addClass(star) {
+
+  addClass(star): void {
      let ab = "";
      for (let i = 0; i < star; i++) {
        ab = "starId" + i;
        document.getElementById(ab).classList.add("selected");
      }
   }
-  removeClass(star) {
+
+  removeClass(star): void {
      let ab = "";
-     for (let i = star-1; i >= this.selectedValue; i--) {
+     for (let i = star - 1; i >= this.selectedValue; i--) {
        ab = "starId" + i;
        document.getElementById(ab).classList.remove("selected");
      }
