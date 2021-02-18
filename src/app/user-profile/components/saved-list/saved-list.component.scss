@@ -1,8 +1,22 @@
 @import "src/variables";
 
-.discounts-box {
+:host {
+  width: 100%;
+}
 
+.discounts-box {
   font-size: 1rem;
+  background: #fff;
+  box-shadow: 0 16px 24px 0 rgba(0, 0, 0, .1);
+  border-radius: 4px;
+  overflow: hidden;
+
+  h3 {
+    background: #9a9999;
+    color: $white;
+    padding: 10px;
+    text-align: center;
+  }
 
   &__title {
     font-size: 1.5em;
@@ -11,17 +25,7 @@
     color: #ffffff;
   }
 
-  &__settings {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 3em;
-    font-size: 1.2em;
-    font-weight: bold;
-    color: $discount_filter_selector_text_color;
-  }
-
   &__list {
-    padding: 0 1em;
     display: flex;
     flex-direction: column;
     gap: 1.5em;

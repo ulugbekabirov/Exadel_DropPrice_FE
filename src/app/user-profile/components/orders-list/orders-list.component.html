@@ -3,8 +3,13 @@
     <ng-content></ng-content>
   </h3>
   <ul>
-    <app-orders-list-item *ngFor="let ticket of tickets$ | async"
-                          [ticket]="ticket">
-    </app-orders-list-item>
+    <li *ngFor="let ticket of tickets$ | async">
+      <app-orders-list-item
+        [ticket]="ticket"
+        (requestTicket)="requestTicket($event)"
+        (changeFavourites)="getToggleFavourites($event)"
+      >
+      </app-orders-list-item>
+    </li>
   </ul>
 </div>

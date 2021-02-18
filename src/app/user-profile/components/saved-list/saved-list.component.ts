@@ -1,30 +1,18 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Discount, LocationCoords, Ticket, Town } from '../../../models';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Discount } from '../../../models';
 
 @Component({
   selector: 'app-saved-list',
   templateUrl: './saved-list.component.html',
-  styleUrls: ['./saved-list.component.scss']
+  styleUrls: ['./saved-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class SavedListComponent  {
-  @Output() locationChange = new EventEmitter<any>();
-  @Output() sortChange = new EventEmitter<any>();
   @Output() getTicket = new EventEmitter<any>();
   @Output() toggleFavourites = new EventEmitter<any>();
-  @Output() toggleCoordinates = new EventEmitter<any>();
-  @Input() discounts$;
-  @Input() towns: Town[];
-  @Input() activeCoords: LocationCoords;
-  @Input() sortBy;
-
-  selectLocation(loc): void {
-    this.locationChange.emit(loc);
-  }
-
-  selectSort(sortBy): void {
-    this.sortChange.emit(sortBy);
-  }
+  @Input() discounts$: Observable<Discount[]>;
 
   requestTicket(discountId: any): void {
     this.getTicket.emit(discountId);
@@ -32,10 +20,6 @@ export class SavedListComponent  {
 
   getToggleFavourites(id: number): void {
     this.toggleFavourites.emit(id);
-  }
-
-  myCoords($event: MouseEvent): void {
-    this.toggleCoordinates.emit($event);
   }
 
 }

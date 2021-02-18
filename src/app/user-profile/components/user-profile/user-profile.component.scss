@@ -10,7 +10,7 @@
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-gap: 2em;
     justify-items: stretch;
     align-items: stretch;
@@ -18,9 +18,18 @@
     > article {
       display: flex;
       width: 100%;
+      height: fit-content;
       background: $user_profile_content_bgColor;
       border-radius: $border-radius;
       box-shadow: $box-shadow;
+
+      &:first-child {
+        grid-column: 1 / -1;
+      }
+
+      @media screen and (max-width: 767px) {
+        grid-column: 1 / -1;
+      }
     }
   }
 

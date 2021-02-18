@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ActiveUser } from '../../../models';
 
 @Component({
@@ -7,13 +7,6 @@ import { ActiveUser } from '../../../models';
   styleUrls: ['./user-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserCardComponent implements OnInit {
+export class UserCardComponent {
   @Input() activeUser: ActiveUser;
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
-
 }

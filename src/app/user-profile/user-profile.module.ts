@@ -7,6 +7,7 @@ import { UserFacadeService } from './services/user-facade.service';
 import { SavedListComponent } from './components/saved-list/saved-list.component';
 import { OrdersListComponent } from './components/orders-list/orders-list.component';
 import { OrdersListItemComponent } from './components/orders-list-item/orders-list-item.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {path: '', component: UserProfileComponent}
@@ -23,6 +24,7 @@ const routes: Routes = [
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
+    TranslateModule,
   ],
   exports: [
     RouterModule

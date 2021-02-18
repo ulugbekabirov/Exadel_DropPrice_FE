@@ -10,4 +10,7 @@ export interface Ticket {
   orderDate: Date;
   promoCode?: string;
   isExpired: boolean;
+  discountActivity: boolean;
+  discountId: number;
+  vendorId: number;
 }

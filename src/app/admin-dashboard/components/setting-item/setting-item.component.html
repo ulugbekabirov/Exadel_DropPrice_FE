@@ -16,6 +16,10 @@
     >
       <mat-icon>send</mat-icon>
     </button>
+    <mat-slide-toggle *ngIf="setting.dataType === 'bool'"
+                      (toggleChange)="changeConfig(setting.configId)"
+    >Slide me!</mat-slide-toggle>
+
   </mat-form-field>
   <mat-card-content>
     <mat-card-subtitle>{{setting.configName}} :</mat-card-subtitle>

@@ -26,6 +26,14 @@
     flex-direction: column;
     gap: 1.5em;
 
+    h3 {
+      background: rgba(0, 0, 0, .04);
+      color: rgba(0, 0, 0, 1);
+      padding: 10px;
+      text-align: center;
+      margin: 0;
+    }
+
     li {
       margin-bottom: 1em;
     }
