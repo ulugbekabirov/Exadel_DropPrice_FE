@@ -1,14 +1,14 @@
-<div class="discounts-box">
+<div class="saved-list">
   <h3>
     <ng-content></ng-content>
   </h3>
-  <ul class="discounts-box__list">
+  <ul>
     <li *ngFor="let discount of discounts$ | async">
-      <app-discounts-list-item
+      <app-saved-list-item
         [discount]="discount"
         (changeFavourites)="getToggleFavourites($event)"
         (requestTicket)="requestTicket($event)"
-      ></app-discounts-list-item>
+      ></app-saved-list-item>
     </li>
   </ul>
 </div>

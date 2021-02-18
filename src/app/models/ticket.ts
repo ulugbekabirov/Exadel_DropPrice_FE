@@ -13,4 +13,5 @@ export interface Ticket {
   discountActivity: boolean;
   discountId: number;
   vendorId: number;
+  isSavedDiscount: boolean;
 }

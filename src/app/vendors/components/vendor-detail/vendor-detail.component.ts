@@ -9,6 +9,7 @@ import { TicketService } from '../../../services/ticket.service';
 import { RefDirective } from '../../../directives/ref.directive';
 import { UserService } from '../../../services/user.service';
 import { VendorsService } from '../../../services/vendors.service';
+import { UserFacadeService } from '../../../user-profile/services/user-facade.service';
 
 @Component({
   selector: 'app-vendor-detail',
@@ -45,6 +46,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
     private vendorsService: VendorsService,
     private ticketService: TicketService,
     private userService: UserService,
+    private userFacade: UserFacadeService,
   ) {
   }
 
@@ -80,17 +82,6 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
       return;
     }
     this.router.navigate(['/vendors', vendorId]);
-    // forkJoin(
-    //   this.vendorsService.getVendorById(value),
-    //   this.vendorsService.getVendorsDiscounts(value, this.reqOpt)
-    // )
-    //   .pipe(
-    //     takeUntil(this.unsubscribe$),
-    //   )
-    //   .subscribe(([vendor, discounts]) => {
-    //     this.vendorDiscounts = discounts;
-    //     this.vendor = vendor;
-    //   });
   }
 
   changeCoords(): void {
@@ -128,7 +119,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
   }
 
   getTicket(discountId: number): void {
-    this.ticketService.getTicket(discountId, this.refDir);
+    this.userFacade.orderTicket(discountId, this.refDir);
   }
 
   onLocationChange({value: {latitude, longitude}}): void {

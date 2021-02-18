@@ -3,6 +3,8 @@ import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { distinctUntilChanged, map, pluck, switchMap } from 'rxjs/operators';
 import { Discount, Ticket } from '../../models';
 import { DiscountsService } from '../../services/discounts.service';
+import { TicketService } from '../../services/ticket.service';
+import { ApiDataService } from '../../services/api-data.service';
 
 class UserProfileState {
   discounts: Discount[];
@@ -11,10 +13,12 @@ class UserProfileState {
 
 const INITIAL_STATE: UserProfileState = {
   discounts: [],
-  tickets: []
+  tickets: [],
 };
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UserFacadeService {
   private state = new UserProfileState();
   private subject = new BehaviorSubject<UserProfileState>(INITIAL_STATE);
@@ -26,7 +30,24 @@ export class UserFacadeService {
 
   constructor(
     private discountsService: DiscountsService,
+    private ticketService: TicketService,
+    private restApi: ApiDataService,
   ) {
+  }
+
+  get value(): UserProfileState {
+    return this.subject.value;
+  }
+
+  select<T>(name: string): Observable<T> {
+    return this.userProfileStore$.pipe(pluck(name));
+  }
+
+  set(name: string, state: any): void {
+    this.subject.next({
+      ...this.value, [name]: state
+    });
+    console.log('VALUE', this.subject.value);
   }
 
   getUserSavedDiscounts(debounceMs = 500): any {
@@ -44,7 +65,7 @@ export class UserFacadeService {
 
   getUserOrderedDiscounts(debounceMs = 500): any {
     const skip$ = of(0);
-    const take$ = of(10);
+    const take$ = of(20);
     combineLatest(skip$, take$).pipe(
       switchMap(([skip, take]) => {
         return this.discountsService.getUserOrderedDiscounts({skip, take}).pipe(
@@ -65,25 +86,18 @@ export class UserFacadeService {
   toggleFavoriteDiscount(discountId): void {
     this.discountsService.updateIsSavedDiscount(discountId).pipe(
     ).subscribe(resp => {
-      const value = this.subject.value.discounts;
-      const discounts = value.filter((discount: Discount) => discount.discountId !== resp.discountID);
-      this.updateSavedUserDiscounts(discounts);
+      this.getUserSavedDiscounts();
+      this.getUserOrderedDiscounts();
     });
   }
 
-  get value(): UserProfileState {
-    return this.subject.value;
-  }
-
-  select<T>(name: string): Observable<T> {
-    return this.userProfileStore$.pipe(pluck(name));
-  }
-
-  set(name: string, state: any): void {
-    this.subject.next({
-      ...this.value, [name]: state
+  orderTicket(discountId, ref): void {
+    this.restApi.getTicket(discountId).pipe(
+    ).subscribe(ticket => {
+      console.log('next', ticket);
+      this.ticketService.createTicket(ticket, ref);
+      this.getUserOrderedDiscounts();
     });
-    console.log('VALUE', this.subject.value);
   }
 
 }

@@ -7,20 +7,20 @@
     </article>
     <article>
       <app-orders-list
-      [tickets$]="orders$"
-      (getTicket)="getTicket($event)"
-      (toggleFavourites)="changeFavourites($event)"
+        [tickets$]="orders$"
+        (getTicket)="getTicket($event)"
+        (toggleFavourites)="changeFavourites($event)"
       >
-        Ordered Tickets
+        {{"USER_PROFILE.LIST_TITLE.ORDERED" | translate}}
       </app-orders-list>
     </article>
     <article>
       <app-saved-list
-      [discounts$]="discounts$"
-      (getTicket)="getTicket($event)"
-      (toggleFavourites)="changeFavourites($event)"
+        [discounts$]="discounts$"
+        (getTicket)="getTicket($event)"
+        (toggleFavourites)="changeFavourites($event)"
       >
-        Saved Discounts
+        {{"USER_PROFILE.LIST_TITLE.SAVED" | translate}}
       </app-saved-list>
     </article>
   </div>

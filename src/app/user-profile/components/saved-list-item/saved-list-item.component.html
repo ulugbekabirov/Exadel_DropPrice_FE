@@ -1,16 +1,16 @@
 <li class="list-item">
-  <p class="list-item__title" [routerLink]="['/discounts', ticket.discountId]"
+  <p class="list-item__title" [routerLink]="['/discounts', discount.discountId]"
      matTooltip="Подробнее о Скидке"
      matTooltipPosition="above"
   >
-    {{ ticket?.discountName }}
+    {{ discount?.discountName }}
   </p>
   <p class="list-item__subTitle"
-     [routerLink]="['/vendors', ticket.vendorId]"
+     [routerLink]="['/vendors', discount.vendorId]"
      matTooltip="Подробнее о Вендоре"
      matTooltipPosition="above"
   >
-    {{ ticket?.vendorName }}
+    {{ discount?.vendorName }}
   </p>
   <p class="list-item__date">
     <!--    <span class="list-item__date_label">-->
@@ -18,7 +18,7 @@
     <!--    </span>-->
     <span class="list-item__date_text"
     >
-      <small>{{ticket.orderDate | date: 'medium'}}</small>
+      <small>{{discount.endDate | date: 'medium'}}</small>
     </span>
   </p>
   <div class="list-item__actions">
@@ -27,24 +27,22 @@
       <mat-icon class="list-item__icon_favourite"
                 fxLayoutAlign="center center"
                 matTooltip="Toggle Favourites"
-                [ngStyle]="{'color': ticket.isExpired ? '#FF6347' : '#FF6347'}"
-                (click)="toggleFavorites(ticket.discountId)"
+                [ngStyle]="{'color': discount.isSaved ? '#FF6347' : '#FF6347'}"
+                (click)="toggleFavorites(discount.discountId)"
       >
-        {{ticket.isSavedDiscount ? 'favorite' : 'favorite_border'}}
+        {{discount.isSaved ? 'favorite' : 'favorite_border'}}
       </mat-icon>
     </div>
 
-    <div class="list-item__actions_ticket"
-         [class.active]="ticket.isExpired">
-      <button *ngIf="ticket.discountActivity"
-              class="action__ticket"
+    <div class="list-item__actions_ticket">
+      <button class="action__ticket"
               matTooltip="Ticket"
-              (click)="ticketHandler(ticket.discountId)"
-              [class.discountInActive]="!ticket.discountActivity"
-              [disabled]="!ticket.discountActivity"
+              (click)="ticketHandler(discount.discountId)"
+              [class.discountInActive]="!discount.activityStatus"
+              [disabled]="!discount.activityStatus"
       >
         {{
-        ticket.isExpired
+        discount.isOrdered
           ? ("USER_PROFILE.TICKET_BUTTON.SHOW_TICKET" | translate)
           : ("USER_PROFILE.TICKET_BUTTON.ORDER_TICKET" | translate)
         }}

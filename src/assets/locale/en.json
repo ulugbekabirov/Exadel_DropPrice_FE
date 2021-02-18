@@ -188,5 +188,15 @@
       "SEARCH_BY": "Search by"
     },
     "CONTENT": ""
+  },
+  "USER_PROFILE": {
+    "LIST_TITLE": {
+      "SAVED": "Saved Discounts",
+      "ORDERED": "Ordered Tickets"
+    },
+    "TICKET_BUTTON": {
+      "SHOW_TICKET": "Show Ticket",
+      "ORDER_TICKET": "Order Ticket"
+    }
   }
 }

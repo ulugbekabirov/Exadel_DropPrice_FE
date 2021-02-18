@@ -189,5 +189,15 @@
       "SEARCH_BY": "Искать по"
     },
     "CONTENT": ""
+  },
+  "USER_PROFILE": {
+    "LIST_TITLE": {
+      "SAVED": "Избранные Скидки",
+      "ORDERED": "История Заказов"
+    },
+    "TICKET_BUTTON": {
+      "SHOW_TICKET": "Показать Талон",
+      "ORDER_TICKET": "Заказать Талон"
+    }
   }
 }

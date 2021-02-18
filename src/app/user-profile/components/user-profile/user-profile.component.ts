@@ -1,21 +1,20 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { forkJoin, Observable, Subscription } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ActiveUser, Discount, Ticket } from '../../../models';
 import { UserService } from '../../../services/user.service';
 import { UserFacadeService } from '../../services/user-facade.service';
-import { filter, map, takeUntil } from 'rxjs/operators';
 import { TicketService } from '../../../services/ticket.service';
 import { RefDirective } from '../../../directives/ref.directive';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss']
+  styleUrls: ['./user-profile.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserProfileComponent implements OnInit, OnDestroy {
+
+export class UserProfileComponent implements OnInit {
   activeUser$: Observable<ActiveUser>;
-  // isSavedDiscounts$: Observable<Discount[]>;
-  // orderedTickets$: Observable<Ticket[]>;
   orders$: Observable<Ticket[]>;
   discounts$: Observable<Discount[]>;
 
@@ -37,13 +36,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   }
 
   getTicket(discountId: number): void {
-    this.ticketService.getTicket(discountId, this.refDir);
+    this.facade.orderTicket(discountId, this.refDir);
   }
 
   changeFavourites(discountId: number): void {
     this.facade.toggleFavoriteDiscount(discountId);
-  }
-
-  ngOnDestroy(): void {
   }
 }

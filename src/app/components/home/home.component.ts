@@ -7,6 +7,7 @@ import { SORT_BY } from '../../../constants';
 import { ActiveUser, Discount, LocationCoords, Tag, Town } from '../../models';
 import { RefDirective } from '../../directives/ref.directive';
 import { TicketService } from '../../services/ticket.service';
+import { UserFacadeService } from '../../user-profile/services/user-facade.service';
 
 
 @Component({
@@ -40,6 +41,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private discountsService: DiscountsService,
     private userService: UserService,
     private ticketService: TicketService,
+    private facade: UserFacadeService,
   ) {
   }
 
@@ -102,7 +104,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   getTicket(discountId: number): void {
-    this.ticketService.getTicket(discountId, this.refDir);
+    this.facade.orderTicket(discountId, this.refDir);
   }
 
   changeFavourites(id: number): void {
