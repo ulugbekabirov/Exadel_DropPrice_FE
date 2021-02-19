@@ -231,8 +231,6 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe(
-          res => console.log('HTTP response', res),
-          error => console.log('HTTP Error', error),
           () => this.successSnackBar("Successfully saved!", '')
       );
       

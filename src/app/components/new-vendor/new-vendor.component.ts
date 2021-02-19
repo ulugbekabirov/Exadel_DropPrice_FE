@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation, ElementRef, ChangeDetectorRef } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -23,9 +23,10 @@ export class NewVendorComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private cd: ChangeDetectorRef,
     private snackBar: MatSnackBar,
     private discountsService: DiscountsService,
-    private vendorsService: VendorsService
+    private vendorsService: VendorsService,
   ) {}
 
   ngOnInit(): void {
@@ -48,23 +49,23 @@ export class NewVendorComponent implements OnInit {
         facebook: ['', [Validators.pattern(/^(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$/)]],
         website: ['', [Validators.pattern(/^(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$/)]],
         otherSocialLink: ['', [Validators.pattern(/^(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$/)]]
-      })
+      }),
     });
   }
 
   successSnackBar(message: string, action: any) {
     this.snackBar.open(message, action, {
       duration: 3000,
-      panelClass: ['snackbar-color-success'],
-      horizontalPosition: 'center'
+      horizontalPosition: 'center',
+      panelClass: ['snackbar-color-success']
     });
   }
 
   errorSnackBar(message: string, action: any) {
     this.snackBar.open(message, action, {
       duration: 3000,
+      horizontalPosition: 'center',
       panelClass: ['snackbar-color-error'],
-      horizontalPosition: 'center'
     });
   }
 
@@ -81,8 +82,6 @@ export class NewVendorComponent implements OnInit {
         })
       )
       .subscribe(
-          res => console.log('HTTP response', res),
-          error => console.log('HTTP Error', error),
           () => this.successSnackBar("Successfully saved!", '')
       );
 
@@ -131,4 +130,5 @@ export class NewVendorComponent implements OnInit {
   get otherSocialLink(): AbstractControl {
     return this.newVendorForm.get('otherSocialLink');
   }
+
 }
