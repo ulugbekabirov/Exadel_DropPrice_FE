@@ -26,6 +26,7 @@ export class NewVendorComponent implements OnInit, OnDestroy {
   vendor: Vendor;
   vendId: any;
   private unsubscribe$ = new Subject<void>();
+  isEditMode: boolean = (this.router.url).includes('edit');
 
 
   constructor(private fb: FormBuilder,
@@ -50,23 +51,30 @@ export class NewVendorComponent implements OnInit, OnDestroy {
       ],
       email: ['', [Validators.required, Validators.email]],
       socialLinks: this.fb.group({
-        instagram: ['', [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]],
-        facebook: ['', [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]],
-        website: ['', [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]],
-        otherLinks: ['', [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]]
+        instagram: ['',
+          // [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
+        ],
+        facebook: ['',
+          // [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
+        ],
+        website: ['',
+          // [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
+        ],
+        otherLinks: ['',
+          // [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
+        ]
       })
     });
 
-    if ((this.router.url).includes('edit')) {
+    if (this.isEditMode) {
       this.route.paramMap
         .pipe(
           switchMap((params: any) => {
             this.vendId = +params.get('id');
             return this.vendorsService.getVendorById(this.vendId);
           }),
-        ).pipe(
-        takeUntil(this.unsubscribe$)
-      ).subscribe((vendor) => {
+          takeUntil(this.unsubscribe$)
+        ).subscribe((vendor) => {
         this.newVendorForm.patchValue({
           ...vendor, socialLinks: JSON.parse(vendor.socialLinks)
         });
@@ -81,7 +89,7 @@ export class NewVendorComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     const vendor = this.newVendorForm.value;
     const vendorModel = {...vendor, socialLinks: JSON.stringify(vendor.socialLinks)};
-    if ((this.router.url).includes('edit')) {
+    if (this.isEditMode) {
       this.vendorsService.updateVendor(vendorModel, this.vendId).pipe(
         takeUntil(this.unsubscribe$)
       ).subscribe(() => this.goBack());
