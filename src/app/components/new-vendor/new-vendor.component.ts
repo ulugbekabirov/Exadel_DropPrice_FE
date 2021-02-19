@@ -33,14 +33,13 @@ export class NewVendorComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-              private route: ActivatedRoute,
-              private discountService: DiscountsService,
-              private vendorsService: VendorsService,
-              private router: Router,
-              private location: Location,
-              private cd: ChangeDetectorRef,
-              private snackBar: MatSnackBar,
-              private discountsService: DiscountsService,
+    private route: ActivatedRoute,
+    private discountService: DiscountsService,
+    private vendorsService: VendorsService,
+    private router: Router,
+    private location: Location,
+    private cd: ChangeDetectorRef,
+    private snackBar: MatSnackBar,
   ) {
   }
 
@@ -56,11 +55,11 @@ export class NewVendorComponent implements OnInit, OnDestroy {
         ],
       ],
       email: ['', [Validators.required, Validators.email]],
-      socialLinks: this.fb.group ({
-        instagram:  ['', [Validators.pattern(/^(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$/)]],
+      socialLinks: this.fb.group({
+        instagram: ['', [Validators.pattern(/^(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$/)]],
         facebook: ['', [Validators.pattern(/^(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$/)]],
         website: ['', [Validators.pattern(/^(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$/)]],
-        otherSocialLink: ['', [Validators.pattern(/^(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$/)]]
+        otherLinks: ['', [Validators.pattern(/^(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$/)]]
       }),
     });
   }
@@ -101,85 +100,80 @@ export class NewVendorComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    const newSocial = JSON.stringify(this.newVendorForm.value.socialLinks);
-    const reqVendorModel: Vendor = {...this.newVendorForm.value, socialLinks: newSocial};
-    const newVendor = reqVendorModel;
-
-    this.vendorsService.createVendor(newVendor)
-      .pipe(
+    const vendor = this.newVendorForm.value;
+    const vendorModel = {...vendor, socialLinks: JSON.stringify(vendor.socialLinks)};
+    if (this.isEditMode) {
+      this.vendorsService.updateVendor(vendorModel, this.vendId).pipe(
+        takeUntil(this.unsubscribe$),
         catchError(error => {
           this.errorSnackBar('Not saved!', '');
           return throwError(error);
-        })
-      )
-      .subscribe(
-        () => this.successSnackBar('Successfully saved!', '')
-      );
-
-    this.newVendorForm.reset();
-    for (const control in this.newVendorForm.controls) {
-      this.newVendorForm.controls[control].setErrors(null);
-      const vendor = this.newVendorForm.value;
-      const vendorModel = {...vendor, socialLinks: JSON.stringify(vendor.socialLinks)};
-      if (this.isEditMode) {
-        this.vendorsService.updateVendor(vendorModel, this.vendId).pipe(
-          takeUntil(this.unsubscribe$)
-        ).subscribe(() => this.goBack());
-      } else {
-        this.vendorsService.createVendor(vendorModel).pipe(
-          takeUntil(this.unsubscribe$)
-        ).subscribe(res => {
+        }))
+        .subscribe(() => {
           this.newVendorForm.reset();
+          this.successSnackBar('Successfully update!', '');
+          this.goBack();
+        });
+    } else {
+      this.vendorsService.createVendor(vendorModel).pipe(
+        takeUntil(this.unsubscribe$),
+        catchError(error => {
+          this.errorSnackBar('Not saved!', '');
+          return throwError(error);
+        }))
+        .subscribe(() => {
+          this.newVendorForm.reset();
+          this.successSnackBar('Successfully saved!', '');
           for (const control in this.newVendorForm.controls) {
             this.newVendorForm.controls[control].setErrors(null);
           }
         });
-      }
     }
   }
-    get name(): AbstractControl {
+
+  get name(): AbstractControl {
     return this.newVendorForm.get('vendorName');
   }
 
-    get address(): AbstractControl {
+  get address(): AbstractControl {
     return this.newVendorForm.get('address');
   }
 
-    get description(): AbstractControl {
+  get description(): AbstractControl {
     return this.newVendorForm.get('description');
   }
 
-    get phone(): AbstractControl {
+  get phone(): AbstractControl {
     return this.newVendorForm.get('number');
   }
 
-    get email(): AbstractControl {
+  get email(): AbstractControl {
     return this.newVendorForm.get('email');
   }
 
-    get socialLinks(): AbstractControl {
+  get socialLinks(): AbstractControl {
     return this.newVendorForm.get('socialLinks');
   }
 
-    get instagram(): AbstractControl {
+  get instagram(): AbstractControl {
     return this.newVendorForm.get('instagram');
   }
 
-    get facebook(): AbstractControl {
+  get facebook(): AbstractControl {
     return this.newVendorForm.get('facebook');
   }
 
-    get website(): AbstractControl {
+  get website(): AbstractControl {
     return this.newVendorForm.get('website');
   }
 
-    get otherLinks(): AbstractControl {
+  get otherLinks(): AbstractControl {
     return this.newVendorForm.get('otherLinks');
   }
 
-    ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
-  };
+  }
 
 }
