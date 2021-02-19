@@ -90,11 +90,11 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     });
     this.vendorNameDetectChanges();
 
-    if((this.router.url).includes('edit')) {
+    if ((this.router.url).includes('edit')) {
       this.route.paramMap
       .pipe(
         switchMap((params: any) => {
-          this.discId = +params.get("id");
+          this.discId = +params.get('id');
           return forkJoin (
           this.discountsService.getDiscountById(this.discId, {}),
           this.discountsService.getPointsOfSalesByDiscountId(this.discId)
@@ -102,8 +102,8 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
         }),
         takeUntil(this.unsubscribe$)
       ).subscribe(([discount, points]) => {
-        console.log(discount)
-        console.log(points)
+        console.log(discount);
+        console.log(points);
         this.newDiscountForm.patchValue({
           vendorName: discount.vendorName,
           discountName: discount.discountName,
@@ -114,25 +114,39 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
           endDate: discount.endDate,
           pointOfSales: points
         });
-  
-        if(discount.tags) {
-          for(let tag of discount.tags){
-            (<FormArray>this.newDiscountForm.get('tags')).push(
+
+        if (discount.tags) {
+          for (const tag of discount.tags){
+            (this.newDiscountForm.get('tags') as FormArray).push(
               new FormControl(tag, Validators.required)
-            )
+            );
           }
         }
-        //todo 
-      //  console.log(this.pointOfSalesForms.value)
-      //   if(points) {
-      //     for(let point of points) {
-      //       (<FormArray>this.newDiscountForm.get('pointOfSales')).push(
-      //       (new FormControl(point, Validators.required)))
-      //     }
-      //   }
-      //   console.log(this.pointOfSalesForms.value)
-      })
-    }else this.addPoint();
+
+       console.log(this.pointOfSalesForms.value);
+        if (points) {
+          for (let point of points) {
+            // const control = this.newDiscountForm.get('pointOfSales') as FormArray;
+            // control.push(point as FormGroup)
+            (<FormArray>this.newDiscountForm.get('pointOfSales')).push(
+            (new FormGroup(point, Validators.required)))
+          }
+        }
+        console.log(this.pointOfSalesForms.value)
+      });
+    } else {
+      this.addPoint();
+    }
+  }
+
+  createPoint(point) {
+    this.fb.group({
+      // id: ,
+      // name: ,
+      // address: ,
+      // latitude: ,
+      // longitude: ,
+    })
   }
 
   vendorNameDetectChanges(): void {
@@ -195,7 +209,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
       address: ['', [Validators.required]],
     });
     this.pointOfSalesForms.push(point);
-    console.log(this.pointOfSalesForms.value)
+    console.log(this.pointOfSalesForms.value);
   }
 
   deletePoint(currentSaleObj): void {
@@ -224,11 +238,11 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
 
   submit(): void {
     const reqDiscountModel: Discount = this.newDiscountForm.value;
-    console.log(reqDiscountModel)
+    console.log(reqDiscountModel);
     if ((this.router.url).includes('edit')) {
       const updateDiscount: Discount = reqDiscountModel;
       this.discountsService.updateDiscount(updateDiscount, this.discId).subscribe();
-      console.log(updateDiscount)
+      console.log(updateDiscount);
     } else {
       const newDiscount: Discount = reqDiscountModel;
       this.discountsService.createDiscount(newDiscount)
