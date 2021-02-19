@@ -15,8 +15,11 @@ import {
   PUT_IS_SAVED_DISCOUNTS_ENDPOINT,
   SEARCH_DISCOUNTS_ENDPOINT,
   USER_INFO_ENDPOINT,
-  POST_VENDORS_ENDPOINT, CONFIGS, CHANGE_CONFIGS,
-  PUT_ASSESS_DISCOUNTS_ENDPOINT
+  POST_VENDORS_ENDPOINT,
+  CONFIGS, CHANGE_CONFIGS,
+  PUT_ASSESS_DISCOUNTS_ENDPOINT,
+  USER_SAVED_ENDPOINT,
+  USER_TICKETS_ENDPOINT,
 } from '../../constants';
 import { environment } from '../../environments/environment';
 
@@ -71,6 +74,10 @@ export class ApiDataService {
     return this.http.get(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}`);
   }
 
+  updateVendor(vendor, vendorId): Observable<any> {
+    return this.http.put(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}`, vendor);
+  }
+
   getVendorsDiscounts(vendorId, options): Observable<any> {
     return this.http.get(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}/${GET_VENDOR_DISCOUNTS_ENDPOINT}`, options);
   }
@@ -83,7 +90,7 @@ export class ApiDataService {
     return this.http.post(`${environment.webApiUrl}${POST_DISCOUNTS_ENDPOINT}`, discount);
   }
 
-  postVendor(vendor): any {
+  createVendor(vendor): any {
     return this.http.post(`${environment.webApiUrl}${POST_VENDORS_ENDPOINT}`, vendor);
   }
 
@@ -105,7 +112,17 @@ export class ApiDataService {
       value: opt
     });
   }
+
   putRating(indexId, rating): any {
     return this.http.put(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${indexId.discountId}/${PUT_ASSESS_DISCOUNTS_ENDPOINT}`, rating);
   }
+
+  getUserSavedDiscounts(options): Observable<any> {
+    return this.http.get(`${environment.webApiUrl}${USER_INFO_ENDPOINT}/${USER_SAVED_ENDPOINT}`, options);
+  }
+
+  getUserTickets(options): Observable<any> {
+    return this.http.get(`${environment.webApiUrl}${USER_INFO_ENDPOINT}/${USER_TICKETS_ENDPOINT}`, options);
+  }
 }
+

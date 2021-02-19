@@ -12,6 +12,7 @@ export interface Discount {
   promoCode?: string;
   activityStatus: boolean;
   isSaved: boolean;
+  isOrdered: boolean;
   address: string;
   tags: string[];
 }

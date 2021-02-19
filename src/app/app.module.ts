@@ -27,7 +27,7 @@ import { NewVendorComponent } from './components/new-vendor/new-vendor.component
 import { MapComponent } from './components/map/map.component';
 import { DiscountDetailComponent } from './components/discount-detail/discount-detail.component';
 import { DiscountsComponent } from './components/discounts/discounts.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoadingInterceptor } from './services/loading.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -51,8 +51,6 @@ export function HttpLoaderFactory(http: HttpClient): any {
     BrowserAnimationsModule,
     HttpClientModule,
     SharedModule,
-    FormsModule,      
-    ReactiveFormsModule,
     AppRoutingModule,
     TranslateModule.forRoot({
       useDefaultLang: true,
@@ -73,6 +71,7 @@ export function HttpLoaderFactory(http: HttpClient): any {
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

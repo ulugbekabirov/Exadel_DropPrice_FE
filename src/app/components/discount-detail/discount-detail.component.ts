@@ -8,6 +8,7 @@ import { Observable, Subject } from 'rxjs';
 import { RefDirective } from '../../directives/ref.directive';
 import { TicketService } from '../../services/ticket.service';
 import { UserService } from '../../services/user.service';
+import { UserFacadeService } from '../../user-profile/services/user-facade.service';
 
 @Component({
   selector: 'app-discount-detail',
@@ -35,7 +36,7 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private discountsService: DiscountsService,
-    private ticketService: TicketService,
+    private userFacade: UserFacadeService,
     private location: Location,
     private userService: UserService,
   ) {
@@ -52,7 +53,10 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
       if (!discount) {
         return;
       }
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
       this.discount = discount;
       const lengthRating = this.discount.discountRating ? Number(this.discount.discountRating.toFixed()) : 0;
       this.rating = new Array(lengthRating).fill('star');
@@ -61,7 +65,7 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
   }
 
   ticketHandler(discountId: number): void {
-    this.ticketService.getTicket(discountId, this.refDir);
+    this.userFacade.orderTicket(discountId, this.refDir);
   }
 
   toggleFavorites(discountId: number): void {

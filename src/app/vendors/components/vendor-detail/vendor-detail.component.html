@@ -75,7 +75,7 @@
 
           </p>
           <ul class="vendor-content__field_text">
-            <li *ngFor="let social of vendorSocials">
+            <li *ngFor="let social of vendor?.socialLinks">
               <a
                 href="{{social.path}}"
                 target="_blank"
@@ -93,6 +93,7 @@
               class="vendors-detail__actions_button"
               mat-flat-button
               matTooltip="Edit Discount"
+              (click)="onEditVendor(vendor.vendorId)"
       >
         {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_ACTIONS.EDIT" | translate}}
       </button>

@@ -15,6 +15,7 @@ import { SettingItemComponent } from './components/setting-item/setting-item.com
 import { DiscountsStatisticComponent } from './components/discounts-statistic/discounts-statistic.component';
 import { VendorStatisticsComponent } from './components/vendor-statistics/vendor-statistics.component';
 import { StatisticsFacadeService } from './services/statistics-facade.service';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 const routes: Routes = [
   {path: '',
@@ -46,6 +47,7 @@ const routes: Routes = [
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatFormFieldModule
   ],
   exports: [
     RouterModule

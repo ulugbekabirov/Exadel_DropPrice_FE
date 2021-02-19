@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ApiDataService } from './api-data.service';
-import { BehaviorSubject, from, Observable, } from 'rxjs';
+import { BehaviorSubject, Observable, } from 'rxjs';
 import { ActiveUser } from '../models';
 import { KEY_ACTIVE_USER } from '../../constants';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({

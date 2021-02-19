@@ -9,6 +9,7 @@ import { TicketService } from '../../../services/ticket.service';
 import { RefDirective } from '../../../directives/ref.directive';
 import { UserService } from '../../../services/user.service';
 import { VendorsService } from '../../../services/vendors.service';
+import { UserFacadeService } from '../../../user-profile/services/user-facade.service';
 
 @Component({
   selector: 'app-vendor-detail',
@@ -18,8 +19,7 @@ import { VendorsService } from '../../../services/vendors.service';
 export class VendorDetailComponent implements OnInit, OnDestroy {
   sortBy = SORT_BY;
   towns: Town[];
-  vendor: Vendor;
-  vendorSocials;
+  vendor;
   selectedVendorId;
   vendorDiscounts: Discount[];
   activeCoords = {
@@ -36,7 +36,6 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
   };
   private unsubscribe$ = new Subject<void>();
 
-
   @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
 
   constructor(
@@ -46,6 +45,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
     private vendorsService: VendorsService,
     private ticketService: TicketService,
     private userService: UserService,
+    private userFacade: UserFacadeService,
   ) {
   }
 
@@ -66,9 +66,14 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
       if (!vendor) {
         return;
       }
-      this.vendor = vendor;
-      const json = JSON.parse(this.vendor.socialLinks);
-      this.vendorSocials = Object.keys(json).map(key => ({name: key, path: json[key]}));
+      const parseSocials = JSON.parse(vendor.socialLinks);
+      this.vendor = {
+        ...vendor,
+        socialLinks: Object
+          .keys(parseSocials)
+          .filter(value => !!parseSocials[value])
+          .map(key => ({name: key, path: parseSocials[key]}))
+      };
       this.selectedVendorId = vendor.vendorId;
       this.vendorsList = vendors;
       this.towns = towns;
@@ -76,21 +81,11 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  selectVendor(value: any): void {
-    if (!value) {
+  selectVendor(vendorId: any): void {
+    if (!vendorId) {
       return;
     }
-    forkJoin(
-      this.vendorsService.getVendorById(value),
-      this.vendorsService.getVendorsDiscounts(value, this.reqOpt)
-    )
-      .pipe(
-        takeUntil(this.unsubscribe$),
-      )
-      .subscribe(([vendor, discounts]) => {
-        this.vendorDiscounts = discounts;
-        this.vendor = vendor;
-      });
+    this.router.navigate(['/vendors', vendorId]);
   }
 
   changeCoords(): void {
@@ -128,7 +123,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
   }
 
   getTicket(discountId: number): void {
-    this.ticketService.getTicket(discountId, this.refDir);
+    this.userFacade.orderTicket(discountId, this.refDir);
   }
 
   onLocationChange({value: {latitude, longitude}}): void {
