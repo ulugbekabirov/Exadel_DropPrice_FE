@@ -73,6 +73,10 @@ export class ApiDataService {
     return this.http.get(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}`);
   }
 
+  updateVendor(vendor, vendorId): Observable<any> {
+    return this.http.put(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}`, vendor);
+  }
+
   getVendorsDiscounts(vendorId, options): Observable<any> {
     return this.http.get(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}/${GET_VENDOR_DISCOUNTS_ENDPOINT}`, options);
   }
@@ -85,7 +89,7 @@ export class ApiDataService {
     return this.http.post(`${environment.webApiUrl}${POST_DISCOUNTS_ENDPOINT}`, discount);
   }
 
-  postVendor(vendor): any {
+  createVendor(vendor): any {
     return this.http.post(`${environment.webApiUrl}${POST_VENDORS_ENDPOINT}`, vendor);
   }
 
@@ -116,3 +120,4 @@ export class ApiDataService {
     return this.http.get(`${environment.webApiUrl}${USER_INFO_ENDPOINT}/${USER_TICKETS_ENDPOINT}`, options);
   }
 }
+

@@ -19,8 +19,7 @@ import { UserFacadeService } from '../../../user-profile/services/user-facade.se
 export class VendorDetailComponent implements OnInit, OnDestroy {
   sortBy = SORT_BY;
   towns: Town[];
-  vendor: Vendor;
-  vendorSocials;
+  vendor;
   selectedVendorId;
   vendorDiscounts: Discount[];
   activeCoords = {
@@ -67,9 +66,14 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
       if (!vendor) {
         return;
       }
-      this.vendor = vendor;
-      const json = JSON.parse(this.vendor.socialLinks);
-      this.vendorSocials = Object.keys(json).map(key => ({name: key, path: json[key]}));
+      const parseSocials = JSON.parse(vendor.socialLinks);
+      this.vendor = {
+        ...vendor,
+        socialLinks: Object
+          .keys(parseSocials)
+          .filter(value => !!parseSocials[value])
+          .map(key => ({name: key, path: parseSocials[key]}))
+      };
       this.selectedVendorId = vendor.vendorId;
       this.vendorsList = vendors;
       this.towns = towns;
