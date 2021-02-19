@@ -6,7 +6,6 @@ import { DiscountsService } from '../../services/discounts.service';
 import { Discount } from '../../models';
 import { Observable, Subject } from 'rxjs';
 import { RefDirective } from '../../directives/ref.directive';
-import { TicketService } from '../../services/ticket.service';
 import { UserService } from '../../services/user.service';
 import { UserFacadeService } from '../../user-profile/services/user-facade.service';
 
@@ -28,7 +27,7 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
     latitude: this.userService.activeUserValue.officeLatitude,
   };
   stars: number[] = [1, 2, 3, 4, 5];
-  selectedValue: number = 0;
+  selectedValue = 0;
 
   @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
 
@@ -53,10 +52,6 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
       if (!discount) {
         return;
       }
-<<<<<<< HEAD
-
-=======
->>>>>>> dev
       this.discount = discount;
       const lengthRating = this.discount.discountRating ? Number(this.discount.discountRating.toFixed()) : 0;
       this.rating = new Array(lengthRating).fill('star');
@@ -101,18 +96,18 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
   }
 
   addClass(star): void {
-     let ab = "";
+     let ab = '';
      for (let i = 0; i < star; i++) {
-       ab = "starId" + i;
-       document.getElementById(ab).classList.add("selected");
+       ab = 'starId' + i;
+       document.getElementById(ab).classList.add('selected');
      }
   }
 
   removeClass(star): void {
-     let ab = "";
+     let ab = '';
      for (let i = star - 1; i >= this.selectedValue; i--) {
-       ab = "starId" + i;
-       document.getElementById(ab).classList.remove("selected");
+       ab = 'starId' + i;
+       document.getElementById(ab).classList.remove('selected');
      }
   }
 }

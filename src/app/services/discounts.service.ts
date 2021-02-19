@@ -85,7 +85,7 @@ export class DiscountsService {
   putRating(discountId, rating): any {
     const options: { params: HttpParams } = {
       params: new HttpParams()
-        .set('AssessmentValue', rating)
+        .set('assessmentValue', rating)
     };
     return this.restApi.putRating(discountId, options);
   }

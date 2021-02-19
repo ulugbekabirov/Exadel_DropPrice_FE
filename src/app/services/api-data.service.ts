@@ -113,8 +113,8 @@ export class ApiDataService {
     });
   }
 
-  putRating(indexId, rating): any {
-    return this.http.put(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${indexId.discountId}/${PUT_ASSESS_DISCOUNTS_ENDPOINT}`, rating);
+  putRating(discountId, options): any {
+    return this.http.put(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${discountId}/${PUT_ASSESS_DISCOUNTS_ENDPOINT}`, options);
   }
 
   getUserSavedDiscounts(options): Observable<any> {
