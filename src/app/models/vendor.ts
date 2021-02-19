@@ -10,7 +10,7 @@ export interface Vendor {
     facebook: string,
     website: string,
     otherSocialLink: string,
-  };
+  } | string;
 
   vendorRating: number;
   ticketCount: number;

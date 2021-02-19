@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -13,17 +13,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { Vendor } from './../../models/vendor';
 import { Location } from '@angular/common';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-new-vendor',
   templateUrl: './new-vendor.component.html',
   styleUrls: ['./new-vendor.component.scss'],
 })
-export class NewVendorComponent implements OnInit {
+export class NewVendorComponent implements OnInit, OnDestroy {
   newVendorForm: FormGroup;
   vendor: Vendor;
   vendId: any;
+  private unsubscribe$ = new Subject<void>();
 
 
   constructor(private fb: FormBuilder,
@@ -31,17 +33,16 @@ export class NewVendorComponent implements OnInit {
               private discountService: DiscountsService,
               private vendorsService: VendorsService,
               private router: Router,
-              private location: Location)  {}
+              private location: Location) {
+  }
 
 
   ngOnInit(): void {
     this.newVendorForm = this.fb.group({
-      name: ['', [Validators.required]],
+      vendorName: ['', [Validators.required]],
       address: [''],
       description: [''],
-      phone: [
-
-        '',
+      phone: ['',
         [
           Validators.required,
           Validators.pattern(/^((8|\+7|\+3|\+9|)*\d{0,3}[\- ]?)*\d{0,3}?(\(?\d{1,3}\)?[\- ]?)?[\d\- ]{7,10}$/),
@@ -52,7 +53,7 @@ export class NewVendorComponent implements OnInit {
         instagram: ['', [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]],
         facebook: ['', [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]],
         website: ['', [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]],
-        otherSocialLink: ['', [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]]
+        otherLinks: ['', [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]]
       })
     });
 
@@ -63,53 +64,42 @@ export class NewVendorComponent implements OnInit {
             this.vendId = +params.get('id');
             return this.vendorsService.getVendorById(this.vendId);
           }),
-        ).subscribe((vendor) => {
-          const json = JSON.parse(vendor.socialLinks)
-          for (let key in json) {
-            if (json[key]) {
-              json[key] = json[key].trim();
-            }
-          }
-          this.newVendorForm.patchValue({
-            name: vendor.vendorName,
-            address: vendor.address,
-            description: vendor.description,
-            phone: vendor.phone.trim(),
-            email: vendor.email,
-            socialLinks: {
-              instagram: (json.instagram),
-              facebook: (json.facebook),
-              website: (json.webSite),
-              otherSocialLink: (json.vk)
-            }
-          });
+        ).pipe(
+        takeUntil(this.unsubscribe$)
+      ).subscribe((vendor) => {
+        this.newVendorForm.patchValue({
+          ...vendor, socialLinks: JSON.parse(vendor.socialLinks)
         });
+      });
     }
   }
 
-  goBack() {
+  goBack(): void {
     this.location.back();
   }
 
   onSubmit(): void {
-    const newSocial = JSON.stringify(this.newVendorForm.value.socialLinks);
-    const reqVendorModel: Vendor = { ...this.newVendorForm.value, socialLinks: newSocial }
+    const vendor = this.newVendorForm.value;
+    const vendorModel = {...vendor, socialLinks: JSON.stringify(vendor.socialLinks)};
     if ((this.router.url).includes('edit')) {
-      const updateVendor: Vendor = reqVendorModel;
-      this.vendorsService.updateVendor(updateVendor, this.vendId).subscribe(() => this.goBack());
+      this.vendorsService.updateVendor(vendorModel, this.vendId).pipe(
+        takeUntil(this.unsubscribe$)
+      ).subscribe(() => this.goBack());
     } else {
-      const newVendor = reqVendorModel;
-      this.vendorsService.createVendor(newVendor)
-        .subscribe(res => console.log('res', res));
-    }
-    this.newVendorForm.reset();
-    for (const control in this.newVendorForm.controls) {
-      this.newVendorForm.controls[control].setErrors(null);
+      this.vendorsService.createVendor(vendorModel).pipe(
+        takeUntil(this.unsubscribe$)
+      ).subscribe(res => {
+        console.log(res);
+        this.newVendorForm.reset();
+        for (const control in this.newVendorForm.controls) {
+          this.newVendorForm.controls[control].setErrors(null);
+        }
+      });
     }
   }
 
   get name(): AbstractControl {
-    return this.newVendorForm.get('name');
+    return this.newVendorForm.get('vendorName');
   }
 
   get address(): AbstractControl {
@@ -144,7 +134,12 @@ export class NewVendorComponent implements OnInit {
     return this.newVendorForm.get('website');
   }
 
-  get otherSocialLink(): AbstractControl {
-    return this.newVendorForm.get('otherSocialLink');
+  get otherLinks(): AbstractControl {
+    return this.newVendorForm.get('otherLinks');
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

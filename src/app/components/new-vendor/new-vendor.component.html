@@ -17,7 +17,7 @@
             <mat-label>{{
               "NEW_VENDOR_FORM.NAME_LABEL" | translate
             }}</mat-label>
-            <input matInput formControlName="name" />
+            <input matInput formControlName="vendorName" />
           </mat-form-field>
 
           <mat-form-field>
@@ -106,15 +106,18 @@
             </mat-error>
           </mat-form-field>
 
+
           <mat-form-field>
             <mat-label>{{
               "NEW_VENDOR_FORM.OTHER_SOCIAL_NETWORK_LABEL" | translate
             }}</mat-label>
-            <input formControlName="otherSocialLink" matInput/>
+            <input formControlName="otherLinks" matInput/>
             <mat-error
               >{{ "NEW_VENDOR_FORM.VALID_SOCIAL_NETWORK" | translate }}
             </mat-error>
           </mat-form-field>
+
+
         </div>
 
         <button
