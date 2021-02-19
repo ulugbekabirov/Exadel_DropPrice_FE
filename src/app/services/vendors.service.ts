@@ -34,6 +34,10 @@ export class VendorsService {
     return this.restApi.getVendors();
   }
 
+  updateVendor(vendor, vendorId): Observable<any> {
+    return this.restApi.updateVendor(vendor, vendorId);
+  }
+
   getVendorsDiscounts(vendorId, params): Observable<any> {
     const paramsObj = {};
     Object.keys({...params}).filter(value => typeof params[value] !== 'undefined').forEach(param => {

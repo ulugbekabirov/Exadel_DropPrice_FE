@@ -1,0 +1,60 @@
+<li class="list-item"
+    [class.isExpired]="ticket.isExpired || !ticket.discountActivity"
+>
+  <p class="list-item__title" [routerLink]="['/discounts', ticket.discountId]"
+     matTooltip="Подробнее о Скидке"
+     matTooltipPosition="above"
+  >
+    {{ ticket?.discountName }}
+  </p>
+  <p class="list-item__subTitle"
+     [routerLink]="['/vendors', ticket.vendorId]"
+     matTooltip="Подробнее о Вендоре"
+     matTooltipPosition="above"
+  >
+    {{ ticket?.vendorName }}
+  </p>
+  <p class="list-item__date">
+        <span class="list-item__date_label">
+          <small>
+            {{"USER_PROFILE.LIST_ITEM.DATE_ORDER" | translate}}:
+          </small>
+        </span>
+    <span class="list-item__date_text"
+    >
+      <small>{{ticket.orderDate | date: 'medium'}}</small>
+    </span>
+  </p>
+  <div class="list-item__actions">
+
+    <div class="list-item__actions_favourite">
+      <mat-icon class="list-item__icon_favourite"
+                fxLayoutAlign="center center"
+                matTooltip="Toggle Favourites"
+                [ngStyle]="{'color': ticket.isExpired ? '#FF6347' : '#FF6347'}"
+                (click)="toggleFavorites(ticket.discountId)"
+      >
+        {{ticket.isSavedDiscount ? 'favorite' : 'favorite_border'}}
+      </mat-icon>
+    </div>
+
+    <div class="list-item__actions_ticket">
+      <button class="action__ticket"
+              matTooltip="Ticket"
+              (click)="ticketHandler(ticket.discountId)"
+              [class.discountInActive]="!ticket.discountActivity"
+              [disabled]="!ticket.discountActivity"
+      >
+        {{
+        ticket.discountActivity
+          ?
+        ticket.isExpired
+          ? ("USER_PROFILE.TICKET_BUTTON.ORDER_TICKET" | translate)
+          : ("USER_PROFILE.TICKET_BUTTON.SHOW_TICKET" | translate)
+          : ("USER_PROFILE.TICKET_BUTTON.DISCOUNT_INACTIVE" | translate)
+        }}
+      </button>
+    </div>
+
+  </div>
+</li>

@@ -3,4 +3,5 @@ export interface Setting {
   configValue: string;
   configDescription: string;
   configName: string;
+  dataType: string;
 }

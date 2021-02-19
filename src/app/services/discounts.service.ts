@@ -9,7 +9,8 @@ import { HttpParams } from '@angular/common/http';
 export class DiscountsService {
   constructor(
     private restApi: ApiDataService,
-  ) {}
+  ) {
+  }
 
   getDiscounts(params): Observable<any> {
     const paramsObj = {};
@@ -82,5 +83,27 @@ export class DiscountsService {
 
   getPointOfSales(): Observable<any> {
     return this.restApi.getPointOfSales();
+  }
+
+  getUserSavedDiscounts(opt): Observable<any> {
+    const paramsObj = {};
+    Object.keys({...opt}).filter(value => typeof opt[value] !== 'undefined').forEach(param => {
+      paramsObj[param] = opt[param];
+    });
+    const options: { params: HttpParams } = {
+      params: new HttpParams({fromObject: paramsObj})
+    };
+    return this.restApi.getUserSavedDiscounts(options);
+  }
+
+  getUserOrderedDiscounts(opt): Observable<any> {
+    const paramsObj = {};
+    Object.keys({...opt}).filter(value => typeof opt[value] !== 'undefined').forEach(param => {
+      paramsObj[param] = opt[param];
+    });
+    const options: { params: HttpParams } = {
+      params: new HttpParams({fromObject: paramsObj})
+    };
+    return this.restApi.getUserTickets(options);
   }
 }

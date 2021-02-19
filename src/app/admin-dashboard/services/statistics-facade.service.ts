@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { VendorsService } from '../../services/vendors.service';
 import { DiscountsService } from '../../services/discounts.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, startWith, switchMap, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, pluck, startWith, switchMap, tap } from 'rxjs/operators';
 import { combineLatest } from 'rxjs/internal/observable/combineLatest';
 import { DiscountsSortStore } from './discounts-sorts-store';
 import { VendorsSortStore } from './vendors-sort-store';
@@ -60,10 +60,10 @@ export class StatisticsFacadeService {
     combineLatest(searchTerm$, sortBy$, take$, skip$).pipe(
       switchMap(([searchQuery, sortBy, take, skip]) => {
         return this.discountsService.searchStatsDiscount({searchQuery, sortBy, take, skip}).pipe(
+          pluck('discountDTOs'),
         );
       })
-    )
-      .subscribe(this.updateSearchResults.bind(this));
+    ).subscribe(this.updateSearchResults.bind(this));
     return this.searchResults$;
   }
 
@@ -90,6 +90,8 @@ export class StatisticsFacadeService {
     combineLatest(searchTerm$, sortBy$, take$, skip$).pipe(
       switchMap(([searchQuery, sortBy, take, skip]) => {
         return this.vendorsService.searchVendors({searchQuery, sortBy, take, skip}).pipe(
+          // tap(({totalNumberOfVendors}) => this.vendorsSortStore.set('totalNumberOfVendors', totalNumberOfVendors)),
+          pluck('vendorDTOs'),
         );
       })
     )

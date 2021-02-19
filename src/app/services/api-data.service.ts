@@ -16,7 +16,10 @@ import {
   PUT_IS_SAVED_DISCOUNTS_ENDPOINT,
   SEARCH_DISCOUNTS_ENDPOINT,
   USER_INFO_ENDPOINT,
-  POST_VENDORS_ENDPOINT, CONFIGS, CHANGE_CONFIGS
+  USER_SAVED_ENDPOINT,
+  USER_TICKETS_ENDPOINT,
+  POST_VENDORS_ENDPOINT,
+  CONFIGS, CHANGE_CONFIGS
 } from '../../constants';
 import { environment } from '../../environments/environment';
 
@@ -71,6 +74,10 @@ export class ApiDataService {
     return this.http.get(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}`);
   }
 
+  updateVendor(vendor, vendorId): Observable<any> {
+    return this.http.put(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}`, vendor);
+  }
+
   getVendorsDiscounts(vendorId, options): Observable<any> {
     return this.http.get(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}/${GET_VENDOR_DISCOUNTS_ENDPOINT}`, options);
   }
@@ -109,4 +116,13 @@ export class ApiDataService {
       value: opt
     });
   }
+
+  getUserSavedDiscounts(options): Observable<any> {
+    return this.http.get(`${environment.webApiUrl}${USER_INFO_ENDPOINT}/${USER_SAVED_ENDPOINT}`, options);
+  }
+
+  getUserTickets(options): Observable<any> {
+    return this.http.get(`${environment.webApiUrl}${USER_INFO_ENDPOINT}/${USER_TICKETS_ENDPOINT}`, options);
+  }
 }
+

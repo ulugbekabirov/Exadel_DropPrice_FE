@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -11,6 +11,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DiscountsService } from '../../services/discounts.service';
 import { VendorsService } from '../../services/vendors.service';
 import { Vendor } from './../../models/vendor';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { switchMap, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-new-vendor',
@@ -18,29 +23,36 @@ import { Vendor } from './../../models/vendor';
   styleUrls: ['./new-vendor.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class NewVendorComponent implements OnInit {
+export class NewVendorComponent implements OnInit, OnDestroy {
   newVendorForm: FormGroup;
+  vendor: Vendor;
+  vendId: any;
+  private unsubscribe$ = new Subject<void>();
+  isEditMode: boolean = (this.router.url).includes('edit');
+
 
   constructor(
     private fb: FormBuilder,
-    private cd: ChangeDetectorRef,
-    private snackBar: MatSnackBar,
-    private discountsService: DiscountsService,
-    private vendorsService: VendorsService,
-  ) {}
+              private route: ActivatedRoute,
+              private discountService: DiscountsService,
+              private vendorsService: VendorsService,
+              private router: Router,
+              private location: Location,
+              private cd: ChangeDetectorRef,
+              private snackBar: MatSnackBar,
+              private discountsService: DiscountsService,
+  ) {
+  }
 
   ngOnInit(): void {
     this.newVendorForm = this.fb.group({
-      name: ['', [Validators.required]],
+      vendorName: ['', [Validators.required]],
       address: [''],
       description: [''],
-      phone: [
-        '',
+      phone: ['',
         [
           Validators.required,
-          Validators.pattern('[- +()0-9]+'),
-          Validators.maxLength(13),
-          Validators.minLength(13),
+          Validators.pattern(/^((8|\+7|\+3|\+9|)*\d{0,3}[\- ]?)*\d{0,3}?(\(?\d{1,3}\)?[\- ]?)?[\d\- ]{7,10}$/),
         ],
       ],
       email: ['', [Validators.required, Validators.email]],
@@ -65,70 +77,109 @@ export class NewVendorComponent implements OnInit {
     this.snackBar.open(message, action, {
       duration: 3000,
       horizontalPosition: 'center',
-      panelClass: ['snackbar-color-error'],
+      panelClass: ['snackbar-color-error']
     });
+
+    if (this.isEditMode) {
+      this.route.paramMap
+        .pipe(
+          switchMap((params: any) => {
+            this.vendId = +params.get('id');
+            return this.vendorsService.getVendorById(this.vendId);
+          }),
+          takeUntil(this.unsubscribe$)
+        ).subscribe((vendor) => {
+        this.newVendorForm.patchValue({
+          ...vendor, socialLinks: JSON.parse(vendor.socialLinks)
+        });
+      });
+    }
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
   onSubmit(): void {
     const newSocial = JSON.stringify(this.newVendorForm.value.socialLinks);
-    const reqVendorModel: Vendor = { ...this.newVendorForm.value, socialLinks: newSocial }
+    const reqVendorModel: Vendor = {...this.newVendorForm.value, socialLinks: newSocial};
     const newVendor = reqVendorModel;
 
     this.vendorsService.createVendor(newVendor)
       .pipe(
         catchError(error => {
-          this.errorSnackBar("Not saved!", '');
+          this.errorSnackBar('Not saved!', '');
           return throwError(error);
         })
       )
       .subscribe(
-          () => this.successSnackBar("Successfully saved!", '')
+        () => this.successSnackBar('Successfully saved!', '')
       );
 
     this.newVendorForm.reset();
     for (const control in this.newVendorForm.controls) {
       this.newVendorForm.controls[control].setErrors(null);
+      const vendor = this.newVendorForm.value;
+      const vendorModel = {...vendor, socialLinks: JSON.stringify(vendor.socialLinks)};
+      if (this.isEditMode) {
+        this.vendorsService.updateVendor(vendorModel, this.vendId).pipe(
+          takeUntil(this.unsubscribe$)
+        ).subscribe(() => this.goBack());
+      } else {
+        this.vendorsService.createVendor(vendorModel).pipe(
+          takeUntil(this.unsubscribe$)
+        ).subscribe(res => {
+          this.newVendorForm.reset();
+          for (const control in this.newVendorForm.controls) {
+            this.newVendorForm.controls[control].setErrors(null);
+          }
+        });
+      }
     }
   }
-
-  get name(): AbstractControl {
-    return this.newVendorForm.get('name');
+    get name(): AbstractControl {
+    return this.newVendorForm.get('vendorName');
   }
 
-  get address(): AbstractControl {
+    get address(): AbstractControl {
     return this.newVendorForm.get('address');
   }
 
-  get description(): AbstractControl {
+    get description(): AbstractControl {
     return this.newVendorForm.get('description');
   }
 
-  get phone(): AbstractControl {
+    get phone(): AbstractControl {
     return this.newVendorForm.get('number');
   }
 
-  get email(): AbstractControl {
+    get email(): AbstractControl {
     return this.newVendorForm.get('email');
   }
 
-  get socialLinks(): AbstractControl {
+    get socialLinks(): AbstractControl {
     return this.newVendorForm.get('socialLinks');
   }
 
-  get instagram(): AbstractControl {
+    get instagram(): AbstractControl {
     return this.newVendorForm.get('instagram');
   }
 
-  get facebook(): AbstractControl {
+    get facebook(): AbstractControl {
     return this.newVendorForm.get('facebook');
   }
 
-  get website(): AbstractControl {
+    get website(): AbstractControl {
     return this.newVendorForm.get('website');
   }
 
-  get otherSocialLink(): AbstractControl {
-    return this.newVendorForm.get('otherSocialLink');
+    get otherLinks(): AbstractControl {
+    return this.newVendorForm.get('otherLinks');
   }
+
+    ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  };
 
 }

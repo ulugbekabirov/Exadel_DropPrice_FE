@@ -1,0 +1,26 @@
+@import "src/variables";
+
+:host {
+  width: 100%;
+}
+
+.orders-list {
+  background: #fff;
+  box-shadow: 0 16px 24px 0 rgba(0, 0, 0, .1);
+  border-radius: 4px;
+  overflow: hidden;
+
+  h3 {
+    background: #9a9999;
+    color: $white;
+    padding: 10px;
+    text-align: center;
+    margin: 0;
+  }
+
+  li {
+    &:nth-child(2n) {
+      background: #f5f4f5;
+    }
+  }
+}

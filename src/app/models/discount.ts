@@ -16,5 +16,7 @@ export interface Discount {
     name: string,
     address: string
   }];
+  isOrdered: boolean;
+  address: string;
   tags: string[];
 }

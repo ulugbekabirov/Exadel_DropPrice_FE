@@ -11,6 +11,7 @@ export interface SortState {
   searchQuery: string;
   skip: number;
   take: number;
+  totalNumberOfVendors: number;
 }
 
 const SEARCH_INITIAL_STATE = {
@@ -21,6 +22,7 @@ const SEARCH_INITIAL_STATE = {
   searchQuery: '',
   skip: 0,
   take: 10,
+  totalNumberOfVendors: 0,
 };
 
 @Injectable({

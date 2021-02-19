@@ -1,0 +1,14 @@
+<div class="saved-list">
+  <h3>
+    <ng-content></ng-content>
+  </h3>
+  <ul>
+    <li *ngFor="let discount of discounts$ | async">
+      <app-saved-list-item
+        [discount]="discount"
+        (changeFavourites)="getToggleFavourites($event)"
+        (requestTicket)="requestTicket($event)"
+      ></app-saved-list-item>
+    </li>
+  </ul>
+</div>

@@ -32,6 +32,7 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { RouterModule } from '@angular/router';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { TicketComponent } from './components/ticket/ticket.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { TicketComponent } from './components/ticket/ticket.component';
     DiscountsListItemComponent,
     SearchBarComponent,
     TicketComponent,
+    LoadingSpinnerComponent,
   ],
 
   imports: [
@@ -107,6 +109,7 @@ import { TicketComponent } from './components/ticket/ticket.component';
     SearchBarComponent,
     MatTooltipModule,
     MatDialogModule,
+    LoadingSpinnerComponent,
   ],
   entryComponents: [MapComponent],
 })

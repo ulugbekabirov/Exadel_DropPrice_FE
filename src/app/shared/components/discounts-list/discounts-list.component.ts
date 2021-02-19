@@ -6,8 +6,8 @@ import { Discount, LocationCoords, Town } from '../../../models';
   templateUrl: './discounts-list.component.html',
   styleUrls: ['./discounts-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
-
 })
+
 export class DiscountsListComponent {
   @Output() locationChange = new EventEmitter<any>();
   @Output() sortChange = new EventEmitter<any>();
