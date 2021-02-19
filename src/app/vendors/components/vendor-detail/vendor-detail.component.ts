@@ -9,6 +9,7 @@ import { TicketService } from '../../../services/ticket.service';
 import { RefDirective } from '../../../directives/ref.directive';
 import { UserService } from '../../../services/user.service';
 import { VendorsService } from '../../../services/vendors.service';
+import { UserFacadeService } from '../../../user-profile/services/user-facade.service';
 
 @Component({
   selector: 'app-vendor-detail',
@@ -35,7 +36,6 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
   };
   private unsubscribe$ = new Subject<void>();
 
-
   @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
 
   constructor(
@@ -45,6 +45,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
     private vendorsService: VendorsService,
     private ticketService: TicketService,
     private userService: UserService,
+    private userFacade: UserFacadeService,
   ) {
   }
 
@@ -78,10 +79,6 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
       this.towns = towns;
       this.vendorDiscounts = vendDisc;
     });
-  }
-
-  onEditVendor(vendorId: number): void {
-    this.router.navigate(['/vendors/edit', vendorId]);
   }
 
   selectVendor(vendorId: any): void {
@@ -126,7 +123,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
   }
 
   getTicket(discountId: number): void {
-    this.ticketService.getTicket(discountId, this.refDir);
+    this.userFacade.orderTicket(discountId, this.refDir);
   }
 
   onLocationChange({value: {latitude, longitude}}): void {
