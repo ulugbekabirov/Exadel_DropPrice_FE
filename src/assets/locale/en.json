@@ -77,7 +77,7 @@
     "WEBSITE_LABEL": "Vendor website",
     "OTHER_SOCIAL_NETWORK_LABEL": "Other social networks",
     "VALID_SOCIAL_NETWORK": "Please enter a valid url address",
-    "BTN_TITLE": "Add"
+    "BTN_TITLE": "Save"
   },
   "TICKET": {
     "TITLE": "Ticket",

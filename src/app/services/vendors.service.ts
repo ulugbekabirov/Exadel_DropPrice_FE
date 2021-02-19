@@ -22,8 +22,8 @@ export class VendorsService {
     return this.restApi.searchVendors(options);
   }
 
-  postVendor(vendor): any {
-    return this.restApi.postVendor(vendor);
+  createVendor(vendor): any {
+    return this.restApi.createVendor(vendor);
   }
 
   getVendorById(vendorId): Observable<any> {
@@ -32,6 +32,10 @@ export class VendorsService {
 
   getVendors(): Observable<Vendor[]> {
     return this.restApi.getVendors();
+  }
+
+  updateVendor(vendor, vendorId): Observable<any> {
+    return this.restApi.updateVendor(vendor, vendorId);
   }
 
   getVendorsDiscounts(vendorId, params): Observable<any> {
