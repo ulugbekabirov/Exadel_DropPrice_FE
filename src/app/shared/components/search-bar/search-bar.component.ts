@@ -34,6 +34,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   @Input() tags: Tag[];
   @Output() searchQueryChange = new EventEmitter<any>();
 
+  //TODO - Refactor
   ngOnChanges(changes: any): void {
     const tagsCurrenValue = changes.tags.currentValue;
     if (tagsCurrenValue && tagsCurrenValue.length) {
