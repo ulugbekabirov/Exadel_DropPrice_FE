@@ -1,5 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription, forkJoin, Subject } from 'rxjs';
+import { startWith, debounceTime, switchMap, takeUntil } from 'rxjs/operators';
 import {
   AbstractControl,
   FormArray,
@@ -9,26 +11,22 @@ import {
   Validators,
   ValidationErrors,
   FormArrayName,
+  FormGroupName,
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { DiscountsService } from '../../services/discounts.service';
 
-import { Vendor } from '../../models';
-
-import { startWith, debounceTime, switchMap } from 'rxjs/operators';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { COMMA, ENTER, V } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
-import { MapComponent } from './../map/map.component';
-
-import { ActivatedRoute, Router } from '@angular/router';
-import { Discount } from './../../models/discount';
-
+import { DiscountsService } from '../../services/discounts.service';
 import { VendorsService } from '../../services/vendors.service';
 
+import { MapComponent } from './../map/map.component';
 
+import { Discount } from './../../models/discount';
+import { Vendor } from '../../models';
 export interface Tag {
   name: string;
 }
@@ -53,6 +51,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
   vendorsList: Vendor[];
   filteredList: Vendor[];
   private subscription: Subscription;
+  private unsubscribe$ = new Subject<void>();
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocompleteModule;
@@ -89,7 +88,6 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
       activityStatus: [true, [Validators.requiredTrue]],
       pointOfSales: this.fb.array([], Validators.required),
     });
-    this.addPoint();
     this.vendorNameDetectChanges();
 
     if((this.router.url).includes('edit')) {
@@ -97,9 +95,15 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
       .pipe(
         switchMap((params: any) => {
           this.discId = +params.get("id");
-          return this.discountsService.getDiscountById(this.discId, {});
+          return forkJoin (
+          this.discountsService.getDiscountById(this.discId, {}),
+          this.discountsService.getPointsOfSalesByDiscountId(this.discId)
+          );
         }),
-      ).subscribe((discount) => {
+        takeUntil(this.unsubscribe$)
+      ).subscribe(([discount, points]) => {
+        console.log(discount)
+        console.log(points)
         this.newDiscountForm.patchValue({
           vendorName: discount.vendorName,
           discountName: discount.discountName,
@@ -107,7 +111,8 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
           discountAmount: discount.discountAmount,
           promoCode: discount.promoCode,
           startDate: discount.startDate,
-          endDate: discount.endDate,    
+          endDate: discount.endDate,
+          pointOfSales: points
         });
   
         if(discount.tags) {
@@ -117,8 +122,17 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
             )
           }
         }
+        //todo 
+      //  console.log(this.pointOfSalesForms.value)
+      //   if(points) {
+      //     for(let point of points) {
+      //       (<FormArray>this.newDiscountForm.get('pointOfSales')).push(
+      //       (new FormControl(point, Validators.required)))
+      //     }
+      //   }
+      //   console.log(this.pointOfSalesForms.value)
       })
-    }
+    }else this.addPoint();
   }
 
   vendorNameDetectChanges(): void {
@@ -181,6 +195,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
       address: ['', [Validators.required]],
     });
     this.pointOfSalesForms.push(point);
+    console.log(this.pointOfSalesForms.value)
   }
 
   deletePoint(currentSaleObj): void {
@@ -208,14 +223,21 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
   }
 
   submit(): void {
-    const newDiscount = this.newDiscountForm.value;
-    this.discountsService.postDiscount(newDiscount)
-      .subscribe(res => console.log('res', res));
+    const reqDiscountModel: Discount = this.newDiscountForm.value;
+    console.log(reqDiscountModel)
+    if ((this.router.url).includes('edit')) {
+      const updateDiscount: Discount = reqDiscountModel;
+      this.discountsService.updateDiscount(updateDiscount, this.discId).subscribe();
+      console.log(updateDiscount)
+    } else {
+      const newDiscount: Discount = reqDiscountModel;
+      this.discountsService.createDiscount(newDiscount)
+        .subscribe(res => console.log('res', res));
+    }
     this.newDiscountForm.reset();
     for (const control in this.newDiscountForm.controls) {
       this.newDiscountForm.controls[control].setErrors(null);
     }
-
     this.pointOfSalesForms.controls = [];
     this.tags.controls = [];
   }

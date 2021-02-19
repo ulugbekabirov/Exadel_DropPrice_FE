@@ -210,6 +210,7 @@
             mat-flat-button
             matTooltip="Edit Discount"
             routerLink="edit"
+            (click)="onEditDiscount(discount.discountId)"
     >
       {{ "DISCOUNT_DETAIL.EDIT_BUTTON_LABEL" | translate }}
     </button>

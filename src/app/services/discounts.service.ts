@@ -70,13 +70,13 @@ export class DiscountsService {
     return this.restApi.putDiscountInArchive(discountId);
   }
 
-  postDiscount(discount): any {
-    return this.restApi.postDiscount(discount);
+  createDiscount(discount): any {
+    return this.restApi. createDiscount(discount);
   }
 
-  updateDiscount(id:number):any {
-   return this.restApi.updateIsSavedDiscount(id);
-  }
+  updateDiscount(discount, id:number):any {
+    return this.restApi.updateDiscount(discount, id);
+   }
 
   searchStatsDiscount(terms): any {
     const paramsObj = {};

@@ -84,8 +84,12 @@ export class ApiDataService {
     return this.http.put(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${id}/${PUT_ARCHIVE_DISCOUNTS_ENDPOINT}`, null);
   }
 
-  postDiscount(discount): any {
+  createDiscount(discount): any {
     return this.http.post(`${environment.webApiUrl}${POST_DISCOUNTS_ENDPOINT}`, discount);
+  }
+
+  updateDiscount(discount, id):any {
+    return this.http.put(`${environment.webApiUrl}${POST_DISCOUNTS_ENDPOINT}/${id}`,discount);
   }
 
   postVendor(vendor): any {

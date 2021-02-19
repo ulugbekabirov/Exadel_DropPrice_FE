@@ -71,6 +71,10 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
       });
   }
 
+  onEditDiscount(discountId){
+    this.router.navigate(['discounts/edit', discountId])
+  }
+
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
