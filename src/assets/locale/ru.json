@@ -201,7 +201,8 @@
     },
     "TICKET_BUTTON": {
       "SHOW_TICKET": "Показать Талон",
-      "ORDER_TICKET": "Заказать Талон"
+      "ORDER_TICKET": "Заказать Талон",
+      "DISCOUNT_INACTIVE": "Скидка не доступна"
     }
   }
 }

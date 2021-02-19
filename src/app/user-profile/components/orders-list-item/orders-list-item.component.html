@@ -46,9 +46,12 @@
               [disabled]="!ticket.discountActivity"
       >
         {{
+        ticket.discountActivity
+          ?
         ticket.isExpired
           ? ("USER_PROFILE.TICKET_BUTTON.ORDER_TICKET" | translate)
           : ("USER_PROFILE.TICKET_BUTTON.SHOW_TICKET" | translate)
+          : ("USER_PROFILE.TICKET_BUTTON.DISCOUNT_INACTIVE" | translate)
         }}
       </button>
     </div>

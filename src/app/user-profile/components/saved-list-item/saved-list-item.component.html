@@ -54,9 +54,12 @@
               [disabled]="!discount.activityStatus"
       >
         {{
+        discount.activityStatus
+          ?
         discount.isOrdered
           ? ("USER_PROFILE.TICKET_BUTTON.SHOW_TICKET" | translate)
           : ("USER_PROFILE.TICKET_BUTTON.ORDER_TICKET" | translate)
+          : ("USER_PROFILE.TICKET_BUTTON.DISCOUNT_INACTIVE" | translate)
         }}
       </button>
     </div>

@@ -200,7 +200,8 @@
     },
     "TICKET_BUTTON": {
       "SHOW_TICKET": "Show Ticket",
-      "ORDER_TICKET": "Order Ticket"
+      "ORDER_TICKET": "Order Ticket",
+      "DISCOUNT_INACTIVE": "Not available"
     }
   }
 }
