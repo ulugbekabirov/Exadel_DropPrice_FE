@@ -6,7 +6,7 @@
              fxLayoutGap="1em"
     >
       <h3 class="vendors-detail__header_title">
-        {{'Рейтинг вендора: '}}
+        {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_RATING_LABEL" | translate}}
       </h3>
       <div class="vendors-detail__header_rating"
            fxLayout="row"
@@ -25,32 +25,28 @@
       </div>
     </section>
     <section class="vendors-detail__content">
-      <mat-card class="vendor-content">
+      <div class="vendor-content">
         <div class="vendor-content__field">
           <p class="vendor-content__field_label"
           >
-            {{'Наименование вендора:'}}
+            {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_NAME" | translate}}
           </p>
-          <mat-form-field class="vendor-content__field">
-<!--            <mat-label>-->
-<!--              {{vendor?.vendorName}}-->
-<!--            </mat-label>-->
-            <mat-select
-              [formControl]="foodControl"
-              (selectionChange)="selectVendor($event)"
+
+          <select
+            [(ngModel)]="selectedVendorId"
+            (change)="selectVendor(selectedVendorId)"
+          >
+            <option *ngFor="let vend of vendorsList" [value]="vend.vendorId"
+                    [selected]="vend.vendorId === selectedVendorId"
             >
-
-              <mat-option>None</mat-option>
-              <mat-option *ngFor="let vend of vendors" [value]="vend.vendorId">
-                {{vend.vendorName}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+              {{vend.vendorName}}
+            </option>
+          </select>
         </div>
-
         <div class="vendor-content__field">
           <p class="vendor-content__field_label">
-            {{'Адрес:'}}
+            {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_ADDRESS" | translate}}
+
           </p>
           <p class="vendor-content__field_text">
             {{vendor?.address}}
@@ -58,7 +54,7 @@
         </div>
         <div class="vendor-content__field">
           <p class="vendor-content__field_label">
-            {{'Электронная почта:'}}
+            {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_EMAIL" | translate}}
           </p>
           <p class="vendor-content__field_text">
             {{vendor?.email}}
@@ -66,7 +62,8 @@
         </div>
         <div class="vendor-content__field">
           <p class="vendor-content__field_label">
-            {{'Контактный телефон:'}}
+            {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_PHONE" | translate}}
+
           </p>
           <p class="vendor-content__field_text">
             {{vendor?.phone}}
@@ -74,14 +71,22 @@
         </div>
         <div class="vendor-content__field">
           <p class="vendor-content__field_label">
-            {{'Социальные сети:'}}
-          </p>
-          <p class="vendor-content__field_text">
-            {{vendor?.socials}}
-          </p>
-        </div>
-      </mat-card>
+            {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_SOCIALS" | translate}}
 
+          </p>
+          <ul class="vendor-content__field_text">
+            <li *ngFor="let social of vendorSocials">
+              <a
+                href="{{social.path}}"
+                target="_blank"
+                title="{{social.name}}"
+              >
+                {{social.name}}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </section>
     <section class="vendors-detail__actions">
       <button *appVerifyUserRoles='["Moderator"]'
@@ -89,7 +94,7 @@
               mat-flat-button
               matTooltip="Edit Discount"
       >
-        {{'Редактировать'}}
+        {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_ACTIONS.EDIT" | translate}}
       </button>
     </section>
   </article>

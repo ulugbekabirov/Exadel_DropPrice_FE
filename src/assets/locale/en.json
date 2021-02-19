@@ -110,7 +110,7 @@
     "PLACEHOLDER_PROMO_CODE": "Enter your promo code",
     "PLACEHOLDER_START_DATE": "start",
     "PLACEHOLDER_END_DATE": "end",
-    "PLACEHOLDER_NEW_TAG": "Enter a new tag",
+    "PLACEHOLDER_NEW_TAG": "Enter a new tag and press 'Enter'",
     "DATE_START_END": "Validity period*",
     "START_DATE_ERROR": "Invalid start date",
     "END_DATE_ERROR": "Invalid end date",
@@ -140,5 +140,53 @@
     "EDIT_BUTTON_LABEL": "Edit",
     "ARCHIVE_BUTTON_LABEL": "Archive",
     "TICKET_BUTTON_LABEL": "Ticket"
+  },
+  "VENDOR_PAGE": {
+    "PAGE_TITLE": "About vendor",
+    "VENDOR_DETAIL": {
+      "DETAIL_RATING_LABEL": "Vendor rating",
+      "DETAIL_CONTENT": {
+        "VENDOR_NAME": "Vendor Name",
+        "VENDOR_ADDRESS": "Address",
+        "VENDOR_EMAIL": "E-Mail",
+        "VENDOR_PHONE": "Phone",
+        "VENDOR_SOCIALS": "Socials"
+      },
+      "DETAIL_ACTIONS": {
+        "EDIT": "Edit"
+      }
+    }
+  },
+  "BUTTON_BACK_LOCATION": "go back",
+  "ADMIN_DASHBOARD": {
+    "SETTINGS": "Change",
+    "SIDEBAR": {
+      "ADMIN": "Statistics",
+      "SETTINGS": "Settings",
+      "VENDORS": "Vendors",
+      "DISCOUNTS": "Discounts",
+      "OPTIONS": "Options",
+      "COLLAPSE": "Collapse"
+    },
+    "SORT": {
+      "LABEL": {
+        "RATING": "Sort by rating",
+        "TICKET": "Sort by tickets"
+      },
+      "ASC": "ascending",
+      "DESC": "descending"
+    },
+    "STATS": {
+      "TABLE": {
+        "NAME": "Name",
+        "RATING": "Rating",
+        "TICKETS": "Tickets",
+        "EMAIL": "E-mail"
+      }
+    },
+    "SEARCH": {
+      "SEARCH_BY": "Search by"
+    },
+    "CONTENT": ""
   }
 }

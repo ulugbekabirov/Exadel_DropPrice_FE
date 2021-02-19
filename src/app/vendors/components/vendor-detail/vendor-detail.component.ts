@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { switchMap, takeUntil, tap } from 'rxjs/operators';
-import { ActivatedRoute, Router } from '@angular/router';
+import { switchMap, takeUntil } from 'rxjs/operators';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { DiscountsService } from '../../../services/discounts.service';
-import { forkJoin, Observable, Subject } from 'rxjs';
-import { ActiveUser, Discount, LocationCoords, Tag, Town, Vendor } from '../../../models';
+import { forkJoin, Subject } from 'rxjs';
+import { Discount, Town, Vendor } from '../../../models';
 import { SORT_BY } from '../../../../constants';
 import { TicketService } from '../../../services/ticket.service';
 import { RefDirective } from '../../../directives/ref.directive';
 import { UserService } from '../../../services/user.service';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { VendorsService } from '../../../services/vendors.service';
 
 @Component({
   selector: 'app-vendor-detail',
@@ -17,60 +17,49 @@ import { FormBuilder, FormControl } from '@angular/forms';
 })
 export class VendorDetailComponent implements OnInit, OnDestroy {
   sortBy = SORT_BY;
-  activeUser: ActiveUser;
-  tags: Tag[];
   towns: Town[];
   vendor: Vendor;
-  activeUser$: Observable<ActiveUser>;
-  activeCoords: LocationCoords;
-  private unsubscribe$ = new Subject<void>();
-  private vendorRating;
-  vendors: Vendor[];
-  vendors$: Observable<Vendor[]>;
+  vendorSocials;
+  selectedVendorId;
+  vendorDiscounts: Discount[];
+  activeCoords = {
+    longitude: this.userService.activeUserValue.longitude,
+    latitude: this.userService.activeUserValue.latitude,
+  };
+  vendorsList: Vendor[];
   reqOpt = {
     skip: 0,
     take: 10,
-    longitude: 23.8026752,
-    latitude: 53.68,
+    longitude: this.userService.activeUserValue.officeLongitude,
+    latitude: this.userService.activeUserValue.officeLatitude,
     sortBy: 'DistanceAsc',
   };
-  vendorDiscounts;
-  selectedValue = null;
-  foodControl;
+  private unsubscribe$ = new Subject<void>();
+
 
   @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private discountsService: DiscountsService,
+    private vendorsService: VendorsService,
     private ticketService: TicketService,
     private userService: UserService,
-    private fb: FormBuilder,
   ) {
   }
 
   ngOnInit(): void {
-
-    this.vendors$ = this.discountsService.getVendors();
-    const towns$ = this.discountsService.getTowns();
-    const tags$ = this.discountsService.getTags(0, 10);
     this.route.paramMap
       .pipe(
-        switchMap((params): any => {
-
-          // return this.discountsService.getVendorById(+params.get('id'));
+        switchMap((params: ParamMap): any => {
+          const vendId: number = +params.get('id');
           return forkJoin(
-            this.discountsService.getVendorById(+params.get('id')),
-            this.vendors$,
-            towns$,
-            this.discountsService.getVendorsDiscounts(+params.get('id'), this.reqOpt)
+            this.vendorsService.getVendorById(vendId),
+            this.vendorsService.getVendors(),
+            this.discountsService.getTowns(),
+            this.vendorsService.getVendorsDiscounts(vendId, this.reqOpt)
           );
-        }),
-        tap(([vendor, vendors, towns, vendDisc]) => {
-          console.log(vendor);
-          console.log(vendors);
-          console.log(towns);
-          console.log(vendDisc);
         }),
         takeUntil(this.unsubscribe$)
       ).subscribe(([vendor, vendors, towns, vendDisc]) => {
@@ -78,23 +67,22 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
         return;
       }
       this.vendor = vendor;
-      this.vendors = vendors;
+      const json = JSON.parse(this.vendor.socialLinks);
+      this.vendorSocials = Object.keys(json).map(key => ({name: key, path: json[key]}));
+      this.selectedVendorId = vendor.vendorId;
+      this.vendorsList = vendors;
       this.towns = towns;
-      this.foodControl = new FormControl(this.vendor.vendorName);
-      this.selectedValue = vendor;
       this.vendorDiscounts = vendDisc;
-      console.log(this.vendor);
     });
   }
 
-  selectVendor({value}: any): void {
-    console.log(value);
+  selectVendor(value: any): void {
     if (!value) {
       return;
     }
     forkJoin(
-      this.discountsService.getVendorById(value),
-      this.discountsService.getVendorsDiscounts(value, this.reqOpt)
+      this.vendorsService.getVendorById(value),
+      this.vendorsService.getVendorsDiscounts(value, this.reqOpt)
     )
       .pipe(
         takeUntil(this.unsubscribe$),
@@ -111,7 +99,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
         this.reqOpt.latitude = res.latitude;
         this.reqOpt.longitude = res.longitude;
       }).then(res => {
-      this.discountsService.getVendorsDiscounts(this.vendor.vendorId, this.reqOpt).pipe(
+      this.vendorsService.getVendorsDiscounts(this.vendor.vendorId, this.reqOpt).pipe(
         takeUntil(this.unsubscribe$)
       )
         .subscribe(data => this.vendorDiscounts = data);
@@ -133,7 +121,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
 
   onSortChange({value: {sortBy}}): void {
     this.reqOpt.sortBy = sortBy;
-    this.discountsService.getVendorsDiscounts(this.vendor.vendorId, this.reqOpt).pipe(
+    this.vendorsService.getVendorsDiscounts(this.vendor.vendorId, this.reqOpt).pipe(
       takeUntil(this.unsubscribe$)
     )
       .subscribe(res => this.vendorDiscounts = res);
@@ -146,9 +134,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
   onLocationChange({value: {latitude, longitude}}): void {
     this.reqOpt.latitude = latitude;
     this.reqOpt.longitude = longitude;
-    console.log(this.vendor.vendorId);
-    console.log(this.reqOpt);
-    this.discountsService.getVendorsDiscounts(this.vendor.vendorId, this.reqOpt).pipe(
+    this.vendorsService.getVendorsDiscounts(this.vendor.vendorId, this.reqOpt).pipe(
       takeUntil(this.unsubscribe$)
     )
       .subscribe(res => this.vendorDiscounts = res);
@@ -158,5 +144,4 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
-
 }

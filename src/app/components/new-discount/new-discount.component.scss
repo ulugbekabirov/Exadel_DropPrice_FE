@@ -1,3 +1,5 @@
+@import "src/variables";
+
 .new-discount-wrapper {
   background: #DEEBFA;
 }
@@ -94,9 +96,14 @@ mat-icon{
   .form__discount-details {
     width: 100%;;
   }
-  .mat-form-field-infix {
-    display: contents;
-  }
+}
+
+.snackbar-color-success {
+  background-color: $snackbar-color-success;
+}
+
+.snackbar-color-error {
+  background-color: $snackbar-color-error;
 }
 
 @media screen and (max-width: 960px) {

@@ -30,7 +30,7 @@
               matInput
               formControlName="vendorName"
               [matAutocomplete]="auto"
-              
+
               placeholder="{{
                 'NEW_DISCOUNT_FORM.PLACEHOLDER_VENDOR_NAME' | translate
               }}"
@@ -68,7 +68,7 @@
           }}</mat-label>
           <textarea
             class="form__discount-description"
-            formControlName="descriptionDiscount"
+            formControlName="description"
             matInput
             #description
             maxlength="5000"
@@ -162,7 +162,7 @@
           </div>
         </div>
 
-        <mat-form-field class="chip-list" fxLayout="row" formArrayName="tags">
+        <mat-form-field class="chip-list" formArrayName="tags">
           <mat-label>{{
             "NEW_DISCOUNT_FORM.LABEL_TAGS" | translate
           }}</mat-label>
@@ -188,12 +188,12 @@
             </mat-chip>
           </mat-chip-list>
         </mat-form-field>
-
+       
         <div class="points_title">
           <h4>{{ "NEW_DISCOUNT_FORM.POINTS_TITLE" | translate }}</h4>
         </div>
 
-        <div formArrayName="pointsOfSales">
+        <div formArrayName="pointOfSales">
           <div
             *ngFor="let point of pointOfSalesForms.controls; let i = index"
             [formGroupName]="i"
@@ -203,11 +203,22 @@
               fxLayoutAlign="start center"
               fxLayout.xs="center center"
             >
+
               <mat-form-field class="point__name">
-                <mat-label>{{
-                  "NEW_DISCOUNT_FORM.NAME_LABEL" | translate
-                }}</mat-label>
-                <input matInput formControlName="name" />
+                <mat-label>{{ "NEW_DISCOUNT_FORM.NAME_LABEL" | translate }}</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  formControlName="name"
+                  [matAutocomplete]="auto"/>
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option
+                    *ngFor="let option of filteredPointNameList"
+                    [value]="option.name"
+                  >
+                    {{ option.name }}
+                  </mat-option>
+                </mat-autocomplete>
               </mat-form-field>
 
               <mat-form-field class="point__address">
@@ -262,7 +273,7 @@
         </div>
 
         <button
-          mat-flat-button
+          mat-raised-button
           color="primary"
           [disabled]="!newDiscountForm.valid || coordinateIsEmpty"
           type="submit"

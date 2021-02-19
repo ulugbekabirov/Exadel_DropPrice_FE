@@ -1,0 +1,12 @@
+<article class="admin-dashboard"
+         ngClass="{{collapseSidebar ? 'collapsed' : ''}}"
+>
+  <div class="admin-dashboard__sidebar">
+    <app-admin-sidebar
+      (changeCollapse)="onWidthChange($event)"
+    ></app-admin-sidebar>
+  </div>
+  <div class="admin-dashboard__outlet">
+    <router-outlet></router-outlet>
+  </div>
+</article>

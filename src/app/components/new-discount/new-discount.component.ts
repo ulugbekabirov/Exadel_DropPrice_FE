@@ -1,5 +1,5 @@
-import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit, ElementRef, ViewChild, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Subscription } from 'rxjs';
 import {
   AbstractControl,
   FormArray,
@@ -11,12 +11,18 @@ import {
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { DiscountsService } from '../../services/discounts.service';
-import { Vendor } from '../../models';
+import { Vendor, Discount } from '../../models';
 
-import { map, startWith, debounceTime, filter} from 'rxjs/operators';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { throwError } from 'rxjs';
+import { startWith, debounceTime, catchError } from 'rxjs/operators';
+import { ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MapComponent } from './../map/map.component';
+import { VendorsService } from '../../services/vendors.service';
+
 export interface Tag {
   name: string;
 }
@@ -24,21 +30,24 @@ export interface Tag {
   selector: 'app-new-discount',
   templateUrl: './new-discount.component.html',
   styleUrls: ['./new-discount.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NewDiscountComponent implements OnInit, OnDestroy {
   newDiscountForm: FormGroup;
-  hide = true;
+  coordinateIsEmpty = true;
   tagsArray: Tag[] = [];
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  readonly separatorKeysCodes: number[] = [ENTER];
   isChecked = true;
-  coordinateIsEmpty = true;
+
   vendorsList: Vendor[];
   filteredList: Vendor[];
-  filteredVendors: Observable<Vendor[]>;
+  pointNameList: Discount[];
+  filteredPointNameList: Discount[];
+
   private subscription: Subscription;
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
@@ -47,30 +56,44 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
   constructor(
     public translateService: TranslateService,
     public fb: FormBuilder,
-    private discountService: DiscountsService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
+    private discountsService: DiscountsService,
+    private vendorsService: VendorsService,
   ) {}
 
   ngOnInit(): void {
 
-    this.subscription = this.discountService.getVendors()
+    this.subscription = this.vendorsService.getVendors()
       .subscribe(res => {
         this.vendorsList = this.filteredList = res;
+      });
+
+    this.subscription = this.discountsService.getPointOfSales()
+      .subscribe(res => {
+        this.pointNameList = this.filteredPointNameList = res.sort((a, b) => {
+          return a.name < b.name ? -1 : 1;
+        });
       });
 
     this.newDiscountForm = this.fb.group({
       vendorName: ['', [Validators.required, this.requireMatch.bind(this)]],
       discountName: ['', [Validators.required]],
-      descriptionDiscount: ['', [Validators.required]],
-      discountAmount: ['', [Validators.required, Validators.min(1), Validators.max(100)]],
+      description: ['', [Validators.minLength(40), Validators.required]],
+      discountAmount: [
+        '',
+        [Validators.required, Validators.min(1), Validators.max(100)],
+      ],
       promoCode: [''],
       startDate: ['', [Validators.required]],
       endDate: ['', [Validators.required]],
       tags: this.fb.array([], Validators.required),
       activityStatus: [true, [Validators.requiredTrue]],
-      pointsOfSales: this.fb.array([], Validators.required),
+      pointOfSales: this.fb.array([], Validators.required),
     });
-
+    this.addPoint();
     this.vendorNameDetectChanges();
+    // this.pointOfSalesDetectChanges();
   }
 
   vendorNameDetectChanges(): void {
@@ -84,17 +107,40 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
             this.filteredList = this.vendorsList;
             return;
           }
-          this.filteredList = this.vendorsList.filter(value => value.vendorName.includes(data) );
+          this.filteredList = this.vendorsList.filter(value => value.vendorName.includes(data));
         });
   }
 
   private requireMatch(control: AbstractControl): ValidationErrors | null {
     const selection: any = control.value;
-    if (this.vendorsList && this.vendorsList.find(x => x.vendorName.includes(selection))) {
+    if (this.vendorsList && this.vendorsList.find(item => item.vendorName.includes(selection))) {
       return null;
     }
     return { requireMatch: true };
   }
+
+  //TODO add filter of points
+  // pointOfSalesDetectChanges(): void {
+  //   const pointOfSalesControl = this.newDiscountForm.controls.pointOfSales as FormArray;
+  //   pointOfSalesControl.valueChanges.subscribe(
+  //     (data) => {
+  //       if (!this.pointNameList || !data) {
+  //         this.filteredPointNameList = this.pointNameList;
+  //         return;
+  //       }
+  //       this.filteredPointNameList = this.pointNameList.filter(value => value.pointOfSales.includes(data));
+  //       console.log(this.filteredPointNameList);
+  //       console.log(data);
+  //     })
+  // }
+
+  // private requireMatchPoint(control: AbstractControl): ValidationErrors | null {
+  //   const selection: any = control.value;
+  //   if (this.pointNameList && this.pointNameList.find(item => item.pointOfSales.includes(selection))) {
+  //     return null;
+  //   }
+  //   return { requireMatchPoint: true };
+  // }
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -128,7 +174,6 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
   }
 
   addPoint(): void {
-    this.hide = false;
     const point = this.fb.group({
       name: ['', [Validators.required]],
       address: ['', [Validators.required]],
@@ -136,22 +181,64 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     this.pointOfSalesForms.push(point);
   }
 
-  deletePoint(i): void {
-    this.pointOfSalesForms.removeAt(i);
+  deletePoint(currentSaleObj): void {
+    this.pointOfSalesForms.removeAt(currentSaleObj);
+    this.coordinateIsEmpty = true;
   }
 
-  addLocation(i): void {
-    console.log(`ADD location to ${i} object`);
+  openDialog(currentSaleObj): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.minHeight = '400px';
+    dialogConfig.minWidth = '100%';
+    dialogConfig.direction = 'rtl';
+
+    dialogConfig.data = {
+      latitude: this.pointOfSalesForms.value[currentSaleObj].latitude,
+      longitude: this.pointOfSalesForms.value[currentSaleObj].longitude,
+    };
+
+    const dialogRef = this.dialog.open(MapComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((data) => {
+      Object.assign(this.pointOfSalesForms.value[currentSaleObj], data);
+    });
+    this.coordinateIsEmpty = false;
+  }
+
+  successSnackBar(message: string, action: any) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      panelClass: ['snackbar-color-success'],
+      horizontalPosition: 'center'
+    });
+  }
+
+  errorSnackBar(message: string, action: any) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      panelClass: ['snack-bar-color-error'],
+      horizontalPosition: 'center'
+    });
   }
 
   submit(): void {
-    this.newDiscountForm.value;
-    this.newDiscountForm.reset();
+    const newDiscount = this.newDiscountForm.value;
+    this.discountsService.postDiscount(newDiscount)
+      .pipe(
+        catchError(error => {
+          this.errorSnackBar("Not saved!", '');
+          return throwError(error);
+        })
+      )
+      .subscribe(
+        () => this.successSnackBar("Successfully saved!", '')
+      );
 
+    this.newDiscountForm.reset();
     for (const control in this.newDiscountForm.controls) {
       this.newDiscountForm.controls[control].setErrors(null);
     }
-
+    this.pointOfSalesForms.controls = [];
     this.tags.controls = [];
   }
 
@@ -163,8 +250,8 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     return this.newDiscountForm.get('discountName');
   }
 
-  get descriptionDiscount(): AbstractControl {
-    return this.newDiscountForm.get('descriptionDiscount');
+  get description(): AbstractControl {
+    return this.newDiscountForm.get('description');
   }
 
   get discountAmount(): AbstractControl {
@@ -200,7 +287,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
   }
 
   get pointOfSalesForms(): FormArray {
-    return this.newDiscountForm.get('pointsOfSales') as FormArray;
+    return this.newDiscountForm.get('pointOfSales') as FormArray;
   }
 
   ngOnDestroy(): void {
