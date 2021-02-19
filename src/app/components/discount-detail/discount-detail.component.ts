@@ -92,22 +92,22 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
 
   countStar(star): void {
     this.selectedValue = star;
-    this.discountsService.putRating(this.discount, this.selectedValue);
+    this.discountsService.putRating(this.discount.discountId, this.selectedValue).subscribe(next => console.log(next));
   }
 
   addClass(star): void {
-     let ab = '';
-     for (let i = 0; i < star; i++) {
-       ab = 'starId' + i;
-       document.getElementById(ab).classList.add('selected');
-     }
+    let ab = '';
+    for (let i = 0; i < star; i++) {
+      ab = 'starId' + i;
+      document.getElementById(ab).classList.add('selected');
+    }
   }
 
   removeClass(star): void {
-     let ab = '';
-     for (let i = star - 1; i >= this.selectedValue; i--) {
-       ab = 'starId' + i;
-       document.getElementById(ab).classList.remove('selected');
-     }
+    let ab = '';
+    for (let i = star - 1; i >= this.selectedValue; i--) {
+      ab = 'starId' + i;
+      document.getElementById(ab).classList.remove('selected');
+    }
   }
 }
