@@ -89,7 +89,6 @@ export class NewVendorComponent implements OnInit, OnDestroy {
       this.vendorsService.createVendor(vendorModel).pipe(
         takeUntil(this.unsubscribe$)
       ).subscribe(res => {
-        console.log(res);
         this.newVendorForm.reset();
         for (const control in this.newVendorForm.controls) {
           this.newVendorForm.controls[control].setErrors(null);
