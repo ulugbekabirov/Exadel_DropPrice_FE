@@ -2,7 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ApiDataService } from '../../../services/api-data.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Setting } from '../../../models/setting';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -15,8 +16,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
   settingEdit: FormGroup = new FormGroup({
     settingValue: new FormControl('', Validators.required)
   });
-  subscription: Subscription;
   settings;
+  private unsubscribe$ = new Subject<void>();
+
 
   constructor(
     private api: ApiDataService,
@@ -24,13 +26,18 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.settings$ = this.api.getApiConfigs().subscribe(next => this.settings = next);
+    this.settings$ = this.api.getApiConfigs().pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe(next => this.settings = next);
   }
 
   changeSetting(configId: number): void {
     const {settingValue} = this.settingEdit.value;
-    this.api.putApiConfig(configId, settingValue).subscribe(
+    this.api.putApiConfig(configId, settingValue).pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe(
       resp => {
+        this.settingEdit.reset();
         this.settings = this.settings.map((config: Setting) => {
           return config.configId === resp.configId
             ? {...config, configValue: resp.configValue}
@@ -41,6 +48,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

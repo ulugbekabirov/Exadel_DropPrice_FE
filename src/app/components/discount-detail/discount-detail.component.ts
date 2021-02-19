@@ -92,7 +92,8 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
 
   countStar(star): void {
     this.selectedValue = star;
-    this.discountsService.putRating(this.discount.discountId, this.selectedValue).subscribe(next => console.log(next));
+    this.discountsService.putRating(this.discount.discountId, this.selectedValue)
+      .subscribe(next => this.router.navigate(['/discounts', this.discount.discountId]));
   }
 
   addClass(star): void {
