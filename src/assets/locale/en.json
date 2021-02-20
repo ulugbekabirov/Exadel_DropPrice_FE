@@ -110,7 +110,7 @@
     "PLACEHOLDER_PROMO_CODE": "Enter your promo code",
     "PLACEHOLDER_START_DATE": "start",
     "PLACEHOLDER_END_DATE": "end",
-    "PLACEHOLDER_NEW_TAG": "Enter a new tag",
+    "PLACEHOLDER_NEW_TAG": "Enter a new tag and press 'Enter'",
     "DATE_START_END": "Validity period*",
     "START_DATE_ERROR": "Invalid start date",
     "END_DATE_ERROR": "Invalid end date",

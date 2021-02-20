@@ -83,10 +83,14 @@ export class DiscountsService {
   }
 
   putRating(discountId, rating): any {
-    const options = {
+    const body = {
       assessmentValue: rating
     };
-    return this.restApi.putRating(discountId, options);
+    return this.restApi.putRating(discountId, body);
+  }
+
+  getPointOfSales(): Observable<any> {
+    return this.restApi.getPointOfSales();
   }
 
   getUserSavedDiscounts(opt): Observable<any> {

@@ -7,6 +7,7 @@ import {
   GET_DISCOUNTS_ENDPOINT,
   GET_TAGS_ENDPOINT,
   GET_TICKET_ENDPOINT,
+  GET_POINT_OF_SALES,
   GET_TOWNS_ENDPOINT,
   GET_VENDOR_DISCOUNTS_ENDPOINT,
   GET_VENDORS_ENDPOINT,
@@ -82,6 +83,10 @@ export class ApiDataService {
     return this.http.get(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}/${GET_VENDOR_DISCOUNTS_ENDPOINT}`, options);
   }
 
+  getPointOfSales(): Observable<any>  {
+    return this.http.get(`${environment.webApiUrl}${GET_POINT_OF_SALES}`);
+  }
+
   putDiscountInArchive(id): Observable<any> {
     return this.http.put(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${id}/${PUT_ARCHIVE_DISCOUNTS_ENDPOINT}`, null);
   }
@@ -113,8 +118,8 @@ export class ApiDataService {
     });
   }
 
-  putRating(discountId, options): any {
-    return this.http.put(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${discountId}/${PUT_ASSESS_DISCOUNTS_ENDPOINT}`, options);
+  putRating(discountId, body): any {
+    return this.http.put(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${discountId}/${PUT_ASSESS_DISCOUNTS_ENDPOINT}`, body);
   }
 
   getUserSavedDiscounts(options): Observable<any> {

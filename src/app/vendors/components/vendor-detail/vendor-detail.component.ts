@@ -81,6 +81,10 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
     });
   }
 
+  onEditVendor(vendorId: number): void {
+    this.router.navigate(['/vendors/edit', vendorId]);
+  }
+
   selectVendor(vendorId: any): void {
     if (!vendorId) {
       return;
