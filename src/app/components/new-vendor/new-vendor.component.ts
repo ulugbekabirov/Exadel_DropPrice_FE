@@ -111,7 +111,7 @@ export class NewVendorComponent implements OnInit, OnDestroy {
     const vendor = this.newVendorForm.value;
     const vendorModel = {...vendor, socialLinks: JSON.stringify(vendor.socialLinks)};
     if (this.isEditMode) {
-      this.updateVendor(vendor, this.vendId);
+      this.updateVendor(vendorModel, this.vendId);
     } else {
       this.createNewVendor(vendorModel);
     }
