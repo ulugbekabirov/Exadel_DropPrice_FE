@@ -70,13 +70,8 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
       });
   }
 
-  onEditDiscount(discountId){
-    this.router.navigate(['discounts/edit', discountId])
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+  onEditDiscount(discountId): void{
+    this.router.navigate(['discounts/edit', discountId]);
   }
 
   archiveDiscount(discountId: number): void {
@@ -90,5 +85,10 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
 
   goBack(): void {
     this.location.back();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

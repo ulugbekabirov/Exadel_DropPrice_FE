@@ -51,15 +51,13 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
   readonly separatorKeysCodes: number[] = [ENTER];
   isChecked = true;
   discId: number;
+  private unsubscribe$ = new Subject<void>();
   isEditMode: boolean = (this.router.url).includes('edit');
 
   vendorsList: Vendor[];
   filteredList: Vendor[];
   pointNameList: Discount[];
   filteredPointNameList: Discount[];
-
-  private subscription: Subscription;
-  private unsubscribe$ = new Subject<void>();
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocompleteModule;
@@ -78,17 +76,19 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.subscription = this.vendorsService.getVendors()
-      .subscribe(res => {
-        this.vendorsList = this.filteredList = res;
-      });
+    this.vendorsService.getVendors().pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe(res => {
+      this.vendorsList = this.filteredList = res;
+    });
 
-    this.subscription = this.discountsService.getPointOfSales()
-      .subscribe(res => {
-        this.pointNameList = this.filteredPointNameList = res.sort((a, b) => {
-          return a.name < b.name ? -1 : 1;
-        });
+    this.discountsService.getPointOfSales().pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe(res => {
+      this.pointNameList = this.filteredPointNameList = res.sort((a, b) => {
+        return a.name < b.name ? -1 : 1;
       });
+    });
 
     this.newDiscountForm = this.fb.group({
       vendorName: ['', [Validators.required, this.requireMatch.bind(this)]],
@@ -98,7 +98,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
         '',
         [Validators.required, Validators.min(1), Validators.max(100)],
       ],
-      promoCode: [''],
+      promoCode: [null],
       startDate: ['', [Validators.required]],
       endDate: ['', [Validators.required]],
       tags: this.fb.array([], Validators.required),
@@ -148,17 +148,17 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
 
   vendorNameDetectChanges(): void {
     this.newDiscountForm.get('vendorName').valueChanges.pipe(
+      takeUntil(this.unsubscribe$),
       debounceTime(300),
-      startWith('')
-    )
-      .subscribe(
-        (data) => {
-          if (!this.vendorsList || !data) {
-            this.filteredList = this.vendorsList;
-            return;
-          }
-          this.filteredList = this.vendorsList.filter(value => value.vendorName.includes(data));
-        });
+      startWith(''),
+    ).subscribe(
+      (data) => {
+        if (!this.vendorsList || !data) {
+          this.filteredList = this.vendorsList;
+          return;
+        }
+        this.filteredList = this.vendorsList.filter(value => value.vendorName.includes(data));
+      });
   }
 
   private requireMatch(control: AbstractControl): ValidationErrors | null {
@@ -236,7 +236,6 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     this.coordinateIsEmpty = true;
   }
 
-
   openDialog(currentSaleObj): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -312,8 +311,8 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     } else {
       this.createDiscount(discount);
     }
-    this.pointOfSalesForms.controls = [];
-    this.tags.controls = [];
+    this.pointOfSalesForms.clear();
+    this.tags.clear();
   }
 
   get vendorName(): AbstractControl {
@@ -365,7 +364,8 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
 }

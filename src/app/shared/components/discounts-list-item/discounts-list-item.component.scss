@@ -203,6 +203,9 @@
           border: 1px solid burlywood;
         }
       }
+      .action__edit {
+        cursor: pointer;
+      }
     }
 
     @media screen and (min-width: 767.98px) {
