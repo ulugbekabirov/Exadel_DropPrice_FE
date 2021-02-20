@@ -6,7 +6,7 @@
     matTooltip="Gp Back"
     (click)="goBack()"
   >
-    <mat-icon class="go-back__link_icon"> reply </mat-icon>
+    <mat-icon class="go-back__link_icon"> reply</mat-icon>
     <span class="go-back__link_text">
       {{ "BUTTON_BACK_LOCATION" | translate }}
     </span>
@@ -18,7 +18,7 @@
         class="rating__icon"
         fxLayoutAlign="center center"
         *ngFor="let star of rating"
-        >{{ star ? "star_rate" : "star_border" }}
+      >{{ star ? "star_rate" : "star_border" }}
       </mat-icon>
     </div>
 
@@ -152,28 +152,20 @@
   </section>
 
   <section *ngIf="discount?.isOrdered" class="discount-detail__rating">
-    <span class="rating__label">
+    <span class="discount-detail__rating_label">
       {{ "DISCOUNT_DETAIL.ASSESSMENT_LABEL" | translate }}
     </span>
-    <div class="row">
-      <div class="col-sm-12">
-        <ul
-          class="list-inline rating-list"
-          *ngFor="let star of stars; let i = index"
-          style="display: inline-block"
-        >
-          <li
-            (click)="countStar(star)"
-            id="{{ 'starId' + i }}"
-            [ngClass]="{ selected: star <= selectedValue }"
-            (mouseover)="addClass(star)"
-            (mouseout)="removeClass(star)"
+        <ul class="discount-detail__rating_list">
+          <li *ngFor="let star of stars; let i = index"
+              (click)="countStar(star)"
+              id="{{ 'starId' + i }}"
+              [ngClass]="{ selected: star <= selectedRatingValue }"
+              (mouseover)="addClass(star)"
+              (mouseout)="removeClass(star)"
           >
             ★
           </li>
         </ul>
-      </div>
-    </div>
   </section>
 
   <section class="discount-detail__actions">

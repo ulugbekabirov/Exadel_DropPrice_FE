@@ -62,7 +62,6 @@
       .rating__icon {
         font-size: 2em;
         color: $discountRating_star_color;
-        cursor: pointer;
       }
     }
 
@@ -275,15 +274,33 @@
   &__rating {
     align-self: center;
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 1em;
     flex-direction: row;
     padding: 1em 0;
 
-    .rating__label {
-      padding: 9px 0;
-      font-size: 1.4em;
+    &_label {
+      font-size: 1.4rem;
       font-weight: 500;
       color: $discount_detail_text_color;
+    }
+
+    &_list {
+      display: flex;
+      list-style: none;
+      gap: .4em;
+
+      li {
+        cursor: pointer;
+        font-size: 2.5rem;
+        color: #ddd;
+        padding: .4em 0;
+
+        &.selected {
+          color: $discountRating_star_color;
+        }
+      }
     }
 
     .rating__icon {
@@ -323,43 +340,4 @@
     margin-top: 2em;
     font-size: 1.1rem;
   }
-}
-.cont {
-  width: 93%;
-  max-width: 350px;
-  text-align: center;
-  margin: 4% auto;
-  padding: 30px 0;
-  background: #111;
-  color: #eee;
-  border-radius: 5px;
-  border: thin solid #444;
-  overflow: hidden;
-}
-
-div.stars {
-  width: 270px;
-  display: inline-block;
-}
-.rating-list {
-  li {
-    cursor: pointer;
-    font-size: 40px;
-    float: right;
-    color: #ddd;
-    padding: 10px 5px;
-    &:hover {
-      color: #ffd700;
-      ~ {
-        li {
-          color: #ffd700;
-        }
-      }
-    }
-  }
-  li.selected {
-    color: #ffd700;
-  }
-  display: inline-block;
-  list-style: none;
 }

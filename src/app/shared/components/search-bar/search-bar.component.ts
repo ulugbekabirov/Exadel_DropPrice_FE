@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
-import { ApiDataService } from '../../../services/api-data.service';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -10,20 +9,18 @@ export class SearchBar {
   constructor(
     public name: string,
     public tag: string[] = [],
-  ) {}
+  ) {
+  }
 }
 
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss'],
-  providers: [ApiDataService]
 })
 
 export class SearchBarComponent implements OnInit, OnDestroy {
-  rating3: number;
   public form: FormGroup;
-
   public consoleMessages: string[] = [];
   public userQuestion: string;
   public userQuestionUpdate = new Subject<string>();
@@ -33,19 +30,6 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
   @Input() tags: Tag[];
   @Output() searchQueryChange = new EventEmitter<any>();
-
-  //TODO - Refactor
-  ngOnChanges(changes: any): void {
-    const tagsCurrenValue = changes.tags.currentValue;
-    if (tagsCurrenValue && tagsCurrenValue.length) {
-
-      setTimeout(() => {
-        const event = new Event("click");
-        const first = document.querySelector('mat-chip');
-        first.dispatchEvent(event);
-      }, 0);
-    }
-  }
 
   userNext(evt): void {
     return this.userQuestionUpdate.next(evt);
@@ -76,7 +60,6 @@ export class SearchBarComponent implements OnInit, OnDestroy {
         this.consoleMessages.push(value);
         this.addSearch();
       });
-
   }
 
   ngOnDestroy(): void {

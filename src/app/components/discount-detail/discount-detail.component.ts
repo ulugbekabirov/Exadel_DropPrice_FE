@@ -27,7 +27,7 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
     latitude: this.userService.activeUserValue.officeLatitude,
   };
   stars: number[] = [1, 2, 3, 4, 5];
-  selectedValue = 0;
+  selectedRatingValue = 0;
 
   @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
 
@@ -55,7 +55,6 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
       this.discount = discount;
       const lengthRating = this.discount.discountRating ? Number(this.discount.discountRating.toFixed()) : 0;
       this.rating = new Array(lengthRating).fill('star');
-      this.selectedValue = this.rating.length;
     });
   }
 
@@ -66,15 +65,9 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
   toggleFavorites(discountId: number): void {
     this.discountsService.updateIsSavedDiscount(discountId).pipe(
       takeUntil(this.unsubscribe$)
-    )
-      .subscribe(resp => {
-        this.discount = {...this.discount, isSaved: resp.isSaved};
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+    ).subscribe(resp => {
+      this.discount = {...this.discount, isSaved: resp.isSaved};
+    });
   }
 
   archiveDiscount(discountId: number): void {
@@ -90,10 +83,13 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
     this.location.back();
   }
 
-  countStar(star): void {
-    this.selectedValue = star;
-    this.discountsService.putRating(this.discount.discountId, this.selectedValue)
-      .subscribe(next => this.router.navigate(['/discounts', this.discount.discountId]));
+  countStar(starValue): void {
+    this.selectedRatingValue = starValue;
+    this.discountsService.putRating(this.discount.discountId, this.selectedRatingValue).pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe(next => {
+        this.selectedRatingValue = 0;
+      });
   }
 
   addClass(star): void {
@@ -106,9 +102,14 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
 
   removeClass(star): void {
     let ab = '';
-    for (let i = star - 1; i >= this.selectedValue; i--) {
+    for (let i = star - 1; i >= this.selectedRatingValue; i--) {
       ab = 'starId' + i;
       document.getElementById(ab).classList.remove('selected');
     }
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }
