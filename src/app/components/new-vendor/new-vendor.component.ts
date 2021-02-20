@@ -56,27 +56,19 @@ export class NewVendorComponent implements OnInit, OnDestroy {
       ],
       email: ['', [Validators.required, Validators.email]],
       socialLinks: this.fb.group({
-        instagram: ['', [Validators.pattern(/^(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$/)]],
-        facebook: ['', [Validators.pattern(/^(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$/)]],
-        website: ['', [Validators.pattern(/^(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$/)]],
-        otherLinks: ['', [Validators.pattern(/^(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$/)]]
-      }),
-    });
-  }
-
-  successSnackBar(message: string, action: any) {
-    this.snackBar.open(message, action, {
-      duration: 3000,
-      horizontalPosition: 'center',
-      panelClass: ['snackbar-color-success']
-    });
-  }
-
-  errorSnackBar(message: string, action: any) {
-    this.snackBar.open(message, action, {
-      duration: 3000,
-      horizontalPosition: 'center',
-      panelClass: ['snackbar-color-error']
+        instagram: ['',
+          // [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
+        ],
+        facebook: ['',
+          // [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
+        ],
+        website: ['',
+          // [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
+        ],
+        otherLinks: ['',
+          // [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
+        ]
+      })
     });
 
     if (this.isEditMode) {
@@ -95,6 +87,22 @@ export class NewVendorComponent implements OnInit, OnDestroy {
     }
   }
 
+  successSnackBar(message: string, action: any): void {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      horizontalPosition: 'center',
+      panelClass: ['snackbar-color-success']
+    });
+  }
+
+  errorSnackBar(message: string, action: any): void {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      horizontalPosition: 'center',
+      panelClass: ['snackbar-color-error']
+    });
+  }
+
   goBack(): void {
     this.location.back();
   }
@@ -103,32 +111,40 @@ export class NewVendorComponent implements OnInit, OnDestroy {
     const vendor = this.newVendorForm.value;
     const vendorModel = {...vendor, socialLinks: JSON.stringify(vendor.socialLinks)};
     if (this.isEditMode) {
-      this.vendorsService.updateVendor(vendorModel, this.vendId).pipe(
-        takeUntil(this.unsubscribe$),
-        catchError(error => {
-          this.errorSnackBar('Not saved!', '');
-          return throwError(error);
-        }))
-        .subscribe(() => {
-          this.newVendorForm.reset();
-          this.successSnackBar('Successfully update!', '');
-          this.goBack();
-        });
+      this.updateVendor(vendor, this.vendId);
     } else {
-      this.vendorsService.createVendor(vendorModel).pipe(
-        takeUntil(this.unsubscribe$),
-        catchError(error => {
-          this.errorSnackBar('Not saved!', '');
-          return throwError(error);
-        }))
-        .subscribe(() => {
-          this.newVendorForm.reset();
-          this.successSnackBar('Successfully saved!', '');
-          for (const control in this.newVendorForm.controls) {
-            this.newVendorForm.controls[control].setErrors(null);
-          }
-        });
+      this.createNewVendor(vendorModel);
     }
+  }
+
+  updateVendor(vendor, vendId): void {
+    this.vendorsService.updateVendor(vendor, vendId).pipe(
+      takeUntil(this.unsubscribe$),
+      catchError(error => {
+        this.errorSnackBar('Not saved!', '');
+        return throwError(error);
+      }))
+      .subscribe(() => {
+        this.newVendorForm.reset();
+        this.successSnackBar('Successfully update!', '');
+        this.goBack();
+      });
+  }
+
+  createNewVendor(vendor): void {
+    this.vendorsService.createVendor(vendor).pipe(
+      takeUntil(this.unsubscribe$),
+      catchError(error => {
+        this.errorSnackBar('Not saved!', '');
+        return throwError(error);
+      }))
+      .subscribe(() => {
+        this.newVendorForm.reset();
+        this.successSnackBar('Successfully saved!', '');
+        for (const control in this.newVendorForm.controls) {
+          this.newVendorForm.controls[control].setErrors(null);
+        }
+      });
   }
 
   get name(): AbstractControl {
