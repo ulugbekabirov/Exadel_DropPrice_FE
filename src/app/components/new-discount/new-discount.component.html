@@ -275,7 +275,7 @@
         <button
           mat-raised-button
           color="primary"
-          [disabled]="!newDiscountForm.valid || coordinateIsEmpty"
+          [disabled]="newDiscountForm.invalid || coordinateIsEmpty"
           type="submit"
         >
           {{ "NEW_DISCOUNT_FORM.BTN_TITLE" | translate }}

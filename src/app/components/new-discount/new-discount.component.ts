@@ -105,7 +105,6 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
       activityStatus: [true, [Validators.requiredTrue]],
       pointOfSales: this.fb.array([]),
     });
-    this.vendorNameDetectChanges();
 
     if (this.isEditMode) {
       this.route.paramMap
@@ -132,6 +131,8 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
           });
         }
         this.newDiscountForm.patchValue(editingDiscount);
+        this.coordinateIsEmpty = false;
+        this.vendorNameDetectChanges();
       });
     }
   }
