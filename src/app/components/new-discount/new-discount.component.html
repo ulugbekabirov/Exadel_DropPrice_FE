@@ -147,10 +147,10 @@
             ></mat-datepicker-toggle>
             <mat-date-range-picker #picker></mat-date-range-picker>
             <mat-error *ngIf="startDate.hasError('matStartDateInvalid')">
-              {{ NEW_DISCOUNT_FORM.START_DATE_ERROR | translate }}
+              {{ "NEW_DISCOUNT_FORM.START_DATE_ERROR" | translate }}
             </mat-error>
             <mat-error *ngIf="endDate.hasError('matEndDateInvalid')"
-              >{{ NEW_DISCOUNT_FORM.END_DATE_ERROR | translate }}
+              >{{ "NEW_DISCOUNT_FORM.END_DATE_ERROR" | translate }}
             </mat-error>
           </mat-form-field>
 
@@ -181,7 +181,7 @@
               *ngFor="let tag of tags.controls; index as i"
               [removable]="removable"
               (removed)="remove(tag)"
-              [FormControl]="tags.controls[i]"
+              [FormControlN]="tags.controls[i]"
             >
               {{ tag.value }}
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>

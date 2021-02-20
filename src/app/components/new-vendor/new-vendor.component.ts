@@ -81,7 +81,7 @@ export class NewVendorComponent implements OnInit, OnDestroy {
           takeUntil(this.unsubscribe$)
         ).subscribe((vendor) => {
         this.newVendorForm.patchValue({
-          ...vendor, socialLinks: JSON.parse(vendor.socialLinks)
+          ...vendor, socialLinks: vendor.socialLinks ? JSON.parse(vendor.socialLinks) : {}
         });
       });
     }
@@ -103,10 +103,6 @@ export class NewVendorComponent implements OnInit, OnDestroy {
     });
   }
 
-  goBack(): void {
-    this.location.back();
-  }
-
   onSubmit(): void {
     const vendor = this.newVendorForm.value;
     const vendorModel = {...vendor, socialLinks: JSON.stringify(vendor.socialLinks)};
@@ -124,10 +120,13 @@ export class NewVendorComponent implements OnInit, OnDestroy {
         this.errorSnackBar('Not saved!', '');
         return throwError(error);
       }))
-      .subscribe(() => {
+      .subscribe((res) => {
         this.newVendorForm.reset();
         this.successSnackBar('Successfully update!', '');
-        this.goBack();
+        for (const control in this.newVendorForm.controls) {
+          this.newVendorForm.controls[control].setErrors(null);
+        }
+        this.router.navigate(['/vendors', res.id]);
       });
   }
 

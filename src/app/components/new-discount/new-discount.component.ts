@@ -29,10 +29,10 @@ import { MapComponent } from './../map/map.component';
 import { VendorsService } from '../../services/vendors.service';
 
 
-
 export interface Tag {
   name: string;
 }
+
 @Component({
   selector: 'app-new-discount',
   templateUrl: './new-discount.component.html',
@@ -73,7 +73,8 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private discountsService: DiscountsService,
     private vendorsService: VendorsService,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
 
@@ -102,66 +103,46 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
       endDate: ['', [Validators.required]],
       tags: this.fb.array([], Validators.required),
       activityStatus: [true, [Validators.requiredTrue]],
-      pointOfSales: this.fb.array([], Validators.required),
+      pointOfSales: this.fb.array([]),
     });
     this.vendorNameDetectChanges();
 
     if (this.isEditMode) {
       this.route.paramMap
-      .pipe(
-        switchMap((params: any) => {
-          this.discId = +params.get('id');
-          return forkJoin (
-          this.discountsService.getDiscountById(this.discId, {}),
-          this.discountsService.getPointsOfSalesByDiscountId(this.discId)
-          );
-        }),
-        takeUntil(this.unsubscribe$)
-      ).subscribe(([discount, points]) => {
-        console.log(discount);
-        console.log(points);
-        this.newDiscountForm.patchValue({
-          vendorName: discount.vendorName,
-          discountName: discount.discountName,
-          description: discount.description,
-          discountAmount: discount.discountAmount,
-          promoCode: discount.promoCode,
-          startDate: discount.startDate,
-          endDate: discount.endDate,
-          pointOfSales: points
-        });
-
-        if (discount.tags) {
-          for (const tag of discount.tags){
-            (this.newDiscountForm.get('tags') as FormArray).push(
-              new FormControl(tag, Validators.required)
+        .pipe(
+          switchMap((params: any) => {
+            this.discId = +params.get('id');
+            return forkJoin(
+              this.discountsService.getDiscountById(this.discId, {}),
+              this.discountsService.getPointsOfSalesByDiscountId(this.discId)
             );
-          }
+          }),
+          takeUntil(this.unsubscribe$)
+        ).subscribe(([discount, points]) => {
+        const editingDiscount = {...discount, pointOfSales: points};
+        if (editingDiscount.tags) {
+          editingDiscount.tags.forEach(tag => {
+            this.tags.push(
+              new FormControl(tag, Validators.required));
+          });
         }
-
-        console.log(this.pointOfSalesForms.value);
-        if (points) {
-          for (const point of points) {
-            // const control = this.newDiscountForm.get('pointOfSales') as FormArray;
-            // control.push(point as FormGroup)
-            (this.newDiscountForm.get('pointOfSales') as FormArray).push(
-            (new FormGroup(point, Validators.required)));
-          }
+        if (editingDiscount.pointOfSales) {
+          editingDiscount.pointOfSales.forEach(point => {
+            this.pointOfSalesForms.push(this.editPointOfSale());
+          });
         }
-        console.log(this.pointOfSalesForms.value);
+        this.newDiscountForm.patchValue(editingDiscount);
       });
-    } else {
-      this.addPoint();
     }
   }
 
-  createPoint(point) {
-    this.fb.group({
-      // id: ,
-      // name: ,
-      // address: ,
-      // latitude: ,
-      // longitude: ,
+  editPointOfSale(): FormGroup {
+    return this.fb.group({
+      id: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      latitude: ['', [Validators.required]],
+      longitude: ['', [Validators.required]],
     });
   }
 
@@ -172,7 +153,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     )
       .subscribe(
         (data) => {
-          if (!this.vendorsList || !data ) {
+          if (!this.vendorsList || !data) {
             this.filteredList = this.vendorsList;
             return;
           }
@@ -185,7 +166,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     if (this.vendorsList && this.vendorsList.find(item => item.vendorName.includes(selection))) {
       return null;
     }
-    return { requireMatch: true };
+    return {requireMatch: true};
   }
 
   // TODO add filter of points
@@ -248,13 +229,13 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
       address: ['', [Validators.required]],
     });
     this.pointOfSalesForms.push(point);
-    console.log(this.pointOfSalesForms.value);
   }
 
   deletePoint(currentSaleObj): void {
     this.pointOfSalesForms.removeAt(currentSaleObj);
     this.coordinateIsEmpty = true;
   }
+
 
   openDialog(currentSaleObj): void {
     const dialogConfig = new MatDialogConfig();
@@ -299,9 +280,12 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
         return throwError(error);
       }))
       .subscribe((res) => {
-        console.log('res', res);
         this.newDiscountForm.reset();
         this.successSnackBar('Successfully update!', '');
+        for (const control in this.newDiscountForm.controls) {
+          this.newDiscountForm.controls[control].setErrors(null);
+        }
+        this.router.navigate(['/discounts', res.id]);
       });
   }
 
@@ -314,7 +298,6 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
       }))
       .subscribe((res) => {
         this.newDiscountForm.reset();
-        console.log('res', res);
         this.successSnackBar('Successfully saved!', '');
         for (const control in this.newDiscountForm.controls) {
           this.newDiscountForm.controls[control].setErrors(null);

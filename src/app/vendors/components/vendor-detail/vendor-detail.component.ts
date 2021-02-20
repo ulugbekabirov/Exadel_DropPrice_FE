@@ -66,7 +66,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
       if (!vendor) {
         return;
       }
-      const parseSocials = JSON.parse(vendor.socialLinks);
+      const parseSocials = vendor.socialLinks ? JSON.parse(vendor.socialLinks) : '';
       this.vendor = {
         ...vendor,
         socialLinks: Object
