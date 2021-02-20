@@ -117,7 +117,7 @@ export class NewVendorComponent implements OnInit, OnDestroy {
     }
   }
 
-  updateVendor(vendor, vendId): void {
+  private updateVendor(vendor, vendId): void {
     this.vendorsService.updateVendor(vendor, vendId).pipe(
       takeUntil(this.unsubscribe$),
       catchError(error => {
@@ -131,7 +131,7 @@ export class NewVendorComponent implements OnInit, OnDestroy {
       });
   }
 
-  createNewVendor(vendor): void {
+  private createNewVendor(vendor): void {
     this.vendorsService.createVendor(vendor).pipe(
       takeUntil(this.unsubscribe$),
       catchError(error => {

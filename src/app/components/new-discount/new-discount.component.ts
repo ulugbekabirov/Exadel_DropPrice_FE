@@ -51,6 +51,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
   readonly separatorKeysCodes: number[] = [ENTER];
   isChecked = true;
   discId: number;
+  isEditMode: boolean = (this.router.url).includes('edit');
 
   vendorsList: Vendor[];
   filteredList: Vendor[];
@@ -105,7 +106,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     });
     this.vendorNameDetectChanges();
 
-    if ((this.router.url).includes('edit')) {
+    if (this.isEditMode) {
       this.route.paramMap
       .pipe(
         switchMap((params: any) => {
@@ -274,7 +275,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     this.coordinateIsEmpty = false;
   }
 
-  successSnackBar(message: string, action: any) {
+  successSnackBar(message: string, action: any): void {
     this.snackBar.open(message, action, {
       duration: 3000,
       panelClass: ['snackbar-color-success'],
@@ -282,7 +283,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     });
   }
 
-  errorSnackBar(message: string, action: any) {
+  errorSnackBar(message: string, action: any): void {
     this.snackBar.open(message, action, {
       duration: 3000,
       panelClass: ['snack-bar-color-error'],
@@ -290,38 +291,47 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     });
   }
 
-  submit(): void {
-    const reqDiscountModel: Discount = this.newDiscountForm.value;
-    console.log(reqDiscountModel);
-    if ((this.router.url).includes('edit')) {
-      const updateDiscount: Discount = reqDiscountModel;
-      this.discountsService.updateDiscount(updateDiscount, this.discId).subscribe();
-      console.log(updateDiscount);
+  private updateDiscount(discount: Discount, discId: number): void {
+    this.discountsService.updateDiscount(discount, discId).pipe(
+      takeUntil(this.unsubscribe$),
+      catchError(error => {
+        this.errorSnackBar('Not saved!', '');
+        return throwError(error);
+      }))
+      .subscribe((res) => {
+        console.log('res', res);
+        this.newDiscountForm.reset();
+        this.successSnackBar('Successfully update!', '');
+      });
+  }
+
+  private createDiscount(discount: Discount): void {
+    this.discountsService.createDiscount(discount).pipe(
+      takeUntil(this.unsubscribe$),
+      catchError(error => {
+        this.errorSnackBar('Not saved!', '');
+        return throwError(error);
+      }))
+      .subscribe((res) => {
+        this.newDiscountForm.reset();
+        console.log('res', res);
+        this.successSnackBar('Successfully saved!', '');
+        for (const control in this.newDiscountForm.controls) {
+          this.newDiscountForm.controls[control].setErrors(null);
+        }
+      });
+  }
+
+  onSubmit(): void {
+    const discount = this.newDiscountForm.value;
+    if (this.isEditMode) {
+      this.updateDiscount(discount, this.discId);
     } else {
-      const newDiscount: Discount = reqDiscountModel;
-      this.discountsService.createDiscount(newDiscount)
-        .subscribe(res => console.log('res', res));
-    }
-    const newDiscount = this.newDiscountForm.value;
-    this.discountsService.postDiscount(newDiscount)
-      .pipe(
-        catchError(error => {
-          this.errorSnackBar('Not saved!', '');
-          return throwError(error);
-        })
-      )
-      .subscribe(
-        () => this.successSnackBar('Successfully saved!', '')
-      );
-    this.newDiscountForm.reset();
-    for (const control in this.newDiscountForm.controls) {
-      this.newDiscountForm.controls[control].setErrors(null);
+      this.createDiscount(discount);
     }
     this.pointOfSalesForms.controls = [];
     this.tags.controls = [];
   }
-
-
 
   get vendorName(): AbstractControl {
     return this.newDiscountForm.get('vendorName');
@@ -374,4 +384,5 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
 }
