@@ -3,14 +3,14 @@ import { ApiDataService } from './api-data.service';
 import { Observable } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class DiscountsService {
   constructor(
     private restApi: ApiDataService,
-  ) {}
+  ) {
+  }
 
   getDiscounts(params): Observable<any> {
     const paramsObj = {};
@@ -51,7 +51,7 @@ export class DiscountsService {
     return this.restApi.getDiscountById(discountId, options);
   }
 
-  getPointsOfSalesByDiscountId(discountId) {
+  getPointsOfSalesByDiscountId(discountId): Observable<any> {
     return this.restApi.getPointsOfSalesByDiscountId(discountId);
   }
 
@@ -74,7 +74,7 @@ export class DiscountsService {
     return this.restApi. createDiscount(discount);
   }
 
-  updateDiscount(discount, id:number):any {
+  updateDiscount(discount, id: number): any {
     return this.restApi.updateDiscount(discount, id);
    }
 
@@ -87,5 +87,31 @@ export class DiscountsService {
       params: new HttpParams({fromObject: paramsObj})
     };
     return this.restApi.searchStatsDiscounts(options);
+  }
+
+  getPointOfSales(): Observable<any> {
+    return this.restApi.getPointOfSales();
+  }
+
+  getUserSavedDiscounts(opt): Observable<any> {
+    const paramsObj = {};
+    Object.keys({...opt}).filter(value => typeof opt[value] !== 'undefined').forEach(param => {
+      paramsObj[param] = opt[param];
+    });
+    const options: { params: HttpParams } = {
+      params: new HttpParams({fromObject: paramsObj})
+    };
+    return this.restApi.getUserSavedDiscounts(options);
+  }
+
+  getUserOrderedDiscounts(opt): Observable<any> {
+    const paramsObj = {};
+    Object.keys({...opt}).filter(value => typeof opt[value] !== 'undefined').forEach(param => {
+      paramsObj[param] = opt[param];
+    });
+    const options: { params: HttpParams } = {
+      params: new HttpParams({fromObject: paramsObj})
+    };
+    return this.restApi.getUserTickets(options);
   }
 }

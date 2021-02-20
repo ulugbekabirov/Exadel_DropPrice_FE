@@ -2,6 +2,8 @@ export const AUTH_ENDPOINT = 'login';
 export const CONFIGS = 'configs';
 export const CHANGE_CONFIGS = 'changeConfigs';
 export const USER_INFO_ENDPOINT = 'user';
+export const USER_SAVED_ENDPOINT = 'saved';
+export const USER_TICKETS_ENDPOINT = 'tickets';
 export const GET_VENDORS_ENDPOINT = 'vendors';
 export const POST_VENDORS_ENDPOINT = 'vendors';
 export const GET_VENDOR_DISCOUNTS_ENDPOINT = 'discounts';
@@ -15,7 +17,7 @@ export const GET_TICKET_ENDPOINT = 'createTicket';
 export const PUT_IS_SAVED_DISCOUNTS_ENDPOINT = 'save';
 export const PUT_ARCHIVE_DISCOUNTS_ENDPOINT = 'archive';
 export const SEARCH_DISCOUNTS_ENDPOINT = 'search';
-export const GET_POINTOFSALES_ENDPOINT = 'pointOfSales';
+export const GET_POINT_OF_SALES = 'pointOfSales';
 
 export const SORT_BY = [
   {

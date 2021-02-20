@@ -17,7 +17,7 @@
             <mat-label>{{
               "NEW_VENDOR_FORM.NAME_LABEL" | translate
             }}</mat-label>
-            <input matInput formControlName="name" />
+            <input matInput formControlName="vendorName" />
           </mat-form-field>
 
           <mat-form-field>
@@ -49,7 +49,6 @@
         <div fxLayout="row"
              fxLayout.xs="column"
              fxLayoutGap="30px"
-
              class="new-vendor-form__details"
         >
           <mat-form-field>
@@ -77,8 +76,8 @@
              fxLayoutGap="25px"
              fxLayout.lt-md="column"
              fxLayoutGap.xs="5px"
-             formGroupName="social_network"
-             class="new-vendor-form__social-network"
+             formGroupName="socialLinks"
+             class="new-vendor-form__social-links"
              >
           <mat-form-field>
             <mat-label>Facebook</mat-label>
@@ -106,15 +105,18 @@
             </mat-error>
           </mat-form-field>
 
+
           <mat-form-field>
             <mat-label>{{
               "NEW_VENDOR_FORM.OTHER_SOCIAL_NETWORK_LABEL" | translate
             }}</mat-label>
-            <input formControlName="otherSocialLink" matInput/>
+            <input formControlName="otherLinks" matInput/>
             <mat-error
               >{{ "NEW_VENDOR_FORM.VALID_SOCIAL_NETWORK" | translate }}
             </mat-error>
           </mat-form-field>
+
+
         </div>
 
         <button

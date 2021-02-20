@@ -1,0 +1,57 @@
+@import "src/variables";
+
+:host {
+  width: 100%;
+}
+
+.user-profile-card {
+  font-size: 1rem;
+  background: $white;
+  width: 100%;
+  height: auto;
+
+  img {
+    background: $white;
+  }
+
+  &__content {
+    &_field {
+
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-start;
+      align-items: center;
+
+      &_icon {
+        font-size: 2rem;
+        background: $user_profile_card_content_txtColor;
+      }
+
+      span {
+        &:last-child {
+          font-size: 1.1em;
+          letter-spacing: .06em;
+        }
+      }
+    }
+  }
+
+  mat-card-subtitle {
+    border-bottom: 1px solid $user_profile_card_content_txtColor;;
+  }
+
+  .user-profile-card__icon {
+    font-size: 2rem;
+    cursor: pointer;
+    outline: none;
+    color: $user_profile_card_content_txtColor;
+
+    &:hover {
+      color: $user_profile_card_content_iconColor_hover;
+    }
+  }
+
+  mat-card-actions {
+    background: $user_profile_card_action_bgColor;
+  }
+}

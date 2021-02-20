@@ -78,7 +78,7 @@
     "WEBSITE_LABEL": "Веб-сайт",
     "OTHER_SOCIAL_NETWORK_LABEL": "Другие соц. сети поставщика",
     "VALID_SOCIAL_NETWORK": "Неверный aдрес ссылки",
-    "BTN_TITLE": "Добавить"
+    "BTN_TITLE": "Сохранить"
   },
   "TICKET": {
     "TITLE": "Талон",
@@ -111,7 +111,7 @@
     "PLACEHOLDER_PROMO_CODE": "Введите промокод",
     "PLACEHOLDER_START_DATE": "начало",
     "PLACEHOLDER_END_DATE": "окончание",
-    "PLACEHOLDER_NEW_TAG": "Введите тег",
+    "PLACEHOLDER_NEW_TAG": "Введите тег и нажмите 'Enter'",
     "DATE_START_END": "Cрок действия скидки*",
     "START_DATE_ERROR": "Невернная дата начала",
     "END_DATE_ERROR": "Неверная дата окончания",
@@ -189,5 +189,20 @@
       "SEARCH_BY": "Искать по"
     },
     "CONTENT": ""
+  },
+  "USER_PROFILE": {
+    "LIST_TITLE": {
+      "SAVED": "Избранные Скидки",
+      "ORDERED": "История Заказов"
+    },
+    "LIST_ITEM": {
+      "DATE_BEFORE": "до",
+      "DATE_ORDER": "заказан"
+    },
+    "TICKET_BUTTON": {
+      "SHOW_TICKET": "Показать Талон",
+      "ORDER_TICKET": "Заказать Талон",
+      "DISCOUNT_INACTIVE": "Скидка не доступна"
+    }
   }
 }
