@@ -181,7 +181,7 @@
               *ngFor="let tag of tags.controls; index as i"
               [removable]="removable"
               (removed)="remove(tag)"
-              [FormControlN]="tags.controls[i]"
+              [FormControl]="tags.controls[i]"
             >
               {{ tag.value }}
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
