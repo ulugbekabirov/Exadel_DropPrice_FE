@@ -111,7 +111,7 @@
     "PLACEHOLDER_PROMO_CODE": "Введите промокод",
     "PLACEHOLDER_START_DATE": "начало",
     "PLACEHOLDER_END_DATE": "окончание",
-    "PLACEHOLDER_NEW_TAG": "Введите тег",
+    "PLACEHOLDER_NEW_TAG": "Введите тег и нажмите 'Enter'",
     "DATE_START_END": "Cрок действия скидки*",
     "START_DATE_ERROR": "Невернная дата начала",
     "END_DATE_ERROR": "Неверная дата окончания",

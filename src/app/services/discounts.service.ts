@@ -2,9 +2,6 @@ import { Injectable } from '@angular/core';
 import { ApiDataService } from './api-data.service';
 import { Observable } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-import { USER_INFO_ENDPOINT, USER_SAVED_ENDPOINT, USER_TICKETS_ENDPOINT } from '../../constants';
-
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +9,8 @@ import { USER_INFO_ENDPOINT, USER_SAVED_ENDPOINT, USER_TICKETS_ENDPOINT } from '
 export class DiscountsService {
   constructor(
     private restApi: ApiDataService,
-  ) {}
+  ) {
+  }
 
   getDiscounts(params): Observable<any> {
     const paramsObj = {};
@@ -81,6 +79,10 @@ export class DiscountsService {
       params: new HttpParams({fromObject: paramsObj})
     };
     return this.restApi.searchStatsDiscounts(options);
+  }
+
+  getPointOfSales(): Observable<any> {
+    return this.restApi.getPointOfSales();
   }
 
   getUserSavedDiscounts(opt): Observable<any> {

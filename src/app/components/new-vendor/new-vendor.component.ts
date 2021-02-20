@@ -1,25 +1,27 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
   Validators,
   AbstractControl,
 } from '@angular/forms';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DiscountsService } from '../../services/discounts.service';
 import { VendorsService } from '../../services/vendors.service';
-
-import { ActivatedRoute, Router } from '@angular/router';
-
-
 import { Vendor } from './../../models/vendor';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-new-vendor',
   templateUrl: './new-vendor.component.html',
   styleUrls: ['./new-vendor.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NewVendorComponent implements OnInit, OnDestroy {
   newVendorForm: FormGroup;
@@ -29,14 +31,17 @@ export class NewVendorComponent implements OnInit, OnDestroy {
   isEditMode: boolean = (this.router.url).includes('edit');
 
 
-  constructor(private fb: FormBuilder,
-              private route: ActivatedRoute,
-              private discountService: DiscountsService,
-              private vendorsService: VendorsService,
-              private router: Router,
-              private location: Location) {
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private discountService: DiscountsService,
+    private vendorsService: VendorsService,
+    private router: Router,
+    private location: Location,
+    private cd: ChangeDetectorRef,
+    private snackBar: MatSnackBar,
+  ) {
   }
-
 
   ngOnInit(): void {
     this.newVendorForm = this.fb.group({
@@ -82,6 +87,22 @@ export class NewVendorComponent implements OnInit, OnDestroy {
     }
   }
 
+  successSnackBar(message: string, action: any): void {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      horizontalPosition: 'center',
+      panelClass: ['snackbar-color-success']
+    });
+  }
+
+  errorSnackBar(message: string, action: any): void {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      horizontalPosition: 'center',
+      panelClass: ['snackbar-color-error']
+    });
+  }
+
   goBack(): void {
     this.location.back();
   }
@@ -90,19 +111,40 @@ export class NewVendorComponent implements OnInit, OnDestroy {
     const vendor = this.newVendorForm.value;
     const vendorModel = {...vendor, socialLinks: JSON.stringify(vendor.socialLinks)};
     if (this.isEditMode) {
-      this.vendorsService.updateVendor(vendorModel, this.vendId).pipe(
-        takeUntil(this.unsubscribe$)
-      ).subscribe(() => this.goBack());
+      this.updateVendor(vendorModel, this.vendId);
     } else {
-      this.vendorsService.createVendor(vendorModel).pipe(
-        takeUntil(this.unsubscribe$)
-      ).subscribe(res => {
+      this.createNewVendor(vendorModel);
+    }
+  }
+
+  updateVendor(vendor, vendId): void {
+    this.vendorsService.updateVendor(vendor, vendId).pipe(
+      takeUntil(this.unsubscribe$),
+      catchError(error => {
+        this.errorSnackBar('Not saved!', '');
+        return throwError(error);
+      }))
+      .subscribe(() => {
         this.newVendorForm.reset();
+        this.successSnackBar('Successfully update!', '');
+        this.goBack();
+      });
+  }
+
+  createNewVendor(vendor): void {
+    this.vendorsService.createVendor(vendor).pipe(
+      takeUntil(this.unsubscribe$),
+      catchError(error => {
+        this.errorSnackBar('Not saved!', '');
+        return throwError(error);
+      }))
+      .subscribe(() => {
+        this.newVendorForm.reset();
+        this.successSnackBar('Successfully saved!', '');
         for (const control in this.newVendorForm.controls) {
           this.newVendorForm.controls[control].setErrors(null);
         }
       });
-    }
   }
 
   get name(): AbstractControl {
@@ -125,7 +167,7 @@ export class NewVendorComponent implements OnInit, OnDestroy {
     return this.newVendorForm.get('email');
   }
 
-  get social_network(): AbstractControl {
+  get socialLinks(): AbstractControl {
     return this.newVendorForm.get('socialLinks');
   }
 
@@ -149,4 +191,5 @@ export class NewVendorComponent implements OnInit, OnDestroy {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
+
 }
