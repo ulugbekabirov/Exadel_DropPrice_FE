@@ -1,5 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription, forkJoin, Subject } from 'rxjs';
+import { startWith, debounceTime, switchMap, takeUntil, catchError } from 'rxjs/operators';
 import {
   AbstractControl,
   FormArray,
@@ -8,24 +10,29 @@ import {
   FormGroup,
   Validators,
   ValidationErrors,
+  FormArrayName,
+  FormGroupName,
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+
+import { COMMA, ENTER, V } from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+
 import { DiscountsService } from '../../services/discounts.service';
 import { Vendor, Discount } from '../../models';
 
 import { throwError } from 'rxjs';
-import { startWith, debounceTime, catchError } from 'rxjs/operators';
-import { ENTER } from '@angular/cdk/keycodes';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MapComponent } from './../map/map.component';
 import { VendorsService } from '../../services/vendors.service';
 
+
 export interface Tag {
   name: string;
 }
+
 @Component({
   selector: 'app-new-discount',
   templateUrl: './new-discount.component.html',
@@ -34,47 +41,48 @@ export interface Tag {
 })
 export class NewDiscountComponent implements OnInit, OnDestroy {
   newDiscountForm: FormGroup;
+  discount: Discount;
   coordinateIsEmpty = true;
-  tagsArray: Tag[] = [];
-  visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER];
-  isChecked = true;
+  discId: number;
+  private unsubscribe$ = new Subject<void>();
+  isEditMode: boolean = (this.router.url).includes('edit');
 
   vendorsList: Vendor[];
   filteredList: Vendor[];
   pointNameList: Discount[];
   filteredPointNameList: Discount[];
 
-  private subscription: Subscription;
-
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocompleteModule;
 
   constructor(
-    public translateService: TranslateService,
     public fb: FormBuilder,
     private dialog: MatDialog,
+    private route: ActivatedRoute,
+    private router: Router,
     private snackBar: MatSnackBar,
     private discountsService: DiscountsService,
     private vendorsService: VendorsService,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
 
-    this.subscription = this.vendorsService.getVendors()
-      .subscribe(res => {
-        this.vendorsList = this.filteredList = res;
-      });
+    this.vendorsService.getVendors().pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe(res => {
+      this.vendorsList = this.filteredList = res;
+    });
 
-    this.subscription = this.discountsService.getPointOfSales()
-      .subscribe(res => {
-        this.pointNameList = this.filteredPointNameList = res.sort((a, b) => {
-          return a.name < b.name ? -1 : 1;
-        });
-      });
+    this.discountsService.getPointOfSales().pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe(res => {
+      this.pointNameList = this.filteredPointNameList = res;
+    });
 
     this.newDiscountForm = this.fb.group({
       vendorName: ['', [Validators.required, this.requireMatch.bind(this)]],
@@ -84,31 +92,70 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
         '',
         [Validators.required, Validators.min(1), Validators.max(100)],
       ],
-      promoCode: [''],
+      promoCode: [null],
       startDate: ['', [Validators.required]],
       endDate: ['', [Validators.required]],
       tags: this.fb.array([], Validators.required),
       activityStatus: [true, [Validators.requiredTrue]],
-      pointOfSales: this.fb.array([], Validators.required),
+      pointOfSales: this.fb.array([]),
     });
-    this.addPoint();
-    this.vendorNameDetectChanges();
-    // this.pointOfSalesDetectChanges();
+
+    if (this.isEditMode) {
+      this.route.paramMap
+        .pipe(
+          switchMap((params: any) => {
+            this.discId = +params.get('id');
+            return forkJoin(
+              this.discountsService.getDiscountById(this.discId, {}),
+              this.discountsService.getPointsOfSalesByDiscountId(this.discId)
+            );
+          }),
+          takeUntil(this.unsubscribe$)
+        )
+        .subscribe(([discount, points]) => {
+          const editingDiscount = {...discount, pointOfSales: points};
+          if (editingDiscount.tags) {
+            editingDiscount.tags.forEach(tag => {
+              this.tags.push(
+                new FormControl(tag, Validators.required));
+            });
+          }
+          if (editingDiscount.pointOfSales) {
+            editingDiscount.pointOfSales.forEach(point => {
+              this.pointOfSalesForms.push(this.editPointOfSale());
+            });
+          }
+          this.newDiscountForm.patchValue(editingDiscount);
+          this.coordinateIsEmpty = false;
+          this.vendorNameDetectChanges();
+          this.newDiscountForm.markAsPristine();
+        });
+    }
+  }
+
+  editPointOfSale(): FormGroup {
+    return this.fb.group({
+      id: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      latitude: ['', [Validators.required]],
+      longitude: ['', [Validators.required]],
+    });
   }
 
   vendorNameDetectChanges(): void {
     this.newDiscountForm.get('vendorName').valueChanges.pipe(
+      takeUntil(this.unsubscribe$),
       debounceTime(300),
-      startWith('')
+      startWith(''),
     )
-      .subscribe(
-        (data) => {
-          if (!this.vendorsList || !data ) {
-            this.filteredList = this.vendorsList;
-            return;
-          }
-          this.filteredList = this.vendorsList.filter(value => value.vendorName.includes(data));
-        });
+      .subscribe((data) => {
+        if (!this.vendorsList || !data) {
+          this.filteredList = this.vendorsList;
+          return;
+        }
+        this.filteredList = this.vendorsList.filter(value => value.vendorName.includes(data));
+      });
   }
 
   private requireMatch(control: AbstractControl): ValidationErrors | null {
@@ -116,10 +163,10 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     if (this.vendorsList && this.vendorsList.find(item => item.vendorName.includes(selection))) {
       return null;
     }
-    return { requireMatch: true };
+    return {requireMatch: true};
   }
 
-  //TODO add filter of points
+  // TODO add filter of points
   // pointOfSalesDetectChanges(): void {
   //   const pointOfSalesControl = this.newDiscountForm.controls.pointOfSales as FormArray;
   //   pointOfSalesControl.valueChanges.subscribe(
@@ -205,7 +252,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     this.coordinateIsEmpty = false;
   }
 
-  successSnackBar(message: string, action: any) {
+  successSnackBar(message: string, action: any): void {
     this.snackBar.open(message, action, {
       duration: 3000,
       panelClass: ['snackbar-color-success'],
@@ -213,7 +260,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     });
   }
 
-  errorSnackBar(message: string, action: any) {
+  errorSnackBar(message: string, action: any): void {
     this.snackBar.open(message, action, {
       duration: 3000,
       panelClass: ['snack-bar-color-error'],
@@ -221,25 +268,48 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     });
   }
 
-  submit(): void {
-    const newDiscount = this.newDiscountForm.value;
-    this.discountsService.postDiscount(newDiscount)
-      .pipe(
-        catchError(error => {
-          this.errorSnackBar("Not saved!", '');
-          return throwError(error);
-        })
-      )
-      .subscribe(
-        () => this.successSnackBar("Successfully saved!", '')
-      );
+  private updateDiscount(discount: Discount, discId: number): void {
+    this.discountsService.updateDiscount(discount, discId).pipe(
+      takeUntil(this.unsubscribe$),
+      catchError(error => {
+        this.errorSnackBar('Not saved!', '');
+        return throwError(error);
+      }))
+      .subscribe((res) => {
+        this.newDiscountForm.reset();
+        this.successSnackBar('Successfully update!', '');
+        for (const control in this.newDiscountForm.controls) {
+          this.newDiscountForm.controls[control].setErrors(null);
+        }
+        this.router.navigate(['/discounts', res.id]);
+      });
+  }
 
-    this.newDiscountForm.reset();
-    for (const control in this.newDiscountForm.controls) {
-      this.newDiscountForm.controls[control].setErrors(null);
+  private createDiscount(discount: Discount): void {
+    this.discountsService.createDiscount(discount).pipe(
+      takeUntil(this.unsubscribe$),
+      catchError(error => {
+        this.errorSnackBar('Not saved!', '');
+        return throwError(error);
+      }))
+      .subscribe((res) => {
+        this.newDiscountForm.reset();
+        this.successSnackBar('Successfully saved!', '');
+        for (const control in this.newDiscountForm.controls) {
+          this.newDiscountForm.controls[control].setErrors(null);
+        }
+      });
+  }
+
+  onSubmit(): void {
+    const discount = this.newDiscountForm.value;
+    if (this.isEditMode) {
+      this.updateDiscount(discount, this.discId);
+    } else {
+      this.createDiscount(discount);
     }
-    this.pointOfSalesForms.controls = [];
-    this.tags.controls = [];
+    this.pointOfSalesForms.clear();
+    this.tags.clear();
   }
 
   get vendorName(): AbstractControl {
@@ -291,6 +361,8 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
+
 }

@@ -66,6 +66,10 @@ export class ApiDataService {
     return this.http.get(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${discountId}`, options);
   }
 
+  getPointsOfSalesByDiscountId(discountId): Observable<any> {
+    return this.http.get(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${discountId}/${GET_POINT_OF_SALES}`);
+  }
+
   getVendors(): Observable<Vendor[]> {
     return this.http.get<Vendor[]>(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}`);
   }
@@ -82,7 +86,7 @@ export class ApiDataService {
     return this.http.get(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}/${GET_VENDOR_DISCOUNTS_ENDPOINT}`, options);
   }
 
-  getPointOfSales(): Observable<any>  {
+  getPointOfSales(): Observable<any> {
     return this.http.get(`${environment.webApiUrl}${GET_POINT_OF_SALES}`);
   }
 
@@ -90,8 +94,12 @@ export class ApiDataService {
     return this.http.put(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${id}/${PUT_ARCHIVE_DISCOUNTS_ENDPOINT}`, null);
   }
 
-  postDiscount(discount): any {
+  createDiscount(discount): any {
     return this.http.post(`${environment.webApiUrl}${POST_DISCOUNTS_ENDPOINT}`, discount);
+  }
+
+  updateDiscount(discount, id): any {
+    return this.http.put(`${environment.webApiUrl}${POST_DISCOUNTS_ENDPOINT}/${id}`, discount);
   }
 
   createVendor(vendor): any {

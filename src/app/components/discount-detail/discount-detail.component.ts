@@ -10,13 +10,14 @@ import { TicketService } from '../../services/ticket.service';
 import { UserService } from '../../services/user.service';
 import { UserFacadeService } from '../../user-profile/services/user-facade.service';
 
+
 @Component({
   selector: 'app-discount-detail',
   templateUrl: './discount-detail.component.html',
   styleUrls: ['./discount-detail.component.scss']
 })
 export class DiscountDetailComponent implements OnInit, OnDestroy {
-
+  address ="Mock adress, delete it soon"
   discount: Discount;
   private unsubscribe$ = new Subject<void>();
   rating;
@@ -69,9 +70,8 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+  onEditDiscount(discountId): void{
+    this.router.navigate(['discounts/edit', discountId]);
   }
 
   archiveDiscount(discountId: number): void {
@@ -85,5 +85,10 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
 
   goBack(): void {
     this.location.back();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

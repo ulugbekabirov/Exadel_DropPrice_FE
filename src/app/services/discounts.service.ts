@@ -51,6 +51,10 @@ export class DiscountsService {
     return this.restApi.getDiscountById(discountId, options);
   }
 
+  getPointsOfSalesByDiscountId(discountId): Observable<any> {
+    return this.restApi.getPointsOfSalesByDiscountId(discountId);
+  }
+
   searchDiscounts(params): Observable<any> {
     const paramsObj = {};
     Object.keys({...params}).filter(value => typeof params[value] !== 'undefined').forEach(param => {
@@ -66,9 +70,13 @@ export class DiscountsService {
     return this.restApi.putDiscountInArchive(discountId);
   }
 
-  postDiscount(discount): any {
-    return this.restApi.postDiscount(discount);
+  createDiscount(discount): any {
+    return this.restApi. createDiscount(discount);
   }
+
+  updateDiscount(discount, id: number): any {
+    return this.restApi.updateDiscount(discount, id);
+   }
 
   searchStatsDiscount(terms): any {
     const paramsObj = {};
