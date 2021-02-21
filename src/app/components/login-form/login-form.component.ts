@@ -47,10 +47,11 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     const auth$: Observable<ActiveUser> = this.auth.login(this.loginForm.value);
-    this.subscription = auth$.subscribe(() => {
+    this.subscription = auth$.subscribe(resp => {
+      console.log(resp);
       const returnUrl = this.route.snapshot.queryParams['/returnUrl'] || '/';
-      this.router.navigate([returnUrl]);
       this.loginForm.reset();
+      this.router.navigate([returnUrl]);
     });
   }
 
