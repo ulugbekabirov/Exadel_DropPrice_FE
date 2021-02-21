@@ -9,6 +9,7 @@ import { RefDirective } from '../../directives/ref.directive';
 import { UserService } from '../../services/user.service';
 import { UserFacadeService } from '../../user-profile/services/user-facade.service';
 
+
 @Component({
   selector: 'app-discount-detail',
   templateUrl: './discount-detail.component.html',
@@ -16,7 +17,6 @@ import { UserFacadeService } from '../../user-profile/services/user-facade.servi
 })
 
 export class DiscountDetailComponent implements OnInit, OnDestroy {
-
   discount: Discount;
   private unsubscribe$ = new Subject<void>();
   rating;
@@ -65,9 +65,14 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
   toggleFavorites(discountId: number): void {
     this.discountsService.updateIsSavedDiscount(discountId).pipe(
       takeUntil(this.unsubscribe$)
-    ).subscribe(resp => {
-      this.discount = {...this.discount, isSaved: resp.isSaved};
-    });
+    )
+      .subscribe(resp => {
+        this.discount = {...this.discount, isSaved: resp.isSaved};
+      });
+  }
+
+  onEditDiscount(discountId): void {
+    this.router.navigate(['discounts/edit', discountId]);
   }
 
   archiveDiscount(discountId: number): void {
@@ -88,8 +93,8 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
     this.discountsService.putRating(this.discount.discountId, this.selectedRatingValue).pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe(next => {
-        this.selectedRatingValue = 0;
-      });
+      this.selectedRatingValue = 0;
+    });
   }
 
   addClass(star): void {

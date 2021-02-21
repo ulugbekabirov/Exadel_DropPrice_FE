@@ -155,17 +155,17 @@
     <span class="discount-detail__rating_label">
       {{ "DISCOUNT_DETAIL.ASSESSMENT_LABEL" | translate }}
     </span>
-        <ul class="discount-detail__rating_list">
-          <li *ngFor="let star of stars; let i = index"
-              (click)="countStar(star)"
-              id="{{ 'starId' + i }}"
-              [ngClass]="{ selected: star <= selectedRatingValue }"
-              (mouseover)="addClass(star)"
-              (mouseout)="removeClass(star)"
-          >
-            ★
-          </li>
-        </ul>
+    <ul class="discount-detail__rating_list">
+      <li *ngFor="let star of stars; let i = index"
+          (click)="countStar(star)"
+          id="{{ 'starId' + i }}"
+          [ngClass]="{ selected: star <= selectedRatingValue }"
+          (mouseover)="addClass(star)"
+          (mouseout)="removeClass(star)"
+      >
+        ★
+      </li>
+    </ul>
   </section>
 
   <section class="discount-detail__actions">
@@ -177,12 +177,12 @@
     >
       {{ "DISCOUNT_DETAIL.TICKET_BUTTON_LABEL" | translate }}
     </button>
-    <button
-      *appVerifyUserRoles="['Moderator']"
-      class="action__button"
-      mat-flat-button
-      matTooltip="Edit Discount"
-      routerLink="edit"
+    <button *appVerifyUserRoles='["Moderator"]'
+            class="action__button"
+            mat-flat-button
+            matTooltip="Edit Discount"
+            routerLink="edit"
+            (click)="onEditDiscount(discount.discountId)"
     >
       {{ "DISCOUNT_DETAIL.EDIT_BUTTON_LABEL" | translate }}
     </button>
