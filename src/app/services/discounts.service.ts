@@ -3,6 +3,7 @@ import { ApiDataService } from './api-data.service';
 import { Observable } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -87,6 +88,13 @@ export class DiscountsService {
       params: new HttpParams({fromObject: paramsObj})
     };
     return this.restApi.searchStatsDiscounts(options);
+  }
+
+  putRating(discountId, rating): any {
+    const body = {
+      assessmentValue: rating
+    };
+    return this.restApi.putRating(discountId, body);
   }
 
   getPointOfSales(): Observable<any> {
