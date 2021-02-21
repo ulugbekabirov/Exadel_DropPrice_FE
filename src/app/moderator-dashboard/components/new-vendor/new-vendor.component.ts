@@ -8,9 +8,9 @@ import {
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DiscountsService } from '../../services/discounts.service';
-import { VendorsService } from '../../services/vendors.service';
-import { Vendor } from './../../models/vendor';
+import { DiscountsService } from '../../../services/discounts.service';
+import { VendorsService } from '../../../services/vendors.service';
+import { Vendor } from '../../../models/vendor';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { switchMap, takeUntil } from 'rxjs/operators';
