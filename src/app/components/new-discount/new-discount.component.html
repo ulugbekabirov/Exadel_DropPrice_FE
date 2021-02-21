@@ -203,7 +203,6 @@
               fxLayoutAlign="start center"
               fxLayout.xs="center center"
             >
-
               <mat-form-field class="point__name">
                 <mat-label>{{ "NEW_DISCOUNT_FORM.NAME_LABEL" | translate }}</mat-label>
                 <input
@@ -275,7 +274,7 @@
         <button
           mat-raised-button
           color="primary"
-          [disabled]="newDiscountForm.invalid || coordinateIsEmpty"
+          [disabled]="newDiscountForm.pristine || newDiscountForm.invalid || coordinateIsEmpty"
           type="submit"
         >
           {{ "NEW_DISCOUNT_FORM.BTN_TITLE" | translate }}

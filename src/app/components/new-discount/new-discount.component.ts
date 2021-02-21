@@ -43,13 +43,10 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
   newDiscountForm: FormGroup;
   discount: Discount;
   coordinateIsEmpty = true;
-  tagsArray: Tag[] = [];
-  visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER];
-  isChecked = true;
   discId: number;
   private unsubscribe$ = new Subject<void>();
   isEditMode: boolean = (this.router.url).includes('edit');
@@ -63,7 +60,6 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
   @ViewChild('auto') matAutocomplete: MatAutocompleteModule;
 
   constructor(
-    public translateService: TranslateService,
     public fb: FormBuilder,
     private dialog: MatDialog,
     private route: ActivatedRoute,
@@ -85,9 +81,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     this.discountsService.getPointOfSales().pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe(res => {
-      this.pointNameList = this.filteredPointNameList = res.sort((a, b) => {
-        return a.name < b.name ? -1 : 1;
-      });
+      this.pointNameList = this.filteredPointNameList = res;
     });
 
     this.newDiscountForm = this.fb.group({
@@ -117,23 +111,25 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
             );
           }),
           takeUntil(this.unsubscribe$)
-        ).subscribe(([discount, points]) => {
-        const editingDiscount = {...discount, pointOfSales: points};
-        if (editingDiscount.tags) {
-          editingDiscount.tags.forEach(tag => {
-            this.tags.push(
-              new FormControl(tag, Validators.required));
-          });
-        }
-        if (editingDiscount.pointOfSales) {
-          editingDiscount.pointOfSales.forEach(point => {
-            this.pointOfSalesForms.push(this.editPointOfSale());
-          });
-        }
-        this.newDiscountForm.patchValue(editingDiscount);
-        this.coordinateIsEmpty = false;
-        this.vendorNameDetectChanges();
-      });
+        )
+        .subscribe(([discount, points]) => {
+          const editingDiscount = {...discount, pointOfSales: points};
+          if (editingDiscount.tags) {
+            editingDiscount.tags.forEach(tag => {
+              this.tags.push(
+                new FormControl(tag, Validators.required));
+            });
+          }
+          if (editingDiscount.pointOfSales) {
+            editingDiscount.pointOfSales.forEach(point => {
+              this.pointOfSalesForms.push(this.editPointOfSale());
+            });
+          }
+          this.newDiscountForm.patchValue(editingDiscount);
+          this.coordinateIsEmpty = false;
+          this.vendorNameDetectChanges();
+          this.newDiscountForm.markAsPristine();
+        });
     }
   }
 
@@ -152,8 +148,8 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
       takeUntil(this.unsubscribe$),
       debounceTime(300),
       startWith(''),
-    ).subscribe(
-      (data) => {
+    )
+      .subscribe((data) => {
         if (!this.vendorsList || !data) {
           this.filteredList = this.vendorsList;
           return;
