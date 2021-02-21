@@ -1,6 +1,6 @@
 <section class="settings">
   <div class="grid">
-    <article *ngFor="let setting of settings"
+    <article *ngFor="let setting of settings$ | async"
              class="config"
     >
       <app-setting-item

@@ -16,35 +16,23 @@ export class SettingsComponent implements OnInit, OnDestroy {
   settingEdit: FormGroup = new FormGroup({
     settingValue: new FormControl('', Validators.required)
   });
-  settings;
   private unsubscribe$ = new Subject<void>();
 
 
   constructor(
     private api: ApiDataService,
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.settings$ = this.api.getApiConfigs().pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(next => this.settings = next);
+    this.settings$ = this.api.getApiConfigs();
   }
 
   changeSetting(configId: number): void {
     const {settingValue} = this.settingEdit.value;
-    this.api.putApiConfig(configId, settingValue).pipe(
+    this.api.putApiConfig(configId, settingValue)
+      .pipe(
       takeUntil(this.unsubscribe$)
-    ).subscribe(
-      resp => {
-        this.settingEdit.reset();
-        this.settings = this.settings.map((config: Setting) => {
-          return config.configId === resp.configId
-            ? {...config, configValue: resp.configValue}
-            : {...config};
-        });
-      }
-    );
+    ).subscribe();
   }
 
   ngOnDestroy(): void {
