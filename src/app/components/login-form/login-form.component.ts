@@ -5,10 +5,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { switchMap, take, takeUntil } from 'rxjs/operators';
 import { AuthService } from '../../auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-import { ActiveUser } from '../../models';
+import { Subject } from 'rxjs';
+import { UserService } from '../../services/user.service';
 
 
 @Component({
@@ -19,13 +20,14 @@ import { ActiveUser } from '../../models';
 export class LoginFormComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
   hide = true;
-  private subscription: Subscription;
+  private unsubscribe$ = new Subject<void>();
 
   constructor(
     private auth: AuthService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
+    private userService: UserService,
   ) {
   }
 
@@ -46,13 +48,21 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    const auth$: Observable<ActiveUser> = this.auth.login(this.loginForm.value);
-    this.subscription = auth$.subscribe(resp => {
-      console.log(resp);
-      const returnUrl = this.route.snapshot.queryParams['/returnUrl'] || '/';
-      this.loginForm.reset();
-      this.router.navigate([returnUrl]);
-    });
+    this.auth.login(this.loginForm.value)
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        switchMap(() => {
+          return this.userService.activeUser;
+        })
+      )
+      .subscribe(resp => {
+        if (!resp) {
+          return;
+        }
+        const returnUrl = this.route.snapshot.queryParams['/returnUrl'] || '/';
+        this.loginForm.reset();
+        this.router.navigate([returnUrl]);
+      });
   }
 
   get email(): AbstractControl {
@@ -64,6 +74,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiDataService } from './api-data.service';
-import { BehaviorSubject, Observable, } from 'rxjs';
+import { BehaviorSubject, Observable, of, } from 'rxjs';
 import { ActiveUser } from '../models';
 import { KEY_ACTIVE_USER } from '../../constants';
 import { map, tap } from 'rxjs/operators';
@@ -32,9 +32,11 @@ export class UserService {
   }
 
   private handleActiveUser(user: ActiveUser): any {
+    if (this.activeUserValue) {
+      this.logout();
+    }
     this.activeUserSubject.next(user);
     localStorage.setItem(KEY_ACTIVE_USER, JSON.stringify(user));
-    return user;
   }
 
   getLocation(): Promise<any> {
