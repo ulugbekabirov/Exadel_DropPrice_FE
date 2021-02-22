@@ -1,72 +1,50 @@
 <div class="admin-dashboard__search">
   <app-admin-search
     (onEmitSearchTerm)="searchTermChange($event)"
-    [initialValue]="searchTerm$"
+    [initialValue$]="searchTerm$"
   ></app-admin-search>
 </div>
 <section class="content">
-  <section class="grid">
-    <article>
-      <div>
-        <mat-card
-          fxLayout="row"
-          fxLayoutAlign="space-around center"
-        >
-          <mat-form-field>
-            <mat-label>{{"ADMIN_DASHBOARD.SORT.LABEL.RATING" | translate}}</mat-label>
-            <mat-select [formControl]="ratingSort"
-            >
-              <mat-option *ngFor="let rating of sortRating$ | async " [value]="rating">
-                {{rating.includes('Asc') ? ("ADMIN_DASHBOARD.SORT.ASC" | translate) : ("ADMIN_DASHBOARD.SORT.DESC" | translate)}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>{{"ADMIN_DASHBOARD.SORT.LABEL.TICKET" | translate}}</mat-label>
-            <mat-select [formControl]="ticketCountSort"
-            >
-              <mat-option *ngFor="let ticketCount of sortTicketCount$ | async" [value]="ticketCount">
-                {{ticketCount.includes('Asc') ? ("ADMIN_DASHBOARD.SORT.ASC" | translate) : ("ADMIN_DASHBOARD.SORT.DESC" | translate)}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </mat-card>
+  <div class="grid">
+    <article class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource$ | async" matSort>
 
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>{{"ADMIN_DASHBOARD.STATS.TABLE.NAME" | translate}}</th>
+          <td class="td-name" mat-cell *matCellDef="let element">
+            <a [routerLink]="['/discounts', element.discountId]">
+              {{element.discountName}}
+            </a>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>{{"ADMIN_DASHBOARD.STATS.TABLE.NAME" | translate}}</th>
-            <td class="td-name" mat-cell *matCellDef="let element">
-              <a [routerLink]="['/discounts', element.discountId]">
-                {{element.discountName}}
-              </a>
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="rating">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header
+          >
+            {{"ADMIN_DASHBOARD.STATS.TABLE.RATING" | translate}}
+          </th>
+          <td mat-cell
+              *matCellDef="let element"> {{element.discountRating ? element.discountRating.toFixed(1) : '-'}} </td>
+        </ng-container>
 
-          <ng-container matColumnDef="rating">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header
-            >
-              {{"ADMIN_DASHBOARD.STATS.TABLE.RATING" | translate}}
-            </th>
-            <td mat-cell
-                *matCellDef="let element"> {{element.discountRating ? element.discountRating.toFixed(1) : '-'}} </td>
-          </ng-container>
+        <ng-container matColumnDef="ticketCount">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header
+          >
+            {{"ADMIN_DASHBOARD.STATS.TABLE.TICKETS" | translate}}
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.ticketCount}} </td>
+        </ng-container>
 
-          <ng-container matColumnDef="ticketCount">
-            <th mat-header-cell *matHeaderCellDef  mat-sort-header
-            >
-              {{"ADMIN_DASHBOARD.STATS.TABLE.TICKETS" | translate}}
-            </th>
-            <td mat-cell *matCellDef="let element"> {{element.ticketCount}} </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-
-        <mat-paginator [length]="resultsLength" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-      </div>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator
+        [length]="resultsLength$ | async"
+        [pageSizeOptions]="pageSizes$ | async"
+        [pageSize]="pageSize$ | async"
+        showFirstLastButtons
+      ></mat-paginator>
     </article>
-  </section>
+  </div>
 </section>
 

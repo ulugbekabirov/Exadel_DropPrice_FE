@@ -1,41 +1,37 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, pluck } from 'rxjs/operators';
-import { Discount } from 'src/app/models';
+import { Vendor } from '../../models';
 
 
-export interface SortState {
-  ratingData: any;
-  ratingSelected: any;
-  ticketCountData: any;
-  ticketCountSelected: any;
+export interface VendorsStatState {
   sorts: string[];
   sortBy: string[];
   searchQuery: string;
   skip: number;
   take: number;
-  results: Discount[];
+  results: Vendor[];
   total: number;
+  pageSizes: number[];
 }
 
-const SEARCH_INITIAL_STATE = {
-  ratingData: ['RatingAsc', 'RatingDesc'],
-  ratingSelected: 'RatingDesc',
-  ticketCountData: ['TicketCountAsc', 'TicketCountDesc'],
-  ticketCountSelected: 'TicketCountAsc',
+const VENDORS_STAT_INITIAL_STATE: VendorsStatState = {
   sorts: ['RatingAsc', 'RatingDesc', 'TicketCountAsc', 'TicketCountDesc'],
-  sortBy: ['RatingAsc', 'TicketCountAsc'],
+  sortBy: ['RatingDesc', 'TicketCountDesc'],
   searchQuery: '',
+  results: [],
+  total: 0,
   skip: 0,
   take: 5,
+  pageSizes: [5, 10, 20]
 };
 
 @Injectable({
   providedIn: 'root'
 })
-export class DiscountsSortStore {
+export class VendorsStatStore {
 
-  private subject = new BehaviorSubject<SortState>(SEARCH_INITIAL_STATE);
+  private subject = new BehaviorSubject<VendorsStatState>(VENDORS_STAT_INITIAL_STATE);
   private store = this.subject.asObservable()
     .pipe(
       distinctUntilChanged()
@@ -53,6 +49,5 @@ export class DiscountsSortStore {
     this.subject.next({
       ...this.value, [name]: state
     });
-    console.log(this.value);
   }
 }

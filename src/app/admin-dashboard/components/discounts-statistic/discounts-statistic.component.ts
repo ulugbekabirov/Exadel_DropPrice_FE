@@ -1,11 +1,9 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { merge, Observable, Subject } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 import { startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { StatisticsFacadeService } from '../../services/statistics-facade.service';
-import { DiscountsSortStore } from '../../services/discounts-sorts-store';
+import { DiscountsStatStore } from '../../services/discounts-stat-store';
 import { MatSort } from '@angular/material/sort';
 import { Discount } from 'src/app/models';
 
@@ -16,15 +14,12 @@ import { Discount } from 'src/app/models';
 })
 
 export class DiscountsStatisticComponent implements OnInit, OnDestroy, AfterViewInit {
-  ratingSort = new FormControl();
-  ticketCountSort = new FormControl();
-  dataSource;
   displayedColumns: string[] = ['name', 'rating', 'ticketCount'];
-  sortRating$: Observable<any>;
-  sortTicketCount$: Observable<any>;
-  searchResults$;
-  searchTerm$: any;
-  resultsLength: number;
+  dataSource$: Observable<Discount[]>;
+  searchTerm$: Observable<string>;
+  resultsLength$: Observable<number>;
+  pageSizes$: Observable<number[]>;
+  pageSize$: Observable<number>;
   private unsubscribe$ = new Subject<void>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -32,37 +27,21 @@ export class DiscountsStatisticComponent implements OnInit, OnDestroy, AfterView
 
   constructor(
     private facade: StatisticsFacadeService,
-    private sortStore: DiscountsSortStore,
-  ) {
-    this.facade.searchDiscounts()
-      .pipe(
-        takeUntil(this.unsubscribe$)
-      ).subscribe(next => console.log(next));
-
-    this.sortRating$ = this.sortStore.select('ratingData');
-    this.sortTicketCount$ = this.sortStore.select('ticketCountData');
-    this.searchTerm$ = this.sortStore.select('searchQuery');
-  }
+    private discountsStatStore: DiscountsStatStore,
+  ) {}
 
   ngOnInit(): void {
-    this.facade.select('results')
+    this.dataSource$ = this.facade.searchDiscounts()
       .pipe(
-        takeUntil(this.unsubscribe$)
-      ).subscribe((result: Discount[]) => {
-      this.dataSource = new MatTableDataSource(result);
-    });
-    this.facade.select('total').pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe((total: number) => {
-      this.resultsLength = total;
-    });
-
-    this.ratingSort.valueChanges.pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(next => this.sortStore.set('ratingSelected', next));
-    this.ticketCountSort.valueChanges.pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(next => this.sortStore.set('ticketCountSelected', next));
+        takeUntil(this.unsubscribe$),
+        switchMap((): Observable<Discount[]> => {
+          return this.discountsStatStore.select('results');
+        })
+      );
+    this.searchTerm$ = this.discountsStatStore.select('searchQuery');
+    this.resultsLength$ = this.discountsStatStore.select('total');
+    this.pageSizes$ = this.discountsStatStore.select('pageSizes');
+    this.pageSize$ = this.discountsStatStore.select('take');
   }
 
   ngAfterViewInit(): void {
@@ -72,15 +51,16 @@ export class DiscountsStatisticComponent implements OnInit, OnDestroy, AfterView
       .pipe(
         startWith({}),
         takeUntil(this.unsubscribe$)
-      ).subscribe((data) => this.facade.updateDiscountsSort(data));
+      )
+      .subscribe((data: any) => this.facade.updateDiscountsSort(data));
+  }
+
+  searchTermChange(query): void {
+    this.discountsStatStore.set('searchQuery', query);
   }
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
-  }
-
-  searchTermChange(query): void {
-    this.sortStore.set('searchQuery', query);
   }
 }
