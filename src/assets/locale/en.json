@@ -28,7 +28,7 @@
   "MAIN_PAGE": {
     "SEARCH": "Search",
     "BUTTONS": {
-      "TICKET": "Ticket"
+      "TICKET": "Get the discount"
     },
     "FILTER": {
       "SORT_BY": {
@@ -57,8 +57,8 @@
       }
     },
     "DISCOUNT_CARD": {
-      "DISTANCE": "from you",
-      "DATE": "before"
+      "DISTANCE": " from you",
+      "DATE": "before "
     }
   },
   "MODERATOR_DASHBOARD": {

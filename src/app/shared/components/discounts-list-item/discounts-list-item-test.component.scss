@@ -1,0 +1,168 @@
+@import "src/variables";
+
+.container {
+  display: flex;
+  height: 250px;
+  flex-direction: column;
+  align-self: center;
+  position: relative;
+  background: white;
+  box-shadow: 1px 3px 10px 1px #A5A4A5;
+  border-radius: 10px;
+  padding: 30px;
+  font-size: 16px;
+  color: #313237;
+
+  .corner-ribbon-6 {
+    width: 100px;
+    height: 120px;
+    overflow: hidden;
+    position: absolute;
+  }
+
+  .corner-ribbon-6::before,
+  .corner-ribbon-6::after {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    display: block;
+  }
+
+  .corner-ribbon-6 span {
+    position: absolute;
+    display: block;
+    width: 160px;
+    padding: 10px 0;
+    background-color: #709ace;
+    // background-color: #f66e65;
+    // background-color: #5fa892;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    font: 700 18px/1 'Lato', sans-serif;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    font-size: 1.8rem;
+  }
+
+  .corner-ribbon-6-top-right {
+    top: -10px;
+    right: -5px;
+  }
+
+  .corner-ribbon-6-top-right::before,
+  .corner-ribbon-6-top-right::after {
+    border-right-color: transparent;
+  }
+
+  .corner-ribbon-6-top-right::before {
+    top: 0;
+    left: 0;
+  }
+
+  .corner-ribbon-6-top-right::after {
+    right: 0;
+    bottom: 0;
+  }
+
+  .corner-ribbon-6-top-right span {
+    left: -25px;
+    top: 30px;
+  }
+
+  .titles {
+    width: calc(100% - 60px);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    .discount-card__vendor_link,
+    .favorite {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .discount-card__vendor_link {
+      color: #4b4c52;
+    }
+
+    .favorite {
+      margin-bottom: 16px;
+      color: $isSaved_true_bg_color;
+      cursor: pointer;
+      will-change: transform;
+      transition: transform .1s ease-in-out;
+
+      &:hover {
+        transform: scale(1.1, 1.1);
+        color: $isSaved_true_bg_color_hover;
+      }
+    }
+
+    .edit_icon {
+      cursor: pointer;
+      margin-bottom: 16px;
+    }
+  }
+
+  .test2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: last baseline;
+
+    .discount-card__header_title {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .discount-card__distance {
+      color: #adadaf;
+      font-size: .8rem;
+      font-weight: 500;
+    }
+  }
+
+  .discount-card__amount {
+    font-size: 2rem;
+    margin-bottom: 20px;
+
+    .date {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+  }
+
+  .test3 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .rating__amount,
+  .rating__icon {
+    font-size: 1.2rem;
+    font-weight: 500;
+
+  }
+
+  .rating__icon {
+    color: #3F51B5;
+  }
+
+  .discount-footer {
+    margin: auto 0 0 0;
+
+    .rating-main {
+      // align-self: start;
+      margin-bottom: 10px;
+    }
+
+    .action__ticket {
+      font-size: 1rem;
+      margin: auto 0 0 0;
+      background-color: $main_header_bgColor;
+    }
+
+  }
+}

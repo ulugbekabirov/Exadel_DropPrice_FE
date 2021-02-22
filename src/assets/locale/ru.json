@@ -28,7 +28,7 @@
   "MAIN_PAGE": {
     "SEARCH": "Поиск",
     "BUTTONS": {
-      "TICKET": "Талон"
+      "TICKET": "Получить скидку"
     },
     "FILTER": {
       "SORT_BY": {
@@ -58,8 +58,8 @@
       }
     },
     "DISCOUNT_CARD": {
-      "DISTANCE": "от вас",
-      "DATE": "до"
+      "DISTANCE": " от вас",
+      "DATE": "до "
     }
   },
   "MODERATOR_DASHBOARD": {
