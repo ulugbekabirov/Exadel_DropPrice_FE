@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
   }
 
-  changeCoords(): void {
+  onChangeUserCoords(): void {
     this.userService.getLocation()
       .then(res => {
         this.activeData.latitude = res.latitude;
