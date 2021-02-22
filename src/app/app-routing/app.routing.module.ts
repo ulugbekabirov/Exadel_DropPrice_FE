@@ -5,9 +5,6 @@ import { NotFoundComponent } from '../shared/components/not-found.components/not
 import { HomeComponent } from '../components/home/home.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { DiscountDetailComponent } from '../components/discount-detail/discount-detail.component';
-import { ModeratorDashboardComponent } from '../components/moderator-dashboard/moderator-dashboard.component';
-import { NewDiscountComponent } from '../components/new-discount/new-discount.component';
-import { NewVendorComponent } from '../components/new-vendor/new-vendor.component';
 
 const appRoutes: Routes = [
   {
@@ -20,12 +17,7 @@ const appRoutes: Routes = [
   {path: 'vendors', loadChildren: () => import('../vendors/vendors.module').then(m => m.VendorsModule)},
   {path: 'user-profile', loadChildren: () => import('../user-profile/user-profile.module').then(m => m.UserProfileModule)},
   {path: 'admin', loadChildren: () => import('../admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule)},
-  {path: 'add-new',
-    component: ModeratorDashboardComponent,
-    canActivate: [AuthGuard],
-  },
-  {path: 'discounts/edit/:id', component: NewDiscountComponent},
-  {path: 'vendors/edit/:id', component: NewVendorComponent},
+  {path: 'add-new', loadChildren: () => import('../moderator-dashboard/moderator-dashboard.module').then(m => m.ModeratorDashboardModule)},
   {path: '', redirectTo: '/', pathMatch: 'full'},
   {path: '**', component: NotFoundComponent}
 ];

@@ -29,6 +29,6 @@ export class DiscountsListItemComponent {
     this.changeFavourites.emit(discountId);
   }
   onEditDiscount(discountId: number){
-    this._router.navigate(['discounts/edit', discountId])
+    this._router.navigate(['add-new/discounts/edit', discountId]);
   }
 }

@@ -17,6 +17,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VerifyUserRolesDirective } from '../directives/verify-user-roles.directive';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { NotFoundComponent } from './components/not-found.components/not-found.component';
 import { RefDirective } from '../directives/ref.directive';
 import { ModalComponent } from './components/modal.component/modal.component';
@@ -33,7 +34,6 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { RouterModule } from '@angular/router';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { TicketComponent } from './components/ticket/ticket.component';
-import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 
 @NgModule({
