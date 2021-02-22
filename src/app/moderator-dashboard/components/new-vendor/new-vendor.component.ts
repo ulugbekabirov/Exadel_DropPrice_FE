@@ -62,7 +62,7 @@ export class NewVendorComponent implements OnInit, OnDestroy {
         facebook: ['',
           [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
         ],
-        website: ['',
+        webSite: ['',
           [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
         ]
       })
@@ -175,8 +175,8 @@ export class NewVendorComponent implements OnInit, OnDestroy {
     return this.newVendorForm.get('facebook');
   }
 
-  get website(): AbstractControl {
-    return this.newVendorForm.get('website');
+  get webSite(): AbstractControl {
+    return this.newVendorForm.get('webSite');
   }
 
   get otherLinks(): AbstractControl {
