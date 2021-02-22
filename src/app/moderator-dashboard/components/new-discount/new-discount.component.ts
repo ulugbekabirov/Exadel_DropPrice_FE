@@ -85,7 +85,10 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     });
 
     this.newDiscountForm = this.fb.group({
-      vendorName: ['', [Validators.required, this.requireMatch.bind(this)]],
+      vendorName: [
+        {value: '', disabled: this.isEditMode},
+        [Validators.required, this.requireMatch.bind(this)]
+      ],
       discountName: ['', [Validators.required]],
       description: ['', [Validators.minLength(40), Validators.required]],
       discountAmount: [
