@@ -1,207 +1,179 @@
 <article class="discount-detail">
-  <a class="go-back__link"
-     fxLayoutAlign="center center"
-     fxLayoutGap=".5em"
-     matTooltip="Gp Back"
-     (click)="goBack()"
+  <a
+    class="go-back__link"
+    fxLayoutAlign="center center"
+    fxLayoutGap=".5em"
+    matTooltip="Gp Back"
+    (click)="goBack()"
   >
-    <mat-icon class="go-back__link_icon">
-      reply
-    </mat-icon>
+    <mat-icon class="go-back__link_icon"> reply</mat-icon>
     <span class="go-back__link_text">
-      {{"BUTTON_BACK_LOCATION" | translate}}
+      {{ "BUTTON_BACK_LOCATION" | translate }}
     </span>
   </a>
 
-
   <section class="discount-detail__header">
-
     <div class="discount-detail__header_rating">
-      <mat-icon class="rating__icon"
-                fxLayoutAlign="center center"
-                *ngFor="let star of rating"
-      >{{star ? 'star_rate' : 'star_border'}}
+      <mat-icon
+        class="rating__icon"
+        fxLayoutAlign="center center"
+        *ngFor="let star of rating"
+      >{{ star ? "star_rate" : "star_border" }}
       </mat-icon>
     </div>
 
     <h2 class="discount-detail__header_title">
-      {{discount?.discountName}}
+      {{ discount?.discountName }}
     </h2>
 
-    <mat-icon class="discount-detail__header_favourite"
-              fxLayoutAlign="center center"
-              matTooltip="Toggle Favourites"
-              [ngStyle]="{'color': discount?.isSaved ? '#FF6347' : '#A38D8B'}"
-              (click)="toggleFavorites(discount?.discountId)"
+    <mat-icon
+      class="discount-detail__header_favourite"
+      fxLayoutAlign="center center"
+      matTooltip="Toggle Favourites"
+      [ngStyle]="{ color: discount?.isSaved ? '#FF6347' : '#A38D8B' }"
+      (click)="toggleFavorites(discount?.discountId)"
     >
       favorite
     </mat-icon>
   </section>
 
   <section class="discount-detail__content">
-
     <mat-card class="discount-content">
       <h3 class="discount-content__vendor">
         <a
           [routerLink]="['../../vendors/', discount?.vendorId]"
           matTooltip="Vendor"
         >
-          {{discount?.vendorName}}
+          {{ discount?.vendorName }}
         </a>
       </h3>
 
       <div class="discount-content__description">
         <p class="discount-content__description_text">
-          {{discount?.description}}
+          {{ discount?.description }}
         </p>
       </div>
-      <p class="discount-content__amount"
-         fxLayout="row"
-         fxLayoutAlign="start center"
-         fxLayoutGap="1em"
+      <p
+        class="discount-content__amount"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        fxLayoutGap="1em"
       >
-        <span class="discount-content__amount_label"
-              fxLayoutAlign="start center"
-              fxFlex="30"
+        <span
+          class="discount-content__amount_label"
+          fxLayoutAlign="start center"
+          fxFlex="30"
         >
           {{ "DISCOUNT_DETAIL.AMOUNT_LABEL" | translate }}:
         </span>
-        <span
-          fxLayoutAlign="start center"
-          fxFlex="70"
-        >
+        <span fxLayoutAlign="start center" fxFlex="70">
           <span class="discount-content__amount_text">
-          {{discount?.discountAmount}}
-        </span>
-          <span class="discount-content__amount_symbol">
-          %
-        </span>
+            {{ discount?.discountAmount }}
+          </span>
+          <span class="discount-content__amount_symbol"> % </span>
         </span>
       </p>
 
-      <p class="discount-content__promoCode"
-         fxLayout="row"
-         fxLayoutAlign="start center"
-         fxLayoutGap="1em"
+      <p
+        class="discount-content__promoCode"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        fxLayoutGap="1em"
       >
-        <span class="discount-content__promoCode_label"
-              fxFlex="30"
-              fxLayoutAlign="start center"
+        <span
+          class="discount-content__promoCode_label"
+          fxFlex="30"
+          fxLayoutAlign="start center"
         >
           {{ "DISCOUNT_DETAIL.PROMO_CODE_LABEL" | translate }}:
         </span>
-        <span class="discount-content__promoCode_text"
-              fxLayoutAlign="start center"
-              fxFlex="70"
+        <span
+          class="discount-content__promoCode_text"
+          fxLayoutAlign="start center"
+          fxFlex="70"
         >
-          {{discount?.promoCode}}
+          {{ discount?.promoCode }}
         </span>
       </p>
 
-      <p class="discount-content__address"
-         fxLayout="row"
-         fxLayoutAlign="start center"
-         fxLayoutGap="1em"
+      <p
+        class="discount-content__address"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        fxLayoutGap="1em"
       >
-        <span class="discount-content__address_label"
-              fxFlex="20"
-        >
+        <span class="discount-content__address_label" fxFlex="20">
           {{ "DISCOUNT_DETAIL.ADDRESS_LABEL" | translate }}
         </span>
-        <span class="discount-content__address_text"
-              fxFlex="80"
-        >
-          {{discount?.address}}
+        <span class="discount-content__address_text" fxFlex="80">
+          {{ discount?.address }}
         </span>
       </p>
 
       <p class="discount-content__distance">
-        <span
-          fxFlex="20"
-        >{{ "DISCOUNT_DETAIL.DISTANCE" | translate }}: </span>
-        <span>{{discount?.distanceInMeters | metersToKilometers}}</span>
+        <span fxFlex="20">{{ "DISCOUNT_DETAIL.DISTANCE" | translate }}: </span>
+        <span>{{ discount?.distanceInMeters | metersToKilometers }}</span>
       </p>
 
-      <div class="discount-content__date"
-           fxLayout="column"
-           fxLayoutAlign="center start"
-           fxLayoutGap="1em"
+      <div
+        class="discount-content__date"
+        fxLayout="column"
+        fxLayoutAlign="center start"
+        fxLayoutGap="1em"
       >
         <p>{{ "DISCOUNT_DETAIL.DATES_LABEL" | translate }}</p>
-        <div fxLayoutAlign="start center"
-             fxFill
-        >
-          <span class="discount-content__date_label"
-                fxFlex="20"
-          >
+        <div fxLayoutAlign="start center" fxFill>
+          <span class="discount-content__date_label" fxFlex="20">
             {{ "DISCOUNT_DETAIL.START_DATE" | translate }}:
           </span>
           <span class="discount-content__date_start">
-          {{discount?.startDate | date:"dd.MM.yyyy"}}
-        </span>
+            {{ discount?.startDate | date: "dd.MM.yyyy" }}
+          </span>
         </div>
-        <div fxLayoutAlign="start center"
-             fxFill
-        >
-          <span class="discount-content__date_label"
-                fxFlex="20"
-          >
+        <div fxLayoutAlign="start center" fxFill>
+          <span class="discount-content__date_label" fxFlex="20">
             {{ "DISCOUNT_DETAIL.END_DATE" | translate }}:
           </span>
           <span class="discount-content__date_end">
-          {{discount?.endDate | date:"dd.MM.yyyy"}}
-        </span>
+            {{ discount?.endDate | date: "dd.MM.yyyy" }}
+          </span>
         </div>
       </div>
 
       <mat-chip-list class="discount-content__tags">
-        <mat-chip *ngFor="let tag of discount?.tags"
-                  class="discount-content__tags_tag"
+        <mat-chip
+          *ngFor="let tag of discount?.tags"
+          class="discount-content__tags_tag"
         >
-          # {{tag}}
+          # {{ tag }}
         </mat-chip>
       </mat-chip-list>
-
     </mat-card>
-
   </section>
 
-  <section class="discount-detail__rating">
-    <span class="rating__label">
+  <section *ngIf="discount?.isOrdered" class="discount-detail__rating">
+    <span class="discount-detail__rating_label">
       {{ "DISCOUNT_DETAIL.ASSESSMENT_LABEL" | translate }}
     </span>
-    <mat-icon class="rating__icon"
-              fxLayoutAlign="center center"
-              matTooltip="Rate Discount"
-    >{{'star_rate'}}
-    </mat-icon>
-    <mat-icon class="rating__icon"
-              fxLayoutAlign="center center"
-              matTooltip="Rate Discount"
-    >{{'star_rate'}}
-    </mat-icon>
-    <mat-icon class="rating__icon"
-              fxLayoutAlign="center center"
-              matTooltip="Rate Discount"
-    >{{'star_rate'}}
-    </mat-icon>
-    <mat-icon class="rating__icon"
-              fxLayoutAlign="center center"
-              matTooltip="Rate Discount"
-    >{{'star_border'}}
-    </mat-icon>
-    <mat-icon class="rating__icon"
-              fxLayoutAlign="center center"
-              matTooltip="Rate Discount"
-    >{{'star_border'}}
-    </mat-icon>
+    <ul class="discount-detail__rating_list">
+      <li *ngFor="let star of stars; let i = index"
+          (click)="countStar(star)"
+          id="{{ 'starId' + i }}"
+          [ngClass]="{ selected: star <= selectedRatingValue }"
+          (mouseover)="addClass(star)"
+          (mouseout)="removeClass(star)"
+      >
+        ★
+      </li>
+    </ul>
   </section>
 
   <section class="discount-detail__actions">
-    <button class="action__button"
-            mat-flat-button
-            matTooltip="Take Ticket"
-            (click)="ticketHandler(discount?.discountId)"
+    <button
+      class="action__button"
+      mat-flat-button
+      matTooltip="Take Ticket"
+      (click)="ticketHandler(discount?.discountId)"
     >
       {{ "DISCOUNT_DETAIL.TICKET_BUTTON_LABEL" | translate }}
     </button>
@@ -210,22 +182,22 @@
             mat-flat-button
             matTooltip="Edit Discount"
             routerLink="edit"
+            (click)="onEditDiscount(discount.discountId)"
     >
       {{ "DISCOUNT_DETAIL.EDIT_BUTTON_LABEL" | translate }}
     </button>
-    <button *appVerifyUserRoles='["Moderator"]'
-            class="action__button"
-            mat-flat-button
-            matTooltip="Archive Discount"
-            (click)="archiveDiscount(discount?.discountId)"
-            [ngStyle]="{'backgroundColor': discount?.activityStatus ? '#4A94EB' : '#FF6347'}"
+    <button
+      *appVerifyUserRoles="['Moderator']"
+      class="action__button"
+      mat-flat-button
+      matTooltip="Archive Discount"
+      (click)="archiveDiscount(discount?.discountId)"
+      [ngStyle]="{
+        backgroundColor: discount?.activityStatus ? '#4A94EB' : '#FF6347'
+      }"
     >
       {{ "DISCOUNT_DETAIL.ARCHIVE_BUTTON_LABEL" | translate }}
     </button>
   </section>
-
 </article>
 <ng-template appRef></ng-template>
-
-
-

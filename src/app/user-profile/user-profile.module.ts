@@ -30,5 +30,6 @@ const routes: Routes = [
   exports: [
     RouterModule
   ]
- })
-export class UserProfileModule { }
+})
+export class UserProfileModule {
+}
