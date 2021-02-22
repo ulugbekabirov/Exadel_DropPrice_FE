@@ -13,7 +13,7 @@
   "HEADER": {
     "SELECTOR_TITLE": "Язык",
     "ADMIN_PANEL_LINK_TITLE": "Статистика",
-    "MODERATOR_PANEL_LINK_TITLE": "Добавить Вендора"
+    "MODERATOR_PANEL_LINK_TITLE": "Добавить"
   },
   "LOGIN": {
     "TITLE": "Вход",
@@ -140,10 +140,10 @@
     "ARCHIVE_BUTTON_LABEL": "Архивировать",
     "TICKET_BUTTON_LABEL": "Заказать скидку",
     "MAT_TAB_ABOUT": "О СКИДКЕ",
-    "MAT_TAB_RATING": "ОЦЕНИТЬ",
-    "MAT_TAB_MAP": "ПОКАЗАТЬ НА КАРТЕ",
-    "START_DATE": "от",
-    "END_DATE": "до"
+    "TOOLTIP_GO_BACK": "Вернуться к списку",
+    "TOOLTIP_VENDOR": "Вендор",
+    "TOOLTIP_FAVORITES": "Добавить в избранные",
+    "TOOLTIP_VENDOR_RAT": "Рейтинг вендора"
   },
   "VENDOR_PAGE": {
     "PAGE_TITLE": "Информация о вендоре",

@@ -21,9 +21,6 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { MissingTranslationService } from './services/missing-translation.service';
 import { HeaderComponent } from './components/header/header.component';
 import { AppRoutingModule } from './app-routing/app.routing.module';
-import { NewDiscountComponent } from './components/new-discount/new-discount.component';
-import { ModeratorDashboardComponent } from './components/moderator-dashboard/moderator-dashboard.component';
-import { NewVendorComponent } from './components/new-vendor/new-vendor.component';
 import { MapComponent } from './components/map/map.component';
 import { DiscountDetailComponent } from './components/discount-detail/discount-detail.component';
 import { DiscountsComponent } from './components/discounts/discounts.component';
@@ -39,10 +36,7 @@ export function HttpLoaderFactory(http: HttpClient): any {
     LoginFormComponent,
     HomeComponent,
     HeaderComponent,
-    ModeratorDashboardComponent,
-    NewVendorComponent,
     MapComponent,
-    NewDiscountComponent,
     DiscountDetailComponent,
     DiscountsComponent
   ],

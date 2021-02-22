@@ -11,7 +11,7 @@
         fxLayoutAlign.xs="center start"
         [formGroup]="newDiscountForm"
         #formDirective="ngForm"
-        (ngSubmit)="submit()"
+        (ngSubmit)="onSubmit()"
       >
         <div
           class="full-width"
@@ -147,10 +147,10 @@
             ></mat-datepicker-toggle>
             <mat-date-range-picker #picker></mat-date-range-picker>
             <mat-error *ngIf="startDate.hasError('matStartDateInvalid')">
-              {{ NEW_DISCOUNT_FORM.START_DATE_ERROR | translate }}
+              {{ "NEW_DISCOUNT_FORM.START_DATE_ERROR" | translate }}
             </mat-error>
             <mat-error *ngIf="endDate.hasError('matEndDateInvalid')"
-              >{{ NEW_DISCOUNT_FORM.END_DATE_ERROR | translate }}
+              >{{ "NEW_DISCOUNT_FORM.END_DATE_ERROR" | translate }}
             </mat-error>
           </mat-form-field>
 
@@ -188,7 +188,7 @@
             </mat-chip>
           </mat-chip-list>
         </mat-form-field>
-       
+
         <div class="points_title">
           <h4>{{ "NEW_DISCOUNT_FORM.POINTS_TITLE" | translate }}</h4>
         </div>
@@ -203,7 +203,6 @@
               fxLayoutAlign="start center"
               fxLayout.xs="center center"
             >
-
               <mat-form-field class="point__name">
                 <mat-label>{{ "NEW_DISCOUNT_FORM.NAME_LABEL" | translate }}</mat-label>
                 <input
@@ -275,7 +274,7 @@
         <button
           mat-raised-button
           color="primary"
-          [disabled]="!newDiscountForm.valid || coordinateIsEmpty"
+          [disabled]="newDiscountForm.pristine || newDiscountForm.invalid || coordinateIsEmpty"
           type="submit"
         >
           {{ "NEW_DISCOUNT_FORM.BTN_TITLE" | translate }}

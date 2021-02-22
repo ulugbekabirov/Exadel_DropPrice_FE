@@ -6,17 +6,17 @@ import { DiscountsService } from '../../services/discounts.service';
 import { Discount } from '../../models';
 import { Observable, Subject } from 'rxjs';
 import { RefDirective } from '../../directives/ref.directive';
-import { TicketService } from '../../services/ticket.service';
 import { UserService } from '../../services/user.service';
 import { UserFacadeService } from '../../user-profile/services/user-facade.service';
 
+
 @Component({
   selector: 'app-discount-detail',
-  templateUrl: './discount-detail-test.component.html',
-  styleUrls: ['./discount-detail-test.component.scss']
+  templateUrl: './discount-detail.component.html',
+  styleUrls: ['./discount-detail.component.scss']
 })
-export class DiscountDetailComponent implements OnInit, OnDestroy {
 
+export class DiscountDetailComponent implements OnInit, OnDestroy {
   discount: Discount;
   private unsubscribe$ = new Subject<void>();
   rating;
@@ -26,6 +26,8 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
     longitude: this.userService.activeUserValue.officeLongitude,
     latitude: this.userService.activeUserValue.officeLatitude,
   };
+  stars: number[] = [1, 2, 3, 4, 5];
+  selectedRatingValue = 0;
 
   @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
 
@@ -69,9 +71,8 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+  onEditDiscount(discountId): void {
+    this.router.navigate(['add-new/discounts/edit', discountId]);
   }
 
   archiveDiscount(discountId: number): void {
@@ -85,5 +86,35 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
 
   goBack(): void {
     this.location.back();
+  }
+
+  countStar(starValue): void {
+    this.selectedRatingValue = starValue;
+    this.discountsService.putRating(this.discount.discountId, this.selectedRatingValue).pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe(next => {
+      this.selectedRatingValue = 0;
+    });
+  }
+
+  addClass(star): void {
+    let ab = '';
+    for (let i = 0; i < star; i++) {
+      ab = 'starId' + i;
+      document.getElementById(ab).classList.add('selected');
+    }
+  }
+
+  removeClass(star): void {
+    let ab = '';
+    for (let i = star - 1; i >= this.selectedRatingValue; i--) {
+      ab = 'starId' + i;
+      document.getElementById(ab).classList.remove('selected');
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

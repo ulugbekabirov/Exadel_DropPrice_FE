@@ -13,7 +13,7 @@
   "HEADER": {
     "SELECTOR_TITLE": "Language",
     "ADMIN_PANEL_LINK_TITLE": "View statistics",
-    "MODERATOR_PANEL_LINK_TITLE": "Add Vendor"
+    "MODERATOR_PANEL_LINK_TITLE": "Add New"
   },
   "LOGIN": {
     "TITLE": "Log In",
@@ -139,10 +139,10 @@
     "ARCHIVE_BUTTON_LABEL": "Archive",
     "TICKET_BUTTON_LABEL": "Order discount",
     "MAT_TAB_ABOUT": "ABOUT",
-    "MAT_TAB_RATING": "RATE",
-    "MAT_TAB_MAP": "SHOW IT",
-    "START_DATE": "from",
-    "END_DATE": "to"
+    "TOOLTIP_GO_BACK": "Go back",
+    "TOOLTIP_VENDOR": "Vendor",
+    "TOOLTIP_FAVORITES": "Add to favorites",
+    "TOOLTIP_VENDOR_RAT": "Vendor rating"
   },
   "VENDOR_PAGE": {
     "PAGE_TITLE": "About vendor",

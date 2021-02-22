@@ -66,7 +66,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
       if (!vendor) {
         return;
       }
-      const parseSocials = JSON.parse(vendor.socialLinks);
+      const parseSocials = vendor.socialLinks ? JSON.parse(vendor.socialLinks) : '';
       this.vendor = {
         ...vendor,
         socialLinks: Object
@@ -82,7 +82,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
   }
 
   onEditVendor(vendorId: number): void {
-    this.router.navigate(['/vendors/edit', vendorId]);
+    this.router.navigate(['add-new/vendors/edit', vendorId]);
   }
 
   selectVendor(vendorId: any): void {

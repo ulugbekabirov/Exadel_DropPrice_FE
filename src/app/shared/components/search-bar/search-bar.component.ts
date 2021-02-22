@@ -1,26 +1,26 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
-import { ApiDataService } from '../../../services/api-data.service';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { Tag } from '../../../models';
+import { FormGroup } from '@angular/forms';
 
 export class SearchBar {
   constructor(
     public name: string,
     public tag: string[] = [],
-  ) {}
+  ) {
+  }
 }
 
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss'],
-  providers: [ApiDataService]
 })
 
 export class SearchBarComponent implements OnInit, OnDestroy {
-
+  public form: FormGroup;
   public consoleMessages: string[] = [];
   public userQuestion: string;
   public userQuestionUpdate = new Subject<string>();
@@ -60,7 +60,6 @@ export class SearchBarComponent implements OnInit, OnDestroy {
         this.consoleMessages.push(value);
         this.addSearch();
       });
-
   }
 
   ngOnDestroy(): void {

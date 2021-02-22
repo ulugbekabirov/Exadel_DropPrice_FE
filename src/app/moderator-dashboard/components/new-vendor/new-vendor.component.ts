@@ -8,9 +8,9 @@ import {
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DiscountsService } from '../../services/discounts.service';
-import { VendorsService } from '../../services/vendors.service';
-import { Vendor } from './../../models/vendor';
+import { DiscountsService } from '../../../services/discounts.service';
+import { VendorsService } from '../../../services/vendors.service';
+import { Vendor } from '../../../models/vendor';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { switchMap, takeUntil } from 'rxjs/operators';
@@ -57,16 +57,13 @@ export class NewVendorComponent implements OnInit, OnDestroy {
       email: ['', [Validators.required, Validators.email]],
       socialLinks: this.fb.group({
         instagram: ['',
-          // [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
+          [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
         ],
         facebook: ['',
-          // [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
+          [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
         ],
-        website: ['',
-          // [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
-        ],
-        otherLinks: ['',
-          // [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
+        webSite: ['',
+          [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
         ]
       })
     });
@@ -81,7 +78,7 @@ export class NewVendorComponent implements OnInit, OnDestroy {
           takeUntil(this.unsubscribe$)
         ).subscribe((vendor) => {
         this.newVendorForm.patchValue({
-          ...vendor, socialLinks: JSON.parse(vendor.socialLinks)
+          ...vendor, socialLinks: vendor.socialLinks ? JSON.parse(vendor.socialLinks) : {}
         });
       });
     }
@@ -103,10 +100,6 @@ export class NewVendorComponent implements OnInit, OnDestroy {
     });
   }
 
-  goBack(): void {
-    this.location.back();
-  }
-
   onSubmit(): void {
     const vendor = this.newVendorForm.value;
     const vendorModel = {...vendor, socialLinks: JSON.stringify(vendor.socialLinks)};
@@ -117,21 +110,24 @@ export class NewVendorComponent implements OnInit, OnDestroy {
     }
   }
 
-  updateVendor(vendor, vendId): void {
+  private updateVendor(vendor, vendId): void {
     this.vendorsService.updateVendor(vendor, vendId).pipe(
       takeUntil(this.unsubscribe$),
       catchError(error => {
         this.errorSnackBar('Not saved!', '');
         return throwError(error);
       }))
-      .subscribe(() => {
+      .subscribe((res) => {
         this.newVendorForm.reset();
         this.successSnackBar('Successfully update!', '');
-        this.goBack();
+        for (const control in this.newVendorForm.controls) {
+          this.newVendorForm.controls[control].setErrors(null);
+        }
+        this.router.navigate(['/vendors', res.id]);
       });
   }
 
-  createNewVendor(vendor): void {
+  private createNewVendor(vendor): void {
     this.vendorsService.createVendor(vendor).pipe(
       takeUntil(this.unsubscribe$),
       catchError(error => {
@@ -179,8 +175,8 @@ export class NewVendorComponent implements OnInit, OnDestroy {
     return this.newVendorForm.get('facebook');
   }
 
-  get website(): AbstractControl {
-    return this.newVendorForm.get('website');
+  get webSite(): AbstractControl {
+    return this.newVendorForm.get('webSite');
   }
 
   get otherLinks(): AbstractControl {

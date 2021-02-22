@@ -22,7 +22,7 @@
     <span class="rating__amount"
           fxLayoutAlign="center center"
     >
-          {{discount.discountRating ? discount.discountRating.toFixed() : discount.discountRating}}
+          {{discount.discountRating ? discount.discountRating.toFixed(2) : discount.discountRating}}
     </span>
       <mat-icon class="rating__icon"
                 fxLayoutAlign="center center"
@@ -86,6 +86,14 @@
       >
         {{ "MAIN_PAGE.BUTTONS.TICKET" | translate }}
       </button>
+      <mat-icon *appVerifyUserRoles='["Moderator"]'
+                class="action__edit"
+                matTooltip="Edit Discount"
+      (click)="onEditDiscount(discount.discountId)"
+      >
+      mode_edit
+      </mat-icon>
+
     </div>
   </div>
 </div>

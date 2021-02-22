@@ -3,6 +3,7 @@ import { ApiDataService } from './api-data.service';
 import { Observable } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -51,6 +52,10 @@ export class DiscountsService {
     return this.restApi.getDiscountById(discountId, options);
   }
 
+  getPointsOfSalesByDiscountId(discountId): Observable<any> {
+    return this.restApi.getPointsOfSalesByDiscountId(discountId);
+  }
+
   searchDiscounts(params): Observable<any> {
     const paramsObj = {};
     Object.keys({...params}).filter(value => typeof params[value] !== 'undefined').forEach(param => {
@@ -66,9 +71,13 @@ export class DiscountsService {
     return this.restApi.putDiscountInArchive(discountId);
   }
 
-  postDiscount(discount): any {
-    return this.restApi.postDiscount(discount);
+  createDiscount(discount): any {
+    return this.restApi. createDiscount(discount);
   }
+
+  updateDiscount(discount, id: number): any {
+    return this.restApi.updateDiscount(discount, id);
+   }
 
   searchStatsDiscount(terms): any {
     const paramsObj = {};
@@ -79,6 +88,13 @@ export class DiscountsService {
       params: new HttpParams({fromObject: paramsObj})
     };
     return this.restApi.searchStatsDiscounts(options);
+  }
+
+  putRating(discountId, rating): any {
+    const body = {
+      assessmentValue: rating
+    };
+    return this.restApi.putRating(discountId, body);
   }
 
   getPointOfSales(): Observable<any> {
