@@ -148,6 +148,7 @@
       "DETAIL_CONTENT": {
         "VENDOR_NAME": "Vendor Name",
         "VENDOR_ADDRESS": "Address",
+        "VENDOR_DESCRIPTION": "Description",
         "VENDOR_EMAIL": "E-Mail",
         "VENDOR_PHONE": "Phone",
         "VENDOR_SOCIALS": "Socials"

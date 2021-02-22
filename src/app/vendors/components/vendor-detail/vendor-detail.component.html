@@ -1,93 +1,123 @@
 <div class="vendors">
-  <article class="vendors-detail">
-    <section class="vendors-detail__header"
-             fxLayout="row"
-             fxLayoutAlign="center center"
-             fxLayoutGap="1em"
+  <div class="vendors-label">
+    <h2 class="vendors-label__vendor-name">
+      {{vendor?.vendorName}}
+    </h2>
+    <div class="vendors-label__rating"
+         fxLayout="row"
+         fxLayoutGap=".3em"
     >
-      <h3 class="vendors-detail__header_title">
-        {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_RATING_LABEL" | translate}}
-      </h3>
-      <div class="vendors-detail__header_rating"
-           fxLayout="row"
-           fxLayoutAlign="center center"
-           fxLayoutGap=".3em"
-      >
-      <span class="rating__amount"
-            fxLayoutAlign="center center"
-      >
-          {{vendor?.vendorRating ? vendor?.vendorRating.toFixed(1) : vendor?.vendorRating}}
-    </span>
-        <mat-icon class="rating__icon"
-                  fxLayoutAlign="center center"
-        >{{vendor?.vendorRating ? 'star_rate' : 'star_border'}}
-        </mat-icon>
-      </div>
-    </section>
-    <section class="vendors-detail__content">
-      <div class="vendor-content">
-        <div class="vendor-content__field">
-          <p class="vendor-content__field_label"
-          >
-            {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_NAME" | translate}}
-          </p>
+      <span class="rating__amount" fxLayoutAlign="center center">
+        {{vendor?.vendorRating ? vendor?.vendorRating.toFixed(1) : vendor?.vendorRating}}
+      </span>
+      <mat-icon class="rating__icon" fxLayoutAlign="center center">
+        {{vendor?.vendorRating ? 'star_rate' : 'star_border'}}
+      </mat-icon>
+    </div>
+  </div>
 
-          <select
-            [(ngModel)]="selectedVendorId"
-            (change)="selectVendor(selectedVendorId)"
-          >
-            <option *ngFor="let vend of vendorsList" [value]="vend.vendorId"
-                    [selected]="vend.vendorId === selectedVendorId"
-            >
-              {{vend.vendorName}}
-            </option>
-          </select>
-        </div>
-        <div class="vendor-content__field">
+  <article class="vendors-detail">
+    <mat-accordion>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Подробнее о вендоре
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p class="vendor-content__field_text">
+          {{vendor?.description}}
+        </p>
+        <mat-divider></mat-divider>
+        <li class="vendor-content__field" fxLayout="row" fxLayoutGap=" .3em">
+          <mat-icon class="vendor-content__mat-icon">business</mat-icon>
           <p class="vendor-content__field_label">
             {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_ADDRESS" | translate}}
-
           </p>
           <p class="vendor-content__field_text">
             {{vendor?.address}}
           </p>
-        </div>
-        <div class="vendor-content__field">
+        </li>
+
+        <li class="vendor-content__field" fxLayout="row" fxLayoutGap=" .3em">
+          <mat-icon class="vendor-content__mat-icon">mail_outline</mat-icon>
           <p class="vendor-content__field_label">
             {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_EMAIL" | translate}}
           </p>
           <p class="vendor-content__field_text">
             {{vendor?.email}}
           </p>
-        </div>
-        <div class="vendor-content__field">
+        </li>
+
+        <li class="vendor-content__field" fxLayout="row" fxLayoutGap=" .3em">
+          <mat-icon class="vendor-content__mat-icon">phone</mat-icon>
           <p class="vendor-content__field_label">
             {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_PHONE" | translate}}
-
           </p>
           <p class="vendor-content__field_text">
             {{vendor?.phone}}
           </p>
-        </div>
-        <div class="vendor-content__field">
-          <p class="vendor-content__field_label">
-            {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_SOCIALS" | translate}}
+        </li>
+      </mat-expansion-panel>
+    </mat-accordion>
 
+    <section class="vendors-detail__content">
+      <ul class="vendor-content">
+        <li class="vendor-content__field">
+          <p class="vendor-content__field_text">
+            {{vendor?.description}}
           </p>
-          <ul class="vendor-content__field_text">
+        </li>
+        
+        <mat-divider></mat-divider>
+        <li class="vendor-content__field" fxLayout="row" fxLayoutGap=" .3em">
+          <mat-icon class="vendor-content__mat-icon">business</mat-icon>
+          <p class="vendor-content__field_label">
+            {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_ADDRESS" | translate}}
+          </p>
+          <p class="vendor-content__field_text">
+            {{vendor?.address}}
+          </p>
+        </li>
+
+        <li class="vendor-content__field" fxLayout="row" fxLayoutGap=" .3em">
+          <mat-icon class="vendor-content__mat-icon">mail_outline</mat-icon>
+          <p class="vendor-content__field_label">
+            {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_EMAIL" | translate}}
+          </p>
+          <p class="vendor-content__field_text">
+            {{vendor?.email}}
+          </p>
+        </li>
+
+        <li class="vendor-content__field" fxLayout="row" fxLayoutGap=" .3em">
+          <mat-icon class="vendor-content__mat-icon">phone</mat-icon>
+          <p class="vendor-content__field_label">
+            {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_PHONE" | translate}}
+          </p>
+          <p class="vendor-content__field_text">
+            {{vendor?.phone}}
+          </p>
+        </li>
+
+        <div class="vendor-content__field">
+          <ul class="vendor-content__field_text" fxLayout="row" fxLayoutGap=" .3em">
             <li *ngFor="let social of vendor?.socialLinks">
               <a
                 href="{{social.path}}"
                 target="_blank"
                 title="{{social.name}}"
+                ngSwitch="{{social.name}}"
               >
-                {{social.name}}
+              <img *ngSwitchCase="'instagram'" src="./assets/img/instagram.svg" alt="instagram" class="social-icon">
+              <img *ngSwitchCase="'facebook'" src="./assets/img/facebook.svg" alt="facebook" class="social-icon">
+              <img *ngSwitchDefault src="./assets/img/website.svg" alt="website" class="social-icon">
               </a>
             </li>
           </ul>
         </div>
-      </div>
+      </ul>
     </section>
+
     <section class="vendors-detail__actions">
       <button *appVerifyUserRoles='["Moderator"]'
               class="vendors-detail__actions_button"
@@ -99,6 +129,7 @@
       </button>
     </section>
   </article>
+
   <article class="vendors-discounts">
     <app-discounts-list
       [discounts]="vendorDiscounts"
@@ -114,4 +145,3 @@
   </article>
 </div>
 <ng-template appRef></ng-template>
-

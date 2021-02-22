@@ -10,6 +10,7 @@ import { RefDirective } from '../../../directives/ref.directive';
 import { UserService } from '../../../services/user.service';
 import { VendorsService } from '../../../services/vendors.service';
 import { UserFacadeService } from '../../../user-profile/services/user-facade.service';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @Component({
   selector: 'app-vendor-detail',
@@ -37,7 +38,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
 
   @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
-
+  
   constructor(
     private router: Router,
     private route: ActivatedRoute,
