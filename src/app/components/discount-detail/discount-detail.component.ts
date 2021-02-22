@@ -12,8 +12,8 @@ import { UserFacadeService } from '../../user-profile/services/user-facade.servi
 
 @Component({
   selector: 'app-discount-detail',
-  templateUrl: './discount-detail.component.html',
-  styleUrls: ['./discount-detail.component.scss']
+  templateUrl: './discount-detail-test.component.html',
+  styleUrls: ['./discount-detail-test.component.scss']
 })
 export class DiscountDetailComponent implements OnInit, OnDestroy {
 

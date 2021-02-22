@@ -131,16 +131,19 @@
   },
   "DISCOUNT_DETAIL": {
     "AMOUNT_LABEL": "Скидка",
-    "PROMO_CODE_LABEL": "Промо Код",
-    "ADDRESS_LABEL": "адрес",
-    "DISTANCE": "от вас",
-    "DATES_LABEL": "срок действия",
-    "START_DATE": "от",
-    "END_DATE": "до",
+    "PROMO_CODE_LABEL": "Промокод",
+    "ADDRESS_LABEL": "Адрес",
+    "DISTANCE": "Расстояние от вас",
+    "DATES_LABEL": "Срок действия скидки",
     "ASSESSMENT_LABEL": "Оценить",
     "EDIT_BUTTON_LABEL": "Редактировать",
     "ARCHIVE_BUTTON_LABEL": "Архивировать",
-    "TICKET_BUTTON_LABEL": "Талон"
+    "TICKET_BUTTON_LABEL": "Заказать скидку",
+    "MAT_TAB_ABOUT": "О СКИДКЕ",
+    "MAT_TAB_RATING": "ОЦЕНИТЬ",
+    "MAT_TAB_MAP": "ПОКАЗАТЬ НА КАРТЕ",
+    "START_DATE": "от",
+    "END_DATE": "до"
   },
   "VENDOR_PAGE": {
     "PAGE_TITLE": "Информация о вендоре",

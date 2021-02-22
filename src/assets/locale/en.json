@@ -129,17 +129,20 @@
     "ADD_POINT_BTN": "Add point"
   },
   "DISCOUNT_DETAIL": {
-    "AMOUNT_LABEL": "discount",
+    "AMOUNT_LABEL": "Discount",
     "PROMO_CODE_LABEL": "Promo Code",
-    "ADDRESS_LABEL": "address",
-    "DISTANCE": "from you",
-    "DATES_LABEL": "validity period",
-    "START_DATE": "from",
-    "END_DATE": "to",
+    "ADDRESS_LABEL": "Address",
+    "DISTANCE": "Distance from you",
+    "DATES_LABEL": "Validity discount period",
     "ASSESSMENT_LABEL": "Assess",
     "EDIT_BUTTON_LABEL": "Edit",
     "ARCHIVE_BUTTON_LABEL": "Archive",
-    "TICKET_BUTTON_LABEL": "Ticket"
+    "TICKET_BUTTON_LABEL": "Order discount",
+    "MAT_TAB_ABOUT": "ABOUT",
+    "MAT_TAB_RATING": "RATE",
+    "MAT_TAB_MAP": "SHOW IT",
+    "START_DATE": "from",
+    "END_DATE": "to"
   },
   "VENDOR_PAGE": {
     "PAGE_TITLE": "About vendor",
