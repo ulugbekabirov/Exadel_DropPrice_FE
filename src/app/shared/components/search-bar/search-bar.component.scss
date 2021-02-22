@@ -78,3 +78,10 @@ div.stars {
   width: 270px;
   display: inline-block;
 }
+
+.mat-chip.mat-standard-chip::after {
+  background: none;
+}
+mat-chip:hover {
+  background: rgb(180, 180, 180); 
+}

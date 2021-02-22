@@ -14,7 +14,7 @@
         (ngModelChange)="userNext($event)"
       />
       <mat-icon class="searchIcon" fxLayoutAlign="center center">
-        {{ "search" }}
+       {{ "search" }}
       </mat-icon>
     </mat-form-field>
   </form>
@@ -28,7 +28,7 @@
           (click)="getCardsByTag(newTags?.tagName, chips)"
         >
           <mat-icon class="chipsIcon" *ngIf="chips.selected">check</mat-icon>
-          {{ newTags?.tagName }}
+         #  {{ newTags?.tagName }}
         </mat-chip>
       </div>
     </mat-chip-list>
