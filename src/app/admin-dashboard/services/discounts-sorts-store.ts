@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, pluck } from 'rxjs/operators';
+import { Discount } from 'src/app/models';
 
 
 export interface SortState {
@@ -8,9 +9,13 @@ export interface SortState {
   ratingSelected: any;
   ticketCountData: any;
   ticketCountSelected: any;
+  sorts: string[];
+  sortBy: string[];
   searchQuery: string;
   skip: number;
   take: number;
+  results: Discount[];
+  total: number;
 }
 
 const SEARCH_INITIAL_STATE = {
@@ -18,9 +23,11 @@ const SEARCH_INITIAL_STATE = {
   ratingSelected: 'RatingDesc',
   ticketCountData: ['TicketCountAsc', 'TicketCountDesc'],
   ticketCountSelected: 'TicketCountAsc',
+  sorts: ['RatingAsc', 'RatingDesc', 'TicketCountAsc', 'TicketCountDesc'],
+  sortBy: ['RatingAsc', 'TicketCountAsc'],
   searchQuery: '',
   skip: 0,
-  take: 10,
+  take: 5,
 };
 
 @Injectable({
@@ -29,7 +36,10 @@ const SEARCH_INITIAL_STATE = {
 export class DiscountsSortStore {
 
   private subject = new BehaviorSubject<SortState>(SEARCH_INITIAL_STATE);
-  private store = this.subject.asObservable().pipe(distinctUntilChanged());
+  private store = this.subject.asObservable()
+    .pipe(
+      distinctUntilChanged()
+    );
 
   get value(): any {
     return this.subject.value;
@@ -43,5 +53,6 @@ export class DiscountsSortStore {
     this.subject.next({
       ...this.value, [name]: state
     });
+    console.log(this.value);
   }
 }

@@ -12,6 +12,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -74,6 +75,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     AgmCoreModule,
     MatTooltipModule,
     MatDialogModule,
+    MatExpansionModule,
   ],
 
   providers: [GoogleMapsAPIWrapper],
@@ -109,6 +111,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     SearchBarComponent,
     MatTooltipModule,
     MatDialogModule,
+    MatExpansionModule,
     LoadingSpinnerComponent,
   ],
   entryComponents: [MapComponent],

@@ -200,6 +200,7 @@
       "DATE_ORDER": "заказан"
     },
     "TICKET_BUTTON": {
+      "TICKET_LABEL": "Талон",
       "SHOW_TICKET": "Показать Талон",
       "ORDER_TICKET": "Заказать Талон",
       "DISCOUNT_INACTIVE": "Скидка не доступна"

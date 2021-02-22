@@ -14,6 +14,7 @@ interface SearchResult {
 
 class SearchState {
   results: SearchResult[];
+  total: number;
 }
 
 @Injectable()
@@ -22,9 +23,9 @@ export class StatisticsFacadeService {
   private state = new SearchState();
   private dispatch = new BehaviorSubject<SearchState>(this.state);
 
-  searchResults$: Observable<SearchResult[]> = this.dispatch.asObservable().pipe(
-    map(state => state.results),
-    startWith([] as SearchResult[])
+  statisticStore$: Observable<SearchState> = this.dispatch.asObservable().pipe(
+    distinctUntilChanged(),
+    map(state => state),
   );
 
   constructor(
@@ -37,34 +38,40 @@ export class StatisticsFacadeService {
 
   searchDiscounts(
     debounceMs = 500
-  ): Observable<SearchResult[]> {
-    const searchTerm$ = this.discountsSortStore.select('searchQuery').pipe(
-      debounceTime(debounceMs),
-      distinctUntilChanged(),
-    );
-    const sortBy$ = combineLatest(
-      this.discountsSortStore.select('ratingSelected'),
-      this.discountsSortStore.select('ticketCountSelected')
-    ).pipe(
-      debounceTime(debounceMs),
-      distinctUntilChanged(),
-    );
-    const take$ = this.discountsSortStore.select('take').pipe(
-      debounceTime(debounceMs),
-      distinctUntilChanged()
-    );
-    const skip$ = this.discountsSortStore.select('skip').pipe(
-      debounceTime(debounceMs),
-      distinctUntilChanged(),
-    );
-    combineLatest(searchTerm$, sortBy$, take$, skip$).pipe(
-      switchMap(([searchQuery, sortBy, take, skip]) => {
-        return this.discountsService.searchStatsDiscount({searchQuery, sortBy, take, skip}).pipe(
-          pluck('discountDTOs'),
-        );
-      })
-    ).subscribe(this.updateSearchResults.bind(this));
-    return this.searchResults$;
+  ): any {
+    const searchTerm$ = this.discountsSortStore.select('searchQuery')
+      .pipe(
+        debounceTime(debounceMs),
+        distinctUntilChanged(),
+      );
+    const sortBy$ = this.discountsSortStore.select('sortBy')
+      .pipe(
+        debounceTime(debounceMs),
+        distinctUntilChanged(),
+      );
+    const take$ = this.discountsSortStore.select('take')
+      .pipe(
+        debounceTime(debounceMs),
+        distinctUntilChanged()
+      );
+    const skip$ = this.discountsSortStore.select('skip')
+      .pipe(
+        debounceTime(debounceMs),
+        distinctUntilChanged(),
+      );
+    return combineLatest(searchTerm$, sortBy$, take$, skip$)
+      .pipe(
+        switchMap(([searchQuery, sortBy, take, skip]) => {
+          return this.discountsService.searchStatsDiscount({searchQuery, sortBy, take, skip})
+            .pipe(
+              tap(({totalNumberOfDiscounts, discountDTOs}) => {
+                this.set('total', totalNumberOfDiscounts);
+                this.set('results', discountDTOs);
+                console.log(discountDTOs);
+              })
+            );
+        })
+      );
   }
 
   searchVendors(
@@ -96,15 +103,62 @@ export class StatisticsFacadeService {
       })
     )
       .subscribe(this.updateSearchResults.bind(this));
-    return this.searchResults$;
+    return this.statisticStore$;
   }
 
-  updateSearchResults(results: SearchResult[]): void {
+  updateSearchResults(total: number, results: SearchResult[]): void {
     this.dispatch.next(
       (this.state = {
         ...this.state,
-        results
+        results,
+        total
       })
     );
+    console.log(this.state);
+  }
+
+  updateDiscountsSort({pageSize, pageIndex, active, direction}): void {
+    if (pageSize) {
+      this.discountsSortStore.set('skip', pageSize * pageIndex);
+      this.discountsSortStore.set('take', pageSize);
+    }
+    if (active) {
+      let {sorts, sortBy} = this.discountsSortStore.value;
+      let [primarySort, secondarySort] = sortBy;
+      console.log(sortBy);
+      if (!direction) {
+        sortBy = [primarySort, secondarySort] = [secondarySort, primarySort];
+        console.log(sortBy);
+      } else {
+        // const newSort = [...sorts]
+        //   .filter(el => el.toLowerCase().includes(active.toLowerCase()) && el.toLowerCase().includes(direction.toLowerCase()));
+        // primarySort = [...newSort];
+        // console.log(primarySort);
+        // console.log(sortBy);
+      }
+      // if (direction) {
+      //   const newSort = [...sorts]
+      //     .filter(el => el.toLowerCase().includes(active.toLowerCase()) && el.toLowerCase().includes(direction.toLowerCase()));
+      //   console.log(newSort);
+      //   console.log(sortBy);
+      //   const newSortBy = [...newSort, sortBy[0]];
+      //   console.log(newSortBy);
+      // }
+    }
+  }
+
+  get value(): any {
+    return this.dispatch.value;
+  }
+
+  select<T>(name: string): Observable<T> {
+    return this.statisticStore$.pipe(pluck(name));
+  }
+
+  set(name: string, state: any): void {
+    this.dispatch.next({
+      ...this.value, [name]: state
+    });
+    console.log(this.value);
   }
 }
