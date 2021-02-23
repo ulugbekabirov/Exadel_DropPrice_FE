@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { LoginFormComponent } from './components/login-form/login-form.component';
+import { DiscountsComponent } from './components/discounts/discounts.component';
 import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
-  {path: '', component: LoginFormComponent}
+  {path: '', component: DiscountsComponent},
 ];
 
 @NgModule({
   declarations: [
-    LoginFormComponent
+    DiscountsComponent,
   ],
   imports: [
     SharedModule,
@@ -18,8 +18,7 @@ const routes: Routes = [
     TranslateModule,
   ],
   exports: [
-    RouterModule
+    RouterModule,
   ]
 })
-export class AuthModule {
-}
+export class HomeModule { }

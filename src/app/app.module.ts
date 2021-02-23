@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { DiscountDetailComponent } from './components/discount-detail/discount-detail.component';
 import { SharedModule } from './shared/shared.module';
 import {
   TranslateLoader,
@@ -12,18 +13,15 @@ import {
 } from '@ngx-translate/core';
 import { AgmCoreModule } from '@agm/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { AuthInterceptor } from './auth/auth.interceptor';
+import { AuthInterceptor } from './auth/services/auth.interceptor';
 import { HttpErrorInterceptor } from './services/http.error.interceptor';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { LoginFormComponent } from './components/login-form/login-form.component';
 import { MissingTranslationService } from './services/missing-translation.service';
 import { HeaderComponent } from './components/header/header.component';
 import { AppRoutingModule } from './app-routing/app.routing.module';
 import { MapComponent } from './components/map/map.component';
-import { DiscountDetailComponent } from './components/discount-detail/discount-detail.component';
-import { DiscountsComponent } from './components/discounts/discounts.component';
 import { LoadingInterceptor } from './services/loading.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient): any {
@@ -33,12 +31,10 @@ export function HttpLoaderFactory(http: HttpClient): any {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginFormComponent,
     HomeComponent,
     HeaderComponent,
     MapComponent,
     DiscountDetailComponent,
-    DiscountsComponent
   ],
   imports: [
     BrowserModule,
