@@ -95,8 +95,8 @@ describe('LoginFormComponent', () => {
     button.click();
     fixture.detectChanges();
 
-    const usernameErrorMsg = fixture.debugElement.nativeElement.querySelector('#username-error-msg');
-    const passwordErrorMsg = fixture.debugElement.nativeElement.querySelector('#password-error-msg');
+    const usernameErrorMsg = fixture.debugElement.nativeElement.querySelector('aria-invalid="false"');
+    const passwordErrorMsg = fixture.debugElement.nativeElement.querySelector('aria-invalid="false"');
 
     expect(usernameErrorMsg).toBeDefined();
     expect(usernameErrorMsg.innerHTML).toContain('Please enter username');
