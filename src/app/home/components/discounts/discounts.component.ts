@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { forkJoin, Observable, Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { RefDirective } from '../../../directives/ref.directive';
@@ -12,7 +12,7 @@ import { HomeStore } from '../../services/home-store';
   templateUrl: './discounts.component.html',
   styleUrls: ['./discounts.component.scss']
 })
-export class DiscountsComponent implements OnInit, OnDestroy {
+export class DiscountsComponent implements OnInit, OnDestroy, AfterViewInit {
   discounts$: Observable<Discount[]>;
   towns$: Observable<Town[]>;
   tags$: Observable<Tag[]>;
@@ -41,19 +41,16 @@ export class DiscountsComponent implements OnInit, OnDestroy {
     this.tags$ = this.store.select('tags');
     this.towns$ = this.store.select('towns');
     this.searchTerm$ = this.store.select('searchQuery');
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+    this.searchTerm$ = this.store.select('requestTags');
+    this.searchTerm$ = this.store.select('sortBy');
   }
 
   getTicket(discountId: number): void {
     this.facade.requestTicket(discountId, this.refDir);
   }
 
-  changeFavourites($event: any): void {
-
+  changeFavourites(discountId: number): void {
+    this.facade.toggleFavourites(discountId);
   }
 
   onSearchQueryChange({name, tag}): void {
@@ -65,7 +62,15 @@ export class DiscountsComponent implements OnInit, OnDestroy {
 
   }
 
-  onSortChange($event: any): void {
-    console.log($event);
+  onSortChange({value: {sortBy}}): void {
+    this.store.set('sortBy', sortBy);
+  }
+
+  ngAfterViewInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

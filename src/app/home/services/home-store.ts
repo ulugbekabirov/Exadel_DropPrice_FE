@@ -51,6 +51,6 @@ export class HomeStore {
     this.subject.next({
       ...this.value, [name]: state
     });
-    console.log(this.value)
+    console.log(this.value);
   }
 }

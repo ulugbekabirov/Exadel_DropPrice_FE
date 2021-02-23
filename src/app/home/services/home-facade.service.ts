@@ -68,7 +68,7 @@ export class HomeFacadeService {
     const latitude$: Observable<number> = this.throttle(this.homeStore.select('latitude'), debounceMs);
     const longitude$: Observable<number> = this.throttle(this.homeStore.select('longitude'), debounceMs);
     const sortBy$: Observable<string> = this.throttle(this.homeStore.select('sortBy'), debounceMs);
-    const tags$: Observable<string[]> = this.throttle(this.homeStore.select('requestTags'), debounceMs);
+    const tags$: Observable<string[]> = this.homeStore.select('requestTags');
     return combineLatest(searchQuery$, take$, skip$, latitude$, longitude$, sortBy$, tags$)
       .pipe(
         switchMap(([searchQuery, take, skip, latitude, longitude, sortBy, tags]) => {
@@ -86,6 +86,11 @@ export class HomeFacadeService {
     ).subscribe(ticket => {
       this.ticketService.createTicket(ticket, ref);
     });
+  }
+
+  toggleFavourites(discountId): void {
+    this.discountsService.updateIsSavedDiscount(discountId)
+      .pipe();
   }
 
   throttle<T>(source$: Observable<T>, debounceMs): Observable<T> {
