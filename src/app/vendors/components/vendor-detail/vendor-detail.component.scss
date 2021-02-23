@@ -100,11 +100,6 @@
         }
       }
     }
-
-    &__actions {
-      margin-top: .3em;
-    }
-    
     mat-expansion-panel-header {
       height: 100px;
     }
@@ -125,14 +120,19 @@
   mat-divider {
     margin-bottom: 1em;
   }
+
+  .mat-expansion-panel-header {
+    margin-top: .1em;
+  }
   
   .mat-expansion-panel-header-description {
     flex-grow: 0;
   }
-  
-  .rating__amount {
-    margin: 0;
+
+  .rating__icon {
+    margin-bottom: .2em;
   }
+
   .vendors-discounts {
     @media screen and (min-width: 767.98px) {
 

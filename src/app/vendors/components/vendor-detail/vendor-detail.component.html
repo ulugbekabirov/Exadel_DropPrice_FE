@@ -41,7 +41,7 @@
           </div>
         </mat-panel-title>
         <mat-panel-description>
-          <section class="vendors-detail__actions" fxLayout="column" fxLayoutGap=".5em">
+          <section class="vendors-detail__actions" fxLayout="column">
             <mat-icon *appVerifyUserRoles='["Moderator"]'
                     matTooltip='{{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_EDIT" | translate}}'
                     (click)="onEditVendor(vendor.vendorId)"
