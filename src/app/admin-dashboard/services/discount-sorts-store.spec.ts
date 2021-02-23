@@ -1,7 +1,7 @@
-import { DiscountSortsStore } from './discounts-sorts-store';
+import { DiscountsSortStore } from './discounts-sorts-store';
 
 describe('DiscountSortsStore', () => {
   it('should create an instance', () => {
-    expect(new DiscountSortsStore()).toBeTruthy();
+    expect(new DiscountsSortStore()).toBeTruthy();
   });
 });

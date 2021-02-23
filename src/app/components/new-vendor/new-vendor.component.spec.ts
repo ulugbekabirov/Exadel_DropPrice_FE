@@ -22,4 +22,5 @@ describe('NewVendorComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });
