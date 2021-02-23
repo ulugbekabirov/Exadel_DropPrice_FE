@@ -10,74 +10,61 @@
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 2em;
 
     > article {
       display: flex;
-      //height: 20em;
+      flex-direction: column;
       background: $admin_content_bgColor;
       border-radius: $border-radius;
       box-shadow: $box-shadow;
 
-      div {
-
+      table {
+        font-size: 1rem;
         width: 100%;
+        text-align: center;
+        border-top: 1px solid #e0e0e0;
 
-        mat-card {
-          border-radius: 0;
-          box-shadow: none;
-          padding: 0 1em;
-        }
-
-        table {
+        th {
           font-size: 1rem;
-          width: 100%;
+          font-weight: 500;
           text-align: center;
-          border-top: 1px solid #e0e0e0;
+        }
 
-          th {
-            font-size: 1rem;
-            font-weight: 500;
-            text-align: center;
+        td {
+          border-left: 2px solid white;
+          border-right: 2px solid white;
+
+          &:hover {
+            border-left: 2px solid $admin_sidebar_bgColor_hover;
+            border-right: 2px solid $admin_sidebar_bgColor_hover;
           }
+        }
 
-          td {
-            border-left: 2px solid white;
-            border-right: 2px solid white;
+        .td-name {
+          text-align: left;
+        }
 
-            &:hover {
-              border-left: 2px solid $admin_sidebar_bgColor_hover;
-              border-right: 2px solid $admin_sidebar_bgColor_hover;
-            }
-          }
-
-          .td-name {
-            text-align: left;
-          }
-
-          a {
-            &:hover {
-              color: $admin_sidebar_bgColor_hover;
-            }
+        a {
+          &:hover {
+            color: $admin_sidebar_bgColor_hover;
           }
         }
       }
-
-      &:first-child,
-      &:last-child {
-        grid-column: 1 / -1;
-      }
-
-      @media screen and (max-width: 400px) {
-
-        grid-column: 1 / -1;
-      }
     }
 
-    @media screen and (max-width: 767px) {
-      position: static;
-      width: 100%;
+    &:first-child,
+    &:last-child {
+      grid-column: 1 / -1;
     }
+
+    @media screen and (max-width: 400px) {
+
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    position: static;
+    width: 100%;
   }
 }
