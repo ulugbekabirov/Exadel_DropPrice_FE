@@ -23,10 +23,10 @@ const HOME_INITIAL_STATE: HomeState = {
   tags: [],
   towns: [],
   discounts: [],
-  sortBy: '',
+  sortBy: 'DistanceAsc',
   searchQuery: '',
-  latitude: 53.683814399999996,
-  longitude: 23.8026752,
+  latitude: 0,
+  longitude: 0,
   take: 10,
   skip: 0,
   requestTags: []

@@ -52,7 +52,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.unsubscribe$),
         switchMap(() => {
-          return this.userService.activeUser;
+          return this.userService.activeUser$;
         })
       )
       .subscribe(resp => {

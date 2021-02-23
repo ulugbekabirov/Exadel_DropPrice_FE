@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.activeUser$ = this.userService.activeUser;
+    this.activeUser$ = this.userService.activeUser$;
     this.activeUser$.pipe(
       takeUntil(this.unsubscribe$)
     )

@@ -12,13 +12,16 @@ import { HomeStore } from '../../services/home-store';
   templateUrl: './discounts.component.html',
   styleUrls: ['./discounts.component.scss']
 })
-export class DiscountsComponent implements OnInit, OnDestroy, AfterViewInit {
+export class DiscountsComponent implements OnInit, OnDestroy {
   discounts$: Observable<Discount[]>;
   towns$: Observable<Town[]>;
   tags$: Observable<Tag[]>;
   sorts$: Observable<Sort[]>;
   searchTerm$: Observable<string>;
   activeUser$: Observable<ActiveUser>;
+
+  requestTags$;
+  sortBy;
   private unsubscribe$: Subject<void> = new Subject<void>();
   @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
 
@@ -30,17 +33,20 @@ export class DiscountsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.facade.getHomeData()
+    this.discounts$ = this.facade.loadData()
       .pipe(
-        takeUntil(this.unsubscribe$)
-      ).subscribe();
-    this.discounts$ = this.store.select('discounts');
+        takeUntil(this.unsubscribe$),
+        switchMap((): Observable<Discount[]> => {
+          return this.store.select('discounts');
+        })
+      );
+    // this.discounts$ = this.store.select('discounts');
     this.sorts$ = this.store.select('sorts');
     this.tags$ = this.store.select('tags');
     this.towns$ = this.store.select('towns');
     this.searchTerm$ = this.store.select('searchQuery');
-    this.searchTerm$ = this.store.select('requestTags');
-    this.searchTerm$ = this.store.select('sortBy');
+    this.requestTags$ = this.store.select('requestTags');
+    this.sortBy$ = this.store.select('sortBy');
   }
 
   getTicket(discountId: number): void {
@@ -53,18 +59,16 @@ export class DiscountsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onSearchQueryChange({name, tag}): void {
     this.store.set('searchQuery', name);
-    this.store.set('requestTags', tag);
+    this.store.set('requestTags', [...tag]);
   }
 
-  onLocationChange($event: any): void {
-
+  onLocationChange({value: {latitude, longitude}}): void {
+    this.store.set('latitude', latitude);
+    this.store.set('longitude', longitude);
   }
 
   onSortChange({value: {sortBy}}): void {
     this.store.set('sortBy', sortBy);
-  }
-
-  ngAfterViewInit(): void {
   }
 
   ngOnDestroy(): void {

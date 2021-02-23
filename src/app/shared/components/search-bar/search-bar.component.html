@@ -19,18 +19,26 @@
     </mat-form-field>
   </form>
   <div class="listWrapper">
-    <mat-chip-list selectable multiple aria-label="Fish selection">
-      <div class="chipsBlock">
-        <mat-chip
-          class="chipsStyle"
-          #chips="matChip"
-          *ngFor="let newTags of tags$ | async"
-          (click)="getCardsByTag(newTags?.tagName, chips)"
-        >
-          <mat-icon class="chipsIcon" *ngIf="chips.selected">check</mat-icon>
-         #  {{ newTags?.tagName }}
-        </mat-chip>
-      </div>
+<!--    <mat-chip-list selectable multiple aria-label="Fish selection">-->
+<!--      <div class="chipsBlock">-->
+<!--        <mat-chip-->
+<!--          class="chipsStyle"-->
+<!--          #chips="matChip"-->
+<!--          *ngFor="let newTags of tags$ | async"-->
+<!--          (click)="getCardsByTag(newTags?.tagName, chips)"-->
+<!--        >-->
+<!--          <mat-icon class="chipsIcon" *ngIf="chips.selected">check</mat-icon>-->
+<!--         #  {{ newTags?.tagName }}-->
+<!--        </mat-chip>-->
+<!--      </div>-->
+<!--    </mat-chip-list>-->
+
+    <mat-chip-list selectable multiple>
+      <mat-chip #chips="matChip" *ngFor="let tag of tags$ | async"
+                (click)="toggleSelection(chips)" [value]="tag.tagName">
+        <mat-icon *ngIf="chips.selected">check</mat-icon>
+        {{tag.tagName}}
+      </mat-chip>
     </mat-chip-list>
   </div>
 </div>

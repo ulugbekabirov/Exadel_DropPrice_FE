@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { combineLatest, forkJoin, from, Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
 import { SORTS } from '../../../constants';
-import { Tag, Town } from '../../models';
+import { Discount, Tag, Town } from '../../models';
 import { Sort } from '../../models/sort';
 import { ApiDataService } from '../../services/api-data.service';
 import { DiscountsService } from '../../services/discounts.service';
@@ -21,7 +21,8 @@ export class HomeFacadeService {
   ) {
   }
 
-  getHomeData(): Observable<any> {
+  loadData(): Observable<any> {
+    // this.userService.activeUser$
     return forkJoin(
       this.getSorts(),
       this.getTags(),
@@ -72,7 +73,7 @@ export class HomeFacadeService {
     return combineLatest(searchQuery$, take$, skip$, latitude$, longitude$, sortBy$, tags$)
       .pipe(
         switchMap(([searchQuery, take, skip, latitude, longitude, sortBy, tags]) => {
-          return this.discountsService.getDiscounts({searchQuery, take, skip, latitude, longitude, sortBy, tags})
+          return this.discountsService.searchDiscounts({searchQuery, take, skip, latitude, longitude, sortBy, tags})
             .pipe(
               tap(discounts => this.homeStore.set('discounts', discounts)),
             );
@@ -88,8 +89,16 @@ export class HomeFacadeService {
   }
 
   toggleFavourites(discountId): void {
+    const value: Discount[] = this.homeStore.value.discounts;
     this.discountsService.updateIsSavedDiscount(discountId)
-      .pipe();
+      .subscribe(resp => {
+        const discounts = value.map((discount: Discount) => {
+          return discount.discountId === resp.discountID
+            ? {...discount, isSaved: resp.isSaved}
+            : {...discount};
+        });
+        this.homeStore.set('discounts', discounts);
+      });
   }
 
   throttle<T>(source$: Observable<T>, debounceMs): Observable<T> {

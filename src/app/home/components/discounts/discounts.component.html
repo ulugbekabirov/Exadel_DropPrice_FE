@@ -1,9 +1,11 @@
 <app-search-bar
   [tags$]="tags$"
   [searchTerm$]="searchTerm$"
+  [activeTags$]="requestTags$"
   (searchQueryChange)="onSearchQueryChange($event)"
 ></app-search-bar>
 <app-discounts-list
+  [sortBy]="sorts$"
   [items$]="discounts$"
   [towns$]="towns$"
   [sorts$]="sorts$"
