@@ -151,7 +151,8 @@
         "VENDOR_DESCRIPTION": "Description",
         "VENDOR_EMAIL": "E-Mail",
         "VENDOR_PHONE": "Phone",
-        "VENDOR_SOCIALS": "Socials"
+        "VENDOR_SOCIALS": "Socials",
+        "VENDOR_EDIT": "Edit vendor"
       },
       "DETAIL_ACTIONS": {
         "EDIT": "Edit"

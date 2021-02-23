@@ -152,7 +152,7 @@
         "VENDOR_ADDRESS": "Адрес",
         "VENDOR_EMAIL": "Электронная почта",
         "VENDOR_PHONE": "Контактный телефон",
-        "VENDOR_SOCIALS": "Социальные сети"
+        "VENDOR_EDIT": "Редактировать вендора"
       },
       "DETAIL_ACTIONS": {
         "EDIT": "Редактировать"

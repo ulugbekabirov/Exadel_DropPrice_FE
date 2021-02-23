@@ -3,10 +3,12 @@
 * {
   color: #313237;
 }
+
 .vendors {
   padding: 2.7em .5em 0 .5em;
 
   .vendors-label {
+    margin-right: 1em;
     &__vendor-name{
       font-size: 1.7rem;
       font-weight: 700;
@@ -18,13 +20,13 @@
   }
   
   .vendors-detail {
-
     font-size: 1.2rem;
 
     &_label {
       font-size: 1.1em;
       font-style: normal;
       font-weight: 600;
+      line-height: 1.5;
     }
 
     &__header {
@@ -54,40 +56,38 @@
 
       .vendor-content {
 
-        mat-divider {
-          margin-bottom: .7em;
+        &__social {
+          margin-top: .5em;
         }
 
         &__field {
 
           width: 100%;
 
+          &_description {
+            font-size: 1rem;
+            font-weight: 700;
+          }
+
           &_label {
-            flex: 1 1 20%;
+            flex: 1 1 25%;
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 500;
+          }
+
+          &_label-text {
+            margin: .3em;
             font-size: 1rem;
             font-style: normal;
             font-weight: 500;
           }
 
           &_text {
-            flex: 1 1 80%;
+            flex: 1 1 75%;
             font-size: 1rem;
             font-weight: 500;
-          }
-
-          select {
-            border: none;
-            outline: none;
-            width: 100%;
-            font-size: 1.2em;
-            font-weight: 500;
-            margin-bottom: .6em;
-
-            option {
-              font-size: 1em;
-              font-style: italic;
-              font-weight: 500;
-            }
+            margin-top: .3em;
           }
 
           li {
@@ -98,34 +98,21 @@
             }
           }
         }
-
-      .social-icon {
-        width: 2em;
-      }
       }
     }
 
     &__actions {
-      margin-top: .7em;
+      margin-top: .3em;
+    }
+    
+    mat-expansion-panel-header {
+      height: 100px;
+    }
 
-      &_button {
-        display: block;
-        letter-spacing: .1em;
-        font-weight: 500;
-        white-space: nowrap;
-        overflow: hidden;
-        border-radius: .5em;
-        border: 1px solid $ticket_button_bg_color;
-        background: $ticket_button_bg_color;
-        box-shadow: 0 .3em .2em rgba(28, 104, 192, .25);
-        color: $ticket_button_text_color;
-        cursor: pointer;
-        outline: none;
-
-        &:hover {
-          border: 1px solid burlywood;
-        }
-      }
+    .social-icon,
+    mat-icon {
+      width: 25px;
+      color: #3F51B5;
     }
 
     @media screen and (min-width: 767.98px) {
@@ -135,9 +122,18 @@
     }
   }
 
+  mat-divider {
+    margin-bottom: 1em;
+  }
+  
+  .mat-expansion-panel-header-description {
+    flex-grow: 0;
+  }
+  
+  .rating__amount {
+    margin: 0;
+  }
   .vendors-discounts {
-
-
     @media screen and (min-width: 767.98px) {
 
       grid-column: 2/3;
