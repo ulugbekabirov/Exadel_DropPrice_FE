@@ -1,91 +1,57 @@
-<div class="test">
-  <div class="container">
-    <div class="corner-ribbon-6 corner-ribbon-6-top-right">
-      <span class="discount-card__amount_text">
-        {{ discount.discountAmount }} %
-      </span>
+<div class="container">
+  <div class="corner-ribbon-6 corner-ribbon-6-top-right">
+    <span class="discount-card__amount_text">
+      {{ discount.discountAmount }} %
+    </span>
+  </div>
+  <div class="titles" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <div>
+      <h2>
+        <a class="discount-card__vendor_link" [routerLink]="['/vendors', discount.vendorId]"
+          matTooltip="Подробнее о Вендоре" matTooltipPosition="right">
+          {{ discount.vendorName }}
+        </a>
+      </h2>
     </div>
-    <div
-      class="titles"
-      fxLayout="row"
-      fxLayoutAlign="start center"
-      fxLayoutGap="10px"
-    >
-     
-      <div>
-        <h2>
-          <a class="discount-card__vendor_link" [routerLink]="['/vendors', discount.vendorId]"
-          matTooltip="Подробнее о Вендоре"
+    <mat-icon class="favorite" fxLayoutAlign="center center" matTooltip="Toggle Favourites"
+      [ngStyle]="{'color': discount.isSaved ? 'red' : '#adadaf'}" (click)="toggleFavorites(discount.discountId)">
+      favorite
+    </mat-icon>
+  </div>
+
+  <div class="discount-info">
+    <div>
+      <p class="discount-card__header_title">
+        <a [routerLink]="['/discounts', discount.discountId]" matTooltip="Подробнее о Скидке"
           matTooltipPosition="right">
-            {{ discount.vendorName }}
-          </a>
-        </h2>
-      </div>
-      <mat-icon class="favorite" fxLayoutAlign="center center" matTooltip="Toggle Favourites"
-      [ngStyle]="{'color': discount.isSaved ? 'red' : '#adadaf'}"
-      (click)="toggleFavorites(discount.discountId)">
-        favorite
-      </mat-icon>
-      <!-- <mat-icon class="edit_icon" *appVerifyUserRoles='["Moderator"]'
-                matTooltip="Edit Discount"
-                fxLayoutAlign="center center"
-      (click)="onEditDiscount(discount.discountId)">mode_edit
-      </mat-icon> -->
-     
+          {{ discount.discountName }}
+        </a>
+      </p>
     </div>
 
-    <div class="test2">
-      <div>
-        <p class="discount-card__header_title">
-          <a  [routerLink]="['/discounts', discount.discountId]"
-          matTooltip="Подробнее о Скидке"
-          matTooltipPosition="right">
-            {{ discount.discountName }}
-          </a>
-        </p>
+    <div class="discount-disctance">
+      <div class="discount-card__distance">
+        <span>{{discount.distanceInMeters | metersToKilometers}}</span>
+        <span>{{ "MAIN_PAGE.DISCOUNT_CARD.DISTANCE" | translate }}</span>
       </div>
-
-      <div class="test3">
-        <div class="discount-card__distance">
-          <span>{{discount.distanceInMeters | metersToKilometers}}</span>
-          <span>{{ "MAIN_PAGE.DISCOUNT_CARD.DISTANCE" | translate }}</span>
-        </div>
-    
-        
-      </div>
-      
     </div>
-   
-<!-- 
-    <div
-      class="discount-card__amount"
-      fxLayout="column"
-      fxLayoutAlign="center end"
-      fxLayoutGap="30px"
-    >
-      <div class="date">
-        <span>{{ "MAIN_PAGE.DISCOUNT_CARD.DATE" | translate }}</span>
-        <span>{{ discount.endDate | date:"dd.MM.yyyy" }}</span>
-      </div>
-    </div> -->
+  </div>
 
-    <div class="discount-footer">
+  <div class="discount-footer">
     <div class="rating-main" fxLayout="row" fxLayoutAlign="space-between center">
       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2px">
         <span class="rating__amount">
           {{discount.discountRating ? discount.discountRating.toFixed(1) : discount.discountRating}}
         </span>
-        <mat-icon *ngIf="discount.discountRating > 0" class="rating__icon"
-          >star_rate
+        <mat-icon *ngIf="discount.discountRating > 0" class="rating__icon">star_rate
         </mat-icon>
       </div>
-    </div> 
-      <div>
-        <button class="action__ticket" color="primary" mat-raised-button  matTooltip="Take ticket"
+    </div>
+    <div>
+      <button class="action__ticket" mat-raised-button matTooltip="Take ticket"
         (click)="ticketHandler(discount.discountId)">
-          {{ "MAIN_PAGE.BUTTONS.TICKET" | translate }}
-        </button>
-      </div>
+        {{ "MAIN_PAGE.BUTTONS.TICKET" | translate }}
+      </button>
     </div>
   </div>
 </div>

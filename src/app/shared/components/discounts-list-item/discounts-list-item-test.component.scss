@@ -83,7 +83,7 @@
     }
 
     .discount-card__vendor_link {
-      color: #4b4c52;
+      color: $discount_list_item_vendor_link;
     }
 
     .favorite {
@@ -105,7 +105,7 @@
     }
   }
 
-  .test2 {
+  .discount-info {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -117,7 +117,7 @@
     }
 
     .discount-card__distance {
-      color: #adadaf;
+      color: $discount_list_item_card__distance;
       font-size: .8rem;
       font-weight: 500;
     }
@@ -133,7 +133,7 @@
     }
   }
 
-  .test3 {
+  .discount-disctance {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -147,7 +147,7 @@
   }
 
   .rating__icon {
-    color: #3F51B5;
+    color: $indigo;
   }
 
   .discount-footer {
@@ -161,8 +161,9 @@
     .action__ticket {
       font-size: 1rem;
       margin: auto 0 0 0;
+      color: #fff;
       background-color: $main_header_bgColor;
+      opacity: .85;
     }
-
   }
 }

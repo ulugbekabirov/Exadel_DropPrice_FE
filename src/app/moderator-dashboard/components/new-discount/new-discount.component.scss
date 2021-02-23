@@ -1,4 +1,4 @@
-@import "src/variables";
+@import "../../../../variables";
 
 .new-discount-wrapper {
   background: #DEEBFA;
@@ -39,7 +39,7 @@ mat-card {
   .mat-form-field-wrapper {
     width: 100%;
   }
- 
+
 }
 
 .activity-date {
@@ -63,7 +63,7 @@ mat-card {
       @media screen and (max-width: 660px) {
         width: 100%;
       }
-    }   
+    }
   }
 }
 
