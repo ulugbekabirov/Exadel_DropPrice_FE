@@ -1,0 +1,31 @@
+<section class="user-profile">
+  <div class="grid">
+    <article>
+      <app-user-card
+        [activeUser]="activeUser$ | async"
+      ></app-user-card>
+    </article>
+    <article>
+      <app-orders-list
+        [tickets$]="orders$"
+        (getTicket)="getTicket($event)"
+        (toggleFavourites)="changeFavourites($event)"
+      >
+        {{"USER_PROFILE.LIST_TITLE.ORDERED" | translate}}
+      </app-orders-list>
+    </article>
+    <article>
+      <app-saved-list
+        [discounts$]="discounts$"
+        (getTicket)="getTicket($event)"
+        (toggleFavourites)="changeFavourites($event)"
+      >
+        {{"USER_PROFILE.LIST_TITLE.SAVED" | translate}}
+      </app-saved-list>
+    </article>
+  </div>
+</section>
+<ng-template appRef></ng-template>
+
+
+

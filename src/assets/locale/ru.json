@@ -1,0 +1,209 @@
+{
+  "COMMON": {
+    "HEADER": "Пример использования библиотеки Ngx Translate"
+  },
+  "LANGUAGES": {
+    "EN": "Английский",
+    "RU": "Русский",
+    "TITLE": "Изменить язык"
+  },
+  "BUTTON": {
+    "LOGOUT": "Выход"
+  },
+  "HEADER": {
+    "SELECTOR_TITLE": "Язык",
+    "ADMIN_PANEL_LINK_TITLE": "Статистика",
+    "MODERATOR_PANEL_LINK_TITLE": "Добавить"
+  },
+  "LOGIN": {
+    "TITLE": "Вход",
+    "BTN_TITLE": "Войти",
+    "EMAIL_LABEL": "Введите электронный адрес*",
+    "VALID_EMAIL": "Неверный формат электронного адреса",
+    "PASSWORD_LABEL": "Введите пароль*",
+    "PASS_ERR_LENGTH": "Пароль должен содержать минимум 8 символов",
+    "STRONG_PASS": "Пароль должен содержать заглавные и строчные буквы, цифры",
+    "HIDE": "Скрыть пароль"
+  },
+  "MAIN_PAGE": {
+    "SEARCH": "Поиск",
+    "BUTTONS": {
+      "TICKET": "Талон"
+    },
+    "FILTER": {
+      "SORT_BY": {
+        "TITLE": "сортировать по",
+        "DISCOUNT_RATING_ASC": {
+          "NAME": "Рейтинг - по возрастанию"
+        },
+        "DISCOUNT_RATING_DESC": {
+          "NAME": "Рейтинг - по убыванию"
+        },
+        "DISTANCE_ASC": {
+          "NAME": "Расстояние - по возрастанию"
+        },
+        "DISTANCE_DESC": {
+          "NAME": "Расстояние - по убыванию"
+        },
+        "ALPHABET_ASC": {
+          "NAME": "Алфавит - А до Я"
+        },
+        "ALPHABET_DESC": {
+          "NAME": "Алфавит - Я до А"
+        }
+      },
+      "LOCATION_SORT": {
+        "TITLE": "локация",
+        "": "Моё местоположение"
+      }
+    },
+    "DISCOUNT_CARD": {
+      "DISTANCE": "от вас",
+      "DATE": "до"
+    }
+  },
+  "MODERATOR_DASHBOARD": {
+    "NEW_VENDOR_FORM": "Форма добавления поставщика услуг",
+    "NEW_DISCOUNT_FORM": "Форма добавления скидки"
+  },
+  "NEW_VENDOR_FORM": {
+    "NAME_LABEL": "Наименование поставщика услуги/товара*",
+    "ADDRESS_LABEL": "Адрес поставщика услуги/товара",
+    "ADDRESS_PLACEHOLDER": "Например: г.Минск, ул.Ольшевского,11-4",
+    "DESCRIPTION": "Описание вендора",
+    "PHONE_NUMBER": "Телефон поставщика услуги/товара*",
+    "VALID_PHONE": "Телефон в формате +КОД_СТРАНЫ-КОД_ОПЕРАТОРА-НОМЕР, без пробелов",
+    "EMAIL_LABEL": "Электронный адрес поставщика услуги/товара*",
+    "VALID_EMAIL": "Неверный формат электронного адреса",
+    "WEBSITE_LABEL": "Веб-сайт",
+    "OTHER_SOCIAL_NETWORK_LABEL": "Другие соц. сети поставщика",
+    "VALID_SOCIAL_NETWORK": "Неверный aдрес ссылки",
+    "BTN_TITLE": "Сохранить"
+  },
+  "TICKET": {
+    "TITLE": "Талон",
+    "FIRST_NAME": "Фамилия",
+    "LAST_NAME": "Имя",
+    "PATRONYMIC": "Отчество",
+    "NAME_VENDOR": "Наименование вендора",
+    "PRODUCT_SERVICE": "Товар/услуга",
+    "EMAIL": "Электронная почта",
+    "PHONE": "Контактный телефон",
+    "PROMO_CODE": "Промокод (при наличии)",
+    "DISCOUNT": "Скидка",
+    "CONFIRMATION_DATE": "Дата подтверждения",
+    "CLOSE": "Закрыть"
+  },
+  "NEW_DISCOUNT_FORM": {
+    "NAME_VENDOR": "Наименование поставщика услуги/товара*",
+    "NAME_VENDOR_ERROR": "Выберите наименование поставщика из доступных вариантов*",
+    "PRODUCT_SERVICE": "Наименование товара/услуги*",
+    "DESCRIPTION": "Описание скидки",
+    "AMOUNT_DISCOUNT": "Размер скидки*",
+    "DISCOUNT_VALIDITY_DATE": "Дата действия скидки*",
+    "PROMO_CODE": "Промокод",
+    "LABEL_TAGS": "Теги*",
+    "BTN_TITLE": "Добавить",
+    "PLACEHOLDER_VENDOR_NAME": "Введите наименование поставщика услуги/товара",
+    "PLACEHOLDER_PRODUCT_SERVICE": "Введите наименование товара/услуги",
+    "PLACEHOLDER_DESCRIPTION": "Введите описание",
+    "PLACEHOLDER_PERCENT": "Укажите процент",
+    "PLACEHOLDER_PROMO_CODE": "Введите промокод",
+    "PLACEHOLDER_START_DATE": "начало",
+    "PLACEHOLDER_END_DATE": "окончание",
+    "PLACEHOLDER_NEW_TAG": "Введите тег и нажмите 'Enter'",
+    "DATE_START_END": "Cрок действия скидки*",
+    "START_DATE_ERROR": "Невернная дата начала",
+    "END_DATE_ERROR": "Неверная дата окончания",
+    "MIN_MAX_PERCENT": "Диапазон",
+    "ACTIVITY_STATUS": "Статус скидки:",
+    "NAME_LABEL": "Введите название места*",
+    "ADDRESS_LABEL": "Введите адрес места*",
+    "ADDRESS_PLACEHOLDER": "Напр.: г. Минск, ул. Ольшевского, 11-4",
+    "POINTS_TITLE": "Нажмите для добавления данных локации:",
+    "ADD_LOCATION": "Добавить локацию",
+    "OPEN_MAP": "Открыть карту",
+    "DELETE_LOCATION": "Удалить локацию",
+    "EMPTYCOORDINATES": "Пожалуйста, поставьте точку на карте, для этого нажмите значок добавления местоположения"
+  },
+  "MAP": {
+    "ADD_POINT_BTN": "Добавить точку локации"
+  },
+  "DISCOUNT_DETAIL": {
+    "AMOUNT_LABEL": "Скидка",
+    "PROMO_CODE_LABEL": "Промо Код",
+    "ADDRESS_LABEL": "адрес",
+    "DISTANCE": "от вас",
+    "DATES_LABEL": "срок действия",
+    "START_DATE": "от",
+    "END_DATE": "до",
+    "ASSESSMENT_LABEL": "Оценить",
+    "EDIT_BUTTON_LABEL": "Редактировать",
+    "ARCHIVE_BUTTON_LABEL": "Архивировать",
+    "TICKET_BUTTON_LABEL": "Талон"
+  },
+  "VENDOR_PAGE": {
+    "PAGE_TITLE": "Информация о вендоре",
+    "VENDOR_DETAIL": {
+      "DETAIL_RATING_LABEL": "Рейтинг вендора",
+      "DETAIL_CONTENT": {
+        "VENDOR_NAME": "Наименование вендора",
+        "VENDOR_ADDRESS": "Адрес",
+        "VENDOR_EMAIL": "Электронная почта",
+        "VENDOR_PHONE": "Контактный телефон",
+        "VENDOR_SOCIALS": "Социальные сети"
+      },
+      "DETAIL_ACTIONS": {
+        "EDIT": "Редактировать"
+      }
+    }
+  },
+  "BUTTON_BACK_LOCATION": "назад",
+  "ADMIN_DASHBOARD": {
+    "SETTINGS": "Изменить",
+    "SIDEBAR": {
+      "ADMIN": "Статистика",
+      "SETTINGS": "Настройки",
+      "VENDORS": "Вендоры",
+      "DISCOUNTS": "Скидки",
+      "OPTIONS": "Опции",
+      "COLLAPSE": "Свернуть"
+    },
+    "SORT": {
+      "LABEL": {
+        "RATING": "Сортировать по рейтингу",
+        "TICKET": "Сортировать по количеству талонов"
+      },
+      "ASC": "по возрастанию",
+      "DESC": "по убыванию"
+    },
+    "STATS": {
+      "TABLE": {
+        "NAME": "Название",
+          "RATING": "Рейтинг",
+        "TICKETS": "Талоны",
+        "EMAIL": "Эл. Почта"
+      }
+    },
+    "SEARCH": {
+      "SEARCH_BY": "Искать по"
+    },
+    "CONTENT": ""
+  },
+  "USER_PROFILE": {
+    "LIST_TITLE": {
+      "SAVED": "Избранные Скидки",
+      "ORDERED": "История Заказов"
+    },
+    "LIST_ITEM": {
+      "DATE_BEFORE": "до",
+      "DATE_ORDER": "заказан"
+    },
+    "TICKET_BUTTON": {
+      "TICKET_LABEL": "Талон",
+      "SHOW_TICKET": "Показать Талон",
+      "ORDER_TICKET": "Заказать Талон",
+      "DISCOUNT_INACTIVE": "Скидка не доступна"
+    }
+  }
+}

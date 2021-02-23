@@ -1,0 +1,208 @@
+{
+  "COMMON": {
+    "HEADER": "Ngx Translate Application Usage in Angular"
+  },
+  "LANGUAGES": {
+    "EN": "English",
+    "RU": "Russian",
+    "TITLE": "Change language"
+  },
+  "BUTTON": {
+    "LOGOUT": "Logout"
+  },
+  "HEADER": {
+    "SELECTOR_TITLE": "Language",
+    "ADMIN_PANEL_LINK_TITLE": "View statistics",
+    "MODERATOR_PANEL_LINK_TITLE": "Add New"
+  },
+  "LOGIN": {
+    "TITLE": "Log In",
+    "BTN_TITLE": "Log In",
+    "EMAIL_LABEL": "Enter your email*",
+    "VALID_EMAIL": "Please enter a valid email address",
+    "PASSWORD_LABEL": "Enter your password*",
+    "PASS_ERR_LENGTH": "Password should contain 8 characters",
+    "STRONG_PASS": "Password must including UPPER/lowercase and number",
+    "HIDE": "Hide password"
+  },
+  "MAIN_PAGE": {
+    "SEARCH": "Search",
+    "BUTTONS": {
+      "TICKET": "Ticket"
+    },
+    "FILTER": {
+      "SORT_BY": {
+        "TITLE": "sort by",
+        "DISCOUNT_RATING_ASC": {
+          "NAME": "Rating - Low to High"
+        },
+        "DISCOUNT_RATING_DESC": {
+          "NAME": "Rating - High to Low"
+        },
+        "DISTANCE_ASC": {
+          "NAME": "Distance - Low to High"
+        },
+        "DISTANCE_DESC": {
+          "NAME": "Distance - High to Low"
+        },
+        "ALPHABET_ASC": {
+          "NAME": "Alphabet - A to Z"
+        },
+        "ALPHABET_DESC": {
+          "NAME": "Alphabet - Z to A"
+        }
+      },
+      "LOCATION_SORT": {
+        "TITLE": "location"
+      }
+    },
+    "DISCOUNT_CARD": {
+      "DISTANCE": "from you",
+      "DATE": "before"
+    }
+  },
+  "MODERATOR_DASHBOARD": {
+    "NEW_VENDOR_FORM": "Vendor adding form",
+    "NEW_DISCOUNT_FORM": "Discount adding form"
+  },
+  "NEW_VENDOR_FORM": {
+    "NAME_LABEL": "Vendor name*",
+    "ADDRESS_LABEL": "Vendor address",
+    "DESCRIPTION": "Vendor description",
+    "ADDRESS_PLACEHOLDER": "Ex.: 17 Kensington Street",
+    "PHONE_NUMBER": "Vendor phone number*",
+    "VALID_PHONE": "Enter the phone without spaces in the format '+COUNTRY_CODE-OPERATOR_CODE-NUMBER'",
+    "EMAIL_LABEL": "Vendor email*",
+    "VALID_EMAIL": "Please enter a valid email address",
+    "WEBSITE_LABEL": "Vendor website",
+    "OTHER_SOCIAL_NETWORK_LABEL": "Other social networks",
+    "VALID_SOCIAL_NETWORK": "Please enter a valid url address",
+    "BTN_TITLE": "Save"
+  },
+  "TICKET": {
+    "TITLE": "Ticket",
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
+    "PATRONYMIC": "Patronymic",
+    "NAME_VENDOR": "Vendor's name",
+    "PRODUCT_SERVICE": "Product/service",
+    "EMAIL": "Email",
+    "PHONE": "Contact number",
+    "PROMO_CODE": "Promo code (if available)",
+    "DISCOUNT": "Discount",
+    "CONFIRMATION_DATE": "Confirmation date",
+    "CLOSE": "Close"
+  },
+  "NEW_DISCOUNT_FORM": {
+    "NAME_VENDOR": "Vendor name*",
+    "NAME_VENDOR_ERROR": "The vendor must be selected from the available options",
+    "PRODUCT_SERVICE": "Product or service name*",
+    "DESCRIPTION": "Discount description",
+    "AMOUNT_DISCOUNT": "Discount amount*",
+    "DISCOUNT_VALIDITY_DATE": "Discount validity date*",
+    "PROMO_CODE": "Promo code",
+    "LABEL_TAGS": "Tags*",
+    "BTN_TITLE": "Add",
+    "PLACEHOLDER_VENDOR_NAME": "Enter the vendor name",
+    "PLACEHOLDER_PRODUCT_SERVICE": "Enter the product or service name",
+    "PLACEHOLDER_DESCRIPTION": "Enter description",
+    "PLACEHOLDER_PERCENT": "Enter the percent",
+    "PLACEHOLDER_PROMO_CODE": "Enter your promo code",
+    "PLACEHOLDER_START_DATE": "start",
+    "PLACEHOLDER_END_DATE": "end",
+    "PLACEHOLDER_NEW_TAG": "Enter a new tag and press 'Enter'",
+    "DATE_START_END": "Validity period*",
+    "START_DATE_ERROR": "Invalid start date",
+    "END_DATE_ERROR": "Invalid end date",
+    "MIN_MAX_PERCENT": "Range",
+    "ACTIVITY_STATUS": "Discount activity:",
+    "NAME_LABEL": "Enter location's name*",
+    "ADDRESS_LABEL": "Enter location's address*",
+    "ADDRESS_PLACEHOLDER": "Example: London, 17 Kensington Street",
+    "POINTS_TITLE": "Click to add location details:",
+    "ADD_LOCATION": "Add the location",
+    "OPEN_MAP": "Open the map",
+    "DELETE_LOCATION": "Delete the location",
+    "EMPTYCOORDINATES": "Please, put a point on the map, click adding location icon"
+  },
+  "MAP": {
+    "ADD_POINT_BTN": "Add point"
+  },
+  "DISCOUNT_DETAIL": {
+    "AMOUNT_LABEL": "discount",
+    "PROMO_CODE_LABEL": "Promo Code",
+    "ADDRESS_LABEL": "address",
+    "DISTANCE": "from you",
+    "DATES_LABEL": "validity period",
+    "START_DATE": "from",
+    "END_DATE": "to",
+    "ASSESSMENT_LABEL": "Assess",
+    "EDIT_BUTTON_LABEL": "Edit",
+    "ARCHIVE_BUTTON_LABEL": "Archive",
+    "TICKET_BUTTON_LABEL": "Ticket"
+  },
+  "VENDOR_PAGE": {
+    "PAGE_TITLE": "About vendor",
+    "VENDOR_DETAIL": {
+      "DETAIL_RATING_LABEL": "Vendor rating",
+      "DETAIL_CONTENT": {
+        "VENDOR_NAME": "Vendor Name",
+        "VENDOR_ADDRESS": "Address",
+        "VENDOR_EMAIL": "E-Mail",
+        "VENDOR_PHONE": "Phone",
+        "VENDOR_SOCIALS": "Socials"
+      },
+      "DETAIL_ACTIONS": {
+        "EDIT": "Edit"
+      }
+    }
+  },
+  "BUTTON_BACK_LOCATION": "go back",
+  "ADMIN_DASHBOARD": {
+    "SETTINGS": "Change",
+    "SIDEBAR": {
+      "ADMIN": "Statistics",
+      "SETTINGS": "Settings",
+      "VENDORS": "Vendors",
+      "DISCOUNTS": "Discounts",
+      "OPTIONS": "Options",
+      "COLLAPSE": "Collapse"
+    },
+    "SORT": {
+      "LABEL": {
+        "RATING": "Sort by rating",
+        "TICKET": "Sort by tickets"
+      },
+      "ASC": "ascending",
+      "DESC": "descending"
+    },
+    "STATS": {
+      "TABLE": {
+        "NAME": "Name",
+        "RATING": "Rating",
+        "TICKETS": "Tickets",
+        "EMAIL": "E-mail"
+      }
+    },
+    "SEARCH": {
+      "SEARCH_BY": "Search by"
+    },
+    "CONTENT": ""
+  },
+  "USER_PROFILE": {
+    "LIST_TITLE": {
+      "SAVED": "Saved Discounts",
+      "ORDERED": "Ordered Tickets"
+    },
+    "LIST_ITEM": {
+      "DATE_BEFORE": "before",
+      "DATE_ORDER": "order"
+    },
+    "TICKET_BUTTON": {
+      "TICKET_LABEL": "Ticket",
+      "SHOW_TICKET": "Show Ticket",
+      "ORDER_TICKET": "Order Ticket",
+      "DISCOUNT_INACTIVE": "Not available"
+    }
+  }
+}

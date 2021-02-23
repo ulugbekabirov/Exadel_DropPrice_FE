@@ -1,0 +1,63 @@
+@import "../../../../variables";
+
+html,
+body {
+	height: 100%;
+	margin: 0;
+  padding: 0;
+}
+
+%form {
+  width: 100%;
+  max-width: 900px;
+  margin: 2.5em auto;
+}
+
+mat-card {
+  @extend %form;
+    padding: 25px 50px;
+    min-width: 200px;
+  @media screen and (device-aspect-ratio: 40/71) {
+    min-width: 300px;
+  }
+  h2{
+    align-self: center;
+  }
+}
+
+.new-vendor-form {
+  &__details,
+  &__social-links{
+    margin-top: 10px;
+  }
+  &__description {
+    height: 190px;
+  }
+}
+
+mat-form-field {
+  display: block;
+  width: 100%;
+}
+
+mat-icon{
+  cursor: pointer;
+  color: rgb(46, 77, 128);
+}
+
+mat-icon:focus, mat-icon:active {
+  opacity: .7;
+}
+
+button {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.snackbar-color-success {
+  background-color: $snackbar-color-success;
+}
+
+.snackbar-color-error {
+  background-color: $snackbar-color-error;
+}

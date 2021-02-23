@@ -1,0 +1,101 @@
+<div class="discount-card">
+  <div class="discount-card__header"
+       fxLayout="row"
+       fxLayoutAlign="center center"
+  >
+    <h2 class="discount-card__header_title">
+      <a
+        [routerLink]="['/discounts', discount.discountId]"
+        matTooltip="Подробнее о Скидке"
+        matTooltipPosition="right"
+      >
+        {{discount.discountName}}
+      </a>
+    </h2>
+  </div>
+  <div class="discount-card__rating">
+    <div class="discount-card__rating_rating"
+         fxLayout="row"
+         fxLayoutAlign="center center"
+         fxLayoutGap=".3em"
+    >
+    <span class="rating__amount"
+          fxLayoutAlign="center center"
+    >
+          {{discount.discountRating ? discount.discountRating.toFixed(2) : discount.discountRating}}
+    </span>
+      <mat-icon class="rating__icon"
+                fxLayoutAlign="center center"
+      >{{discount.discountRating ? 'star_rate' : 'star_border'}}
+      </mat-icon>
+    </div>
+    <mat-icon class="discount-card__rating_favourite"
+              fxLayoutAlign="center center"
+              matTooltip="Toggle Favourites"
+              [ngStyle]="{'color': discount.isSaved ? '#FF6347' : '#A38D8B'}"
+              (click)="toggleFavorites(discount.discountId)"
+    >
+      favorite
+    </mat-icon>
+  </div>
+  <div class="discount-card__vendor"
+       fxLayoutAlign="flex-start center"
+  >
+    <a class="discount-card__vendor_link"
+       [routerLink]="['/vendors', discount.vendorId]"
+       matTooltip="Подробнее о Вендоре"
+       matTooltipPosition="right"
+    >
+      {{discount.vendorName}}
+    </a>
+  </div>
+  <div class="discount-card__distance">
+    <span>{{discount.distanceInMeters | metersToKilometers}}</span>
+    <span>{{"MAIN_PAGE.DISCOUNT_CARD.DISTANCE" | translate}}</span>
+  </div>
+  <div class="discount-card__amount"
+       fxLayoutAlign="center center"
+  >
+    <span class="discount-card__amount_text">
+          {{discount.discountAmount}}
+    </span>
+    <span class="discount-card__amount_symbol">
+      %
+    </span>
+  </div>
+  <div class="discount-card__footer"
+       fxLayoutAlign="center center"
+       fxLayout="row"
+       fxLayoutGap="1em"
+  >
+    <div class="discount-card__footer_endDate"
+         fxLayoutAlign="center center"
+         fxLayout="row"
+         fxLayoutGap=".5em"
+    >
+      <span>{{ "MAIN_PAGE.DISCOUNT_CARD.DATE" | translate }}</span>
+      <span>{{discount.endDate | date:"dd.MM.yyyy"}}</span>
+    </div>
+    <div class="discount-card__footer_action"
+         fxLayoutAlign="center center"
+    >
+      <button class="action__ticket"
+              mat-flat-button
+              matTooltip="Take Ticket"
+              (click)="ticketHandler(discount.discountId)"
+      >
+        {{ "MAIN_PAGE.BUTTONS.TICKET" | translate }}
+      </button>
+      <mat-icon *appVerifyUserRoles='["Moderator"]'
+                class="action__edit"
+                matTooltip="Edit Discount"
+      (click)="onEditDiscount(discount.discountId)"
+      >
+      mode_edit
+      </mat-icon>
+
+    </div>
+  </div>
+</div>
+
+

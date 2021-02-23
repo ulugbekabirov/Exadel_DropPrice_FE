@@ -1,0 +1,29 @@
+<div class="shadow">
+  <mat-card class="modal">
+    <mat-card-header class="modal__title">
+      <mat-card-title>{{title}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="modal__content">
+      {{content}}
+    </mat-card-content>
+    <mat-card-footer
+      fxLayoutGap="2em"
+      fxLayoutAlign="center center"
+    >
+      <button
+        mat-stroked-button
+        color="primary"
+        matSuffix
+        (click)="allow()"
+      >Да
+      </button>
+      <button
+        mat-stroked-button
+        color="warn"
+        matSuffix
+        (click)="prevent()"
+      >Нет
+      </button>
+    </mat-card-footer>
+  </mat-card>
+</div>

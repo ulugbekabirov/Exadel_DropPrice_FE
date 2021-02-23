@@ -1,1 +1,9 @@
-<div>app-root works!</div>
+<app-loading-spinner
+  [isLoading$]="loading$"
+></app-loading-spinner>
+<app-header></app-header>
+<main>
+  <div class="main-container">
+    <router-outlet></router-outlet>
+  </div>
+</main>

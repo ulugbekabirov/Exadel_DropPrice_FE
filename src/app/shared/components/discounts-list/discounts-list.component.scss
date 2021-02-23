@@ -1,0 +1,64 @@
+@import "src/variables";
+
+.discounts-box {
+
+  font-size: 1rem;
+
+  &__title {
+    font-size: 1.5em;
+    text-align: center;
+    font-weight: 500;
+    color: #ffffff;
+  }
+
+  &__settings {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 3em;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: $discount_filter_selector_text_color;
+  }
+
+  &__list {
+    padding: 0 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+
+    h3 {
+      background: rgba(0, 0, 0, .04);
+      color: rgba(0, 0, 0, 1);
+      padding: 10px;
+      text-align: center;
+      margin: 0;
+    }
+
+    li {
+      margin-bottom: 1em;
+    }
+
+    @media screen and (min-width: 700px) {
+
+      &::-webkit-scrollbar-track {
+
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        border-radius: .5em;
+        background-color: #F5F5F5;
+      }
+
+      &::-webkit-scrollbar {
+
+        width: .3em;
+        background-color: #F5F5F5;
+      }
+
+      &::-webkit-scrollbar-thumb {
+
+        border-radius: .5em;
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+        background-color: #7ec4f3;
+      }
+    }
+  }
+}

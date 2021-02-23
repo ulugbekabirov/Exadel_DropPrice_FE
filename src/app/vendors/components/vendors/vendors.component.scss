@@ -1,0 +1,14 @@
+@import "src/variables";
+
+.vendors-container {
+
+  font-size: 1rem;
+
+  .vendors__title {
+    font-size: 1.4em;
+    margin: 0;
+    padding: 1em;
+    text-align: center;
+    color: $vendor_header_text_color;
+  }
+}

@@ -1,1 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
+@import "variables";
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font: 1rem/1.5 "Roboto", sans-serif;
+  background-color: $body_bgColor;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button,
+input {
+  border: none;
+  outline: none;
+}
+
+a,
+button {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+
+  &:visited {
+    color: initial;
+  }
+}
+
+svg {
+  display: block;
+}
+
+

@@ -1,0 +1,68 @@
+<li class="list-item"
+    [class.isExpired]="!discount.activityStatus"
+>
+  <p class="list-item__title" [routerLink]="['/discounts', discount.discountId]"
+     matTooltip="Подробнее о Скидке"
+     matTooltipPosition="above"
+  >
+    {{ discount?.discountName }}
+  </p>
+  <p class="list-item__subTitle"
+     [routerLink]="['/vendors', discount.vendorId]"
+     matTooltip="Подробнее о Вендоре"
+     matTooltipPosition="above"
+  >
+    {{ discount?.vendorName }}
+  </p>
+  <p class="list-item__discountAmount">
+    <span class="list-item__discountAmount_text">
+          {{discount.discountAmount}}
+    </span>
+    <span class="list-item__discountAmount_symbol">
+      %
+    </span>
+  </p>
+  <p class="list-item__date">
+        <span class="list-item__date_label">
+         <small>
+           {{"USER_PROFILE.LIST_ITEM.DATE_BEFORE" | translate}}:
+         </small>
+        </span>
+    <span class="list-item__date_text"
+    >
+      <small>{{discount.endDate | date: 'medium'}}</small>
+    </span>
+  </p>
+  <div class="list-item__actions">
+
+    <div class="list-item__actions_favourite">
+      <mat-icon class="list-item__icon_favourite"
+                fxLayoutAlign="center center"
+                matTooltip="Toggle Favourites"
+                [ngStyle]="{'color': discount.isSaved ? '#FF6347' : '#FF6347'}"
+                (click)="toggleFavorites(discount.discountId)"
+      >
+        {{discount.isSaved ? 'favorite' : 'favorite_border'}}
+      </mat-icon>
+    </div>
+
+    <div class="list-item__actions_ticket">
+      <button class="action__ticket"
+              matTooltip="Ticket"
+              (click)="ticketHandler(discount.discountId)"
+              [class.discountInActive]="!discount.activityStatus"
+              [disabled]="!discount.activityStatus"
+      >
+        {{
+        discount.activityStatus
+          ?
+        discount.isOrdered
+          ? ("USER_PROFILE.TICKET_BUTTON.TICKET_LABEL" | translate)
+          : ("USER_PROFILE.TICKET_BUTTON.TICKET_LABEL" | translate)
+          : ("USER_PROFILE.TICKET_BUTTON.DISCOUNT_INACTIVE" | translate)
+        }}
+      </button>
+    </div>
+
+  </div>
+</li>

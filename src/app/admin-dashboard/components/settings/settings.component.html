@@ -1,0 +1,13 @@
+<section class="settings">
+  <div class="grid">
+    <article *ngFor="let setting of settings"
+             class="config"
+    >
+      <app-setting-item
+      [setting]="setting"
+      [settingEdit]="settingEdit"
+      (onSettingChange)="changeSetting($event)"
+      ></app-setting-item>
+    </article>
+  </div>
+</section>

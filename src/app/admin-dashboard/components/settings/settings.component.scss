@@ -1,0 +1,31 @@
+@import "src/variables";
+
+.settings {
+  font-size: 1rem;
+  position: relative;
+  min-height: 100vh;
+  padding: 2em;
+  color: $admin_content_txtColor;
+  background: $admin_content_bgColor;
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 2em;
+    justify-items: stretch;
+    align-items: stretch;
+
+    > article {
+      display: flex;
+      width: 100%;
+      background: $admin_content_bgColor;
+      border-radius: $border-radius;
+      box-shadow: $box-shadow;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    position: static;
+    width: 100%;
+  }
+}

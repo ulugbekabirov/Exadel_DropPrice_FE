@@ -1,0 +1,110 @@
+@import "src/variables";
+
+.list-item {
+  position: relative;
+  padding: .6em 1.1em;
+  width: 100%;
+  height: 100%;
+  font-size: 1rem;
+  border-right: 2px solid #5b9fef;
+  border-left: 2px solid #5b9fef;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+
+  &:hover {
+    border-right: 2px solid #535353;
+    border-left: 2px solid #535353;
+  }
+
+  &__title {
+    grid-column: 1/4;
+    grid-row: 1/2;
+    font-size: 1.1em;
+    margin: 0;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    outline: none;
+  }
+
+  &__subTitle {
+    grid-column: 1/3;
+    grid-row: 2/3;
+    align-self: center;
+    color: #807d82;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    margin: 0;
+  }
+
+  &__discountAmount {
+    grid-column: 4/5;
+    grid-row: 1/3;
+    margin: 0;
+    justify-self: center;
+    align-self: center;
+
+    span {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: $discountAmount_text_color;
+    }
+  }
+
+  &__date {
+    grid-column: 1/3;
+    grid-row: 3/4;
+    align-self: end;
+    margin: 0;
+  }
+
+  &__actions {
+    grid-column: 3/5;
+    grid-row: 3/4;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: .8em;
+
+    &_favourite {
+      cursor: pointer;
+    }
+
+    &_ticket {
+      .action__ticket {
+        font-size: .7em;
+        letter-spacing: .05em;
+        font-weight: 500;
+        text-transform: uppercase;
+        padding: .4em 1.1em;
+        white-space: nowrap;
+        overflow: hidden;
+        border-radius: 1em;
+        border: 1px solid $ticket_button_bg_color;
+        background: $ticket_button_bg_color;
+        box-shadow: 0 .3em .2em rgba(28, 104, 192, .25);
+        color: $ticket_button_text_color;
+        cursor: pointer;
+        outline: none;
+
+        &:hover {
+          border: 1px solid burlywood;
+        }
+
+        &.discountInActive {
+          background: #adabaf;
+          cursor: default;
+        }
+      }
+    }
+  }
+
+  &.isExpired {
+    opacity: .5;
+    border-right: 2px solid #FF6347;
+    border-left: 2px solid #5b9fef;
+  }
+}

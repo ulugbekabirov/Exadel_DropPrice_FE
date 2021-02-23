@@ -1,0 +1,39 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.login-wrapper {
+  height: 100%;
+}
+
+%login-form {
+  max-width: 300px;
+  margin: 2em auto;
+}
+mat-card {
+  @extend %login-form;
+  text-align: center;
+  padding: 50px;
+  min-width: 400px;
+  @media screen and (device-aspect-ratio: 40/71) {
+    min-width: 300px;
+  }
+  h2{
+    align-self: center;
+  }
+}
+
+mat-form-field {
+  display: block;
+}
+
+button {
+  width: 100%;
+  margin-top: 20px;
+}
+.languages-select{
+  @extend %login-form;
+}

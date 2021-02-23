@@ -1,0 +1,121 @@
+<div class="new-vendor-wrapper">
+  <mat-card>
+    <mat-card-content>
+      <form
+        [formGroup]="newVendorForm"
+        (ngSubmit)="onSubmit()"
+        fxLayout="column"
+        fxLayoutAlign="space-between"
+        class="new-vendor-form"
+      >
+        <div  fxLayout="row"
+              fxLayoutGap="30px"
+              fxLayoutAlign="center center"
+              fxLayout.lt-md="column"
+              fxLayoutGap.xs="5px" >
+          <mat-form-field>
+            <mat-label>{{
+              "NEW_VENDOR_FORM.NAME_LABEL" | translate
+            }}</mat-label>
+            <input matInput formControlName="vendorName" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>{{
+              "NEW_VENDOR_FORM.ADDRESS_LABEL" | translate
+            }}</mat-label>
+            <input
+              matInput
+              formControlName="address"
+              required
+              placeholder="{{ 'NEW_VENDOR_FORM.ADDRESS_PLACEHOLDER' | translate }}"
+            />
+          </mat-form-field>
+        </div>
+
+        <mat-form-field class="full-width">
+          <mat-label>{{ "NEW_VENDOR_FORM.DESCRIPTION" | translate }}</mat-label>
+          <textarea
+            class="new-vendor-form__description"
+            formControlName="description"
+            matInput
+            #description
+            maxlength="5000"
+          >
+          </textarea>
+          <mat-hint class="description-limit">{{ description.value.length }} / 5000</mat-hint>
+        </mat-form-field>
+
+        <div fxLayout="row"
+             fxLayout.xs="column"
+             fxLayoutGap="30px"
+             class="new-vendor-form__details"
+        >
+          <mat-form-field>
+            <mat-label>{{
+              "NEW_VENDOR_FORM.PHONE_NUMBER" | translate
+            }}</mat-label>
+            <input matInput formControlName="phone" type="tel" />
+            <mat-icon matSuffix>phone</mat-icon>
+            <mat-error
+              >{{ "NEW_VENDOR_FORM.VALID_PHONE" | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>{{ "NEW_VENDOR_FORM.EMAIL_LABEL" | translate }}</mat-label>
+            <input matInput formControlName="email" />
+            <mat-icon matSuffix>alternate_email</mat-icon>
+            <mat-error
+              >{{ "NEW_VENDOR_FORM.VALID_EMAIL" | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row"
+             fxLayoutGap="25px"
+             fxLayout.lt-md="column"
+             fxLayoutGap.xs="5px"
+             formGroupName="socialLinks"
+             class="new-vendor-form__social-links"
+             >
+          <mat-form-field>
+            <mat-label>Facebook</mat-label>
+            <input formControlName="facebook" matInput/>
+            <mat-error
+              >{{ "NEW_VENDOR_FORM.VALID_SOCIAL_NETWORK" | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Instagram</mat-label>
+            <input formControlName="instagram" matInput/>
+            <mat-error
+              >{{ "NEW_VENDOR_FORM.VALID_SOCIAL_NETWORK" | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>{{
+              "NEW_VENDOR_FORM.WEBSITE_LABEL" | translate
+            }}</mat-label>
+            <input formControlName="webSite" matInput/>
+            <mat-error
+              >{{ "NEW_VENDOR_FORM.VALID_SOCIAL_NETWORK" | translate }}
+            </mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <button
+          mat-flat-button
+          color="primary"
+          [disabled]="newVendorForm.invalid"
+          type="submit"
+        >
+          {{ "NEW_VENDOR_FORM.BTN_TITLE" | translate }}
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
