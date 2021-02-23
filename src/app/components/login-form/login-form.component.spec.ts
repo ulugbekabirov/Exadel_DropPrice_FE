@@ -3,45 +3,43 @@ import { LoginFormComponent } from './login-form.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import {  FormBuilder } from '@angular/forms'
+import {  FormBuilder } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { ActiveUser } from '../../models';
 
-fdescribe('LoginFormComponent', () => {
+describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
   let fixture: ComponentFixture<LoginFormComponent>;
 
-  let validUser = {
+  const validUser = {
     username: '00132126',
     password: '123456'
   };
 
-  let blankUser = {
+  const blankUser = {
     username: '',
     password: ''
   };
 
   function updateForm(userEmail: string, userPassword: string) {
-    console.log('ff',fixture.componentInstance.loginForm.controls['username'].patchValue(userEmail));
-    fixture.componentInstance.loginForm.controls['username'].patchValue(userEmail);
-    fixture.componentInstance.loginForm.controls['password'].patchValue(userPassword);
+    fixture.componentInstance.loginForm.controls[this.username].patchValue(userEmail);
+    fixture.componentInstance.loginForm.controls[this.password].patchValue(userPassword);
   }
 
   beforeEach(async () => {
-  
+
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule, 
-        HttpClientTestingModule, 
-        FormsModule, 
+        RouterTestingModule,
+        HttpClientTestingModule,
+        FormsModule,
         ReactiveFormsModule,
         TranslateModule.forRoot()
         ],
       declarations: [ LoginFormComponent],
       providers: [FormBuilder]
 
-    })
+    });
   });
 
   beforeEach(() => {
@@ -53,9 +51,8 @@ fdescribe('LoginFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
+
   it('created a form with username and password input and login button', () => {
-    const fixture = TestBed.createComponent(LoginFormComponent);
     const emailContainer = fixture.debugElement.nativeElement.querySelector('#email-container');
     const passwordContainer = fixture.debugElement.nativeElement.querySelector('#password-container');
     const loginBtnContainer = fixture.debugElement.nativeElement.querySelector('#login-btn-container');
@@ -64,7 +61,7 @@ fdescribe('LoginFormComponent', () => {
     expect(loginBtnContainer).toBeDefined();
   });
 
-  fit('When username is blank, username field should display red outline ', () => {
+  it('When username is blank, username field should display red outline ', () => {
     updateForm(blankUser.username, validUser.password);
     fixture.detectChanges();
     const button = fixture.debugElement.nativeElement.querySelector('button');
