@@ -22,6 +22,7 @@ export class DiscountsService {
     const options: { params: HttpParams } = {
       params: new HttpParams({fromObject: paramsObj})
     };
+    console.log(options)
     return this.restApi.getDiscounts(options);
   }
 

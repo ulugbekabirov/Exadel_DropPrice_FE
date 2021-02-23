@@ -68,14 +68,13 @@ export class HomeFacadeService {
     const latitude$: Observable<number> = this.throttle(this.homeStore.select('latitude'), debounceMs);
     const longitude$: Observable<number> = this.throttle(this.homeStore.select('longitude'), debounceMs);
     const sortBy$: Observable<string> = this.throttle(this.homeStore.select('sortBy'), debounceMs);
-    const tags$: Observable<string[]> = this.homeStore.select('requestTags');
+    const tags$: Observable<string[]> = this.throttle(this.homeStore.select('requestTags'), debounceMs);
     return combineLatest(searchQuery$, take$, skip$, latitude$, longitude$, sortBy$, tags$)
       .pipe(
         switchMap(([searchQuery, take, skip, latitude, longitude, sortBy, tags]) => {
           return this.discountsService.getDiscounts({searchQuery, take, skip, latitude, longitude, sortBy, tags})
             .pipe(
               tap(discounts => this.homeStore.set('discounts', discounts)),
-              tap(next => console.log('next', next))
             );
         })
       );

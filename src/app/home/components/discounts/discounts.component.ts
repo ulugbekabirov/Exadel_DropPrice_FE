@@ -30,13 +30,11 @@ export class DiscountsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.discounts$ = this.facade.getHomeData()
+    this.facade.getHomeData()
       .pipe(
-        takeUntil(this.unsubscribe$),
-        switchMap((): Observable<Discount[]> => {
-          return this.store.select('discounts');
-        })
-      );
+        takeUntil(this.unsubscribe$)
+      ).subscribe();
+    this.discounts$ = this.store.select('discounts');
     this.sorts$ = this.store.select('sorts');
     this.tags$ = this.store.select('tags');
     this.towns$ = this.store.select('towns');

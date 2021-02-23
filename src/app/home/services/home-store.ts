@@ -11,6 +11,8 @@ export interface HomeState {
   discounts: Discount[];
   sortBy: string;
   searchQuery: string;
+  latitude: number;
+  longitude: number;
   take: number;
   skip: number;
   requestTags: string[];
@@ -23,6 +25,8 @@ const HOME_INITIAL_STATE: HomeState = {
   discounts: [],
   sortBy: '',
   searchQuery: '',
+  latitude: 53.683814399999996,
+  longitude: 23.8026752,
   take: 10,
   skip: 0,
   requestTags: []
