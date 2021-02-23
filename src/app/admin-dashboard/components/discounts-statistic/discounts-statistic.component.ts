@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Observable, Subject } from 'rxjs';
+import { merge, Observable, Subject } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { takeUntil } from 'rxjs/operators';
+import { startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { StatisticsFacadeService } from '../../services/statistics-facade.service';
-import { DiscountsSortStore } from '../../services/discounts-sorts-store';
+import { DiscountsStatStore } from '../../services/discounts-stat-store';
+import { MatSort } from '@angular/material/sort';
+import { Discount } from 'src/app/models';
 
 @Component({
   selector: 'app-discounts-statistic',
@@ -14,54 +14,53 @@ import { DiscountsSortStore } from '../../services/discounts-sorts-store';
 })
 
 export class DiscountsStatisticComponent implements OnInit, OnDestroy, AfterViewInit {
-  ratingSort = new FormControl();
-  ticketCountSort = new FormControl();
-  dataSource;
   displayedColumns: string[] = ['name', 'rating', 'ticketCount'];
-  sortRating$: Observable<any>;
-  sortTicketCount$: Observable<any>;
-  searchResults$;
-  searchTerm$: any;
-  resultsLength: any;
+  dataSource$: Observable<Discount[]>;
+  searchTerm$: Observable<string>;
+  resultsLength$: Observable<number>;
+  pageSizes$: Observable<number[]>;
+  pageSize$: Observable<number>;
   private unsubscribe$ = new Subject<void>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private facade: StatisticsFacadeService,
-    private sortStore: DiscountsSortStore,
-  ) {
-    this.searchResults$ = this.facade.searchDiscounts();
-    this.sortRating$ = this.sortStore.select('ratingData');
-    this.sortTicketCount$ = this.sortStore.select('ticketCountData');
-    this.searchTerm$ = this.sortStore.select('searchQuery');
-  }
+    private discountsStatStore: DiscountsStatStore,
+  ) {}
 
   ngOnInit(): void {
-    this.searchResults$.pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(results => this.dataSource = new MatTableDataSource(results));
-    this.ratingSort.valueChanges.pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(next => this.sortStore.set('ratingSelected', next));
-    this.ticketCountSort.valueChanges.pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(next => this.sortStore.set('ticketCountSelected', next));
+    this.dataSource$ = this.facade.searchDiscounts()
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        switchMap((): Observable<Discount[]> => {
+          return this.discountsStatStore.select('results');
+        })
+      );
+    this.searchTerm$ = this.discountsStatStore.select('searchQuery');
+    this.resultsLength$ = this.discountsStatStore.select('total');
+    this.pageSizes$ = this.discountsStatStore.select('pageSizes');
+    this.pageSize$ = this.discountsStatStore.select('take');
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.paginator.page.pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(next => this.sortStore.set('take', next.pageSize));
+    const sort$ = this.sort.sortChange;
+    const paginator$ = this.paginator.page;
+    merge(sort$, paginator$)
+      .pipe(
+        startWith({}),
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe((data: any) => this.facade.updateDiscountsSort(data));
+  }
+
+  searchTermChange(query): void {
+    this.discountsStatStore.set('searchQuery', query);
   }
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
-  }
-
-  searchTermChange(query): void {
-    this.sortStore.set('searchQuery', query);
   }
 }

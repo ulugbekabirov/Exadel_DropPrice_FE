@@ -199,6 +199,7 @@
       "DATE_ORDER": "order"
     },
     "TICKET_BUTTON": {
+      "TICKET_LABEL": "Ticket",
       "SHOW_TICKET": "Show Ticket",
       "ORDER_TICKET": "Order Ticket",
       "DISCOUNT_INACTIVE": "Not available"

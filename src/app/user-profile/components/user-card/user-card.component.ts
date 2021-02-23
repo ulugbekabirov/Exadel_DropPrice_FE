@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+
 import { ActiveUser } from '../../../models';
 
 @Component({
@@ -9,4 +10,5 @@ import { ActiveUser } from '../../../models';
 })
 export class UserCardComponent {
   @Input() activeUser: ActiveUser;
+  panelOpenState = false;
 }
