@@ -4,7 +4,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { DiscountsService } from '../../../services/discounts.service';
 import { forkJoin, Subject } from 'rxjs';
 import { Discount, Town, Vendor } from '../../../models';
-import { SORT_BY } from '../../../../constants';
+import { SORTS } from '../../../../constants';
 import { TicketService } from '../../../services/ticket.service';
 import { RefDirective } from '../../../directives/ref.directive';
 import { UserService } from '../../../services/user.service';
@@ -17,7 +17,7 @@ import { UserFacadeService } from '../../../user-profile/services/user-facade.se
   styleUrls: ['./vendor-detail.component.scss']
 })
 export class VendorDetailComponent implements OnInit, OnDestroy {
-  sortBy = SORT_BY;
+  sortBy = SORTS;
   towns: Town[];
   vendor;
   selectedVendorId;

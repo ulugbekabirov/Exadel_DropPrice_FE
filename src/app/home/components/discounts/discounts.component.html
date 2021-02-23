@@ -1,2 +1,16 @@
-<h1>discounts works!</h1>
-
+<app-search-bar
+  [tags$]="tags$"
+  [searchTerm$]="searchTerm$"
+  (searchQueryChange)="onSearchQueryChange($event)"
+></app-search-bar>
+<app-discounts-list
+  [items$]="discounts$"
+  [towns$]="towns$"
+  [sorts$]="sorts$"
+  (locationChange)="onLocationChange($event)"
+  (sortChange)="onSortChange($event)"
+  (getTicket)="getTicket($event)"
+  (toggleFavourites)="changeFavourites($event)"
+> Discounts
+</app-discounts-list>
+<ng-template appRef></ng-template>

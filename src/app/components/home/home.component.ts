@@ -3,7 +3,7 @@ import { forkJoin, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DiscountsService } from 'src/app/services/discounts.service';
 import { UserService } from 'src/app/services/user.service';
-import { SORT_BY } from '../../../constants';
+import { SORTS } from '../../../constants';
 import { ActiveUser, Discount, LocationCoords, Tag, Town } from '../../models';
 import { RefDirective } from '../../directives/ref.directive';
 import { TicketService } from '../../services/ticket.service';
@@ -17,7 +17,7 @@ import { UserFacadeService } from '../../user-profile/services/user-facade.servi
 })
 
 export class HomeComponent implements OnInit, OnDestroy {
-  sortBy = SORT_BY;
+  sortBy = SORTS;
   activeUser: ActiveUser;
   tags: Tag[];
   towns: Town[];

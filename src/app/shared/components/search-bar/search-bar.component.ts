@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { Tag } from '../../../models';
@@ -29,6 +29,8 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   @Input() tags: Tag[];
+  @Input() tags$: Observable<Tag[]>;
+  @Input() searchTerm$: Observable<string>;
   @Output() searchQueryChange = new EventEmitter<any>();
 
   userNext(evt): void {

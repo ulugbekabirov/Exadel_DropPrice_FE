@@ -14,6 +14,7 @@ export class DiscountsService {
   }
 
   getDiscounts(params): Observable<any> {
+    console.log('params', params);
     const paramsObj = {};
     Object.keys({...params}).filter(value => typeof params[value] !== 'undefined').forEach(param => {
       paramsObj[param] = params[param];

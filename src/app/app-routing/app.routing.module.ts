@@ -6,13 +6,13 @@ import { HomeComponent } from '../components/home/home.component';
 import { AuthGuard } from '../guards/auth.guard';
 
 const appRoutes: Routes = [
-  {
-    path: '',
-    component: HomeComponent,
-    canActivate: [AuthGuard],
-  },
+  // {
+  //   path: '',
+  //   component: HomeComponent,
+  //   canActivate: [AuthGuard],
+  // },
+  {path: '', loadChildren: () => import('../home/home.module').then(m => m.HomeModule)},
   {path: 'discounts/:id', component: DiscountDetailComponent},
-  {path: 'discounts', loadChildren: () => import('../home/home.module').then(m => m.HomeModule)},
   {path: 'login', loadChildren: () => import('../auth/auth.module').then(m => m.AuthModule)},
   {path: 'vendors', loadChildren: () => import('../vendors/vendors.module').then(m => m.VendorsModule)},
   {path: 'user-profile', loadChildren: () => import('../user-profile/user-profile.module').then(m => m.UserProfileModule)},

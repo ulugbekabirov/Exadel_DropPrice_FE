@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Discount, LocationCoords, Town } from '../../../models';
 
 @Component({
@@ -18,6 +19,10 @@ export class DiscountsListComponent {
   @Input() towns: Town[];
   @Input() activeCoords: LocationCoords;
   @Input() sortBy;
+
+  @Input() items$: Observable<any>;
+  @Input() towns$: Observable<any>;
+  @Input() sorts$: Observable<any>;
 
   selectLocation(loc): void {
     this.locationChange.emit(loc);

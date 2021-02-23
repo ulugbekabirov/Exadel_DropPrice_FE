@@ -24,7 +24,7 @@
         <mat-chip
           class="chipsStyle"
           #chips="matChip"
-          *ngFor="let newTags of tags"
+          *ngFor="let newTags of tags$ | async"
           (click)="getCardsByTag(newTags?.tagName, chips)"
         >
           <mat-icon class="chipsIcon" *ngIf="chips.selected">check</mat-icon>

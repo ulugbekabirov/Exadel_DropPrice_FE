@@ -11,7 +11,7 @@
       <mat-select
         (selectionChange)="selectSort($event)"
       >
-        <mat-option *ngFor="let sort of sortBy" [value]="sort">
+        <mat-option *ngFor="let sort of sorts$ | async" [value]="sort">
           {{sort.name | translate}}
         </mat-option>
       </mat-select>
@@ -31,14 +31,14 @@
           (click)="myCoords($event)"
         >Моя локация
         </mat-option>
-        <mat-option *ngFor="let town of towns" [value]="town">
+        <mat-option *ngFor="let town of towns$ | async" [value]="town">
           {{town.townName}}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
   <ul class="discounts-box__list">
-    <li *ngFor="let discount of discounts">
+    <li *ngFor="let discount of items$ | async">
       <app-discounts-list-item
         [discount]="discount"
         (changeFavourites)="getToggleFavourites($event)"
