@@ -17,86 +17,83 @@
 
 .ticket {
   box-sizing: border-box;
-  //max-width: 560px;
-  //width: 100%;
-  //height: 565px;
   margin: 1rem auto;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 1.5em;
+  border-radius: 8px;
   background: $ticket-background;
   z-index: 99;
-  box-shadow: 2px 2px 15px 0 #AB9B0D;
-
-  &:before,
-  &:after {
-    content: '';
-    position: absolute;
-    left: 5px;
-    height: 6px;
-    max-width: 450px;
-    width: 100%;
-  }
-
-  &:before {
-    top: -5px;
-    background: radial-gradient(circle, transparent, transparent 50%, $ticket-background 50%,$ticket-background 100% ) -7px -8px / 16px 16px repeat-x,
-  }
-
-  &:after {
-    bottom: -5px;
-    background: radial-gradient(circle, transparent, transparent 50%, $ticket-background 50%, $ticket-background 100% ) -7px -2px / 16px 16px repeat-x,
-  }
+  top: 3%;
+  position: relative;
 }
 
 .logo-img {
-  width: 50%;
+  width: 40%;
+}
+
+.ticket-info {
+  &__label {
+    flex: 1;
+    font-size: 1em;
+  }
+
+  &__field {
+    flex: 1;
+    text-align: end;
+    font-size: 1em;
+  }
 }
 
 .ticket-content {
+  color: #3a3939;
   justify-content: center;
   align-items: center;
-  padding: 15px 20px;
   box-sizing: border-box;
   height: 100%;
   width: 100%;
-  border: 6px solid #D8D8D8;
+
+  &__dotted-line{
+    background: url(/assets/img/stars.png);
+    height: 6px;
+    width: 100%;
+    margin: .6em 0 1em 0;
+  }
 }
 
 .ticket-info {
   div {
     margin-top: 5px;
   }
+
+  &__label {
+    margin-right: 2em;
+  }
+
+  &__field {
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.2em;
+  }
 }
 
 .ticket-discount {
-  margin: 30px 0 30px;
-}
-
-.ticket-info__label {
+  font-size: 1.1em;
   font-weight: bold;
-}
-
-.ticket-info__field {
-  font-size: 1rem;
-  font-weight: 400;
-  font-style: italic;
-  line-height: 1.2em;
-  width: 50%;
-}
-
-.ticket-discount {
-  font-size: 20px;
 
   .discount-amount {
-    color: #ff0000;
-    font-weight: bold;
+    margin-left: .3em;
   }
 }
 
 .ticket-date {
   margin-left: 5px;
+  &__confirmation {
+    font-size: 1em;
+  }
 }
 
-.ticket-close {
-  margin-top: 40px;
+.close-ticket {
+  cursor: pointer;
+  position: absolute;
+  top: 3%;
+  right: 5%;
 }

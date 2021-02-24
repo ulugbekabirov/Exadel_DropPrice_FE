@@ -88,7 +88,7 @@
     "PRODUCT_SERVICE": "Product/service",
     "EMAIL": "Email",
     "PHONE": "Contact number",
-    "PROMO_CODE": "Promo code (if available)",
+    "PROMO_CODE": "Promo code",
     "DISCOUNT": "Discount",
     "CONFIRMATION_DATE": "Confirmation date",
     "CLOSE": "Close"
