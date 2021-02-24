@@ -1,8 +1,9 @@
 <app-search-bar
   [tags$]="tags$"
-  [searchTerm$]="searchTerm$"
-  [activeTags$]="requestTags$"
-  (searchQueryChange)="onSearchQueryChange($event)"
+  [activeTags$]="activeTags$"
+  [initialValue$]="searchTerm$"
+  (onEmitSearchTerm)="searchTermChange($event)"
+  (onEmitSearchTag)="searchTagChange($event)"
 ></app-search-bar>
 <app-discounts-list
   [sortBy]="sorts$"

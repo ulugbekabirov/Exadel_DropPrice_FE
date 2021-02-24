@@ -1,0 +1,11 @@
+<mat-chip-list selectable multiple>
+  <mat-chip
+    #chip="matChip"
+    *ngFor="let tag of tags$ | async"
+    (click)="toggleSelection(chip)"
+    [value]="tag.tagId"
+  >
+    <mat-icon *ngIf="chip.selected">check</mat-icon>
+    {{tag.tagName}}
+  </mat-chip>
+</mat-chip-list>

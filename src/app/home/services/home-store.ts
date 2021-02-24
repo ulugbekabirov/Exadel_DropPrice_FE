@@ -9,13 +9,6 @@ export interface HomeState {
   tags: Tag[];
   towns: Town[];
   discounts: Discount[];
-  sortBy: string;
-  searchQuery: string;
-  latitude: number;
-  longitude: number;
-  take: number;
-  skip: number;
-  requestTags: string[];
 }
 
 const HOME_INITIAL_STATE: HomeState = {
@@ -23,13 +16,6 @@ const HOME_INITIAL_STATE: HomeState = {
   tags: [],
   towns: [],
   discounts: [],
-  sortBy: 'DistanceAsc',
-  searchQuery: '',
-  latitude: 0,
-  longitude: 0,
-  take: 10,
-  skip: 0,
-  requestTags: []
 };
 
 @Injectable({
@@ -53,8 +39,8 @@ export class HomeStore {
 
   set(name: string, state: any): void {
     this.subject.next({
-      ...this.value, [name]: state
+      ...this.value,
+      [name]: state
     });
-    console.log(this.value);
   }
 }

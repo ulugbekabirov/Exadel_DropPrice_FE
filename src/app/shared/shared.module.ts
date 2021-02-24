@@ -1,3 +1,4 @@
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MapComponent } from './../components/map/map.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -34,6 +35,8 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { RouterModule } from '@angular/router';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { TicketComponent } from './components/ticket/ticket.component';
+import { SearchComponent } from './components/search/search.component';
+import { TagsFilterComponent } from './components/tags-filter/tags-filter.component';
 
 
 @NgModule({
@@ -48,6 +51,8 @@ import { TicketComponent } from './components/ticket/ticket.component';
     SearchBarComponent,
     TicketComponent,
     LoadingSpinnerComponent,
+    SearchComponent,
+    TagsFilterComponent,
   ],
 
   imports: [
@@ -76,6 +81,7 @@ import { TicketComponent } from './components/ticket/ticket.component';
     MatTooltipModule,
     MatDialogModule,
     MatExpansionModule,
+    MatToolbarModule,
   ],
 
   providers: [GoogleMapsAPIWrapper],

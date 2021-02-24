@@ -1,9 +1,10 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { forkJoin, Observable, Subject } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { pluck, switchMap, takeUntil } from 'rxjs/operators';
 import { RefDirective } from '../../../directives/ref.directive';
 import { ActiveUser, Discount, Tag, Town } from '../../../models';
 import { Sort } from '../../../models/sort';
+import { DiscountsRequestStore } from '../../services/discounts-request-store';
 import { HomeFacadeService } from '../../services/home-facade.service';
 import { HomeStore } from '../../services/home-store';
 
@@ -19,9 +20,8 @@ export class DiscountsComponent implements OnInit, OnDestroy {
   sorts$: Observable<Sort[]>;
   searchTerm$: Observable<string>;
   activeUser$: Observable<ActiveUser>;
-
-  requestTags$;
-  sortBy;
+  activeTags$;
+  sortBy$;
   private unsubscribe$: Subject<void> = new Subject<void>();
   @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
 
@@ -29,6 +29,7 @@ export class DiscountsComponent implements OnInit, OnDestroy {
   constructor(
     private store: HomeStore,
     private facade: HomeFacadeService,
+    private sortStore: DiscountsRequestStore,
   ) {
   }
 
@@ -40,13 +41,12 @@ export class DiscountsComponent implements OnInit, OnDestroy {
           return this.store.select('discounts');
         })
       );
-    // this.discounts$ = this.store.select('discounts');
     this.sorts$ = this.store.select('sorts');
     this.tags$ = this.store.select('tags');
     this.towns$ = this.store.select('towns');
-    this.searchTerm$ = this.store.select('searchQuery');
-    this.requestTags$ = this.store.select('requestTags');
-    this.sortBy$ = this.store.select('sortBy');
+    this.searchTerm$ = this.sortStore.select('searchQuery');
+    this.activeTags$ = this.sortStore.select('tags');
+    this.sortBy$ = this.sortStore.select('sortBy');
   }
 
   getTicket(discountId: number): void {
@@ -58,21 +58,32 @@ export class DiscountsComponent implements OnInit, OnDestroy {
   }
 
   onSearchQueryChange({name, tag}): void {
-    this.store.set('searchQuery', name);
-    this.store.set('requestTags', [...tag]);
+    console.log(name)
+    console.log(tag)
+    this.sortStore.set('searchQuery', name);
+    this.sortStore.set('tags', [...tag]);
   }
 
   onLocationChange({value: {latitude, longitude}}): void {
-    this.store.set('latitude', latitude);
-    this.store.set('longitude', longitude);
+    this.sortStore.set('latitude', latitude);
+    this.sortStore.set('longitude', longitude);
   }
 
   onSortChange({value: {sortBy}}): void {
-    this.store.set('sortBy', sortBy);
+    this.sortStore.set('sortBy', sortBy);
   }
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  searchTermChange(searchQuery: string): void {
+    this.sortStore.set('searchQuery', searchQuery);
+  }
+
+  searchTagChange(tags): void {
+    console.log(tags);
+    this.sortStore.set('tags', [...tags]);
   }
 }

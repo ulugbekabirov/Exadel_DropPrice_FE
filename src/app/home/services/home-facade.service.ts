@@ -8,6 +8,7 @@ import { ApiDataService } from '../../services/api-data.service';
 import { DiscountsService } from '../../services/discounts.service';
 import { TicketService } from '../../services/ticket.service';
 import { UserService } from '../../services/user.service';
+import { DiscountsRequestStore } from './discounts-request-store';
 import { HomeStore } from './home-store';
 
 @Injectable()
@@ -16,13 +17,13 @@ export class HomeFacadeService {
     private userService: UserService,
     private discountsService: DiscountsService,
     private homeStore: HomeStore,
+    private requestStore: DiscountsRequestStore,
     private ticketService: TicketService,
     private restApi: ApiDataService
   ) {
   }
 
   loadData(): Observable<any> {
-    // this.userService.activeUser$
     return forkJoin(
       this.getSorts(),
       this.getTags(),
@@ -63,17 +64,11 @@ export class HomeFacadeService {
   }
 
   getDiscounts(debounceMs = 500): Observable<any> {
-    const searchQuery$: Observable<string> = this.throttle(this.homeStore.select('searchQuery'), debounceMs);
-    const take$: Observable<number> = this.throttle(this.homeStore.select('take'), debounceMs);
-    const skip$: Observable<number> = this.throttle(this.homeStore.select('skip'), debounceMs);
-    const latitude$: Observable<number> = this.throttle(this.homeStore.select('latitude'), debounceMs);
-    const longitude$: Observable<number> = this.throttle(this.homeStore.select('longitude'), debounceMs);
-    const sortBy$: Observable<string> = this.throttle(this.homeStore.select('sortBy'), debounceMs);
-    const tags$: Observable<string[]> = this.throttle(this.homeStore.select('requestTags'), debounceMs);
-    return combineLatest(searchQuery$, take$, skip$, latitude$, longitude$, sortBy$, tags$)
+    return this.requestStore.requestData$
       .pipe(
-        switchMap(([searchQuery, take, skip, latitude, longitude, sortBy, tags]) => {
-          return this.discountsService.searchDiscounts({searchQuery, take, skip, latitude, longitude, sortBy, tags})
+        tap(next => console.log(next)),
+        switchMap((request) => {
+          return this.discountsService.searchDiscounts(request)
             .pipe(
               tap(discounts => this.homeStore.set('discounts', discounts)),
             );
