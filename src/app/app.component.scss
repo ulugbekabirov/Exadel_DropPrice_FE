@@ -11,29 +11,29 @@ main {
     position: relative;
     top: $main_header_height;
 
-    //@media (min-width: 575.98px) {
-    //
-    // padding: 0 calc(50vw - 270px);
-    //
-    // @media (min-width: 767.98px) {
-    //
-    //   padding: 0 calc(50vw - 360px);
-    //
-    //   @media (min-width: 991.98px) {
-    //
-    //     padding: 0 calc(50vw - 480px);
-    //
-    //     @media (min-width: 1199.98px) {
-    //
-    //       padding: 0 calc(50vw - 590px);
-    //
-    //       @media (min-width: 1599.98px) {
-    //
-    //         padding: 0 calc(50vw - 640px);
-    //       }
-    //     }
-    //   }
-    // }
-    //}
+    @media (min-width: 575.98px) {
+    
+    padding: 0 calc(50vw - 270px);
+    
+    @media (min-width: 767.98px) {
+    
+      padding: 0 calc(50vw - 360px);
+    
+      @media (min-width: 991.98px) {
+    
+        padding: 0 calc(50vw - 480px);
+    
+        @media (min-width: 1199.98px) {
+    
+          padding: 0 calc(50vw - 590px);
+    
+          @media (min-width: 1599.98px) {
+    
+            padding: 0 calc(50vw - 640px);
+          }
+        }
+      }
+    }
+    }
   }
 }

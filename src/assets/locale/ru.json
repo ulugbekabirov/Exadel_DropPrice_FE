@@ -28,7 +28,7 @@
   "MAIN_PAGE": {
     "SEARCH": "Поиск",
     "BUTTONS": {
-      "TICKET": "Талон"
+      "TICKET": "Получить скидку"
     },
     "FILTER": {
       "SORT_BY": {
@@ -58,8 +58,11 @@
       }
     },
     "DISCOUNT_CARD": {
-      "DISTANCE": "от вас",
-      "DATE": "до"
+      "DISTANCE": " от вас",
+      "TOOLTIP_VENDOR": "Подробнее о вендоре",
+      "TOOLTIP_FAVORITE": "Добавить в избранные",
+      "TOOLTIP_DISCOUNT": "Подробнее о скидке",
+      "TOOLTIP_RATING": "Рейтинг скидки"
     }
   },
   "MODERATOR_DASHBOARD": {
@@ -131,16 +134,19 @@
   },
   "DISCOUNT_DETAIL": {
     "AMOUNT_LABEL": "Скидка",
-    "PROMO_CODE_LABEL": "Промо Код",
-    "ADDRESS_LABEL": "адрес",
-    "DISTANCE": "от вас",
-    "DATES_LABEL": "срок действия",
-    "START_DATE": "от",
-    "END_DATE": "до",
+    "PROMO_CODE_LABEL": "Промокод",
+    "ADDRESS_LABEL": "Адрес",
+    "DISTANCE": "Расстояние от вас",
+    "DATES_LABEL": "Срок действия скидки",
     "ASSESSMENT_LABEL": "Оценить",
     "EDIT_BUTTON_LABEL": "Редактировать",
     "ARCHIVE_BUTTON_LABEL": "Архивировать",
-    "TICKET_BUTTON_LABEL": "Талон"
+    "TICKET_BUTTON_LABEL": "Заказать скидку",
+    "MAT_TAB_ABOUT": "О СКИДКЕ",
+    "TOOLTIP_GO_BACK": "Вернуться к списку",
+    "TOOLTIP_VENDOR": "Вендор",
+    "TOOLTIP_FAVORITES": "Добавить в избранные",
+    "TOOLTIP_VENDOR_RAT": "Рейтинг вендора"
   },
   "VENDOR_PAGE": {
     "PAGE_TITLE": "Информация о вендоре",

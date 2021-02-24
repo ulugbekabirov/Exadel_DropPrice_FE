@@ -2,290 +2,84 @@
 
 .discount-detail {
   font-size: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1em;
-  margin-top: 1em;
+  font-weight: 500;
+  z-index: -1;
+  margin-top: 20px;
+  color: $main_black;
 
-  .go-back__link {
-    font-size: 1rem;
-    background: $ticket_button_bg_color;
-    align-self: flex-start;
-    cursor: pointer;
-    padding: 0.3em 1em;
-    border-radius: 1em;
-    overflow: hidden;
-
-    &_icon {
-      background: inherit;
-      color: #ffffff;
-      will-change: transform;
-      transition: transform 0.1s ease-in-out;
-    }
-
-    &_text {
-      background: inherit;
-      color: #ffffff;
-      cursor: pointer;
-      display: block;
-    }
-
-    &:hover {
-      .go-back__link_icon {
-        background: inherit;
-        transform: scale(1.1, 1.1);
-        color: $isSaved_true_bg_color_hover;
-      }
-    }
+  @media screen and (max-width: 600px) {
+    padding: 0 20px 20px 20px;
+    font-size: .9rem;
+    margin-top: 0;
   }
 
-  &__header {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
-    align-items: center;
-    gap: 1em;
-    padding: 1em;
+  .go_back_main {
+    margin: 20px 0;
 
-    @media screen and (min-width: 767.98px) {
-      padding: 0 2em 1em;
-    }
-
-    &_rating {
-      font-size: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.4em;
-
-      .rating__icon {
-        font-size: 2em;
-        color: $discountRating_star_color;
-      }
-    }
-
-    &_title {
-      font-size: 1.2em;
+    .go-back__link_text {
       font-weight: 500;
-      align-self: center;
-      text-align: center;
-      margin: 0;
-      color: $discount_detail_text_color;
-    }
-
-    @media screen and (min-width: 767.98px) {
-      font-size: 1.5em;
-    }
-
-    &_favourite {
-      font-size: 2em;
-      margin-left: auto;
-      color: $isSaved_true_bg_color;
-      cursor: pointer;
-      will-change: transform;
-      transition: transform 0.1s ease-in-out;
-
-      &:hover {
-        transform: scale(1.1, 1.1);
-        color: $isSaved_true_bg_color_hover;
-      }
     }
   }
 
-  &__content {
-    box-shadow: 0 0.6em 0.5em rgba(28, 104, 192, 0.25);
+  .discount-detail__header {
+  .discount-detail {
+      .tags {
+        margin-bottom: 20px;
+      }
+    }
 
-    .discount-content {
-      &__vendor {
-        align-self: start;
-        font-size: 1.6em;
+    .discount-content__vendor {
+      font-size: 1.1rem;
+      font-weight: 500;
+
+      a {
+        color: #868e96;
+      }
+      a:hover, a:active, a:focus{
+        color:#717d8a;;
+      }
+      @media screen and (max-width: 600px) {
+        font-size: 1rem;
+      }
+    }
+
+    .discount-detail__header_title {
+      font-size: 1.7rem;
+      line-height: 1.1;
+      font-weight: 700;
+
+      @media screen and (max-width: 600px) {
+        font-size: 1.3rem;
         font-weight: 500;
-        line-height: 1.5em;
-        letter-spacing: 0.06em;
-        margin: 0;
-        padding: 1em 0;
+      }
+    }
+
+    .discount-detail__header_favourite {
+      margin: 0 2px 16px;
+      font-size: 1.7rem;
+      cursor: pointer;
+      color: $main_gray;
+      will-change: transform;
+      transition: transform .1s ease-in-out;
+      &:hover {
+        color: $favorite_discount;
+        transform: scale(1.1, 1.1);
+      }
+    }
+    .discount-content__tags_tag{
         cursor: pointer;
+    }
+    .discount-detail__header_rating {
+      margin: 0 0 16px;
 
-        a {
-          color: $discount_detail_text_color;
-
-          &:hover {
-            color: #000000;
-          }
-        }
-      }
-
-      &__description {
-        padding-bottom: 2em;
-
-        &_text {
-          font-size: 1em;
-          font-weight: 500;
-          line-height: 1.5em;
-          letter-spacing: 0.06em;
-          padding: 0.5em 1em;
-          margin: 0 2em;
-          color: $discount_detail_text_color;
-          border-right: 2px solid $main_header_bgColor;
-          border-left: 2px solid $main_header_bgColor;
-        }
-      }
-
-      &__amount {
-        padding-bottom: 1em;
-
-        &_label {
-          font-size: 1.2em;
-          font-weight: 600;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: $discount_detail_text_color;
-        }
-
-        &_text,
-        &_symbol {
-          font-size: 2.6em;
-          font-weight: 800;
-          font-style: italic;
-          color: $discountAmount_text_color;
-        }
-
-        @media screen and (min-width: 767.98px) {
-        }
-      }
-
-      &__promoCode {
-        padding-bottom: 1em;
-        color: $discount_detail_text_color;
-
-        &_label {
-          font-size: 1.2em;
-          font-weight: 600;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: $discount_detail_text_color;
-        }
-
-        &_text {
-          font-size: 1.8em;
-          text-transform: uppercase;
-          font-style: italic;
-          font-weight: 600;
-          letter-spacing: 0.1em;
-          color: $main_header_bgColor;
-        }
-      }
-
-      &__address {
-        padding-bottom: 1em;
-
-        &_label {
-          font-weight: 500;
-          font-size: 1.2em;
-          padding-right: 1em;
-          border-right: 1px solid #000000;
-          color: $discount_detail_text_color;
-        }
-
-        &_text {
-          font-size: 1em;
-          font-weight: 500;
-          line-height: 1.5em;
-          letter-spacing: 0.06em;
-          color: $discount_detail_text_color;
-        }
-      }
-
-      &__distance {
-        padding-bottom: 1em;
-
-        :first-child {
-          font-weight: 500;
-          font-size: 1.2em;
-          margin-right: 1em;
-          color: $discount_detail_text_color;
-        }
-
-        :last-child {
-          font-size: 1.5em;
-          font-weight: 600;
-          letter-spacing: 0.1em;
-          color: $discount_detail_text_color;
-        }
-
-        @media screen and (min-width: 767.98px) {
-        }
-      }
-
-      &__date {
-        padding-bottom: 2em;
-
-        p {
-          font-weight: 500;
-          font-size: 1.2em;
-          color: $discount_detail_text_color;
-        }
-
-        &_label {
-          font-weight: 500;
-          font-size: 1.2em;
-          padding-right: 1em;
-          color: $discount_detail_text_color;
-        }
-
-        &_end,
-        &_start {
-          font-size: 1.2em;
-          font-weight: 600;
-          letter-spacing: 0.1em;
-          color: $discount_detail_text_color;
-        }
-
-        @media screen and (min-width: 767.98px) {
-          flex-direction: column;
-          align-items: end;
-          justify-content: flex-end;
-        }
-      }
-
-      &__tags {
-        &_tag {
-          display: flex;
-          justify-content: center;
-          text-transform: uppercase;
-          font-weight: 400;
-          align-items: center;
-          padding: 0.4em 2em;
-          min-width: 8em;
-          color: #ffffff;
-          background: $ticket_button_bg_color;
-          cursor: pointer;
-          box-shadow: 0 0.4em 0.3em rgba(28, 104, 192, 0.25);
-
-          :hover {
-            color: #ffffff;
-          }
-        }
+      cursor: pointer;
+      .rating__icon {
+        color: $indigo;
       }
     }
   }
 
-  &__rating {
-    align-self: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1em;
-    flex-direction: row;
-    padding: 1em 0;
-
-    &_label {
-      font-size: 1.4rem;
-      font-weight: 500;
-      color: $discount_detail_text_color;
-    }
-
+  .discount-detail__rating {
     &_list {
       display: flex;
       list-style: none;
@@ -294,50 +88,68 @@
       li {
         cursor: pointer;
         font-size: 2.5rem;
-        color: #ddd;
+        color: $main_gray;
         padding: .4em 0;
 
         &.selected {
-          color: $discountRating_star_color;
+          color: $indigo;
         }
       }
     }
+  }
 
-    .rating__icon {
-      font-size: 2em;
-      color: $discountRating_star_color;
+}
+
+.discount-detail__content {
+  margin-top: 20px;
+
+  .discount-content__description {
+    margin-bottom: 20px;
+
+    .discount-icons{
+        display: flex;
+        gap: 10px;
+        @media screen and (max-width: 600px) {
+           flex-direction: column;
+          }
+    }
+    .action__icon {
       cursor: pointer;
+    }
+
+    .action__icon:hover,
+    .action__icon:active,
+    .action__icon:focus {
+      opacity: .8;
     }
   }
 
-  &__actions {
-    align-self: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2em;
-    padding-bottom: 2em;
+  .action__button {
+    cursor: pointer;
+    margin-top: 2rem;
+  }
+}
 
-    .action__button {
-      font-size: 1rem;
-      letter-spacing: 0.08em;
-      font-weight: 500;
-      min-width: 8em;
-      white-space: nowrap;
-      overflow: hidden;
-      border-radius: 1em;
-      padding: 0.2em 1em;
-      border: 1px solid $ticket_button_bg_color;
-      background: $ticket_button_bg_color;
-      color: $ticket_button_text_color;
-      box-shadow: 0 0.4em 0.3em rgba(28, 104, 192, 0.25);
-      cursor: pointer;
-      outline: none;
-    }
+.highliter {
+  font-weight: 700;
+  font-size: 1rem;
+
+  @media screen and (max-width: 600px) {
+    font-weight: 600;
+    font-size: .9rem;
+  }
+}
+
+.discount-detail__actions {
+  width: 100%;
+
+  .ticket {
+    width: 25%;
   }
 
-  @media screen and (min-width: 767.98px) {
-    margin-top: 2em;
-    font-size: 1.1rem;
+  @media screen and (max-width: 600px) {
+    .ticket {
+      width: 100%;
+    }
   }
 }

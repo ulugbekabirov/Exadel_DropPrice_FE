@@ -1,8 +1,8 @@
 @import "src/variables";
 
 .discounts-box {
-
   font-size: 1rem;
+  padding-bottom: 2rem;
 
   &__title {
     font-size: 1.5em;
@@ -21,22 +21,10 @@
   }
 
   &__list {
-    padding: 0 1em;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5em;
-
-    h3 {
-      background: rgba(0, 0, 0, .04);
-      color: rgba(0, 0, 0, 1);
-      padding: 10px;
-      text-align: center;
-      margin: 0;
-    }
-
-    li {
-      margin-bottom: 1em;
-    }
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    row-gap: 20px;
+    column-gap: 20px;
 
     @media screen and (min-width: 700px) {
 

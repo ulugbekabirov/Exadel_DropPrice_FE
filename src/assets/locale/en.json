@@ -28,7 +28,7 @@
   "MAIN_PAGE": {
     "SEARCH": "Search",
     "BUTTONS": {
-      "TICKET": "Ticket"
+      "TICKET": "Get the discount"
     },
     "FILTER": {
       "SORT_BY": {
@@ -57,8 +57,11 @@
       }
     },
     "DISCOUNT_CARD": {
-      "DISTANCE": "from you",
-      "DATE": "before"
+      "DISTANCE": " from you",
+      "TOOLTIP_VENDOR": "Vendor details",
+      "TOOLTIP_FAVORITE": "Add to favorites",
+      "TOOLTIP_DISCOUNT": "Discount details",
+      "TOOLTIP_RATING": "Discount rating"
     }
   },
   "MODERATOR_DASHBOARD": {
@@ -129,17 +132,20 @@
     "ADD_POINT_BTN": "Add point"
   },
   "DISCOUNT_DETAIL": {
-    "AMOUNT_LABEL": "discount",
+    "AMOUNT_LABEL": "Discount",
     "PROMO_CODE_LABEL": "Promo Code",
-    "ADDRESS_LABEL": "address",
-    "DISTANCE": "from you",
-    "DATES_LABEL": "validity period",
-    "START_DATE": "from",
-    "END_DATE": "to",
+    "ADDRESS_LABEL": "Address",
+    "DISTANCE": "Distance from you",
+    "DATES_LABEL": "Validity discount period",
     "ASSESSMENT_LABEL": "Assess",
     "EDIT_BUTTON_LABEL": "Edit",
     "ARCHIVE_BUTTON_LABEL": "Archive",
-    "TICKET_BUTTON_LABEL": "Ticket"
+    "TICKET_BUTTON_LABEL": "Order discount",
+    "MAT_TAB_ABOUT": "ABOUT",
+    "TOOLTIP_GO_BACK": "Go back",
+    "TOOLTIP_VENDOR": "Vendor",
+    "TOOLTIP_FAVORITES": "Add to favorites",
+    "TOOLTIP_VENDOR_RAT": "Vendor rating"
   },
   "VENDOR_PAGE": {
     "PAGE_TITLE": "About vendor",
