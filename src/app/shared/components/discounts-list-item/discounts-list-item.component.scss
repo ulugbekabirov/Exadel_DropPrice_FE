@@ -11,7 +11,7 @@
   border-radius: 10px;
   padding: 30px;
   font-size: 16px;
-  color: #313237;
+  color: $main_black;
 
   .corner-ribbon-6 {
     width: 100px;
@@ -86,7 +86,7 @@
 
     .favorite {
       margin-bottom: 16px;
-      color: #da8171;
+      color: $favorite_discount;
       cursor: pointer;
       will-change: transform;
       transition: transform .1s ease-in-out;
@@ -144,7 +144,7 @@
   }
 
   .rating__icon {
-    color:#3F51B5;
+    color:$indigo;
   }
 
   .discount-footer {
