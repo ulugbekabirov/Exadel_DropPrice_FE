@@ -58,7 +58,10 @@
     },
     "DISCOUNT_CARD": {
       "DISTANCE": " from you",
-      "DATE": "before "
+      "TOOLTIP_VENDOR": "Vendor details",
+      "TOOLTIP_FAVORITE": "Add to favorites",
+      "TOOLTIP_DISCOUNT": "Discount details",
+      "TOOLTIP_RATING": "Discount rating"
     }
   },
   "MODERATOR_DASHBOARD": {

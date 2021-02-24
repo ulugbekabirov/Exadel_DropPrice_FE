@@ -1,8 +1,8 @@
 @import "src/variables";
 
 .discounts-box {
-
   font-size: 1rem;
+  padding-bottom: 2rem;
 
   &__title {
     font-size: 1.5em;
@@ -22,7 +22,7 @@
 
   &__list {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     row-gap: 20px;
     column-gap: 20px;
 
