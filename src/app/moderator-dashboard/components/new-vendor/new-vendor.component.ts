@@ -8,9 +8,9 @@ import {
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DiscountsService } from '../../services/discounts.service';
-import { VendorsService } from '../../services/vendors.service';
-import { Vendor } from './../../models/vendor';
+import { DiscountsService } from '../../../services/discounts.service';
+import { VendorsService } from '../../../services/vendors.service';
+import { Vendor } from '../../../models/vendor';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { switchMap, takeUntil } from 'rxjs/operators';
@@ -62,7 +62,7 @@ export class NewVendorComponent implements OnInit, OnDestroy {
         facebook: ['',
           [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
         ],
-        website: ['',
+        webSite: ['',
           [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
         ]
       })
@@ -175,8 +175,8 @@ export class NewVendorComponent implements OnInit, OnDestroy {
     return this.newVendorForm.get('facebook');
   }
 
-  get website(): AbstractControl {
-    return this.newVendorForm.get('website');
+  get webSite(): AbstractControl {
+    return this.newVendorForm.get('webSite');
   }
 
   get otherLinks(): AbstractControl {

@@ -1,14 +1,33 @@
 @import "src/variables";
 
+* {
+  color: #313237;
+}
+
 .vendors {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2em;
+  padding: 2.7em .5em 0 .5em;
 
+  .vendors-label {
+    margin-right: 1em;
+    &__vendor-name{
+      font-size: 1.7rem;
+      font-weight: 700;
+    }
+
+    &__rating{
+      font-size: 1.3rem;
+    }
+  }
+  
   .vendors-detail {
+    font-size: 1.2rem;
 
-    font-size: 1rem;
-    padding: 0 1em;
+    &_label {
+      font-size: 1.1em;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 1.5;
+    }
 
     &__header {
 
@@ -21,110 +40,74 @@
 
       .rating {
         &__amount {
-          font-size: 2em;
+          font-size: 1.5em;
           font-weight: 500;
-          font-style: italic;
           color: $discount_card_text_color;
         }
 
         &__icon {
           font-size: 2em;
-          color: $discountRating_star_color;
         }
       }
     }
 
     &__content {
-      background: #ffffff;
-      border-radius: .8em;
-      padding: 2em;
-      box-shadow: 0 .6em .5em rgba(28, 104, 192, .25);
+      padding-top: .4em;
 
       .vendor-content {
+
+        &__social {
+          margin-top: .5em;
+        }
 
         &__field {
 
           width: 100%;
 
+          &_description {
+            font-size: 1rem;
+            font-weight: 700;
+          }
+
           &_label {
-            font-size: 1.1em;
+            flex: 1 1 25%;
+            font-size: 1rem;
             font-style: normal;
-            font-weight: 600;
+            font-weight: 500;
+          }
+
+          &_label-text {
+            margin: .3em;
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 500;
           }
 
           &_text {
-            font-size: 1.3em;
-            font-style: italic;
+            flex: 1 1 75%;
+            font-size: 1rem;
             font-weight: 500;
-            padding-left: 1em;
-          }
-
-          &:not(:last-child) {
-            border-bottom: 1px solid #000000;
-            margin-bottom: 2em;
-          }
-
-          select {
-            border: none;
-            outline: none;
-            width: 100%;
-            font-size: 1.3em;
-            font-style: italic;
-            font-weight: 500;
-            padding-left: 1em;
-            margin-bottom: .6em;
-
-            option {
-              font-size: 1em;
-              font-style: italic;
-              font-weight: 500;
-            }
+            margin-top: .3em;
           }
 
           li {
             margin-bottom: .3em;
 
             a {
-              color: initial;
-              border-left: .2em solid #ffffff;
-              padding-left: .5em;
-
-              &:hover {
-                border-left: .2em solid $main_header_bgColor;
-                color: $main_header_bgColor;
-              }
+              padding-right: .5em;
             }
           }
         }
       }
-
-
+    }
+    mat-expansion-panel-header {
+      height: 100px;
     }
 
-    &__actions {
-
-      margin-top: 2em;
-
-      &_button {
-        font-size: 1rem;
-        width: 100%;
-        display: block;
-        letter-spacing: .1em;
-        font-weight: 700;
-        white-space: nowrap;
-        overflow: hidden;
-        border-radius: .5em;
-        border: 1px solid $ticket_button_bg_color;
-        background: $ticket_button_bg_color;
-        box-shadow: 0 .3em .2em rgba(28, 104, 192, .25);
-        color: $ticket_button_text_color;
-        cursor: pointer;
-        outline: none;
-
-        &:hover {
-          border: 1px solid burlywood;
-        }
-      }
+    .social-icon,
+    mat-icon {
+      width: 25px;
+      color: #3F51B5;
     }
 
     @media screen and (min-width: 767.98px) {
@@ -134,9 +117,23 @@
     }
   }
 
+  mat-divider {
+    margin-bottom: 1em;
+  }
+
+  .mat-expansion-panel-header {
+    margin-top: .1em;
+  }
+  
+  .mat-expansion-panel-header-description {
+    flex-grow: 0;
+  }
+
+  .rating__icon {
+    margin-bottom: .2em;
+  }
+
   .vendors-discounts {
-
-
     @media screen and (min-width: 767.98px) {
 
       grid-column: 2/3;
@@ -159,5 +156,3 @@
     }
   }
 }
-
-

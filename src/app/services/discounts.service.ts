@@ -79,7 +79,7 @@ export class DiscountsService {
     return this.restApi.updateDiscount(discount, id);
    }
 
-  searchStatsDiscount(terms): any {
+  searchStatsDiscounts(terms): any {
     const paramsObj = {};
     Object.keys({...terms}).filter(value => typeof terms[value] !== 'undefined').forEach(param => {
       paramsObj[param] = terms[param];

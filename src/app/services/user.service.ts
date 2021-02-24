@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ApiDataService } from './api-data.service';
-import { BehaviorSubject, Observable, } from 'rxjs';
+import { BehaviorSubject, Observable, of, } from 'rxjs';
 import { ActiveUser } from '../models';
 import { KEY_ACTIVE_USER } from '../../constants';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 
 @Injectable({
@@ -32,6 +32,9 @@ export class UserService {
   }
 
   private handleActiveUser(user: ActiveUser): any {
+    if (this.activeUserValue) {
+      this.logout();
+    }
     this.activeUserSubject.next(user);
     localStorage.setItem(KEY_ACTIVE_USER, JSON.stringify(user));
   }
@@ -51,7 +54,8 @@ export class UserService {
         (error) => {
           reject(error);
         },
-        {timeout: 5000});
+        {timeout: 5000}
+      );
     });
   }
 
@@ -64,7 +68,10 @@ export class UserService {
         });
       })
       .then(res => {
-        this.handleActiveUser(res);
+        return this.handleActiveUser(res);
+      })
+      .catch(err => {
+        return this.handleActiveUser(user);
       });
   }
 

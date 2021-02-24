@@ -1,4 +1,4 @@
-$body_bgColor: #DEEBFA;
+$body_bgColor: #ffffff;
 $main_header_bgColor: #1C67C0;
 $main_header_items_hover: #00b9eb;
 $main_header_txtColor: #dde9f8;
@@ -6,23 +6,30 @@ $main_header_profile_txtColor_hover: #E88300;
 $main_header_link_active: #ffffff;
 $main_header_height: 3.4rem;
 
+$discount_list_item_sale: #709ace;
+$discount_list_item_vendor_link: #4b4c52;
+$discount_list_item_card__distance:#adadaf;
+$main_black: #313237;
+$main_gray: #adadaf;
+$favorite_discount: #da8171;
+$indigo: #3F51B5;
+
+
 $vendor_header_text_color: #655B5A;
 
 $discount_card_bg_color: #DEEBFA;
 $discount_card_hover_bg_color: #DEEBFA;
 $discount_card_text_color: #655B5A;
 $isSaved_true_bg_color: #FF473E;
-$isSaved_true_bg_color_hover: #000000;
-$isSaved_false_bg_color: #A38D8B;
 $discountAmount_text_color: #FF0000;
 $discountRating_star_color: #c1af11;
 
-$ticket_button_bg_color: #4a94eb;
+$ticket_button_bg_color: #3f51b5;
 $ticket_button_text_color: #ffffff;
 $ticket-background: #FBFBFB;
 
 $discount_filter_selector_text_color: #655B5A;
-$discount_detail_text_color: #655B5A;
+
 
 $snackbar-color-success: #64ca60;
 $snackbar-color-error: #FF473E;

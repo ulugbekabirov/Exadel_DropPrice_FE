@@ -11,7 +11,7 @@ export class VendorsService {
 
   constructor( private restApi: ApiDataService, ) { }
 
-  searchVendors(terms): Observable<any>{
+  searchStatsVendors(terms): Observable<any>{
     const paramsObj = {};
     Object.keys({...terms}).filter(value => typeof terms[value] !== 'undefined').forEach(param => {
       paramsObj[param] = terms[param];

@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { Observable, Subject } from 'rxjs';
-import { FormControl } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
+import { merge, Observable, Subject } from 'rxjs';
+import { startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { Vendor } from '../../../models';
 import { StatisticsFacadeService } from '../../services/statistics-facade.service';
-import { VendorsSortStore } from '../../services/vendors-sort-store';
+import { VendorsStatStore } from '../../services/vendors-stat-store';
 
 @Component({
   selector: 'app-vendor-statistics',
@@ -13,55 +13,53 @@ import { VendorsSortStore } from '../../services/vendors-sort-store';
   styleUrls: ['./vendor-statistics.component.scss']
 })
 export class VendorStatisticsComponent implements OnInit, AfterViewInit, OnDestroy {
-  ratingSort = new FormControl();
-  ticketCountSort = new FormControl();
-  dataSource;
   displayedColumns: string[] = ['name', 'rating', 'ticketCount', 'email'];
-  sortRating$: Observable<any>;
-  sortTicketCount$: Observable<any>;
-  searchResults$;
-  searchTerm$;
-  resultsLength: any;
+  dataSource$: Observable<Vendor[]>;
+  searchTerm$: Observable<string>;
+  resultsLength$: Observable<number>;
+  pageSizes$: Observable<number[]>;
+  pageSize$: Observable<number>;
   private unsubscribe$ = new Subject<void>();
 
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private facade: StatisticsFacadeService,
-    private sortStore: VendorsSortStore
+    private vendorsStatStore: VendorsStatStore
   ) {
-    this.searchResults$ = this.facade.searchVendors();
-    this.sortRating$ = this.sortStore.select('ratingData');
-    this.sortTicketCount$ = this.sortStore.select('ticketCountData');
-    this.searchTerm$ = this.sortStore.select('searchQuery');
   }
 
   ngOnInit(): void {
-    this.searchResults$.pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(results => this.dataSource = new MatTableDataSource(results));
-    this.ratingSort.valueChanges.pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(next => this.sortStore.set('ratingSelected', next));
-    this.ticketCountSort.valueChanges.pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(next => this.sortStore.set('ticketCountSelected', next));
+    this.dataSource$ = this.facade.searchVendors()
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        switchMap((): Observable<Vendor[]> => {
+          return this.vendorsStatStore.select('results');
+        })
+      );
+    this.resultsLength$ = this.vendorsStatStore.select('total');
+    this.pageSizes$ = this.vendorsStatStore.select('pageSizes');
+    this.searchTerm$ = this.vendorsStatStore.select('searchQuery');
+    this.pageSize$ = this.vendorsStatStore.select('take');
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.paginator.page.pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(next => this.sortStore.set('take', next.pageSize));
+    const sort$ = this.sort.sortChange;
+    const paginator$ = this.paginator.page;
+    merge(sort$, paginator$)
+      .pipe(
+        startWith({}),
+        takeUntil(this.unsubscribe$)
+      ).subscribe((data: any) => this.facade.updateVendorsSort(data));
+  }
+
+  searchTermChange(query): void {
+    this.vendorsStatStore.set('searchQuery', query);
   }
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
-  }
-
-  searchTermChange(query): void {
-    this.sortStore.set('searchQuery', query);
   }
 }

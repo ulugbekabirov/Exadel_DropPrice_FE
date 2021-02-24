@@ -72,7 +72,7 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
   }
 
   onEditDiscount(discountId): void {
-    this.router.navigate(['discounts/edit', discountId]);
+    this.router.navigate(['add-new/discounts/edit', discountId]);
   }
 
   archiveDiscount(discountId: number): void {

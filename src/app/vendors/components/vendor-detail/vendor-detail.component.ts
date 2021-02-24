@@ -17,6 +17,7 @@ import { UserFacadeService } from '../../../user-profile/services/user-facade.se
   styleUrls: ['./vendor-detail.component.scss']
 })
 export class VendorDetailComponent implements OnInit, OnDestroy {
+  panelOpenState = false;
   sortBy = SORT_BY;
   towns: Town[];
   vendor;
@@ -82,7 +83,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
   }
 
   onEditVendor(vendorId: number): void {
-    this.router.navigate(['/vendors/edit', vendorId]);
+    this.router.navigate(['add-new/vendors/edit', vendorId]);
   }
 
   selectVendor(vendorId: any): void {
