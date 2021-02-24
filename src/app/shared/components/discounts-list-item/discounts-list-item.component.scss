@@ -86,14 +86,13 @@
 
     .favorite {
       margin-bottom: 16px;
-      color: $favorite_discount;
+      color: #da8171;
       cursor: pointer;
       will-change: transform;
       transition: transform .1s ease-in-out;
 
       &:hover {
         transform: scale(1.1, 1.1);
-        color: $favorite_discount;
       }
     }
 
