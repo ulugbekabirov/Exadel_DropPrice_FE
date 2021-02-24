@@ -132,17 +132,20 @@
     "ADD_POINT_BTN": "Add point"
   },
   "DISCOUNT_DETAIL": {
-    "AMOUNT_LABEL": "discount",
+    "AMOUNT_LABEL": "Discount",
     "PROMO_CODE_LABEL": "Promo Code",
-    "ADDRESS_LABEL": "address",
-    "DISTANCE": "from you",
-    "DATES_LABEL": "validity period",
-    "START_DATE": "from",
-    "END_DATE": "to",
+    "ADDRESS_LABEL": "Address",
+    "DISTANCE": "Distance from you",
+    "DATES_LABEL": "Validity discount period",
     "ASSESSMENT_LABEL": "Assess",
     "EDIT_BUTTON_LABEL": "Edit",
     "ARCHIVE_BUTTON_LABEL": "Archive",
-    "TICKET_BUTTON_LABEL": "Ticket"
+    "TICKET_BUTTON_LABEL": "Order discount",
+    "MAT_TAB_ABOUT": "ABOUT",
+    "TOOLTIP_GO_BACK": "Go back",
+    "TOOLTIP_VENDOR": "Vendor",
+    "TOOLTIP_FAVORITES": "Add to favorites",
+    "TOOLTIP_VENDOR_RAT": "Vendor rating"
   },
   "VENDOR_PAGE": {
     "PAGE_TITLE": "About vendor",
@@ -151,9 +154,11 @@
       "DETAIL_CONTENT": {
         "VENDOR_NAME": "Vendor Name",
         "VENDOR_ADDRESS": "Address",
+        "VENDOR_DESCRIPTION": "Description",
         "VENDOR_EMAIL": "E-Mail",
         "VENDOR_PHONE": "Phone",
-        "VENDOR_SOCIALS": "Socials"
+        "VENDOR_SOCIALS": "Socials",
+        "VENDOR_EDIT": "Edit vendor"
       },
       "DETAIL_ACTIONS": {
         "EDIT": "Edit"

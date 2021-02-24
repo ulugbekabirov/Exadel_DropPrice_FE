@@ -134,16 +134,19 @@
   },
   "DISCOUNT_DETAIL": {
     "AMOUNT_LABEL": "Скидка",
-    "PROMO_CODE_LABEL": "Промо Код",
-    "ADDRESS_LABEL": "адрес",
-    "DISTANCE": "от вас",
-    "DATES_LABEL": "срок действия",
-    "START_DATE": "от",
-    "END_DATE": "до",
+    "PROMO_CODE_LABEL": "Промокод",
+    "ADDRESS_LABEL": "Адрес",
+    "DISTANCE": "Расстояние от вас",
+    "DATES_LABEL": "Срок действия скидки",
     "ASSESSMENT_LABEL": "Оценить",
     "EDIT_BUTTON_LABEL": "Редактировать",
     "ARCHIVE_BUTTON_LABEL": "Архивировать",
-    "TICKET_BUTTON_LABEL": "Талон"
+    "TICKET_BUTTON_LABEL": "Заказать скидку",
+    "MAT_TAB_ABOUT": "О СКИДКЕ",
+    "TOOLTIP_GO_BACK": "Вернуться к списку",
+    "TOOLTIP_VENDOR": "Вендор",
+    "TOOLTIP_FAVORITES": "Добавить в избранные",
+    "TOOLTIP_VENDOR_RAT": "Рейтинг вендора"
   },
   "VENDOR_PAGE": {
     "PAGE_TITLE": "Информация о вендоре",
@@ -151,10 +154,11 @@
       "DETAIL_RATING_LABEL": "Рейтинг вендора",
       "DETAIL_CONTENT": {
         "VENDOR_NAME": "Наименование вендора",
+        "VENDOR_DESCRIPTION": "Описание",
         "VENDOR_ADDRESS": "Адрес",
         "VENDOR_EMAIL": "Электронная почта",
         "VENDOR_PHONE": "Контактный телефон",
-        "VENDOR_SOCIALS": "Социальные сети"
+        "VENDOR_EDIT": "Редактировать вендора"
       },
       "DETAIL_ACTIONS": {
         "EDIT": "Редактировать"

@@ -1,5 +1,27 @@
 # InternshipFe
 
+InternshipFe - веб-приложение, цель которого автоматизировать процесс поиска необходимых ближайших по местоположению услуг/товаров, заказ которых предусматривает предоставление скидки для сотрудников компании Exadel.
+
+## Как начать
+
+Клонируйте репозиторий с помощью команды
+
+```bash
+git clone https://github.com/PavelHaurylik/EXADEL_INTERNSHIP_JAN2021_FE.git
+```
+
+Установите зависимости
+
+```bash
+npm install
+```
+
+И запустите приложение
+
+```bash
+ng serve
+```
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.7.
 
 ## Development server
