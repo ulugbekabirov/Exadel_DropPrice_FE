@@ -1,0 +1,69 @@
+<header class="header"
+        fxLayoutAlign="space-between center"
+>
+  <a class="header__logo"
+     routerLink=""
+  >DropPrice</a>
+  <span class="header__hamburger"
+        (click)="toggleActive()"
+        [ngClass]="active ? 'active' : ''"
+  >
+    <span class="bar"></span>
+  </span>
+  <div class="header__nav"
+       [ngClass]="active ? 'active' : ''"
+  >
+    <a *appVerifyUserRoles='["Admin"]'
+       routerLink="/admin"
+       routerLinkActive="active_link"
+       (click)="toggleActive()"
+    >
+      {{ "HEADER.ADMIN_PANEL_LINK_TITLE" | translate }}
+    </a>
+    <a *appVerifyUserRoles='["Moderator"]'
+       routerLink="/add-new"
+       routerLinkActive="active_link"
+       (click)="toggleActive()"
+    >
+      {{ "HEADER.MODERATOR_PANEL_LINK_TITLE" | translate }}
+    </a>
+    <div class="profile"
+         fxLayoutAlign="space-around center"
+         fxLayoutGap=".5em"
+    >
+      <mat-icon *ngIf="authUser$ | async"
+                class="profile__icon"
+                fxLayoutAlign="center center"
+                routerLink="/user-profile"
+                routerLinkActive="active_link"
+                matTooltip="User Profile"
+                (click)="toggleActive()"
+      >person
+      </mat-icon>
+
+      <mat-icon>language</mat-icon>
+      <mat-select class="profile__language_selector" class="lang" (selectionChange)="languageHandler($event.value)">
+        <mat-option class="profile__language_option"
+        *ngFor="let lang of langs" 
+        [value]="lang"
+        >
+           {{ lang }}
+        </mat-option>
+      </mat-select>
+   
+      
+      <button *ngIf="authUser$ | async"
+              mat-icon-button
+              aria-label="logout icon"
+              fxLayoutAlign="center center"
+              (click)="logoutHandler()"
+      >
+        <mat-icon class="profile__icon"
+                  matTooltip="Logout"
+                  fxLayoutAlign="center center"
+        >exit_to_app
+        </mat-icon>
+      </button>
+    </div>
+  </div>
+</header>
