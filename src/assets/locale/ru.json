@@ -28,7 +28,7 @@
   "MAIN_PAGE": {
     "SEARCH": "Поиск",
     "BUTTONS": {
-      "TICKET": "Талон"
+      "TICKET": "Получить скидку"
     },
     "FILTER": {
       "SORT_BY": {
@@ -58,8 +58,11 @@
       }
     },
     "DISCOUNT_CARD": {
-      "DISTANCE": "от вас",
-      "DATE": "до"
+      "DISTANCE": " от вас",
+      "TOOLTIP_VENDOR": "Подробнее о вендоре",
+      "TOOLTIP_FAVORITE": "Добавить в избранные",
+      "TOOLTIP_DISCOUNT": "Подробнее о скидке",
+      "TOOLTIP_RATING": "Рейтинг скидки"
     }
   },
   "MODERATOR_DASHBOARD": {
