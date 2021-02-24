@@ -1,236 +1,166 @@
 @import "src/variables";
 
-.discount-card {
-  font-size: .8rem;
-  background: #ffffff;
-  border-radius: .8em;
-  padding: 1em;
-  box-shadow: 0 .6em .5em rgba(28, 104, 192, .25);
-  will-change: box-shadow;
+.container {
+  display: flex;
+  height: 280px;
+  flex-direction: column;
+  align-self: center;
+  position: relative;
+  background: #fff;
+  box-shadow: 1px 3px 10px 1px #A5A4A5;
+  border-radius: 10px;
+  padding: 30px;
+  font-size: 16px;
+  color: #313237;
 
-  &:hover {
-    background: #ffffff;
-    box-shadow: 0 .8em .5em rgba(28, 104, 192, .35);
+  .corner-ribbon-6 {
+    width: 100px;
+    height: 120px;
+    overflow: hidden;
+    position: absolute;
   }
 
-  &__header {
-
-    padding: 0 0 1em;
-
-    &_title {
-      color: $discount_card_text_color;
-      font-size: 1.8em;
-      font-weight: 500;
-      margin: 0;
-      padding-bottom: .5em;
-      line-height: 1.6em;
-      outline: none;
-      cursor: pointer;
-      will-change: transform;
-      transition: transform .1s ease-in-out;
-
-      a {
-        color: $discount_card_text_color;
-
-        &:hover {
-          color: #000000;
-        }
-      }
-    }
-
-    @media screen and (min-width: 767.98px) {
-      grid-row: 1/2;
-      grid-column: 1/4;
-      align-self: center;
-      justify-self: start;
-    }
+  .corner-ribbon-6::before,
+  .corner-ribbon-6::after {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    display: block;
   }
 
-  &__rating {
+  .corner-ribbon-6 span {
+    position: absolute;
+    display: block;
+    width: 160px;
+    padding: 10px 0;
+    background-color: $discount_list_item_sale;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    font: 700 18px/1 'Lato', sans-serif;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    font-size: 1.8rem;
+  }
+
+  .corner-ribbon-6-top-right {
+    top: -10px;
+    right: -5px;
+  }
+
+  .corner-ribbon-6-top-right::before,
+  .corner-ribbon-6-top-right::after {
+    border-right-color: transparent;
+  }
+
+  .corner-ribbon-6-top-right::before {
+    top: 0;
+    left: 0;
+  }
+
+  .corner-ribbon-6-top-right::after {
+    right: 0;
+    bottom: 0;
+  }
+
+  .corner-ribbon-6-top-right span {
+    left: -25px;
+    top: 30px;
+  }
+
+  .titles {
+    width: calc(100% - 60px);
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    gap: 1rem;
+    flex-direction: column;
+    flex-wrap: wrap;
 
-    &_favourite {
-      font-size: 3em;
-      color: $isSaved_true_bg_color;
+    .discount-card__vendor_link,
+    .favorite {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .discount-card__vendor_link {
+      color: $discount_list_item_vendor_link;
+    }
+
+    .favorite {
+      margin-bottom: 16px;
+      color: $favorite_discount;
       cursor: pointer;
-      will-change: transform;
-      //transition: transform .1s ease-in-out;
-
-      //&:hover {
-      //  transform: scale(1.1, 1.1);
-      //  color: $isSaved_true_bg_color_hover;
-      //}
-    }
-
-    &_rating {
-      .rating {
-        &__amount {
-          font-size: 2.2em;
-          font-weight: 500;
-          font-style: italic;
-          color: $discount_card_text_color;
-        }
-
-        &__icon {
-          font-size: 2em;
-          color: $discountRating_star_color;
-        }
-      }
-    }
-
-    @media screen and (min-width: 767.98px) {
-      grid-row: 1/2;
-      grid-column: 4/5;
-      align-self: center;
-      justify-self: center;
-      flex-direction: row;
-    }
-  }
-
-  &__vendor {
-
-    padding: 0 0 1em;
-
-    &_link, &:visited {
-      display: block;
-      font-size: 1.4em;
-      font-weight: 500;
-      padding: .5em .5em .2em 0;
-      color: $discount_card_text_color;
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
       will-change: transform;
       transition: transform .1s ease-in-out;
 
       &:hover {
-        transform: scale(1.05, 1.05);
-        color: #000000;
+        transform: scale(1.1, 1.1);
+        color: $favorite_discount;
       }
     }
 
-    @media screen and (min-width: 767.98px) {
-      padding: 0;
-      grid-row: 2/3;
-      grid-column: 1/4;
-      align-self: end;
+    .edit_icon {
+      cursor: pointer;
+      margin-bottom: 16px;
     }
   }
 
-  &__distance {
+  .discount-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: last baseline;
 
-    margin-bottom: 1em;
-
-    :first-child {
-      font-size: 1.5em;
+    .discount-card__header_title {
+      font-size: 1.2rem;
       font-weight: 600;
-      letter-spacing: .1em;
-      color: $discount_card_text_color;
     }
 
-    :last-child {
+    .discount-card__distance {
+      color: $discount_list_item_card__distance;
+      font-size: .8rem;
       font-weight: 500;
-      font-size: 1.2em;
-      margin-left: .5em;
-      color: $discount_card_text_color;
-    }
-
-    @media screen and (min-width: 767.98px) {
-      grid-row: 3/4;
-      grid-column: 1/4;
-      margin: 0;
     }
   }
 
-  &__amount {
+  .discount-card__amount {
+    font-size: 2rem;
+    margin-bottom: 20px;
 
-    padding: .5em;
-    margin-bottom: 1em;
-
-    &_text, &_symbol {
-      font-size: 4em;
-      font-weight: 800;
-      font-style: italic;
-      color: $discountAmount_text_color;
-    }
-
-    @media screen and (min-width: 767.98px) {
-      grid-row: 1/3;
-      grid-column: 5/7;
-      justify-self: center;
-      align-self: center;
+    .date {
+      font-size: 1.2rem;
+      font-weight: 500;
     }
   }
 
-  &__footer {
-
-    padding: .5em;
-
-    &_endDate {
-      :first-child {
-        font-size: 1em;
-        font-weight: 500;
-        color: $discount_card_text_color;
-      }
-
-      :last-child {
-        font-weight: 500;
-        font-size: 1.2em;
-        color: $discount_card_text_color;
-      }
-    }
-
-    &_action {
-      .action__ticket {
-        font-size: 1rem;
-        letter-spacing: .1em;
-        font-weight: 500;
-        min-width: 8em;
-        white-space: nowrap;
-        overflow: hidden;
-        border-radius: 1em;
-        border: 1px solid $ticket_button_bg_color;
-        background: $ticket_button_bg_color;
-        box-shadow: 0 .3em .2em rgba(28, 104, 192, .25);
-        color: $ticket_button_text_color;
-        cursor: pointer;
-        outline: none;
-
-        &:hover {
-          border: 1px solid burlywood;
-        }
-      }
-      .action__edit {
-        cursor: pointer;
-      }
-    }
-
-    @media screen and (min-width: 767.98px) {
-      grid-row: 3/4;
-      grid-column: 4/7;
-      justify-self: end;
-      align-self: center;
-    }
+  .discount-disctance {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  @media (min-width: 767.98px) {
-    display: grid;
-    grid-template-rows: auto 1fr 1fr;
-    grid-template-columns: repeat(6, 1fr);;
-    gap: .5em;
-    justify-items: start;
-    align-items: center;
+  .rating__amount,
+  .rating__icon {
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
 
-    @media (min-width: 991.98px) {
-      font-size: .9rem;
-      @media (min-width: 1199.98px) {
-        @media (min-width: 1999.98px) {
-          font-size: 1rem;
-        }
-      }
+  .rating__icon {
+    color: $indigo;
+  }
+
+  .discount-footer {
+    margin: auto 0 0 0;
+
+    .rating-main {
+      margin-bottom: 10px;
+    }
+
+    .action__ticket {
+      font-size: 1rem;
+      margin: auto 0 0 0;
+      color: #fff;
+      background-color: $main_header_bgColor;
+      opacity: .85;
     }
   }
 }

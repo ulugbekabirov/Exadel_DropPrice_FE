@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 import { Discount } from '../../../models';
 @Component({
   selector: 'app-discounts-list-item',
-  templateUrl: './discounts-list-item-test.component.html',
-  styleUrls: ['./discounts-list-item-test.component.scss'],
+  templateUrl: './discounts-list-item.component.html',
+  styleUrls: ['./discounts-list-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DiscountsListItemComponent {
