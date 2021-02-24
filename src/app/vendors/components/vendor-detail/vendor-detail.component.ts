@@ -17,6 +17,7 @@ import { UserFacadeService } from '../../../user-profile/services/user-facade.se
   styleUrls: ['./vendor-detail.component.scss']
 })
 export class VendorDetailComponent implements OnInit, OnDestroy {
+  panelOpenState = false;
   sortBy = SORT_BY;
   towns: Town[];
   vendor;
