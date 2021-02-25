@@ -1,8 +1,8 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import { Tag } from '../../../models';
-import { FormControl } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-search-bar',
@@ -17,31 +17,37 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   @Input() initialValue$: Observable<string>;
   @Input() activeTags$;
   @Input() tags$: Observable<Tag[]>;
+
   subscription: Subscription;
-  // options = ['Clothing', 'Shoes', 'Electronics', 'Books', 'Magazines'];
   options;
-  chipsControl = new FormControl(['']);
+  value;
+  // chipsControl: FormArray = this.fb.array([]);
+
+  constructor(
+    public fb: FormBuilder,
+    private cd: ChangeDetectorRef,
+
+  ) {
+  }
 
   ngOnInit(): void {
-    this.tags$.pipe(
-      map((next) => {
-        console.log(next);
-      }),
-    ).subscribe(next => {
-      console.log(next);
-      this.options = next;
-    });
-
-    this.subscription = this.activeTags$.pipe(
-      take(1),
-      switchMap((result) => {
-        this.chipsControl.setValue(result);
-        return this.chipsControl.valueChanges;
-      })
-    ).subscribe(next => {
-      console.log(next);
-      this.searchTagChange(next);
-    });
+    // this.subscription = this.activeTags$.pipe(
+    //   take(1),
+    //   switchMap((result: Tag[]) => {
+    //     this.value = result;
+    //     result.forEach(ch => {
+    //       const chip = this.fb.group({
+    //         tagName: '',
+    //         tagId: ''
+    //       });
+    //       this.chipsControl.push(chip);
+    //     });
+    //     this.chipsControl.setValue(result);
+    //     return this.chipsControl.valueChanges;
+    //   })
+    // ).subscribe(next => {
+    //   this.searchTagChange(next);
+    // });
   }
 
   searchTagChange(tag): void {
@@ -51,7 +57,8 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   searchTermChange(searchTerm: string): void {
     this.onEmitSearchTerm.emit(searchTerm);
   }
+
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
   }
 }

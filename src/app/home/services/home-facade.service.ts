@@ -37,7 +37,7 @@ export class HomeFacadeService {
 
   getTags(): Observable<Tag[]> {
     const skip$: Observable<number> = of(0);
-    const take$: Observable<number> = of(10);
+    const take$: Observable<number> = of(5);
     return combineLatest(skip$, take$)
       .pipe(
         switchMap(([skip, take]) => {
@@ -68,7 +68,16 @@ export class HomeFacadeService {
       .pipe(
         tap(next => console.log(next)),
         switchMap((request) => {
-          return this.discountsService.searchDiscounts(request)
+          const req = {
+            ...request,
+            tags: request.tags.map(({tagId}) => tagId),
+            sortBy: request.sortBy.sortBy,
+            latitude: request.location.latitude,
+            longitude: request.location.longitude,
+          };
+          console.log(request);
+          console.log(req);
+          return this.discountsService.searchDiscounts(req)
             .pipe(
               tap(discounts => this.homeStore.set('discounts', discounts)),
             );

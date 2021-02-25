@@ -20,8 +20,11 @@ export class DiscountsComponent implements OnInit, OnDestroy {
   sorts$: Observable<Sort[]>;
   searchTerm$: Observable<string>;
   activeUser$: Observable<ActiveUser>;
+  location$;
   activeTags$;
   sortBy$;
+  latitude$;
+  longitude$;
   private unsubscribe$: Subject<void> = new Subject<void>();
   @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
 
@@ -44,9 +47,11 @@ export class DiscountsComponent implements OnInit, OnDestroy {
     this.sorts$ = this.store.select('sorts');
     this.tags$ = this.store.select('tags');
     this.towns$ = this.store.select('towns');
+
     this.searchTerm$ = this.sortStore.select('searchQuery');
     this.activeTags$ = this.sortStore.select('tags');
     this.sortBy$ = this.sortStore.select('sortBy');
+    this.location$ = this.sortStore.select('location');
   }
 
   getTicket(discountId: number): void {
@@ -58,18 +63,17 @@ export class DiscountsComponent implements OnInit, OnDestroy {
   }
 
   onSearchQueryChange({name, tag}): void {
-    console.log(name)
-    console.log(tag)
     this.sortStore.set('searchQuery', name);
     this.sortStore.set('tags', [...tag]);
   }
 
-  onLocationChange({value: {latitude, longitude}}): void {
-    this.sortStore.set('latitude', latitude);
-    this.sortStore.set('longitude', longitude);
+  onLocationChange(location): void {
+    console.log(location)
+    this.sortStore.set('location', location);
   }
 
-  onSortChange({value: {sortBy}}): void {
+  onSortChange(sortBy): void {
+    console.log(sortBy)
     this.sortStore.set('sortBy', sortBy);
   }
 

@@ -6,14 +6,16 @@
   (onEmitSearchTag)="searchTagChange($event)"
 ></app-search-bar>
 <app-discounts-list
-  [sortBy]="sorts$"
-  [items$]="discounts$"
   [towns$]="towns$"
   [sorts$]="sorts$"
+  [discounts$]="discounts$"
+  [sortBySelected$]="sortBy$"
+  [locationSelected$]="location$"
+
   (locationChange)="onLocationChange($event)"
   (sortChange)="onSortChange($event)"
   (getTicket)="getTicket($event)"
   (toggleFavourites)="changeFavourites($event)"
-> Discounts
+>
 </app-discounts-list>
 <ng-template appRef></ng-template>

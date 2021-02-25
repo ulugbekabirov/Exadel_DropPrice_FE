@@ -1,25 +1,36 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, map, pluck } from 'rxjs/operators';
+import { Tag } from '../../models';
+import { Sort } from '../../models/sort';
 
 interface RequestDiscounts {
   request: {
-    sortBy: string;
+    sortBy: Sort;
     searchQuery: string;
-    latitude: number;
-    longitude: number;
+    location: {
+      latitude: number;
+      longitude: number;
+      townName: string;
+    }
     take: number;
     skip: number;
-    tags: string[];
+    tags: Tag[];
   };
 }
 
 const INITIAL_REQUEST_DISCOUNTS: RequestDiscounts = {
   request: {
-    sortBy: 'DistanceAsc',
+    sortBy: {
+      name: 'MAIN_PAGE.FILTER.SORT_BY.DISTANCE_DESC.NAME',
+      sortBy: 'DistanceDesc',
+    },
     searchQuery: '',
-    latitude: 0,
-    longitude: 0,
+    location: {
+      latitude: 0,
+      longitude: 0,
+      townName: 'Моя локация',
+    },
     take: 10,
     skip: 0,
     tags: [],
@@ -36,6 +47,7 @@ export class DiscountsRequestStore {
     .pipe(
       distinctUntilChanged()
     );
+
   requestData$ = this.store.pipe(
     map(requestDiscounts => requestDiscounts.request)
   );

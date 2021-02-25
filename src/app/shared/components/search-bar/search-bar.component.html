@@ -6,27 +6,28 @@
     >
     </app-search>
   </form>
-  <div class="listWrapper">
-    <!--    <mat-chip-list selectable multiple aria-label="Fish selection">-->
-    <!--      <div class="chipsBlock">-->
-    <!--        <mat-chip-->
-    <!--          class="chipsStyle"-->
-    <!--          #chips="matChip"-->
-    <!--          *ngFor="let newTags of tags$ | async"-->
-    <!--          (click)="getCardsByTag(newTags?.tagName, chips)"-->
-    <!--        >-->
-    <!--          <mat-icon class="chipsIcon" *ngIf="chips.selected">check</mat-icon>-->
-    <!--         #  {{ newTags?.tagName }}-->
-    <!--        </mat-chip>-->
-    <!--      </div>-->
-    <!--    </mat-chip-list>-->
-    <app-tags-filter
-      [options]="options"
-      [formControl]="chipsControl"
-      [tags$]="tags$"
-    >
-    </app-tags-filter>
-<!--    <h3>Value: {{chipsControlValue$ | async}}</h3>-->
-<!--    <button mat-raised-button (click)="setChipsValue()">Patch Value</button>-->
-  </div>
+<!--  <div class="listWrapper">-->
+<!--    &lt;!&ndash;    <mat-chip-list selectable multiple aria-label="Fish selection">&ndash;&gt;-->
+<!--    &lt;!&ndash;      <div class="chipsBlock">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <mat-chip&ndash;&gt;-->
+<!--    &lt;!&ndash;          class="chipsStyle"&ndash;&gt;-->
+<!--    &lt;!&ndash;          #chips="matChip"&ndash;&gt;-->
+<!--    &lt;!&ndash;          *ngFor="let newTags of tags$ | async"&ndash;&gt;-->
+<!--    &lt;!&ndash;          (click)="getCardsByTag(newTags?.tagName, chips)"&ndash;&gt;-->
+<!--    &lt;!&ndash;        >&ndash;&gt;-->
+<!--    &lt;!&ndash;          <mat-icon class="chipsIcon" *ngIf="chips.selected">check</mat-icon>&ndash;&gt;-->
+<!--    &lt;!&ndash;         #  {{ newTags?.tagName }}&ndash;&gt;-->
+<!--    &lt;!&ndash;        </mat-chip>&ndash;&gt;-->
+<!--    &lt;!&ndash;      </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </mat-chip-list>&ndash;&gt;-->
+<!--    <app-tags-filter-->
+<!--      [options]="options"-->
+<!--      [tags$]="tags$"-->
+<!--      [activeTags$]="activeTags$"-->
+<!--      (chipSelected)="searchTagChange($event)"-->
+<!--    >-->
+<!--    </app-tags-filter>-->
+<!--&lt;!&ndash;    <h3>Value: {{chipsControlValue$ | async}}</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;    <button mat-raised-button (click)="setChipsValue()">Patch Value</button>&ndash;&gt;-->
+<!--  </div>-->
 </div>
