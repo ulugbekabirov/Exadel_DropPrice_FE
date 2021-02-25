@@ -15,7 +15,7 @@ import { delay } from 'rxjs/operators';
 export class AppComponent implements OnInit, OnDestroy {
   private authUser: AuthInfo;
   private subscription: Subscription;
-  private title = 'InternshipFe';
+  public title = 'InternshipFe';
   loading$: Observable<boolean>;
 
 
