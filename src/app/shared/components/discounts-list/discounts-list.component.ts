@@ -31,26 +31,22 @@ export class DiscountsListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sortBySelected$.pipe(
-      takeUntil(this.unsubscribe$),
       switchMap((sortBy) => {
-        console.log(sortBy);
         this.mainSortBy.patchValue(sortBy);
         return this.throttle(this.mainSortBy.valueChanges);
-      })
+      }),
+      takeUntil(this.unsubscribe$)
     ).subscribe(next => {
-      console.log(next);
       this.sortChange.emit(next);
     });
 
     this.locationSelected$.pipe(
-      takeUntil(this.unsubscribe$),
       switchMap((coords) => {
-        console.log(coords);
         this.locationSort.patchValue(coords);
         return this.throttle(this.locationSort.valueChanges);
-      })
-    ).subscribe(next => {
-      console.log(next);
+      }),
+    takeUntil(this.unsubscribe$)
+  ).subscribe(next => {
       this.locationChange.emit(next);
     });
   }

@@ -2,12 +2,12 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap, takeUntil } from 'rxjs/operators';
-import { DiscountsService } from '../../services/discounts.service';
-import { Discount } from '../../models';
+import { DiscountsService } from '../../../services/discounts.service';
+import { Discount } from '../../../models';
 import { Observable, Subject } from 'rxjs';
-import { RefDirective } from '../../directives/ref.directive';
-import { UserService } from '../../services/user.service';
-import { UserFacadeService } from '../../user-profile/services/user-facade.service';
+import { RefDirective } from '../../../directives/ref.directive';
+import { HomeFacadeService } from '../../services/home-facade.service';
+import { HomeStore } from '../../services/home-store';
 
 
 @Component({
@@ -17,15 +17,10 @@ import { UserFacadeService } from '../../user-profile/services/user-facade.servi
 })
 
 export class DiscountDetailComponent implements OnInit, OnDestroy {
-  discount: Discount;
+  discount$: Observable<Discount>;
+  discountId: number;
   private unsubscribe$ = new Subject<void>();
   rating;
-  reqOpt = {
-    skip: 0,
-    take: 10,
-    longitude: this.userService.activeUserValue.officeLongitude,
-    latitude: this.userService.activeUserValue.officeLatitude,
-  };
   stars: number[] = [1, 2, 3, 4, 5];
   selectedRatingValue = 0;
 
@@ -35,40 +30,32 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private discountsService: DiscountsService,
-    private userFacade: UserFacadeService,
     private location: Location,
-    private userService: UserService,
+    private facade: HomeFacadeService,
+    private store: HomeStore,
   ) {
   }
 
   ngOnInit(): void {
-    this.route.paramMap
+    this.discount$ = this.route.paramMap
       .pipe(
         switchMap((params): Observable<Discount> => {
-          return this.discountsService.getDiscountById(+params.get('id'), this.reqOpt);
+          this.discountId = +params.get('id');
+          return this.facade.getDiscount(this.discountId).pipe(
+            switchMap((): Observable<Discount> => {
+              return this.store.select('activeDiscount');
+            })
+          );
         }),
-        takeUntil(this.unsubscribe$)
-      ).subscribe((discount: Discount) => {
-      if (!discount) {
-        return;
-      }
-      this.discount = discount;
-      const lengthRating = this.discount.discountRating ? Number(this.discount.discountRating.toFixed()) : 0;
-      this.rating = new Array(lengthRating).fill('star');
-    });
+      );
   }
 
   ticketHandler(discountId: number): void {
-    this.userFacade.orderTicket(discountId, this.refDir);
+    this.facade.requestTicket(discountId, this.refDir);
   }
 
   toggleFavorites(discountId: number): void {
-    this.discountsService.updateIsSavedDiscount(discountId).pipe(
-      takeUntil(this.unsubscribe$)
-    )
-      .subscribe(resp => {
-        this.discount = {...this.discount, isSaved: resp.isSaved};
-      });
+    this.facade.toggleFavourites(discountId);
   }
 
   onEditDiscount(discountId): void {
@@ -76,12 +63,7 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
   }
 
   archiveDiscount(discountId: number): void {
-    this.discountsService.putDiscountInArchive(discountId).pipe(
-      takeUntil(this.unsubscribe$)
-    )
-      .subscribe(resp => {
-        this.discount = {...this.discount, activityStatus: resp.activityStatus};
-      });
+    this.facade.putArchiveDiscount(discountId);
   }
 
   goBack(): void {
@@ -90,7 +72,7 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
 
   countStar(starValue): void {
     this.selectedRatingValue = starValue;
-    this.discountsService.putRating(this.discount.discountId, this.selectedRatingValue).pipe(
+    this.discountsService.putRating(this.discountId, this.selectedRatingValue).pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe(next => {
       this.selectedRatingValue = 0;

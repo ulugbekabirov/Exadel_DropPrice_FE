@@ -9,13 +9,12 @@ import { Tag } from '../../../models';
 })
 
 export class TagsFilterComponent implements OnInit, AfterViewInit {
-  @ViewChild(MatChipList) chipList: MatChipList;
 
-  @Input() options;
-  value;
+  @ViewChild(MatChipList) chipList: MatChipList;
   @Input() tags$;
   @Output() chipSelected = new EventEmitter();
   @Input() activeTags$;
+  selectedTags: Tag[];
   userAction = true;
 
   constructor(
@@ -25,48 +24,58 @@ export class TagsFilterComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.activeTags$.pipe().subscribe(next => {
-      this.value = next;
+      this.selectedTags = next;
     });
   }
 
   ngAfterViewInit(): void {
-    this.selectChips(this.value);
+    this.selectChips(this.selectedTags);
   }
 
   selectChips(value: Tag[]): void {
     this.userAction = false;
     this.chipList.chips.forEach((chip: MatChip) => chip.deselect());
     // const chipsToSelect = [];
-    // const chipsToSelect = this.chipList.chips.filter((chip) => value.find((tag) => chip.value.tagId === tag.tagId));
-    // chipsToSelect.forEach((chip) => chip.select());
+    const chipsToSelect = this.chipList.chips
+      .filter((chip) => {
+        const find = value.find(tag => tag.tagId === chip.value.tagId);
+        console.log(find);
+        if (find) {
+          return true;
+        }
+      });
+    console.log(chipsToSelect);
+    chipsToSelect.forEach((chip) => chip.select());
     this.userAction = true;
   }
 
-  toggleSelection(chip: MatChip): void {
-    chip.toggleSelected();
-  }
-
-  uniqChip(value, tag: Tag) {
-    if (!value.length) {
+  uniqChip(tag: Tag): any {
+    if (!this.selectedTags.length) {
       return [tag];
     }
-    return value.filter((opt: Tag) => opt.tagId !== tag.tagId);
+    return this.selectedTags.filter((opt: Tag) => opt.tagId !== tag.tagId);
   }
 
   changeSelectedTag(chip: MatChipSelectionChange, isUserSelect): void {
+
     const chipValue = chip.source.value;
 
     if (!isUserSelect) {
       this.chipSelected.emit(chipValue);
       return;
     }
-    const uniq = this.uniqChip(this.value, chipValue);
+    const uniq = this.uniqChip( chipValue);
     if (chip.selected) {
-      this.value = [...this.value, chipValue];
+      this.selectedTags = [...this.selectedTags, chipValue];
     } else {
-      this.value = [...uniq];
+      this.selectedTags = [...uniq];
     }
     console.log(this.chipList.chips);
-    this.chipSelected.emit(this.value);
+    this.chipSelected.emit(this.selectedTags);
   }
+
+  toggleSelection(chip): void {
+    chip.toggleSelected();
+  }
+
 }

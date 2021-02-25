@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { DiscountDetailComponent } from './components/discount-detail/discount-detail.component';
 import { SharedModule } from './shared/shared.module';
 import {
   TranslateLoader,
@@ -34,7 +33,6 @@ export function HttpLoaderFactory(http: HttpClient): any {
     HomeComponent,
     HeaderComponent,
     MapComponent,
-    DiscountDetailComponent,
   ],
   imports: [
     BrowserModule,

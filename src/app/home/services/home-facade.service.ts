@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { combineLatest, forkJoin, from, Observable, of } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { SORTS } from '../../../constants';
 import { Discount, Tag, Town } from '../../models';
 import { Sort } from '../../models/sort';
@@ -23,14 +23,48 @@ export class HomeFacadeService {
   ) {
   }
 
+  isCurrentUserLocation(): boolean {
+    return !!(this.userService.activeUserValue.latitude && this.userService.activeUserValue.longitude);
+  }
+
+  getUserLocation(): any {
+    const userCurrentLocation: Town = {
+      townName: 'My Location',
+      longitude: this.userService.activeUserValue.longitude,
+      latitude: this.userService.activeUserValue.latitude,
+    };
+    const userOfficeLocation: Town = {
+      townName: 'My Office Location',
+      longitude: this.userService.activeUserValue.officeLongitude,
+      latitude: this.userService.activeUserValue.officeLatitude,
+    };
+    return this.isCurrentUserLocation()
+      ?
+      [
+        userCurrentLocation,
+        userOfficeLocation
+      ]
+      :
+      [
+        userOfficeLocation
+      ];
+  }
+
   loadData(): Observable<any> {
-    return forkJoin(
-      this.getSorts(),
-      this.getTags(),
-      this.getTowns()
-    ).pipe(
+    return this.userService.activeUser$.pipe(
+      tap((user) => {
+        const location = {
+          latitude: user.latitude ? user.latitude : user.officeLatitude,
+          longitude: user.longitude ? user.longitude : user.officeLongitude,
+        };
+        this.requestStore.set('location', location);
+      }),
       switchMap(() => {
-        return this.getDiscounts();
+        return forkJoin(this.getSorts(), this.getTags(), this.getTowns()).pipe(
+          switchMap(() => {
+            return this.getDiscounts();
+          })
+        );
       })
     );
   }
@@ -52,6 +86,7 @@ export class HomeFacadeService {
   getTowns(): Observable<Town[]> {
     return this.discountsService.getTowns()
       .pipe(
+        map(towns => [...this.getUserLocation(), ...towns]),
         tap(towns => this.homeStore.set('towns', towns))
       );
   }
@@ -66,7 +101,6 @@ export class HomeFacadeService {
   getDiscounts(debounceMs = 500): Observable<any> {
     return this.requestStore.requestData$
       .pipe(
-        tap(next => console.log(next)),
         switchMap((request) => {
           const req = {
             ...request,
@@ -75,11 +109,25 @@ export class HomeFacadeService {
             latitude: request.location.latitude,
             longitude: request.location.longitude,
           };
-          console.log(request);
-          console.log(req);
           return this.discountsService.searchDiscounts(req)
             .pipe(
               tap(discounts => this.homeStore.set('discounts', discounts)),
+            );
+        })
+      );
+  }
+
+  getDiscount(discountId): Observable<any> {
+    return this.requestStore.requestData$
+      .pipe(
+        switchMap((request) => {
+          const req = {
+            latitude: request.location.latitude,
+            longitude: request.location.longitude,
+          };
+          return this.discountsService.getDiscountById(discountId, req)
+            .pipe(
+              tap(discount => this.homeStore.set('activeDiscount', discount)),
             );
         })
       );
@@ -101,9 +149,25 @@ export class HomeFacadeService {
             ? {...discount, isSaved: resp.isSaved}
             : {...discount};
         });
+        const activeDiscount = this.homeStore.value.activeDiscount;
+        if (activeDiscount.discountId === resp.discountID) {
+          const discount = {...activeDiscount, isSaved: resp.isSaved};
+          this.homeStore.set('activeDiscount', discount);
+        }
         this.homeStore.set('discounts', discounts);
       });
   }
+
+  putArchiveDiscount(discountId: number): void {
+    this.discountsService.putDiscountInArchive(discountId)
+      .pipe()
+      .subscribe(resp => {
+        const activeDiscount = this.homeStore.value.activeDiscount;
+        const discount = {...activeDiscount, activityStatus: resp.activityStatus};
+        this.homeStore.set('activeDiscount', discount);
+      });
+  }
+
 
   throttle<T>(source$: Observable<T>, debounceMs): Observable<T> {
     return source$

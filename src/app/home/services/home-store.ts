@@ -5,10 +5,11 @@ import { Discount, Tag, Town } from '../../models';
 import { Sort } from '../../models/sort';
 
 export interface HomeState {
-  sorts: Sort[];
-  tags: Tag[];
-  towns: Town[];
-  discounts: Discount[];
+  sorts: Sort[] | [];
+  tags: Tag[] | [];
+  towns: Town[] | [];
+  discounts: Discount[] | [];
+  activeDiscount: Discount | {};
 }
 
 const HOME_INITIAL_STATE: HomeState = {
@@ -16,6 +17,7 @@ const HOME_INITIAL_STATE: HomeState = {
   tags: [],
   towns: [],
   discounts: [],
+  activeDiscount: {}
 };
 
 @Injectable({
@@ -42,5 +44,6 @@ export class HomeStore {
       ...this.value,
       [name]: state
     });
+    console.log('this', this.subject.value);
   }
 }

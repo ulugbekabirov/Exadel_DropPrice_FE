@@ -23,8 +23,6 @@ export class DiscountsComponent implements OnInit, OnDestroy {
   location$;
   activeTags$;
   sortBy$;
-  latitude$;
-  longitude$;
   private unsubscribe$: Subject<void> = new Subject<void>();
   @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
 
@@ -39,10 +37,10 @@ export class DiscountsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.discounts$ = this.facade.loadData()
       .pipe(
-        takeUntil(this.unsubscribe$),
         switchMap((): Observable<Discount[]> => {
           return this.store.select('discounts');
-        })
+        }),
+        takeUntil(this.unsubscribe$),
       );
     this.sorts$ = this.store.select('sorts');
     this.tags$ = this.store.select('tags');
@@ -88,6 +86,6 @@ export class DiscountsComponent implements OnInit, OnDestroy {
 
   searchTagChange(tags): void {
     console.log(tags);
-    this.sortStore.set('tags', [...tags]);
+    this.sortStore.set('tags', tags);
   }
 }

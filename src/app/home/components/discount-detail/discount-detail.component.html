@@ -13,25 +13,35 @@
   </a>
 
   <section class="discount-detail__header">
+
     <div class="discount-detail__header_rating">
-      <mat-icon
-        class="rating__icon"
-        fxLayoutAlign="center center"
-        *ngFor="let star of rating"
-      >{{ star ? "star_rate" : "star_border" }}
-      </mat-icon>
+      <div class="discount-card__rating_rating"
+           fxLayout="row"
+           fxLayoutAlign="center center"
+           fxLayoutGap=".3em"
+      >
+    <span class="rating__amount"
+          fxLayoutAlign="center center"
+    >
+          {{(discount$ | async).discountRating ? (discount$ | async).discountRating.toFixed(2) : (discount$ | async).discountRating}}
+    </span>
+        <mat-icon class="rating__icon"
+                  fxLayoutAlign="center center"
+        >{{(discount$ | async).discountRating ? 'star_rate' : 'star_border'}}
+        </mat-icon>
+      </div>
     </div>
 
     <h2 class="discount-detail__header_title">
-      {{ discount?.discountName }}
+      {{ (discount$ | async).discountName }}
     </h2>
 
     <mat-icon
       class="discount-detail__header_favourite"
       fxLayoutAlign="center center"
       matTooltip="Toggle Favourites"
-      [ngStyle]="{ color: discount?.isSaved ? '#FF6347' : '#A38D8B' }"
-      (click)="toggleFavorites(discount?.discountId)"
+      [ngStyle]="{ color: (discount$ | async).isSaved ? '#FF6347' : '#A38D8B' }"
+      (click)="toggleFavorites(discountId)"
     >
       favorite
     </mat-icon>
@@ -41,16 +51,16 @@
     <mat-card class="discount-content">
       <h3 class="discount-content__vendor">
         <a
-          [routerLink]="['../../vendors/', discount?.vendorId]"
+          [routerLink]="['../../vendors/', (discount$ | async).vendorId]"
           matTooltip="Vendor"
         >
-          {{ discount?.vendorName }}
+          {{ (discount$ | async).vendorName }}
         </a>
       </h3>
 
       <div class="discount-content__description">
         <p class="discount-content__description_text">
-          {{ discount?.description }}
+          {{ (discount$ | async).description }}
         </p>
       </div>
       <p
@@ -68,7 +78,7 @@
         </span>
         <span fxLayoutAlign="start center" fxFlex="70">
           <span class="discount-content__amount_text">
-            {{ discount?.discountAmount }}
+            {{ (discount$ | async).discountAmount }}
           </span>
           <span class="discount-content__amount_symbol"> % </span>
         </span>
@@ -92,7 +102,7 @@
           fxLayoutAlign="start center"
           fxFlex="70"
         >
-          {{ discount?.promoCode }}
+          {{ (discount$ | async).promoCode }}
         </span>
       </p>
 
@@ -106,13 +116,13 @@
           {{ "DISCOUNT_DETAIL.ADDRESS_LABEL" | translate }}
         </span>
         <span class="discount-content__address_text" fxFlex="80">
-          {{ discount?.address }}
+          {{ (discount$ | async).address }}
         </span>
       </p>
 
       <p class="discount-content__distance">
         <span fxFlex="20">{{ "DISCOUNT_DETAIL.DISTANCE" | translate }}: </span>
-        <span>{{ discount?.distanceInMeters | metersToKilometers }}</span>
+        <span>{{ (discount$ | async).distanceInMeters | metersToKilometers }}</span>
       </p>
 
       <div
@@ -127,7 +137,7 @@
             {{ "DISCOUNT_DETAIL.START_DATE" | translate }}:
           </span>
           <span class="discount-content__date_start">
-            {{ discount?.startDate | date: "dd.MM.yyyy" }}
+            {{ (discount$ | async)?.startDate | date: "dd.MM.yyyy" }}
           </span>
         </div>
         <div fxLayoutAlign="start center" fxFill>
@@ -135,14 +145,14 @@
             {{ "DISCOUNT_DETAIL.END_DATE" | translate }}:
           </span>
           <span class="discount-content__date_end">
-            {{ discount?.endDate | date: "dd.MM.yyyy" }}
+            {{ (discount$ | async).endDate | date: "dd.MM.yyyy" }}
           </span>
         </div>
       </div>
 
       <mat-chip-list class="discount-content__tags">
         <mat-chip
-          *ngFor="let tag of discount?.tags"
+          *ngFor="let tag of (discount$ | async).tags"
           class="discount-content__tags_tag"
         >
           # {{ tag }}
@@ -151,7 +161,7 @@
     </mat-card>
   </section>
 
-  <section *ngIf="discount?.isOrdered" class="discount-detail__rating">
+  <section *ngIf="(discount$ | async).isOrdered" class="discount-detail__rating">
     <span class="discount-detail__rating_label">
       {{ "DISCOUNT_DETAIL.ASSESSMENT_LABEL" | translate }}
     </span>
@@ -173,7 +183,7 @@
       class="action__button"
       mat-flat-button
       matTooltip="Take Ticket"
-      (click)="ticketHandler(discount?.discountId)"
+      (click)="ticketHandler(discountId)"
     >
       {{ "DISCOUNT_DETAIL.TICKET_BUTTON_LABEL" | translate }}
     </button>
@@ -182,7 +192,7 @@
             mat-flat-button
             matTooltip="Edit Discount"
             routerLink="edit"
-            (click)="onEditDiscount(discount.discountId)"
+            (click)="onEditDiscount(discountId)"
     >
       {{ "DISCOUNT_DETAIL.EDIT_BUTTON_LABEL" | translate }}
     </button>
@@ -191,9 +201,9 @@
       class="action__button"
       mat-flat-button
       matTooltip="Archive Discount"
-      (click)="archiveDiscount(discount?.discountId)"
+      (click)="archiveDiscount(discountId)"
       [ngStyle]="{
-        backgroundColor: discount?.activityStatus ? '#4A94EB' : '#FF6347'
+        backgroundColor: (discount$ | async).activityStatus ? '#4A94EB' : '#FF6347'
       }"
     >
       {{ "DISCOUNT_DETAIL.ARCHIVE_BUTTON_LABEL" | translate }}
