@@ -3,7 +3,7 @@
   <span class="header__hamburger" (click)="toggleActive()" [ngClass]="active ? 'active' : ''">
     <span class="bar"></span>
   </span>
-  <div class="header__nav" fxLayoutAlign="center end" fxLayoutGap=".5em"  [ngClass]="active ? 'active' : ''">
+  <div class="header__nav" fxLayoutGap=".5em"  [ngClass]="active ? 'active' : ''">
     <a *appVerifyUserRoles='["Admin"]' routerLink="/admin" routerLinkActive="active_link" (click)="toggleActive()">
       {{ "HEADER.ADMIN_PANEL_LINK_TITLE" | translate }}
     </a>

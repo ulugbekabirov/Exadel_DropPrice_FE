@@ -123,15 +123,31 @@
     left: 100%;
     top: $main_header_height;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-    overflow-x: hidden;
-    transition: .5s ease left;
 
-    @media screen and (max-width: 767px) {
-      background-color: #fff;
+     @media screen and (max-width: 767px) {
+       background-color: #fff;
+       flex-direction: column;
+       justify-content: center;
+       align-items: flex-start;
+       z-index: 1;
+       overflow-x: hidden;
+       transition: .5s ease left;
+       padding-left: 3rem;
+       gap: 2rem;
+     }
+
+
+    a {
+      color: $main_header_txtColor;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 1rem;
+      // line-height: 24px;
+
+      &:hover,
+      &focus {
+        color: $main_header_items_hover;
+      }
     }
 
     &.active {
@@ -171,22 +187,12 @@
       }
     }
 
-    a {
-      color: $main_header_txtColor;
-      font-weight: 400;
-      font-style: normal;
-      font-size: 1rem;
-      line-height: 24px;
-
-      &:hover,
-      &focus {
-        color: $main_header_items_hover;
-      }
-    }
+   
 
     .profile {
       height: 28px;
       gap: 1.5rem;
+      overflow: hidden;
       .person {
         font-size: 2rem;
       }
@@ -207,6 +213,7 @@
           font-size: 2em;
           font-weight: 500;
           color: $indigo;
+          margin-right: 1.2rem;
         }
 
         &:hover {
