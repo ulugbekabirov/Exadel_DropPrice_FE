@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -15,8 +15,9 @@ export class SearchBar {
 
 @Component({
   selector: 'app-search-bar',
-  templateUrl: './search-bar.component.html',
-  styleUrls: ['./search-bar.component.scss'],
+  templateUrl: './search-bar-test.component.html',
+  styleUrls: ['./search-bar-test.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class SearchBarComponent implements OnInit, OnDestroy {
@@ -27,6 +28,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   public searches: SearchBar[] = [];
   public tagsName: string[] = [];
   private subscription: Subscription;
+  panelOpenState = false;
 
   @Input() tags: Tag[];
   @Output() searchQueryChange = new EventEmitter<any>();
