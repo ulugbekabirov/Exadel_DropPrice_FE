@@ -8,7 +8,6 @@
         <ul class="content">
           <li class="ticket-content__field" 
               fxLayout="row" 
-              fxLayout.xs="column" 
               fxLayoutAlign="space-between">
             <p class="ticket-info__label">
               {{ "TICKET.FIRST_NAME" | translate }}:
@@ -19,7 +18,6 @@
           </li>
           <li class="ticket-content__field" 
               fxLayout="row" 
-              fxLayout.xs="column" 
               fxLayoutAlign="space-between">
             <p class="ticket-info__label">
               {{ "TICKET.LAST_NAME" | translate }}:
@@ -30,8 +28,8 @@
           </li>
           <li class="ticket-content__field" 
               fxLayout="row" 
-              fxLayout.xs="column" 
-              fxLayoutAlign="space-between">
+              fxLayoutAlign="space-between"
+              *ngIf="ticket?.patronymic">
             <p class="ticket-info__label">
               {{ "TICKET.PATRONYMIC" | translate }}:
             </p>
@@ -41,8 +39,17 @@
           </li>
           <div class="ticket-content__dotted-line"></div>
           <li class="ticket-content__field" 
+              fxLayout="row" 
+              fxLayoutAlign="space-between">
+            <p class="ticket-info__label">
+              {{ "TICKET.PRODUCT_SERVICE" | translate}}:
+            </p>
+            <p class="ticket-info__field">
+              {{ ticket?.discountName }}
+            </p>
+          </li>
+          <li class="ticket-content__field" 
               fxLayout="row"  
-              fxLayout.xs="column" 
               fxLayoutAlign="space-between">
             <p class="ticket-info__label">
               {{ "TICKET.NAME_VENDOR" | translate }}:
@@ -53,18 +60,6 @@
           </li>
           <li class="ticket-content__field" 
               fxLayout="row" 
-              fxLayout.xs="column" 
-              fxLayoutAlign="space-between">
-            <p class="ticket-info__label">
-              {{ "TICKET.PRODUCT_SERVICE" | translate}}:
-            </p>
-            <p class="ticket-info__field">
-              {{ ticket?.discountName }}
-            </p>
-          </li>
-          <li class="ticket-content__field" 
-              fxLayout="row" 
-              fxLayout.xs="column" 
               fxLayoutAlign="space-between">
             <p class="ticket-info__label">
               {{ "TICKET.EMAIL" | translate }}:
@@ -75,7 +70,6 @@
           </li>
           <li class="ticket-content__field" 
               fxLayout="row"  
-              fxLayout.xs="column" 
               fxLayoutAlign="space-between">
             <p class="ticket-info__label">
               {{ "TICKET.PHONE" | translate }}:
@@ -86,7 +80,6 @@
           </li>
           <li class="ticket-content__field" 
               fxLayout="row" 
-              fxLayout.xs="column" 
               fxLayoutAlign="space-between">
             <p class="ticket-info__label">
               {{ "TICKET.CONFIRMATION_DATE" | translate }}:
@@ -98,7 +91,6 @@
           <li *ngIf="ticket?.promoCode" 
               class="ticket-content__field" 
               fxLayout="row" 
-              fxLayout.xs="column" 
               fxLayoutAlign="space-between">
             <p class="ticket-info__label">
               {{ "TICKET.PROMO_CODE" | translate}}:
@@ -112,19 +104,22 @@
       <div class="ticket-discount"
            fxLayout="row"
            fxLayoutAlign="space-between">
-        <!-- <p>{{ "TICKET.DISCOUNT" | translate}}:<span class="discount-amount"> {{ ticket?.discountAmount }}%</span></p> -->
         <p class="ticket-info__label">{{ "TICKET.DISCOUNT" | translate}}:</p>
         <p class="discount-amount">{{ ticket?.discountAmount }}%</p>
       </div>
       <div class="ticket-content__dotted-line"></div>
     </div>
-    <!-- <div class="example-button-row ticket-close" fxLayoutAlign="center center">
-      <button mat-flat-button color="primary"
-              (click)="back()"
-      >{{ "TICKET.CLOSE" | translate }}</button>
-    </div> -->
+    <div mat-dialog-actions 
+         fxLayout="row" 
+         fxLayoutAlign="center center">
+      <button mat-stroked-button
+              (click)="back()">
+        {{ "TICKET.CLOSE" | translate }}
+      </button>
+    </div>
     <mat-icon class="close-ticket" 
               (click)="back()"
-              matTooltip='{{ "TICKET.CLOSE" | translate}}'>close</mat-icon>
+              matTooltip='{{ "TICKET.CLOSE" | translate}}'>close
+    </mat-icon>
   </div>
 </div>
