@@ -24,34 +24,37 @@
           <mat-form-field class="full-width">
             <mat-label>{{
               "NEW_DISCOUNT_FORM.NAME_VENDOR" | translate
-            }}</mat-label>
+              }}</mat-label>
             <input
               type="text"
               matInput
-              formControlName="vendorName"
+              formControlName="vendorId"
               [matAutocomplete]="auto"
 
               placeholder="{{
                 'NEW_DISCOUNT_FORM.PLACEHOLDER_VENDOR_NAME' | translate
               }}"
             />
-            <mat-autocomplete #auto="matAutocomplete">
+            <mat-autocomplete
+              #auto="matAutocomplete"
+              [displayWith]="displayFn.bind(this)"
+            >
               <mat-option
                 *ngFor="let option of filteredList"
-                [value]="option.vendorName"
+                [value]="option.vendorId"
               >
                 {{ option.vendorName }}
               </mat-option>
             </mat-autocomplete>
-            <mat-error *ngIf="vendorName.errors?.requireMatch">{{
+            <mat-error *ngIf="vendorId.errors?.requireMatch">{{
               "NEW_DISCOUNT_FORM.NAME_VENDOR_ERROR" | translate
-            }}</mat-error>
+              }}</mat-error>
           </mat-form-field>
 
           <mat-form-field class="full-width product-service">
             <mat-label>{{
               "NEW_DISCOUNT_FORM.PRODUCT_SERVICE" | translate
-            }}</mat-label>
+              }}</mat-label>
             <input
               matInput
               placeholder="{{
@@ -65,7 +68,7 @@
         <mat-form-field class="full-width">
           <mat-label>{{
             "NEW_DISCOUNT_FORM.DESCRIPTION" | translate
-          }}</mat-label>
+            }}</mat-label>
           <textarea
             class="form__discount-description"
             formControlName="description"
@@ -75,7 +78,8 @@
           >
           </textarea>
           <mat-hint class="description-limit"
-            >{{ description.value.length }} / 5000</mat-hint
+          >{{ description.value.length }} / 5000
+          </mat-hint
           >
         </mat-form-field>
 
@@ -90,7 +94,7 @@
           <mat-form-field class="form__discount-details-amount">
             <mat-label>{{
               "NEW_DISCOUNT_FORM.AMOUNT_DISCOUNT" | translate
-            }}</mat-label>
+              }}</mat-label>
             <input
               matInput
               type="number"
@@ -103,15 +107,16 @@
             />
             <span matSuffix>%</span>
             <mat-error *ngIf="discountAmount.invalid"
-              >{{ "NEW_DISCOUNT_FORM.MIN_MAX_PERCENT" | translate }}:
-              1-100%</mat-error
+            >{{ "NEW_DISCOUNT_FORM.MIN_MAX_PERCENT" | translate }}:
+              1-100%
+            </mat-error
             >
           </mat-form-field>
 
           <mat-form-field class="promo-code">
             <mat-label>{{
               "NEW_DISCOUNT_FORM.PROMO_CODE" | translate
-            }}</mat-label>
+              }}</mat-label>
             <input
               matInput
               placeholder="{{
@@ -124,7 +129,7 @@
           <mat-form-field class="date">
             <mat-label class="date__label">{{
               "NEW_DISCOUNT_FORM.DATE_START_END" | translate
-            }}</mat-label>
+              }}</mat-label>
             <mat-date-range-input [rangePicker]="picker">
               <input
                 matStartDate
@@ -150,7 +155,7 @@
               {{ "NEW_DISCOUNT_FORM.START_DATE_ERROR" | translate }}
             </mat-error>
             <mat-error *ngIf="endDate.hasError('matEndDateInvalid')"
-              >{{ "NEW_DISCOUNT_FORM.END_DATE_ERROR" | translate }}
+            >{{ "NEW_DISCOUNT_FORM.END_DATE_ERROR" | translate }}
             </mat-error>
           </mat-form-field>
 
@@ -165,7 +170,7 @@
         <mat-form-field class="chip-list" formArrayName="tags">
           <mat-label>{{
             "NEW_DISCOUNT_FORM.LABEL_TAGS" | translate
-          }}</mat-label>
+            }}</mat-label>
           <input
             placeholder="{{
               'NEW_DISCOUNT_FORM.PLACEHOLDER_NEW_TAG' | translate
@@ -192,38 +197,37 @@
         <div class="points_title">
           <h4>{{ "NEW_DISCOUNT_FORM.POINTS_TITLE" | translate }}</h4>
         </div>
-
         <div formArrayName="pointOfSales">
-          <div
-            *ngFor="let point of pointOfSalesForms.controls; let i = index"
-            [formGroupName]="i"
+           <span>
+            <mat-checkbox *ngIf="pointOfSalesForms.controls.length >= 2"
+                          (change)="setAllPointsOfSalesChecked($event.checked)"
+            >
+              {{'Check All'}}
+            </mat-checkbox>
+          </span>
+          <div *ngFor="let point of pointOfSalesForms.controls; let i = index"
+               [formGroupName]="i"
           >
             <div
               class="points"
               fxLayoutAlign="start center"
               fxLayout.xs="center center"
+              fxLayoutGap="1em"
             >
+              <mat-checkbox
+                formControlName="checked"
+              ></mat-checkbox>
               <mat-form-field class="point__name">
                 <mat-label>{{ "NEW_DISCOUNT_FORM.NAME_LABEL" | translate }}</mat-label>
                 <input
                   type="text"
                   matInput
-                  formControlName="name"
-                  [matAutocomplete]="auto"/>
-                <mat-autocomplete #auto="matAutocomplete">
-                  <mat-option
-                    *ngFor="let option of filteredPointNameList"
-                    [value]="option.name"
-                  >
-                    {{ option.name }}
-                  </mat-option>
-                </mat-autocomplete>
+                  formControlName="name"/>
               </mat-form-field>
-
               <mat-form-field class="point__address">
                 <mat-label>{{
                   "NEW_DISCOUNT_FORM.ADDRESS_LABEL" | translate
-                }}</mat-label>
+                  }}</mat-label>
                 <input
                   matInput
                   placeholder="{{
@@ -244,7 +248,8 @@
                   (click)="openDialog(i)"
                   matTooltip="{{ 'NEW_DISCOUNT_FORM.OPEN_MAP' | translate }}"
                   aria-label="Icon that displays a tooltip when focused or hovered over"
-                  >add_location_alt</mat-icon
+                >add_location_alt
+                </mat-icon
                 >
                 <mat-icon
                   (click)="deletePoint(i)"
@@ -252,9 +257,11 @@
                     'NEW_DISCOUNT_FORM.DELETE_LOCATION' | translate
                   }}"
                   aria-label="Icon that displays a tooltip when focused or hovered over"
-                  >delete</mat-icon
+                >delete
+                </mat-icon
                 >
               </div>
+
             </div>
           </div>
         </div>
@@ -263,22 +270,27 @@
           (click)="addPoint()"
           matTooltip="{{ 'NEW_DISCOUNT_FORM.ADD_LOCATION' | translate }}"
           aria-label="Icon that displays a tooltip when focused or hovered over"
-          >add</mat-icon
+        >add
+        </mat-icon
         >
         <div *ngIf="coordinateIsEmpty" class="empty_error">
           <mat-error>{{
             "NEW_DISCOUNT_FORM.EMPTYCOORDINATES" | translate
-          }}</mat-error>
+            }}</mat-error>
         </div>
 
         <button
           mat-raised-button
           color="primary"
-          [disabled]="newDiscountForm.pristine || newDiscountForm.invalid || coordinateIsEmpty"
           type="submit"
+          [disabled]="newDiscountForm.pristine"
+
         >
+          <!--          [disabled]="newDiscountForm.pristine || newDiscountForm.invalid || coordinateIsEmpty"-->
+
           {{ "NEW_DISCOUNT_FORM.BTN_TITLE" | translate }}
         </button>
+<!--        <pre>{{newDiscountForm.value | json}}</pre>-->
       </form>
     </mat-card-content>
   </mat-card>

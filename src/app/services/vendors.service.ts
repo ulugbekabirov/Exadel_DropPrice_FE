@@ -49,4 +49,8 @@ export class VendorsService {
     return this.restApi.getVendorsDiscounts(vendorId, options);
   }
 
+  getVendorPointsOfSales(vendorId): Observable<any> {
+    return this.restApi.getVendorPointsOfSales(vendorId);
+  }
+
 }

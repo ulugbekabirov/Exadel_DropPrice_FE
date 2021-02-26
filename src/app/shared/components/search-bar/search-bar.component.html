@@ -1,36 +1,17 @@
 <div class="search">
   <form class="searchForm">
-    <mat-form-field class="searchInput">
-      <mat-label class="searchLable">
-        {{ "MAIN_PAGE.SEARCH" | translate }}
-      </mat-label>
-      <input
-        matInput
-        class="form-control"
-        [(ngModel)]="userQuestion"
-        type="text"
-        name="userQuestion"
-        id="userQuestions"
-        (ngModelChange)="userNext($event)"
-      />
-      <mat-icon class="searchIcon" fxLayoutAlign="center center">
-       {{ "search" }}
-      </mat-icon>
-    </mat-form-field>
+    <app-search
+      (onEmitSearchTerm)="searchTermChange($event)"
+      [initialValue$]="initialValue$"
+    >
+    </app-search>
   </form>
   <div class="listWrapper">
-    <mat-chip-list selectable multiple aria-label="Fish selection">
-      <div class="chipsBlock">
-        <mat-chip
-          class="chipsStyle"
-          #chips="matChip"
-          *ngFor="let newTags of tags"
-          (click)="getCardsByTag(newTags?.tagName, chips)"
-        >
-          <mat-icon class="chipsIcon" *ngIf="chips.selected">check</mat-icon>
-         #  {{ newTags?.tagName }}
-        </mat-chip>
-      </div>
-    </mat-chip-list>
+    <app-tags-filter
+      [tags$]="tags$"
+      [activeTags$]="activeTags$"
+      (chipSelected)="searchTagChange($event)"
+    >
+    </app-tags-filter>
   </div>
 </div>

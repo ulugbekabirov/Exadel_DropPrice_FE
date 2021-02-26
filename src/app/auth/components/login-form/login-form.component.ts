@@ -6,10 +6,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { switchMap, take, takeUntil } from 'rxjs/operators';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../../services/user.service';
 
 
 @Component({
@@ -52,7 +52,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.unsubscribe$),
         switchMap(() => {
-          return this.userService.activeUser;
+          return this.userService.activeUser$;
         })
       )
       .subscribe(resp => {

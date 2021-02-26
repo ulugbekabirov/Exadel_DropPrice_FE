@@ -1,13 +1,17 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
   Validators,
-  AbstractControl,
+  AbstractControl, FormArray,
 } from '@angular/forms';
-import { throwError } from 'rxjs';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { forkJoin, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MapComponent } from '../../../components/map/map.component';
+import { Discount } from '../../../models';
 import { DiscountsService } from '../../../services/discounts.service';
 import { VendorsService } from '../../../services/vendors.service';
 import { Vendor } from '../../../models/vendor';
@@ -29,11 +33,13 @@ export class NewVendorComponent implements OnInit, OnDestroy {
   vendId: any;
   private unsubscribe$ = new Subject<void>();
   isEditMode: boolean = (this.router.url).includes('edit');
-
+  coordinateIsEmpty = true;
+  filteredPointNameList: Discount[];
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
+    private dialog: MatDialog,
     private discountService: DiscountsService,
     private vendorsService: VendorsService,
     private router: Router,
@@ -55,6 +61,7 @@ export class NewVendorComponent implements OnInit, OnDestroy {
         ],
       ],
       email: ['', [Validators.required, Validators.email]],
+      pointOfSales: this.fb.array([]),
       socialLinks: this.fb.group({
         instagram: ['',
           [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
@@ -73,15 +80,56 @@ export class NewVendorComponent implements OnInit, OnDestroy {
         .pipe(
           switchMap((params: any) => {
             this.vendId = +params.get('id');
-            return this.vendorsService.getVendorById(this.vendId);
+            return forkJoin(
+              this.vendorsService.getVendorById(this.vendId),
+              this.vendorsService.getVendorPointsOfSales(this.vendId)
+            );
           }),
           takeUntil(this.unsubscribe$)
-        ).subscribe((vendor) => {
-        this.newVendorForm.patchValue({
-          ...vendor, socialLinks: vendor.socialLinks ? JSON.parse(vendor.socialLinks) : {}
-        });
+        ).subscribe(([vendor, points]) => {
+        const editingVendor = {
+          ...vendor,
+          pointOfSales: points,
+          socialLinks: vendor.socialLinks ? JSON.parse(vendor.socialLinks) : {}
+        };
+        if (editingVendor.pointOfSales) {
+          editingVendor.pointOfSales.forEach(point => {
+            this.pointOfSalesForms.push(this.editPointOfSale());
+          });
+        }
+        console.log(editingVendor)
+        this.newVendorForm.patchValue(editingVendor);
+        this.coordinateIsEmpty = false;
+        this.newVendorForm.markAsPristine();
       });
     }
+  }
+
+  editPointOfSale(): FormGroup {
+    return this.fb.group({
+      id: [''],
+      name: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      latitude: ['', [Validators.required]],
+      longitude: ['', [Validators.required]],
+      checked: [''],
+    });
+  }
+
+  addPoint(): void {
+    const point = this.fb.group({
+      name: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      latitude: ['', [Validators.required]],
+      longitude: ['', [Validators.required]],
+      checked: [''],
+    });
+    this.pointOfSalesForms.push(point);
+  }
+
+  deletePoint(currentSaleObj): void {
+    this.pointOfSalesForms.removeAt(currentSaleObj);
+    this.coordinateIsEmpty = true;
   }
 
   successSnackBar(message: string, action: any): void {
@@ -91,6 +139,26 @@ export class NewVendorComponent implements OnInit, OnDestroy {
       panelClass: ['snackbar-color-success']
     });
   }
+
+  openDialog(currentSaleObj): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.minHeight = '400px';
+    dialogConfig.minWidth = '100%';
+    dialogConfig.direction = 'rtl';
+
+    dialogConfig.data = {
+      latitude: this.pointOfSalesForms.value[currentSaleObj].latitude,
+      longitude: this.pointOfSalesForms.value[currentSaleObj].longitude,
+    };
+
+    const dialogRef = this.dialog.open(MapComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((data) => {
+      Object.assign(this.pointOfSalesForms.value[currentSaleObj], data);
+    });
+    this.coordinateIsEmpty = false;
+  }
+
 
   errorSnackBar(message: string, action: any): void {
     this.snackBar.open(message, action, {
@@ -104,10 +172,13 @@ export class NewVendorComponent implements OnInit, OnDestroy {
     const vendor = this.newVendorForm.value;
     const vendorModel = {...vendor, socialLinks: JSON.stringify(vendor.socialLinks)};
     if (this.isEditMode) {
+      console.log('UPDATE', vendorModel);
       this.updateVendor(vendorModel, this.vendId);
     } else {
+      console.log('NEW_VENDOR', vendorModel);
       this.createNewVendor(vendorModel);
     }
+    this.pointOfSalesForms.clear();
   }
 
   private updateVendor(vendor, vendId): void {
@@ -143,14 +214,6 @@ export class NewVendorComponent implements OnInit, OnDestroy {
       });
   }
 
-  get name(): AbstractControl {
-    return this.newVendorForm.get('vendorName');
-  }
-
-  get address(): AbstractControl {
-    return this.newVendorForm.get('address');
-  }
-
   get description(): AbstractControl {
     return this.newVendorForm.get('description');
   }
@@ -181,6 +244,22 @@ export class NewVendorComponent implements OnInit, OnDestroy {
 
   get otherLinks(): AbstractControl {
     return this.newVendorForm.get('otherLinks');
+  }
+
+  get name(): AbstractControl {
+    return this.pointOfSalesForms.get('name');
+  }
+
+  get address(): AbstractControl {
+    return this.pointOfSalesForms.get('address');
+  }
+
+  get checked(): AbstractControl {
+    return this.pointOfSalesForms.get('checked');
+  }
+
+  get pointOfSalesForms(): FormArray {
+    return this.newVendorForm.get('pointOfSales') as FormArray;
   }
 
   ngOnDestroy(): void {

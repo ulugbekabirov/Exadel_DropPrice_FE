@@ -14,6 +14,7 @@ export class DiscountsService {
   }
 
   getDiscounts(params): Observable<any> {
+    console.log('params', params);
     const paramsObj = {};
     Object.keys({...params}).filter(value => typeof params[value] !== 'undefined').forEach(param => {
       paramsObj[param] = params[param];
@@ -21,6 +22,7 @@ export class DiscountsService {
     const options: { params: HttpParams } = {
       params: new HttpParams({fromObject: paramsObj})
     };
+    console.log(options)
     return this.restApi.getDiscounts(options);
   }
 

@@ -1,0 +1,36 @@
+@import "src/variables";
+
+:host {
+  text-align: center;
+  min-width: 150px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.searchInput {
+  font-size: 1rem;
+  position: relative;
+  width: 100%;
+  padding: 0 1em;
+
+  .searchLabel {
+    font-size: 1.2rem;
+    padding: 0 1rem;
+  }
+
+  input {
+    padding: .1em 1em;
+  }
+}
+
+mat-icon {
+  position: absolute;
+  top: 50%;
+  right: .8em;
+  transform: translateY(-50%);
+  height: 1.4rem;
+  width: 1.4rem;
+  font-size: 1.5rem;
+  color: $discount_card_text_color;
+}

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { concatMap, tap } from 'rxjs/operators';
-import { ActiveUser, AuthUser } from '../models';
-import { AuthInfo } from '../models';
-import { ApiDataService } from '../services/api-data.service';
-import { KEY_AUTH_TOKEN } from '../../constants';
-import { UserService } from '../services/user.service';
+import { ActiveUser, AuthUser } from '../../models';
+import { AuthInfo } from '../../models';
+import { ApiDataService } from '../../services/api-data.service';
+import { KEY_AUTH_TOKEN } from '../../../constants';
+import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 
 
