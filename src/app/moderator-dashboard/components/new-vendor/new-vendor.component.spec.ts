@@ -11,11 +11,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import {fakeAsync, tick} from '@angular/core/testing';
-import {interval, Observable, Subscription, throwError} from 'rxjs';
-import {catchError, take} from 'rxjs/operators';
-import { TestScheduler } from 'rxjs/testing';
-
 fdescribe('NewVendorComponent', () => {
   let component: NewVendorComponent;
   let fixture: ComponentFixture<NewVendorComponent>;
@@ -75,7 +70,7 @@ fdescribe('NewVendorComponent', () => {
   it('should test if onSubmit method has been called 0 times', (() => {
     fixture.detectChanges();
     spyOn(component, 'onSubmit');
-    el.querySelector('input').click()
+    el.querySelector('input').click();
     expect(component.onSubmit).toHaveBeenCalledTimes(0);
   }));
 
