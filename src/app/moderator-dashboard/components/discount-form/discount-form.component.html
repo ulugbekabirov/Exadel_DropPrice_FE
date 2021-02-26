@@ -9,7 +9,7 @@
         class="form"
         fxLayout.xs="column"
         fxLayoutAlign.xs="center start"
-        [formGroup]="newDiscountForm"
+        [formGroup]="discountForm"
         #formDirective="ngForm"
         (ngSubmit)="onSubmit()"
       >
@@ -31,9 +31,7 @@
               formControlName="vendorId"
               [matAutocomplete]="auto"
 
-              placeholder="{{
-                'NEW_DISCOUNT_FORM.PLACEHOLDER_VENDOR_NAME' | translate
-              }}"
+              placeholder="{{'NEW_DISCOUNT_FORM.PLACEHOLDER_VENDOR_NAME' | translate}}"
             />
             <mat-autocomplete
               #auto="matAutocomplete"
@@ -46,9 +44,7 @@
                 {{ option.vendorName }}
               </mat-option>
             </mat-autocomplete>
-            <mat-error *ngIf="vendorId.errors?.requireMatch">{{
-              "NEW_DISCOUNT_FORM.NAME_VENDOR_ERROR" | translate
-              }}</mat-error>
+            <mat-error *ngIf="vendorId.errors?.requireMatch">{{"NEW_DISCOUNT_FORM.NAME_VENDOR_ERROR" | translate}}</mat-error>
           </mat-form-field>
 
           <mat-form-field class="full-width product-service">
@@ -64,7 +60,6 @@
             />
           </mat-form-field>
         </div>
-
         <mat-form-field class="full-width">
           <mat-label>{{
             "NEW_DISCOUNT_FORM.DESCRIPTION" | translate
@@ -178,14 +173,14 @@
             [matChipInputFor]="chipList"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
             [matChipInputAddOnBlur]="addOnBlur"
-            (matChipInputTokenEnd)="add($event)"
+            (matChipInputTokenEnd)="addTag($event)"
           />
           <mat-chip-list #chipList aria-label="Tag selection">
             <mat-chip
               [selectable]="selectable"
               *ngFor="let tag of tags.controls; index as i"
               [removable]="removable"
-              (removed)="remove(tag)"
+              (removed)="removeTag(tag)"
               [FormControl]="tags.controls[i]"
             >
               {{ tag.value }}
@@ -199,13 +194,13 @@
         </div>
         <div formArrayName="pointOfSales">
            <span>
-            <mat-checkbox *ngIf="pointOfSalesForms.controls.length >= 2"
+            <mat-checkbox *ngIf="pointOfSalesForm.controls.length >= 2"
                           (change)="setAllPointsOfSalesChecked($event.checked)"
             >
               {{'Check All'}}
             </mat-checkbox>
           </span>
-          <div *ngFor="let point of pointOfSalesForms.controls; let i = index"
+          <div *ngFor="let point of pointOfSalesForm.controls; let i = index"
                [formGroupName]="i"
           >
             <div
@@ -222,75 +217,30 @@
                 <input
                   type="text"
                   matInput
-                  formControlName="name"/>
+                  formControlName="name"
+                />
               </mat-form-field>
               <mat-form-field class="point__address">
-                <mat-label>{{
-                  "NEW_DISCOUNT_FORM.ADDRESS_LABEL" | translate
-                  }}</mat-label>
+                <mat-label>{{"NEW_DISCOUNT_FORM.ADDRESS_LABEL" | translate}}</mat-label>
                 <input
                   matInput
-                  placeholder="{{
-                    'NEW_DISCOUNT_FORM.ADDRESS_PLACEHOLDER' | translate
-                  }}"
+                  placeholder="{{'NEW_DISCOUNT_FORM.ADDRESS_PLACEHOLDER' | translate}}"
                   formControlName="address"
                 />
               </mat-form-field>
-              <div class="icons" fxLayout="row" fxLayoutAlign="center center">
-                <mat-icon
-                  [ngStyle]="{
-                    color:
-                      !pointOfSalesForms.value[i].latitude ||
-                      !pointOfSalesForms.value[i].longitude
-                        ? 'red'
-                        : 'black'
-                  }"
-                  (click)="openDialog(i)"
-                  matTooltip="{{ 'NEW_DISCOUNT_FORM.OPEN_MAP' | translate }}"
-                  aria-label="Icon that displays a tooltip when focused or hovered over"
-                >add_location_alt
-                </mat-icon
-                >
-                <mat-icon
-                  (click)="deletePoint(i)"
-                  matTooltip="{{
-                    'NEW_DISCOUNT_FORM.DELETE_LOCATION' | translate
-                  }}"
-                  aria-label="Icon that displays a tooltip when focused or hovered over"
-                >delete
-                </mat-icon
-                >
-              </div>
 
             </div>
           </div>
         </div>
-
-        <mat-icon
-          (click)="addPoint()"
-          matTooltip="{{ 'NEW_DISCOUNT_FORM.ADD_LOCATION' | translate }}"
-          aria-label="Icon that displays a tooltip when focused or hovered over"
-        >add
-        </mat-icon
-        >
-        <div *ngIf="coordinateIsEmpty" class="empty_error">
-          <mat-error>{{
-            "NEW_DISCOUNT_FORM.EMPTYCOORDINATES" | translate
-            }}</mat-error>
-        </div>
-
+        <mat-error *ngIf="pointOfSalesForm.errors?.checkPoints">{{"NEW_DISCOUNT_FORM.EMPTY_COORDINATES_POINT" | translate}}</mat-error>
         <button
           mat-raised-button
           color="primary"
           type="submit"
-          [disabled]="newDiscountForm.pristine"
-
+          [disabled]="discountForm.pristine || discountForm.invalid "
         >
-          <!--          [disabled]="newDiscountForm.pristine || newDiscountForm.invalid || coordinateIsEmpty"-->
-
           {{ "NEW_DISCOUNT_FORM.BTN_TITLE" | translate }}
         </button>
-<!--        <pre>{{newDiscountForm.value | json}}</pre>-->
       </form>
     </mat-card-content>
   </mat-card>

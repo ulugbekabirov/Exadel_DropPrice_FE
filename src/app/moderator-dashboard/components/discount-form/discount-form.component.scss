@@ -12,8 +12,8 @@
 
 mat-card {
   @extend %form;
-    padding: 25px 50px;
-    min-width: 200px;
+  padding: 25px 50px;
+  min-width: 200px;
   @media screen and (device-aspect-ratio: 40/71) {
     min-width: 300px;
   }
