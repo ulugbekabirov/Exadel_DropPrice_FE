@@ -8,16 +8,22 @@ import { ApiDataService } from '../../services/api-data.service';
 import { DiscountsService } from '../../services/discounts.service';
 import { TicketService } from '../../services/ticket.service';
 import { UserService } from '../../services/user.service';
+import { VendorsService } from '../../services/vendors.service';
+import { VendorsRequestStore } from '../../vendors/services/vendors-request-store';
 import { DiscountsRequestStore } from './discounts-request-store';
 import { HomeStore } from './home-store';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class HomeFacadeService {
   constructor(
     private userService: UserService,
     private discountsService: DiscountsService,
+    private vendorsService: VendorsService,
     private homeStore: HomeStore,
-    private requestStore: DiscountsRequestStore,
+    private requestDiscountsStore: DiscountsRequestStore,
+    private requestVendorsStore: VendorsRequestStore,
     private ticketService: TicketService,
     private restApi: ApiDataService
   ) {
@@ -57,7 +63,7 @@ export class HomeFacadeService {
           latitude: user.latitude ? user.latitude : user.officeLatitude,
           longitude: user.longitude ? user.longitude : user.officeLongitude,
         };
-        this.requestStore.set('location', location);
+        this.requestDiscountsStore.set('location', location);
       }),
       switchMap(() => {
         return forkJoin(this.getSorts(), this.getTags(), this.getTowns()).pipe(
@@ -99,7 +105,7 @@ export class HomeFacadeService {
   }
 
   getDiscounts(debounceMs = 500): Observable<any> {
-    return this.requestStore.requestData$
+    return this.requestDiscountsStore.requestData$
       .pipe(
         switchMap((request) => {
           const req = {
@@ -118,7 +124,7 @@ export class HomeFacadeService {
   }
 
   getDiscount(discountId): Observable<any> {
-    return this.requestStore.requestData$
+    return this.requestDiscountsStore.requestData$
       .pipe(
         switchMap((request) => {
           const req = {
@@ -140,34 +146,17 @@ export class HomeFacadeService {
     });
   }
 
-  toggleFavourites(discountId): void {
-    const value: Discount[] = this.homeStore.value.discounts;
-    this.discountsService.updateIsSavedDiscount(discountId)
-      .subscribe(resp => {
-        const discounts = value.map((discount: Discount) => {
-          return discount.discountId === resp.discountID
-            ? {...discount, isSaved: resp.isSaved}
-            : {...discount};
-        });
-        const activeDiscount = this.homeStore.value.activeDiscount;
-        if (activeDiscount.discountId === resp.discountID) {
-          const discount = {...activeDiscount, isSaved: resp.isSaved};
-          this.homeStore.set('activeDiscount', discount);
-        }
-        this.homeStore.set('discounts', discounts);
-      });
+  toggleFavourites(discountId): Observable<any> {
+    return this.discountsService.updateIsSavedDiscount(discountId);
   }
 
-  putArchiveDiscount(discountId: number): void {
-    this.discountsService.putDiscountInArchive(discountId)
-      .pipe()
-      .subscribe(resp => {
-        const activeDiscount = this.homeStore.value.activeDiscount;
-        const discount = {...activeDiscount, activityStatus: resp.activityStatus};
-        this.homeStore.set('activeDiscount', discount);
-      });
+  putArchiveDiscount(discountId: number): Observable<any> {
+    return this.discountsService.putDiscountInArchive(discountId);
   }
 
+  putRating(discountId, assess): Observable<any> {
+    return this.discountsService.putRating(discountId, assess);
+  }
 
   throttle<T>(source$: Observable<T>, debounceMs): Observable<T> {
     return source$
@@ -175,5 +164,53 @@ export class HomeFacadeService {
         debounceTime(debounceMs),
         distinctUntilChanged()
       );
+  }
+
+  getVendor(vendorId): Observable<any> {
+    return this.vendorsService.getVendorById(vendorId)
+      .pipe(
+        map(vendor => {
+          const parseSocials = vendor.socialLinks ? JSON.parse(vendor.socialLinks) : '';
+          return {
+            ...vendor,
+            socialLinks: Object
+              .keys(parseSocials)
+              .filter(value => !!parseSocials[value])
+              .map(key => ({name: key, path: parseSocials[key]}))
+          };
+        }),
+        tap(vendor => this.homeStore.set('activeVendor', vendor)),
+      );
+  }
+
+  getVendors(): Observable<any> {
+    return this.vendorsService.getVendors().pipe(
+      tap(vendors => this.homeStore.set('vendors', vendors))
+    );
+  }
+
+  getVendorDiscounts(vendorId, reqOpt): Observable<any> {
+    return this.vendorsService.getVendorsDiscounts(vendorId, reqOpt).pipe(
+      tap(discounts => this.homeStore.set('vendorDiscounts', discounts))
+    );
+  }
+
+  loadVendorsData(vendorId): Observable<any> {
+    return this.requestVendorsStore.requestData$
+      .pipe(
+      switchMap((request) => {
+        const reqOpt = {
+          ...request,
+          sortBy: request.sortBy.sortBy,
+          latitude: request.location.latitude,
+          longitude: request.location.longitude,
+        };
+        return forkJoin(
+          this.getVendor(vendorId),
+          this.getVendors(),
+          this.getVendorDiscounts(vendorId, reqOpt)
+        );
+      })
+    );
   }
 }

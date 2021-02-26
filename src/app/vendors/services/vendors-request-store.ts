@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, map, pluck } from 'rxjs/operators';
-import { Tag } from '../../models';
 import { Sort } from '../../models/sort';
 
-interface RequestDiscounts {
+interface RequestVendorsDiscounts {
   request: {
     sortBy: Sort;
     searchQuery: string;
@@ -15,11 +14,10 @@ interface RequestDiscounts {
     }
     take: number;
     skip: number;
-    tags: Tag[];
   };
 }
 
-const INITIAL_REQUEST_DISCOUNTS: RequestDiscounts = {
+const INITIAL_REQUEST_VENDORS_DISCOUNTS: RequestVendorsDiscounts = {
   request: {
     sortBy: {
       name: 'MAIN_PAGE.FILTER.SORT_BY.DISTANCE_DESC.NAME',
@@ -33,23 +31,24 @@ const INITIAL_REQUEST_DISCOUNTS: RequestDiscounts = {
     },
     take: 10,
     skip: 0,
-    tags: [],
   }
 };
 
 @Injectable({
   providedIn: 'root'
 })
-export class DiscountsRequestStore {
+export class VendorsRequestStore {
 
-  private requestSubject: BehaviorSubject<RequestDiscounts> = new BehaviorSubject<RequestDiscounts>(INITIAL_REQUEST_DISCOUNTS);
-  private store: Observable<RequestDiscounts> = this.requestSubject.asObservable()
+  private requestSubject: BehaviorSubject<RequestVendorsDiscounts> =
+    new BehaviorSubject<RequestVendorsDiscounts>(INITIAL_REQUEST_VENDORS_DISCOUNTS);
+
+  private store: Observable<RequestVendorsDiscounts> = this.requestSubject.asObservable()
     .pipe(
       distinctUntilChanged()
     );
 
   requestData$ = this.store.pipe(
-    map(requestDiscounts => requestDiscounts.request)
+    map(requestVendors => requestVendors.request)
   );
 
   get value(): any {

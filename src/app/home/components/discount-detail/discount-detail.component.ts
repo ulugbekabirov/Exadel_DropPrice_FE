@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap, takeUntil } from 'rxjs/operators';
-import { DiscountsService } from '../../../services/discounts.service';
 import { Discount } from '../../../models';
 import { Observable, Subject } from 'rxjs';
 import { RefDirective } from '../../../directives/ref.directive';
@@ -29,7 +28,6 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private discountsService: DiscountsService,
     private location: Location,
     private facade: HomeFacadeService,
     private store: HomeStore,
@@ -39,7 +37,7 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.discount$ = this.route.paramMap
       .pipe(
-        switchMap((params): Observable<Discount> => {
+        switchMap((params): Observable<any> => {
           this.discountId = +params.get('id');
           return this.facade.getDiscount(this.discountId).pipe(
             switchMap((): Observable<Discount> => {
@@ -55,7 +53,13 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
   }
 
   toggleFavorites(discountId: number): void {
-    this.facade.toggleFavourites(discountId);
+    this.facade.toggleFavourites(discountId).pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe(resp => {
+      const activeDiscount = this.store.value.activeDiscount;
+      const discount = {...activeDiscount, isSaved: resp.isSaved};
+      this.store.set('activeDiscount', discount);
+    });
   }
 
   onEditDiscount(discountId): void {
@@ -63,7 +67,13 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
   }
 
   archiveDiscount(discountId: number): void {
-    this.facade.putArchiveDiscount(discountId);
+    this.facade.putArchiveDiscount(discountId).pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe(resp => {
+      const activeDiscount = this.store.value.activeDiscount;
+      const discount = {...activeDiscount, activityStatus: resp.activityStatus};
+      this.store.set('activeDiscount', discount);
+    });
   }
 
   goBack(): void {
@@ -72,7 +82,7 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
 
   countStar(starValue): void {
     this.selectedRatingValue = starValue;
-    this.discountsService.putRating(this.discountId, this.selectedRatingValue).pipe(
+    this.facade.putRating(this.discountId, this.selectedRatingValue).pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe(next => {
       this.selectedRatingValue = 0;

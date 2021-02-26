@@ -39,12 +39,10 @@ export class TagsFilterComponent implements OnInit, AfterViewInit {
     const chipsToSelect = this.chipList.chips
       .filter((chip) => {
         const find = value.find(tag => tag.tagId === chip.value.tagId);
-        console.log(find);
         if (find) {
           return true;
         }
       });
-    console.log(chipsToSelect);
     chipsToSelect.forEach((chip) => chip.select());
     this.userAction = true;
   }
@@ -70,7 +68,6 @@ export class TagsFilterComponent implements OnInit, AfterViewInit {
     } else {
       this.selectedTags = [...uniq];
     }
-    console.log(this.chipList.chips);
     this.chipSelected.emit(this.selectedTags);
   }
 

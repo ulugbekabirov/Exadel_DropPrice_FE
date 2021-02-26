@@ -22,7 +22,7 @@
     <span class="rating__amount"
           fxLayoutAlign="center center"
     >
-          {{discount.discountRating ? discount.discountRating.toFixed(2) : discount.discountRating}}
+          {{discount.discountRating | number: '.1-2'}}
     </span>
       <mat-icon class="rating__icon"
                 fxLayoutAlign="center center"

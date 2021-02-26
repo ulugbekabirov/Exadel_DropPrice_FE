@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { forkJoin, Observable, Subject } from 'rxjs';
-import { pluck, switchMap, takeUntil } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { RefDirective } from '../../../directives/ref.directive';
-import { ActiveUser, Discount, Tag, Town } from '../../../models';
+import { Discount, Tag, Town } from '../../../models';
 import { Sort } from '../../../models/sort';
 import { DiscountsRequestStore } from '../../services/discounts-request-store';
 import { HomeFacadeService } from '../../services/home-facade.service';
@@ -19,10 +19,9 @@ export class DiscountsComponent implements OnInit, OnDestroy {
   tags$: Observable<Tag[]>;
   sorts$: Observable<Sort[]>;
   searchTerm$: Observable<string>;
-  activeUser$: Observable<ActiveUser>;
-  location$;
-  activeTags$;
-  sortBy$;
+  location$: Observable<Town>;
+  activeTags$: Observable<Tag[]>;
+  sortBy$: Observable<Sort>;
   private unsubscribe$: Subject<void> = new Subject<void>();
   @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
 
@@ -57,21 +56,30 @@ export class DiscountsComponent implements OnInit, OnDestroy {
   }
 
   changeFavourites(discountId: number): void {
-    this.facade.toggleFavourites(discountId);
-  }
-
-  onSearchQueryChange({name, tag}): void {
-    this.sortStore.set('searchQuery', name);
-    this.sortStore.set('tags', [...tag]);
+    this.facade.toggleFavourites(discountId)
+      .pipe(
+        takeUntil(this.unsubscribe$)
+      ).subscribe(resp => {
+      const value: Discount[] = this.store.value.discounts;
+      const activeDiscount = this.store.value.activeDiscount;
+      const discounts = value.map((discount: Discount) => {
+        return discount.discountId === resp.discountID
+          ? {...discount, isSaved: resp.isSaved}
+          : {...discount};
+      });
+      if (activeDiscount.discountId === resp.discountID) {
+        const discount = {...activeDiscount, isSaved: resp.isSaved};
+        this.store.set('activeDiscount', discount);
+      }
+      this.store.set('discounts', discounts);
+    });
   }
 
   onLocationChange(location): void {
-    console.log(location)
     this.sortStore.set('location', location);
   }
 
   onSortChange(sortBy): void {
-    console.log(sortBy)
     this.sortStore.set('sortBy', sortBy);
   }
 
@@ -85,7 +93,6 @@ export class DiscountsComponent implements OnInit, OnDestroy {
   }
 
   searchTagChange(tags): void {
-    console.log(tags);
     this.sortStore.set('tags', tags);
   }
 }

@@ -23,24 +23,24 @@
     <span class="rating__amount"
           fxLayoutAlign="center center"
     >
-          {{(discount$ | async).discountRating ? (discount$ | async).discountRating.toFixed(2) : (discount$ | async).discountRating}}
+          {{(discount$ | async)?.discountRating | number: '.1-2'}}
     </span>
         <mat-icon class="rating__icon"
                   fxLayoutAlign="center center"
-        >{{(discount$ | async).discountRating ? 'star_rate' : 'star_border'}}
+        >{{(discount$ | async)?.discountRating ? 'star_rate' : 'star_border'}}
         </mat-icon>
       </div>
     </div>
 
     <h2 class="discount-detail__header_title">
-      {{ (discount$ | async).discountName }}
+      {{ (discount$ | async)?.discountName }}
     </h2>
 
     <mat-icon
       class="discount-detail__header_favourite"
       fxLayoutAlign="center center"
       matTooltip="Toggle Favourites"
-      [ngStyle]="{ color: (discount$ | async).isSaved ? '#FF6347' : '#A38D8B' }"
+      [ngStyle]="{ color: (discount$ | async)?.isSaved ? '#FF6347' : '#A38D8B' }"
       (click)="toggleFavorites(discountId)"
     >
       favorite
@@ -51,16 +51,16 @@
     <mat-card class="discount-content">
       <h3 class="discount-content__vendor">
         <a
-          [routerLink]="['../../vendors/', (discount$ | async).vendorId]"
+          [routerLink]="['../../vendors/', (discount$ | async)?.vendorId]"
           matTooltip="Vendor"
         >
-          {{ (discount$ | async).vendorName }}
+          {{ (discount$ | async)?.vendorName }}
         </a>
       </h3>
 
       <div class="discount-content__description">
         <p class="discount-content__description_text">
-          {{ (discount$ | async).description }}
+          {{ (discount$ | async)?.description }}
         </p>
       </div>
       <p
@@ -78,7 +78,7 @@
         </span>
         <span fxLayoutAlign="start center" fxFlex="70">
           <span class="discount-content__amount_text">
-            {{ (discount$ | async).discountAmount }}
+            {{ (discount$ | async)?.discountAmount }}
           </span>
           <span class="discount-content__amount_symbol"> % </span>
         </span>
@@ -102,7 +102,7 @@
           fxLayoutAlign="start center"
           fxFlex="70"
         >
-          {{ (discount$ | async).promoCode }}
+          {{ (discount$ | async)?.promoCode }}
         </span>
       </p>
 
@@ -116,13 +116,13 @@
           {{ "DISCOUNT_DETAIL.ADDRESS_LABEL" | translate }}
         </span>
         <span class="discount-content__address_text" fxFlex="80">
-          {{ (discount$ | async).address }}
+          {{ (discount$ | async)?.address }}
         </span>
       </p>
 
       <p class="discount-content__distance">
         <span fxFlex="20">{{ "DISCOUNT_DETAIL.DISTANCE" | translate }}: </span>
-        <span>{{ (discount$ | async).distanceInMeters | metersToKilometers }}</span>
+        <span>{{ (discount$ | async)?.distanceInMeters | metersToKilometers }}</span>
       </p>
 
       <div
@@ -145,14 +145,14 @@
             {{ "DISCOUNT_DETAIL.END_DATE" | translate }}:
           </span>
           <span class="discount-content__date_end">
-            {{ (discount$ | async).endDate | date: "dd.MM.yyyy" }}
+            {{ (discount$ | async)?.endDate | date: "dd.MM.yyyy" }}
           </span>
         </div>
       </div>
 
       <mat-chip-list class="discount-content__tags">
         <mat-chip
-          *ngFor="let tag of (discount$ | async).tags"
+          *ngFor="let tag of (discount$ | async)?.tags"
           class="discount-content__tags_tag"
         >
           # {{ tag }}
@@ -161,7 +161,7 @@
     </mat-card>
   </section>
 
-  <section *ngIf="(discount$ | async).isOrdered" class="discount-detail__rating">
+  <section *ngIf="(discount$ | async)?.isOrdered" class="discount-detail__rating">
     <span class="discount-detail__rating_label">
       {{ "DISCOUNT_DETAIL.ASSESSMENT_LABEL" | translate }}
     </span>
@@ -203,7 +203,7 @@
       matTooltip="Archive Discount"
       (click)="archiveDiscount(discountId)"
       [ngStyle]="{
-        backgroundColor: (discount$ | async).activityStatus ? '#4A94EB' : '#FF6347'
+        backgroundColor: (discount$ | async)?.activityStatus ? '#4A94EB' : '#FF6347'
       }"
     >
       {{ "DISCOUNT_DETAIL.ARCHIVE_BUTTON_LABEL" | translate }}
