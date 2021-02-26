@@ -3,9 +3,8 @@ import {
   FormGroup,
   FormBuilder,
   Validators,
-  AbstractControl, FormArray,
+  AbstractControl, FormArray, ValidationErrors,
 } from '@angular/forms';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { forkJoin, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -21,13 +20,36 @@ import { Subject } from 'rxjs';
 import { OnDestroy } from '@angular/core';
 
 @Component({
-  selector: 'app-new-vendor',
-  templateUrl: './new-vendor.component.html',
-  styleUrls: ['./new-vendor.component.scss'],
+  selector: 'app-vendor-form',
+  templateUrl: './vendor-form.component.html',
+  styleUrls: ['./vendor-form.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class NewVendorComponent implements OnInit, OnDestroy {
-  newVendorForm: FormGroup;
+export class VendorFormComponent implements OnInit, OnDestroy {
+  vendorForm: FormGroup = this.fb.group({
+    vendorName: ['', [Validators.required]],
+    address: ['', [Validators.required]],
+    description: ['', [Validators.required]],
+    phone: ['',
+      [
+        Validators.required,
+        Validators.pattern(/^((8|\+7|\+3|\+9|)*\d{0,3}[\- ]?)*\d{0,3}?(\(?\d{1,3}\)?[\- ]?)?[\d\- ]{7,10}$/),
+      ],
+    ],
+    email: ['', [Validators.required, Validators.email]],
+    pointOfSales: this.fb.array([]),
+    socialLinks: this.fb.group({
+      instagram: ['',
+        [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
+      ],
+      facebook: ['',
+        [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
+      ],
+      webSite: ['',
+        [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
+      ]
+    })
+  });
   vendor: Vendor;
   vendorId: number;
   private unsubscribe$ = new Subject<void>();
@@ -48,31 +70,6 @@ export class NewVendorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.newVendorForm = this.fb.group({
-      vendorName: ['', [Validators.required]],
-      address: [''],
-      description: [''],
-      phone: ['',
-        [
-          Validators.required,
-          Validators.pattern(/^((8|\+7|\+3|\+9|)*\d{0,3}[\- ]?)*\d{0,3}?(\(?\d{1,3}\)?[\- ]?)?[\d\- ]{7,10}$/),
-        ],
-      ],
-      email: ['', [Validators.required, Validators.email]],
-      pointOfSales: this.fb.array([]),
-      socialLinks: this.fb.group({
-        instagram: ['',
-          [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
-        ],
-        facebook: ['',
-          [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
-        ],
-        webSite: ['',
-          [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
-        ]
-      })
-    });
-
     if (this.isEditMode) {
       this.route.paramMap
         .pipe(
@@ -90,39 +87,40 @@ export class NewVendorComponent implements OnInit, OnDestroy {
           pointOfSales: points,
           socialLinks: vendor.socialLinks ? JSON.parse(vendor.socialLinks) : {}
         };
-        if (editingVendor.pointOfSales) {
-          editingVendor.pointOfSales.forEach(point => {
-            this.pointOfSalesForms.push(this.editPointOfSale());
-          });
-        }
-        this.newVendorForm.patchValue(editingVendor);
+        this.patchPointsOfSales(points);
+        this.vendorForm.patchValue(editingVendor);
         this.coordinateIsEmpty = false;
-        this.newVendorForm.markAsPristine();
+        this.vendorForm.markAsPristine();
       });
     }
   }
 
-  editPointOfSale(): FormGroup {
-    return this.fb.group({
-      name: ['', [Validators.required]],
-      address: ['', [Validators.required]],
-      latitude: ['', [Validators.required]],
-      longitude: ['', [Validators.required]],
+  patchPointsOfSales(points): void {
+    this.pointOfSalesForm.clear();
+    const initPointsOfSales = {
+      pointOfSales: points
+    };
+    initPointsOfSales.pointOfSales.forEach(point => {
+      this.addPointOfSales(point);
     });
+    this.vendorForm.patchValue(initPointsOfSales);
   }
 
-  addPoint(): void {
-    const point = this.fb.group({
-      name: ['', [Validators.required]],
-      address: ['', [Validators.required]],
-      latitude: ['', [Validators.required]],
-      longitude: ['', [Validators.required]],
+  addPointOfSales(point): void {
+    this.pointOfSalesForm.push(this.createPointOfSales(point));
+  }
+
+  createPointOfSales(point): FormGroup {
+    return this.fb.group({
+      name: point.name || '',
+      address: point.address || '',
+      latitude: point.latitude || '',
+      longitude: point.longitude || '',
     });
-    this.pointOfSalesForms.push(point);
   }
 
   deletePoint(currentSaleObj): void {
-    this.pointOfSalesForms.removeAt(currentSaleObj);
+    this.pointOfSalesForm.removeAt(currentSaleObj);
     this.coordinateIsEmpty = true;
   }
 
@@ -134,6 +132,16 @@ export class NewVendorComponent implements OnInit, OnDestroy {
     });
   }
 
+  addPoint(): void {
+    const point = this.fb.group({
+      name: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      latitude: [''],
+      longitude: [''],
+    });
+    this.pointOfSalesForm.push(point);
+  }
+
   openDialog(currentSaleObj): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -142,13 +150,13 @@ export class NewVendorComponent implements OnInit, OnDestroy {
     dialogConfig.direction = 'rtl';
 
     dialogConfig.data = {
-      latitude: this.pointOfSalesForms.value[currentSaleObj].latitude,
-      longitude: this.pointOfSalesForms.value[currentSaleObj].longitude,
+      latitude: this.pointOfSalesForm.value[currentSaleObj].latitude,
+      longitude: this.pointOfSalesForm.value[currentSaleObj].longitude,
     };
 
     const dialogRef = this.dialog.open(MapComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
-      Object.assign(this.pointOfSalesForms.value[currentSaleObj], data);
+      Object.assign(this.pointOfSalesForm.value[currentSaleObj], data);
     });
     this.coordinateIsEmpty = false;
   }
@@ -162,14 +170,14 @@ export class NewVendorComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    const vendor = this.newVendorForm.value;
+    const vendor = this.vendorForm.value;
     const vendorModel = {...vendor, socialLinks: JSON.stringify(vendor.socialLinks)};
     if (this.isEditMode) {
       this.updateVendor(vendorModel, this.vendorId);
     } else {
       this.createNewVendor(vendorModel);
     }
-    this.pointOfSalesForms.clear();
+    this.pointOfSalesForm.clear();
   }
 
   private updateVendor(vendor, vendId): void {
@@ -180,10 +188,10 @@ export class NewVendorComponent implements OnInit, OnDestroy {
         return throwError(error);
       }))
       .subscribe((res) => {
-        this.newVendorForm.reset();
+        this.vendorForm.reset();
         this.successSnackBar('Successfully update!', '');
-        for (const control in this.newVendorForm.controls) {
-          this.newVendorForm.controls[control].setErrors(null);
+        for (const control in this.vendorForm.controls) {
+          this.vendorForm.controls[control].setErrors(null);
         }
         this.router.navigate(['/vendors', res.vendorId]);
       });
@@ -198,61 +206,61 @@ export class NewVendorComponent implements OnInit, OnDestroy {
         return throwError(error);
       }))
       .subscribe((res) => {
-        this.newVendorForm.reset();
+        this.vendorForm.reset();
         this.successSnackBar('Successfully saved!', '');
-        for (const control in this.newVendorForm.controls) {
-          this.newVendorForm.controls[control].setErrors(null);
+        for (const control in this.vendorForm.controls) {
+          this.vendorForm.controls[control].setErrors(null);
         }
         this.router.navigate(['/vendors', res.vendorId]);
       });
   }
 
   get description(): AbstractControl {
-    return this.newVendorForm.get('description');
+    return this.vendorForm.get('description');
   }
 
   get phone(): AbstractControl {
-    return this.newVendorForm.get('number');
+    return this.vendorForm.get('number');
   }
 
   get email(): AbstractControl {
-    return this.newVendorForm.get('email');
+    return this.vendorForm.get('email');
   }
 
   get socialLinks(): AbstractControl {
-    return this.newVendorForm.get('socialLinks');
+    return this.vendorForm.get('socialLinks');
   }
 
   get instagram(): AbstractControl {
-    return this.newVendorForm.get('instagram');
+    return this.vendorForm.get('instagram');
   }
 
   get facebook(): AbstractControl {
-    return this.newVendorForm.get('facebook');
+    return this.vendorForm.get('facebook');
   }
 
   get webSite(): AbstractControl {
-    return this.newVendorForm.get('webSite');
+    return this.vendorForm.get('webSite');
   }
 
   get otherLinks(): AbstractControl {
-    return this.newVendorForm.get('otherLinks');
+    return this.vendorForm.get('otherLinks');
   }
 
   get name(): AbstractControl {
-    return this.pointOfSalesForms.get('name');
+    return this.pointOfSalesForm.get('name');
   }
 
   get address(): AbstractControl {
-    return this.pointOfSalesForms.get('address');
+    return this.pointOfSalesForm.get('address');
   }
 
   get checked(): AbstractControl {
-    return this.pointOfSalesForms.get('checked');
+    return this.pointOfSalesForm.get('checked');
   }
 
-  get pointOfSalesForms(): FormArray {
-    return this.newVendorForm.get('pointOfSales') as FormArray;
+  get pointOfSalesForm(): FormArray {
+    return this.vendorForm.get('pointOfSales') as FormArray;
   }
 
   ngOnDestroy(): void {

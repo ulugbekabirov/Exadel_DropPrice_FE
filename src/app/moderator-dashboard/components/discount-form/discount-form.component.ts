@@ -111,7 +111,8 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
       filter((next) => typeof next === 'number'),
       switchMap(vendorId => {
         return this.vendorsService.getVendorPointsOfSales(vendorId);
-      })
+      }),
+      takeUntil(this.unsubscribe$),
     ).subscribe(points => {
       if (!points) {
         return;

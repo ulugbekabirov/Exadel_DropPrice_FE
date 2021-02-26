@@ -1,7 +1,7 @@
 <div class="new-vendor-wrapper">
   <mat-card>
     <mat-card-content>
-      <form [formGroup]="newVendorForm"
+      <form [formGroup]="vendorForm"
         (ngSubmit)="onSubmit()"
         fxLayout="column"
         fxLayoutAlign="space-between"
@@ -112,7 +112,7 @@
           </div>
 
           <div formArrayName="pointOfSales">
-            <div *ngFor="let point of pointOfSalesForms.controls; let i = index"
+            <div *ngFor="let point of pointOfSalesForm.controls; let i = index"
                  [formGroupName]="i"
             >
               <div class="points"
@@ -128,9 +128,7 @@
                 </mat-form-field>
 
                 <mat-form-field class="point__address">
-                  <mat-label>{{
-                    "NEW_DISCOUNT_FORM.ADDRESS_LABEL" | translate
-                    }}</mat-label>
+                  <mat-label>{{"NEW_DISCOUNT_FORM.ADDRESS_LABEL" | translate}}</mat-label>
                   <input
                     matInput
                     placeholder="{{'NEW_DISCOUNT_FORM.ADDRESS_PLACEHOLDER' | translate}}"
@@ -141,8 +139,8 @@
                   <mat-icon
                     [ngStyle]="{
                     color:
-                      !pointOfSalesForms.value[i].latitude ||
-                      !pointOfSalesForms.value[i].longitude
+                      !pointOfSalesForm.value[i].latitude ||
+                      !pointOfSalesForm.value[i].longitude
                         ? 'red'
                         : 'black'
                   }"
@@ -150,13 +148,10 @@
                     matTooltip="{{ 'NEW_DISCOUNT_FORM.OPEN_MAP' | translate }}"
                     aria-label="Icon that displays a tooltip when focused or hovered over"
                   >add_location_alt
-                  </mat-icon
-                  >
+                  </mat-icon>
                   <mat-icon
                     (click)="deletePoint(i)"
-                    matTooltip="{{
-                    'NEW_DISCOUNT_FORM.DELETE_LOCATION' | translate
-                  }}"
+                    matTooltip="{{'NEW_DISCOUNT_FORM.DELETE_LOCATION' | translate}}"
                     aria-label="Icon that displays a tooltip when focused or hovered over"
                   >delete
                   </mat-icon
@@ -175,9 +170,7 @@
           </mat-icon>
 
           <div *ngIf="coordinateIsEmpty" class="empty_error">
-            <mat-error>{{
-              "NEW_DISCOUNT_FORM.EMPTYCOORDINATES" | translate
-              }}</mat-error>
+            <mat-error>{{"NEW_DISCOUNT_FORM.EMPTYCOORDINATES" | translate}}</mat-error>
           </div>
         </div>
 
@@ -185,11 +178,10 @@
           mat-flat-button
           color="primary"
           type="submit"
-          [disabled]="newVendorForm.pristine || coordinateIsEmpty"
+          [disabled]="vendorForm.pristine || coordinateIsEmpty || vendorForm.invalid"
         >
           {{ "NEW_VENDOR_FORM.BTN_TITLE" | translate }}
         </button>
-        <pre>{{newVendorForm.value | json}}</pre>
       </form>
     </mat-card-content>
   </mat-card>
