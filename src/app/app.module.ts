@@ -16,7 +16,6 @@ import { AuthInterceptor } from './auth/services/auth.interceptor';
 import { HttpErrorInterceptor } from './services/http.error.interceptor';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
 import { MissingTranslationService } from './services/missing-translation.service';
 import { HeaderComponent } from './components/header/header.component';
 import { AppRoutingModule } from './app-routing/app.routing.module';
@@ -30,7 +29,6 @@ export function HttpLoaderFactory(http: HttpClient): any {
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     HeaderComponent,
     MapComponent,
   ],

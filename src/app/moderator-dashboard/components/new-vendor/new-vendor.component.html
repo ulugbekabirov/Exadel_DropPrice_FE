@@ -1,29 +1,28 @@
 <div class="new-vendor-wrapper">
   <mat-card>
     <mat-card-content>
-      <form
-        [formGroup]="newVendorForm"
+      <form [formGroup]="newVendorForm"
         (ngSubmit)="onSubmit()"
         fxLayout="column"
         fxLayoutAlign="space-between"
         class="new-vendor-form"
       >
-        <div  fxLayout="row"
-              fxLayoutGap="30px"
-              fxLayoutAlign="center center"
-              fxLayout.lt-md="column"
-              fxLayoutGap.xs="5px" >
+        <div fxLayout="row"
+             fxLayoutGap="30px"
+             fxLayoutAlign="center center"
+             fxLayout.lt-md="column"
+             fxLayoutGap.xs="5px">
           <mat-form-field>
             <mat-label>{{
               "NEW_VENDOR_FORM.NAME_LABEL" | translate
-            }}</mat-label>
-            <input matInput formControlName="vendorName" />
+              }}</mat-label>
+            <input matInput formControlName="vendorName"/>
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>{{
               "NEW_VENDOR_FORM.ADDRESS_LABEL" | translate
-            }}</mat-label>
+              }}</mat-label>
             <input
               matInput
               formControlName="address"
@@ -54,20 +53,20 @@
           <mat-form-field>
             <mat-label>{{
               "NEW_VENDOR_FORM.PHONE_NUMBER" | translate
-            }}</mat-label>
-            <input matInput formControlName="phone" type="tel" />
+              }}</mat-label>
+            <input matInput formControlName="phone" type="tel"/>
             <mat-icon matSuffix>phone</mat-icon>
             <mat-error
-              >{{ "NEW_VENDOR_FORM.VALID_PHONE" | translate }}
+            >{{ "NEW_VENDOR_FORM.VALID_PHONE" | translate }}
             </mat-error>
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>{{ "NEW_VENDOR_FORM.EMAIL_LABEL" | translate }}</mat-label>
-            <input matInput formControlName="email" />
+            <input matInput formControlName="email"/>
             <mat-icon matSuffix>alternate_email</mat-icon>
             <mat-error
-              >{{ "NEW_VENDOR_FORM.VALID_EMAIL" | translate }}
+            >{{ "NEW_VENDOR_FORM.VALID_EMAIL" | translate }}
             </mat-error>
           </mat-form-field>
         </div>
@@ -78,12 +77,12 @@
              fxLayoutGap.xs="5px"
              formGroupName="socialLinks"
              class="new-vendor-form__social-links"
-             >
+        >
           <mat-form-field>
             <mat-label>Facebook</mat-label>
             <input formControlName="facebook" matInput/>
             <mat-error
-              >{{ "NEW_VENDOR_FORM.VALID_SOCIAL_NETWORK" | translate }}
+            >{{ "NEW_VENDOR_FORM.VALID_SOCIAL_NETWORK" | translate }}
             </mat-error>
           </mat-form-field>
 
@@ -91,17 +90,17 @@
             <mat-label>Instagram</mat-label>
             <input formControlName="instagram" matInput/>
             <mat-error
-              >{{ "NEW_VENDOR_FORM.VALID_SOCIAL_NETWORK" | translate }}
+            >{{ "NEW_VENDOR_FORM.VALID_SOCIAL_NETWORK" | translate }}
             </mat-error>
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>{{
               "NEW_VENDOR_FORM.WEBSITE_LABEL" | translate
-            }}</mat-label>
+              }}</mat-label>
             <input formControlName="webSite" matInput/>
             <mat-error
-              >{{ "NEW_VENDOR_FORM.VALID_SOCIAL_NETWORK" | translate }}
+            >{{ "NEW_VENDOR_FORM.VALID_SOCIAL_NETWORK" | translate }}
             </mat-error>
           </mat-form-field>
 
@@ -113,30 +112,19 @@
           </div>
 
           <div formArrayName="pointOfSales">
-            <div
-              *ngFor="let point of pointOfSalesForms.controls; let i = index"
-              [formGroupName]="i"
+            <div *ngFor="let point of pointOfSalesForms.controls; let i = index"
+                 [formGroupName]="i"
             >
-              <div
-                class="points"
-                fxLayoutAlign="start center"
-                fxLayout.xs="center center"
+              <div class="points"
+                   fxLayoutAlign="start center"
+                   fxLayout.xs="center center"
               >
                 <mat-form-field class="point__name">
                   <mat-label>{{ "NEW_DISCOUNT_FORM.NAME_LABEL" | translate }}</mat-label>
                   <input
                     type="text"
                     matInput
-                    formControlName="name"
-                    [matAutocomplete]="auto"/>
-                  <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option
-                      *ngFor="let option of filteredPointNameList"
-                      [value]="option.name"
-                    >
-                      {{ option.name }}
-                    </mat-option>
-                  </mat-autocomplete>
+                    formControlName="name"/>
                 </mat-form-field>
 
                 <mat-form-field class="point__address">
@@ -145,9 +133,7 @@
                     }}</mat-label>
                   <input
                     matInput
-                    placeholder="{{
-                    'NEW_DISCOUNT_FORM.ADDRESS_PLACEHOLDER' | translate
-                  }}"
+                    placeholder="{{'NEW_DISCOUNT_FORM.ADDRESS_PLACEHOLDER' | translate}}"
                     formControlName="address"
                   />
                 </mat-form-field>
@@ -163,7 +149,8 @@
                     (click)="openDialog(i)"
                     matTooltip="{{ 'NEW_DISCOUNT_FORM.OPEN_MAP' | translate }}"
                     aria-label="Icon that displays a tooltip when focused or hovered over"
-                  >add_location_alt</mat-icon
+                  >add_location_alt
+                  </mat-icon
                   >
                   <mat-icon
                     (click)="deletePoint(i)"
@@ -171,7 +158,8 @@
                     'NEW_DISCOUNT_FORM.DELETE_LOCATION' | translate
                   }}"
                     aria-label="Icon that displays a tooltip when focused or hovered over"
-                  >delete</mat-icon
+                  >delete
+                  </mat-icon
                   >
                 </div>
               </div>
@@ -182,21 +170,26 @@
             (click)="addPoint()"
             matTooltip="{{ 'NEW_DISCOUNT_FORM.ADD_LOCATION' | translate }}"
             aria-label="Icon that displays a tooltip when focused or hovered over"
-          >add</mat-icon
           >
+            add
+          </mat-icon>
+
           <div *ngIf="coordinateIsEmpty" class="empty_error">
             <mat-error>{{
               "NEW_DISCOUNT_FORM.EMPTYCOORDINATES" | translate
               }}</mat-error>
           </div>
         </div>
+
         <button
           mat-flat-button
           color="primary"
           type="submit"
+          [disabled]="newVendorForm.pristine || coordinateIsEmpty"
         >
           {{ "NEW_VENDOR_FORM.BTN_TITLE" | translate }}
         </button>
+        <pre>{{newVendorForm.value | json}}</pre>
       </form>
     </mat-card-content>
   </mat-card>

@@ -164,7 +164,7 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
       address: ['', [Validators.required]],
       latitude: ['', [Validators.required]],
       longitude: ['', [Validators.required]],
-      checked: ['true'],
+      checked: [''],
     });
   }
 

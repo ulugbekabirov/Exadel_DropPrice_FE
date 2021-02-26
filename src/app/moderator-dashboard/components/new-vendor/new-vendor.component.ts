@@ -11,7 +11,6 @@ import { forkJoin, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MapComponent } from '../../../components/map/map.component';
-import { Discount } from '../../../models';
 import { DiscountsService } from '../../../services/discounts.service';
 import { VendorsService } from '../../../services/vendors.service';
 import { Vendor } from '../../../models/vendor';
@@ -30,11 +29,10 @@ import { OnDestroy } from '@angular/core';
 export class NewVendorComponent implements OnInit, OnDestroy {
   newVendorForm: FormGroup;
   vendor: Vendor;
-  vendId: any;
+  vendorId: number;
   private unsubscribe$ = new Subject<void>();
   isEditMode: boolean = (this.router.url).includes('edit');
   coordinateIsEmpty = true;
-  filteredPointNameList: Discount[];
 
   constructor(
     private fb: FormBuilder,
@@ -79,10 +77,10 @@ export class NewVendorComponent implements OnInit, OnDestroy {
       this.route.paramMap
         .pipe(
           switchMap((params: any) => {
-            this.vendId = +params.get('id');
+            this.vendorId = +params.get('id');
             return forkJoin(
-              this.vendorsService.getVendorById(this.vendId),
-              this.vendorsService.getVendorPointsOfSales(this.vendId)
+              this.vendorsService.getVendorById(this.vendorId),
+              this.vendorsService.getVendorPointsOfSales(this.vendorId)
             );
           }),
           takeUntil(this.unsubscribe$)
@@ -97,7 +95,6 @@ export class NewVendorComponent implements OnInit, OnDestroy {
             this.pointOfSalesForms.push(this.editPointOfSale());
           });
         }
-        console.log(editingVendor)
         this.newVendorForm.patchValue(editingVendor);
         this.coordinateIsEmpty = false;
         this.newVendorForm.markAsPristine();
@@ -107,12 +104,10 @@ export class NewVendorComponent implements OnInit, OnDestroy {
 
   editPointOfSale(): FormGroup {
     return this.fb.group({
-      id: [''],
       name: ['', [Validators.required]],
       address: ['', [Validators.required]],
       latitude: ['', [Validators.required]],
       longitude: ['', [Validators.required]],
-      checked: [''],
     });
   }
 
@@ -122,7 +117,6 @@ export class NewVendorComponent implements OnInit, OnDestroy {
       address: ['', [Validators.required]],
       latitude: ['', [Validators.required]],
       longitude: ['', [Validators.required]],
-      checked: [''],
     });
     this.pointOfSalesForms.push(point);
   }
@@ -159,7 +153,6 @@ export class NewVendorComponent implements OnInit, OnDestroy {
     this.coordinateIsEmpty = false;
   }
 
-
   errorSnackBar(message: string, action: any): void {
     this.snackBar.open(message, action, {
       duration: 3000,
@@ -172,10 +165,8 @@ export class NewVendorComponent implements OnInit, OnDestroy {
     const vendor = this.newVendorForm.value;
     const vendorModel = {...vendor, socialLinks: JSON.stringify(vendor.socialLinks)};
     if (this.isEditMode) {
-      console.log('UPDATE', vendorModel);
-      this.updateVendor(vendorModel, this.vendId);
+      this.updateVendor(vendorModel, this.vendorId);
     } else {
-      console.log('NEW_VENDOR', vendorModel);
       this.createNewVendor(vendorModel);
     }
     this.pointOfSalesForms.clear();
@@ -194,23 +185,25 @@ export class NewVendorComponent implements OnInit, OnDestroy {
         for (const control in this.newVendorForm.controls) {
           this.newVendorForm.controls[control].setErrors(null);
         }
-        this.router.navigate(['/vendors', res.id]);
+        this.router.navigate(['/vendors', res.vendorId]);
       });
   }
 
   private createNewVendor(vendor): void {
-    this.vendorsService.createVendor(vendor).pipe(
+    const {vendorId, ...newVendor} = vendor;
+    this.vendorsService.createVendor(newVendor).pipe(
       takeUntil(this.unsubscribe$),
       catchError(error => {
         this.errorSnackBar('Not saved!', '');
         return throwError(error);
       }))
-      .subscribe(() => {
+      .subscribe((res) => {
         this.newVendorForm.reset();
         this.successSnackBar('Successfully saved!', '');
         for (const control in this.newVendorForm.controls) {
           this.newVendorForm.controls[control].setErrors(null);
         }
+        this.router.navigate(['/vendors', res.vendorId]);
       });
   }
 

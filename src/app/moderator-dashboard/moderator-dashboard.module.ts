@@ -21,7 +21,7 @@ const routes: Routes = [
   declarations: [
     ModeratorDashboardComponent,
     NewDiscountComponent,
-    NewVendorComponent
+    NewVendorComponent,
   ],
   imports: [
     SharedModule,
