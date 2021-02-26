@@ -2,9 +2,11 @@
          ngClass="{{collapseSidebar ? 'collapsed' : ''}}"
 >
   <div class="admin-dashboard__sidebar">
-    <app-admin-sidebar
-      (changeCollapse)="onWidthChange($event)"
-    ></app-admin-sidebar>
+    <mat-tab-group>
+      <mat-tab label="Discounts statistic"><app-discounts-statistic></app-discounts-statistic> </mat-tab>
+      <mat-tab label="Vendors statistic"><app-vendor-statistics></app-vendor-statistics></mat-tab>
+      <mat-tab label="Settings"><app-settings></app-settings></mat-tab>
+    </mat-tab-group>
   </div>
   <div class="admin-dashboard__outlet">
     <router-outlet></router-outlet>
