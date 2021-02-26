@@ -2,14 +2,14 @@
   <mat-icon mat-dialog-close (click)="close()">close</mat-icon>
   <div mat-dialog-content>
     <agm-map
-      [latitude]="coordinate.latitude"
-      [longitude]="coordinate.longitude"
+      [latitude]="coordinates.latitude"
+      [longitude]="coordinates.longitude"
       [zoom]="zoom"
       (mapClick)="onChoseLocation($event)"
     >
       <agm-marker
-        [latitude]="coordinate.latitude"
-        [longitude]="coordinate.longitude"
+        [latitude]="coordinates.latitude"
+        [longitude]="coordinates.longitude"
       ></agm-marker>
     </agm-map>
   </div>
@@ -19,7 +19,7 @@
       mat-raised-button
       color="accent"
       [mat-dialog-close]="true"
-      (click)="getCoordinats()"
+      (click)="getCoordinates()"
     >
       {{ "MAP.ADD_POINT_BTN" | translate }}
     </button>

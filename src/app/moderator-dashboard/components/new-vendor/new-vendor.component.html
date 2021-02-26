@@ -107,10 +107,92 @@
 
         </div>
 
+        <div>
+          <div class="points_title">
+            <h4>{{ "NEW_DISCOUNT_FORM.POINTS_TITLE" | translate }}</h4>
+          </div>
+
+          <div formArrayName="pointOfSales">
+            <div
+              *ngFor="let point of pointOfSalesForms.controls; let i = index"
+              [formGroupName]="i"
+            >
+              <div
+                class="points"
+                fxLayoutAlign="start center"
+                fxLayout.xs="center center"
+              >
+                <mat-form-field class="point__name">
+                  <mat-label>{{ "NEW_DISCOUNT_FORM.NAME_LABEL" | translate }}</mat-label>
+                  <input
+                    type="text"
+                    matInput
+                    formControlName="name"
+                    [matAutocomplete]="auto"/>
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option
+                      *ngFor="let option of filteredPointNameList"
+                      [value]="option.name"
+                    >
+                      {{ option.name }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+
+                <mat-form-field class="point__address">
+                  <mat-label>{{
+                    "NEW_DISCOUNT_FORM.ADDRESS_LABEL" | translate
+                    }}</mat-label>
+                  <input
+                    matInput
+                    placeholder="{{
+                    'NEW_DISCOUNT_FORM.ADDRESS_PLACEHOLDER' | translate
+                  }}"
+                    formControlName="address"
+                  />
+                </mat-form-field>
+                <div class="icons" fxLayout="row" fxLayoutAlign="center center">
+                  <mat-icon
+                    [ngStyle]="{
+                    color:
+                      !pointOfSalesForms.value[i].latitude ||
+                      !pointOfSalesForms.value[i].longitude
+                        ? 'red'
+                        : 'black'
+                  }"
+                    (click)="openDialog(i)"
+                    matTooltip="{{ 'NEW_DISCOUNT_FORM.OPEN_MAP' | translate }}"
+                    aria-label="Icon that displays a tooltip when focused or hovered over"
+                  >add_location_alt</mat-icon
+                  >
+                  <mat-icon
+                    (click)="deletePoint(i)"
+                    matTooltip="{{
+                    'NEW_DISCOUNT_FORM.DELETE_LOCATION' | translate
+                  }}"
+                    aria-label="Icon that displays a tooltip when focused or hovered over"
+                  >delete</mat-icon
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <mat-icon
+            (click)="addPoint()"
+            matTooltip="{{ 'NEW_DISCOUNT_FORM.ADD_LOCATION' | translate }}"
+            aria-label="Icon that displays a tooltip when focused or hovered over"
+          >add</mat-icon
+          >
+          <div *ngIf="coordinateIsEmpty" class="empty_error">
+            <mat-error>{{
+              "NEW_DISCOUNT_FORM.EMPTYCOORDINATES" | translate
+              }}</mat-error>
+          </div>
+        </div>
         <button
           mat-flat-button
           color="primary"
-          [disabled]="newVendorForm.invalid"
           type="submit"
         >
           {{ "NEW_VENDOR_FORM.BTN_TITLE" | translate }}

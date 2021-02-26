@@ -14,6 +14,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -82,6 +83,7 @@ import { TagsFilterComponent } from './components/tags-filter/tags-filter.compon
     MatDialogModule,
     MatExpansionModule,
     MatToolbarModule,
+    MatCheckboxModule
   ],
 
   providers: [GoogleMapsAPIWrapper],
@@ -117,6 +119,7 @@ import { TagsFilterComponent } from './components/tags-filter/tags-filter.compon
     SearchBarComponent,
     MatTooltipModule,
     MatDialogModule,
+    MatCheckboxModule,
     MatExpansionModule,
     LoadingSpinnerComponent,
   ],

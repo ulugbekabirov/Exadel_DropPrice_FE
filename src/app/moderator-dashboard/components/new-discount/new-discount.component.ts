@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, forkJoin, Subject } from 'rxjs';
-import { startWith, debounceTime, switchMap, takeUntil, catchError } from 'rxjs/operators';
+import { startWith, debounceTime, switchMap, takeUntil, catchError, map, tap } from 'rxjs/operators';
 import {
   AbstractControl,
   FormArray,
@@ -10,10 +10,7 @@ import {
   FormGroup,
   Validators,
   ValidationErrors,
-  FormArrayName,
-  FormGroupName,
 } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
 
 import { COMMA, ENTER, V } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
@@ -40,7 +37,6 @@ export interface Tag {
   encapsulation: ViewEncapsulation.None
 })
 export class NewDiscountComponent implements OnInit, OnDestroy {
-  newDiscountForm: FormGroup;
   discount: Discount;
   coordinateIsEmpty = true;
   selectable = true;
@@ -53,11 +49,27 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
 
   vendorsList: Vendor[];
   filteredList: Vendor[];
-  pointNameList: Discount[];
-  filteredPointNameList: Discount[];
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocompleteModule;
+
+  newDiscountForm: FormGroup = this.fb.group({
+    vendorId: ['', [Validators.required]],
+    // vendorName: ['', [Validators.required]],
+    discountName: ['', [Validators.required]],
+    description: ['', [Validators.minLength(40), Validators.required]],
+    discountAmount: [
+      '',
+      [Validators.required, Validators.min(1), Validators.max(100)],
+    ],
+    promoCode: [null],
+    startDate: ['', [Validators.required]],
+    endDate: ['', [Validators.required]],
+    tags: this.fb.array([], Validators.required),
+    activityStatus: [true, [Validators.requiredTrue]],
+    pointOfSales: this.fb.array([]),
+  });
+
 
   constructor(
     public fb: FormBuilder,
@@ -71,36 +83,31 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.vendorsService.getVendors().pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe(res => {
       this.vendorsList = this.filteredList = res;
     });
 
-    this.discountsService.getPointOfSales().pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(res => {
-      this.pointNameList = this.filteredPointNameList = res;
-    });
-
-    this.newDiscountForm = this.fb.group({
-      vendorName: [
-        {value: '', disabled: this.isEditMode},
-        [Validators.required, this.requireMatch.bind(this)]
-      ],
-      discountName: ['', [Validators.required]],
-      description: ['', [Validators.minLength(40), Validators.required]],
-      discountAmount: [
-        '',
-        [Validators.required, Validators.min(1), Validators.max(100)],
-      ],
-      promoCode: [null],
-      startDate: ['', [Validators.required]],
-      endDate: ['', [Validators.required]],
-      tags: this.fb.array([], Validators.required),
-      activityStatus: [true, [Validators.requiredTrue]],
-      pointOfSales: this.fb.array([]),
+    this.vendorId.valueChanges.pipe(
+      switchMap((vendorId) => {
+        return this.vendorsService.getVendorPointsOfSales(vendorId);
+      })
+    ).subscribe(points => {
+      this.pointOfSalesForms.clear();
+      if (!points) {
+        return;
+      }
+      const initNewDiscount = {
+        pointOfSales: points
+      };
+      if (initNewDiscount.pointOfSales) {
+        initNewDiscount.pointOfSales.forEach(point => {
+          this.pointOfSalesForms.push(this.editPointOfSale());
+        });
+      }
+      this.newDiscountForm.patchValue(initNewDiscount);
+      this.coordinateIsEmpty = false;
     });
 
     if (this.isEditMode) {
@@ -128,21 +135,36 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
               this.pointOfSalesForms.push(this.editPointOfSale());
             });
           }
+          console.log(editingDiscount);
           this.newDiscountForm.patchValue(editingDiscount);
           this.coordinateIsEmpty = false;
-          this.vendorNameDetectChanges();
           this.newDiscountForm.markAsPristine();
         });
     }
   }
 
+  displayFn(value?: number | string): any {
+    return value ? this.filteredList.find(_ => _.vendorId === value).vendorName : undefined;
+  }
+
+  setAllPointsOfSalesChecked(event: boolean): void {
+    if (!this.pointOfSalesForms.value) {
+      return;
+    }
+    this.pointOfSalesForms.controls.forEach(control => {
+      const updateChecked = {checked: event};
+      control.patchValue(updateChecked);
+    });
+  }
+
   editPointOfSale(): FormGroup {
     return this.fb.group({
-      id: ['', [Validators.required]],
+      id: [''],
       name: ['', [Validators.required]],
       address: ['', [Validators.required]],
       latitude: ['', [Validators.required]],
       longitude: ['', [Validators.required]],
+      checked: ['true'],
     });
   }
 
@@ -168,29 +190,6 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     }
     return {requireMatch: true};
   }
-
-  // TODO add filter of points
-  // pointOfSalesDetectChanges(): void {
-  //   const pointOfSalesControl = this.newDiscountForm.controls.pointOfSales as FormArray;
-  //   pointOfSalesControl.valueChanges.subscribe(
-  //     (data) => {
-  //       if (!this.pointNameList || !data) {
-  //         this.filteredPointNameList = this.pointNameList;
-  //         return;
-  //       }
-  //       this.filteredPointNameList = this.pointNameList.filter(value => value.pointOfSales.includes(data));
-  //       console.log(this.filteredPointNameList);
-  //       console.log(data);
-  //     })
-  // }
-
-  // private requireMatchPoint(control: AbstractControl): ValidationErrors | null {
-  //   const selection: any = control.value;
-  //   if (this.pointNameList && this.pointNameList.find(item => item.pointOfSales.includes(selection))) {
-  //     return null;
-  //   }
-  //   return { requireMatchPoint: true };
-  // }
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -227,6 +226,9 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
     const point = this.fb.group({
       name: ['', [Validators.required]],
       address: ['', [Validators.required]],
+      latitude: ['', [Validators.required]],
+      longitude: ['', [Validators.required]],
+      checked: [''],
     });
     this.pointOfSalesForms.push(point);
   }
@@ -301,14 +303,17 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
         for (const control in this.newDiscountForm.controls) {
           this.newDiscountForm.controls[control].setErrors(null);
         }
+        this.router.navigate(['/discounts']);
       });
   }
 
   onSubmit(): void {
-    const discount = this.newDiscountForm.value;
+    const discount = {...this.newDiscountForm.value, pointOfSales: this.pointOfSalesForms.value.filter(point => point.checked)};
     if (this.isEditMode) {
+      console.log('UPDATE', discount);
       this.updateDiscount(discount, this.discId);
     } else {
+      console.log('NEW', discount);
       this.createDiscount(discount);
     }
     this.pointOfSalesForms.clear();
@@ -317,6 +322,10 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
 
   get vendorName(): AbstractControl {
     return this.newDiscountForm.get('vendorName');
+  }
+
+  get vendorId(): AbstractControl {
+    return this.newDiscountForm.get('vendorId');
   }
 
   get discountName(): AbstractControl {
@@ -357,6 +366,10 @@ export class NewDiscountComponent implements OnInit, OnDestroy {
 
   get address(): AbstractControl {
     return this.pointOfSalesForms.get('address');
+  }
+
+  get checked(): AbstractControl {
+    return this.pointOfSalesForms.get('checked');
   }
 
   get pointOfSalesForms(): FormArray {
