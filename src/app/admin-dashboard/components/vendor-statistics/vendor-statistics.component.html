@@ -21,7 +21,7 @@
           <ng-container matColumnDef="rating">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"ADMIN_DASHBOARD.STATS.TABLE.RATING" | translate}}</th>
             <td mat-cell
-                *matCellDef="let element"> {{element.vendorRating ? element.vendorRating.toFixed(2) : '-'}} </td>
+                *matCellDef="let element"> {{element.vendorRating ? (element.vendorRating | number: '.1-3') : '-'}} </td>
           </ng-container>
 
           <ng-container matColumnDef="ticketCount">

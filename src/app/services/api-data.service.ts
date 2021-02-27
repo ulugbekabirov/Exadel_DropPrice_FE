@@ -137,5 +137,9 @@ export class ApiDataService {
   getUserTickets(options): Observable<any> {
     return this.http.get(`${environment.webApiUrl}${USER_INFO_ENDPOINT}/${USER_TICKETS_ENDPOINT}`, options);
   }
+
+  getVendorPointsOfSales(vendorId): Observable<any> {
+    return this.http.get(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}/${GET_POINT_OF_SALES}`);
+  }
 }
 

@@ -1,0 +1,21 @@
+<app-search-bar
+  [tags$]="tags$"
+  [activeTags$]="activeTags$"
+  [initialValue$]="searchTerm$"
+  (onEmitSearchTerm)="searchTermChange($event)"
+  (onEmitSearchTag)="searchTagChange($event)"
+></app-search-bar>
+<app-discounts-list
+  [towns$]="towns$"
+  [sorts$]="sorts$"
+  [discounts$]="discounts$"
+  [sortBySelected$]="sortBy$"
+  [locationSelected$]="location$"
+
+  (locationChange)="onLocationChange($event)"
+  (sortChange)="onSortChange($event)"
+  (getTicket)="getTicket($event)"
+  (toggleFavourites)="changeFavourites($event)"
+>
+</app-discounts-list>
+<ng-template appRef></ng-template>

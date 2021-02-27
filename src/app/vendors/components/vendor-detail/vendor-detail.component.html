@@ -7,7 +7,7 @@
         <mat-panel-title>
           <div class="vendors-label" fxLayout="column">
             <h2 class="vendors-label__vendor-name">
-              {{vendor?.vendorName}}
+              {{(vendor$ | async)?.vendorName}}
             </h2>
 
             <div class="vendors-label__rating"
@@ -15,16 +15,16 @@
                   fxLayoutGap=".1em"
             >
               <span class="rating__amount" fxLayoutAlign="center center">
-                {{vendor?.vendorRating ? vendor?.vendorRating.toFixed(1) : vendor?.vendorRating}}
+          {{(vendor$ | async)?.vendorRating | number: '.1-2'}}
               </span>
               <mat-icon class="rating__icon" fxLayoutAlign="center center">
-                {{vendor?.vendorRating ? 'star_rate' : 'star_border'}}
+                {{(vendor$ | async)?.vendorRating ? 'star_rate' : 'star_border'}}
               </mat-icon>
             </div>
           </div>
           <div class="vendor-content__field">
             <ul class="vendor-content__social" fxLayout="row" fxLayoutGap=" .1em">
-              <li *ngFor="let social of vendor?.socialLinks">
+              <li *ngFor="let social of (vendor$ | async)?.socialLinks">
                 <a
                   href="{{social.path}}"
                   target="_blank"
@@ -34,7 +34,7 @@
                   <mat-icon *ngSwitchCase="'facebook'" class="social-icon">facebook</mat-icon>
                   <img *ngSwitchCase="'instagram'" src="./assets/img/instagram.svg" alt="instagram" class="social-icon">
                   <i *ngSwitchCase="'instagram'" class="fab fa-instagram"></i>
-                  <mat-icon *ngSwitchDefault class="social-icon">language</mat-icon> 
+                  <mat-icon *ngSwitchDefault class="social-icon">language</mat-icon>
                 </a>
               </li>
             </ul>
@@ -44,7 +44,7 @@
           <section class="vendors-detail__actions" fxLayout="column">
             <mat-icon *appVerifyUserRoles='["Moderator"]'
                     matTooltip='{{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_EDIT" | translate}}'
-                    (click)="onEditVendor(vendor.vendorId)"
+                    (click)="onEditVendor(vendorId)"
             >
               mode_edit
             </mat-icon>
@@ -53,7 +53,7 @@
       </mat-expansion-panel-header>
       <div class="vendor-content__field">
         <p class="vendor-content__field_description">
-          {{vendor?.description}}
+          {{(vendor$ | async)?.description}}
         </p>
       </div>
       <mat-divider></mat-divider>
@@ -67,10 +67,10 @@
               </p>
             </div>
             <p class="vendor-content__field_text">
-              {{vendor?.address}}
+              {{(vendor$ | async)?.address}}
             </p>
           </li>
-    
+
           <li class="vendor-content__field" fxLayout="row" fxLayoutGap=".3em" fxLayout.xs="column" >
             <div class="vendor-content__field_label" fxLayout="row" fxLayout.xs="row">
               <mat-icon class="vendor-content__mat-icon">mail_outline</mat-icon>
@@ -79,10 +79,10 @@
               </p>
             </div>
             <p class="vendor-content__field_text">
-              {{vendor?.email}}
+              {{(vendor$ | async)?.email}}
             </p>
           </li>
-    
+
           <li class="vendor-content__field" fxLayout="row" fxLayoutGap=".3em" fxLayout.xs="column" >
             <div class="vendor-content__field_label" fxLayout="row" fxLayout.xs="row">
               <mat-icon class="vendor-content__mat-icon">phone</mat-icon>
@@ -91,7 +91,7 @@
               </p>
             </div>
             <p class="vendor-content__field_text">
-              {{vendor?.phone}}
+              {{(vendor$ | async)?.phone}}
             </p>
           </li>
         </ul>
@@ -102,15 +102,15 @@
 
   <article class="vendors-discounts">
     <app-discounts-list
-      [discounts]="vendorDiscounts"
-      [towns]="towns"
+      [discounts$]="vendorDiscounts$"
+      [towns$]="towns$"
       (locationChange)="onLocationChange($event)"
       (getTicket)="getTicket($event)"
       (sortChange)="onSortChange($event)"
       (toggleFavourites)="changeFavourites($event)"
-      [activeCoords]="activeCoords"
-      [sortBy]="sortBy"
-      (toggleCoordinates)="changeCoords()"
+      [sorts$]="sorts$"
+      [sortBySelected$]="sortBySelected$"
+      [locationSelected$]="locationSelected$"
     ></app-discounts-list>
   </article>
 </div>

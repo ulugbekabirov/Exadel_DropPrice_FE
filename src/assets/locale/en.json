@@ -53,7 +53,9 @@
         }
       },
       "LOCATION_SORT": {
-        "TITLE": "location"
+        "TITLE": "location",
+        "CURRENT":"My location",
+        "OFFICE":"My Office Location"
       }
     },
     "DISCOUNT_CARD": {
@@ -126,7 +128,8 @@
     "ADD_LOCATION": "Add the location",
     "OPEN_MAP": "Open the map",
     "DELETE_LOCATION": "Delete the location",
-    "EMPTYCOORDINATES": "Please, put a point on the map, click adding location icon"
+    "EMPTYCOORDINATES": "Please, put a point on the map, click adding location icon",
+    "EMPTY_COORDINATES_POINT": "You must select point or points of sales"
   },
   "MAP": {
     "ADD_POINT_BTN": "Add point"
