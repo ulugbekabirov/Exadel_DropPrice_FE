@@ -15,8 +15,8 @@ export class SearchBar {
 
 @Component({
   selector: 'app-search-bar',
-  templateUrl: './search-bar-test.component.html',
-  styleUrls: ['./search-bar-test.component.scss'],
+  templateUrl: './search-bar.component.html',
+  styleUrls: ['./search-bar.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 

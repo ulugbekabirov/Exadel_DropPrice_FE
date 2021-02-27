@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
-  templateUrl: './header-test.component.html',
-  styleUrls: ['./header-test.component.scss'],
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 
