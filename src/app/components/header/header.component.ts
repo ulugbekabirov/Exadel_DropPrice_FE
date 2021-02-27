@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../../auth/services/auth.service';
@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 
@@ -17,6 +18,7 @@ export class HeaderComponent {
   defaultLang: string = localStorage.getItem('currentLang') ?? environment.defaultLocale;
   authUser$: Observable<AuthInfo> = this.auth.authUser;
   active: boolean;
+  
 
   constructor(
     public translateService: TranslateService,

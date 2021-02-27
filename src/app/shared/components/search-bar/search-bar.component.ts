@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Tag } from '../../../models';
 

@@ -26,7 +26,7 @@
           </h2>
           <mat-icon class="discount-detail__header_favourite"
                     matTooltip="{{ 'DISCOUNT_DETAIL.TOOLTIP_FAVORITES' | translate }}"
-                    [ngStyle]="{'color': (discount$ | async)?.isSaved ? '#adadaf' : '#da8171'}"
+                    [ngStyle]="{'color': (discount$ | async)?.isSaved ? '#da8171' : '#adadaf'}"
                     (click)="toggleFavorites(discountId)">
             favorite
           </mat-icon>
