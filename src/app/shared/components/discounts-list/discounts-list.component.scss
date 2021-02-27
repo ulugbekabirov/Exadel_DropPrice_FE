@@ -14,10 +14,15 @@
   &__settings {
     display: flex;
     justify-content: space-between;
+    gap: 2em;
     padding: 0 3em;
     font-size: 1.2em;
     font-weight: bold;
     color: $discount_filter_selector_text_color;
+
+    .filter-selector {
+      flex: 0 1 auto;
+    }
   }
 
   &__list {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { combineLatest, forkJoin, from, Observable, of } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
+import { concatMap, debounceTime, distinctUntilChanged, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { SORTS } from '../../../constants';
 import { Discount, Tag, Town } from '../../models';
 import { Sort } from '../../models/sort';
@@ -35,7 +35,7 @@ export class HomeFacadeService {
 
   getUserLocation(): any {
     const userCurrentLocation: Town = {
-      townName: 'My Location',
+      townName: 'My location',
       longitude: this.userService.activeUserValue.longitude,
       latitude: this.userService.activeUserValue.latitude,
     };
@@ -126,7 +126,7 @@ export class HomeFacadeService {
   getDiscount(discountId): Observable<any> {
     return this.requestDiscountsStore.requestData$
       .pipe(
-        switchMap((request) => {
+        concatMap((request) => {
           const req = {
             latitude: request.location.latitude,
             longitude: request.location.longitude,
@@ -198,19 +198,19 @@ export class HomeFacadeService {
   loadVendorsData(vendorId): Observable<any> {
     return this.requestVendorsStore.requestData$
       .pipe(
-      switchMap((request) => {
-        const reqOpt = {
-          ...request,
-          sortBy: request.sortBy.sortBy,
-          latitude: request.location.latitude,
-          longitude: request.location.longitude,
-        };
-        return forkJoin(
-          this.getVendor(vendorId),
-          this.getVendors(),
-          this.getVendorDiscounts(vendorId, reqOpt)
-        );
-      })
-    );
+        switchMap((request) => {
+          const reqOpt = {
+            ...request,
+            sortBy: request.sortBy.sortBy,
+            latitude: request.location.latitude,
+            longitude: request.location.longitude,
+          };
+          return forkJoin(
+            this.getVendor(vendorId),
+            this.getVendors(),
+            this.getVendorDiscounts(vendorId, reqOpt)
+          );
+        })
+      );
   }
 }

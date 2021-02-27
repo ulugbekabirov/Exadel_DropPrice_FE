@@ -32,20 +32,18 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
     private facade: HomeFacadeService,
     private store: HomeStore,
   ) {
+    this.discount$ = this.store.select('activeDiscount');
   }
 
   ngOnInit(): void {
-    this.discount$ = this.route.paramMap
+    this.route.paramMap
       .pipe(
         switchMap((params): Observable<any> => {
           this.discountId = +params.get('id');
-          return this.facade.getDiscount(this.discountId).pipe(
-            switchMap((): Observable<Discount> => {
-              return this.store.select('activeDiscount');
-            })
-          );
+          return this.facade.getDiscount(this.discountId);
         }),
-      );
+        takeUntil(this.unsubscribe$)
+      ).subscribe();
   }
 
   ticketHandler(discountId: number): void {

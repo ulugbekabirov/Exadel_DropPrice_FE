@@ -53,7 +53,9 @@
         }
       },
       "LOCATION_SORT": {
-        "TITLE": "location"
+        "TITLE": "location",
+        "CURRENT":"My location",
+        "OFFICE":"My Office Location"
       }
     },
     "DISCOUNT_CARD": {

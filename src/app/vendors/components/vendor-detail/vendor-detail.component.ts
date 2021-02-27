@@ -5,7 +5,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { HomeFacadeService } from '../../../home/services/home-facade.service';
 import { HomeStore } from '../../../home/services/home-store';
 import { Sort } from '../../../models/sort';
-import { forkJoin, Observable, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Discount, Town, Vendor } from '../../../models';
 import { RefDirective } from '../../../directives/ref.directive';
 import { VendorsRequestStore } from '../../services/vendors-request-store';
@@ -37,29 +37,28 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
     private store: HomeStore,
     private sortStore: VendorsRequestStore
   ) {
-  }
-
-  ngOnInit(): void {
-    this.vendor$ = this.route.paramMap
-      .pipe(
-        switchMap((params: ParamMap): Observable<any> => {
-          this.vendorId = +params.get('id');
-          return this.facade.loadVendorsData(this.vendorId)
-            .pipe(
-              switchMap((): Observable<Vendor> => {
-                return this.store.select('activeVendor');
-              })
-            );
-        }),
-      );
+    this.vendor$ = this.store.select('activeVendor');
     this.vendorsList$ = this.store.select('vendors');
     this.towns$ = this.store.select('towns');
     this.sorts$ = this.store.select('sorts');
     this.vendorDiscounts$ = this.store.select('vendorDiscounts');
     this.locationSelected$ = this.sortStore.select('location');
     this.sortBySelected$ = this.sortStore.select('sortBy');
+  }
+
+  ngOnInit(): void {
+    this.route.paramMap
+      .pipe(
+        switchMap((params: ParamMap): Observable<any> => {
+          this.vendorId = +params.get('id');
+          return this.facade.loadVendorsData(this.vendorId);
+        }),
+        takeUntil(this.unsubscribe$)
+      ).subscribe();
     this.vendorSelect.valueChanges
-      .pipe()
+      .pipe(
+        takeUntil(this.unsubscribe$)
+      )
       .subscribe(vendorId => {
         this.selectVendor(vendorId);
       });
