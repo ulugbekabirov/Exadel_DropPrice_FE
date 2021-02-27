@@ -1,0 +1,155 @@
+@import "../../../../variables";
+
+.discount-detail {
+  font-size: 1rem;
+  font-weight: 500;
+  z-index: -1;
+  margin-top: 20px;
+  color: $main_black;
+
+  @media screen and (max-width: 600px) {
+    padding: 0 20px 20px 20px;
+    font-size: .9rem;
+    margin-top: 0;
+  }
+
+  .go_back_main {
+    margin: 20px 0;
+
+    .go-back__link_text {
+      font-weight: 500;
+    }
+  }
+
+  .discount-detail__header {
+  .discount-detail {
+      .tags {
+        margin-bottom: 20px;
+      }
+    }
+
+    .discount-content__vendor {
+      font-size: 1.1rem;
+      font-weight: 500;
+
+      a {
+        color: #868e96;
+      }
+      a:hover, a:active, a:focus{
+        color:#717d8a;;
+      }
+      @media screen and (max-width: 600px) {
+        font-size: 1rem;
+      }
+    }
+
+    .discount-detail__header_title {
+      font-size: 1.7rem;
+      line-height: 1.1;
+      font-weight: 700;
+
+      @media screen and (max-width: 600px) {
+        font-size: 1.3rem;
+        font-weight: 500;
+      }
+    }
+
+    .discount-detail__header_favourite {
+      margin: 0 2px 16px;
+      font-size: 1.7rem;
+      cursor: pointer;
+      color: $main_gray;
+      will-change: transform;
+      transition: transform .1s ease-in-out;
+      &:hover {
+        color: $favorite_discount;
+        transform: scale(1.1, 1.1);
+      }
+    }
+    .discount-content__tags_tag{
+        cursor: pointer;
+    }
+    .discount-detail__header_rating {
+      margin: 0 0 16px;
+
+      cursor: pointer;
+      .rating__icon {
+        color: $indigo;
+      }
+    }
+  }
+
+  .discount-detail__rating {
+    &_list {
+      display: flex;
+      list-style: none;
+      gap: .4em;
+
+      li {
+        cursor: pointer;
+        font-size: 2.5rem;
+        color: $main_gray;
+        padding: .4em 0;
+
+        &.selected {
+          color: $indigo;
+        }
+      }
+    }
+  }
+
+}
+
+.discount-detail__content {
+  margin-top: 20px;
+
+  .discount-content__description {
+    margin-bottom: 20px;
+
+    .discount-icons{
+        display: flex;
+        gap: 10px;
+        @media screen and (max-width: 600px) {
+           flex-direction: column;
+          }
+    }
+    .action__icon {
+      cursor: pointer;
+    }
+
+    .action__icon:hover,
+    .action__icon:active,
+    .action__icon:focus {
+      opacity: .8;
+    }
+  }
+
+  .action__button {
+    cursor: pointer;
+    margin-top: 2rem;
+  }
+}
+
+.highliter {
+  font-weight: 700;
+  font-size: 1rem;
+
+  @media screen and (max-width: 600px) {
+    font-weight: 600;
+    font-size: .9rem;
+  }
+}
+
+.discount-detail__actions {
+  width: 100%;
+
+  .ticket {
+    width: 25%;
+  }
+
+  @media screen and (max-width: 600px) {
+    .ticket {
+      width: 100%;
+    }
+  }
+}

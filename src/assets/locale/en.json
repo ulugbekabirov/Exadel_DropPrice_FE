@@ -13,7 +13,10 @@
   "HEADER": {
     "SELECTOR_TITLE": "Language",
     "ADMIN_PANEL_LINK_TITLE": "View statistics",
-    "MODERATOR_PANEL_LINK_TITLE": "Add New"
+    "MODERATOR_PANEL_LINK_TITLE": "Add new",
+    "USER_PROFILE": "My profile",
+    "CHANGE_LANGUAGE": "Change language",
+    "LOG_OUT": "Log out"
   },
   "LOGIN": {
     "TITLE": "Log In",
@@ -53,7 +56,9 @@
         }
       },
       "LOCATION_SORT": {
-        "TITLE": "location"
+        "TITLE": "location",
+        "CURRENT":"My location",
+        "OFFICE":"My Office Location"
       }
     },
     "DISCOUNT_CARD": {
@@ -91,7 +96,7 @@
     "PRODUCT_SERVICE": "Product/service",
     "EMAIL": "Email",
     "PHONE": "Contact number",
-    "PROMO_CODE": "Promo code (if available)",
+    "PROMO_CODE": "Promo code",
     "DISCOUNT": "Discount",
     "CONFIRMATION_DATE": "Confirmation date",
     "CLOSE": "Close"
@@ -126,7 +131,8 @@
     "ADD_LOCATION": "Add the location",
     "OPEN_MAP": "Open the map",
     "DELETE_LOCATION": "Delete the location",
-    "EMPTYCOORDINATES": "Please, put a point on the map, click adding location icon"
+    "EMPTYCOORDINATES": "Please, put a point on the map, click adding location icon",
+    "EMPTY_COORDINATES_POINT": "You must select point or points of sales"
   },
   "MAP": {
     "ADD_POINT_BTN": "Add point"

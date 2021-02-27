@@ -1,68 +1,28 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Tag } from '../../../models';
-import { FormGroup } from '@angular/forms';
-
-export class SearchBar {
-  constructor(
-    public name: string,
-    public tag: string[] = [],
-  ) {
-  }
-}
 
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
-export class SearchBarComponent implements OnInit, OnDestroy {
-  public form: FormGroup;
-  public consoleMessages: string[] = [];
-  public userQuestion: string;
-  public userQuestionUpdate = new Subject<string>();
-  public searches: SearchBar[] = [];
-  public tagsName: string[] = [];
-  private subscription: Subscription;
+export class SearchBarComponent {
 
-  @Input() tags: Tag[];
-  @Output() searchQueryChange = new EventEmitter<any>();
+  @Output() onEmitSearchTerm: EventEmitter<string> = new EventEmitter();
+  @Output() onEmitSearchTag: EventEmitter<string> = new EventEmitter();
+  @Input() initialValue$: Observable<string>;
+  @Input() activeTags$: Observable<Tag[]>;
+  @Input() tags$: Observable<Tag[]>;
 
-  userNext(evt): void {
-    return this.userQuestionUpdate.next(evt);
+  searchTagChange(tag): void {
+    this.onEmitSearchTag.emit(tag);
   }
 
-  addSearch(): void {
-    this.searches.pop();
-    this.searches.push(new SearchBar(this.userQuestion, this.tagsName));
-    this.searchQueryChange.emit(this.searches[0]);
+  searchTermChange(searchTerm: string): void {
+    this.onEmitSearchTerm.emit(searchTerm);
   }
 
-  getCardsByTag(tag: string, chip: any): void {
-    chip.toggleSelected();
-    if (this.tagsName.indexOf(tag) > -1) {
-      this.tagsName.splice(this.tagsName.indexOf(tag), 1);
-    } else {
-      this.tagsName.push(tag);
-    }
-    this.addSearch();
-  }
-
-  ngOnInit(): void {
-    this.subscription = this.userQuestionUpdate.pipe(
-      debounceTime(1000),
-      distinctUntilChanged())
-      .subscribe(value => {
-        this.consoleMessages.pop();
-        this.consoleMessages.push(value);
-        this.addSearch();
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
 }

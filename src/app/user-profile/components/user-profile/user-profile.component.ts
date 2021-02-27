@@ -31,7 +31,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activeUser$ = this.userService.activeUser;
+    this.activeUser$ = this.userService.activeUser$;
     this.orders$ = this.facade.select('tickets');
     this.discounts$ = this.facade.select('discounts').pipe(
       filter(Boolean),

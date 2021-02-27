@@ -13,7 +13,10 @@
   "HEADER": {
     "SELECTOR_TITLE": "Язык",
     "ADMIN_PANEL_LINK_TITLE": "Статистика",
-    "MODERATOR_PANEL_LINK_TITLE": "Добавить"
+    "MODERATOR_PANEL_LINK_TITLE": "Добавить",
+    "USER_PROFILE": "Мой профиль",
+    "CHANGE_LANGUAGE": "Изменить язык",
+    "LOG_OUT": "Выйти"
   },
   "LOGIN": {
     "TITLE": "Вход",
@@ -54,7 +57,8 @@
       },
       "LOCATION_SORT": {
         "TITLE": "локация",
-        "": "Моё местоположение"
+        "CURRENT":"Моё местоположение",
+        "OFFICE":"Мой оффис"
       }
     },
     "DISCOUNT_CARD": {
@@ -92,7 +96,7 @@
     "PRODUCT_SERVICE": "Товар/услуга",
     "EMAIL": "Электронная почта",
     "PHONE": "Контактный телефон",
-    "PROMO_CODE": "Промокод (при наличии)",
+    "PROMO_CODE": "Промокод",
     "DISCOUNT": "Скидка",
     "CONFIRMATION_DATE": "Дата подтверждения",
     "CLOSE": "Закрыть"
@@ -127,7 +131,8 @@
     "ADD_LOCATION": "Добавить локацию",
     "OPEN_MAP": "Открыть карту",
     "DELETE_LOCATION": "Удалить локацию",
-    "EMPTYCOORDINATES": "Пожалуйста, поставьте точку на карте, для этого нажмите значок добавления местоположения"
+    "EMPTYCOORDINATES": "Пожалуйста, поставьте точку на карте, для этого нажмите значок добавления местоположения",
+    "EMPTY_COORDINATES_POINT": "Необходимо выбрать точку продаж"
   },
   "MAP": {
     "ADD_POINT_BTN": "Добавить точку локации"

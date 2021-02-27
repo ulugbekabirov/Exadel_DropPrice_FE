@@ -3,21 +3,27 @@
 .discounts-box {
   font-size: 1rem;
   padding-bottom: 2rem;
-
-  &__title {
-    font-size: 1.5em;
-    text-align: center;
-    font-weight: 500;
-    color: #ffffff;
-  }
+  margin-top: 2rem;
 
   &__settings {
     display: flex;
     justify-content: space-between;
-    padding: 0 3em;
-    font-size: 1.2em;
-    font-weight: bold;
+    font-size: 1rem;
     color: $discount_filter_selector_text_color;
+
+    .mat-form-field {
+      width: 25%;
+      font-weight: 500;
+    }
+
+    @media screen and (max-width: 767px) {
+      flex-direction: column;
+      flex-wrap: wrap;
+
+      .mat-form-field {
+        width: 100%;
+      }
+    }
   }
 
   &__list {
