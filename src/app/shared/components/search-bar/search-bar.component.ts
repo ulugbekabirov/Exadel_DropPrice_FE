@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Tag } from '../../../models';
 
@@ -6,6 +6,7 @@ import { Tag } from '../../../models';
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class SearchBarComponent {
