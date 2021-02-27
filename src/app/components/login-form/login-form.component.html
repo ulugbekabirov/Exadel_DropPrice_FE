@@ -13,11 +13,13 @@
         <mat-form-field>
           <mat-label>{{ "LOGIN.EMAIL_LABEL" | translate }}</mat-label>
           <input matInput formControlName="email"/>
+          <input id="email-container" matInput formControlName="email"/>
           <mat-error>{{ "LOGIN.VALID_EMAIL" | translate }} </mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>{{ "LOGIN.PASSWORD_LABEL" | translate }}</mat-label>
           <input
+            id="password-container"
             matInput
             [type]="hide ? 'password' : 'text'"
             formControlName="password"
@@ -39,6 +41,7 @@
           </mat-error>
         </mat-form-field>
         <button
+          id="login-btn-container"
           mat-flat-button
           color="primary"
           [disabled]="loginForm.invalid"
