@@ -13,7 +13,10 @@
   "HEADER": {
     "SELECTOR_TITLE": "Language",
     "ADMIN_PANEL_LINK_TITLE": "View statistics",
-    "MODERATOR_PANEL_LINK_TITLE": "Add New"
+    "MODERATOR_PANEL_LINK_TITLE": "Add new",
+    "USER_PROFILE": "My profile",
+    "CHANGE_LANGUAGE": "Change language",
+    "LOG_OUT": "Log out"
   },
   "LOGIN": {
     "TITLE": "Log In",

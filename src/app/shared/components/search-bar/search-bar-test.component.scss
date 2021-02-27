@@ -23,6 +23,13 @@
   }
 }
 
-.mat-chip.mat-standard-chip.mat-chip-selected.mat-primary{
-  background-color: $discount_list_item_sale;
+.chip-list{
+  .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary{
+    background-color: $main_header_bgColor;
+    opacity: .85;
+  }
+  
+  .chipsStyle{
+    cursor: pointer;
+  }
 }

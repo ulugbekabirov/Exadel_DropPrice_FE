@@ -3,21 +3,24 @@
 .discounts-box {
   font-size: 1rem;
   padding-bottom: 2rem;
+  margin-top: 2rem;
 
   &__settings {
     display: flex;
     justify-content: space-between;
-    flex-direction: c;
-    font-size: 1.2em;
-    font-weight: bold;
+    font-size: 1rem;
     color: $discount_filter_selector_text_color;
-    .mat-form-field{
+
+    .mat-form-field {
       width: 25%;
+      font-weight: 500;
     }
+
     @media screen and (max-width: 767px) {
       flex-direction: column;
       flex-wrap: wrap;
-      .mat-form-field{
+
+      .mat-form-field {
         width: 100%;
       }
     }

@@ -3,7 +3,7 @@
   <span class="header__hamburger" (click)="toggleActive()" [ngClass]="active ? 'active' : ''">
     <span class="bar"></span>
   </span>
-  <div class="header__nav" fxLayoutGap=".5em"  [ngClass]="active ? 'active' : ''">
+  <div class="header__nav" fxLayoutGap=".5em" [ngClass]="active ? 'active' : ''">
     <a *appVerifyUserRoles='["Admin"]' routerLink="/admin" routerLinkActive="active_link" (click)="toggleActive()">
       {{ "HEADER.ADMIN_PANEL_LINK_TITLE" | translate }}
     </a>
@@ -12,25 +12,22 @@
       {{ "HEADER.MODERATOR_PANEL_LINK_TITLE" | translate }}
     </a>
     <div class="profile" fxLayoutAlign="space-between center">
-        <mat-icon *ngIf="authUser$ | async" class="profile__icon person" routerLink="/user-profile" fxLayoutAlign="center center"
-        routerLinkActive="active_link" matTooltip="User Profile" (click)="toggleActive()">person
+      <mat-icon *ngIf="authUser$ | async" class="profile__icon person" routerLink="/user-profile"
+        fxLayoutAlign="center center" routerLinkActive="active_link"
+        matTooltip="{{ 'HEADER.USER_PROFILE' | translate }}" (click)="toggleActive()">person
       </mat-icon>
       <div fxLayoutAlign="center center" fxLayoutGap=".1em">
         <mat-icon class="profile__icon language" fxLayoutAlign="center center" fxLayoutGap=".1em">language</mat-icon>
-        <mat-select class="profile__language_selector" class="lang" (selectionChange)="languageHandler($event.value)">
+        <mat-select class="profile__language_selector" class="lang"
+          matTooltip="{{ 'HEADER.CHANGE_LANGUAGE' | translate }}" (selectionChange)="languageHandler($event.value)">
           <mat-option class="profile__language_option" *ngFor="let lang of langs" [value]="lang">
             {{ lang }}
           </mat-option>
         </mat-select>
       </div>
-      
-
-
-      <!-- <button *ngIf="authUser$ | async" mat-icon-button aria-label="logout icon" fxLayoutAlign="center center"
-        (click)="logoutHandler()"> -->
-        <mat-icon *ngIf="authUser$ | async" class="profile__icon" matTooltip="Logout" fxLayoutAlign="center center" (click)="logoutHandler()">exit_to_app
-        </mat-icon>
-      <!-- </button> -->
+      <mat-icon *ngIf="authUser$ | async" class="profile__icon" matTooltip="{{ 'HEADER.LOG_OUT' | translate }}"
+        fxLayoutAlign="center center" (click)="logoutHandler()">exit_to_app
+      </mat-icon>
     </div>
   </div>
 </header>
