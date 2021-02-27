@@ -4,15 +4,27 @@
   width: 100%;
 }
 
+.user-profile-header__user-name {
+  font-size: 1.5rem;
+  line-height: 1.1;
+  font-weight: 700;
+
+    @media screen and (max-width: 600px) {
+      font-size: 1.3rem;
+      font-weight: 500;
+    }
+
+    @media screen and (max-width: 480px) {
+      font-size: 1.2em;
+    }
+}
+
 .user-profile-card {
   font-size: 1rem;
   background: $white;
   width: 100%;
   height: auto;
-
-  img {
-    background: $white;
-  }
+  color: #313237;
 
   &__content {
     &_field {
@@ -21,34 +33,69 @@
       gap: 1rem;
       justify-content: flex-start;
       align-items: center;
+      font-size: 1rem;
+      font-weight: 500;
+    }
 
-      &_icon {
-        font-size: 2rem;
-        background: $user_profile_card_content_txtColor;
-      }
+    &_list {
+      margin-top: 1em;
 
-      span {
-        &:last-child {
-          font-size: 1.1em;
-          letter-spacing: .06em;
+      li > P {
+        flex: 1 1 100%;
+        box-sizing: border-box;
+        max-width: 20%;
+
+        @media screen and (max-width: 980px) {
+          max-width: 30%;
+        }
+
+        @media screen and (max-width: 480px) {
+          max-width: 30%;
+          line-height: 1.5;
         }
       }
+    }
+
+    &_label {
+      line-height: 1.7;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-left: .3em;
+
+      @media screen and (max-width: 600px) {
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+
+      @media screen and (max-width: 480px) {
+        font-size: 0.8rem;
+        margin-left: 0;
+      }
+    }
+
+    &_text {
+      
+      flex: 1 1 100%;
+      box-sizing: border-box;
+      max-width: 25%;
+
+      @media screen and (max-width: 600px) {
+        font-size: 0.8rem;
+      }
+    }
+
+    &_icon {
+      color: #3F51B5; 
+      @media screen and (max-width: 480px) {
+        display: none;
+        width: 18px;
+        margin-right: .3em;
+      } 
     }
   }
 
   mat-card-subtitle {
     border-bottom: 1px solid $user_profile_card_content_txtColor;;
-  }
-
-  .user-profile-card__icon {
-    font-size: 2rem;
-    cursor: pointer;
-    outline: none;
-    color: $user_profile_card_content_txtColor;
-
-    &:hover {
-      color: $user_profile_card_content_iconColor_hover;
-    }
   }
 
   mat-card-actions {

@@ -198,9 +198,14 @@
     "CONTENT": ""
   },
   "USER_PROFILE": {
+    "USER_CARD": {
+      "OFFICE_LOCATION": "Офис",
+      "USER_PHONE": "Tелефон",
+      "USER_EMAIL": "Эл. почта"
+    },
     "LIST_TITLE": {
-      "SAVED": "Избранные Скидки",
-      "ORDERED": "История Заказов"
+      "SAVED": "Избранные скидки",
+      "ORDERED": "История заказов"
     },
     "LIST_ITEM": {
       "DATE_BEFORE": "до",

@@ -1,83 +1,55 @@
-<mat-card class="user-profile-card">
-  <mat-card-header>
-    <div mat-card-avatar>
-      <img mat-card-avatar src="../../../../assets/img/user-avatar.png" alt="Avatar">
-    </div>
-    <mat-card-title>{{activeUser.fio}}</mat-card-title>
-    <mat-card-subtitle>Software Developer</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content class="user-profile-card__content">
-    <p class="user-profile-card__content_field">
-      <span>
-      <mat-icon class="user-profile-card__content_icon"
-                fxLayoutAlign="center center"
-      >business
-      </mat-icon>
-    </span>
-      <span>
-        {{activeUser.office}}
-      </span>
-    </p>
-    <p class="user-profile-card__content_field">
-      <span>
-        <mat-icon class="user-profile-card__content_icon"
-                  fxLayoutAlign="end center"
-        >phone
-      </mat-icon>
-    </span>
-      <span>
-         {{activeUser.phone}}
-      </span>
-    </p>
-    <p class="user-profile-card__content_field">
-      <span>
-      <mat-icon class="user-profile-card__content_icon"
-                fxLayoutAlign="center center"
-      >mail_outline
-      </mat-icon>
-    </span>
-      <span>
-        {{activeUser.email}}
-      </span>
-    </p>
-  </mat-card-content>
-  <mat-card-actions
-    fxLayoutAlign="start center"
-  >
-    <button mat-icon-button
-            aria-label="share"
-            fxLayoutAlign="center center"
-    >
-      <mat-icon class="user-profile-card__icon"
-                matTooltip="share"
-                fxLayoutAlign="center center"
-      >share
-      </mat-icon>
-    </button>
-  </mat-card-actions>
-</mat-card>
-<mat-accordion>
-  <mat-expansion-panel hideToggle>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        This is the expansion title
-      </mat-panel-title>
-      <mat-panel-description>
-        This is a summary of the content
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <p>This is the primary content of the panel.</p>
-  </mat-expansion-panel>
+<mat-accordion class="user-profile">
   <mat-expansion-panel (opened)="panelOpenState = true"
-                       (closed)="panelOpenState = false">
+  (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Self aware panel
+        <mat-card-header class="user-profile-header">
+          <mat-card-title class="user-profile-header__user-name">{{ activeUser.fio }}</mat-card-title>
+        </mat-card-header>
       </mat-panel-title>
-      <mat-panel-description>
-        Currently I am {{panelOpenState ? 'open' : 'closed'}}
-      </mat-panel-description>
     </mat-expansion-panel-header>
-    <p>I'm visible because I am open</p>
+    <mat-divider></mat-divider>
+    <mat-card-content class="user-profile-card__content">
+      <ul class="user-profile-card__content_list">
+        <li class="user-profile-card__content_field" 
+            fxLayout="row" 
+            fxLayoutGap="1em" 
+            fxLayoutGap.xs=".2em">
+          <p fxLayout="row">
+            <mat-icon class="user-profile-card__content_icon">business</mat-icon>
+            <span class="user-profile-card__content_label">{{ "USER_PROFILE.USER_CARD.OFFICE_LOCATION" | translate }}:</span>
+          </p>
+          <p>
+            <span class="user-profile-card__content_text">{{ activeUser.office }}</span>
+          </p>
+      </li>
+   
+      <li class="user-profile-card__content_field" 
+          fxLayout="row" 
+          fxLayoutGap="1em" 
+          fxLayoutGap.xs=".2em">
+        <p fxLayout="row">
+          <mat-icon class="user-profile-card__content_icon">phone</mat-icon>
+          <span class="user-profile-card__content_label">{{ "USER_PROFILE.USER_CARD.USER_PHONE" | translate }}:</span>
+        </p>
+        <p>
+          <span class="user-profile-card__content_text">{{ activeUser.phone }}</span>
+        </p>
+      </li>
+
+      <li class="user-profile-card__content_field" 
+          fxLayout="row" 
+          fxLayoutGap="1em" 
+          fxLayoutGap.xs=".2em">
+        <p fxLayout="row">
+          <mat-icon class="user-profile-card__content_icon">mail_outline</mat-icon>
+          <span class="user-profile-card__content_label">{{ "USER_PROFILE.USER_CARD.USER_EMAIL" | translate }}:</span>
+        </p>
+        <p>
+          <span class="user-profile-card__content_text">{{ activeUser.email }}</span>
+        </p> 
+      </li>
+      </ul>
+    </mat-card-content>
   </mat-expansion-panel>
 </mat-accordion>

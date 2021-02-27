@@ -198,9 +198,14 @@
     "CONTENT": ""
   },
   "USER_PROFILE": {
+    "USER_CARD": {
+      "OFFICE_LOCATION": "Office",
+      "USER_PHONE": "Phone",
+      "USER_EMAIL": "Email"
+    },
     "LIST_TITLE": {
-      "SAVED": "Saved Discounts",
-      "ORDERED": "Ordered Tickets"
+      "SAVED": "Saved discounts",
+      "ORDERED": "Ordered tickets"
     },
     "LIST_ITEM": {
       "DATE_BEFORE": "before",
