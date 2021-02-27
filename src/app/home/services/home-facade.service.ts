@@ -45,15 +45,8 @@ export class HomeFacadeService {
       latitude: this.userService.activeUserValue.officeLatitude,
     };
     return this.isCurrentUserLocation()
-      ?
-      [
-        userCurrentLocation,
-        userOfficeLocation
-      ]
-      :
-      [
-        userOfficeLocation
-      ];
+      ? [userCurrentLocation, userOfficeLocation]
+      : [userOfficeLocation];
   }
 
   loadData(): Observable<any> {
@@ -140,8 +133,8 @@ export class HomeFacadeService {
   }
 
   requestTicket(discountId, ref): void {
-    this.restApi.getTicket(discountId).pipe(
-    ).subscribe(ticket => {
+    this.restApi.getTicket(discountId)
+      .subscribe(ticket => {
       this.ticketService.createTicket(ticket, ref);
     });
   }

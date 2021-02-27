@@ -81,17 +81,18 @@ export class VendorFormComponent implements OnInit, OnDestroy {
             );
           }),
           takeUntil(this.unsubscribe$)
-        ).subscribe(([vendor, points]) => {
-        const editingVendor = {
-          ...vendor,
-          pointOfSales: points,
-          socialLinks: vendor.socialLinks ? JSON.parse(vendor.socialLinks) : {}
-        };
-        this.patchPointsOfSales(points);
-        this.vendorForm.patchValue(editingVendor);
-        this.coordinateIsEmpty = false;
-        this.vendorForm.markAsPristine();
-      });
+        )
+        .subscribe(([vendor, points]) => {
+          const editingVendor = {
+            ...vendor,
+            pointOfSales: points,
+            socialLinks: vendor.socialLinks ? JSON.parse(vendor.socialLinks) : {}
+          };
+          this.patchPointsOfSales(points);
+          this.vendorForm.patchValue(editingVendor);
+          this.coordinateIsEmpty = false;
+          this.vendorForm.markAsPristine();
+        });
     }
   }
 

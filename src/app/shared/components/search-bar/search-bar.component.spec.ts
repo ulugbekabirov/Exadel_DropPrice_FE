@@ -23,7 +23,7 @@ describe('SearchBarComponent (deep tests)', () => {
     fixture = TestBed.createComponent(SearchBarComponent);
     });
 
-    it('should create', () => {
+  it('should create', () => {
       expect(component).toBeTruthy();
     });
 
