@@ -14,27 +14,5 @@
     >
     </app-tags-filter>
   </div>
-  <!-- TODO -->
-  <!-- <mat-accordion *ngIf="tags.length > 8; else elseBlock">
-    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-      <mat-expansion-panel-header>
-        <p>Теги для поиска</p>
-      </mat-expansion-panel-header>
-      <mat-chip-list>
-        <mat-chip class="chipsStyle" #chips="matChip" *ngFor="let newTags of tags"
-          (click)="getCardsByTag(newTags?.tagName, chips)">
-          # {{ newTags?.tagName }}
-        </mat-chip>
-      </mat-chip-list>
-    </mat-expansion-panel>
-  </mat-accordion> -->
-  <!-- <ng-template #elseBlock>
-    <mat-chip-list>
-      <mat-chip class="chipsStyle" #chips="matChip" *ngFor="let newTags of tags"
-        (click)="getCardsByTag(newTags?.tagName, chips)">
-        # {{ newTags?.tagName }}
-      </mat-chip>
-    </mat-chip-list>
-  </ng-template> -->
 </div>
 

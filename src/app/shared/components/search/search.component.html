@@ -1,13 +1,7 @@
 <mat-form-field class="searchInput">
-  <mat-label class="searchLabel">
-    {{ "MAIN_PAGE.SEARCH" | translate }}...
+  <mat-label class="searchLable">
+    <mat-icon class="searchIcon" fxLayoutAlign="center center">search</mat-icon>
+    {{ "MAIN_PAGE.SEARCH" | translate }}
   </mat-label>
-  <input
-    matInput
-    type="text"
-    [formControl]="searchTerm"
-  />
-  <mat-icon class="searchIcon" fxLayoutAlign="center center">
-    {{ "search" }}
-  </mat-icon>
+  <input matInput class="form-control" [formControl]="searchTerm"/>
 </mat-form-field>

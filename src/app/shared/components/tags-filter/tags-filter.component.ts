@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatChip, MatChipList, MatChipSelectionChange } from '@angular/material/chips';
 import { Tag } from '../../../models';
 
@@ -6,6 +6,7 @@ import { Tag } from '../../../models';
   selector: 'app-tags-filter',
   templateUrl: './tags-filter.component.html',
   styleUrls: ['./tags-filter.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class TagsFilterComponent implements OnInit, AfterViewInit {
