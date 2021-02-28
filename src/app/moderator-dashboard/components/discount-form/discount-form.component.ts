@@ -17,7 +17,6 @@ import { VendorsService } from '../../../services/vendors.service';
   styleUrls: ['./discount-form.component.scss']
 })
 export class DiscountFormComponent implements OnInit, OnDestroy {
-  // discount: Discount;
   selectable = true;
   removable = true;
   addOnBlur = true;
@@ -34,6 +33,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
 
   discountForm: FormGroup = this.fb.group({
     vendorId: ['', this.requireMatch.bind(this)],
+    vendorName: [''],
     discountName: ['', [Validators.required]],
     description: ['', [Validators.minLength(40), Validators.required]],
     discountAmount: ['', [Validators.required, Validators.min(1), Validators.max(100)]],
@@ -81,7 +81,6 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
             });
           }
           this.discountForm.patchValue(editingDiscount);
-          this.vendorId.disable();
           this.discountForm.markAsPristine();
         });
     }

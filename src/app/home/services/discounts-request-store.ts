@@ -9,8 +9,8 @@ interface RequestDiscounts {
     sortBy: Sort;
     searchQuery: string;
     location: {
-      latitude: number;
-      longitude: number;
+      latitude: number | null;
+      longitude: number | null;
       townName: string;
     } | null;
     take: number;
@@ -26,7 +26,11 @@ const INITIAL_REQUEST_DISCOUNTS: RequestDiscounts = {
       sortBy: 'DistanceDesc',
     },
     searchQuery: '',
-    location: null,
+    location: {
+      latitude: null,
+      longitude: null,
+      townName: ''
+    },
     take: 10,
     skip: 0,
     tags: [],

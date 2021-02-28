@@ -49,8 +49,12 @@ export class HomeFacadeService {
       : [userOfficeLocation];
   }
 
+  ifLocationDefined(): boolean {
+    return (this.requestDiscountsStore.value.request.location.latitude && this.requestDiscountsStore.value.request.location.longitude);
+  }
+
   loadData(): Observable<any> {
-    if (!this.requestDiscountsStore.value.request.location) {
+    if (!this.ifLocationDefined()) {
       const user: ActiveUser = this.userService.activeUserValue;
       const location = {
         townName: 'My location',
@@ -117,10 +121,11 @@ export class HomeFacadeService {
   getDiscount(discountId): Observable<any> {
     return this.requestDiscountsStore.requestData$
       .pipe(
-        concatMap((request) => {
+        switchMap((request) => {
+          const user = this.userService.activeUserValue;
           const req = {
-            latitude: request.location.latitude,
-            longitude: request.location.longitude,
+            latitude: request.location.latitude ? request.location.latitude : user.officeLatitude,
+            longitude: request.location.longitude ? request.location.longitude : user.officeLongitude,
           };
           return this.discountsService.getDiscountById(discountId, req)
             .pipe(
