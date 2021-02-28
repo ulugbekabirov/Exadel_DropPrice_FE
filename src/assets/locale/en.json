@@ -208,17 +208,18 @@
       "ORDERED": "Ordered tickets"
     },
     "LIST_ITEM": {
-      "DATE_BEFORE": "before",
+      "DATE_BEFORE": "valid until",
       "DATE_ORDER": "order",
       "TOOLTIP_DISCOUNT": "More about discount",
       "TOOLTIP_VENDOR": "More about vendor",
       "TOOLTIP_FAVORITE": "Toggle favorites"
     },
     "TICKET_BUTTON": {
-      "TICKET_LABEL": "Ticket",
-      "SHOW_TICKET": "Show ticket",
-      "ORDER_TICKET": "Order ticket",
-      "DISCOUNT_INACTIVE": "Not available"
+      "TICKET_LABEL": "Get the discount",
+      "SHOW_TICKET": "Show the ticket",
+      "ORDER_TICKET": "Order the ticket",
+      "DISCOUNT_INACTIVE": "Not available",
+      "TOOLTIP_TICKET": "Ticket"
     }
   }
 }

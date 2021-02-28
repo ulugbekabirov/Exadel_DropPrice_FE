@@ -42,7 +42,7 @@
   &__date {
     grid-column: 2/3;
     grid-row: 3/4;
-    gap: .8em;
+    gap: .5em;
 
     display: flex;
     justify-content: flex-end;
@@ -58,7 +58,7 @@
     align-self: end;
     margin: 0;
 
-    &_favourite {
+    &_favorite {
       cursor: pointer;
       margin-top: 3px;
       color: $favorite_discount;
@@ -94,6 +94,9 @@
   }
 
   &.isExpired {
+    opacity: .5;
+    border-right: 2px solid #FF6347;
+    border-left: 2px solid #5b9fef;
 
     &__actions {
       &_ticket {

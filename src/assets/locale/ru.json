@@ -208,17 +208,18 @@
       "ORDERED": "История заказов"
     },
     "LIST_ITEM": {
-      "DATE_BEFORE": "до",
+      "DATE_BEFORE": "действует до",
       "DATE_ORDER": "заказан",
       "TOOLTIP_DISCOUNT": "Подробнее о скидке",
       "TOOLTIP_VENDOR": "Подробнее о вендоре",
       "TOOLTIP_FAVORITE": "Переключить избранное"
     },
     "TICKET_BUTTON": {
-      "TICKET_LABEL": "Талон",
+      "TICKET_LABEL": "Получить скидку",
       "SHOW_TICKET": "Показать талон",
       "ORDER_TICKET": "Заказать талон",
-      "DISCOUNT_INACTIVE": "Скидка не доступна"
+      "DISCOUNT_INACTIVE": "Скидка не доступна",
+      "TOOLTIP_TICKET": "Талон"
     }
   }
 }

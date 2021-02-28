@@ -18,7 +18,7 @@
     <div class="list-item__actions_ticket">
       <button class="action__ticket"
               mat-raised-button
-              matTooltip='{{ "USER_PROFILE.TICKET_BUTTON.TICKET_LABEL" | translate }}'
+              matTooltip='{{ "USER_PROFILE.TICKET_BUTTON.TOOLTIP_TICKET" | translate }}'
               (click)="ticketHandler(ticket.discountId)"
               [class.discountInActive]="!ticket.discountActivity"
               [disabled]="!ticket.discountActivity"
@@ -33,8 +33,8 @@
         }}
       </button>
     </div>
-    <div class="list-item__actions_favourite">
-      <mat-icon class="list-item__icon_favourite"
+    <div class="list-item__actions_favorite">
+      <mat-icon class="list-item__icon_favorite"
                 fxLayoutAlign="center center"
                 matTooltip='{{ "USER_PROFILE.LIST_ITEM.TOOLTIP_FAVORITE" | translate }}'
                 [ngStyle]="{'color': ticket.isSavedDiscount ? 'rgb(218, 129, 113)' : '#adadaf'}"
@@ -52,7 +52,7 @@
         </span>
     <span class="list-item__date_text"
     >
-      <small>{{ticket.orderDate | date: 'medium'}}</small>
+      <small>{{ticket.orderDate | date: 'dd/MM/yyyy, HH:mm '}}</small>
     </span>
   </p>
 </li>

@@ -2,7 +2,7 @@
     [class.isExpired]="!discount.activityStatus"
 >
   <p class="list-item__title" [routerLink]="['/discounts', discount.discountId]"
-    matTooltip="Подробнее о Скидке"
+    matTooltip='{{ "USER_PROFILE.LIST_ITEM.TOOLTIP_DISCOUNT" | translate }}'
     matTooltipPosition="above"
   >
     {{ discount?.discountName }}
@@ -15,7 +15,7 @@
   </div>
   <p class="list-item__subTitle"
      [routerLink]="['/vendors', discount.vendorId]"
-     matTooltip="Подробнее о Вендоре"
+     matTooltip='{{ "USER_PROFILE.LIST_ITEM.TOOLTIP_VENDOR" | translate }}'
      matTooltipPosition="above"
   >
     {{ discount?.vendorName }}
@@ -26,7 +26,7 @@
     <div class="list-item__actions_ticket">
       <button class="action__ticket"
               mat-raised-button 
-              matTooltip="Ticket"
+              matTooltip='{{ "USER_PROFILE.TICKET_BUTTON.TOOLTIP_TICKET" | translate }}'
               (click)="ticketHandler(discount.discountId)"
               [class.discountInActive]="!discount.activityStatus"
               [disabled]="!discount.activityStatus"
@@ -41,8 +41,8 @@
         }}
       </button>
     </div>
-    <div class="list-item__actions_favourite">
-      <mat-icon class="list-item__icon_favourite"
+    <div class="list-item__actions_favorite">
+      <mat-icon class="list-item__icon_favorite"
                 fxLayoutAlign="center center"
                 matTooltip='{{ "USER_PROFILE.LIST_ITEM.TOOLTIP_FAVORITE" | translate}}'
                 [ngStyle]="{'color': discount.isSaved ? 'rgb(218, 129, 113)' : '#adadaf'}"
@@ -59,7 +59,7 @@
      </small>
     </span>
     <span class="list-item__date_text">
-      <small>{{discount.endDate | date: 'medium'}}</small>
+      <small>{{discount.endDate | date: 'dd/MM/yyyy'}}</small>
     </span>
   </p>
 </li>
