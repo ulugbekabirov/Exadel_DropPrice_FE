@@ -1,8 +1,8 @@
 @import "src/variables";
-
-.admin-dashboard__search{
+.admin-dashboard__search {
   margin: 2rem 0;
 }
+
 table {
   width: 100%;
 
@@ -17,34 +17,34 @@ table {
   .mat-column-rating {
     flex: 0 0 10%;
     width: 10%;
-    text-align: right;
+
+    .mat-sort-header-container {
+      justify-content: center;
+    }
+
+    text-align: center;
   }
 
   .mat-column-ticketCount {
     flex: 0 0 10%;
     width: 10%;
-    text-align: right;
-  }
 
-  th.mat-header-cell,
-  td.mat-cell,
-  td.mat-footer-cell {
-    border-bottom-width: 2px;
+    .mat-sort-header-container {
+      justify-content: center;
+    }
+
+    text-align: center;
   }
 
   .mat-header-cell,
   .mat-sort-header {
     font-size: 14px;
+    background-color: $main_gray;
 
     @media screen and (max-width: 767px) {
       font-size: 12px;
     }
   }
-
-  .mat-sort-header-container {
-    float: right;
-  }
-
 
   .mat-cell,
   .mat-footer-cell {
@@ -52,5 +52,11 @@ table {
       font-size: 12px;
     }
   }
-
+  .mat-row:nth-child(even){
+    background-color: #e0e0e0;
+}
+        
+.mat-row:nth-child(odd){
+    background-color: #ffff;
+}
 }

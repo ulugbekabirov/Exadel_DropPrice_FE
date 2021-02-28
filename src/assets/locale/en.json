@@ -194,7 +194,7 @@
       "TABLE": {
         "NAME": "Name",
         "RATING": "Rating",
-        "TICKETS": "Tickets",
+        "TICKETS": "Number of tickets",
         "EMAIL": "E-mail"
       }
     },

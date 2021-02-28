@@ -1,63 +1,16 @@
-@import "src/variables";
-
 table {
   width: 100%;
 
-  .mat-column-name {
-    flex: 0 0 50%;
-    width: 50%;
-    overflow-wrap: break-word;
-    hyphens: auto;
-    padding-right: 2rem;
-  }
-
-  .mat-column-rating {
-    flex: 0 0 10%;
-    width: 10%;
-    // text-align: center;
-  }
-
-  .mat-column-ticketCount {
-    flex: 0 0 10%;
-    width: 10%;
-    // text-align: center;
-  }
-
-  
   .mat-column-email {
     flex: 0 0 30%;
-    width: 30%;
+    width: 20%;
     overflow-wrap: break-word;
     hyphens: auto;
     padding-right: 2rem;
     text-align: right;
   }
-
-  th.mat-header-cell,
-  td.mat-cell,
-  td.mat-footer-cell {
-    border-bottom-width: 2px;
-  }
-
 
   th.mat-header-cell:last-of-type {
     text-align: right;
   }
-
-  .mat-header-cell {
-    font-size: 14px;
-
-    @media screen and (max-width: 767px) {
-      font-size: 12px;
-    }
-  }
-
-
-  .mat-cell,
-  .mat-footer-cell {
-    @media screen and (max-width: 767px) {
-      font-size: 12px;
-    }
-  }
-
 }
