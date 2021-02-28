@@ -173,15 +173,10 @@
   },
   "BUTTON_BACK_LOCATION": "go back",
   "ADMIN_DASHBOARD": {
-    "SETTINGS": "Change",
-    "SIDEBAR": {
-      "ADMIN": "Statistics",
-      "SETTINGS": "Settings",
-      "VENDORS": "Vendors",
-      "DISCOUNTS": "Discounts",
-      "OPTIONS": "Options",
-      "COLLAPSE": "Collapse"
-    },
+    "SETTINGS_TITLE": "Change",
+    "DISCOUNT_LABEL": "Discounts statistic",
+    "VENDOR_LABEL": "Vendors statistic",
+    "SETTINGS_LABEL": "Settings",
     "SORT": {
       "LABEL": {
         "RATING": "Sort by rating",
@@ -195,7 +190,7 @@
         "NAME": "Name",
         "RATING": "Rating",
         "TICKETS": "Number of tickets",
-        "EMAIL": "E-mail"
+        "EMAIL": "E-mail address"
       }
     },
     "SEARCH": {

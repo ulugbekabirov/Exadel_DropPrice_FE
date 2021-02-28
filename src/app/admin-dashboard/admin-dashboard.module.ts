@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../guards/auth.guard';
-import { AdminSidebarComponent } from './components/admin-sidebar/admin-sidebar.component';
 import { AdminSearchComponent } from './components/admin-search/admin-search.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -32,7 +31,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AdminDashboardComponent,
-    AdminSidebarComponent,
     AdminSearchComponent,
     SettingsComponent,
     SettingItemComponent,

@@ -39,7 +39,7 @@ table {
   .mat-header-cell,
   .mat-sort-header {
     font-size: 14px;
-    background-color: $main_gray;
+    background-color: #d1d1d1;
 
     @media screen and (max-width: 767px) {
       font-size: 12px;
@@ -53,7 +53,7 @@ table {
     }
   }
   .mat-row:nth-child(even){
-    background-color: #e0e0e0;
+    background-color: #ebebeb;
 }
         
 .mat-row:nth-child(odd){

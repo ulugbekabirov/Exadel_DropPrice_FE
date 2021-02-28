@@ -172,15 +172,11 @@
   },
   "BUTTON_BACK_LOCATION": "назад",
   "ADMIN_DASHBOARD": {
-    "SETTINGS": "Изменить",
-    "SIDEBAR": {
-      "ADMIN": "Статистика",
-      "SETTINGS": "Настройки",
-      "VENDORS": "Вендоры",
-      "DISCOUNTS": "Скидки",
-      "OPTIONS": "Опции",
-      "COLLAPSE": "Свернуть"
-    },
+    "SETTINGS_TITLE": "Изменить",
+    "DISCOUNT_LABEL": "Статистика по скидкам",
+    "VENDOR_LABEL": "Статистика по вендорам",
+    "SETTINGS_LABEL": "Настройки",
+
     "SORT": {
       "LABEL": {
         "RATING": "Сортировать по рейтингу",
