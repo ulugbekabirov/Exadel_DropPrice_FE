@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { combineLatest, forkJoin, from, Observable, of } from 'rxjs';
 import { concatMap, debounceTime, distinctUntilChanged, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { SORTS } from '../../../constants';
-import { Discount, Tag, Town } from '../../models';
+import { ActiveUser, Discount, Tag, Town } from '../../models';
 import { Sort } from '../../models/sort';
 import { ApiDataService } from '../../services/api-data.service';
 import { DiscountsService } from '../../services/discounts.service';
@@ -11,19 +11,17 @@ import { UserService } from '../../services/user.service';
 import { VendorsService } from '../../services/vendors.service';
 import { VendorsRequestStore } from '../../vendors/services/vendors-request-store';
 import { DiscountsRequestStore } from './discounts-request-store';
-import { HomeStore } from './home-store';
+import { DiscountsStore } from './discounts-store';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HomeFacadeService {
+export class DiscountsFacadeService {
   constructor(
     private userService: UserService,
     private discountsService: DiscountsService,
-    private vendorsService: VendorsService,
-    private homeStore: HomeStore,
+    private store: DiscountsStore,
     private requestDiscountsStore: DiscountsRequestStore,
-    private requestVendorsStore: VendorsRequestStore,
     private ticketService: TicketService,
     private restApi: ApiDataService
   ) {
@@ -49,21 +47,23 @@ export class HomeFacadeService {
       : [userOfficeLocation];
   }
 
+  ifLocationDefined(): boolean {
+    return (this.requestDiscountsStore.value.request.location.latitude && this.requestDiscountsStore.value.request.location.longitude);
+  }
+
   loadData(): Observable<any> {
-    return this.userService.activeUser$.pipe(
-      tap((user) => {
-        const location = {
-          latitude: user.latitude ? user.latitude : user.officeLatitude,
-          longitude: user.longitude ? user.longitude : user.officeLongitude,
-        };
-        this.requestDiscountsStore.set('location', location);
-      }),
+    if (!this.ifLocationDefined()) {
+      const user: ActiveUser = this.userService.activeUserValue;
+      const location = {
+        townName: 'My location',
+        latitude: user.latitude ? user.latitude : user.officeLatitude,
+        longitude: user.longitude ? user.longitude : user.officeLongitude,
+      };
+      this.requestDiscountsStore.set('location', location);
+    }
+    return forkJoin(this.getSorts(), this.getTags(), this.getTowns()).pipe(
       switchMap(() => {
-        return forkJoin(this.getSorts(), this.getTags(), this.getTowns()).pipe(
-          switchMap(() => {
-            return this.getDiscounts();
-          })
-        );
+        return this.getDiscounts();
       })
     );
   }
@@ -76,7 +76,7 @@ export class HomeFacadeService {
         switchMap(([skip, take]) => {
           return this.discountsService.getTags(skip, take)
             .pipe(
-              tap(tags => this.homeStore.set('tags', tags))
+              tap(tags => this.store.set('tags', tags))
             );
         })
       );
@@ -86,14 +86,14 @@ export class HomeFacadeService {
     return this.discountsService.getTowns()
       .pipe(
         map(towns => [...this.getUserLocation(), ...towns]),
-        tap(towns => this.homeStore.set('towns', towns))
+        tap(towns => this.store.set('towns', towns))
       );
   }
 
   getSorts(): Observable<Sort[]> {
     return of(SORTS)
       .pipe(
-        tap(sorts => this.homeStore.set('sorts', sorts))
+        tap(sorts => this.store.set('sorts', sorts))
       );
   }
 
@@ -110,7 +110,7 @@ export class HomeFacadeService {
           };
           return this.discountsService.searchDiscounts(req)
             .pipe(
-              tap(discounts => this.homeStore.set('discounts', discounts)),
+              tap(discounts => this.store.set('discounts', discounts)),
             );
         })
       );
@@ -119,14 +119,15 @@ export class HomeFacadeService {
   getDiscount(discountId): Observable<any> {
     return this.requestDiscountsStore.requestData$
       .pipe(
-        concatMap((request) => {
+        switchMap((request) => {
+          const user = this.userService.activeUserValue;
           const req = {
-            latitude: request.location.latitude,
-            longitude: request.location.longitude,
+            latitude: request.location.latitude ? request.location.latitude : user.officeLatitude,
+            longitude: request.location.longitude ? request.location.longitude : user.officeLongitude,
           };
           return this.discountsService.getDiscountById(discountId, req)
             .pipe(
-              tap(discount => this.homeStore.set('activeDiscount', discount)),
+              tap(discount => this.store.set('activeDiscount', discount)),
             );
         })
       );
@@ -135,8 +136,8 @@ export class HomeFacadeService {
   requestTicket(discountId, ref): void {
     this.restApi.getTicket(discountId)
       .subscribe(ticket => {
-      this.ticketService.createTicket(ticket, ref);
-    });
+        this.ticketService.createTicket(ticket, ref);
+      });
   }
 
   toggleFavourites(discountId): Observable<any> {
@@ -156,54 +157,6 @@ export class HomeFacadeService {
       .pipe(
         debounceTime(debounceMs),
         distinctUntilChanged()
-      );
-  }
-
-  getVendor(vendorId): Observable<any> {
-    return this.vendorsService.getVendorById(vendorId)
-      .pipe(
-        map(vendor => {
-          const parseSocials = vendor.socialLinks ? JSON.parse(vendor.socialLinks) : '';
-          return {
-            ...vendor,
-            socialLinks: Object
-              .keys(parseSocials)
-              .filter(value => !!parseSocials[value])
-              .map(key => ({name: key, path: parseSocials[key]}))
-          };
-        }),
-        tap(vendor => this.homeStore.set('activeVendor', vendor)),
-      );
-  }
-
-  getVendors(): Observable<any> {
-    return this.vendorsService.getVendors().pipe(
-      tap(vendors => this.homeStore.set('vendors', vendors))
-    );
-  }
-
-  getVendorDiscounts(vendorId, reqOpt): Observable<any> {
-    return this.vendorsService.getVendorsDiscounts(vendorId, reqOpt).pipe(
-      tap(discounts => this.homeStore.set('vendorDiscounts', discounts))
-    );
-  }
-
-  loadVendorsData(vendorId): Observable<any> {
-    return this.requestVendorsStore.requestData$
-      .pipe(
-        switchMap((request) => {
-          const reqOpt = {
-            ...request,
-            sortBy: request.sortBy.sortBy,
-            latitude: request.location.latitude,
-            longitude: request.location.longitude,
-          };
-          return forkJoin(
-            this.getVendor(vendorId),
-            this.getVendors(),
-            this.getVendorDiscounts(vendorId, reqOpt)
-          );
-        })
       );
   }
 }

@@ -154,7 +154,6 @@ export class VendorFormComponent implements OnInit, OnDestroy {
       latitude: this.pointOfSalesForm.value[currentSaleObj].latitude,
       longitude: this.pointOfSalesForm.value[currentSaleObj].longitude,
     };
-
     const dialogRef = this.dialog.open(MapComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
       Object.assign(this.pointOfSalesForm.value[currentSaleObj], data);

@@ -21,7 +21,7 @@ describe('LoginFormComponent', () => {
     password: ''
   };
 
-  function updateForm(userEmail: string, userPassword: string) {
+  function updateForm(userEmail: string, userPassword: string): void {
     fixture.componentInstance.loginForm.controls[this.username].patchValue(userEmail);
     fixture.componentInstance.loginForm.controls[this.password].patchValue(userPassword);
   }

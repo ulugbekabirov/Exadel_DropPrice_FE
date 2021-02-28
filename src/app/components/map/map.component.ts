@@ -11,7 +11,10 @@ import { UserService } from '../../services/user.service';
 })
 export class MapComponent implements OnInit, OnDestroy {
   zoom = 13;
-  coordinates;
+  coordinates = {
+    latitude: null,
+    longitude: null,
+  };
   subscription: Subscription;
 
   constructor(
@@ -31,7 +34,12 @@ export class MapComponent implements OnInit, OnDestroy {
         latitude: officeLatitude,
         longitude: officeLongitude
       }))
-    ).subscribe(next => this.coordinates = next);
+    ).subscribe(next => {
+      if (this.coordinates.latitude && this.coordinates.longitude) {
+        return;
+      }
+      this.coordinates = next;
+    });
   }
 
   onChoseLocation(event): void {

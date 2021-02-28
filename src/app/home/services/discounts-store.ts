@@ -8,28 +8,22 @@ export interface HomeState {
   sorts: Sort[] | [];
   tags: Tag[] | [];
   towns: Town[] | [];
-  vendors: Vendor[] | [];
   discounts: Discount[] | [];
   activeDiscount: Discount | {};
-  activeVendor: Vendor | {};
-  vendorDiscounts: Discount[]| [];
 }
 
 const HOME_INITIAL_STATE: HomeState = {
   sorts: [],
   tags: [],
   towns: [],
-  vendors: [],
   discounts: [],
   activeDiscount: {},
-  activeVendor: {},
-  vendorDiscounts: [],
 };
 
 @Injectable({
   providedIn: 'root'
 })
-export class HomeStore {
+export class DiscountsStore {
 
   private subject: BehaviorSubject<HomeState> = new BehaviorSubject<HomeState>(HOME_INITIAL_STATE);
   private store: Observable<HomeState> = this.subject.asObservable()

@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, of, } from 'rxjs';
 import { ActiveUser } from '../models';
 import { KEY_ACTIVE_USER } from '../../constants';
 import { map, pluck, tap } from 'rxjs/operators';
+import { LanguageService } from './language.service';
 
 
 @Injectable({
@@ -15,6 +16,7 @@ export class UserService {
 
   constructor(
     private restApi: ApiDataService,
+    private languageService: LanguageService
   ) {
     this.activeUserSubject = new BehaviorSubject<ActiveUser>(JSON.parse(localStorage.getItem(KEY_ACTIVE_USER)));
     this.activeUser$ = this.activeUserSubject.asObservable();

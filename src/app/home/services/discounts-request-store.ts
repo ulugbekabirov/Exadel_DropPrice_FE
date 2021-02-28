@@ -9,10 +9,10 @@ interface RequestDiscounts {
     sortBy: Sort;
     searchQuery: string;
     location: {
-      latitude: number;
-      longitude: number;
+      latitude: number | null;
+      longitude: number | null;
       townName: string;
-    }
+    } | null;
     take: number;
     skip: number;
     tags: Tag[];
@@ -27,9 +27,9 @@ const INITIAL_REQUEST_DISCOUNTS: RequestDiscounts = {
     },
     searchQuery: '',
     location: {
-      latitude: 0,
-      longitude: 0,
-      townName: 'Моя локация',
+      latitude: null,
+      longitude: null,
+      townName: ''
     },
     take: 10,
     skip: 0,
