@@ -5,8 +5,8 @@ import { RefDirective } from '../../../directives/ref.directive';
 import { Discount, Tag, Town } from '../../../models';
 import { Sort } from '../../../models/sort';
 import { DiscountsRequestStore } from '../../services/discounts-request-store';
-import { HomeFacadeService } from '../../services/home-facade.service';
-import { HomeStore } from '../../services/home-store';
+import { DiscountsFacadeService } from '../../services/discounts-facade.service';
+import { DiscountsStore } from '../../services/discounts-store';
 
 @Component({
   selector: 'app-discounts',
@@ -27,8 +27,8 @@ export class DiscountsComponent implements OnInit, OnDestroy {
 
 
   constructor(
-    private store: HomeStore,
-    private facade: HomeFacadeService,
+    private store: DiscountsStore,
+    private facade: DiscountsFacadeService,
     private sortStore: DiscountsRequestStore,
   ) {
   }

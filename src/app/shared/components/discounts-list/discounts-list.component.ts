@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, mergeMap, switchMap, take, takeUntil, tap } from 'rxjs/operators';
-import { Discount, LocationCoords, Town } from '../../../models';
+import { debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs/operators';
+import { LocationCoords, Town } from '../../../models';
 import { Sort } from '../../../models/sort';
 
 @Component({
@@ -42,11 +42,11 @@ export class DiscountsListComponent implements OnInit, OnDestroy {
 
     this.locationSelected$.pipe(
       switchMap((coords) => {
-        this.locationSort.patchValue(coords);
+        this.locationSort.patchValue(coords, {emitModelToViewChange: true});
         return this.throttle(this.locationSort.valueChanges);
       }),
-    takeUntil(this.unsubscribe$)
-  ).subscribe(next => {
+      takeUntil(this.unsubscribe$)
+    ).subscribe(next => {
       this.locationChange.emit(next);
     });
   }

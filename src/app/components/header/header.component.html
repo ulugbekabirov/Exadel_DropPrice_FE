@@ -20,8 +20,11 @@
         <mat-icon class="profile__icon language" fxLayoutAlign="center center" fxLayoutGap=".1em">language</mat-icon>
         <mat-select class="profile__language_selector" class="lang"
           matTooltip="{{ 'HEADER.CHANGE_LANGUAGE' | translate }}" (selectionChange)="languageHandler($event.value)">
-          <mat-option class="profile__language_option" *ngFor="let lang of langs" [value]="lang">
-            {{ lang }}
+          <mat-option class="profile__language_option"
+                      *ngFor="let language of languages$ | async"
+                      [value]="language"
+          >
+            {{ language }}
           </mat-option>
         </mat-select>
       </div>

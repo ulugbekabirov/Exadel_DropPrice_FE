@@ -2,13 +2,15 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { HomeFacadeService } from '../../../home/services/home-facade.service';
-import { HomeStore } from '../../../home/services/home-store';
+import { DiscountsFacadeService } from '../../../home/services/discounts-facade.service';
+import { DiscountsStore } from '../../../home/services/discounts-store';
 import { Sort } from '../../../models/sort';
 import { Observable, Subject } from 'rxjs';
 import { Discount, Town, Vendor } from '../../../models';
 import { RefDirective } from '../../../directives/ref.directive';
+import { VendorsFacadeService } from '../../services/vendors-facade.service';
 import { VendorsRequestStore } from '../../services/vendors-request-store';
+import { VendorsStore } from '../../services/vendors-store';
 
 @Component({
   selector: 'app-vendor-detail',
@@ -33,8 +35,8 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private facade: HomeFacadeService,
-    private store: HomeStore,
+    private facade: VendorsFacadeService,
+    private store: VendorsStore,
     private sortStore: VendorsRequestStore
   ) {
     this.vendor$ = this.store.select('activeVendor');
@@ -51,7 +53,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
       .pipe(
         switchMap((params: ParamMap): Observable<any> => {
           this.vendorId = +params.get('id');
-          return this.facade.loadVendorsData(this.vendorId);
+          return this.facade.loadData(this.vendorId);
         }),
         takeUntil(this.unsubscribe$)
       ).subscribe();

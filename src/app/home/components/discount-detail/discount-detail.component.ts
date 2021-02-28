@@ -5,8 +5,8 @@ import { switchMap, takeUntil } from 'rxjs/operators';
 import { Discount } from '../../../models';
 import { Observable, Subject } from 'rxjs';
 import { RefDirective } from '../../../directives/ref.directive';
-import { HomeFacadeService } from '../../services/home-facade.service';
-import { HomeStore } from '../../services/home-store';
+import { DiscountsFacadeService } from '../../services/discounts-facade.service';
+import { DiscountsStore } from '../../services/discounts-store';
 
 
 @Component({
@@ -29,8 +29,8 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
-    private facade: HomeFacadeService,
-    private store: HomeStore,
+    private facade: DiscountsFacadeService,
+    private store: DiscountsStore,
   ) {
     this.discount$ = this.store.select('activeDiscount');
   }
@@ -106,5 +106,6 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+    this.store.set('activeDiscount', {});
   }
 }

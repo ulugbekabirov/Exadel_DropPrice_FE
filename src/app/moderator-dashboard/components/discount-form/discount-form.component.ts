@@ -5,9 +5,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { forkJoin, Subject, throwError } from 'rxjs';
+import { Subject, throwError } from 'rxjs';
 import { catchError, debounceTime, filter, map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { Discount, Vendor } from '../../../models';
+import { Discount } from '../../../models';
 import { DiscountsService } from '../../../services/discounts.service';
 import { VendorsService } from '../../../services/vendors.service';
 
@@ -81,6 +81,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
             });
           }
           this.discountForm.patchValue(editingDiscount);
+          this.discountForm.controls.vendorId.disable();
           this.discountForm.markAsPristine();
         });
     }
@@ -145,6 +146,10 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
       this.addPointOfSales(point);
     });
     this.discountForm.patchValue(initPointsOfSales);
+    this.pointOfSalesForm.controls.forEach(control => {
+      control.get('name').disable();
+      control.get('address').disable();
+    });
   }
 
   addPointOfSales(point): void {
@@ -203,7 +208,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    const discount = {...this.discountForm.value, pointOfSales: this.pointOfSalesForm.value.filter(point => point.checked)};
+    const discount = {...this.discountForm.getRawValue(), pointOfSales: this.pointOfSalesForm.getRawValue().filter(point => point.checked)};
     const {checked, ...newDiscount} = discount;
 
     if (this.isEditMode) {
