@@ -2,8 +2,6 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { DiscountsFacadeService } from '../../../home/services/discounts-facade.service';
-import { DiscountsStore } from '../../../home/services/discounts-store';
 import { Sort } from '../../../models/sort';
 import { Observable, Subject } from 'rxjs';
 import { Discount, Town, Vendor } from '../../../models';
@@ -107,5 +105,6 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+    this.store.set('activeVendor', {});
   }
 }

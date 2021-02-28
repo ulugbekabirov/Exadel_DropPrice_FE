@@ -29,8 +29,6 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <pre>{{locationSort.value | json}}</pre>
-
   <ul class="discounts-box__list">
     <li *ngFor="let discount of discounts$ | async">
       <app-discounts-list-item

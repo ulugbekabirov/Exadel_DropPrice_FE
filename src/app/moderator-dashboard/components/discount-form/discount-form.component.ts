@@ -63,7 +63,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
     ).subscribe(res => {
       this.vendorsList = this.filteredList = res;
     });
-
+    this.vendorNameChanges();
     if (this.isEditMode) {
       this.route.paramMap.pipe(
         switchMap((params: ParamMap) => {
@@ -85,7 +85,6 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
           this.discountForm.markAsPristine();
         });
     }
-    this.vendorNameChanges();
   }
 
   displayFn(value?: number | string): any {
