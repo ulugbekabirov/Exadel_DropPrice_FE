@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { combineLatest, forkJoin, from, Observable, of } from 'rxjs';
 import { concatMap, debounceTime, distinctUntilChanged, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { SORTS } from '../../../constants';
-import { Discount, Tag, Town } from '../../models';
+import { ActiveUser, Discount, Tag, Town } from '../../models';
 import { Sort } from '../../models/sort';
 import { ApiDataService } from '../../services/api-data.service';
 import { DiscountsService } from '../../services/discounts.service';
@@ -50,20 +50,18 @@ export class HomeFacadeService {
   }
 
   loadData(): Observable<any> {
-    return this.userService.activeUser$.pipe(
-      tap((user) => {
-        const location = {
-          latitude: user.latitude ? user.latitude : user.officeLatitude,
-          longitude: user.longitude ? user.longitude : user.officeLongitude,
-        };
-        this.requestDiscountsStore.set('location', location);
-      }),
+    if (!this.requestDiscountsStore.value.request.location) {
+      const user: ActiveUser = this.userService.activeUserValue;
+      const location = {
+        townName: 'My location',
+        latitude: user.latitude ? user.latitude : user.officeLatitude,
+        longitude: user.longitude ? user.longitude : user.officeLongitude,
+      };
+      this.requestDiscountsStore.set('location', location);
+    }
+    return forkJoin(this.getSorts(), this.getTags(), this.getTowns()).pipe(
       switchMap(() => {
-        return forkJoin(this.getSorts(), this.getTags(), this.getTowns()).pipe(
-          switchMap(() => {
-            return this.getDiscounts();
-          })
-        );
+        return this.getDiscounts();
       })
     );
   }
@@ -135,8 +133,8 @@ export class HomeFacadeService {
   requestTicket(discountId, ref): void {
     this.restApi.getTicket(discountId)
       .subscribe(ticket => {
-      this.ticketService.createTicket(ticket, ref);
-    });
+        this.ticketService.createTicket(ticket, ref);
+      });
   }
 
   toggleFavourites(discountId): Observable<any> {

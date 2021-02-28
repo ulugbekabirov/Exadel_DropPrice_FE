@@ -22,7 +22,6 @@ export class AuthInterceptor implements HttpInterceptor {
     const isApiUrl = req.url.startsWith(environment.webApiUrl);
     if (isLoggedIn && isApiUrl) {
       const clonedReq: HttpRequest<any> = req.clone({
-        // headers: req.headers.set('Authorization', `Bearer ${authUser.token}`)
         headers: new HttpHeaders()
           .set('Authorization', `Bearer ${authUser.token}`)
           .set('Accept-Language', `${lang}`)

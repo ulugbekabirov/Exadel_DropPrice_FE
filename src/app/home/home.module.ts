@@ -5,7 +5,6 @@ import { DiscountDetailComponent } from './components/discount-detail/discount-d
 import { AuthGuard } from '../guards/auth.guard';
 import { DiscountsComponent } from './components/discounts/discounts.component';
 import { SharedModule } from '../shared/shared.module';
-import { HomeFacadeService } from './services/home-facade.service';
 
 const routes: Routes = [
   {
@@ -30,8 +29,6 @@ const routes: Routes = [
   exports: [
     RouterModule,
   ],
-  providers: [
-    HomeFacadeService
-  ]
+  providers: []
 })
 export class HomeModule { }

@@ -12,7 +12,7 @@ interface RequestDiscounts {
       latitude: number;
       longitude: number;
       townName: string;
-    }
+    } | null;
     take: number;
     skip: number;
     tags: Tag[];
@@ -26,11 +26,7 @@ const INITIAL_REQUEST_DISCOUNTS: RequestDiscounts = {
       sortBy: 'DistanceDesc',
     },
     searchQuery: '',
-    location: {
-      latitude: 0,
-      longitude: 0,
-      townName: 'Моя локация',
-    },
+    location: null,
     take: 10,
     skip: 0,
     tags: [],
