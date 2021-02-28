@@ -1,0 +1,53 @@
+@import "src/variables";
+
+table {
+  width: 100%;
+
+  .mat-column-name {
+    flex: 0 0 50%;
+    width: 50%;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    padding-right: 2rem;
+  }
+
+  .mat-column-rating {
+    flex: 0 0 10%;
+    width: 10%;
+    text-align: right;
+  }
+
+  .mat-column-ticketCount {
+    flex: 0 0 10%;
+    width: 10%;
+    text-align: right;
+  }
+
+  th.mat-header-cell,
+  td.mat-cell,
+  td.mat-footer-cell {
+    border-bottom-width: 2px;
+  }
+
+  .mat-header-cell,
+  .mat-sort-header {
+    font-size: 14px;
+
+    @media screen and (max-width: 767px) {
+      font-size: 12px;
+    }
+  }
+
+  .mat-sort-header-container {
+    float: right;
+  }
+
+
+  .mat-cell,
+  .mat-footer-cell {
+    @media screen and (max-width: 767px) {
+      font-size: 12px;
+    }
+  }
+
+}
