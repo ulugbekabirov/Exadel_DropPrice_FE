@@ -1,6 +1,6 @@
 <mat-accordion class="user-profile">
   <mat-expansion-panel (opened)="panelOpenState = true"
-  (closed)="panelOpenState = false">
+  (closed)="panelOpenState = false" [expanded]="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <mat-card-header class="user-profile-header">
@@ -17,7 +17,7 @@
             fxLayoutGap.xs=".2em">
           <p fxLayout="row">
             <mat-icon class="user-profile-card__content_icon">business</mat-icon>
-            <span class="user-profile-card__content_label">{{ "USER_PROFILE.USER_CARD.OFFICE_LOCATION" | translate }}:</span>
+            <span class="user-profile-card__content_label office">{{ "USER_PROFILE.USER_CARD.OFFICE_LOCATION" | translate }}:</span>
           </p>
           <p>
             <span class="user-profile-card__content_text">{{ activeUser.office }}</span>
@@ -30,7 +30,7 @@
           fxLayoutGap.xs=".2em">
         <p fxLayout="row">
           <mat-icon class="user-profile-card__content_icon">phone</mat-icon>
-          <span class="user-profile-card__content_label">{{ "USER_PROFILE.USER_CARD.USER_PHONE" | translate }}:</span>
+          <span class="user-profile-card__content_label phone">{{ "USER_PROFILE.USER_CARD.USER_PHONE" | translate }}:</span>
         </p>
         <p>
           <span class="user-profile-card__content_text">{{ activeUser.phone }}</span>

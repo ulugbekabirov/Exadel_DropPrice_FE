@@ -5,13 +5,13 @@
 }
 
 .saved-list {
-  background: #fff;
+  background: $white;
   box-shadow: 0 16px 24px 0 rgba(0, 0, 0, .1);
   border-radius: 4px;
   overflow: hidden;
 
   h3 {
-    background: #9a9999;
+    background: $main-gray;
     color: $white;
     padding: 10px;
     text-align: center;

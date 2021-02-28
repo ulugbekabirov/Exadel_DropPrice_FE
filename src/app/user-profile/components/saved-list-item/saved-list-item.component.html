@@ -2,11 +2,17 @@
     [class.isExpired]="!discount.activityStatus"
 >
   <p class="list-item__title" [routerLink]="['/discounts', discount.discountId]"
-     matTooltip="Подробнее о Скидке"
-     matTooltipPosition="above"
+    matTooltip="Подробнее о Скидке"
+    matTooltipPosition="above"
   >
     {{ discount?.discountName }}
   </p>
+  
+  <div class="corner-ribbon-6 corner-ribbon-6-top-right">
+    <span class="discount-card__amount_text">
+      {{ discount.discountAmount }} %
+    </span>
+  </div>
   <p class="list-item__subTitle"
      [routerLink]="['/vendors', discount.vendorId]"
      matTooltip="Подробнее о Вендоре"
@@ -14,40 +20,12 @@
   >
     {{ discount?.vendorName }}
   </p>
-  <p class="list-item__discountAmount">
-    <span class="list-item__discountAmount_text">
-          {{discount.discountAmount}}
-    </span>
-    <span class="list-item__discountAmount_symbol">
-      %
-    </span>
-  </p>
-  <p class="list-item__date">
-        <span class="list-item__date_label">
-         <small>
-           {{"USER_PROFILE.LIST_ITEM.DATE_BEFORE" | translate}}:
-         </small>
-        </span>
-    <span class="list-item__date_text"
-    >
-      <small>{{discount.endDate | date: 'medium'}}</small>
-    </span>
-  </p>
-  <div class="list-item__actions">
 
-    <div class="list-item__actions_favourite">
-      <mat-icon class="list-item__icon_favourite"
-                fxLayoutAlign="center center"
-                matTooltip="Toggle Favourites"
-                [ngStyle]="{'color': discount.isSaved ? '#FF6347' : '#FF6347'}"
-                (click)="toggleFavorites(discount.discountId)"
-      >
-        {{discount.isSaved ? 'favorite' : 'favorite_border'}}
-      </mat-icon>
-    </div>
-
+  <div class="list-item__actions" 
+       fxLayout="row">
     <div class="list-item__actions_ticket">
       <button class="action__ticket"
+              mat-raised-button 
               matTooltip="Ticket"
               (click)="ticketHandler(discount.discountId)"
               [class.discountInActive]="!discount.activityStatus"
@@ -63,6 +41,25 @@
         }}
       </button>
     </div>
-
+    <div class="list-item__actions_favourite">
+      <mat-icon class="list-item__icon_favourite"
+                fxLayoutAlign="center center"
+                matTooltip='{{ "USER_PROFILE.LIST_ITEM.TOOLTIP_FAVORITE" | translate}}'
+                [ngStyle]="{'color': discount.isSaved ? 'rgb(218, 129, 113)' : '#adadaf'}"
+                (click)="toggleFavorites(discount.discountId)"
+      >
+        favorite
+      </mat-icon>
+    </div>
   </div>
+  <p class="list-item__date">
+    <span class="list-item__date_label">
+     <small>
+       {{"USER_PROFILE.LIST_ITEM.DATE_BEFORE" | translate}}:
+     </small>
+    </span>
+    <span class="list-item__date_text">
+      <small>{{discount.endDate | date: 'medium'}}</small>
+    </span>
+  </p>
 </li>

@@ -66,20 +66,20 @@
     }
   },
   "MODERATOR_DASHBOARD": {
-    "NEW_VENDOR_FORM": "Форма добавления поставщика услуг",
+    "NEW_VENDOR_FORM": "Форма добавления вендора",
     "NEW_DISCOUNT_FORM": "Форма добавления скидки"
   },
   "NEW_VENDOR_FORM": {
-    "NAME_LABEL": "Наименование поставщика услуги/товара*",
-    "ADDRESS_LABEL": "Адрес поставщика услуги/товара",
+    "NAME_LABEL": "Наименование вендора*",
+    "ADDRESS_LABEL": "Адрес вендора",
     "ADDRESS_PLACEHOLDER": "Например: г.Минск, ул.Ольшевского,11-4",
     "DESCRIPTION": "Описание вендора",
-    "PHONE_NUMBER": "Телефон поставщика услуги/товара*",
+    "PHONE_NUMBER": "Телефон вендора*",
     "VALID_PHONE": "Телефон в формате +КОД_СТРАНЫ-КОД_ОПЕРАТОРА-НОМЕР, без пробелов",
-    "EMAIL_LABEL": "Электронный адрес поставщика услуги/товара*",
+    "EMAIL_LABEL": "Электронный адрес вендора*",
     "VALID_EMAIL": "Неверный формат электронного адреса",
     "WEBSITE_LABEL": "Веб-сайт",
-    "OTHER_SOCIAL_NETWORK_LABEL": "Другие соц. сети поставщика",
+    "OTHER_SOCIAL_NETWORK_LABEL": "Другие соц. сети вендора",
     "VALID_SOCIAL_NETWORK": "Неверный aдрес ссылки",
     "BTN_TITLE": "Сохранить"
   },
@@ -98,8 +98,8 @@
     "CLOSE": "Закрыть"
   },
   "NEW_DISCOUNT_FORM": {
-    "NAME_VENDOR": "Наименование поставщика услуги/товара*",
-    "NAME_VENDOR_ERROR": "Выберите наименование поставщика из доступных вариантов*",
+    "NAME_VENDOR": "Наименование вендора*",
+    "NAME_VENDOR_ERROR": "Выберите наименование вендора из доступных вариантов*",
     "PRODUCT_SERVICE": "Наименование товара/услуги*",
     "DESCRIPTION": "Описание скидки",
     "AMOUNT_DISCOUNT": "Размер скидки*",
@@ -107,7 +107,7 @@
     "PROMO_CODE": "Промокод",
     "LABEL_TAGS": "Теги*",
     "BTN_TITLE": "Добавить",
-    "PLACEHOLDER_VENDOR_NAME": "Введите наименование поставщика услуги/товара",
+    "PLACEHOLDER_VENDOR_NAME": "Введите наименование вендора",
     "PLACEHOLDER_PRODUCT_SERVICE": "Введите наименование товара/услуги",
     "PLACEHOLDER_DESCRIPTION": "Введите описание",
     "PLACEHOLDER_PERCENT": "Укажите процент",
@@ -127,7 +127,7 @@
     "ADD_LOCATION": "Добавить локацию",
     "OPEN_MAP": "Открыть карту",
     "DELETE_LOCATION": "Удалить локацию",
-    "EMPTYCOORDINATES": "Пожалуйста, поставьте точку на карте, для этого нажмите значок добавления местоположения"
+    "EMPTYCOORDINATES": "Пожалуйста, поставьте точку на карте. Для этого нажмите значок добавления местоположения."
   },
   "MAP": {
     "ADD_POINT_BTN": "Добавить точку локации"
@@ -209,12 +209,15 @@
     },
     "LIST_ITEM": {
       "DATE_BEFORE": "до",
-      "DATE_ORDER": "заказан"
+      "DATE_ORDER": "заказан",
+      "TOOLTIP_DISCOUNT": "Подробнее о скидке",
+      "TOOLTIP_VENDOR": "Подробнее о вендоре",
+      "TOOLTIP_FAVORITE": "Переключить избранное"
     },
     "TICKET_BUTTON": {
       "TICKET_LABEL": "Талон",
-      "SHOW_TICKET": "Показать Талон",
-      "ORDER_TICKET": "Заказать Талон",
+      "SHOW_TICKET": "Показать талон",
+      "ORDER_TICKET": "Заказать талон",
       "DISCOUNT_INACTIVE": "Скидка не доступна"
     }
   }

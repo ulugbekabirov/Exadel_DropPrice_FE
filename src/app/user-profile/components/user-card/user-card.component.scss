@@ -8,6 +8,7 @@
   font-size: 1.5rem;
   line-height: 1.1;
   font-weight: 700;
+  margin-left: 0;
 
     @media screen and (max-width: 600px) {
       font-size: 1.3rem;
@@ -85,7 +86,8 @@
     }
 
     &_icon {
-      color: #3F51B5; 
+      color: $indigo; 
+      opacity: 0.85;
       @media screen and (max-width: 480px) {
         display: none;
         width: 18px;
