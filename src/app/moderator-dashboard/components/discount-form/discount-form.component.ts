@@ -38,7 +38,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
     discountName: ['', [Validators.required]],
     description: ['', [Validators.minLength(40), Validators.required]],
     discountAmount: ['', [Validators.required, Validators.min(1), Validators.max(100)]],
-    promoCode: [null],
+    promoCode: [''],
     startDate: ['', [Validators.required]],
     endDate: ['', [Validators.required]],
     activityStatus: [true, [Validators.requiredTrue]],
@@ -297,7 +297,8 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
     this.snackBar.open(message, action, {
       duration: 3000,
       panelClass: ['snackbar-color-success'],
-      horizontalPosition: 'center'
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
     });
   }
 
@@ -305,7 +306,8 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
     this.snackBar.open(message, action, {
       duration: 3000,
       panelClass: ['snack-bar-color-error'],
-      horizontalPosition: 'center'
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
     });
   }
 

@@ -23,7 +23,7 @@ const INITIAL_REQUEST_DISCOUNTS: RequestDiscounts = {
   request: {
     sortBy: {
       name: 'MAIN_PAGE.FILTER.SORT_BY.DISTANCE_DESC.NAME',
-      sortBy: 'DistanceDesc',
+      sortBy: 'DistanceAsc',
     },
     searchQuery: '',
     location: {
@@ -31,7 +31,7 @@ const INITIAL_REQUEST_DISCOUNTS: RequestDiscounts = {
       longitude: null,
       townName: ''
     },
-    take: 10,
+    take: 50,
     skip: 0,
     tags: [],
   }

@@ -70,7 +70,7 @@ export class DiscountsFacadeService {
 
   getTags(): Observable<Tag[]> {
     const skip$: Observable<number> = of(0);
-    const take$: Observable<number> = of(5);
+    const take$: Observable<number> = of(18);
     return combineLatest(skip$, take$)
       .pipe(
         switchMap(([skip, take]) => {
