@@ -8,29 +8,20 @@
   justify-content: center;
 }
 
+
 .search-input {
-  font-size: 1rem;
-  position: relative;
-  width: 100%;
-  padding: 0 1em;
+  width: inherit;
 
-  &__label {
+  .search-input__label {
+    color: $main_gray;
     font-size: 1.2rem;
-    padding: 0 1rem;
+    font-weight: 400;
+    display: flex;
+    justify-content: space-between;
   }
 
-  &__input {
-    padding: .1em 1em;
+  .search-input__icon {
+    color: $main_gray;
   }
 
-  &__icon {
-    position: absolute;
-    top: 50%;
-    right: .8em;
-    transform: translateY(-50%);
-    height: 1.4rem;
-    width: 1.4rem;
-    font-size: 1.5rem;
-    color: $discount_card_text_color;
-  }
 }

@@ -5,7 +5,8 @@ import {
   Input,
   OnInit,
   Output,
-  ViewChild
+  ViewChild,
+  ViewEncapsulation
 } from '@angular/core';
 import { MatChipList } from '@angular/material/chips';
 import { Observable } from 'rxjs';
@@ -17,6 +18,7 @@ import { Tag } from '../../../models';
   selector: 'app-tags-filter',
   templateUrl: './tags-filter.component.html',
   styleUrls: ['./tags-filter.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
@@ -37,9 +39,9 @@ export class TagsFilterComponent implements OnInit {
           map((tags: Tag[]): Tag[] => tags.map((tag: Tag) => {
             const find = activeTags.find((activeTag: Tag) => tag.tagId === activeTag.tagId);
             if (find) {
-              return {...tag, selected: true};
+              return { ...tag, selected: true };
             } else {
-              return {...tag, selected: false};
+              return { ...tag, selected: false };
             }
           }))
         );

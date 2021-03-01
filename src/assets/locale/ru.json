@@ -79,7 +79,7 @@
     "ADDRESS_PLACEHOLDER": "Например: г.Минск, ул.Ольшевского,11-4",
     "DESCRIPTION": "Описание вендора",
     "PHONE_NUMBER": "Телефон вендора*",
-    "VALID_PHONE": "Телефон в формате +КОД_СТРАНЫ-КОД_ОПЕРАТОРА-НОМЕР, без пробелов",
+    "VALID_PHONE": "Телефон в формате, например: +375 25 123 45 76 или 8029 123 45 67",
     "EMAIL_LABEL": "Электронный адрес вендора*",
     "VALID_EMAIL": "Неверный формат электронного адреса",
     "WEBSITE_LABEL": "Веб-сайт",
@@ -146,7 +146,7 @@
     "ASSESSMENT_LABEL": "Оценить",
     "EDIT_BUTTON_LABEL": "Редактировать",
     "ARCHIVE_BUTTON_LABEL": "Архивировать",
-    "TICKET_BUTTON_LABEL": "Заказать скидку",
+    "TICKET_BUTTON_LABEL": "Получить скидку",
     "MAT_TAB_ABOUT": "О СКИДКЕ",
     "TOOLTIP_GO_BACK": "Вернуться к списку",
     "TOOLTIP_VENDOR": "Вендор",
@@ -172,15 +172,11 @@
   },
   "BUTTON_BACK_LOCATION": "назад",
   "ADMIN_DASHBOARD": {
-    "SETTINGS": "Изменить",
-    "SIDEBAR": {
-      "ADMIN": "Статистика",
-      "SETTINGS": "Настройки",
-      "VENDORS": "Вендоры",
-      "DISCOUNTS": "Скидки",
-      "OPTIONS": "Опции",
-      "COLLAPSE": "Свернуть"
-    },
+    "SETTINGS_TITLE": "Изменить",
+    "DISCOUNT_LABEL": "Статистика по скидкам",
+    "VENDOR_LABEL": "Статистика по вендорам",
+    "SETTINGS_LABEL": "Настройки",
+
     "SORT": {
       "LABEL": {
         "RATING": "Сортировать по рейтингу",
@@ -193,8 +189,8 @@
       "TABLE": {
         "NAME": "Название",
           "RATING": "Рейтинг",
-        "TICKETS": "Талоны",
-        "EMAIL": "Эл. Почта"
+        "TICKETS": "Кол-во талонов",
+        "EMAIL": "Электронная почта"
       }
     },
     "SEARCH": {
