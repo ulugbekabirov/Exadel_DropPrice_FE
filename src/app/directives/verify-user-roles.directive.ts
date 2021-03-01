@@ -20,7 +20,7 @@ export class VerifyUserRolesDirective implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.activeUser$ = this.userService.activeUser;
+    this.activeUser$ = this.userService.activeUser$;
     this.subscription = this.activeUser$
       .pipe(
         pluck('roles'),

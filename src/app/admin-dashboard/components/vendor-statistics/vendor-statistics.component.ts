@@ -19,7 +19,7 @@ export class VendorStatisticsComponent implements OnInit, AfterViewInit, OnDestr
   resultsLength$: Observable<number>;
   pageSizes$: Observable<number[]>;
   pageSize$: Observable<number>;
-  private unsubscribe$ = new Subject<void>();
+  private unsubscribe$: Subject<void> = new Subject<void>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

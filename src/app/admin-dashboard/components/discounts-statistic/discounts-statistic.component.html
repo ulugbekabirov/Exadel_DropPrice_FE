@@ -24,7 +24,7 @@
             {{"ADMIN_DASHBOARD.STATS.TABLE.RATING" | translate}}
           </th>
           <td mat-cell
-              *matCellDef="let element"> {{element.discountRating ? element.discountRating.toFixed(1) : '-'}} </td>
+              *matCellDef="let element"> {{element.discountRating ? (element.discountRating | number: '.1-3') : '-'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="ticketCount">

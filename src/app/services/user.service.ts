@@ -3,7 +3,8 @@ import { ApiDataService } from './api-data.service';
 import { BehaviorSubject, Observable, of, } from 'rxjs';
 import { ActiveUser } from '../models';
 import { KEY_ACTIVE_USER } from '../../constants';
-import { map, tap } from 'rxjs/operators';
+import { map, pluck, tap } from 'rxjs/operators';
+import { LanguageService } from './language.service';
 
 
 @Injectable({
@@ -11,13 +12,24 @@ import { map, tap } from 'rxjs/operators';
 })
 export class UserService {
   private activeUserSubject: BehaviorSubject<ActiveUser>;
-  public activeUser: Observable<ActiveUser>;
+  public activeUser$: Observable<ActiveUser>;
 
   constructor(
     private restApi: ApiDataService,
+    private languageService: LanguageService
   ) {
     this.activeUserSubject = new BehaviorSubject<ActiveUser>(JSON.parse(localStorage.getItem(KEY_ACTIVE_USER)));
-    this.activeUser = this.activeUserSubject.asObservable();
+    this.activeUser$ = this.activeUserSubject.asObservable();
+  }
+
+  select<T>(name: string): Observable<T> {
+    return this.activeUser$.pipe(pluck(name));
+  }
+
+  set(name: string, state: any): void {
+    this.activeUserSubject.next({
+      ...this.activeUserValue, [name]: state
+    });
   }
 
   get activeUserValue(): ActiveUser {
