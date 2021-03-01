@@ -1,78 +1,58 @@
-import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { MatChip, MatChipList, MatChipSelectionChange } from '@angular/material/chips';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
+import { MatChipList } from '@angular/material/chips';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/internal/operators/map';
+import { switchMap } from 'rxjs/operators';
 import { Tag } from '../../../models';
 
 @Component({
   selector: 'app-tags-filter',
   templateUrl: './tags-filter.component.html',
   styleUrls: ['./tags-filter.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class TagsFilterComponent implements OnInit, AfterViewInit {
+export class TagsFilterComponent implements OnInit {
 
   @ViewChild(MatChipList) chipList: MatChipList;
   @Input() tags$;
+  privateTags$;
   @Output() chipSelected = new EventEmitter();
   @Input() activeTags$;
-  selectedTags: Tag[];
-  userAction = true;
-
-  constructor(
-    private cd: ChangeDetectorRef,
-  ) {
-  }
+  selectedTags: Tag[] = [];
 
   ngOnInit(): void {
-    this.activeTags$.pipe().subscribe(next => {
-      this.selectedTags = next;
-    });
-  }
-
-  ngAfterViewInit(): void {
-    this.selectChips(this.selectedTags);
-  }
-
-  selectChips(value: Tag[]): void {
-    this.userAction = false;
-    this.chipList.chips.forEach((chip: MatChip) => chip.deselect());
-    // const chipsToSelect = [];
-    const chipsToSelect = this.chipList.chips
-      .filter((chip) => {
-        const find = value.find(tag => tag.tagId === chip.value.tagId);
-        if (find) {
-          return true;
-        }
-      });
-    chipsToSelect.forEach((chip) => chip.select());
-    this.userAction = true;
-  }
-
-  uniqChip(tag: Tag): any {
-    if (!this.selectedTags.length) {
-      return [tag];
-    }
-    return this.selectedTags.filter((opt: Tag) => opt.tagId !== tag.tagId);
-  }
-
-  changeSelectedTag(chip: MatChipSelectionChange, isUserSelect): void {
-
-    const chipValue = chip.source.value;
-
-    if (!isUserSelect) {
-      this.chipSelected.emit(chipValue);
-      return;
-    }
-    const uniq = this.uniqChip( chipValue);
-    if (chip.selected) {
-      this.selectedTags = [...this.selectedTags, chipValue];
-    } else {
-      this.selectedTags = [...uniq];
-    }
-    this.chipSelected.emit(this.selectedTags);
+    this.privateTags$ = this.activeTags$.pipe(
+      switchMap((activeTags: Tag[]): Observable<Tag[]> => {
+        return this.tags$.pipe(
+          map((tags: Tag[]): Tag[] => tags.map((tag: Tag) => {
+            const find = activeTags.find((activeTag: Tag) => tag.tagId === activeTag.tagId);
+            if (find) {
+              return {...tag, selected: true};
+            } else {
+              return {...tag, selected: false};
+            }
+          }))
+        );
+      })
+    );
   }
 
   toggleSelection(chip): void {
-    chip.toggleSelected();
+    if (this.selectedTags.find(tag => tag.tagId === chip.tagId)) {
+      this.selectedTags = this.selectedTags.filter(tag => chip.tagId !== tag.tagId);
+    } else {
+      this.selectedTags = [...this.selectedTags, chip];
+    }
+    this.chipSelected.emit(this.selectedTags);
   }
 
 }

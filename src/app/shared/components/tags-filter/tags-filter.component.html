@@ -1,15 +1,20 @@
-<mat-chip-list [selectable]="true" [multiple]="true">
-  <div class="chipsBlock">
+<mat-chip-list selectable multiple>
+  <div class="tags-block">
     <mat-chip
-      class="chipsStyle"
+      class="tags-block__chip"
       #chip="matChip"
-      *ngFor="let tag of tags$ | async"
-      (click)="toggleSelection(chip)"
+      *ngFor="let tag of privateTags$ | async"
+      (click)="toggleSelection(tag)"
       [value]="tag"
-      (selectionChange)="changeSelectedTag($event, userAction)"
+      [class.selected]="tag.selected"
     >
-      <mat-icon class="chipsIcon" *ngIf="chip.selected">check</mat-icon>
-      # {{tag.tagName}}
+      <span class="tags-block__chip_symbol">
+        #
+      </span>
+      <span class="tags-block__chip_text">
+        {{tag.tagName}}
+      </span>
     </mat-chip>
   </div>
 </mat-chip-list>
+
