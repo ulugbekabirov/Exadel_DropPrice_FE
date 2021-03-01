@@ -74,8 +74,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
           return this.discountsService.getDiscountById(this.discountId, {});
         }),
         takeUntil(this.unsubscribe$)
-      )
-        .subscribe(discount => {
+      ).subscribe(discount => {
           const editingDiscount = {...discount};
           if (editingDiscount.tags) {
             editingDiscount.tags.forEach(tag => {
@@ -83,7 +82,16 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
                 new FormControl(tag, Validators.required));
             });
           }
-          this.restApi.putBeginEditDiscount(this.discountId);
+          this.restApi.beginEditDiscount(this.discountId)
+            .subscribe(next => {
+              console.log('start session', next);
+              this.snackBar.open(next.message, '', {
+                duration: 5000,
+                panelClass: ['snack-bar-color-success'],
+                horizontalPosition: 'center',
+                verticalPosition: 'top'
+              });
+            });
           this.discountForm.patchValue(editingDiscount);
           this.discountForm.controls.vendorId.disable();
           this.discountForm.markAsPristine();

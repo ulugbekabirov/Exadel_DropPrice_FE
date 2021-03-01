@@ -19,6 +19,8 @@ export const PUT_ARCHIVE_DISCOUNTS_ENDPOINT = 'archive';
 export const PUT_ASSESS_DISCOUNTS_ENDPOINT = 'assess';
 export const SEARCH_DISCOUNTS_ENDPOINT = 'search';
 export const GET_POINT_OF_SALES = 'pointOfSales';
+export const START_EDIT_SESSION_ENDPOINT = 'beginEdit';
+export const END_EDIT_SESSION_ENDPOINT = 'endEdit';
 
 export const SORTS = [
   {

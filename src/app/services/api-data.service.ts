@@ -20,7 +20,7 @@ import {
   CONFIGS, CHANGE_CONFIGS,
   PUT_ASSESS_DISCOUNTS_ENDPOINT,
   USER_SAVED_ENDPOINT,
-  USER_TICKETS_ENDPOINT,
+  USER_TICKETS_ENDPOINT, START_EDIT_SESSION_ENDPOINT, END_EDIT_SESSION_ENDPOINT,
 } from '../../constants';
 import { environment } from '../../environments/environment';
 
@@ -142,9 +142,12 @@ export class ApiDataService {
     return this.http.get(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}/${GET_POINT_OF_SALES}`);
   }
 
-  putBeginEditDiscount(discountId): any {
-    return this.http.put(`${environment.webApiUrl}${DISCOUNTS_ENDPOINT}/${discountId}/beginEdit`, null)
-      .subscribe(next => console.log('Message', next));
+  beginEditDiscount(discountId): any {;
+    return this.http.put(`${environment.webApiUrl}${DISCOUNTS_ENDPOINT}/${discountId}/${START_EDIT_SESSION_ENDPOINT}`, null);
+  }
+
+  endEditDiscount(discountId): any {
+    return this.http.delete(`${environment.webApiUrl}${DISCOUNTS_ENDPOINT}/${discountId}/${END_EDIT_SESSION_ENDPOINT}`, null);
   }
 }
 
