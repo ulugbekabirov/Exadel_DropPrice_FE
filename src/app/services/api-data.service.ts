@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ActiveUser, AuthInfo, AuthUser, Vendor } from '../models';
 import {
   AUTH_ENDPOINT,
-  GET_DISCOUNTS_ENDPOINT,
+  DISCOUNTS_ENDPOINT,
   GET_TAGS_ENDPOINT,
   GET_TICKET_ENDPOINT,
   GET_POINT_OF_SALES,
@@ -40,7 +40,7 @@ export class ApiDataService {
   }
 
   getDiscounts(options): Observable<any> {
-    return this.http.get<any>(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}`, options);
+    return this.http.get<any>(`${environment.webApiUrl}${DISCOUNTS_ENDPOINT}`, options);
   }
 
   getTowns(): Observable<any> {
@@ -52,23 +52,23 @@ export class ApiDataService {
   }
 
   getTicket(discountId): Observable<any> {
-    return this.http.get<any>(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${discountId}/${GET_TICKET_ENDPOINT}`);
+    return this.http.get<any>(`${environment.webApiUrl}${DISCOUNTS_ENDPOINT}/${discountId}/${GET_TICKET_ENDPOINT}`);
   }
 
   searchDiscounts(options): Observable<any> {
-    return this.http.get<any>(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${SEARCH_DISCOUNTS_ENDPOINT}`, options);
+    return this.http.get<any>(`${environment.webApiUrl}${DISCOUNTS_ENDPOINT}/${SEARCH_DISCOUNTS_ENDPOINT}`, options);
   }
 
   updateIsSavedDiscount(id): Observable<any> {
-    return this.http.put(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${id}/${PUT_IS_SAVED_DISCOUNTS_ENDPOINT}`, null);
+    return this.http.put(`${environment.webApiUrl}${DISCOUNTS_ENDPOINT}/${id}/${PUT_IS_SAVED_DISCOUNTS_ENDPOINT}`, null);
   }
 
   getDiscountById(discountId, options): Observable<any> {
-    return this.http.get(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${discountId}`, options);
+    return this.http.get(`${environment.webApiUrl}${DISCOUNTS_ENDPOINT}/${discountId}`, options);
   }
 
   getPointsOfSalesByDiscountId(discountId): Observable<any> {
-    return this.http.get(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${discountId}/${GET_POINT_OF_SALES}`);
+    return this.http.get(`${environment.webApiUrl}${DISCOUNTS_ENDPOINT}/${discountId}/${GET_POINT_OF_SALES}`);
   }
 
   getVendors(): Observable<Vendor[]> {
@@ -92,7 +92,7 @@ export class ApiDataService {
   }
 
   putDiscountInArchive(id): Observable<any> {
-    return this.http.put(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${id}/${PUT_ARCHIVE_DISCOUNTS_ENDPOINT}`, null);
+    return this.http.put(`${environment.webApiUrl}${DISCOUNTS_ENDPOINT}/${id}/${PUT_ARCHIVE_DISCOUNTS_ENDPOINT}`, null);
   }
 
   createDiscount(discount): any {
@@ -112,7 +112,7 @@ export class ApiDataService {
   }
 
   searchStatsDiscounts(options): any {
-    return this.http.get(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/stats/search`, options);
+    return this.http.get(`${environment.webApiUrl}${DISCOUNTS_ENDPOINT}/stats/search`, options);
   }
 
   getApiConfigs(): any {
@@ -127,7 +127,7 @@ export class ApiDataService {
   }
 
   putRating(discountId, body): any {
-    return this.http.put(`${environment.webApiUrl}${GET_DISCOUNTS_ENDPOINT}/${discountId}/${PUT_ASSESS_DISCOUNTS_ENDPOINT}`, body);
+    return this.http.put(`${environment.webApiUrl}${DISCOUNTS_ENDPOINT}/${discountId}/${PUT_ASSESS_DISCOUNTS_ENDPOINT}`, body);
   }
 
   getUserSavedDiscounts(options): Observable<any> {
@@ -140,6 +140,10 @@ export class ApiDataService {
 
   getVendorPointsOfSales(vendorId): Observable<any> {
     return this.http.get(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}/${GET_POINT_OF_SALES}`);
+  }
+
+  putBeginEditDiscount(discountId): Observable<any> {
+    return this.http.put(`${environment.webApiUrl}${DISCOUNTS_ENDPOINT}/${discountId}/beginEdit`, null);
   }
 }
 

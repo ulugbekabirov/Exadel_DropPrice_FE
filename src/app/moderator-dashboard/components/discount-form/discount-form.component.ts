@@ -5,9 +5,10 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Subject, throwError } from 'rxjs';
+import { forkJoin, Subject, throwError } from 'rxjs';
 import { catchError, debounceTime, filter, map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { Discount } from '../../../models';
+import { ApiDataService } from '../../../services/api-data.service';
 import { DiscountsService } from '../../../services/discounts.service';
 import { VendorsService } from '../../../services/vendors.service';
 
@@ -52,6 +53,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private discountsService: DiscountsService,
     private vendorsService: VendorsService,
+    private restApi: ApiDataService
   ) {
   }
 
@@ -64,6 +66,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
       this.vendorsList = this.filteredList = res;
     });
     this.vendorNameChanges();
+
     if (this.isEditMode) {
       this.route.paramMap.pipe(
         switchMap((params: ParamMap) => {
@@ -72,7 +75,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
         }),
         takeUntil(this.unsubscribe$)
       )
-        .subscribe((discount) => {
+        .subscribe(discount => {
           const editingDiscount = {...discount};
           if (editingDiscount.tags) {
             editingDiscount.tags.forEach(tag => {
@@ -80,6 +83,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
                 new FormControl(tag, Validators.required));
             });
           }
+          this.restApi.putBeginEditDiscount(this.discountId).subscribe(next => console.log('Message', next));
           this.discountForm.patchValue(editingDiscount);
           this.discountForm.controls.vendorId.disable();
           this.discountForm.markAsPristine();
