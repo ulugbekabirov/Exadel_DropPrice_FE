@@ -1,15 +1,14 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { DiscountsService } from '../../../services/discounts.service';
-import { forkJoin, Subject } from 'rxjs';
+import { Sort } from '../../../models/sort';
+import { Observable, Subject } from 'rxjs';
 import { Discount, Town, Vendor } from '../../../models';
-import { SORT_BY } from '../../../../constants';
-import { TicketService } from '../../../services/ticket.service';
 import { RefDirective } from '../../../directives/ref.directive';
-import { UserService } from '../../../services/user.service';
-import { VendorsService } from '../../../services/vendors.service';
-import { UserFacadeService } from '../../../user-profile/services/user-facade.service';
+import { VendorsFacadeService } from '../../services/vendors-facade.service';
+import { VendorsRequestStore } from '../../services/vendors-request-store';
+import { VendorsStore } from '../../services/vendors-store';
 
 @Component({
   selector: 'app-vendor-detail',
@@ -17,68 +16,52 @@ import { UserFacadeService } from '../../../user-profile/services/user-facade.se
   styleUrls: ['./vendor-detail.component.scss']
 })
 export class VendorDetailComponent implements OnInit, OnDestroy {
-  sortBy = SORT_BY;
-  towns: Town[];
-  vendor;
-  selectedVendorId;
-  vendorDiscounts: Discount[];
-  activeCoords = {
-    longitude: this.userService.activeUserValue.longitude,
-    latitude: this.userService.activeUserValue.latitude,
-  };
-  vendorsList: Vendor[];
-  reqOpt = {
-    skip: 0,
-    take: 10,
-    longitude: this.userService.activeUserValue.officeLongitude,
-    latitude: this.userService.activeUserValue.officeLatitude,
-    sortBy: 'DistanceAsc',
-  };
-  private unsubscribe$ = new Subject<void>();
+  panelOpenState = false;
 
+  vendor$: Observable<Vendor>;
+  vendorsList$: Observable<Vendor[]>;
+  vendorDiscounts$: Observable<Discount[]>;
+  vendorId: number;
+  towns$: Observable<Town[]>;
+  sorts$: Observable<Sort[]>;
+  sortBySelected$: Observable<Sort>;
+  locationSelected$: Observable<Town>;
+  vendorSelect = new FormControl();
+  private unsubscribe$ = new Subject<void>();
   @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private discountsService: DiscountsService,
-    private vendorsService: VendorsService,
-    private ticketService: TicketService,
-    private userService: UserService,
-    private userFacade: UserFacadeService,
+    private facade: VendorsFacadeService,
+    private store: VendorsStore,
+    private sortStore: VendorsRequestStore
   ) {
+    this.vendor$ = this.store.select('activeVendor');
+    this.vendorsList$ = this.store.select('vendors');
+    this.towns$ = this.store.select('towns');
+    this.sorts$ = this.store.select('sorts');
+    this.vendorDiscounts$ = this.store.select('vendorDiscounts');
+    this.locationSelected$ = this.sortStore.select('location');
+    this.sortBySelected$ = this.sortStore.select('sortBy');
   }
 
   ngOnInit(): void {
     this.route.paramMap
       .pipe(
-        switchMap((params: ParamMap): any => {
-          const vendId: number = +params.get('id');
-          return forkJoin(
-            this.vendorsService.getVendorById(vendId),
-            this.vendorsService.getVendors(),
-            this.discountsService.getTowns(),
-            this.vendorsService.getVendorsDiscounts(vendId, this.reqOpt)
-          );
+        switchMap((params: ParamMap): Observable<any> => {
+          this.vendorId = +params.get('id');
+          return this.facade.loadData(this.vendorId);
         }),
         takeUntil(this.unsubscribe$)
-      ).subscribe(([vendor, vendors, towns, vendDisc]) => {
-      if (!vendor) {
-        return;
-      }
-      const parseSocials = vendor.socialLinks ? JSON.parse(vendor.socialLinks) : '';
-      this.vendor = {
-        ...vendor,
-        socialLinks: Object
-          .keys(parseSocials)
-          .filter(value => !!parseSocials[value])
-          .map(key => ({name: key, path: parseSocials[key]}))
-      };
-      this.selectedVendorId = vendor.vendorId;
-      this.vendorsList = vendors;
-      this.towns = towns;
-      this.vendorDiscounts = vendDisc;
-    });
+      ).subscribe();
+    this.vendorSelect.valueChanges
+      .pipe(
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe(vendorId => {
+        this.selectVendor(vendorId);
+      });
   }
 
   onEditVendor(vendorId: number): void {
@@ -92,55 +75,36 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
     this.router.navigate(['/vendors', vendorId]);
   }
 
-  changeCoords(): void {
-    this.userService.getLocation()
-      .then(res => {
-        this.reqOpt.latitude = res.latitude;
-        this.reqOpt.longitude = res.longitude;
-      }).then(res => {
-      this.vendorsService.getVendorsDiscounts(this.vendor.vendorId, this.reqOpt).pipe(
+  changeFavourites(discountId: any): void {
+    this.facade.toggleFavourites(discountId)
+      .pipe(
         takeUntil(this.unsubscribe$)
-      )
-        .subscribe(data => this.vendorDiscounts = data);
+      ).subscribe(resp => {
+      const value: Discount[] = this.store.value.vendorDiscounts;
+      const discounts = value.map((discount: Discount) => {
+        return discount.discountId === resp.discountID
+          ? {...discount, isSaved: resp.isSaved}
+          : {...discount};
+      });
+      this.store.set('vendorDiscounts', discounts);
     });
   }
 
-  changeFavourites(discountId: any): void {
-    this.discountsService.updateIsSavedDiscount(discountId).pipe(
-      takeUntil(this.unsubscribe$)
-    )
-      .subscribe(resp => {
-        this.vendorDiscounts = this.vendorDiscounts.map((discount: Discount) => {
-          return discount.discountId === resp.discountID
-            ? {...discount, isSaved: resp.isSaved}
-            : {...discount};
-        });
-      });
-  }
-
-  onSortChange({value: {sortBy}}): void {
-    this.reqOpt.sortBy = sortBy;
-    this.vendorsService.getVendorsDiscounts(this.vendor.vendorId, this.reqOpt).pipe(
-      takeUntil(this.unsubscribe$)
-    )
-      .subscribe(res => this.vendorDiscounts = res);
+  onSortChange(sortBy): void {
+    this.sortStore.set('sortBy', sortBy);
   }
 
   getTicket(discountId: number): void {
-    this.userFacade.orderTicket(discountId, this.refDir);
+    this.facade.requestTicket(discountId, this.refDir);
   }
 
-  onLocationChange({value: {latitude, longitude}}): void {
-    this.reqOpt.latitude = latitude;
-    this.reqOpt.longitude = longitude;
-    this.vendorsService.getVendorsDiscounts(this.vendor.vendorId, this.reqOpt).pipe(
-      takeUntil(this.unsubscribe$)
-    )
-      .subscribe(res => this.vendorDiscounts = res);
+  onLocationChange(location): void {
+    this.sortStore.set('location', location);
   }
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+    this.store.set('activeVendor', {});
   }
 }

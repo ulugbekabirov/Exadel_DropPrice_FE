@@ -1,5 +1,5 @@
 export interface Town {
-  townId: number;
+  townId?: number;
   townName: string;
   latitude: number;
   longitude: number;

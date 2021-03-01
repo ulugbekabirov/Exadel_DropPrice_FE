@@ -13,7 +13,10 @@
   "HEADER": {
     "SELECTOR_TITLE": "Language",
     "ADMIN_PANEL_LINK_TITLE": "View statistics",
-    "MODERATOR_PANEL_LINK_TITLE": "Add New"
+    "MODERATOR_PANEL_LINK_TITLE": "Add new",
+    "USER_PROFILE": "My profile",
+    "CHANGE_LANGUAGE": "Change language",
+    "LOG_OUT": "Log out"
   },
   "LOGIN": {
     "TITLE": "Log In",
@@ -28,7 +31,7 @@
   "MAIN_PAGE": {
     "SEARCH": "Search",
     "BUTTONS": {
-      "TICKET": "Ticket"
+      "TICKET": "Get the discount"
     },
     "FILTER": {
       "SORT_BY": {
@@ -53,12 +56,17 @@
         }
       },
       "LOCATION_SORT": {
-        "TITLE": "location"
+        "TITLE": "location",
+        "CURRENT":"My location",
+        "OFFICE":"My Office Location"
       }
     },
     "DISCOUNT_CARD": {
-      "DISTANCE": "from you",
-      "DATE": "before"
+      "DISTANCE": " from you",
+      "TOOLTIP_VENDOR": "Vendor details",
+      "TOOLTIP_FAVORITE": "Add to favorites",
+      "TOOLTIP_DISCOUNT": "Discount details",
+      "TOOLTIP_RATING": "Discount rating"
     }
   },
   "MODERATOR_DASHBOARD": {
@@ -71,7 +79,7 @@
     "DESCRIPTION": "Vendor description",
     "ADDRESS_PLACEHOLDER": "Ex.: 17 Kensington Street",
     "PHONE_NUMBER": "Vendor phone number*",
-    "VALID_PHONE": "Enter the phone without spaces in the format '+COUNTRY_CODE-OPERATOR_CODE-NUMBER'",
+    "VALID_PHONE": "Enter the phone, for example: +375 25 123 45 76 or 8029 123 45 67",
     "EMAIL_LABEL": "Vendor email*",
     "VALID_EMAIL": "Please enter a valid email address",
     "WEBSITE_LABEL": "Vendor website",
@@ -88,7 +96,7 @@
     "PRODUCT_SERVICE": "Product/service",
     "EMAIL": "Email",
     "PHONE": "Contact number",
-    "PROMO_CODE": "Promo code (if available)",
+    "PROMO_CODE": "Promo code",
     "DISCOUNT": "Discount",
     "CONFIRMATION_DATE": "Confirmation date",
     "CLOSE": "Close"
@@ -123,23 +131,27 @@
     "ADD_LOCATION": "Add the location",
     "OPEN_MAP": "Open the map",
     "DELETE_LOCATION": "Delete the location",
-    "EMPTYCOORDINATES": "Please, put a point on the map, click adding location icon"
+    "EMPTYCOORDINATES": "Please, put a point on the map, click adding location icon",
+    "EMPTY_COORDINATES_POINT": "You must select point or points of sales"
   },
   "MAP": {
     "ADD_POINT_BTN": "Add point"
   },
   "DISCOUNT_DETAIL": {
-    "AMOUNT_LABEL": "discount",
+    "AMOUNT_LABEL": "Discount",
     "PROMO_CODE_LABEL": "Promo Code",
-    "ADDRESS_LABEL": "address",
-    "DISTANCE": "from you",
-    "DATES_LABEL": "validity period",
-    "START_DATE": "from",
-    "END_DATE": "to",
+    "ADDRESS_LABEL": "Address",
+    "DISTANCE": "Distance from you",
+    "DATES_LABEL": "Validity discount period",
     "ASSESSMENT_LABEL": "Assess",
     "EDIT_BUTTON_LABEL": "Edit",
     "ARCHIVE_BUTTON_LABEL": "Archive",
-    "TICKET_BUTTON_LABEL": "Ticket"
+    "TICKET_BUTTON_LABEL": "Get the discount",
+    "MAT_TAB_ABOUT": "ABOUT",
+    "TOOLTIP_GO_BACK": "Go back",
+    "TOOLTIP_VENDOR": "Vendor",
+    "TOOLTIP_FAVORITES": "Add to favorites",
+    "TOOLTIP_VENDOR_RAT": "Vendor rating"
   },
   "VENDOR_PAGE": {
     "PAGE_TITLE": "About vendor",
@@ -148,9 +160,11 @@
       "DETAIL_CONTENT": {
         "VENDOR_NAME": "Vendor Name",
         "VENDOR_ADDRESS": "Address",
+        "VENDOR_DESCRIPTION": "Description",
         "VENDOR_EMAIL": "E-Mail",
         "VENDOR_PHONE": "Phone",
-        "VENDOR_SOCIALS": "Socials"
+        "VENDOR_SOCIALS": "Socials",
+        "VENDOR_EDIT": "Edit vendor"
       },
       "DETAIL_ACTIONS": {
         "EDIT": "Edit"
@@ -159,15 +173,10 @@
   },
   "BUTTON_BACK_LOCATION": "go back",
   "ADMIN_DASHBOARD": {
-    "SETTINGS": "Change",
-    "SIDEBAR": {
-      "ADMIN": "Statistics",
-      "SETTINGS": "Settings",
-      "VENDORS": "Vendors",
-      "DISCOUNTS": "Discounts",
-      "OPTIONS": "Options",
-      "COLLAPSE": "Collapse"
-    },
+    "SETTINGS_TITLE": "Change",
+    "DISCOUNT_LABEL": "Discounts statistic",
+    "VENDOR_LABEL": "Vendors statistic",
+    "SETTINGS_LABEL": "Settings",
     "SORT": {
       "LABEL": {
         "RATING": "Sort by rating",
@@ -180,8 +189,8 @@
       "TABLE": {
         "NAME": "Name",
         "RATING": "Rating",
-        "TICKETS": "Tickets",
-        "EMAIL": "E-mail"
+        "TICKETS": "Number of tickets",
+        "EMAIL": "E-mail address"
       }
     },
     "SEARCH": {
@@ -190,19 +199,28 @@
     "CONTENT": ""
   },
   "USER_PROFILE": {
+    "USER_CARD": {
+      "OFFICE_LOCATION": "Office",
+      "USER_PHONE": "Phone",
+      "USER_EMAIL": "Email"
+    },
     "LIST_TITLE": {
-      "SAVED": "Saved Discounts",
-      "ORDERED": "Ordered Tickets"
+      "SAVED": "Saved discounts",
+      "ORDERED": "Ordered tickets"
     },
     "LIST_ITEM": {
-      "DATE_BEFORE": "before",
-      "DATE_ORDER": "order"
+      "DATE_BEFORE": "valid until",
+      "DATE_ORDER": "order",
+      "TOOLTIP_DISCOUNT": "More about discount",
+      "TOOLTIP_VENDOR": "More about vendor",
+      "TOOLTIP_FAVORITE": "Toggle favorites"
     },
     "TICKET_BUTTON": {
-      "TICKET_LABEL": "Ticket",
-      "SHOW_TICKET": "Show Ticket",
-      "ORDER_TICKET": "Order Ticket",
-      "DISCOUNT_INACTIVE": "Not available"
+      "TICKET_LABEL": "Get the discount",
+      "SHOW_TICKET": "Show the ticket",
+      "ORDER_TICKET": "Order the ticket",
+      "DISCOUNT_INACTIVE": "Not available",
+      "TOOLTIP_TICKET": "Ticket"
     }
   }
 }

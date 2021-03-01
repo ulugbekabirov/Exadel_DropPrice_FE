@@ -4,9 +4,8 @@
   font-size: 1rem;
   position: relative;
   min-height: 100vh;
-  padding: 2em;
+  padding: 2em 0;
   color: $user_profile_content_txtColor;
-  background: $user_profile_content_bgColor;
 
   .grid {
     display: grid;
@@ -15,7 +14,7 @@
     justify-items: stretch;
     align-items: stretch;
 
-    > article {
+    article {
       display: flex;
       width: 100%;
       height: fit-content;

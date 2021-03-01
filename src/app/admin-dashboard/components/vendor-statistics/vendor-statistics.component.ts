@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { merge, Observable, Subject } from 'rxjs';
@@ -10,7 +10,8 @@ import { VendorsStatStore } from '../../services/vendors-stat-store';
 @Component({
   selector: 'app-vendor-statistics',
   templateUrl: './vendor-statistics.component.html',
-  styleUrls: ['./vendor-statistics.component.scss']
+  styleUrls: ['./vendor-statistics.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class VendorStatisticsComponent implements OnInit, AfterViewInit, OnDestroy {
   displayedColumns: string[] = ['name', 'rating', 'ticketCount', 'email'];
@@ -19,7 +20,7 @@ export class VendorStatisticsComponent implements OnInit, AfterViewInit, OnDestr
   resultsLength$: Observable<number>;
   pageSizes$: Observable<number[]>;
   pageSize$: Observable<number>;
-  private unsubscribe$ = new Subject<void>();
+  private unsubscribe$: Subject<void> = new Subject<void>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

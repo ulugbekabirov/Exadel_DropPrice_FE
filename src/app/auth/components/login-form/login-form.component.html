@@ -1,0 +1,54 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card fxLayout.xs="row" fxLayoutAlign.xs="center center">
+    <mat-card-content>
+      <form
+        fxLayoutGap.xs="30px"
+        fxLayout.xs="column"
+        fxLayoutAlign.xs="center start"
+        [formGroup]="loginForm"
+        #formDirective="ngForm"
+        (ngSubmit)="onSubmit()"
+      >
+        <h2>{{ "LOGIN.TITLE" | translate }}</h2>
+        <mat-form-field>
+          <mat-label>{{ "LOGIN.EMAIL_LABEL" | translate }}</mat-label>
+          <input id="email-container" matInput formControlName="email"/>
+          <mat-error>{{ "LOGIN.VALID_EMAIL" | translate }} </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{ "LOGIN.PASSWORD_LABEL" | translate }}</mat-label>
+          <input
+            id="password-container"
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            formControlName="password"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'{{LOGIN.HIDE | translate}}'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+          <mat-error *ngIf="password.hasError('minlength')">
+            {{ "LOGIN.PASS_ERR_LENGTH" | translate }}
+          </mat-error>
+          <mat-error *ngIf="password.hasError('pattern')">
+            {{ "LOGIN.STRONG_PASS" | translate }}
+          </mat-error>
+        </mat-form-field>
+        <button
+          id="login-btn-container"
+          mat-flat-button
+          color="primary"
+          [disabled]="loginForm.invalid"
+          type="submit"
+        >
+          {{ "LOGIN.BTN_TITLE" | translate }}
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

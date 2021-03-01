@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation,} from '@angular/core';
 import { merge, Observable, Subject } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
@@ -10,7 +10,8 @@ import { Discount } from 'src/app/models';
 @Component({
   selector: 'app-discounts-statistic',
   templateUrl: './discounts-statistic.component.html',
-  styleUrls: ['./discounts-statistic.component.scss']
+  styleUrls: ['./discounts-statistic.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class DiscountsStatisticComponent implements OnInit, OnDestroy, AfterViewInit {

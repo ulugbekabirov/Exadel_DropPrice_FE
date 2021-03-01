@@ -1,0 +1,152 @@
+<article class="discount-detail">
+  <p class="go_back_main">
+    <a class="go-back__link" fxLayoutAlign="start center" (click)="goBack()">
+      <mat-icon class="go-back__link_icon">
+        keyboard_backspace
+      </mat-icon>
+      <span class="go-back__link_text" matTooltip="{{ 'DISCOUNT_DETAIL.TOOLTIP_GO_BACK' | translate }}"
+            matTooltipPosition="right">
+        {{"BUTTON_BACK_LOCATION" | translate }}
+      </span>
+    </a>
+  </p>
+
+  <section class="discount-detail__header">
+    <div class="discount-detail" fxLayout="column" fxLayoutAlign="space-around start">
+      <div class="discount-titles" fxLayout="column" fxLayoutAlign="space-around start">
+        <h3 class="discount-content__vendor">
+          <a [routerLink]="['../../vendors/', (discount$ | async)?.vendorId]"
+             matTooltip="{{ 'DISCOUNT_DETAIL.TOOLTIP_VENDOR' | translate }}" matTooltipPosition="right">
+            {{(discount$ | async)?.vendorName | uppercase}}
+          </a>
+        </h3>
+        <div class="discount-main-title" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+          <h2 class="discount-detail__header_title">
+            {{(discount$ | async)?.discountName}}
+          </h2>
+          <mat-icon class="discount-detail__header_favourite"
+                    matTooltip="{{ 'DISCOUNT_DETAIL.TOOLTIP_FAVORITES' | translate }}"
+                    [ngStyle]="{'color': (discount$ | async)?.isSaved ? '#da8171' : '#adadaf'}"
+                    (click)="toggleFavorites(discountId)">
+            favorite
+          </mat-icon>
+        </div>
+      </div>
+      <div class="discount-detail__header_rating" fxLayout="row" fxLayoutAlign="center center"
+           matTooltip="{{ 'DISCOUNT_DETAIL.TOOLTIP_VENDOR_RAT' | translate }}" matTooltipPosition="right">
+        <mat-icon class="rating__icon" fxLayoutAlign="center center" *ngFor="let star of rating">
+          {{star ? 'star_rate' : 'star_border'}}
+        </mat-icon>
+      </div>
+
+      <div class="tags">
+        <mat-chip-list class="discount-content__tags">
+          <mat-chip *ngFor="let tag of (discount$ | async)?.tags" class="discount-content__tags_tag">
+            # {{tag}}
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+    </div>
+  </section>
+
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab label="{{ 'DISCOUNT_DETAIL.MAT_TAB_ABOUT' | translate }}">
+      <section class="discount-detail__content">
+        <div class="discount-content__description" fxLayoutGap="20px" fxLayout="row" fxLayoutAlign="start">
+          <p class="discount-content__description_text">
+            {{(discount$ | async)?.description}}
+          </p>
+          <div class="discount-icons">
+            <mat-icon *appVerifyUserRoles='["Moderator"]' class="action__icon edit" color="primary"
+                      matTooltip="Edit Discount" routerLink="edit"
+                      matTooltip="{{ 'DISCOUNT_DETAIL.EDIT_BUTTON_LABEL' | translate }}"
+                      (click)="onEditDiscount(discountId)">edit
+            </mat-icon>
+            <mat-icon *appVerifyUserRoles='["Moderator"]' class="action__icon archive"
+                      matTooltip="{{ 'DISCOUNT_DETAIL.ARCHIVE_BUTTON_LABEL' | translate }}"
+                      [ngStyle]="{'color': (discount$ | async)?.activityStatus ? '#3F51B5' : '#FF6347'}"
+                      (click)="archiveDiscount(discountId)">archive
+            </mat-icon>
+          </div>
+
+        </div>
+
+        <ul class="characteristics-list">
+          <li>
+            <p class="discount-content__amount" fxLayout="row" fxLayoutGap="20px">
+              <span class="discount-content__amount_label highliter" fxFlex="25">
+                {{ "DISCOUNT_DETAIL.AMOUNT_LABEL" | translate }}:
+              </span>
+              <span class="discount-content__amount_text" fxFlex="75">
+                {{(discount$ | async)?.discountAmount}} %
+              </span>
+            </p>
+          </li>
+          <li *ngIf="(discount$ | async)?.promoCode">
+            <p class="discount-content__promoCode" fxLayout="row" fxLayoutGap="20px">
+              <span class="discount-content__promoCode_label highliter" fxFlex="25">
+                {{ "DISCOUNT_DETAIL.PROMO_CODE_LABEL" | translate }}:
+              </span>
+              <span class="discount-content__promoCode_text" fxFlex="75">
+                {{(discount$ | async)?.promoCode}}
+              </span>
+            </p>
+          </li>
+          <li>
+            <p class="discount-content__address" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center start">
+              <span class="discount-content__address_label highliter" fxFlex="25">
+                {{ "DISCOUNT_DETAIL.ADDRESS_LABEL" | translate }}:
+              </span>
+              <span class="discount-content__address_text" fxFlex="75">
+                {{(discount$ | async)?.address}}
+              </span>
+            </p>
+          </li>
+          <li>
+            <p class="discount-content__distance" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center end">
+              <span class="discount-content__distance_label highliter"
+                    fxFlex="25">{{ "DISCOUNT_DETAIL.DISTANCE" | translate }}: </span>
+              <span fxFlex="75">{{(discount$ | async)?.distanceInMeters | metersToKilometers}}</span>
+            </p>
+          </li>
+          <li>
+            <p class="discount-content__date" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center end">
+              <span class="discount-content__date_label highliter" fxFlex="25">
+                {{ "DISCOUNT_DETAIL.DATES_LABEL" | translate }}:
+              </span>
+              <span class="discount-content__date_end" fxFlex="75">
+                {{(discount$ | async)?.startDate | date:"dd.MM.yyyy"}}
+                &mdash; {{(discount$ | async)?.endDate | date:"dd.MM.yyyy"}}
+              </span>
+            </p>
+          </li>
+        </ul>
+
+        <section *ngIf="(discount$ | async)?.isOrdered" class="discount-detail__rating" fxLayout="row"
+                 fxLayoutGap="20px"
+                 fxLayoutAlign="center center">
+          <span class="rating__label highliter" fxFlex="25">
+            {{ "DISCOUNT_DETAIL.ASSESSMENT_LABEL" | translate }}:
+          </span>
+          <div class="stars" fxLayout="row" fxFlex="75" fxLayoutGap="1rem">
+            <ul class="discount-detail__rating_list">
+              <li *ngFor="let star of stars; let i = index" (click)="countStar(star)" id="{{ 'starId' + i }}"
+                  [ngClass]="{ selected: star <= selectedRatingValue }" (mouseover)="addClass(star)"
+                  (mouseout)="removeClass(star)">
+                ★
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="discount-detail__actions" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="center start">
+          <button class="action__button ticket" mat-flat-button color="primary"
+                  (click)="ticketHandler(discountId)">
+            {{ "DISCOUNT_DETAIL.TICKET_BUTTON_LABEL" | translate }}
+          </button>
+        </section>
+      </section>
+    </mat-tab>
+  </mat-tab-group>
+</article>
+<ng-template appRef></ng-template>

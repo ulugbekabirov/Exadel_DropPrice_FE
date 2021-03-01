@@ -9,7 +9,6 @@ import { VendorsStatStore } from './vendors-stat-store';
 
 @Injectable()
 export class StatisticsFacadeService {
-
   constructor(
     private vendorsService: VendorsService,
     private discountsService: DiscountsService,

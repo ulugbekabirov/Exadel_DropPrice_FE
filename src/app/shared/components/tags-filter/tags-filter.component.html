@@ -1,0 +1,13 @@
+<mat-chip-list selectable multiple>
+  <div class="tags-block">
+    <mat-chip class="tags-block__chip" #chip="matChip" *ngFor="let tag of privateTags$ | async"
+      (click)="toggleSelection(tag)" [value]="tag" [class.selected]="tag.selected">
+      <span class="tags-block__chip_symbol">
+        #
+      </span>
+      <span class="tags-block__chip_text">
+        {{tag.tagName | lowercase}}
+      </span>
+    </mat-chip>
+  </div>
+</mat-chip-list>

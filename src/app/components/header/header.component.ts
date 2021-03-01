@@ -1,31 +1,33 @@
-import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { environment } from 'src/environments/environment';
-import { AuthService } from '../../auth/auth.service';
+import { Component, ViewEncapsulation} from '@angular/core';
+import { AuthService } from '../../auth/services/auth.service';
 import { AuthInfo } from '../../models';
 import { Observable } from 'rxjs';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 
 export class HeaderComponent {
-  public langs: string[] = environment.locales;
-  defaultLang: string = localStorage.getItem('currentLang') ?? environment.defaultLocale;
+  languages$;
+  activeLanguage$;
   authUser$: Observable<AuthInfo> = this.auth.authUser;
   active: boolean;
 
   constructor(
-    public translateService: TranslateService,
-    private auth: AuthService) {
+    private languageService: LanguageService,
+    private auth: AuthService
+  ) {
+    this.languages$ = this.languageService.select('languages');
+    this.activeLanguage$ = this.languageService.select('activeLanguage');
   }
 
-  languageHandler(selectedLang: string): void {
-    localStorage.setItem('currentLang', selectedLang);
-    this.translateService.use(selectedLang);
+  languageHandler(language: string): void {
+    this.languageService.set('activeLanguage', language);
   }
 
   logoutHandler(): void {
