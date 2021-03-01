@@ -1,9 +1,8 @@
-<li class="list-item"
-    [class.isExpired]="ticket.isExpired || !ticket.discountActivity"
->
+<li class="list-item">
   <p class="list-item__title" [routerLink]="['/discounts', ticket.discountId]"
      matTooltip='{{ "USER_PROFILE.LIST_ITEM.TOOLTIP_DISCOUNT" | translate }}'
      matTooltipPosition="above"
+     [class.isExpired]="ticket.isExpired || !ticket.discountActivity"
   >
     {{ ticket?.discountName }}
   </p>
@@ -44,7 +43,8 @@
       </mat-icon>
     </div>
   </div>
-  <p class="list-item__date">
+  <p class="list-item__date"
+     [class.isExpired]="ticket.isExpired || !ticket.discountActivity">
         <span class="list-item__date_label">
           <small>
             {{"USER_PROFILE.LIST_ITEM.DATE_ORDER" | translate}}:

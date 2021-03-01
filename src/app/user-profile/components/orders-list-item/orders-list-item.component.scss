@@ -26,6 +26,18 @@
     cursor: pointer;
     border: none;
     outline: none;
+
+    &.isExpired {
+      opacity: .4;
+    }
+  }
+
+  &__actions {
+    &_ticket {
+      .action__ticket {
+        opacity: 1;
+      }
+    }
   }
 
   &__subTitle {
@@ -48,6 +60,10 @@
     justify-content: flex-end;
     align-items: flex-end;
     margin: 0;
+
+    &.isExpired {
+      opacity: .4;
+    }
   }
 
   &__actions {
@@ -88,20 +104,6 @@
         &.discountInActive {
           background: $main_gray;
           cursor: default;
-        }
-      }
-    }
-  }
-
-  &.isExpired {
-    opacity: .5;
-    border-right: 2px solid #FF6347;
-    border-left: 2px solid #5b9fef;
-
-    &__actions {
-      &_ticket {
-        .action__ticket {
-          opacity: 1;
         }
       }
     }
