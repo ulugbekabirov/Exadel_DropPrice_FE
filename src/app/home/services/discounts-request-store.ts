@@ -23,7 +23,7 @@ const INITIAL_REQUEST_DISCOUNTS: RequestDiscounts = {
   request: {
     sortBy: {
       name: 'MAIN_PAGE.FILTER.SORT_BY.DISTANCE_DESC.NAME',
-      sortBy: 'DistanceDesc',
+      sortBy: 'DistanceAsc',
     },
     searchQuery: '',
     location: {

@@ -125,14 +125,6 @@ export class VendorFormComponent implements OnInit, OnDestroy {
     this.coordinateIsEmpty = true;
   }
 
-  successSnackBar(message: string, action: any): void {
-    this.snackBar.open(message, action, {
-      duration: 3000,
-      horizontalPosition: 'center',
-      panelClass: ['snackbar-color-success']
-    });
-  }
-
   addPoint(): void {
     const point = this.fb.group({
       name: ['', [Validators.required]],
@@ -161,11 +153,21 @@ export class VendorFormComponent implements OnInit, OnDestroy {
     this.coordinateIsEmpty = false;
   }
 
+  successSnackBar(message: string, action: any): void {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      horizontalPosition: 'center',
+      panelClass: ['snackbar-color-success'],
+      verticalPosition: 'top'
+    });
+  }
+
   errorSnackBar(message: string, action: any): void {
     this.snackBar.open(message, action, {
       duration: 3000,
       horizontalPosition: 'center',
-      panelClass: ['snackbar-color-error']
+      panelClass: ['snackbar-color-error'],
+      verticalPosition: 'top'
     });
   }
 
