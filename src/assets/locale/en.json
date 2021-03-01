@@ -79,7 +79,7 @@
     "DESCRIPTION": "Vendor description",
     "ADDRESS_PLACEHOLDER": "Ex.: 17 Kensington Street",
     "PHONE_NUMBER": "Vendor phone number*",
-    "VALID_PHONE": "Enter the phone without spaces in the format '+COUNTRY_CODE-OPERATOR_CODE-NUMBER'",
+    "VALID_PHONE": "Enter the phone, for example: +375 25 123 45 76 or 8029 123 45 67",
     "EMAIL_LABEL": "Vendor email*",
     "VALID_EMAIL": "Please enter a valid email address",
     "WEBSITE_LABEL": "Vendor website",
