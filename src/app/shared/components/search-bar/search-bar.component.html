@@ -1,18 +1,15 @@
-<div class="search">
-  <div class="searchForm">
+<section class="search-bar">
     <app-search
       (onEmitSearchTerm)="searchTermChange($event)"
       [initialValue$]="initialValue$"
     >
     </app-search>
-  </div>
-  <div class="listWrapper">
     <app-tags-filter
       [tags$]="tags$"
       [activeTags$]="activeTags$"
       (chipSelected)="searchTagChange($event)"
     >
     </app-tags-filter>
-  </div>
-</div>
+</section>
+
 

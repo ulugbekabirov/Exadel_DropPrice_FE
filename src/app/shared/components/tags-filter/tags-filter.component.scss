@@ -1,12 +1,49 @@
 @import "src/variables";
 
-.chip-list {
-  .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
-    background-color: $main_header_bgColor;
-    opacity: .85;
-  }
+.tags-block {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .5em;
+  padding: .5em 1em;
 
-  .chipsStyle {
+  &__chip {
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffff;
+    position: relative;
+    padding: 0 1em;
+    font-style: normal;
+    font-weight: 500;
+    box-shadow: -1px 3px 7px -2px #a5a4a5;
+
+    &_symbol {
+      color: inherit;
+    }
+
+    &_text {
+      color: inherit;
+    }
+
+    &.selected {
+      background: $discount_list_item_sale;
+      color: #ffff;
+    }
+  }
+  &__icon {
+    position: absolute;
+    left: 8px;
+  }
+  mat-chip{
     cursor: pointer;
+  }
+  mat-chip:hover {
+    color: #ffff;
+    background: $discount_list_item_sale;
+  }
+  .mat-chip.mat-standard-chip::after {
+    background: none;
   }
 }

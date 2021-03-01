@@ -8,17 +8,34 @@
   justify-content: center;
 }
 
-.searchInput {
+.search-input {
+  font-size: 1rem;
+  position: relative;
   width: inherit;
+  // padding: 0 1em;
 
-  .searchLable {
-    color: $main_gray;
+  &__label {
     font-size: 1.2rem;
     font-weight: 400;
+    color: $main_gray;
   }
 
-  .searchIcon {
+
+  &__input {
+    padding: .1em 1em;
+  }
+
+  &__icon {
+    // position: absolute;
+    // top: 50%;
+    // right: .8em;
+    // transform: translateY(-50%);
+    // height: 1.4rem;
+    // width: 1.4rem;
+    // font-size: 1.5rem;
+    // color: $discount_card_text_color;
     float: right;
     color: $main_gray;
   }
+
 }
