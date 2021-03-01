@@ -8,17 +8,18 @@
   justify-content: center;
 }
 
-.searchInput {
+.search-input {
   width: inherit;
 
-  .searchLable {
+  .search-input__label {
     color: $main_gray;
     font-size: 1.2rem;
     font-weight: 400;
+    display: flex;
+    justify-content: space-between;
   }
 
-  .searchIcon {
-    float: right;
+  .search-input__icon {
     color: $main_gray;
   }
 }

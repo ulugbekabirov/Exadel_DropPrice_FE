@@ -9,8 +9,8 @@ import { Discount } from 'src/app/models';
 
 @Component({
   selector: 'app-discounts-statistic',
-  templateUrl: './discounts-statistic-test.component.html',
-  styleUrls: ['./discounts-statistic-test.component.scss'],
+  templateUrl: './discounts-statistic.component.html',
+  styleUrls: ['./discounts-statistic.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 

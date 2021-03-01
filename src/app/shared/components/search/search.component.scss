@@ -8,33 +8,19 @@
   justify-content: center;
 }
 
-.search-input {
-  font-size: 1rem;
-  position: relative;
-  width: inherit;
-  // padding: 0 1em;
 
-  &__label {
+.search-input {
+  width: inherit;
+
+  .search-input__label {
+    color: $main_gray;
     font-size: 1.2rem;
     font-weight: 400;
-    color: $main_gray;
+    display: flex;
+    justify-content: space-between;
   }
 
-
-  &__input {
-    padding: .1em 1em;
-  }
-
-  &__icon {
-    // position: absolute;
-    // top: 50%;
-    // right: .8em;
-    // transform: translateY(-50%);
-    // height: 1.4rem;
-    // width: 1.4rem;
-    // font-size: 1.5rem;
-    // color: $discount_card_text_color;
-    float: right;
+  .search-input__icon {
     color: $main_gray;
   }
 

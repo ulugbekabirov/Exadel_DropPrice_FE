@@ -8,8 +8,8 @@ import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-settings',
-  templateUrl: './settings-test.component.html',
-  styleUrls: ['./settings-test.component.scss']
+  templateUrl: './settings.component.html',
+  styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit, OnDestroy {
   settings: Setting[];

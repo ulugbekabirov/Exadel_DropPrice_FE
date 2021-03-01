@@ -9,8 +9,8 @@ import { VendorsStatStore } from '../../services/vendors-stat-store';
 
 @Component({
   selector: 'app-vendor-statistics',
-  templateUrl: './vendor-statistics-test.component.html',
-  styleUrls: ['./vendor-statistics-test.component.scss'],
+  templateUrl: './vendor-statistics.component.html',
+  styleUrls: ['./vendor-statistics.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class VendorStatisticsComponent implements OnInit, AfterViewInit, OnDestroy {
