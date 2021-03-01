@@ -30,9 +30,9 @@ describe('DiscountsListComponent', () => {
 
     fixture.detectChanges();
 
-    const lists = el.queryAll(By.css(".discount-card"));
+    const lists = el.queryAll(By.css('.discount-card'));
 
-    expect(lists).toBeTruthy("Could not find lists");
+    expect(lists).toBeTruthy('Could not find lists');
 
   });
 });

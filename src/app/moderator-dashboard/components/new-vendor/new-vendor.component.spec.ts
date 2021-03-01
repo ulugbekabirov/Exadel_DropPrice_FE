@@ -35,7 +35,7 @@ fdescribe('NewVendorComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NewVendorComponent);
     component = fixture.componentInstance;
-    de = fixture.debugElement.query(By.css("form"));
+    de = fixture.debugElement.query(By.css('form'));
     el = de.nativeElement;
     fixture.detectChanges();
   });
@@ -75,17 +75,17 @@ fdescribe('NewVendorComponent', () => {
   }));
 
   it('should test if Save button is disabled when the form is invalid -- Required fields are empty', (() => {
-    component.newVendorForm.controls['vendorName'].setValue('');
-    component.newVendorForm.controls['address'].setValue('');
-    component.newVendorForm.controls['description'].setValue('');
-    component.newVendorForm.controls['phone'].setValue('');
-    component.newVendorForm.controls['email'].setValue('');
+    component.newVendorForm.controls.vendorName.setValue('');
+    component.newVendorForm.controls.address.setValue('');
+    component.newVendorForm.controls.description.setValue('');
+    component.newVendorForm.controls.phone.setValue('');
+    component.newVendorForm.controls.email.setValue('');
     fixture.detectChanges();
     expect(el.querySelector('button').disabled).toBeTruthy();
   }));
 
   fit('should test if Save button is disabled when the form is invalid -- Wrong format of email', (() => {
-    component.newVendorForm.controls['email'].setValue('abc');
+    component.newVendorForm.controls.email.setValue('abc');
     fixture.detectChanges();
     expect(el.querySelector('button').disabled).toBeTruthy;
   }));
