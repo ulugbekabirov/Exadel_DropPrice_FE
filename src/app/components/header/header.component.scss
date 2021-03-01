@@ -13,14 +13,19 @@
   left: 0;
 
   a {
-    color: $main_header_txtColor;    
+    color: $main_header_txtColor;
   }
+
   .person {
-    &:hover,&:active,&:focus{
+
+    &:hover,
+    &:active,
+    &:focus {
       outline: none;
       border: none;
     }
   }
+
   mat-icon:not(.person) {
     font-size: 1.8rem;
     color: $main_header_txtColor;
@@ -130,7 +135,7 @@
     left: 100%;
     top: $main_header_height;
     display: flex;
-    
+
 
     @media screen and (max-width: 767px) {
       background-color: #fff;
@@ -150,11 +155,11 @@
       font-weight: 400;
       font-style: normal;
       font-size: 1rem;
-      // line-height: 24px;
-  
+
 
       &:hover,
-      &:focus, &:active {
+      &:focus,
+      &:active {
         color: $main_header_items_hover;
       }
     }
