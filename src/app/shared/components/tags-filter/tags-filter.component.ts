@@ -32,6 +32,7 @@ export class TagsFilterComponent implements OnInit {
   ngOnInit(): void {
     this.privateTags$ = this.activeTags$.pipe(
       switchMap((activeTags: Tag[]): Observable<Tag[]> => {
+        this.selectedTags = activeTags;
         return this.tags$.pipe(
           map((tags: Tag[]): Tag[] => tags.map((tag: Tag) => {
             const find = activeTags.find((activeTag: Tag) => tag.tagId === activeTag.tagId);
