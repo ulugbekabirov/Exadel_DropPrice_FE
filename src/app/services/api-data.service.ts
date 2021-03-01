@@ -142,8 +142,9 @@ export class ApiDataService {
     return this.http.get(`${environment.webApiUrl}${GET_VENDORS_ENDPOINT}/${vendorId}/${GET_POINT_OF_SALES}`);
   }
 
-  putBeginEditDiscount(discountId): Observable<any> {
-    return this.http.put(`${environment.webApiUrl}${DISCOUNTS_ENDPOINT}/${discountId}/beginEdit`, null);
+  putBeginEditDiscount(discountId): any {
+    return this.http.put(`${environment.webApiUrl}${DISCOUNTS_ENDPOINT}/${discountId}/beginEdit`, null)
+      .subscribe(next => console.log('Message', next));
   }
 }
 

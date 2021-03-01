@@ -83,7 +83,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
                 new FormControl(tag, Validators.required));
             });
           }
-          this.restApi.putBeginEditDiscount(this.discountId).subscribe(next => console.log('Message', next));
+          this.restApi.putBeginEditDiscount(this.discountId);
           this.discountForm.patchValue(editingDiscount);
           this.discountForm.controls.vendorId.disable();
           this.discountForm.markAsPristine();
