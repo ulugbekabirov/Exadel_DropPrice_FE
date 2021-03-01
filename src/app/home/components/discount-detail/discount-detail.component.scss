@@ -22,7 +22,7 @@
   }
 
   .discount-detail__header {
-  .discount-detail {
+    .discount-detail {
       .tags {
         margin-bottom: 20px;
       }
@@ -35,9 +35,14 @@
       a {
         color: #868e96;
       }
-      a:hover, a:active, a:focus{
-        color:#717d8a;;
+
+      a:hover,
+      a:active,
+      a:focus {
+        color: #717d8a;
+        ;
       }
+
       @media screen and (max-width: 600px) {
         font-size: 1rem;
       }
@@ -61,18 +66,24 @@
       color: $main_gray;
       will-change: transform;
       transition: transform .1s ease-in-out;
+
       &:hover {
         color: $favorite_discount;
         transform: scale(1.1, 1.1);
       }
     }
-    .discount-content__tags_tag{
-        cursor: pointer;
+
+    .discount-content__tags_tag {
+
+      //     cursor: pointer;
+      pointer-events: none;
     }
+
     .discount-detail__header_rating {
       margin: 0 0 16px;
 
       cursor: pointer;
+
       .rating__icon {
         color: $indigo;
       }
@@ -106,13 +117,15 @@
   .discount-content__description {
     margin-bottom: 20px;
 
-    .discount-icons{
-        display: flex;
-        gap: 10px;
-        @media screen and (max-width: 600px) {
-           flex-direction: column;
-          }
+    .discount-icons {
+      display: flex;
+      gap: 10px;
+
+      @media screen and (max-width: 600px) {
+        flex-direction: column;
+      }
     }
+
     .action__icon {
       cursor: pointer;
     }
@@ -127,6 +140,12 @@
   .action__button {
     cursor: pointer;
     margin-top: 2rem;
+
+    &:active,
+    &:hover,
+    &:focus {
+      opacity: .9;
+    }
   }
 }
 
