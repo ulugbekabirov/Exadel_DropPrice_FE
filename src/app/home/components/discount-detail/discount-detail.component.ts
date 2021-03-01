@@ -83,7 +83,11 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
     this.facade.putRating(this.discountId, this.selectedRatingValue).pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe(next => {
-      this.selectedRatingValue = 0;
+      if (!next && !next.assessmentValue) {
+        this.selectedRatingValue = 0;
+      } else {
+        this.selectedRatingValue = next.assessmentValue;
+      }
     });
   }
 
