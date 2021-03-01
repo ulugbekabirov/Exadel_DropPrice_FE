@@ -8,4 +8,5 @@ export interface ActiveUser {
   phone: string;
   email: string;
   office: string;
+  defaultLanguage: string;
 }

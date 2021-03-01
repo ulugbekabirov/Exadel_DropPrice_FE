@@ -22,14 +22,15 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private translateService: TranslateService,
     private auth: AuthService,
-    private langService: LanguageService,
+    private languageService: LanguageService,
     private loadingService: LoadingService
   ) {
     this.subscription = this.auth.authUser.subscribe(user => this.authUser = user);
   }
 
   ngOnInit(): void {
-    this.translateService.use(this.langService.getCurrentLang());
+    this.languageService.select('activeLanguage')
+      .subscribe((next: string) => this.translateService.use(next));
     this.loading$ = this.loadingService.isLoading$.pipe(
       delay(0)
     );

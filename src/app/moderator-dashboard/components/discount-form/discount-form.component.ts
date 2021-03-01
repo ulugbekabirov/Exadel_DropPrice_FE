@@ -5,9 +5,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { forkJoin, Subject, throwError } from 'rxjs';
+import { Subject, throwError } from 'rxjs';
 import { catchError, debounceTime, filter, map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { Discount, Vendor } from '../../../models';
+import { Discount } from '../../../models';
 import { DiscountsService } from '../../../services/discounts.service';
 import { VendorsService } from '../../../services/vendors.service';
 
@@ -17,7 +17,6 @@ import { VendorsService } from '../../../services/vendors.service';
   styleUrls: ['./discount-form.component.scss']
 })
 export class DiscountFormComponent implements OnInit, OnDestroy {
-  // discount: Discount;
   selectable = true;
   removable = true;
   addOnBlur = true;
@@ -34,6 +33,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
 
   discountForm: FormGroup = this.fb.group({
     vendorId: ['', this.requireMatch.bind(this)],
+    vendorName: [''],
     discountName: ['', [Validators.required]],
     description: ['', [Validators.minLength(40), Validators.required]],
     discountAmount: ['', [Validators.required, Validators.min(1), Validators.max(100)]],
@@ -63,7 +63,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
     ).subscribe(res => {
       this.vendorsList = this.filteredList = res;
     });
-
+    this.vendorNameChanges();
     if (this.isEditMode) {
       this.route.paramMap.pipe(
         switchMap((params: ParamMap) => {
@@ -81,11 +81,10 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
             });
           }
           this.discountForm.patchValue(editingDiscount);
-          this.vendorId.disable();
+          this.discountForm.controls.vendorId.disable();
           this.discountForm.markAsPristine();
         });
     }
-    this.vendorNameChanges();
   }
 
   displayFn(value?: number | string): any {
@@ -146,6 +145,10 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
       this.addPointOfSales(point);
     });
     this.discountForm.patchValue(initPointsOfSales);
+    this.pointOfSalesForm.controls.forEach(control => {
+      control.get('name').disable();
+      control.get('address').disable();
+    });
   }
 
   addPointOfSales(point): void {
@@ -204,7 +207,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    const discount = {...this.discountForm.value, pointOfSales: this.pointOfSalesForm.value.filter(point => point.checked)};
+    const discount = {...this.discountForm.getRawValue(), pointOfSales: this.pointOfSalesForm.getRawValue().filter(point => point.checked)};
     const {checked, ...newDiscount} = discount;
 
     if (this.isEditMode) {

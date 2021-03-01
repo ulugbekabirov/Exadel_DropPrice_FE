@@ -8,8 +8,8 @@ interface RequestVendorsDiscounts {
     sortBy: Sort;
     searchQuery: string;
     location: {
-      latitude: number;
-      longitude: number;
+      latitude: number | null;
+      longitude: number | null;
       townName: string;
     }
     take: number;
@@ -25,9 +25,9 @@ const INITIAL_REQUEST_VENDORS_DISCOUNTS: RequestVendorsDiscounts = {
     },
     searchQuery: '',
     location: {
-      latitude: 0,
-      longitude: 0,
-      townName: 'Моя локация',
+      latitude: null,
+      longitude: null,
+      townName: ''
     },
     take: 10,
     skip: 0,
