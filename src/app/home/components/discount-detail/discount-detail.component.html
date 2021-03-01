@@ -82,7 +82,7 @@
               </span>
             </p>
           </li>
-          <li>
+          <li *ngIf="(discount$ | async)?.promoCode">
             <p class="discount-content__promoCode" fxLayout="row" fxLayoutGap="20px">
               <span class="discount-content__promoCode_label highliter" fxFlex="25">
                 {{ "DISCOUNT_DETAIL.PROMO_CODE_LABEL" | translate }}:
