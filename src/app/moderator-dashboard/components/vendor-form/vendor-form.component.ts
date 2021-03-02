@@ -129,6 +129,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
     this.snackBar.open(message, action, {
       duration: 3000,
       horizontalPosition: 'center',
+      verticalPosition: 'top',
       panelClass: ['snackbar-color-success']
     });
   }
@@ -165,6 +166,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
     this.snackBar.open(message, action, {
       duration: 3000,
       horizontalPosition: 'center',
+      verticalPosition: 'top',
       panelClass: ['snackbar-color-error']
     });
   }

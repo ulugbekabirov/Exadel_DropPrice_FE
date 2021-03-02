@@ -110,7 +110,7 @@
     "DISCOUNT_VALIDITY_DATE": "Дата действия скидки*",
     "PROMO_CODE": "Промокод",
     "LABEL_TAGS": "Теги*",
-    "BTN_TITLE": "Добавить",
+    "BTN_TITLE": "Сохранить",
     "PLACEHOLDER_VENDOR_NAME": "Введите наименование вендора",
     "PLACEHOLDER_PRODUCT_SERVICE": "Введите наименование товара/услуги",
     "PLACEHOLDER_DESCRIPTION": "Введите описание",

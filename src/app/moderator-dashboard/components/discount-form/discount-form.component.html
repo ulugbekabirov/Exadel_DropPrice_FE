@@ -194,7 +194,7 @@
         </div>
         <div formArrayName="pointOfSales">
            <span>
-            <mat-checkbox *ngIf="pointOfSalesForm.controls.length >= 2"
+            <mat-checkbox class="all_discounts" *ngIf="pointOfSalesForm.controls.length >= 2"
                           (change)="setAllPointsOfSalesChecked($event.checked)"
             >
               {{'Check All'}}

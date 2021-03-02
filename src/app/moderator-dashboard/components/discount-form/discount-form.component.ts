@@ -293,7 +293,8 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
     this.snackBar.open(message, action, {
       duration: 3000,
       panelClass: ['snackbar-color-success'],
-      horizontalPosition: 'center'
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
     });
   }
 
@@ -301,7 +302,8 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
     this.snackBar.open(message, action, {
       duration: 3000,
       panelClass: ['snack-bar-color-error'],
-      horizontalPosition: 'center'
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
     });
   }
 

@@ -1,11 +1,11 @@
 @import "../../../../variables";
 
-html,
-body {
-	height: 100%;
-	margin: 0;
-  padding: 0;
-}
+// html,
+// body {
+// 	height: 100%;
+// 	margin: 0;
+//   padding: 0;
+// }
 
 %form {
   width: 100%;
@@ -13,7 +13,7 @@ body {
   margin: 2.5em auto;
 }
 
-mat-card {
+.mat-card {
   @extend %form;
     padding: 25px 50px;
     min-width: 200px;
