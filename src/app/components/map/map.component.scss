@@ -1,3 +1,5 @@
+@import "../../../variables";
+
 .map-wrapper{
   max-height: 100%;
   max-width: 100%;
@@ -11,6 +13,12 @@
 mat-dialog-actions{
   button{
     margin-bottom: 10px;
+    width: 35%;
+    margin: 0 auto;
+    background-color: $indigo;
+    &:hover, &:active, &:focus {
+      opacity: .9;
+    }
   }
 }
 

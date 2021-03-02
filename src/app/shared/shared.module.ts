@@ -57,7 +57,7 @@ import { TagsFilterComponent } from './components/tags-filter/tags-filter.compon
   ],
 
   imports: [
-    RouterModule,
+  RouterModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

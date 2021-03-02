@@ -22,7 +22,7 @@ interface RequestDiscounts {
 const INITIAL_REQUEST_DISCOUNTS: RequestDiscounts = {
   request: {
     sortBy: {
-      name: 'MAIN_PAGE.FILTER.SORT_BY.DISTANCE_DESC.NAME',
+      name: 'MAIN_PAGE.FILTER.SORT_BY.DISTANCE_ASC.NAME',
       sortBy: 'DistanceAsc',
     },
     searchQuery: '',

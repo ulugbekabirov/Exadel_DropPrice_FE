@@ -10,12 +10,10 @@
   &__chip {
     font-size: 1rem;
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
-    gap: .5em;
-    background-color: white;
+    background-color: #ffff;
     position: relative;
-    cursor: pointer;
     padding: 0 1em;
     font-style: normal;
     font-weight: 500;
@@ -30,21 +28,22 @@
     }
 
     &.selected {
-      background: #709ace;
-      color: white;
+      background: $discount_list_item_sale;
+      color: #ffff;
     }
   }
   &__icon {
     position: absolute;
     left: 8px;
   }
-
+  mat-chip{
+    cursor: pointer;
+  }
   mat-chip:hover {
-    color: white;
-    background: #aac8f1;
+    color: #ffff;
+    background: $discount_list_item_sale;
   }
   .mat-chip.mat-standard-chip::after {
     background: none;
   }
-
 }
