@@ -1,5 +1,14 @@
 <div class="vendors">
   <article class="vendors-detail">
+    <p class="go_back_main">
+      <a class="go-back__link" fxLayoutAlign="start center" (click)="goBack()">
+        <mat-icon class="go-back__link_icon">keyboard_backspace</mat-icon>
+        <span class="go-back__link_text" matTooltip="{{ 'VENDOR_PAGE.VENDOR_DETAIL.TOOLTIP_GO_BACK' | translate }}"
+              matTooltipPosition="right">
+          {{"BUTTON_BACK_LOCATION" | translate }}
+        </span>
+      </a>
+    </p>  
     
     <mat-expansion-panel (opened)="panelOpenState = true"
                           (closed)="panelOpenState = false">

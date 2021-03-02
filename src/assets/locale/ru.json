@@ -148,13 +148,13 @@
     "ARCHIVE_BUTTON_LABEL": "Архивировать",
     "TICKET_BUTTON_LABEL": "Получить скидку",
     "MAT_TAB_ABOUT": "О СКИДКЕ",
-    "TOOLTIP_GO_BACK": "Вернуться к списку",
+    "TOOLTIP_GO_BACK": "Вернуться",
     "TOOLTIP_VENDOR": "Вендор",
     "TOOLTIP_FAVORITES": "Добавить в избранные",
     "TOOLTIP_VENDOR_RAT": "Рейтинг вендора"
   },
   "VENDOR_PAGE": {
-    "PAGE_TITLE": "Информация о вендоре",
+    "TOOLTIP_GO_BACK": "Вернуться",
     "VENDOR_DETAIL": {
       "DETAIL_RATING_LABEL": "Рейтинг вендора",
       "DETAIL_CONTENT": {

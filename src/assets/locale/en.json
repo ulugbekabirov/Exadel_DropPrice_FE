@@ -154,7 +154,7 @@
     "TOOLTIP_VENDOR_RAT": "Vendor rating"
   },
   "VENDOR_PAGE": {
-    "PAGE_TITLE": "About vendor",
+    "TOOLTIP_GO_BACK": "Go back",
     "VENDOR_DETAIL": {
       "DETAIL_RATING_LABEL": "Vendor rating",
       "DETAIL_CONTENT": {
