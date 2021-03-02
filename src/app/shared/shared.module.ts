@@ -39,7 +39,7 @@ import { TicketComponent } from './components/ticket/ticket.component';
 import { SearchComponent } from './components/search/search.component';
 import { TagsFilterComponent } from './components/tags-filter/tags-filter.component';
 
-import { TruncateStringPipe } from './../truncate-string.pipe';
+import { TruncateStringPipe } from '../pipes/truncate-string.pipe';
 
 
 @NgModule({
