@@ -1,5 +1,5 @@
 import { ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
@@ -7,7 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { forkJoin, Subject, throwError } from 'rxjs';
 import { catchError, debounceTime, filter, map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { Discount } from '../../../models';
+import { Discount, Vendor } from '../../../models';
 import { ApiDataService } from '../../../services/api-data.service';
 import { DiscountsService } from '../../../services/discounts.service';
 import { VendorsService } from '../../../services/vendors.service';
@@ -28,6 +28,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
 
   vendorsList;
   filteredList;
+  editTime: number;
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocompleteModule;
@@ -53,28 +54,24 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private discountsService: DiscountsService,
     private vendorsService: VendorsService,
-    private restApi: ApiDataService
+    private cd: ChangeDetectorRef,
+
   ) {
   }
 
   ngOnInit(): void {
-
-    this.vendorsService.getVendors().pipe(
-      map(next => next.map(({vendorId, vendorName}) => ({vendorId, vendorName}))),
-      takeUntil(this.unsubscribe$)
-    ).subscribe(res => {
-      this.vendorsList = this.filteredList = res;
-    });
-    this.vendorNameChanges();
-
     if (this.isEditMode) {
       this.route.paramMap.pipe(
         switchMap((params: ParamMap) => {
           this.discountId = +params.get('id');
-          return this.discountsService.getDiscountById(this.discountId, {});
+          return forkJoin(
+            this.discountsService.getDiscountById(this.discountId, {}),
+            this.vendorsService.getVendors(),
+            this.discountsService.beginEditDiscount(this.discountId)
+          );
         }),
-        takeUntil(this.unsubscribe$)
-      ).subscribe(discount => {
+        map(([discount, resVendors, beginEdit]) => {
+          const vendors = resVendors.map(({vendorId, vendorName}) => ({vendorId, vendorName}));
           const editingDiscount = {...discount};
           if (editingDiscount.tags) {
             editingDiscount.tags.forEach(tag => {
@@ -82,21 +79,48 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
                 new FormControl(tag, Validators.required));
             });
           }
-          this.restApi.beginEditDiscount(this.discountId)
-            .subscribe(next => {
-              console.log('start session', next);
-              this.snackBar.open(next.message, '', {
-                duration: 5000,
-                panelClass: ['snack-bar-color-success'],
-                horizontalPosition: 'center',
-                verticalPosition: 'top'
-              });
-            });
-          this.discountForm.patchValue(editingDiscount);
-          this.discountForm.controls.vendorId.disable();
-          this.discountForm.markAsPristine();
-        });
+          return [editingDiscount, vendors, beginEdit];
+        }),
+        takeUntil(this.unsubscribe$)
+      ).subscribe(([discount, vendors, beginEdit]) => {
+        this.beginEditDiscount(beginEdit);
+        this.vendorsList = this.filteredList = vendors;
+        this.discountForm.patchValue(discount);
+        this.discountForm.controls.vendorId.disable();
+        this.discountForm.markAsPristine();
+      });
+    } else {
+      this.vendorsService.getVendors().pipe(
+        map((vendors: Vendor[]) => vendors.map(({vendorId, vendorName}) => ({vendorId, vendorName}))),
+        takeUntil(this.unsubscribe$)
+      ).subscribe(res => {
+        this.vendorsList = this.filteredList = res;
+      });
     }
+    this.vendorNameChanges();
+    this.cd.detectChanges();
+  }
+
+  beginEditDiscount(beginEdit): void {
+    this.editTime = beginEdit.editTime;
+    this.snackBar.open(beginEdit.message, '', {
+      duration: 5000,
+      panelClass: ['snack-bar-color-success'],
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
+    });
+  }
+
+  endEditDiscount(discountId): void {
+    this.discountsService.endEditDiscount(discountId)
+      .subscribe(next => {
+        this.snackBar.open(next.message, '', {
+          duration: 5000,
+          panelClass: ['snack-bar-color-success'],
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+      });
   }
 
   displayFn(value?: number | string): any {
@@ -241,9 +265,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
       .subscribe((res) => {
         this.discountForm.reset();
         this.successSnackBar('Successfully saved!', '');
-        for (const control in this.discountForm.controls) {
-          this.discountForm.controls[control].setErrors(null);
-        }
+        this.resetControlsErrors(this.discountForm);
         this.router.navigate(['/vendors', res.vendorId]);
       });
   }
@@ -258,11 +280,15 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
       .subscribe((res) => {
         this.discountForm.reset();
         this.successSnackBar('Successfully update!', '');
-        for (const control in this.discountForm.controls) {
-          this.discountForm.controls[control].setErrors(null);
-        }
+        this.resetControlsErrors(this.discountForm);
         this.router.navigate(['/vendors', res.vendorId]);
       });
+  }
+
+  resetControlsErrors(form): void {
+    for (const control in form.controls) {
+      form.controls[control].setErrors(null);
+    }
   }
 
   get vendorName(): AbstractControl {
@@ -320,6 +346,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.endEditDiscount(this.discountId);
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }

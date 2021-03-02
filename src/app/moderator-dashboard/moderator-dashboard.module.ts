@@ -29,7 +29,7 @@ const routes: Routes = [
     TranslateModule,
   ],
   exports: [
-    RouterModule
+    RouterModule,
   ]
 })
 export class ModeratorDashboardModule {
