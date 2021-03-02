@@ -10,7 +10,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-fdescribe('NewVendorComponent', () => {
+describe('NewVendorComponent', () => {
   let component: VendorFormComponent;
   let fixture: ComponentFixture<VendorFormComponent>;
   let de: DebugElement;
@@ -83,7 +83,7 @@ fdescribe('NewVendorComponent', () => {
     expect(el.querySelector('button').disabled).toBeTruthy();
   }));
 
-  fit('should test if Save button is disabled when the form is invalid -- Wrong format of email', (() => {
+  it('should test if Save button is disabled when the form is invalid -- Wrong format of email', (() => {
     component.vendorForm.controls.email.setValue('abc');
     fixture.detectChanges();
     expect(el.querySelector('button').disabled).toBeTruthy;
