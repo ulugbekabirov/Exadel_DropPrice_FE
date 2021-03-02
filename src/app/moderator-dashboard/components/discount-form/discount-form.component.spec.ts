@@ -17,7 +17,8 @@ describe('DiscountFormComponent', () => {
   let component: DiscountFormComponent;
   let fixture: ComponentFixture<DiscountFormComponent>;
   const mockTagsService = jasmine.createSpyObj(['getTags']);
-
+  const de = fixture.debugElement.query(By.css('form'));
+  const el = de.nativeElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -40,8 +41,8 @@ describe('DiscountFormComponent', () => {
     fixture = TestBed.createComponent(DiscountFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    const de = fixture.debugElement.query(By.css('form'));
-    const el = de.nativeElement;
+    
+    
   });
 
   it('should create', () => {
