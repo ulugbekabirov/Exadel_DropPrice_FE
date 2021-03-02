@@ -12,10 +12,27 @@
     &__vendor-name{
       font-size: 1.7rem;
       font-weight: 700;
+
+      @media screen and (max-width: 680px) {
+        font-size: 1.5rem;
+      }
+
+      @media screen and (max-width: 400px) {
+        font-size: 1.4rem;
+        font-weight: 600;
+      }
     }
 
-    &__rating{
-      font-size: 1.3rem;
+    .rating {
+      &__amount {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: $discount_card_text_color;
+      }
+
+      &__icon {
+        font-size: 1.3em;
+      }
     }
   }
   
@@ -38,82 +55,106 @@
         font-size: 1.3em;
       }
 
-      .rating {
-        &__amount {
-          font-size: 1.5em;
-          font-weight: 500;
-          color: $discount_card_text_color;
-        }
 
-        &__icon {
-          font-size: 2em;
-        }
+    }
+
+    &__actions {
+      mat-icon {
+        position: relative;
+        top: 32%;
+      }
+      mat-icon:hover {
+        opacity: 0.8;
       }
     }
 
-    &__content {
-      padding-top: .4em;
-
-      .vendor-content {
-
-        &__social {
-          margin-top: .5em;
-        }
-
-        &__field {
-
-          width: 100%;
-
-          &_description {
-            font-size: 1rem;
-            font-weight: 700;
-          }
-
-          &_label {
-            flex: 1 1 25%;
-            font-size: 1rem;
-            font-style: normal;
-            font-weight: 500;
-          }
-
-          &_label-text {
-            margin: .3em;
-            font-size: 1rem;
-            font-style: normal;
-            font-weight: 500;
-          }
-
-          &_text {
-            flex: 1 1 75%;
-            font-size: 1rem;
-            font-weight: 500;
-            margin-top: .3em;
-          }
-
-          li {
-            margin-bottom: .3em;
-
-            a {
-              padding-right: .5em;
-            }
-          }
-        }
+    .vendor-content__social-field {
+      margin-top: .4em;
+      
+      :hover {
+        opacity: 0.8;
+      }
+      @media screen and (max-width: 680px) {
+        margin-top: .3em;
       }
     }
+
     mat-expansion-panel-header {
       height: 100px;
     }
 
     .social-icon,
     mat-icon {
-      width: 25px;
+      width: 24px;
       color: #3F51B5;
+
+      @media screen and (max-width: 680px) {
+        font-size: 1.4rem;
+      }
     }
 
     @media screen and (min-width: 767.98px) {
 
       grid-column: 1/2;
 
+    }
+  }
+
+  .vendor-content {
+
+    &__field-description {
+      font-size: 1rem;
+      font-weight: 500;
+
+      @media screen and (max-width: 680px) {
+        font-size: .9rem;
+      }
+    }
+
+    &__field-label {
+      flex: 1 1 100%;
+      box-sizing: border-box;
+      max-width: 30%;
+      margin-right: 20px;
+      
+      @media screen and (max-width: 960px) {
+        max-width: 40%;
+      }
+
+      @media screen and (max-width: 680px) {
+        max-width: 72%;
+        font-size: .9rem;
+        
+        mat-icon {
+          display: none;
+        }
+      }
+    }
+
+    &__field-label-text {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.7;
+      margin-left: 0.3em;
+
+      @media screen and (max-width: 680px) {
+        font-size: .9rem;
+        margin: 0;
+      }
+    }
+
+    &__field-text { 
+      flex: 1 1 100%;
+      max-width: 65%;
+      box-sizing: border-box;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.7;
+        
+      @media screen and (max-width: 680px) {
+        font-size: .9rem;
+        max-width: 95%;
+      }
     }
   }
 
@@ -127,10 +168,16 @@
   
   .mat-expansion-panel-header-description {
     flex-grow: 0;
+    margin-right: 8px;
   }
 
   .rating__icon {
     margin-bottom: .2em;
+
+    @media screen and (max-width: 400px) {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
   }
 
   .vendors-discounts {
