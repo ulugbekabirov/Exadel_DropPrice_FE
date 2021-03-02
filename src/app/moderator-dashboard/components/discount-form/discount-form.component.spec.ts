@@ -41,8 +41,6 @@ describe('DiscountFormComponent', () => {
     fixture = TestBed.createComponent(DiscountFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    
-    
   });
 
   it('should create', () => {
