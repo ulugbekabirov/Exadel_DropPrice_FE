@@ -39,6 +39,8 @@ import { TicketComponent } from './components/ticket/ticket.component';
 import { SearchComponent } from './components/search/search.component';
 import { TagsFilterComponent } from './components/tags-filter/tags-filter.component';
 
+import { TruncateStringPipe } from '../pipes/truncate-string.pipe';
+
 
 @NgModule({
   declarations: [
@@ -54,10 +56,11 @@ import { TagsFilterComponent } from './components/tags-filter/tags-filter.compon
     LoadingSpinnerComponent,
     SearchComponent,
     TagsFilterComponent,
+    TruncateStringPipe,
   ],
 
   imports: [
-  RouterModule,
+    RouterModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

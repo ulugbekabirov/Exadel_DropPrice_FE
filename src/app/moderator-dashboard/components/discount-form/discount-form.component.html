@@ -175,7 +175,7 @@
             [matChipInputAddOnBlur]="addOnBlur"
             (matChipInputTokenEnd)="addTag($event)"
           />
-          <mat-chip-list #chipList aria-label="Tag selection">
+          <mat-chip-list class="chip-list" #chipList aria-label="Tag selection">
             <mat-chip
               [selectable]="selectable"
               *ngFor="let tag of tags.controls; index as i"
@@ -194,7 +194,7 @@
         </div>
         <div formArrayName="pointOfSales">
            <span>
-            <mat-checkbox *ngIf="pointOfSalesForm.controls.length >= 2"
+            <mat-checkbox class="all_discounts" color="primary" *ngIf="pointOfSalesForm.controls.length >= 2"
                           (change)="setAllPointsOfSalesChecked($event.checked)"
             >
               {{'Check All'}}
@@ -209,7 +209,7 @@
               fxLayout.xs="center center"
               fxLayoutGap="1em"
             >
-              <mat-checkbox
+              <mat-checkbox color="primary"
                 formControlName="checked"
               ></mat-checkbox>
               <mat-form-field class="point__name">

@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
   Validators,
-  AbstractControl, FormArray, ValidationErrors,
+  AbstractControl, FormArray, ValidationErrors
 } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { forkJoin, throwError } from 'rxjs';
@@ -23,7 +23,6 @@ import { OnDestroy } from '@angular/core';
   selector: 'app-vendor-form',
   templateUrl: './vendor-form.component.html',
   styleUrls: ['./vendor-form.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 export class VendorFormComponent implements OnInit, OnDestroy {
   vendorForm: FormGroup = this.fb.group({
@@ -129,6 +128,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
     this.snackBar.open(message, action, {
       duration: 3000,
       horizontalPosition: 'center',
+      verticalPosition: 'top',
       panelClass: ['snackbar-color-success']
     });
   }
@@ -165,6 +165,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
     this.snackBar.open(message, action, {
       duration: 3000,
       horizontalPosition: 'center',
+      verticalPosition: 'top',
       panelClass: ['snackbar-color-error']
     });
   }
