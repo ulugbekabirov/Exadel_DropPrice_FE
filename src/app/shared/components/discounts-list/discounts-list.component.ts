@@ -43,13 +43,11 @@ export class DiscountsListComponent implements OnInit, OnDestroy {
     this.locationSelected$.pipe(
       switchMap((coords) => {
         this.locationSort.patchValue(coords);
-        console.log(this.locationSort)
         return this.throttle(this.locationSort.valueChanges);
       }),
       takeUntil(this.unsubscribe$)
     ).subscribe(next => {
       this.locationChange.emit(next);
-      console.log(this.locationSort)
     });
   }
 

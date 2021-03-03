@@ -1,0 +1,11 @@
+<section class="edit-session"
+         fxLayout="row"
+         fxLayoutAlign="space-between center">
+  <span>{{(editSession$ | async)?.message}}</span>
+  <app-countdown-timer
+    [editSession$]="editSession$"
+    (counterRefresh)="resumeEditSession($event)"
+  >
+  </app-countdown-timer>
+</section>
+

@@ -25,6 +25,7 @@ import { OnDestroy } from '@angular/core';
   styleUrls: ['./vendor-form.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
+
 export class VendorFormComponent implements OnInit, OnDestroy {
   vendorForm: FormGroup = this.fb.group({
     vendorName: ['', [Validators.required]],
@@ -54,6 +55,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
   vendorId: number;
   private unsubscribe$ = new Subject<void>();
   isEditMode: boolean = (this.router.url).includes('edit');
+  hasUnsavedChanges = false;
   coordinateIsEmpty = true;
 
   constructor(
@@ -91,6 +93,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
           this.patchPointsOfSales(points);
           this.vendorForm.patchValue(editingVendor);
           this.coordinateIsEmpty = false;
+          this.hasUnsavedChanges = true;
           this.vendorForm.markAsPristine();
         });
     }
@@ -174,6 +177,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     const vendor = this.vendorForm.value;
     const vendorModel = {...vendor, socialLinks: JSON.stringify(vendor.socialLinks)};
+    this.hasUnsavedChanges = false;
     if (this.isEditMode) {
       this.updateVendor(vendorModel, this.vendorId);
     } else {

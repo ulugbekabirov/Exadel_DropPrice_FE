@@ -1,29 +1,45 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { timer } from 'rxjs';
-import { map, take, tap } from 'rxjs/operators';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { interval } from 'rxjs';
+import { finalize, mapTo, scan, switchMap, takeWhile, tap } from 'rxjs/operators';
+
+interface EditSession {
+  message: string;
+  editTime: number;
+  isEditedDiscount: boolean;
+  discountArchive: boolean;
+}
 
 @Component({
   selector: 'app-countdown-timer',
   templateUrl: './countdown-timer.component.html',
   styleUrls: ['./countdown-timer.component.scss']
 })
-export class CountdownTimerComponent implements OnInit, OnDestroy {
-  @Input()
-  countMinutes: number;
+export class CountdownTimerComponent implements OnInit {
+  @Input() editSession$;
+  @Output() counterRefresh: EventEmitter<any> = new EventEmitter();
   countDown$;
   counter: number;
   tick = 1000;
 
+  @ViewChild('reset', {static: true})
+  refreshBtn: ElementRef;
+
   ngOnInit(): void {
-    console.log(this.countMinutes);
-    this.counter = 60 * this.countMinutes;
-    this.countDown$ = timer(0, this.tick).pipe(
-      take(this.counter),
-      map(() => --this.counter),
-      tap(next => console.log(next))
+    this.countDown$ = this.editSession$.pipe(
+      switchMap((session: EditSession) => {
+        this.counter = session.editTime;
+        return interval(this.tick)
+          .pipe(
+            mapTo(-1),
+            scan((acc, curr) => (curr ? curr + acc : acc), this.counter),
+            takeWhile(count => count >= 0),
+            finalize(() => this.counterRefresh.emit(false))
+          );
+      }),
     );
   }
 
-  ngOnDestroy(): void {
+  refreshSession($event: MouseEvent): void {
+    this.counterRefresh.emit(true);
   }
 }

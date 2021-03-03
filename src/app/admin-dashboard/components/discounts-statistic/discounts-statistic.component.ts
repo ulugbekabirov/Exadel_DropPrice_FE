@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation,} from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation, } from '@angular/core';
 import { merge, Observable, Subject } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { startWith, switchMap, takeUntil, tap } from 'rxjs/operators';

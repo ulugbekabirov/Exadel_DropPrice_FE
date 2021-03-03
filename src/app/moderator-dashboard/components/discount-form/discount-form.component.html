@@ -4,13 +4,19 @@
   fxLayoutAlign="center center"
 >
   <mat-card>
-    <mat-card-subtitle>{{'Time to edit'}}</mat-card-subtitle>
-    <mat-card-title>
-      <app-countdown-timer
-        [countMinutes]="editTime"
+    <div *ngIf="editSession$">
+      <mat-card-subtitle>
+        {{(editSession$ | async)?.discountArchive
+        ? ("NEW_DISCOUNT_FORM.EDIT_SESSION_DISCOUNT_ARCHIVED" | translate)
+        : ("NEW_DISCOUNT_FORM.EDIT_SESSION_DISCOUNT_AVAILABLE" | translate)
+        }}
+      </mat-card-subtitle>
+      <app-edit-session
+        [editSession$]="editSession$"
+        (onResumeEditSession)="refreshEditSession($event)"
       >
-      </app-countdown-timer>
-    </mat-card-title>
+      </app-edit-session>
+    </div>
     <mat-card-content>
       <form
         class="form"
@@ -69,9 +75,7 @@
           </mat-form-field>
         </div>
         <mat-form-field class="full-width">
-          <mat-label>{{
-            "NEW_DISCOUNT_FORM.DESCRIPTION" | translate
-            }}</mat-label>
+          <mat-label>{{"NEW_DISCOUNT_FORM.DESCRIPTION" | translate}}</mat-label>
           <textarea
             class="form__discount-description"
             formControlName="description"

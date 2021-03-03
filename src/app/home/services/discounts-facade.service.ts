@@ -101,7 +101,6 @@ export class DiscountsFacadeService {
     return this.requestDiscountsStore.requestData$
       .pipe(
         switchMap((request) => {
-          console.log('request', request)
           const req = {
             ...request,
             tags: request.tags.map(({tagId}) => tagId),
@@ -109,8 +108,6 @@ export class DiscountsFacadeService {
             latitude: request.location.latitude,
             longitude: request.location.longitude,
           };
-          console.log('req', req)
-
           return this.discountsService.searchDiscounts(req)
             .pipe(
               tap(discounts => this.store.set('discounts', discounts)),
