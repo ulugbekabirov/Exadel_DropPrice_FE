@@ -1,4 +1,5 @@
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { CountdownTimerComponent } from './components/countdown-timer/countdown-timer.component';
 import { MapComponent } from './../components/map/map.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -38,7 +39,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { TicketComponent } from './components/ticket/ticket.component';
 import { SearchComponent } from './components/search/search.component';
 import { TagsFilterComponent } from './components/tags-filter/tags-filter.component';
-
+import { FormatTimePipe } from '../pipes/format-time.pipe';
 import { TruncateStringPipe } from '../pipes/truncate-string.pipe';
 
 
@@ -56,6 +57,8 @@ import { TruncateStringPipe } from '../pipes/truncate-string.pipe';
     LoadingSpinnerComponent,
     SearchComponent,
     TagsFilterComponent,
+    CountdownTimerComponent,
+    FormatTimePipe,
     TruncateStringPipe,
   ],
 
@@ -127,6 +130,8 @@ import { TruncateStringPipe } from '../pipes/truncate-string.pipe';
     MatCheckboxModule,
     MatExpansionModule,
     LoadingSpinnerComponent,
+    CountdownTimerComponent,
+    FormatTimePipe,
   ],
   entryComponents: [MapComponent],
 })

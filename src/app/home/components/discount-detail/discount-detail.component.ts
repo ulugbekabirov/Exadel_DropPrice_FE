@@ -17,6 +17,7 @@ import { DiscountsStore } from '../../services/discounts-store';
 
 export class DiscountDetailComponent implements OnInit, OnDestroy {
   discount$: Observable<Discount>;
+  discount;
   discountId: number;
   private unsubscribe$ = new Subject<void>();
   rating;

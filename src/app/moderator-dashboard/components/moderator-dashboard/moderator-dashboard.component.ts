@@ -6,4 +6,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./moderator-dashboard.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ModeratorDashboardComponent {}
+export class ModeratorDashboardComponent {
+  hasUnsavedChanges = true;
+}

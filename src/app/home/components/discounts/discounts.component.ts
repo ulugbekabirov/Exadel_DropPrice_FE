@@ -76,7 +76,7 @@ export class DiscountsComponent implements OnInit, OnDestroy {
   }
 
   onLocationChange(location): void {
-    this.sortStore.set('location', location);
+    this.sortStore.set('location', {...location});
   }
 
   onSortChange(sortBy): void {

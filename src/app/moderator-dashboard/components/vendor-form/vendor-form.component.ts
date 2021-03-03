@@ -24,6 +24,7 @@ import { OnDestroy } from '@angular/core';
   templateUrl: './vendor-form.component.html',
   styleUrls: ['./vendor-form.component.scss'],
 })
+
 export class VendorFormComponent implements OnInit, OnDestroy {
   vendorForm: FormGroup = this.fb.group({
     vendorName: ['', [Validators.required]],
@@ -53,6 +54,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
   vendorId: number;
   private unsubscribe$ = new Subject<void>();
   isEditMode: boolean = (this.router.url).includes('edit');
+  hasUnsavedChanges = false;
   coordinateIsEmpty = true;
 
   constructor(
@@ -90,6 +92,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
           this.patchPointsOfSales(points);
           this.vendorForm.patchValue(editingVendor);
           this.coordinateIsEmpty = false;
+          this.hasUnsavedChanges = true;
           this.vendorForm.markAsPristine();
         });
     }
@@ -124,15 +127,6 @@ export class VendorFormComponent implements OnInit, OnDestroy {
     this.coordinateIsEmpty = true;
   }
 
-  successSnackBar(message: string, action: any): void {
-    this.snackBar.open(message, action, {
-      duration: 3000,
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-      panelClass: ['snackbar-color-success']
-    });
-  }
-
   addPoint(): void {
     const point = this.fb.group({
       name: ['', [Validators.required]],
@@ -161,18 +155,28 @@ export class VendorFormComponent implements OnInit, OnDestroy {
     this.coordinateIsEmpty = false;
   }
 
+  successSnackBar(message: string, action: any): void {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      horizontalPosition: 'center',
+      panelClass: ['snackbar-color-success'],
+      verticalPosition: 'top'
+    });
+  }
+
   errorSnackBar(message: string, action: any): void {
     this.snackBar.open(message, action, {
       duration: 3000,
       horizontalPosition: 'center',
-      verticalPosition: 'top',
-      panelClass: ['snackbar-color-error']
+      panelClass: ['snackbar-color-error'],
+      verticalPosition: 'top'
     });
   }
 
   onSubmit(): void {
     const vendor = this.vendorForm.value;
     const vendorModel = {...vendor, socialLinks: JSON.stringify(vendor.socialLinks)};
+    this.hasUnsavedChanges = false;
     if (this.isEditMode) {
       this.updateVendor(vendorModel, this.vendorId);
     } else {
@@ -191,9 +195,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
       .subscribe((res) => {
         this.vendorForm.reset();
         this.successSnackBar('Successfully update!', '');
-        for (const control in this.vendorForm.controls) {
-          this.vendorForm.controls[control].setErrors(null);
-        }
+        this.resetControlsErrors(this.vendorForm);
         this.router.navigate(['/vendors', res.vendorId]);
       });
   }
@@ -209,11 +211,15 @@ export class VendorFormComponent implements OnInit, OnDestroy {
       .subscribe((res) => {
         this.vendorForm.reset();
         this.successSnackBar('Successfully saved!', '');
-        for (const control in this.vendorForm.controls) {
-          this.vendorForm.controls[control].setErrors(null);
-        }
+        this.resetControlsErrors(this.vendorForm);
         this.router.navigate(['/vendors', res.vendorId]);
       });
+  }
+
+  resetControlsErrors(form): void {
+    for (const control in form.controls) {
+      form.controls[control].setErrors(null);
+    }
   }
 
   get description(): AbstractControl {
