@@ -33,7 +33,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
     phone: ['',
       [
         Validators.required,
-        Validators.pattern(/^((8|\+7|\+3|\+9|)*\d{0,3}[\- ]?)*\d{0,3}?(\(?\d{1,3}\)?[\- ]?)?[\d\- ]{7,10}$/),
+        Validators.pattern(/^([+]?[0-9\s-\(\)]{3,25})*$/),
       ],
     ],
     email: ['', [Validators.required, Validators.email]],
