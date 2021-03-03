@@ -10,10 +10,12 @@ mat-card {
   @extend %form;
   padding: 25px 50px;
   min-width: 200px;
+
   @media screen and (device-aspect-ratio: 40/71) {
     min-width: 300px;
   }
-  h2{
+
+  h2 {
     align-self: center;
   }
 }
@@ -26,10 +28,12 @@ mat-card {
   &__discount-description {
     height: 190px;
   }
+
   &__discount-details {
     margin-top: 10px;
   }
-  .chip-list{
+
+  .chip-list {
     display: inline;
   }
 }
@@ -49,16 +53,20 @@ mat-card {
   width: 100%;
 }
 
-.points{
+.points {
   margin-bottom: 10px;
+
   @media screen and (max-width: 660px) {
     flex-wrap: wrap;
   }
+
   .point {
+
     &__name,
     &__address {
       width: 100%;
       margin-right: 30px;
+
       @media screen and (max-width: 660px) {
         width: 100%;
       }
@@ -66,7 +74,7 @@ mat-card {
   }
 }
 
-.empty_error{
+.empty_error {
   display: block;
   margin-top: 10px;
 }
@@ -76,7 +84,7 @@ button {
   margin-top: 20px;
 }
 
-mat-icon{
+mat-icon {
   cursor: pointer;
 }
 
@@ -91,9 +99,11 @@ mat-icon{
     letter-spacing: initial;
     margin: 0;
   }
+
   .chip-list,
   .form__discount-details {
-    width: 100%;;
+    width: 100%;
+    ;
   }
 }
 
@@ -111,9 +121,32 @@ mat-icon{
   }
 }
 
-
-  .all_discounts{
+.all_discounts {
   margin-bottom: 20px;
   font-weight: 500;
 }
 
+.points {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 1em;
+  flex-wrap: nowrap;
+
+  @media screen and (max-width: 660px) {
+    gap: 2em;
+    align-items: start;
+  }
+
+  .test1 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (max-width: 660px) {
+      flex-direction: column;
+    }
+  }
+
+}
