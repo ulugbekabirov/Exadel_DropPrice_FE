@@ -40,6 +40,7 @@ import { TicketComponent } from './components/ticket/ticket.component';
 import { SearchComponent } from './components/search/search.component';
 import { TagsFilterComponent } from './components/tags-filter/tags-filter.component';
 import { FormatTimePipe } from '../pipes/format-time.pipe';
+import { TruncateStringPipe } from '../pipes/truncate-string.pipe';
 
 
 @NgModule({
@@ -57,11 +58,12 @@ import { FormatTimePipe } from '../pipes/format-time.pipe';
     SearchComponent,
     TagsFilterComponent,
     CountdownTimerComponent,
-    FormatTimePipe
+    FormatTimePipe,
+    TruncateStringPipe,
   ],
 
   imports: [
-  RouterModule,
+    RouterModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

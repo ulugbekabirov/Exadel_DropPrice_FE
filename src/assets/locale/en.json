@@ -110,7 +110,7 @@
     "DISCOUNT_VALIDITY_DATE": "Discount validity date*",
     "PROMO_CODE": "Promo code",
     "LABEL_TAGS": "Tags*",
-    "BTN_TITLE": "Add",
+    "BTN_TITLE": "Save",
     "PLACEHOLDER_VENDOR_NAME": "Enter the vendor name",
     "PLACEHOLDER_PRODUCT_SERVICE": "Enter the product or service name",
     "PLACEHOLDER_DESCRIPTION": "Enter description",
