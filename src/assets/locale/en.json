@@ -136,6 +136,7 @@
     "EDIT_SESSION_DISCOUNT_ARCHIVED": "Discount archived",
     "EDIT_SESSION_DISCOUNT_AVAILABLE": "Discount available"
   },
+  "UNSAVED_CHANGES": "You have unsaved changes. Are you sure you want to leave?",
   "MAP": {
     "ADD_POINT_BTN": "Add point"
   },

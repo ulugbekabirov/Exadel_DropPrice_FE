@@ -136,6 +136,7 @@
     "EDIT_SESSION_DISCOUNT_ARCHIVED": "Скидка архивирована",
     "EDIT_SESSION_DISCOUNT_AVAILABLE": "Скидка доступна"
   },
+  "UNSAVED_CHANGES": "У вас есть несохраненные изменения. Вы уверены, что хотите уйти?",
   "MAP": {
     "ADD_POINT_BTN": "Добавить точку локации"
   },
