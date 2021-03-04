@@ -111,6 +111,7 @@
     .discount-card__header_title {
       font-size: 1.2rem;
       font-weight: 600;
+      width: calc(100% - 30px);
     }
 
     .discount-card__distance {
@@ -162,30 +163,3 @@
   }
 }
 
-.hot_discount{
-  display: flex;
-  flex-direction: row;
-  &-icon{
-    position: absolute;
-    top: 75%;
-    right: 50%;
-    font-size: 2rem;
-    color:  #E4AF9D;
-    animation: hot 1s linear infinite alternate;
-  }
-
-  @keyframes hot {
-
-    0% {
-      color:  #E4AF9D;
-    }
-
-    50% {
-      color:  #dd9076;
-    }
-
-    100% {
-      color:  #d67150;
-    }
-  }
-}

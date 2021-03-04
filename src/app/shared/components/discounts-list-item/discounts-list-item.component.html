@@ -1,16 +1,10 @@
 <div class="container">
   <div class="corner-ribbon-6 corner-ribbon-6-top-right">
-    <span *ngIf="discount.discountAmount<50; else elseBlock" class="discount-card__amount_text">
+    <span class="discount-card__amount_text">
       {{ discount.discountAmount }} %
     </span>
-
   </div>
-  <ng-template #elseBlock>
-    <div class="hot_discount">
-      <span class="discount-card__amount_text"> {{ discount.discountAmount }} %</span>
-      <mat-icon class="hot_discount-icon">local_fire_department</mat-icon>
-    </div>
-  </ng-template>
+ 
   <div class="titles" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
     <div>
       <h2>

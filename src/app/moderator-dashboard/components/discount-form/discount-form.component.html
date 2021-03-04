@@ -133,7 +133,7 @@
           <div *ngFor="let point of pointOfSalesForm.controls; let i = index" [formGroupName]="i">
             <div class="points">
               <mat-checkbox color="primary" formControlName="checked"></mat-checkbox>
-              <div class="test1">
+              <div class="points__info">
                 <mat-form-field class="point__name">
                   <mat-label>{{ "NEW_DISCOUNT_FORM.NAME_LABEL" | translate }}</mat-label>
                   <input type="text" matInput formControlName="name" />
