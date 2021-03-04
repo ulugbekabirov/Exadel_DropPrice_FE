@@ -10,6 +10,14 @@
   border-radius: 4px;
   overflow: hidden;
 
+  .saved-list-header {
+    background: $main-gray;
+    color: $white;
+    padding: 0 1.8em;
+    text-align: center;
+    margin: 0;
+  }
+
   h3 {
     background: $main-gray;
     color: $white;
@@ -22,6 +30,21 @@
     &:nth-child(2n) {
       background: #f5f4f5;
     }
+  }
+
+  ::ng-deep .mat-expansion-panel-body{
+    padding: 0;
+  }  
+
+  ::ng-deep .mat-expansion-panel-header-title {
+    display: block;
+    font-size: 1.1em;
+    font-weight: 500;
+    color: $white;
+  }
+
+  .mat-expansion-panel-header:hover {
+    background: $main-gray;
   }
 }
 

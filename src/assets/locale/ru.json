@@ -212,7 +212,7 @@
       "ORDERED": "История заказов"
     },
     "LIST_ITEM": {
-      "DATE_BEFORE": "действует до",
+      "DATE_BEFORE": "до",
       "DATE_ORDER": "заказан",
       "TOOLTIP_DISCOUNT": "Подробнее о скидке",
       "TOOLTIP_VENDOR": "Подробнее о вендоре",
