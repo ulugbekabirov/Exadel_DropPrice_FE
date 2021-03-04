@@ -1,7 +1,5 @@
 @import "../../../../variables";
 
-
-
 %form {
   width: 100%;
   max-width: 900px;
@@ -30,6 +28,9 @@ mat-card {
   }
   &__discount-details {
     margin-top: 10px;
+  }
+  .chip-list{
+    display: inline;
   }
 }
 
@@ -109,3 +110,10 @@ mat-icon{
     flex-wrap: wrap;
   }
 }
+
+
+  .all_discounts{
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+

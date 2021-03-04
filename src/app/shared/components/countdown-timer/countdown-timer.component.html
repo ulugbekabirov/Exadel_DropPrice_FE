@@ -1,0 +1,10 @@
+<div class="countdown">
+  <span class="countdown__value">
+  {{countDown$ | async | formatTime}}
+  </span>
+  <mat-icon class="countdown__refresh"
+            (click)="refreshSession($event)"
+  >refresh
+  </mat-icon>
+</div>
+

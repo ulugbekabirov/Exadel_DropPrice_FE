@@ -4,6 +4,19 @@
   fxLayoutAlign="center center"
 >
   <mat-card>
+    <div *ngIf="editSession$">
+      <mat-card-subtitle>
+        {{(editSession$ | async)?.discountArchive
+        ? ("NEW_DISCOUNT_FORM.EDIT_SESSION_DISCOUNT_ARCHIVED" | translate)
+        : ("NEW_DISCOUNT_FORM.EDIT_SESSION_DISCOUNT_AVAILABLE" | translate)
+        }}
+      </mat-card-subtitle>
+      <app-edit-session
+        [editSession$]="editSession$"
+        (onResumeEditSession)="refreshEditSession($event)"
+      >
+      </app-edit-session>
+    </div>
     <mat-card-content>
       <form
         class="form"
@@ -44,7 +57,8 @@
                 {{ option.vendorName }}
               </mat-option>
             </mat-autocomplete>
-            <mat-error *ngIf="vendorId.errors?.requireMatch">{{"NEW_DISCOUNT_FORM.NAME_VENDOR_ERROR" | translate}}</mat-error>
+            <mat-error
+              *ngIf="vendorId.errors?.requireMatch">{{"NEW_DISCOUNT_FORM.NAME_VENDOR_ERROR" | translate}}</mat-error>
           </mat-form-field>
 
           <mat-form-field class="full-width product-service">
@@ -61,9 +75,7 @@
           </mat-form-field>
         </div>
         <mat-form-field class="full-width">
-          <mat-label>{{
-            "NEW_DISCOUNT_FORM.DESCRIPTION" | translate
-            }}</mat-label>
+          <mat-label>{{"NEW_DISCOUNT_FORM.DESCRIPTION" | translate}}</mat-label>
           <textarea
             class="form__discount-description"
             formControlName="description"
@@ -175,7 +187,7 @@
             [matChipInputAddOnBlur]="addOnBlur"
             (matChipInputTokenEnd)="addTag($event)"
           />
-          <mat-chip-list #chipList aria-label="Tag selection">
+          <mat-chip-list class="chip-list" #chipList aria-label="Tag selection">
             <mat-chip
               [selectable]="selectable"
               *ngFor="let tag of tags.controls; index as i"
@@ -194,7 +206,7 @@
         </div>
         <div formArrayName="pointOfSales">
            <span>
-            <mat-checkbox *ngIf="pointOfSalesForm.controls.length >= 2"
+            <mat-checkbox class="all_discounts" color="primary" *ngIf="pointOfSalesForm.controls.length >= 2"
                           (change)="setAllPointsOfSalesChecked($event.checked)"
             >
               {{'Check All'}}
@@ -209,7 +221,7 @@
               fxLayout.xs="center center"
               fxLayoutGap="1em"
             >
-              <mat-checkbox
+              <mat-checkbox color="primary"
                 formControlName="checked"
               ></mat-checkbox>
               <mat-form-field class="point__name">
@@ -232,7 +244,8 @@
             </div>
           </div>
         </div>
-        <mat-error *ngIf="pointOfSalesForm.errors?.checkPoints">{{"NEW_DISCOUNT_FORM.EMPTY_COORDINATES_POINT" | translate}}</mat-error>
+        <mat-error
+          *ngIf="pointOfSalesForm.errors?.checkPoints">{{"NEW_DISCOUNT_FORM.EMPTY_COORDINATES_POINT" | translate}}</mat-error>
         <button
           mat-raised-button
           color="primary"

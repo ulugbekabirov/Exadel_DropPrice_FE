@@ -110,7 +110,7 @@
     "DISCOUNT_VALIDITY_DATE": "Дата действия скидки*",
     "PROMO_CODE": "Промокод",
     "LABEL_TAGS": "Теги*",
-    "BTN_TITLE": "Добавить",
+    "BTN_TITLE": "Сохранить",
     "PLACEHOLDER_VENDOR_NAME": "Введите наименование вендора",
     "PLACEHOLDER_PRODUCT_SERVICE": "Введите наименование товара/услуги",
     "PLACEHOLDER_DESCRIPTION": "Введите описание",
@@ -132,8 +132,11 @@
     "OPEN_MAP": "Открыть карту",
     "DELETE_LOCATION": "Удалить локацию",
     "EMPTYCOORDINATES": "Пожалуйста, поставьте точку на карте, для этого нажмите значок добавления местоположения",
-    "EMPTY_COORDINATES_POINT": "Необходимо выбрать точку продаж"
+    "EMPTY_COORDINATES_POINT": "Необходимо выбрать точку продаж",
+    "EDIT_SESSION_DISCOUNT_ARCHIVED": "Скидка архивирована",
+    "EDIT_SESSION_DISCOUNT_AVAILABLE": "Скидка доступна"
   },
+  "UNSAVED_CHANGES": "У вас есть несохраненные изменения. Вы уверены, что хотите уйти?",
   "MAP": {
     "ADD_POINT_BTN": "Добавить точку локации"
   },

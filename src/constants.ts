@@ -7,7 +7,7 @@ export const USER_TICKETS_ENDPOINT = 'tickets';
 export const GET_VENDORS_ENDPOINT = 'vendors';
 export const POST_VENDORS_ENDPOINT = 'vendors';
 export const GET_VENDOR_DISCOUNTS_ENDPOINT = 'discounts';
-export const GET_DISCOUNTS_ENDPOINT = 'discounts';
+export const DISCOUNTS_ENDPOINT = 'discounts';
 export const POST_DISCOUNTS_ENDPOINT = 'discounts';
 export const GET_TOWNS_ENDPOINT = 'towns';
 export const GET_TAGS_ENDPOINT = 'tags';
@@ -19,6 +19,8 @@ export const PUT_ARCHIVE_DISCOUNTS_ENDPOINT = 'archive';
 export const PUT_ASSESS_DISCOUNTS_ENDPOINT = 'assess';
 export const SEARCH_DISCOUNTS_ENDPOINT = 'search';
 export const GET_POINT_OF_SALES = 'pointOfSales';
+export const START_EDIT_SESSION_ENDPOINT = 'beginEdit';
+export const END_EDIT_SESSION_ENDPOINT = 'endEdit';
 
 export const SORTS = [
   {

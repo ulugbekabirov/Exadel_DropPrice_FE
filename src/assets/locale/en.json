@@ -110,7 +110,7 @@
     "DISCOUNT_VALIDITY_DATE": "Discount validity date*",
     "PROMO_CODE": "Promo code",
     "LABEL_TAGS": "Tags*",
-    "BTN_TITLE": "Add",
+    "BTN_TITLE": "Save",
     "PLACEHOLDER_VENDOR_NAME": "Enter the vendor name",
     "PLACEHOLDER_PRODUCT_SERVICE": "Enter the product or service name",
     "PLACEHOLDER_DESCRIPTION": "Enter description",
@@ -132,8 +132,11 @@
     "OPEN_MAP": "Open the map",
     "DELETE_LOCATION": "Delete the location",
     "EMPTYCOORDINATES": "Please, put a point on the map, click adding location icon",
-    "EMPTY_COORDINATES_POINT": "You must select point or points of sales"
+    "EMPTY_COORDINATES_POINT": "You must select point or points of sales",
+    "EDIT_SESSION_DISCOUNT_ARCHIVED": "Discount archived",
+    "EDIT_SESSION_DISCOUNT_AVAILABLE": "Discount available"
   },
+  "UNSAVED_CHANGES": "You have unsaved changes. Are you sure you want to leave?",
   "MAP": {
     "ADD_POINT_BTN": "Add point"
   },
