@@ -16,6 +16,8 @@ export class OrdersListComponent {
   @Output() toggleFavourites = new EventEmitter<any>();
   @Input() tickets$: Observable<Ticket[]>;
 
+  panelOpenState = false;
+
   requestTicket(discountId: any): void {
     this.getTicket.emit(discountId);
   }

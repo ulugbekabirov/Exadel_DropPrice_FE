@@ -13,6 +13,7 @@ export class SavedListComponent  {
   @Output() getTicket = new EventEmitter<any>();
   @Output() toggleFavourites = new EventEmitter<any>();
   @Input() discounts$: Observable<Discount[]>;
+  panelOpenState = false;
 
   requestTicket(discountId: any): void {
     this.getTicket.emit(discountId);

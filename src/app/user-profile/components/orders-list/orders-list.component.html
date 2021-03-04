@@ -1,15 +1,21 @@
 <div class="orders-list">
-  <h3>
-    <ng-content></ng-content>
-  </h3>
-  <ul>
-    <li *ngFor="let ticket of tickets$ | async">
-      <app-orders-list-item
-        [ticket]="ticket"
-        (requestTicket)="requestTicket($event)"
-        (changeFavourites)="getToggleFavourites($event)"
-      >
-      </app-orders-list-item>
-    </li>
-  </ul>
+  <mat-expansion-panel [expanded]="true"
+                       (opened)="panelOpenState = true"
+                       >
+    <mat-expansion-panel-header class="orders-list__header">
+      <mat-panel-title>
+        <ng-content></ng-content>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ul>
+      <li *ngFor="let ticket of tickets$ | async">
+        <app-orders-list-item
+          [ticket]="ticket"
+          (requestTicket)="requestTicket($event)"
+          (changeFavourites)="getToggleFavourites($event)"
+        >
+        </app-orders-list-item>
+      </li>
+    </ul>
+  </mat-expansion-panel>
 </div>
