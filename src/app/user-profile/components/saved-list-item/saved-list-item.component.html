@@ -13,12 +13,37 @@
       {{ discount.discountAmount }} %
     </span>
   </div>
-  <p class="list-item__subTitle"
-     [routerLink]="['/vendors', discount.vendorId]"
-     matTooltip='{{ "USER_PROFILE.LIST_ITEM.TOOLTIP_VENDOR" | translate }}'
-     matTooltipPosition="above"
-  >
-    {{ discount?.vendorName }}
+  
+  <div class="list-item__vendor-field" fxLayout="row" fxLayoutGap=".5em">
+    <p class="list-item__subtitle"
+          [routerLink]="['/vendors', discount.vendorId]"
+          matTooltip='{{ "USER_PROFILE.LIST_ITEM.TOOLTIP_VENDOR" | translate }}'
+          matTooltipPosition="above"
+    >
+      {{ discount?.vendorName }}
+    </p>
+
+    <div class="list-item__favorite">
+      <mat-icon class="list-item__icon_favorite"
+                fxLayoutAlign="center center"
+                matTooltip='{{ "USER_PROFILE.LIST_ITEM.TOOLTIP_FAVORITE" | translate}}'
+                [ngStyle]="{'color': discount.isSaved ? 'rgb(218, 129, 113)' : '#adadaf'}"
+                (click)="toggleFavorites(discount.discountId)"
+      >
+        favorite
+      </mat-icon>
+    </div>
+  </div>
+
+  <p class="list-item__date">
+    <span class="list-item__date_label">
+     <small>
+       {{"USER_PROFILE.LIST_ITEM.DATE_BEFORE" | translate}}:
+     </small>
+    </span>
+    <span class="list-item__date_text">
+      <small>{{discount.endDate | date: 'dd/MM/yyyy'}}</small>
+    </span>
   </p>
 
   <div class="list-item__actions" 
@@ -41,25 +66,5 @@
         }}
       </button>
     </div>
-    <div class="list-item__actions_favorite">
-      <mat-icon class="list-item__icon_favorite"
-                fxLayoutAlign="center center"
-                matTooltip='{{ "USER_PROFILE.LIST_ITEM.TOOLTIP_FAVORITE" | translate}}'
-                [ngStyle]="{'color': discount.isSaved ? 'rgb(218, 129, 113)' : '#adadaf'}"
-                (click)="toggleFavorites(discount.discountId)"
-      >
-        favorite
-      </mat-icon>
-    </div>
   </div>
-  <p class="list-item__date">
-    <span class="list-item__date_label">
-     <small>
-       {{"USER_PROFILE.LIST_ITEM.DATE_BEFORE" | translate}}:
-     </small>
-    </span>
-    <span class="list-item__date_text">
-      <small>{{discount.endDate | date: 'dd/MM/yyyy'}}</small>
-    </span>
-  </p>
 </li>

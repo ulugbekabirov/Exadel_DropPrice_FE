@@ -1,32 +1,75 @@
-.spinner {
-  border: 16px solid rgba(74, 74, 74, .2);
-  border-top: 16px solid #3498db;
-  border-radius: 50%;
+.spinner-container {
   width: 100px;
   height: 100px;
   position:absolute;
+  z-index: 99;
   top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
-  animation: spin 2s linear infinite;
+  left:46%;
+  @media screen and (max-width: 767px) {
+    top: 50%;
+    left: 40%;
+  }
 }
 
-@keyframes spin {
+.spinner-path {
+  position: relative;
+  width: 10rem;
+  height: 10rem;
+  @media screen and (max-width: 767px) {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  > * {
+    animation: spinner 3s infinite;
+
+    &:after {
+      content: " ";
+      display: block;
+      position: absolute;
+      width: 2rem;
+      height: 2rem;
+      @media screen and (max-width: 767px) {
+        width: 1rem;
+        height: 1rem;
+      }
+      border-radius: 50%;
+    }
+
+    &:nth-child(1) {
+      animation-delay: .5s;
+      &:after {
+        background: #4382e0;
+      }
+    }
+
+    &:nth-child(2) {
+      animation-delay: 1s;
+      &:after {
+        background: #6e9bdf;
+      }
+    }
+
+    &:nth-child(3) {
+      animation-delay: 1.5;
+      &:after {
+        background:  #2b62b4;
+      }
+    }
+    &:nth-child(4) {
+      animation-delay: 2s;
+      &:after {
+        background:  #194485;
+      }
+    }
+  }
+}
+
+@keyframes spinner {
   0% {
     transform: rotate(0deg);
   }
   100% {
     transform: rotate(360deg);
   }
-}
-
-.overlay {
-  position: fixed;
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, .2);
-  z-index: 99;
 }

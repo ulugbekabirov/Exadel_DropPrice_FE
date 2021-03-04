@@ -41,8 +41,8 @@ describe('DiscountFormComponent', () => {
     fixture = TestBed.createComponent(DiscountFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    
-    
+
+
   });
 
   it('should create', () => {
@@ -135,7 +135,7 @@ describe('DiscountFormComponent', () => {
       }
     });
 
-    it('offers a [(name)] two-way binding', function() {
+  it('offers a [(name)] two-way binding', function() {
 
       this.hostComponent.name = 'World';
       this.detectChanges();

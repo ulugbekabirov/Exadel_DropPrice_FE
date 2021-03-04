@@ -1,6 +1,6 @@
 {
   "COMMON": {
-    "HEADER": "Ngx Translate Application Usage in Angular"
+    "WINDOW_CONFIRM": "You have unsaved changes. Are you sure you want to leave?"
   },
   "LANGUAGES": {
     "EN": "English",
@@ -134,7 +134,13 @@
     "EMPTYCOORDINATES": "Please, put a point on the map, click adding location icon",
     "EMPTY_COORDINATES_POINT": "You must select point or points of sales",
     "EDIT_SESSION_DISCOUNT_ARCHIVED": "Discount archived",
-    "EDIT_SESSION_DISCOUNT_AVAILABLE": "Discount available"
+    "EDIT_SESSION_DISCOUNT_AVAILABLE": "Discount available",
+    "SUCCESS_SAVE_SNACKBAR": "Successfully saved!",
+    "ERROR_SAVE_SNACKBAR": "Oops! Сhanges weren't saved, please try again",
+    "ERROR_UPDATE_SNACKBAR": "Oops! changes weren't updated, try again",
+    "SUCCESS_UPDATE_SNACKBAR": "Successfully updated!"
+
+
   },
   "UNSAVED_CHANGES": "You have unsaved changes. Are you sure you want to leave?",
   "MAP": {
@@ -212,7 +218,7 @@
       "ORDERED": "Ordered tickets"
     },
     "LIST_ITEM": {
-      "DATE_BEFORE": "valid until",
+      "DATE_BEFORE": "until",
       "DATE_ORDER": "order",
       "TOOLTIP_DISCOUNT": "More about discount",
       "TOOLTIP_VENDOR": "More about vendor",

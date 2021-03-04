@@ -1,7 +1,12 @@
-<div class="countdown">
-  <span class="countdown__value">
-  {{countDown$ | async | formatTime}}
-  </span>
+
+<div class="countdown" fxLayout="row" fxLayoutAlign="center end">
+  <mat-icon class="countdown__icon">timer</mat-icon>
+  <div class="countdown-timer">
+    <span class="countdown-timer__value">
+      {{countDown$ | async | formatTime}}
+      </span>
+  </div>
+  
   <mat-icon class="countdown__refresh"
             (click)="refreshSession($event)"
   >refresh

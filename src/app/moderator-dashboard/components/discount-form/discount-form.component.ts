@@ -5,11 +5,12 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { forkJoin, Observable, Subject, throwError } from 'rxjs';
+import { forkJoin, Observable, ReplaySubject, Subject, throwError } from 'rxjs';
 import { catchError, debounceTime, filter, map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { Discount, Vendor } from '../../../models';
 import { DiscountsService } from '../../../services/discounts.service';
 import { VendorsService } from '../../../services/vendors.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-discount-form',
@@ -53,6 +54,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private discountsService: DiscountsService,
     private vendorsService: VendorsService,
+    private translate: TranslateService
   ) {
   }
 
@@ -271,27 +273,30 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
     this.discountsService.createDiscount(discount).pipe(
       takeUntil(this.unsubscribe$),
       catchError(error => {
-        this.errorSnackBar('Not saved!', '');
+        this.errorSnackBar(this.translate.instant('NEW_DISCOUNT_FORM.ERROR_SAVE_SNACKBAR'), '');
         return throwError(error);
       }))
       .subscribe((res) => {
         this.discountForm.reset();
-        this.successSnackBar('Successfully saved!', '');
+        this.successSnackBar(this.translate.instant('NEW_DISCOUNT_FORM.SUCCESS_SAVE_SNACKBAR'), '');
         this.resetControlsErrors(this.discountForm);
         this.router.navigate(['/vendors', res.vendorId]);
       });
   }
 
   private updateDiscount(discount: Discount, discountId: number): void {
+    const newObserver = new ReplaySubject();
+    let error = null;
+    let close = null;
     this.discountsService.updateDiscount(discount, discountId).pipe(
       takeUntil(this.unsubscribe$),
       catchError(error => {
-        this.errorSnackBar('Not saved!', '');
+        this.errorSnackBar(this.translate.instant('NEW_DISCOUNT_FORM.ERROR_UPDATE_SNACKBAR'), '');
         return throwError(error);
-      }))
+      }))     
       .subscribe((res) => {
         this.discountForm.reset();
-        this.successSnackBar('Successfully update!', '');
+        this.successSnackBar(this.translate.instant('NEW_DISCOUNT_FORM.SUCCESS_UPDATE_SNACKBAR'), '');
         this.resetControlsErrors(this.discountForm);
         this.router.navigate(['/vendors', res.vendorId]);
       });
