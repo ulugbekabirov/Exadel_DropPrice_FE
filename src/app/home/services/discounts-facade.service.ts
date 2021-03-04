@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-import { combineLatest, forkJoin, from, Observable, of } from 'rxjs';
-import { concatMap, debounceTime, distinctUntilChanged, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
+import { combineLatest, forkJoin, Observable, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { SORTS } from '../../../constants';
-import { ActiveUser, Discount, Tag, Town } from '../../models';
+import { ActiveUser, Tag, Town } from '../../models';
 import { Sort } from '../../models/sort';
 import { ApiDataService } from '../../services/api-data.service';
 import { DiscountsService } from '../../services/discounts.service';
 import { TicketService } from '../../services/ticket.service';
 import { UserService } from '../../services/user.service';
-import { VendorsService } from '../../services/vendors.service';
-import { VendorsRequestStore } from '../../vendors/services/vendors-request-store';
 import { DiscountsRequestStore } from './discounts-request-store';
 import { DiscountsStore } from './discounts-store';
 

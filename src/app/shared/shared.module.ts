@@ -1,3 +1,4 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CountdownTimerComponent } from './components/countdown-timer/countdown-timer.component';
 import { MapComponent } from './../components/map/map.component';
@@ -90,7 +91,8 @@ import { TruncateStringPipe } from '../pipes/truncate-string.pipe';
     MatDialogModule,
     MatExpansionModule,
     MatToolbarModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    ScrollingModule
   ],
 
   providers: [GoogleMapsAPIWrapper],

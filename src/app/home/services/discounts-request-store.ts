@@ -69,5 +69,6 @@ export class DiscountsRequestStore {
       }
     };
     this.requestSubject.next(newRequest);
+    console.log('REQUEST_STORE', this.value);
   }
 }

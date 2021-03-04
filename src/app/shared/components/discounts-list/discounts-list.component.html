@@ -32,7 +32,7 @@
     </mat-form-field>
   </div>
   <ul class="discounts-box__list">
-    <li *ngFor="let discount of discounts$ | async">
+    <li *ngFor="let discount of discounts$ | async " [style.height]="itemHeight + 'px'">
       <app-discounts-list-item
         [discount]="discount"
         (changeFavourites)="getToggleFavourites($event)"
