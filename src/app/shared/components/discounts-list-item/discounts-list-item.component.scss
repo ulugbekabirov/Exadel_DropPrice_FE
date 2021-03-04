@@ -111,6 +111,7 @@
     .discount-card__header_title {
       font-size: 1.2rem;
       font-weight: 600;
+      width: calc(100% - 30px);
     }
 
     .discount-card__distance {

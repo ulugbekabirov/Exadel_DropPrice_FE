@@ -18,6 +18,7 @@ import { Location } from '@angular/common';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { OnDestroy } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-vendor-form',
@@ -33,7 +34,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
     phone: ['',
       [
         Validators.required,
-        Validators.pattern(/^((8|\+7|\+3|\+9|)*\d{0,3}[\- ]?)*\d{0,3}?(\(?\d{1,3}\)?[\- ]?)?[\d\- ]{7,10}$/),
+        Validators.pattern(/^([+]?[0-9\s-\(\)]{3,25})*$/),
       ],
     ],
     email: ['', [Validators.required, Validators.email]],
@@ -67,6 +68,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
     private location: Location,
     private cd: ChangeDetectorRef,
     private snackBar: MatSnackBar,
+    private translate: TranslateService
   ) {
   }
 
@@ -189,12 +191,12 @@ export class VendorFormComponent implements OnInit, OnDestroy {
     this.vendorsService.updateVendor(vendor, vendId).pipe(
       takeUntil(this.unsubscribe$),
       catchError(error => {
-        this.errorSnackBar('Not saved!', '');
+        this.errorSnackBar(this.translate.instant('NEW_DISCOUNT_FORM.ERROR_UPDATE_SNACKBAR'), '');
         return throwError(error);
       }))
       .subscribe((res) => {
         this.vendorForm.reset();
-        this.successSnackBar('Successfully update!', '');
+        this.successSnackBar(this.translate.instant('NEW_DISCOUNT_FORM.SUCCESS_UPDATE_SNACKBAR'), '');
         this.resetControlsErrors(this.vendorForm);
         this.router.navigate(['/vendors', res.vendorId]);
       });
@@ -205,12 +207,12 @@ export class VendorFormComponent implements OnInit, OnDestroy {
     this.vendorsService.createVendor(newVendor).pipe(
       takeUntil(this.unsubscribe$),
       catchError(error => {
-        this.errorSnackBar('Not saved!', '');
+        this.errorSnackBar(this.translate.instant('NEW_DISCOUNT_FORM.ERROR_SAVE_SNACKBAR'), '');
         return throwError(error);
       }))
       .subscribe((res) => {
         this.vendorForm.reset();
-        this.successSnackBar('Successfully saved!', '');
+        this.successSnackBar(this.translate.instant('NEW_DISCOUNT_FORM.SUCCESS_SAVE_SNACKBAR'), '');
         this.resetControlsErrors(this.vendorForm);
         this.router.navigate(['/vendors', res.vendorId]);
       });

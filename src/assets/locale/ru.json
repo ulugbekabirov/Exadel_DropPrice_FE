@@ -1,6 +1,6 @@
 {
   "COMMON": {
-    "HEADER": "Пример использования библиотеки Ngx Translate"
+    "WINDOW_CONFIRM": "У вас есть несохраненные изменения. Вы уверены, что хотите выйти?"
   },
   "LANGUAGES": {
     "EN": "Английский",
@@ -134,7 +134,11 @@
     "EMPTYCOORDINATES": "Пожалуйста, поставьте точку на карте, для этого нажмите значок добавления местоположения",
     "EMPTY_COORDINATES_POINT": "Необходимо выбрать точку продаж",
     "EDIT_SESSION_DISCOUNT_ARCHIVED": "Скидка архивирована",
-    "EDIT_SESSION_DISCOUNT_AVAILABLE": "Скидка доступна"
+    "EDIT_SESSION_DISCOUNT_AVAILABLE": "Скидка доступна",
+    "SUCCESS_SAVE_SNACKBAR": "Успешно сохранено!",
+    "ERROR_SAVE_SNACKBAR": "Упс! Изменения не были сохранены, попробуйте еще раз",
+    "ERROR_UPDATE_SNACKBAR": "Упс! Не получилось обновить данные, попробуйте еще раз",
+    "SUCCESS_UPDATE_SNACKBAR": "Данные успешно обновлены!"
   },
   "UNSAVED_CHANGES": "У вас есть несохраненные изменения. Вы уверены, что хотите уйти?",
   "MAP": {

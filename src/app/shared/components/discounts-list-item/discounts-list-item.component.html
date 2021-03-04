@@ -4,6 +4,7 @@
       {{ discount.discountAmount }} %
     </span>
   </div>
+ 
   <div class="titles" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
     <div>
       <h2>
@@ -43,7 +44,7 @@
       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2px">
         <span class="rating__amount" matTooltip="{{'MAIN_PAGE.DISCOUNT_CARD.TOOLTIP_RATING' | translate}}"
           matTooltipPosition="right">
-          {{discount.discountRating | number: '.1-2'}}
+          {{discount.discountRating | number: '.1-1'}}
         </span>
         <mat-icon *ngIf="discount.discountRating > 0" class="rating__icon">star_rate
         </mat-icon>
