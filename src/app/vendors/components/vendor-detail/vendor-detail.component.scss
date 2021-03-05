@@ -18,7 +18,7 @@
       font-size: 1.3rem;
     }
   }
-  
+
   .vendors-detail {
     font-size: 1.2rem;
 
@@ -124,7 +124,7 @@
   .mat-expansion-panel-header {
     margin-top: .1em;
   }
-  
+
   .mat-expansion-panel-header-description {
     flex-grow: 0;
   }
@@ -155,4 +155,12 @@
       grid-template-columns: repeat(3, 1fr);
     }
   }
+}
+
+.admin-dashboard {
+  padding-top: 2rem;
+}
+.mat-tab-labels{
+  display: flex;
+  justify-content: center;
 }

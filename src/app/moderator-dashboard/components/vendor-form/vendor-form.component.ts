@@ -214,7 +214,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
         this.vendorForm.reset();
         this.successSnackBar(this.translate.instant('NEW_DISCOUNT_FORM.SUCCESS_SAVE_SNACKBAR'), '');
         this.resetControlsErrors(this.vendorForm);
-        this.router.navigate(['/vendors', res.vendorId]);
+        // this.router.navigate(['/vendors', res.vendorId]);
       });
   }
 

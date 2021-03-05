@@ -7,6 +7,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./loading-spinner.component.scss']
 })
 export class LoadingSpinnerComponent {
+  color = 'primary';
+  mode = 'indeterminate';
+  value = 40;
   @Input()
   isLoading$: Observable<boolean>;
 }

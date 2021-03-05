@@ -42,7 +42,7 @@ export class DiscountsListComponent implements OnInit, OnDestroy {
 
     this.locationSelected$.pipe(
       switchMap((coords) => {
-        this.locationSort.patchValue(coords);
+        this.locationSort.patchValue(coords, {emitModelToViewChange: true});
         return this.throttle(this.locationSort.valueChanges);
       }),
       takeUntil(this.unsubscribe$)
@@ -57,6 +57,10 @@ export class DiscountsListComponent implements OnInit, OnDestroy {
 
   getToggleFavourites(id: number): void {
     this.toggleFavourites.emit(id);
+  }
+
+  myCoords($event: MouseEvent): void {
+    this.toggleCoordinates.emit($event);
   }
 
   throttle(source$: Observable<string>): any {

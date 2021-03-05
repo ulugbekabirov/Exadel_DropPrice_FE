@@ -156,7 +156,8 @@
     "EDIT_BUTTON_LABEL": "Edit",
     "ARCHIVE_BUTTON_LABEL": "Archive",
     "TICKET_BUTTON_LABEL": "Get the discount",
-    "MAT_TAB_ABOUT": "ABOUT",
+    "MAT_TAB_ABOUT": "About",
+    "MAT_TAB_POINTS_OF_SALE": "Discount's points of sales",
     "TOOLTIP_GO_BACK": "Go back",
     "TOOLTIP_VENDOR": "Vendor",
     "TOOLTIP_FAVORITES": "Add to favorites",
@@ -166,6 +167,8 @@
     "PAGE_TITLE": "About vendor",
     "VENDOR_DETAIL": {
       "DETAIL_RATING_LABEL": "Vendor rating",
+      "MAT_TAB_VENDOR_DISCOUNTS": "Vendor's discounts",
+      "MAT_TAB_VENDOR_POINTS_OF_SALES": "Vendor's points of sales",
       "DETAIL_CONTENT": {
         "VENDOR_NAME": "Vendor Name",
         "VENDOR_ADDRESS": "Address",
