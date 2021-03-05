@@ -1,6 +1,6 @@
 {
   "COMMON": {
-    "HEADER": "Ngx Translate Application Usage in Angular"
+    "WINDOW_CONFIRM": "You have unsaved changes. Are you sure you want to leave?"
   },
   "LANGUAGES": {
     "EN": "English",
@@ -134,7 +134,13 @@
     "EMPTYCOORDINATES": "Please, put a point on the map, click adding location icon",
     "EMPTY_COORDINATES_POINT": "You must select point or points of sales",
     "EDIT_SESSION_DISCOUNT_ARCHIVED": "Discount archived",
-    "EDIT_SESSION_DISCOUNT_AVAILABLE": "Discount available"
+    "EDIT_SESSION_DISCOUNT_AVAILABLE": "Discount available",
+    "SUCCESS_SAVE_SNACKBAR": "Successfully saved!",
+    "ERROR_SAVE_SNACKBAR": "Oops! Сhanges weren't saved, please try again",
+    "ERROR_UPDATE_SNACKBAR": "Oops! changes weren't updated, try again",
+    "SUCCESS_UPDATE_SNACKBAR": "Successfully updated!"
+
+
   },
   "UNSAVED_CHANGES": "You have unsaved changes. Are you sure you want to leave?",
   "MAP": {
@@ -150,7 +156,8 @@
     "EDIT_BUTTON_LABEL": "Edit",
     "ARCHIVE_BUTTON_LABEL": "Archive",
     "TICKET_BUTTON_LABEL": "Get the discount",
-    "MAT_TAB_ABOUT": "ABOUT",
+    "MAT_TAB_ABOUT": "About",
+    "MAT_TAB_POINTS_OF_SALE": "Discount's points of sales",
     "TOOLTIP_GO_BACK": "Go back",
     "TOOLTIP_VENDOR": "Vendor",
     "TOOLTIP_FAVORITES": "Add to favorites",
@@ -160,6 +167,8 @@
     "TOOLTIP_GO_BACK": "Go back",
     "VENDOR_DETAIL": {
       "DETAIL_RATING_LABEL": "Vendor rating",
+      "MAT_TAB_VENDOR_DISCOUNTS": "Vendor's discounts",
+      "MAT_TAB_VENDOR_POINTS_OF_SALES": "Vendor's points of sales",
       "DETAIL_CONTENT": {
         "VENDOR_NAME": "Vendor Name",
         "VENDOR_ADDRESS": "Address",

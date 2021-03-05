@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { PointOfSales } from '../../../models/point-of-sales';
 import { Sort } from '../../../models/sort';
 import { Observable, Subject } from 'rxjs';
 import { Discount, Town, Vendor } from '../../../models';
@@ -27,6 +28,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
   sorts$: Observable<Sort[]>;
   sortBySelected$: Observable<Sort>;
   locationSelected$: Observable<Town>;
+  pointsOfSales$: Observable<PointOfSales[]>
   vendorSelect = new FormControl();
   private unsubscribe$ = new Subject<void>();
   @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
@@ -46,6 +48,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
     this.vendorDiscounts$ = this.store.select('vendorDiscounts');
     this.locationSelected$ = this.sortStore.select('location');
     this.sortBySelected$ = this.sortStore.select('sortBy');
+    this.pointsOfSales$ = this.store.select('pointsOfSales');
   }
 
   ngOnInit(): void {

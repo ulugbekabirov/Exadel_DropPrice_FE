@@ -1,6 +1,6 @@
 {
   "COMMON": {
-    "HEADER": "Пример использования библиотеки Ngx Translate"
+    "WINDOW_CONFIRM": "У вас есть несохраненные изменения. Вы уверены, что хотите выйти?"
   },
   "LANGUAGES": {
     "EN": "Английский",
@@ -134,7 +134,11 @@
     "EMPTYCOORDINATES": "Пожалуйста, поставьте точку на карте, для этого нажмите значок добавления местоположения",
     "EMPTY_COORDINATES_POINT": "Необходимо выбрать точку продаж",
     "EDIT_SESSION_DISCOUNT_ARCHIVED": "Скидка архивирована",
-    "EDIT_SESSION_DISCOUNT_AVAILABLE": "Скидка доступна"
+    "EDIT_SESSION_DISCOUNT_AVAILABLE": "Скидка доступна",
+    "SUCCESS_SAVE_SNACKBAR": "Успешно сохранено!",
+    "ERROR_SAVE_SNACKBAR": "Упс! Изменения не были сохранены, попробуйте еще раз",
+    "ERROR_UPDATE_SNACKBAR": "Упс! Не получилось обновить данные, попробуйте еще раз",
+    "SUCCESS_UPDATE_SNACKBAR": "Данные успешно обновлены!"
   },
   "UNSAVED_CHANGES": "У вас есть несохраненные изменения. Вы уверены, что хотите уйти?",
   "MAP": {
@@ -150,8 +154,9 @@
     "EDIT_BUTTON_LABEL": "Редактировать",
     "ARCHIVE_BUTTON_LABEL": "Архивировать",
     "TICKET_BUTTON_LABEL": "Получить скидку",
-    "MAT_TAB_ABOUT": "О СКИДКЕ",
-    "TOOLTIP_GO_BACK": "Вернуться",
+    "MAT_TAB_ABOUT": "о скидке",
+    "MAT_TAB_POINTS_OF_SALE": "Точки продаж скидки",
+    "TOOLTIP_GO_BACK": "Вернуться к списку",
     "TOOLTIP_VENDOR": "Вендор",
     "TOOLTIP_FAVORITES": "Добавить в избранные",
     "TOOLTIP_VENDOR_RAT": "Рейтинг вендора"
@@ -168,6 +173,8 @@
         "VENDOR_PHONE": "Контактный телефон",
         "VENDOR_EDIT": "Редактировать вендора"
       },
+      "MAT_TAB_VENDOR_DISCOUNTS": "Скидки Вендора",
+      "MAT_TAB_VENDOR_POINTS_OF_SALES": "Точки продаж вендора",
       "DETAIL_ACTIONS": {
         "EDIT": "Редактировать"
       }

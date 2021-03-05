@@ -1,3 +1,4 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CountdownTimerComponent } from './components/countdown-timer/countdown-timer.component';
 import { MapComponent } from './../components/map/map.component';
@@ -41,6 +42,7 @@ import { SearchComponent } from './components/search/search.component';
 import { TagsFilterComponent } from './components/tags-filter/tags-filter.component';
 import { FormatTimePipe } from '../pipes/format-time.pipe';
 import { TruncateStringPipe } from '../pipes/truncate-string.pipe';
+import { DiscountsMapComponent } from './components/discounts-map/discounts-map.component';
 
 
 @NgModule({
@@ -60,6 +62,7 @@ import { TruncateStringPipe } from '../pipes/truncate-string.pipe';
     CountdownTimerComponent,
     FormatTimePipe,
     TruncateStringPipe,
+    DiscountsMapComponent,
   ],
 
   imports: [
@@ -90,7 +93,8 @@ import { TruncateStringPipe } from '../pipes/truncate-string.pipe';
     MatDialogModule,
     MatExpansionModule,
     MatToolbarModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    ScrollingModule
   ],
 
   providers: [GoogleMapsAPIWrapper],
@@ -132,6 +136,7 @@ import { TruncateStringPipe } from '../pipes/truncate-string.pipe';
     LoadingSpinnerComponent,
     CountdownTimerComponent,
     FormatTimePipe,
+    DiscountsMapComponent,
   ],
   entryComponents: [MapComponent],
 })
