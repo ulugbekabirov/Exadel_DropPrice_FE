@@ -15,7 +15,6 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-
     <mat-form-field class="form-field-location">
       <mat-label fxLayoutAlign="center center">
         <mat-icon class="location__icon">room</mat-icon>
@@ -28,11 +27,10 @@
           {{town.townName}}
         </mat-option>
       </mat-select>
-
     </mat-form-field>
   </div>
   <ul class="discounts-box__list">
-    <li *ngFor="let discount of discounts$ | async " [style.height]="itemHeight + 'px'">
+    <li *ngFor="let discount of discounts$ | async ">
       <app-discounts-list-item
         [discount]="discount"
         (changeFavourites)="getToggleFavourites($event)"
