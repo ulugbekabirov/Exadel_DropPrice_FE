@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, pluck } from 'rxjs/operators';
-import { Discount, Tag, Town, Vendor } from '../../models';
+import { Discount, Town, Vendor } from '../../models';
+import { PointOfSales } from '../../models/point-of-sales';
 import { Sort } from '../../models/sort';
 
 export interface VendorState {
@@ -11,6 +12,7 @@ export interface VendorState {
   discounts: Discount[] | [];
   activeDiscount: Discount | {};
   activeVendor: Vendor | {};
+  pointsOfSales: PointOfSales[];
 }
 
 const VENDOR_INITIAL_STATE: VendorState = {
@@ -20,6 +22,7 @@ const VENDOR_INITIAL_STATE: VendorState = {
   discounts: [],
   activeDiscount: {},
   activeVendor: {},
+  pointsOfSales: []
 };
 
 

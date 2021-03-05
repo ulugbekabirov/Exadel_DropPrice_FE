@@ -36,3 +36,4 @@ export class DiscountsListItemComponent {
     this.router.navigate(['add-new/discounts/edit', discountId]);
   }
 }
+

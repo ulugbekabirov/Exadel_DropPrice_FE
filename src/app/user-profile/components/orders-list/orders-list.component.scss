@@ -10,10 +10,10 @@
   border-radius: 4px;
   overflow: hidden;
 
-  h3 {
+  .orders-list__header{
     background: $main-gray;
     color: $white;
-    padding: 10px;
+    padding: 0 1.8em;
     text-align: center;
     margin: 0;
   }
@@ -23,4 +23,19 @@
       background: #f5f4f5;
     }
   }
+
+  ::ng-deep .mat-expansion-panel-body {
+    padding: 0;
+  } 
+  
+  ::ng-deep .mat-expansion-panel-header-title {
+    display: block;
+    font-size: 1.1em;
+    font-weight: 500;
+    color: $white;
+  }
+
+  .mat-expansion-panel-header:hover {
+    background: $main-gray;
+  } 
 }

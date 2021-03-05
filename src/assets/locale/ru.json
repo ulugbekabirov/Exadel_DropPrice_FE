@@ -1,6 +1,6 @@
 {
   "COMMON": {
-    "HEADER": "Пример использования библиотеки Ngx Translate"
+    "WINDOW_CONFIRM": "У вас есть несохраненные изменения. Вы уверены, что хотите выйти?"
   },
   "LANGUAGES": {
     "EN": "Английский",
@@ -110,7 +110,7 @@
     "DISCOUNT_VALIDITY_DATE": "Дата действия скидки*",
     "PROMO_CODE": "Промокод",
     "LABEL_TAGS": "Теги*",
-    "BTN_TITLE": "Добавить",
+    "BTN_TITLE": "Сохранить",
     "PLACEHOLDER_VENDOR_NAME": "Введите наименование вендора",
     "PLACEHOLDER_PRODUCT_SERVICE": "Введите наименование товара/услуги",
     "PLACEHOLDER_DESCRIPTION": "Введите описание",
@@ -132,8 +132,15 @@
     "OPEN_MAP": "Открыть карту",
     "DELETE_LOCATION": "Удалить локацию",
     "EMPTYCOORDINATES": "Пожалуйста, поставьте точку на карте, для этого нажмите значок добавления местоположения",
-    "EMPTY_COORDINATES_POINT": "Необходимо выбрать точку продаж"
+    "EMPTY_COORDINATES_POINT": "Необходимо выбрать точку продаж",
+    "EDIT_SESSION_DISCOUNT_ARCHIVED": "Скидка архивирована",
+    "EDIT_SESSION_DISCOUNT_AVAILABLE": "Скидка доступна",
+    "SUCCESS_SAVE_SNACKBAR": "Успешно сохранено!",
+    "ERROR_SAVE_SNACKBAR": "Упс! Изменения не были сохранены, попробуйте еще раз",
+    "ERROR_UPDATE_SNACKBAR": "Упс! Не получилось обновить данные, попробуйте еще раз",
+    "SUCCESS_UPDATE_SNACKBAR": "Данные успешно обновлены!"
   },
+  "UNSAVED_CHANGES": "У вас есть несохраненные изменения. Вы уверены, что хотите уйти?",
   "MAP": {
     "ADD_POINT_BTN": "Добавить точку локации"
   },
@@ -147,7 +154,8 @@
     "EDIT_BUTTON_LABEL": "Редактировать",
     "ARCHIVE_BUTTON_LABEL": "Архивировать",
     "TICKET_BUTTON_LABEL": "Получить скидку",
-    "MAT_TAB_ABOUT": "О СКИДКЕ",
+    "MAT_TAB_ABOUT": "о скидке",
+    "MAT_TAB_POINTS_OF_SALE": "Точки продаж скидки",
     "TOOLTIP_GO_BACK": "Вернуться к списку",
     "TOOLTIP_VENDOR": "Вендор",
     "TOOLTIP_FAVORITES": "Добавить в избранные",
@@ -165,6 +173,8 @@
         "VENDOR_PHONE": "Контактный телефон",
         "VENDOR_EDIT": "Редактировать вендора"
       },
+      "MAT_TAB_VENDOR_DISCOUNTS": "Скидки Вендора",
+      "MAT_TAB_VENDOR_POINTS_OF_SALES": "Точки продаж вендора",
       "DETAIL_ACTIONS": {
         "EDIT": "Редактировать"
       }
@@ -209,7 +219,7 @@
       "ORDERED": "История заказов"
     },
     "LIST_ITEM": {
-      "DATE_BEFORE": "действует до",
+      "DATE_BEFORE": "до",
       "DATE_ORDER": "заказан",
       "TOOLTIP_DISCOUNT": "Подробнее о скидке",
       "TOOLTIP_VENDOR": "Подробнее о вендоре",

@@ -1,19 +1,12 @@
 @import "../../../../variables";
 
-html,
-body {
-	height: 100%;
-	margin: 0;
-  padding: 0;
-}
-
 %form {
   width: 100%;
   max-width: 900px;
   margin: 2.5em auto;
 }
 
-mat-card {
+.new-vendor-card {
   @extend %form;
     padding: 25px 50px;
     min-width: 200px;
@@ -33,31 +26,54 @@ mat-card {
   &__description {
     height: 190px;
   }
+  mat-form-field {
+    display: block;
+    width: 100%;
+  }
+  
+  mat-icon{
+    cursor: pointer;
+    color: rgb(46, 77, 128);
+  }
+  
+  mat-icon:focus, mat-icon:active {
+    opacity: .7;
+  }
+  
+  button {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .mat-error{
+    margin-top: 1rem;
+  }
+
+  .points{
+    @media screen and (max-width: 767px) {
+      margin-bottom: 2rem;
+    }
+    .point__name{
+      width: 50%;
+      @media screen and (max-width: 767px) {
+        width: 100%;
+      }
+    }
+    .point__address{
+      width: 50%;
+      @media screen and (max-width: 767px) {
+        width: 100%;
+      }
+    }
+  }
+  
+  .snackbar-color-success {
+    background-color: $snackbar-color-success;
+  }
+  
+  .snackbar-color-error {
+    background-color: $snackbar-color-error;
+  }
+  
 }
 
-mat-form-field {
-  display: block;
-  width: 100%;
-}
-
-mat-icon{
-  cursor: pointer;
-  color: rgb(46, 77, 128);
-}
-
-mat-icon:focus, mat-icon:active {
-  opacity: .7;
-}
-
-button {
-  width: 100%;
-  margin-top: 20px;
-}
-
-.snackbar-color-success {
-  background-color: $snackbar-color-success;
-}
-
-.snackbar-color-error {
-  background-color: $snackbar-color-error;
-}

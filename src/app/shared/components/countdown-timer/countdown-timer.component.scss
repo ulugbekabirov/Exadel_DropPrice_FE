@@ -1,0 +1,50 @@
+@import "src/variables";
+
+.countdown {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 1rem;
+  display: flex;
+  background-color: $discount_list_item_sale;
+  padding: .6rem;
+  color: #ffff;
+  gap: .5em;
+
+
+  &__icon {
+    position: relative;
+    animation: timer 1s linear infinite;
+  }
+
+  @keyframes timer {
+
+    0% {
+      opacity: .9;
+    }
+
+    50% {
+      opacity: .5;
+    }
+
+    100% {
+      opacity: .3;
+    }
+  }
+
+  &-timer {
+
+    &__value {
+      height: 100%;
+      font-weight: 500;
+    }
+  }
+
+  &__refresh {
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

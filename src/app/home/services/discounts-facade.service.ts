@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-import { combineLatest, forkJoin, from, Observable, of } from 'rxjs';
-import { concatMap, debounceTime, distinctUntilChanged, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
+import { combineLatest, forkJoin, Observable, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { SORTS } from '../../../constants';
 import { ActiveUser, Discount, Tag, Town } from '../../models';
+import { PointOfSales } from '../../models/point-of-sales';
 import { Sort } from '../../models/sort';
 import { ApiDataService } from '../../services/api-data.service';
 import { DiscountsService } from '../../services/discounts.service';
 import { TicketService } from '../../services/ticket.service';
 import { UserService } from '../../services/user.service';
-import { VendorsService } from '../../services/vendors.service';
-import { VendorsRequestStore } from '../../vendors/services/vendors-request-store';
 import { DiscountsRequestStore } from './discounts-request-store';
 import { DiscountsStore } from './discounts-store';
 
@@ -116,7 +115,21 @@ export class DiscountsFacadeService {
       );
   }
 
-  getDiscount(discountId): Observable<any> {
+  getDiscount(discountId, request): Observable<Discount> {
+    return this.discountsService.getDiscountById(discountId, request)
+      .pipe(
+        tap(discount => this.store.set('activeDiscount', discount)),
+      );
+  }
+
+  getDiscountPointsOfSales(discountId): Observable<PointOfSales[]> {
+    return this.discountsService.getPointsOfSalesByDiscountId(discountId)
+      .pipe(
+        tap(points => this.store.set('pointsOfSales', points))
+      );
+  }
+
+  loadDiscountData(discountId): Observable<any> {
     return this.requestDiscountsStore.requestData$
       .pipe(
         switchMap((request) => {
@@ -125,10 +138,10 @@ export class DiscountsFacadeService {
             latitude: request.location.latitude ? request.location.latitude : user.officeLatitude,
             longitude: request.location.longitude ? request.location.longitude : user.officeLongitude,
           };
-          return this.discountsService.getDiscountById(discountId, req)
-            .pipe(
-              tap(discount => this.store.set('activeDiscount', discount)),
-            );
+          return forkJoin(
+            this.getDiscount(discountId, req),
+            this.getDiscountPointsOfSales(discountId)
+          );
         })
       );
   }

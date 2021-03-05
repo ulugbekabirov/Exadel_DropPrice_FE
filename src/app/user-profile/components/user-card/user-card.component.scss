@@ -7,17 +7,17 @@
 .user-profile-header__user-name {
   font-size: 1.5rem;
   line-height: 1.1;
-  font-weight: 700;
+  font-weight: 600;
   margin-left: 0;
 
-    @media screen and (max-width: 600px) {
-      font-size: 1.3rem;
-      font-weight: 500;
-    }
+  @media screen and (max-width: 980px) {
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
 
-    @media screen and (max-width: 480px) {
-      font-size: 1.2em;
-    }
+  @media screen and (max-width: 480px) {
+    font-size: 1.2em;
+  }
 }
 
 .user-profile-card {
@@ -59,17 +59,17 @@
 
     &_label {
       line-height: 1.7;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 1rem;
       margin-left: .3em;
 
-      @media screen and (max-width: 600px) {
+      @media screen and (max-width: 980px) {
         font-weight: 500;
-        font-size: 0.9rem;
+      
       }
 
       @media screen and (max-width: 480px) {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
         margin-left: 0;
       }
     }
@@ -81,7 +81,7 @@
       max-width: 25%;
 
       @media screen and (max-width: 600px) {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
       }
     }
 

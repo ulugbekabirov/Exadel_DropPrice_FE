@@ -12,7 +12,10 @@ const routes: Routes = [
     component: DiscountsComponent,
     canActivate: [AuthGuard]
   },
-  {path: 'discounts/:id', component: DiscountDetailComponent},
+  {
+    path: 'discounts/:id',
+    component: DiscountDetailComponent,
+  },
 
 ];
 

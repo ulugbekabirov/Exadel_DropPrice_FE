@@ -1,5 +1,5 @@
 <div class="new-vendor-wrapper">
-  <mat-card>
+  <mat-card class="new-vendor-card">
     <mat-card-content>
       <form [formGroup]="vendorForm"
         (ngSubmit)="onSubmit()"
@@ -118,6 +118,7 @@
               <div class="points"
                    fxLayoutAlign="start center"
                    fxLayout.xs="center center"
+                   fxLayoutGap="2rem"
               >
                 <mat-form-field class="point__name">
                   <mat-label>{{ "NEW_DISCOUNT_FORM.NAME_LABEL" | translate }}</mat-label>
