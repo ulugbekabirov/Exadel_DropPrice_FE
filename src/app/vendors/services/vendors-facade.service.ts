@@ -110,6 +110,14 @@ export class VendorsFacadeService {
 
   getVendorDiscounts(vendorId, reqOpt): Observable<any> {
     return this.vendorsService.getVendorsDiscounts(vendorId, reqOpt).pipe(
+      map(discounts => {
+        return discounts.map(discount => {
+          const {endDate, startDate} = discount;
+          const dateNow = Date.now();
+          const discountAvailable = (dateNow > new Date(startDate).getTime() && dateNow < new Date(endDate).getTime());
+          return {...discount, discountAvailable};
+        });
+      }),
       tap(discounts => this.store.set('vendorDiscounts', discounts))
     );
   }

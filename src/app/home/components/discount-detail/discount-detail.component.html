@@ -58,7 +58,8 @@
           </p>
           <div class="discount-icons">
             <mat-icon *appVerifyUserRoles='["Moderator"]' class="action__icon edit" color="primary"
-                      matTooltip="Edit Discount" routerLink="edit"
+                      matTooltip="Edit Discount"
+                      routerLink="edit"
                       matTooltip="{{ 'DISCOUNT_DETAIL.EDIT_BUTTON_LABEL' | translate }}"
                       (click)="onEditDiscount(discountId)">edit
             </mat-icon>
@@ -140,9 +141,17 @@
         </section>
 
         <section class="discount-detail__actions" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="center start">
-          <button class="action__button ticket" mat-flat-button color="primary"
-                  (click)="ticketHandler(discountId)">
-            {{ "DISCOUNT_DETAIL.TICKET_BUTTON_LABEL" | translate }}
+          <button class="action__button ticket"
+                  mat-flat-button color="primary"
+                  (click)="ticketHandler(discountId)"
+                  [class.discountAvailable]="!(discount$ | async)?.discountAvailable"
+                  [disabled]="!(discount$ | async)?.discountAvailable"
+          >
+            {{
+            (discount$ | async)?.discountAvailable
+              ? ("DISCOUNT_DETAIL.TICKET_BUTTON_LABEL" | translate)
+              : ("DISCOUNT_DETAIL.TICKET_BUTTON_LABEL_DISCOUNT_INACTIVE" | translate)
+            }}
           </button>
         </section>
       </section>

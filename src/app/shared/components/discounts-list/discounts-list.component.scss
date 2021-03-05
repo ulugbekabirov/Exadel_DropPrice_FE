@@ -3,7 +3,7 @@
 .discounts-box {
   font-size: 1rem;
   padding-bottom: 2rem;
-  margin-top: 2rem;
+  margin: 1.2rem 1rem 0;
 
   &__settings {
     display: flex;
@@ -12,7 +12,7 @@
     color: $discount_filter_selector_text_color;
 
     .mat-form-field {
-      width: 25%;
+      flex-basis: 25%;
       font-weight: 500;
     }
 
@@ -29,8 +29,8 @@
   &__list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    row-gap: 20px;
-    column-gap: 20px;
+    gap: 1.2rem;
+    margin-top: 1.2rem;
 
     @media screen and (min-width: 700px) {
 

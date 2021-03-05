@@ -146,6 +146,18 @@
     &:focus {
       opacity: .9;
     }
+
+    &.discountAvailable {
+      background: $main_gray;
+      color: inherit;
+      cursor: default;
+
+      &:active,
+      &:hover,
+      &:focus {
+        opacity: 1;
+      }
+    }
   }
 }
 

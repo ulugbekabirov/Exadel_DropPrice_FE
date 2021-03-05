@@ -31,7 +31,8 @@
   "MAIN_PAGE": {
     "SEARCH": "Поиск",
     "BUTTONS": {
-      "TICKET": "Получить скидку"
+      "TICKET": "Получить скидку",
+      "DISCOUNT_INACTIVE": "Скидка не доступна"
     },
     "FILTER": {
       "SORT_BY": {
@@ -154,6 +155,7 @@
     "EDIT_BUTTON_LABEL": "Редактировать",
     "ARCHIVE_BUTTON_LABEL": "Архивировать",
     "TICKET_BUTTON_LABEL": "Получить скидку",
+    "TICKET_BUTTON_LABEL_DISCOUNT_INACTIVE": "Скидка не доступна",
     "MAT_TAB_ABOUT": "о скидке",
     "MAT_TAB_POINTS_OF_SALE": "Точки продаж скидки",
     "TOOLTIP_GO_BACK": "Вернуться к списку",

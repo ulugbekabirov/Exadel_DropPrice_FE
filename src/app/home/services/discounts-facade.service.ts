@@ -109,6 +109,14 @@ export class DiscountsFacadeService {
           };
           return this.discountsService.searchDiscounts(req)
             .pipe(
+              map(discounts => {
+                return discounts.map(discount => {
+                  const {endDate, startDate} = discount;
+                  const dateNow = Date.now();
+                  const discountAvailable = (dateNow > new Date(startDate).getTime() && dateNow < new Date(endDate).getTime());
+                  return {...discount, discountAvailable};
+                });
+              }),
               tap(discounts => this.store.set('discounts', discounts)),
             );
         })
@@ -118,6 +126,12 @@ export class DiscountsFacadeService {
   getDiscount(discountId, request): Observable<Discount> {
     return this.discountsService.getDiscountById(discountId, request)
       .pipe(
+        map(discount => {
+          const {endDate, startDate} = discount;
+          const dateNow = Date.now();
+          const discountAvailable = (dateNow > new Date(startDate).getTime() && dateNow < new Date(endDate).getTime());
+          return {...discount, discountAvailable};
+        }),
         tap(discount => this.store.set('activeDiscount', discount)),
       );
   }
