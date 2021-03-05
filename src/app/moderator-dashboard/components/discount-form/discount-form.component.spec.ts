@@ -133,7 +133,7 @@ describe('DiscountFormComponent', () => {
       }
     });
 
-    it('offers a [(name)] two-way binding', function() {
+  it('offers a [(name)] two-way binding', function() {
 
       this.hostComponent.name = 'World';
       this.detectChanges();
