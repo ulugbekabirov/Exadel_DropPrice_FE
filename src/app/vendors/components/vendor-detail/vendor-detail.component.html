@@ -101,7 +101,7 @@
   </article>
 <section class="vendors-discounts">
   <mat-tab-group>
-    <mat-tab label="{{ 'Скидки Вендора' }}">
+    <mat-tab label="{{'VENDOR_PAGE.VENDOR_DETAIL.MAT_TAB_VENDOR_DISCOUNTS' | translate}}">
       <app-discounts-list
         [discounts$]="vendorDiscounts$"
         [towns$]="towns$"
@@ -114,7 +114,7 @@
         [locationSelected$]="locationSelected$"
       ></app-discounts-list>
     </mat-tab>
-    <mat-tab label="{{ 'Точки Продаж Вендора' }}">
+    <mat-tab label="{{'VENDOR_PAGE.VENDOR_DETAIL.MAT_TAB_VENDOR_POINTS_OF_SALES' | translate}}">
       <app-discounts-map
         [pointsOfSales$]="pointsOfSales$"
         [locationSelected$]="locationSelected$"

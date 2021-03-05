@@ -12,21 +12,8 @@ export class DiscountsMapComponent {
   pointsOfSales$: Observable<PointOfSales[]>;
   @Input()
   locationSelected$: Observable<any>;
-  zoom: number = 7;
+  zoom = 7;
 
-  clickedMarker(label: string, index: number): void {
-    console.log(`clicked the marker: ${label || index}`);
-  }
-
-  max(coordType: 'latitude' | 'longitude'): number {
-    this.pointsOfSales$.subscribe(markers => {
-      return Math.max(...markers.map(marker => marker[coordType]));
-    });
-  }
-
-  min(coordType: 'latitude' | 'longitude'): number {
-    this.pointsOfSales$.subscribe(markers => {
-      return Math.max(...markers.map(marker => marker[coordType]));
-    });
+  clickedMarker(label: string, id: number): void {
   }
 }

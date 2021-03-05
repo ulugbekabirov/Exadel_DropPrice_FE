@@ -12,7 +12,7 @@
       (markerClick)="clickedMarker(pointOfSales.name, pointOfSales.id)"
       [latitude]="pointOfSales.latitude"
       [longitude]="pointOfSales.longitude"
-      [label]="pointOfSales.name"
+      [title]="pointOfSales.name"
     >
       <agm-info-window>
         <p>
@@ -24,9 +24,9 @@
       </agm-info-window>
 
     </agm-marker>
-    <agm-marker [latitude]="(locationSelected$ | async).latitude + 0.3"
+    <agm-marker [latitude]="(locationSelected$ | async).latitude + 0.2"
                 [longitude]="(locationSelected$ | async).longitude"
-                [label]="'YOU'"
+                [label]="'👇'"
     >
       <agm-info-window>
         <p>
@@ -34,12 +34,7 @@
         </p>
       </agm-info-window>
     </agm-marker>
-    <agm-rectangle
-      [north]="max('latitude')"
-      [east]="max('longitude')"
-      [south]="min('latitude')"
-      [west]="min('longitude')"
-    >
+    <agm-rectangle>
     </agm-rectangle>
   </agm-map>
 </div>

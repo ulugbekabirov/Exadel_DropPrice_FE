@@ -154,7 +154,8 @@
     "EDIT_BUTTON_LABEL": "Редактировать",
     "ARCHIVE_BUTTON_LABEL": "Архивировать",
     "TICKET_BUTTON_LABEL": "Получить скидку",
-    "MAT_TAB_ABOUT": "О СКИДКЕ",
+    "MAT_TAB_ABOUT": "о скидке",
+    "MAT_TAB_POINTS_OF_SALE": "Точки продаж скидки",
     "TOOLTIP_GO_BACK": "Вернуться к списку",
     "TOOLTIP_VENDOR": "Вендор",
     "TOOLTIP_FAVORITES": "Добавить в избранные",
@@ -172,6 +173,8 @@
         "VENDOR_PHONE": "Контактный телефон",
         "VENDOR_EDIT": "Редактировать вендора"
       },
+      "MAT_TAB_VENDOR_DISCOUNTS": "Скидки Вендора",
+      "MAT_TAB_VENDOR_POINTS_OF_SALES": "Точки продаж вендора",
       "DETAIL_ACTIONS": {
         "EDIT": "Редактировать"
       }

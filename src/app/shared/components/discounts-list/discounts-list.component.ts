@@ -82,6 +82,11 @@ export class DiscountsListComponent implements OnInit, OnDestroy {
           //   take: 12
           // })
           .pipe(
+            map((resp: any) => {
+              console.log(resp);
+              console.log('CACHE', this.cache);
+              return resp;
+            }),
             tap(resp => {
               this.cache[page - 1] = resp;
               if ((this.itemHeight * this.numberOfItems * page) < window.innerHeight) {
@@ -94,6 +99,33 @@ export class DiscountsListComponent implements OnInit, OnDestroy {
     );
 
   ngOnInit(): void {
+    // this.pageToLoad$
+    //   .pipe(
+    //     tap(_ => this.loading = true),
+    //     // flatMap((page: number) => {
+    //     //   this.requestStore.set('skip', (12 * (page - 1)));
+    //     //   return this.facade.getDiscounts()
+    //     //   // return this.facade.getDiscounts({
+    //     //   //   skip: 12 * (page - 1),
+    //     //   //   take: 12
+    //     //   // })
+    //     //     .pipe(
+    //     //       map((resp: any) => {
+    //     //         console.log(resp);
+    //     //         console.log('CACHE', this.cache);
+    //     //         return resp;
+    //     //       }),
+    //     //       tap(resp => {
+    //     //         this.cache[page - 1] = resp;
+    //     //         if ((this.itemHeight * this.numberOfItems * page) < window.innerHeight){
+    //     //           this.pageByManual$.next(page + 1);
+    //     //         }
+    //     //       })
+    //     //     );
+    //     // }),
+    //     // map(() => this.cache.reduce((acc, val) => [...acc, ...val]))
+    //   ).subscribe(next =>  this.requestStore.set('skip', (12 * (next - 1))));
+
 
     this.sortBySelected$.pipe(
       switchMap((sortBy) => {
