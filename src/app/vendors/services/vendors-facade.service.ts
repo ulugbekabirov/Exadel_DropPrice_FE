@@ -3,6 +3,7 @@ import { combineLatest, forkJoin, Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { SORTS } from '../../../constants';
 import { ActiveUser, Tag, Town } from '../../models';
+import { PointOfSales } from '../../models/point-of-sales';
 import { Sort } from '../../models/sort';
 import { ApiDataService } from '../../services/api-data.service';
 import { DiscountsService } from '../../services/discounts.service';
@@ -25,7 +26,8 @@ export class VendorsFacadeService {
     private ticketService: TicketService,
     private restApi: ApiDataService,
     private discountsService: DiscountsService,
-  ) { }
+  ) {
+  }
 
   isCurrentUserLocation(): boolean {
     return !!(this.userService.activeUserValue.latitude && this.userService.activeUserValue.longitude);
@@ -125,9 +127,17 @@ export class VendorsFacadeService {
           return forkJoin(
             this.getVendor(vendorId),
             this.getVendors(),
-            this.getVendorDiscounts(vendorId, reqOpt)
+            this.getVendorDiscounts(vendorId, reqOpt),
+            this.getVendorsPointsOfSales(vendorId)
           );
         })
+      );
+  }
+
+  getVendorsPointsOfSales(vendorId: number): Observable<PointOfSales[]> {
+    return this.vendorsService.getVendorPointsOfSales(vendorId)
+      .pipe(
+        tap(points => this.store.set('pointsOfSales', points))
       );
   }
 

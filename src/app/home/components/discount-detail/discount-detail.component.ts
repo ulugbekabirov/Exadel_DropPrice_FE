@@ -5,7 +5,9 @@ import { switchMap, takeUntil } from 'rxjs/operators';
 import { Discount } from '../../../models';
 import { Observable, Subject } from 'rxjs';
 import { RefDirective } from '../../../directives/ref.directive';
+import { PointOfSales } from '../../../models/point-of-sales';
 import { DiscountsFacadeService } from '../../services/discounts-facade.service';
+import { DiscountsRequestStore } from '../../services/discounts-request-store';
 import { DiscountsStore } from '../../services/discounts-store';
 
 
@@ -17,6 +19,8 @@ import { DiscountsStore } from '../../services/discounts-store';
 
 export class DiscountDetailComponent implements OnInit, OnDestroy {
   discount$: Observable<Discount>;
+  pointsOfSales$: Observable<PointOfSales[]>;
+  locationSelected$;
   discount;
   discountId: number;
   private unsubscribe$ = new Subject<void>();
@@ -32,8 +36,12 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
     private location: Location,
     private facade: DiscountsFacadeService,
     private store: DiscountsStore,
+    private sortStore: DiscountsRequestStore,
+
   ) {
     this.discount$ = this.store.select('activeDiscount');
+    this.pointsOfSales$ = this.store.select('pointsOfSales');
+    this.locationSelected$ = this.sortStore.select('location');
   }
 
   ngOnInit(): void {
@@ -41,7 +49,7 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
       .pipe(
         switchMap((params): Observable<any> => {
           this.discountId = +params.get('id');
-          return this.facade.getDiscount(this.discountId);
+          return this.facade.loadDiscountData(this.discountId);
         }),
         takeUntil(this.unsubscribe$)
       ).subscribe();

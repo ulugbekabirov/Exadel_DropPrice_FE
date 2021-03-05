@@ -147,6 +147,12 @@
         </section>
       </section>
     </mat-tab>
+    <mat-tab label="{{ 'Точки Продаж Скидки' }}">
+      <app-discounts-map
+        [pointsOfSales$]="pointsOfSales$"
+        [locationSelected$]="locationSelected$"
+      ></app-discounts-map>
+    </mat-tab>
   </mat-tab-group>
 </article>
 <ng-template appRef></ng-template>

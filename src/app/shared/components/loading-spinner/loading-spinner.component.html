@@ -1,7 +1,10 @@
-<div class='spinner-container' *ngIf="isLoading$ | async">
-  <div class="spinner-path">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
- </div>
+<div *ngIf="isLoading$ | async"
+     class="overlay">
+  <mat-progress-spinner
+    class="spinner"
+    [color]="color"
+    [mode]="mode"
+    [value]="value">
+  </mat-progress-spinner>
+</div>
+
