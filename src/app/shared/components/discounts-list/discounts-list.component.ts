@@ -2,8 +2,10 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnI
 import { FormControl } from '@angular/forms';
 import { BehaviorSubject, fromEvent, merge, Observable, Subject } from 'rxjs';
 import { debounceTime, distinct, distinctUntilChanged, filter, flatMap, map, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { DiscountsStatStore } from '../../../admin-dashboard/services/discounts-stat-store';
 import { DiscountsFacadeService } from '../../../home/services/discounts-facade.service';
 import { DiscountsRequestStore } from '../../../home/services/discounts-request-store';
+import { DiscountsStore } from '../../../home/services/discounts-store';
 import { LocationCoords, Town } from '../../../models';
 import { Sort } from '../../../models/sort';
 import { DiscountsService } from '../../../services/discounts.service';
@@ -19,7 +21,9 @@ export class DiscountsListComponent implements OnInit, OnDestroy {
 
   constructor(
     private facade: DiscountsFacadeService,
-    private requestStore: DiscountsRequestStore
+    private requestStore: DiscountsRequestStore,
+    private discountsService: DiscountsService,
+    private store: DiscountsStore
   ) {
   }
 
@@ -42,7 +46,7 @@ export class DiscountsListComponent implements OnInit, OnDestroy {
   private cache = [];
   private pageByManual$ = new BehaviorSubject(1);
   private itemHeight = 280;
-  private numberOfItems = 4;
+  private numberOfItems = 6;
 
   private pageByScroll$ = fromEvent(window, 'scroll')
     .pipe(
@@ -69,63 +73,26 @@ export class DiscountsListComponent implements OnInit, OnDestroy {
       filter(page => this.cache[page - 1] === undefined)
     );
 
-  loading = false;
-
   itemResults$ = this.pageToLoad$
     .pipe(
-      tap(_ => this.loading = true),
-      flatMap((page: number) => {
-        this.requestStore.set('skip', (12 * (page - 1)));
+      tap(page => this.requestStore.set('skip', (12 * (page - 1)))),
+      switchMap((page: number) => {
         return this.discounts$
-          // return this.facade.getDiscounts({
-          //   skip: 12 * (page - 1),
-          //   take: 12
-          // })
           .pipe(
-            map((resp: any) => {
-              console.log(resp);
-              console.log('CACHE', this.cache);
-              return resp;
-            }),
             tap(resp => {
               this.cache[page - 1] = resp;
+              console.log('CACHE1', this.cache);
               if ((this.itemHeight * this.numberOfItems * page) < window.innerHeight) {
                 this.pageByManual$.next(page + 1);
               }
             })
           );
       }),
-      map(() => this.cache.reduce((acc, val) => [...acc, ...val]))
+      map(() => this.cache.reduce((acc, val) => [...acc, ...val])),
+      tap(() => console.log(this.cache))
     );
 
   ngOnInit(): void {
-    // this.pageToLoad$
-    //   .pipe(
-    //     tap(_ => this.loading = true),
-    //     // flatMap((page: number) => {
-    //     //   this.requestStore.set('skip', (12 * (page - 1)));
-    //     //   return this.facade.getDiscounts()
-    //     //   // return this.facade.getDiscounts({
-    //     //   //   skip: 12 * (page - 1),
-    //     //   //   take: 12
-    //     //   // })
-    //     //     .pipe(
-    //     //       map((resp: any) => {
-    //     //         console.log(resp);
-    //     //         console.log('CACHE', this.cache);
-    //     //         return resp;
-    //     //       }),
-    //     //       tap(resp => {
-    //     //         this.cache[page - 1] = resp;
-    //     //         if ((this.itemHeight * this.numberOfItems * page) < window.innerHeight){
-    //     //           this.pageByManual$.next(page + 1);
-    //     //         }
-    //     //       })
-    //     //     );
-    //     // }),
-    //     // map(() => this.cache.reduce((acc, val) => [...acc, ...val]))
-    //   ).subscribe(next =>  this.requestStore.set('skip', (12 * (next - 1))));
-
 
     this.sortBySelected$.pipe(
       switchMap((sortBy) => {
@@ -134,6 +101,7 @@ export class DiscountsListComponent implements OnInit, OnDestroy {
       }),
       takeUntil(this.unsubscribe$)
     ).subscribe(next => {
+      this.cache = [];
       this.sortChange.emit(next);
     });
 
@@ -144,6 +112,7 @@ export class DiscountsListComponent implements OnInit, OnDestroy {
       }),
       takeUntil(this.unsubscribe$)
     ).subscribe(next => {
+      this.cache = [];
       this.locationChange.emit(next);
     });
   }
