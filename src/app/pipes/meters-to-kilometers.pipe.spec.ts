@@ -1,7 +1,7 @@
 import { MetersToKilometersPipe } from './meters-to-kilometers.pipe';
 
 describe('MetersToKilometersPipe', () => {
- 
+
   it('should convert meters to kilometers: distance > 1000 m.', () => {
     const distNum = '27869';
     const pipe = new MetersToKilometersPipe();
