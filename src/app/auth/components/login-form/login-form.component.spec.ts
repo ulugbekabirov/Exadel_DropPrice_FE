@@ -19,11 +19,11 @@ describe('LoginFormComponent', () => {
   const blankUser = {
     username: '',
     password: ''
-  };
+  }
 
   function updateForm(userEmail: string, userPassword: string): void {
-    fixture.componentInstance.loginForm.controls[this.username].patchValue(userEmail);
-    fixture.componentInstance.loginForm.controls[this.password].patchValue(userPassword);
+    fixture.componentInstance.loginForm.controls['username'].setValue(userEmail);
+    fixture.componentInstance.loginForm.controls['password'].setValue(userPassword);
   }
 
   beforeEach(async () => {
@@ -80,7 +80,6 @@ describe('LoginFormComponent', () => {
     const button = fixture.debugElement.nativeElement.querySelector('button');
     button.click();
     fixture.detectChanges();
-
     const inputs = fixture.debugElement.nativeElement.querySelectorAll('input');
     const passwordInput = inputs[1];
 
@@ -95,8 +94,8 @@ describe('LoginFormComponent', () => {
     button.click();
     fixture.detectChanges();
 
-    const usernameErrorMsg = fixture.debugElement.nativeElement.querySelector('aria-invalid="false"');
-    const passwordErrorMsg = fixture.debugElement.nativeElement.querySelector('aria-invalid="false"');
+    const usernameErrorMsg = fixture.debugElement.nativeElement.querySelector('aria-invalid[fals]');
+    const passwordErrorMsg = fixture.debugElement.nativeElement.querySelector('aria-invalid[false]');
 
     expect(usernameErrorMsg).toBeDefined();
     expect(usernameErrorMsg.innerHTML).toContain('Please enter username');

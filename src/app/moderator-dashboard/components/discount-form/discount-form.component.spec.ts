@@ -10,15 +10,15 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormBuilder } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 import { of } from 'rxjs/internal/observable/of';
+import { DebugElement } from '@angular/core';
 
 describe('DiscountFormComponent', () => {
   let component: DiscountFormComponent;
   let fixture: ComponentFixture<DiscountFormComponent>;
   const mockTagsService = jasmine.createSpyObj(['getTags']);
-  const de = fixture.debugElement.query(By.css('form'));
-  const el = de.nativeElement;
+  let de: DebugElement;
+  let el: HTMLElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -41,7 +41,8 @@ describe('DiscountFormComponent', () => {
     fixture = TestBed.createComponent(DiscountFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    
+    de = fixture.debugElement.query(By.css('form'));
+    el = de.nativeElement;
     
   });
 
