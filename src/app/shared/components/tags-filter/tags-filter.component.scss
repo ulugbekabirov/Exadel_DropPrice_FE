@@ -12,7 +12,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ffff;
+    background-color: $main_header_txtColor;
     position: relative;
     padding: 0 1em;
     font-style: normal;
@@ -29,7 +29,7 @@
 
     &.selected {
       background: $discount_list_item_sale;
-      color: #ffff;
+      color: $main_header_txtColor;
     }
   }
   &__icon {
@@ -40,7 +40,7 @@
     cursor: pointer;
   }
   mat-chip:hover {
-    color: #ffff;
+    color: $main_header_txtColor;
     background: $discount_list_item_sale;
   }
   .mat-chip.mat-standard-chip::after {

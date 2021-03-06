@@ -51,7 +51,7 @@
   &__hamburger {
     height: $main_header_height / 1.5;
     width: $main_header_height / 1.5;
-    border: .18em solid #fff;
+    border: .18em solid $main_header_txtColor;
     border-radius: 50%;
     position: relative;
     display: none;
@@ -67,7 +67,7 @@
       height: 100%;
       width: 100%;
       border-radius: 50%;
-      border: .18em solid #fff;
+      border: .18em solid $main_header_txtColor;
       animation: puls 3s ease infinite;
     }
 
@@ -85,7 +85,7 @@
         height: 100%;
         width: 100%;
         left: 0;
-        background-color: #fff;
+        background-color: $main_header_txtColor;
         transition: .3s ease;
         transition-property: top, bottom;
       }
@@ -138,7 +138,7 @@
 
 
     @media screen and (max-width: 767px) {
-      background-color: #fff;
+      background-color: $main_header_txtColor;
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
