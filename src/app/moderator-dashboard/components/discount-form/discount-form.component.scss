@@ -128,14 +128,14 @@ mat-icon {
 
 .points {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   gap: 1em;
   flex-wrap: nowrap;
 
   @media screen and (max-width: 660px) {
     gap: 2em;
-    align-items: start;
+    align-items: flex-start;
   }
 
   &__info{
@@ -148,5 +148,4 @@ mat-icon {
       flex-direction: column;
     }
   }
-
 }
