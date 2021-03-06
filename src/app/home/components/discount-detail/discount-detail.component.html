@@ -62,11 +62,11 @@
                       matTooltip="{{ 'DISCOUNT_DETAIL.EDIT_BUTTON_LABEL' | translate }}"
                       (click)="onEditDiscount(discountId)">edit
             </mat-icon>
-            <mat-icon *appVerifyUserRoles='["Moderator"]' class="action__icon archive"
+            <!-- <mat-icon *appVerifyUserRoles='["Moderator"]' class="action__icon archive"
                       matTooltip="{{ 'DISCOUNT_DETAIL.ARCHIVE_BUTTON_LABEL' | translate }}"
                       [ngStyle]="{'color': (discount$ | async)?.activityStatus ? '#3F51B5' : '#FF6347'}"
                       (click)="archiveDiscount(discountId)">archive
-            </mat-icon>
+            </mat-icon> -->
           </div>
 
         </div>
@@ -146,6 +146,12 @@
           </button>
         </section>
       </section>
+    </mat-tab>
+    <mat-tab label="{{'DISCOUNT_DETAIL.MAT_TAB_POINTS_OF_SALE' | translate}}">
+      <app-discounts-map
+        [pointsOfSales$]="pointsOfSales$"
+        [locationSelected$]="locationSelected$"
+      ></app-discounts-map>
     </mat-tab>
   </mat-tab-group>
 </article>

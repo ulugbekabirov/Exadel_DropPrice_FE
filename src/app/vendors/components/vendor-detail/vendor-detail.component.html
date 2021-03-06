@@ -99,19 +99,50 @@
       </mat-expansion-panel>
     </mat-accordion>
   </article>
+<section class="vendors-discounts">
+  <mat-tab-group>
+    <mat-tab label="{{'VENDOR_PAGE.VENDOR_DETAIL.MAT_TAB_VENDOR_DISCOUNTS' | translate}}">
+      <app-discounts-list
+        [discounts$]="vendorDiscounts$"
+        [towns$]="towns$"
+        (locationChange)="onLocationChange($event)"
+        (getTicket)="getTicket($event)"
+        (sortChange)="onSortChange($event)"
+        (toggleFavourites)="changeFavourites($event)"
+        [sorts$]="sorts$"
+        [sortBySelected$]="sortBySelected$"
+        [locationSelected$]="locationSelected$"
+      ></app-discounts-list>
+    </mat-tab>
+    <mat-tab label="{{'VENDOR_PAGE.VENDOR_DETAIL.MAT_TAB_VENDOR_POINTS_OF_SALES' | translate}}">
+      <app-discounts-map
+        [pointsOfSales$]="pointsOfSales$"
+        [locationSelected$]="locationSelected$"
+      ></app-discounts-map>
+    </mat-tab>
+  </mat-tab-group>
+</section>
 
-  <article class="vendors-discounts">
-    <app-discounts-list
-      [discounts$]="vendorDiscounts$"
-      [towns$]="towns$"
-      (locationChange)="onLocationChange($event)"
-      (getTicket)="getTicket($event)"
-      (sortChange)="onSortChange($event)"
-      (toggleFavourites)="changeFavourites($event)"
-      [sorts$]="sorts$"
-      [sortBySelected$]="sortBySelected$"
-      [locationSelected$]="locationSelected$"
-    ></app-discounts-list>
-  </article>
+
+<!--  <article class="vendors-discounts">-->
+<!--    <app-discounts-list-->
+<!--      [discounts$]="vendorDiscounts$"-->
+<!--      [towns$]="towns$"-->
+<!--      (locationChange)="onLocationChange($event)"-->
+<!--      (getTicket)="getTicket($event)"-->
+<!--      (sortChange)="onSortChange($event)"-->
+<!--      (toggleFavourites)="changeFavourites($event)"-->
+<!--      [sorts$]="sorts$"-->
+<!--      [sortBySelected$]="sortBySelected$"-->
+<!--      [locationSelected$]="locationSelected$"-->
+<!--    ></app-discounts-list>-->
+<!--  </article>-->
+
+<!--  <article>-->
+<!--    <app-discounts-map-->
+<!--    [pointsOfSales$]="pointsOfSales$"-->
+<!--    [locationSelected$]="locationSelected$"-->
+<!--    ></app-discounts-map>-->
+<!--  </article>-->
 </div>
 <ng-template appRef></ng-template>

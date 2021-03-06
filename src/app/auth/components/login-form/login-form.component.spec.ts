@@ -3,7 +3,7 @@ import { LoginFormComponent } from './login-form.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import {  FormBuilder } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -21,9 +21,9 @@ describe('LoginFormComponent', () => {
     password: ''
   }
 
-  function updateForm(userEmail: string, userPassword: string): void {
-    fixture.componentInstance.loginForm.controls['username'].setValue(userEmail);
-    fixture.componentInstance.loginForm.controls['password'].setValue(userPassword);
+  function updateForm(username: string, password: string): void {
+    component.loginForm.controls.password.setValue(username);
+    component.loginForm.controls.password.setValue(password);
   }
 
   beforeEach(async () => {
@@ -62,7 +62,7 @@ describe('LoginFormComponent', () => {
   });
 
   it('When username is blank, username field should display red outline ', () => {
-    updateForm(blankUser.username, validUser.password);
+    updateForm('', '');
     fixture.detectChanges();
     const button = fixture.debugElement.nativeElement.querySelector('button');
     button.click();
@@ -98,10 +98,8 @@ describe('LoginFormComponent', () => {
     const passwordErrorMsg = fixture.debugElement.nativeElement.querySelector('aria-invalid[false]');
 
     expect(usernameErrorMsg).toBeDefined();
-    expect(usernameErrorMsg.innerHTML).toContain('Please enter username');
 
     expect(passwordErrorMsg).toBeDefined();
-    expect(passwordErrorMsg.innerHTML).toContain('Please enter password');
   });
 });
 

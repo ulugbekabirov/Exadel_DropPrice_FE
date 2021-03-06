@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { DISCOUNTS_ENDPOINT, END_EDIT_SESSION_ENDPOINT, START_EDIT_SESSION_ENDPOINT } from '../../constants';
+import { environment } from '../../environments/environment';
 import { ApiDataService } from './api-data.service';
 import { Observable } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
@@ -121,5 +123,13 @@ export class DiscountsService {
       params: new HttpParams({fromObject: paramsObj})
     };
     return this.restApi.getUserTickets(options);
+  }
+
+  beginEditDiscount(discountId): Observable<any> {
+    return this.restApi.beginEditDiscount(discountId);
+  }
+
+  endEditDiscount(discountId): Observable<any> {
+    return this.restApi.endEditDiscount(discountId);
   }
 }

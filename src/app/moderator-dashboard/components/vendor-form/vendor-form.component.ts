@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
   Validators,
-  AbstractControl, FormArray, ValidationErrors,
+  AbstractControl, FormArray, ValidationErrors
 } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { forkJoin, throwError } from 'rxjs';
@@ -18,13 +18,14 @@ import { Location } from '@angular/common';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { OnDestroy } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-vendor-form',
   templateUrl: './vendor-form.component.html',
   styleUrls: ['./vendor-form.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
+
 export class VendorFormComponent implements OnInit, OnDestroy {
   vendorForm: FormGroup = this.fb.group({
     vendorName: ['', [Validators.required]],
@@ -33,7 +34,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
     phone: ['',
       [
         Validators.required,
-        Validators.pattern(/^((8|\+7|\+3|\+9|)*\d{0,3}[\- ]?)*\d{0,3}?(\(?\d{1,3}\)?[\- ]?)?[\d\- ]{7,10}$/),
+        Validators.pattern(/^([+]?[0-9\s-\(\)]{3,25})*$/),
       ],
     ],
     email: ['', [Validators.required, Validators.email]],
@@ -54,6 +55,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
   vendorId: number;
   private unsubscribe$ = new Subject<void>();
   isEditMode: boolean = (this.router.url).includes('edit');
+  hasUnsavedChanges = false;
   coordinateIsEmpty = true;
 
   constructor(
@@ -66,6 +68,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
     private location: Location,
     private cd: ChangeDetectorRef,
     private snackBar: MatSnackBar,
+    private translate: TranslateService
   ) {
   }
 
@@ -91,6 +94,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
           this.patchPointsOfSales(points);
           this.vendorForm.patchValue(editingVendor);
           this.coordinateIsEmpty = false;
+          this.hasUnsavedChanges = true;
           this.vendorForm.markAsPristine();
         });
     }
@@ -125,14 +129,6 @@ export class VendorFormComponent implements OnInit, OnDestroy {
     this.coordinateIsEmpty = true;
   }
 
-  successSnackBar(message: string, action: any): void {
-    this.snackBar.open(message, action, {
-      duration: 3000,
-      horizontalPosition: 'center',
-      panelClass: ['snackbar-color-success']
-    });
-  }
-
   addPoint(): void {
     const point = this.fb.group({
       name: ['', [Validators.required]],
@@ -161,17 +157,28 @@ export class VendorFormComponent implements OnInit, OnDestroy {
     this.coordinateIsEmpty = false;
   }
 
+  successSnackBar(message: string, action: any): void {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      horizontalPosition: 'center',
+      panelClass: ['snackbar-color-success'],
+      verticalPosition: 'top'
+    });
+  }
+
   errorSnackBar(message: string, action: any): void {
     this.snackBar.open(message, action, {
       duration: 3000,
       horizontalPosition: 'center',
-      panelClass: ['snackbar-color-error']
+      panelClass: ['snackbar-color-error'],
+      verticalPosition: 'top'
     });
   }
 
   onSubmit(): void {
     const vendor = this.vendorForm.value;
     const vendorModel = {...vendor, socialLinks: JSON.stringify(vendor.socialLinks)};
+    this.hasUnsavedChanges = false;
     if (this.isEditMode) {
       this.updateVendor(vendorModel, this.vendorId);
     } else {
@@ -184,15 +191,13 @@ export class VendorFormComponent implements OnInit, OnDestroy {
     this.vendorsService.updateVendor(vendor, vendId).pipe(
       takeUntil(this.unsubscribe$),
       catchError(error => {
-        this.errorSnackBar('Not saved!', '');
+        this.errorSnackBar(this.translate.instant('NEW_DISCOUNT_FORM.ERROR_UPDATE_SNACKBAR'), '');
         return throwError(error);
       }))
       .subscribe((res) => {
         this.vendorForm.reset();
-        this.successSnackBar('Successfully update!', '');
-        for (const control in this.vendorForm.controls) {
-          this.vendorForm.controls[control].setErrors(null);
-        }
+        this.successSnackBar(this.translate.instant('NEW_DISCOUNT_FORM.SUCCESS_UPDATE_SNACKBAR'), '');
+        this.resetControlsErrors(this.vendorForm);
         this.router.navigate(['/vendors', res.vendorId]);
       });
   }
@@ -202,17 +207,21 @@ export class VendorFormComponent implements OnInit, OnDestroy {
     this.vendorsService.createVendor(newVendor).pipe(
       takeUntil(this.unsubscribe$),
       catchError(error => {
-        this.errorSnackBar('Not saved!', '');
+        this.errorSnackBar(this.translate.instant('NEW_DISCOUNT_FORM.ERROR_SAVE_SNACKBAR'), '');
         return throwError(error);
       }))
       .subscribe((res) => {
         this.vendorForm.reset();
-        this.successSnackBar('Successfully saved!', '');
-        for (const control in this.vendorForm.controls) {
-          this.vendorForm.controls[control].setErrors(null);
-        }
-        this.router.navigate(['/vendors', res.vendorId]);
+        this.successSnackBar(this.translate.instant('NEW_DISCOUNT_FORM.SUCCESS_SAVE_SNACKBAR'), '');
+        this.resetControlsErrors(this.vendorForm);
+        // this.router.navigate(['/vendors', res.vendorId]);
       });
+  }
+
+  resetControlsErrors(form): void {
+    for (const control in form.controls) {
+      form.controls[control].setErrors(null);
+    }
   }
 
   get description(): AbstractControl {
