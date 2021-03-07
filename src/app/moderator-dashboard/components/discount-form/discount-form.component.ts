@@ -12,6 +12,7 @@ import { DiscountsService } from '../../../services/discounts.service';
 import { VendorsService } from '../../../services/vendors.service';
 import { TranslateService } from '@ngx-translate/core';
 
+
 @Component({
   selector: 'app-discount-form',
   templateUrl: './discount-form.component.html',
