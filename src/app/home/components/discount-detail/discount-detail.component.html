@@ -50,7 +50,7 @@
   </section>
 
   <mat-tab-group animationDuration="0ms">
-    <mat-tab label="{{ 'DISCOUNT_DETAIL.MAT_TAB_ABOUT' | translate }}">
+    <mat-tab label="{{ 'DISCOUNT_DETAIL.MAT_TAB_ABOUT' | translate | uppercase }}">
       <section class="discount-detail__content">
         <div class="discount-content__description" fxLayoutGap="20px" fxLayout="row" fxLayoutAlign="start">
           <p class="discount-content__description_text">
@@ -147,7 +147,7 @@
         </section>
       </section>
     </mat-tab>
-    <mat-tab label="{{'DISCOUNT_DETAIL.MAT_TAB_POINTS_OF_SALE' | translate}}">
+    <mat-tab label="{{'DISCOUNT_DETAIL.MAT_TAB_POINTS_OF_SALE' | translate | uppercase}}">
       <app-discounts-map
         [pointsOfSales$]="pointsOfSales$"
         [locationSelected$]="locationSelected$"

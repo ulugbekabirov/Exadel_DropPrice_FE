@@ -3,13 +3,12 @@
     <p class="go_back_main">
       <a class="go-back__link" fxLayoutAlign="start center" (click)="goBack()">
         <mat-icon class="go-back__link_icon">keyboard_backspace</mat-icon>
-        <span class="go-back__link_text" matTooltip="{{ 'VENDOR_PAGE.VENDOR_DETAIL.TOOLTIP_GO_BACK' | translate }}"
+        <span class="go-back__link_text" matTooltip="{{ 'VENDOR_PAGE.TOOLTIP_GO_BACK' | translate }}"
               matTooltipPosition="right">
           {{"BUTTON_BACK_LOCATION" | translate }}
         </span>
       </a>
     </p>  
-    
     <mat-expansion-panel (opened)="panelOpenState = true"
                           (closed)="panelOpenState = false">
     <mat-expansion-panel-header >
@@ -108,52 +107,30 @@
       </ul>
     </div>
     </mat-expansion-panel>
-    
   </article>
-<section class="vendors-discounts">
-  <mat-tab-group>
-    <mat-tab label="{{'VENDOR_PAGE.VENDOR_DETAIL.MAT_TAB_VENDOR_DISCOUNTS' | translate}}">
-      <app-discounts-list
-        [discounts$]="vendorDiscounts$"
-        [towns$]="towns$"
-        (locationChange)="onLocationChange($event)"
-        (getTicket)="getTicket($event)"
-        (sortChange)="onSortChange($event)"
-        (toggleFavourites)="changeFavourites($event)"
-        [sorts$]="sorts$"
-        [sortBySelected$]="sortBySelected$"
-        [locationSelected$]="locationSelected$"
-      ></app-discounts-list>
-    </mat-tab>
-    <mat-tab label="{{'VENDOR_PAGE.VENDOR_DETAIL.MAT_TAB_VENDOR_POINTS_OF_SALES' | translate}}">
-      <app-discounts-map
-        [pointsOfSales$]="pointsOfSales$"
-        [locationSelected$]="locationSelected$"
-      ></app-discounts-map>
-    </mat-tab>
-  </mat-tab-group>
-</section>
 
-
-<!--  <article class="vendors-discounts">-->
-<!--    <app-discounts-list-->
-<!--      [discounts$]="vendorDiscounts$"-->
-<!--      [towns$]="towns$"-->
-<!--      (locationChange)="onLocationChange($event)"-->
-<!--      (getTicket)="getTicket($event)"-->
-<!--      (sortChange)="onSortChange($event)"-->
-<!--      (toggleFavourites)="changeFavourites($event)"-->
-<!--      [sorts$]="sorts$"-->
-<!--      [sortBySelected$]="sortBySelected$"-->
-<!--      [locationSelected$]="locationSelected$"-->
-<!--    ></app-discounts-list>-->
-<!--  </article>-->
-
-<!--  <article>-->
-<!--    <app-discounts-map-->
-<!--    [pointsOfSales$]="pointsOfSales$"-->
-<!--    [locationSelected$]="locationSelected$"-->
-<!--    ></app-discounts-map>-->
-<!--  </article>-->
+  <section class="vendors-discounts">
+    <mat-tab-group class="mat-tab-group">
+      <mat-tab label="{{'VENDOR_PAGE.VENDOR_DETAIL.MAT_TAB_VENDOR_DISCOUNTS' | translate | uppercase}}">
+        <app-discounts-list
+          [discounts$]="vendorDiscounts$"
+          [towns$]="towns$"
+          (locationChange)="onLocationChange($event)"
+          (getTicket)="getTicket($event)"
+          (sortChange)="onSortChange($event)"
+          (toggleFavourites)="changeFavourites($event)"
+          [sorts$]="sorts$"
+          [sortBySelected$]="sortBySelected$"
+          [locationSelected$]="locationSelected$"
+        ></app-discounts-list>
+      </mat-tab>
+      <mat-tab label="{{'VENDOR_PAGE.VENDOR_DETAIL.MAT_TAB_VENDOR_POINTS_OF_SALES' | translate | uppercase}}">
+        <app-discounts-map
+          [pointsOfSales$]="pointsOfSales$"
+          [locationSelected$]="locationSelected$"
+        ></app-discounts-map>
+      </mat-tab>
+    </mat-tab-group>
+  </section>
 </div>
 <ng-template appRef></ng-template>
