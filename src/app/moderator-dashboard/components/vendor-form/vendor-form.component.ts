@@ -133,8 +133,8 @@ export class VendorFormComponent implements OnInit, OnDestroy {
     const point = this.fb.group({
       name: ['', [Validators.required]],
       address: ['', [Validators.required]],
-      latitude: [''],
-      longitude: [''],
+      latitude: ['', [Validators.required]],
+      longitude: ['', [Validators.required]],
     });
     this.pointOfSalesForm.push(point);
   }
@@ -142,17 +142,19 @@ export class VendorFormComponent implements OnInit, OnDestroy {
   openDialog(currentSaleObj): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
-    dialogConfig.minHeight = '400px';
+    dialogConfig.minHeight = '500px';
     dialogConfig.minWidth = '100%';
-    dialogConfig.direction = 'rtl';
 
-    dialogConfig.data = {
-      latitude: this.pointOfSalesForm.value[currentSaleObj].latitude,
-      longitude: this.pointOfSalesForm.value[currentSaleObj].longitude,
-    };
+    dialogConfig.data = this.pointOfSalesForm.controls[currentSaleObj];
     const dialogRef = this.dialog.open(MapComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe((data) => {
-      Object.assign(this.pointOfSalesForm.value[currentSaleObj], data);
+    dialogRef.afterClosed()
+      .pipe(
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe((data) => {
+      if (data) {
+        this.pointOfSalesForm.controls[currentSaleObj].patchValue(data);
+      }
     });
     this.coordinateIsEmpty = false;
   }
