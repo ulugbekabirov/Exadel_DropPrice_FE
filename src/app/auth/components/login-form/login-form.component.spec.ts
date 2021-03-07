@@ -3,7 +3,7 @@ import { LoginFormComponent } from './login-form.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import {  FormBuilder } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -19,11 +19,11 @@ describe('LoginFormComponent', () => {
   const blankUser = {
     username: '',
     password: ''
-  };
+  }
 
-  function updateForm(userEmail: string, userPassword: string): void {
-    fixture.componentInstance.loginForm.controls[this.username].patchValue(userEmail);
-    fixture.componentInstance.loginForm.controls[this.password].patchValue(userPassword);
+  function updateForm(username: string, password: string): void {
+    component.loginForm.controls.password.setValue(password);
+    component.loginForm.controls.password.setValue(username);
   }
 
   beforeEach(async () => {
@@ -80,7 +80,6 @@ describe('LoginFormComponent', () => {
     const button = fixture.debugElement.nativeElement.querySelector('button');
     button.click();
     fixture.detectChanges();
-
     const inputs = fixture.debugElement.nativeElement.querySelectorAll('input');
     const passwordInput = inputs[1];
 
@@ -95,14 +94,12 @@ describe('LoginFormComponent', () => {
     button.click();
     fixture.detectChanges();
 
-    const usernameErrorMsg = fixture.debugElement.nativeElement.querySelector('aria-invalid="false"');
-    const passwordErrorMsg = fixture.debugElement.nativeElement.querySelector('aria-invalid="false"');
+    const usernameErrorMsg = fixture.debugElement.nativeElement.querySelector('aria-invalid[false]');
+    const passwordErrorMsg = fixture.debugElement.nativeElement.querySelector('aria-invalid[false]');
 
     expect(usernameErrorMsg).toBeDefined();
-    expect(usernameErrorMsg.innerHTML).toContain('Please enter username');
 
     expect(passwordErrorMsg).toBeDefined();
-    expect(passwordErrorMsg.innerHTML).toContain('Please enter password');
   });
 });
 

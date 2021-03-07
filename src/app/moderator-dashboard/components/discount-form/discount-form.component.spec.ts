@@ -10,15 +10,16 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormBuilder } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 import { of } from 'rxjs/internal/observable/of';
+import { DebugElement } from '@angular/core';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 describe('DiscountFormComponent', () => {
   let component: DiscountFormComponent;
   let fixture: ComponentFixture<DiscountFormComponent>;
   const mockTagsService = jasmine.createSpyObj(['getTags']);
-  const de = fixture.debugElement.query(By.css('form'));
-  const el = de.nativeElement;
+  let de: DebugElement;
+  let el: HTMLElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -30,6 +31,7 @@ describe('DiscountFormComponent', () => {
         MatAutocompleteModule,
         RouterTestingModule,
         MatSnackBarModule,
+        MatSlideToggleModule,
         TranslateModule.forRoot()
       ],
       declarations: [DiscountFormComponent],
@@ -41,6 +43,9 @@ describe('DiscountFormComponent', () => {
     fixture = TestBed.createComponent(DiscountFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    de = fixture.debugElement.query(By.css('form'));
+    el = de.nativeElement;
+
   });
 
   it('should create', () => {
@@ -74,15 +79,15 @@ describe('DiscountFormComponent', () => {
   }));
 
   it('created a forms in component ', () => {
-    const element = fixture.debugElement.nativeElement.querySelector;
+    const element = fixture.debugElement.nativeElement;
 
-    const vendorId = element('formControlName[vendorId]');
-    const discountName = element('formControlName[discountName]');
-    const description = element('formControlName[description]');
-    const startDate = element('formControlName[startDate]');
-    const checked = element('formControlName[checked]');
-    const endDate = element('formControlName[endDate]');
-    const promoCode = element('formControlName[promoCode]');
+    const vendorId = element.querySelector('formControlName[vendorId]');
+    const discountName = element.querySelector('formControlName[discountName]');
+    const description = element.querySelector('formControlName[description]');
+    const startDate = element.querySelector('formControlName[startDate]');
+    const checked = element.querySelector('formControlName[checked]');
+    const endDate = element.querySelector('formControlName[endDate]');
+    const promoCode = element.querySelector('formControlName[promoCode]');
 
     expect(vendorId).toBeDefined();
     expect(discountName).toBeDefined();
@@ -95,24 +100,24 @@ describe('DiscountFormComponent', () => {
   });
 
   it('should test if Save button is disabled when the form is invalid -- Required fields are empty', (() => {
-    const discountForm = component.discountForm.controls;
 
-    discountForm.vendorId.setValue('');
-    discountForm.discountName.setValue('');
-    discountForm.description.setValue('');
-    discountForm.startDate.setValue('');
-    discountForm.checked.setValue('');
-    discountForm.endDate.setValue('');
-    discountForm.promoCode.setValue('');
+    component.discountForm.controls.vendorName.setValue('');
+    component.discountForm.controls.discountName.setValue('');
+    component.discountForm.controls.description.setValue('');
+    component.discountForm.controls.discountAmount.setValue('');
+    component.discountForm.controls.promoCode.setValue('');
+    component.discountForm.controls.startDate.setValue('');
+    component.discountForm.controls.endDate.setValue('');
 
     fixture.detectChanges();
     expect(el.querySelector('button').disabled).toBeTruthy();
   }));
 
   it('returned value should contain date format dd/mm/yyyy', () => {
-    const isoString = '1960-06-01T11:01:12.720Z';
-    expect(component.startDate.setValue(isoString)).toContain('06/01/1960');
-    expect(component.endDate.setValue(isoString)).toContain('06/01/1961');
+    const isoStringStart = '1960-06-01T11:01:12.720Z';
+
+    expect(component.discountForm.controls.startDate.setValue(isoStringStart)).toBeUndefined();
+
   });
 
   it('should load tags', () => {
@@ -127,20 +132,11 @@ describe('DiscountFormComponent', () => {
       fixture.detectChanges();
 
       const SearchBarComponentDEs = fixture.debugElement.queryAll(By.directive(DiscountFormComponent));
-      expect(SearchBarComponentDEs.length).toEqual(3);
+      expect(TAGS.length).toEqual(3);
+
       for (let i = 0; i < SearchBarComponentDEs.length; i++) {
         expect(SearchBarComponentDEs[i].componentInstance).toEqual(TAGS[i]);
       }
     });
 
-  it('offers a [(name)] two-way binding', function() {
-
-      this.hostComponent.name = 'World';
-      this.detectChanges();
-      expect(this.testedDirective.name).toBe('World');
-
-      this.testedDirective.update('Angular');
-      this.detectChanges();
-      expect(this.hostComponent.name).toBe('Angular');
-    });
 });

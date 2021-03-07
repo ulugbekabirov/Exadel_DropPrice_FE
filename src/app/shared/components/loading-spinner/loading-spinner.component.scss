@@ -1,33 +1,56 @@
-.spinner {
-  border: 16px solid rgba(74, 74, 74, .2);
-  border-top: 16px solid #3498db;
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
-
-  animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.overlay {
-  position: fixed;
-  display: flex;
-  width: 100vw;
+@import "src/variables";
+.spin-wrapper{
+  position: relative;
+  width: 100%;
   height: 100vh;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, .1);
-  z-index: 99;
+  background: $main_header_txtColor;
+
+  .spinner{
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    border: 3px solid transparent;
+    border-top-color: $main_header_bgColor;
+    top: 50%;
+    left: 50%;
+    margin: -30px;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+
+    @media screen and (max-width: 767px) {
+      height: 40px;
+      width: 40px;
+      margin: -20px;
+    }
+    
+    &:before, &:after{
+      content:'';
+      position: absolute;
+      border: 3px solid transparent;
+      border-radius: 50%;
+    }
+    
+    &:before{
+      border-top-color: $indigo;
+      top: -12px;
+      left: -12px;
+      right: -12px;
+      bottom: -12px;
+      animation: spin 2s linear infinite;
+    }
+    
+    &:after{
+      border-top-color: $discount_list_item_sale;
+      top: 6px;
+      left: 6px;
+      right: 6px;
+      bottom: 6px;  
+      animation: spin 3s linear infinite;
+    }
+  }
+}
+
+@keyframes spin{
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
 }

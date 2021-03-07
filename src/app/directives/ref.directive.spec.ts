@@ -1,4 +1,4 @@
-import { RefDirective } from './ref.directive';
+// import { RefDirective } from './ref.directive';
 
 describe('RefDirective', () => {
   it('should create an instance', () => {

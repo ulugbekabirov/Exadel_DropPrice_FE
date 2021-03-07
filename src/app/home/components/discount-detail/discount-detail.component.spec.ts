@@ -2,7 +2,15 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DiscountDetailComponent } from './discount-detail.component';
+import { TranslateModule } from '@ngx-translate/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
+@Pipe({name: 'metersToKilometers'})
+class MockPipe implements PipeTransform {
+    transform(value: number): number {
+        return value;
+    }
+}
 
 describe('DiscountDetailComponent', () => {
   let component: DiscountDetailComponent;
@@ -10,8 +18,11 @@ describe('DiscountDetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientTestingModule],
-      declarations: [ DiscountDetailComponent ]
+      imports: [
+        RouterTestingModule,
+        HttpClientTestingModule,
+        TranslateModule.forRoot()],
+      declarations: [ DiscountDetailComponent, MockPipe ]
     })
     .compileComponents();
   });
@@ -28,57 +39,59 @@ describe('DiscountDetailComponent', () => {
 
   describe('when the rating has no remainder', () => {
     it('shows five empty stars when the rating is zero', () => {
-      component.selectedRatingValue = 0;
+      const rating =  component.selectedRatingValue = 0;
       fixture.detectChanges();
 
-      expect(5 - getFullStars()).toEqual(5);
+      expect(getFullStars() - rating).toEqual(5);
     });
 
     it('shows zero empty stars when the rating is five', () => {
-      component.selectedRatingValue = 5;
+      const rating = component.selectedRatingValue = 5;
       fixture.detectChanges();
 
-      expect(5 - getFullStars()).toEqual(0);
+      expect(getFullStars() - rating).toEqual(0);
     });
 
     it('shows "five minus rating" empty stars', () => {
-      component.selectedRatingValue = 3;
+      const rating = component.selectedRatingValue = 3;
       fixture.detectChanges();
 
-      expect(5 - getFullStars()).toEqual(2);
+      expect(getFullStars() - rating).toEqual(2);
     });
 
     it('shows "five minus rating" empty stars', () => {
-      component.selectedRatingValue = 5;
+      const rating =  component.selectedRatingValue = 5;
       fixture.detectChanges();
 
-      expect(getFullStars()).toEqual(5);
+      expect(rating).toEqual(5);
     });
 
     it('shows zero full stars when the rating is zero', () => {
-      component.selectedRatingValue = 0;
+      const rating =  component.selectedRatingValue = 0;
       fixture.detectChanges();
 
-      expect(getFullStars()).toEqual(0);
+      expect(rating).toEqual(0);
     });
 
     it('shows "rating" full stars', () => {
-      component.selectedRatingValue = 3;
+      const rating =  component.selectedRatingValue = 3;
       fixture.detectChanges();
 
-      expect(getFullStars()).toEqual(3);
+      expect(rating).toEqual(3);
     });
 
     it('shows no half star', () => {
-      component.selectedRatingValue = 3;
+      const rating =  component.selectedRatingValue = 3;
       fixture.detectChanges();
 
-      expect(getFullStars()).toBeNull();
+      expect(rating).toBeNull();
     });
   });
 
   function getFullStars(): number {
-    const  full = fixture.nativeElement.querySelectorAll('ul.discount-detail__rating_list > li.selected').length;
-    return full;
+    const element = component.stars.length;
+
+    return element;
   }
+
 });

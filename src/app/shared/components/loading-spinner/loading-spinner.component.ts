@@ -8,9 +8,6 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoadingSpinnerComponent {
-  color = 'primary';
-  mode = 'indeterminate';
-  value = 40;
   @Input()
   isLoading$: Observable<boolean>;
 }

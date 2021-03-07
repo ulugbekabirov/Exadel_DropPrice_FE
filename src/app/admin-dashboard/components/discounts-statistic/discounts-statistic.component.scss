@@ -6,6 +6,8 @@
 
 table {
   width: 100%;
+  color: $main_black;
+  font-weight: 500;
 
   .mat-column-name {
     flex: 0 0 50%;
@@ -59,6 +61,6 @@ table {
   }
 
   .mat-row:nth-child(odd) {
-    background-color: #ffff;
+    background-color: $main_header_txtColor;
   }
 }
