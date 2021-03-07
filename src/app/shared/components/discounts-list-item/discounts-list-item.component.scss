@@ -6,7 +6,7 @@
   flex-direction: column;
   align-self: center;
   position: relative;
-  background: #fff;
+  background: $main_header_txtColor;
   box-shadow: 1px 3px 10px 1px #A5A4A5;
   border-radius: 10px;
   padding: 30px;
@@ -35,7 +35,7 @@
     padding: 10px 0;
     background-color: $discount_list_item_sale;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    color: #fff;
+    color: $main_header_txtColor;
     font: 700 18px/1 'Lato', sans-serif;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     text-align: center;

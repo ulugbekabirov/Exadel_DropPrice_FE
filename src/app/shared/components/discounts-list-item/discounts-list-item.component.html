@@ -6,11 +6,19 @@
   </div>
  
   <div class="titles" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-    <div>
+    <div fxShow fxHide.sm>
       <h2>
         <a class="discount-card__vendor_link" [routerLink]="['/vendors', discount.vendorId]"
           matTooltip="{{ discount.vendorName }}" matTooltipPosition="right">
           {{ discount.vendorName | truncateString:15 }}
+        </a>
+      </h2>
+    </div>
+    <div fxHide fxShow.sm>
+      <h2>
+        <a class="discount-card__vendor_link" [routerLink]="['/vendors', discount.vendorId]"
+          matTooltip="{{ discount.vendorName }}" matTooltipPosition="right">
+          {{ discount.vendorName }}
         </a>
       </h2>
     </div>

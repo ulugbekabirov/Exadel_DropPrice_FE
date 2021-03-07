@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap, takeUntil } from 'rxjs/operators';
@@ -14,7 +14,8 @@ import { DiscountsStore } from '../../services/discounts-store';
 @Component({
   selector: 'app-discount-detail',
   templateUrl: './discount-detail.component.html',
-  styleUrls: ['./discount-detail.component.scss']
+  styleUrls: ['./discount-detail.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class DiscountDetailComponent implements OnInit, OnDestroy {

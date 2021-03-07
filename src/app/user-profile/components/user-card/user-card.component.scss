@@ -22,7 +22,7 @@
 
 .user-profile-card {
   font-size: 1rem;
-  background: $white;
+  background: $main_header_txtColor;
   width: 100%;
   height: auto;
   color: #313237;
@@ -94,13 +94,5 @@
         margin-right: .3em;
       } 
     }
-  }
-
-  mat-card-subtitle {
-    border-bottom: 1px solid $user_profile_card_content_txtColor;;
-  }
-
-  mat-card-actions {
-    background: $user_profile_card_action_bgColor;
   }
 }
