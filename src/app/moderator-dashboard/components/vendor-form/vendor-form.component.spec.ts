@@ -9,6 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 describe('NewVendorComponent', () => {
   let component: VendorFormComponent;
@@ -27,7 +28,11 @@ describe('NewVendorComponent', () => {
         TranslateModule.forRoot()
       ],
       declarations: [VendorFormComponent],
-      providers: [FormBuilder]
+      providers: [
+        FormBuilder, 
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialog, useValue: {} }
+      ]
     }).compileComponents();
   });
 
@@ -79,6 +84,7 @@ describe('NewVendorComponent', () => {
     component.vendorForm.controls.description.setValue('');
     component.vendorForm.controls.phone.setValue('');
     component.vendorForm.controls.email.setValue('');
+    
     fixture.detectChanges();
     expect(el.querySelector('button').disabled).toBeTruthy();
   }));

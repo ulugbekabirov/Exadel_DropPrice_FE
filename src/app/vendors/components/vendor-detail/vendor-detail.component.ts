@@ -28,7 +28,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
   sorts$: Observable<Sort[]>;
   sortBySelected$: Observable<Sort>;
   locationSelected$: Observable<Town>;
-  pointsOfSales$: Observable<PointOfSales[]>
+  pointsOfSales$: Observable<PointOfSales[]>;
   vendorSelect = new FormControl();
   private unsubscribe$ = new Subject<void>();
   @ViewChild(RefDirective, {static: false}) refDir: RefDirective;

@@ -12,6 +12,7 @@ import { DiscountsService } from '../../../services/discounts.service';
 import { VendorsService } from '../../../services/vendors.service';
 import { TranslateService } from '@ngx-translate/core';
 
+
 @Component({
   selector: 'app-discount-form',
   templateUrl: './discount-form.component.html',
@@ -286,14 +287,14 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
 
   private updateDiscount(discount: Discount, discountId: number): void {
     const newObserver = new ReplaySubject();
-    let error = null;
-    let close = null;
+    const error = null;
+    const close = null;
     this.discountsService.updateDiscount(discount, discountId).pipe(
       takeUntil(this.unsubscribe$),
       catchError(error => {
         this.errorSnackBar(this.translate.instant('NEW_DISCOUNT_FORM.ERROR_UPDATE_SNACKBAR'), '');
         return throwError(error);
-      }))     
+      }))
       .subscribe((res) => {
         this.discountForm.reset();
         this.successSnackBar(this.translate.instant('NEW_DISCOUNT_FORM.SUCCESS_UPDATE_SNACKBAR'), '');
