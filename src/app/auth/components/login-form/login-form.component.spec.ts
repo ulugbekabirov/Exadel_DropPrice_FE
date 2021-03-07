@@ -62,7 +62,7 @@ describe('LoginFormComponent', () => {
   });
 
   it('When username is blank, username field should display red outline ', () => {
-    updateForm('', '');
+    updateForm(blankUser.username, validUser.password);
     fixture.detectChanges();
     const button = fixture.debugElement.nativeElement.querySelector('button');
     button.click();
@@ -94,7 +94,7 @@ describe('LoginFormComponent', () => {
     button.click();
     fixture.detectChanges();
 
-    const usernameErrorMsg = fixture.debugElement.nativeElement.querySelector('aria-invalid[fals]');
+    const usernameErrorMsg = fixture.debugElement.nativeElement.querySelector('aria-invalid[false]');
     const passwordErrorMsg = fixture.debugElement.nativeElement.querySelector('aria-invalid[false]');
 
     expect(usernameErrorMsg).toBeDefined();
