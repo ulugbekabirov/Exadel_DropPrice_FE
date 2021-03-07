@@ -22,8 +22,8 @@ describe('LoginFormComponent', () => {
   }
 
   function updateForm(username: string, password: string): void {
-    component.loginForm.controls.password.setValue(username);
     component.loginForm.controls.password.setValue(password);
+    component.loginForm.controls.password.setValue(username);
   }
 
   beforeEach(async () => {

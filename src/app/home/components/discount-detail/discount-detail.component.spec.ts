@@ -3,6 +3,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DiscountDetailComponent } from './discount-detail.component';
 import { TranslateModule } from '@ngx-translate/core';
+import {Pipe, PipeTransform} from '@angular/core';
+
+@Pipe({name: 'metersToKilometers'})
+class MockPipe implements PipeTransform {
+    transform(value: number): number {
+        return value;
+    }
+}
 
 describe('DiscountDetailComponent', () => {
   let component: DiscountDetailComponent;
@@ -11,10 +19,10 @@ describe('DiscountDetailComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule, 
-        HttpClientTestingModule, 
+        RouterTestingModule,
+        HttpClientTestingModule,
         TranslateModule.forRoot()],
-      declarations: [ DiscountDetailComponent ]
+      declarations: [ DiscountDetailComponent, MockPipe ]
     })
     .compileComponents();
   });
@@ -85,5 +93,5 @@ describe('DiscountDetailComponent', () => {
 
     return element;
   }
-  
+
 });

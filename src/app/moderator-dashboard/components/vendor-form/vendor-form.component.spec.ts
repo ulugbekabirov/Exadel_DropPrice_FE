@@ -84,6 +84,7 @@ describe('NewVendorComponent', () => {
     component.vendorForm.controls.description.setValue('');
     component.vendorForm.controls.phone.setValue('');
     component.vendorForm.controls.email.setValue('');
+    
     fixture.detectChanges();
     expect(el.querySelector('button').disabled).toBeTruthy();
   }));

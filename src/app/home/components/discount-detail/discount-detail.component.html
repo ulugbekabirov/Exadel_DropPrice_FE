@@ -62,11 +62,11 @@
                       matTooltip="{{ 'DISCOUNT_DETAIL.EDIT_BUTTON_LABEL' | translate }}"
                       (click)="onEditDiscount(discountId)">edit
             </mat-icon>
-            <!-- <mat-icon *appVerifyUserRoles='["Moderator"]' class="action__icon archive"
+            <mat-icon *appVerifyUserRoles='["Moderator"]' class="action__icon archive"
                       matTooltip="{{ 'DISCOUNT_DETAIL.ARCHIVE_BUTTON_LABEL' | translate }}"
                       [ngStyle]="{'color': (discount$ | async)?.activityStatus ? '#3F51B5' : '#FF6347'}"
                       (click)="archiveDiscount(discountId)">archive
-            </mat-icon> -->
+            </mat-icon>
           </div>
 
         </div>
@@ -106,7 +106,7 @@
             <p class="discount-content__distance" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center end">
               <span class="discount-content__distance_label highliter"
                     fxFlex="25">{{ "DISCOUNT_DETAIL.DISTANCE" | translate }}: </span>
-              <!-- <span fxFlex="75">{{(discount$ | async)?.distanceInMeters | metersToKilometers}}</span> -->
+              <span fxFlex="75">{{(discount$ | async)?.distanceInMeters | metersToKilometers}}</span>
             </p>
           </li>
           <li>

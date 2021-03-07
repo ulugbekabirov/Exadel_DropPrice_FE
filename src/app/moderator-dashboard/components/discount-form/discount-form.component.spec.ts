@@ -12,8 +12,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs/internal/observable/of';
 import { DebugElement } from '@angular/core';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
-fdescribe('DiscountFormComponent', () => {
+describe('DiscountFormComponent', () => {
   let component: DiscountFormComponent;
   let fixture: ComponentFixture<DiscountFormComponent>;
   const mockTagsService = jasmine.createSpyObj(['getTags']);
@@ -30,6 +31,7 @@ fdescribe('DiscountFormComponent', () => {
         MatAutocompleteModule,
         RouterTestingModule,
         MatSnackBarModule,
+        MatSlideToggleModule,
         TranslateModule.forRoot()
       ],
       declarations: [DiscountFormComponent],
@@ -43,7 +45,7 @@ fdescribe('DiscountFormComponent', () => {
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('form'));
     el = de.nativeElement;
-    
+
   });
 
   it('should create', () => {
@@ -98,15 +100,14 @@ fdescribe('DiscountFormComponent', () => {
   });
 
   it('should test if Save button is disabled when the form is invalid -- Required fields are empty', (() => {
-    const discountForm = component.discountForm.controls;
 
-    discountForm.vendorId.setValue('');
-    discountForm.discountName.setValue('');
-    discountForm.description.setValue('');
-    discountForm.startDate.setValue('');
-    discountForm.checked.setValue('');
-    discountForm.endDate.setValue('');
-    discountForm.promoCode.setValue('');
+    component.discountForm.controls.vendorName.setValue('');
+    component.discountForm.controls.discountName.setValue('');
+    component.discountForm.controls.description.setValue('');
+    component.discountForm.controls.discountAmount.setValue('');
+    component.discountForm.controls.promoCode.setValue('');
+    component.discountForm.controls.startDate.setValue('');
+    component.discountForm.controls.endDate.setValue('');
 
     fixture.detectChanges();
     expect(el.querySelector('button').disabled).toBeTruthy();
@@ -114,7 +115,7 @@ fdescribe('DiscountFormComponent', () => {
 
   it('returned value should contain date format dd/mm/yyyy', () => {
     const isoStringStart = '1960-06-01T11:01:12.720Z';
- 
+
     expect(component.discountForm.controls.startDate.setValue(isoStringStart)).toBeUndefined();
 
   });
