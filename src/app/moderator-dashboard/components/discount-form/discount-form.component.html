@@ -1,7 +1,7 @@
 <div class="new-discount-wrapper" fxLayout="column" fxLayoutAlign="center center">
   <mat-card>
     <div *ngIf="editSession$">
-      <mat-card-subtitle>
+      <mat-card-subtitle class="mat-card-subtitle">
         {{(editSession$ | async)?.discountArchive
         ? ("NEW_DISCOUNT_FORM.EDIT_SESSION_DISCOUNT_ARCHIVED" | translate)
         : ("NEW_DISCOUNT_FORM.EDIT_SESSION_DISCOUNT_AVAILABLE" | translate)
@@ -144,12 +144,9 @@
                     formControlName="address" />
                 </mat-form-field>
               </div>
-
-
             </div>
           </div>
         </div>
-
 
         <mat-error *ngIf="pointOfSalesForm.errors?.checkPoints">
           {{"NEW_DISCOUNT_FORM.EMPTY_COORDINATES_POINT" | translate}}</mat-error>
