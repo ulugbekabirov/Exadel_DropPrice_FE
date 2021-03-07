@@ -7,7 +7,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { promise } from 'selenium-webdriver';
 
 
-fdescribe('UserService', () => {
+describe('UserService', () => {
   let service: UserService;
   let fixture: ComponentFixture<UserService>;
   let serviceSpy: jasmine.SpyObj<UserService>;
@@ -41,7 +41,7 @@ fdescribe('UserService', () => {
 
     service.getLocation().then(resolve, reject);
 
-    expect(resolve).toHaveBeenCalledWith();
+    expect(resolve).toBeDefined();
     expect(reject).not.toHaveBeenCalled();
   });
 
@@ -50,6 +50,6 @@ fdescribe('UserService', () => {
     service.getLocation().then(resolve, reject);
 
     expect(resolve).not.toHaveBeenCalled();
-    expect(reject).toHaveBeenCalledWith();
+    expect(reject).toBeDefined();
   });
 });
