@@ -144,6 +144,15 @@ export class DiscountsFacadeService {
   }
 
   loadDiscountData(discountId): Observable<any> {
+    if (!this.ifLocationDefined()) {
+      const user: ActiveUser = this.userService.activeUserValue;
+      const location = {
+        townName: 'My location',
+        latitude: user.latitude ? user.latitude : user.officeLatitude,
+        longitude: user.longitude ? user.longitude : user.officeLongitude,
+      };
+      this.requestDiscountsStore.set('location', location);
+    }
     return this.requestDiscountsStore.requestData$
       .pipe(
         switchMap((request) => {

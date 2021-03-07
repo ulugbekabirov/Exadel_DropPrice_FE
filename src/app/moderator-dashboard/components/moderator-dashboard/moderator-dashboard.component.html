@@ -1,9 +1,13 @@
 <mat-tab-group class="moderator-dashboard-tab" animationDuration="0ms">
   <mat-tab label="{{ 'MODERATOR_DASHBOARD.NEW_VENDOR_FORM' | translate }}">
-    <app-vendor-form></app-vendor-form>
+    <app-vendor-form
+    (changeHasUnsavedChanges)="changeHasUnsavedChanges($event)"
+    ></app-vendor-form>
   </mat-tab>
   <mat-tab label="{{ 'MODERATOR_DASHBOARD.NEW_DISCOUNT_FORM' | translate }}">
-    <app-discount-form></app-discount-form>
+    <app-discount-form
+      (changeHasUnsavedChanges)="changeHasUnsavedChanges($event)"
+    ></app-discount-form>
   </mat-tab>
 </mat-tab-group>
 

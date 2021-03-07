@@ -1,6 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { PointOfSales } from '../../../models/point-of-sales';
+import { UserService } from '../../../services/user.service';
 
 
 @Component({
@@ -13,7 +15,7 @@ export class DiscountsMapComponent {
   pointsOfSales$: Observable<PointOfSales[]>;
   @Input()
   locationSelected$: Observable<any>;
-  zoom = 8;
+  zoom = 10;
 
   clickedMarker(label: string, id: number): void {
   }

@@ -1,5 +1,5 @@
 import { ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
@@ -25,6 +25,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
   discountId: number;
   private unsubscribe$ = new Subject<void>();
   isEditMode: boolean = (this.router.url).includes('edit');
+  @Output() changeHasUnsavedChanges = new EventEmitter();
   hasUnsavedChanges = false;
   vendorsList;
   filteredList;
@@ -260,6 +261,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
     const discount = {...this.discountForm.getRawValue(), pointOfSales: this.pointOfSalesForm.getRawValue().filter(point => point.checked)};
     const {checked, ...newDiscount} = discount;
     this.hasUnsavedChanges = false;
+    this.changeHasUnsavedChanges.emit(false);
     if (this.isEditMode) {
       this.updateDiscount(newDiscount, this.discountId);
     } else {
@@ -293,7 +295,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
       catchError(error => {
         this.errorSnackBar(this.translate.instant('NEW_DISCOUNT_FORM.ERROR_UPDATE_SNACKBAR'), '');
         return throwError(error);
-      }))     
+      }))
       .subscribe((res) => {
         this.discountForm.reset();
         this.successSnackBar(this.translate.instant('NEW_DISCOUNT_FORM.SUCCESS_UPDATE_SNACKBAR'), '');

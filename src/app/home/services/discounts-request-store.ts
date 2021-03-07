@@ -31,7 +31,7 @@ const INITIAL_REQUEST_DISCOUNTS: RequestDiscounts = {
       longitude: null,
       townName: ''
     },
-    take: 12,
+    take: 30,
     skip: 0,
     tags: [],
   }
@@ -69,6 +69,5 @@ export class DiscountsRequestStore {
       }
     };
     this.requestSubject.next(newRequest);
-    console.log('REQUEST_STORE', this.value);
   }
 }

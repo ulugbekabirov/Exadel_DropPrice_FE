@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -55,6 +55,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
   vendorId: number;
   private unsubscribe$ = new Subject<void>();
   isEditMode: boolean = (this.router.url).includes('edit');
+  @Output() changeHasUnsavedChanges = new EventEmitter();
   hasUnsavedChanges = false;
   coordinateIsEmpty = true;
 
@@ -181,6 +182,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
     const vendor = this.vendorForm.value;
     const vendorModel = {...vendor, socialLinks: JSON.stringify(vendor.socialLinks)};
     this.hasUnsavedChanges = false;
+    this.changeHasUnsavedChanges.emit(false);
     if (this.isEditMode) {
       this.updateVendor(vendorModel, this.vendorId);
     } else {
@@ -216,7 +218,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
         this.vendorForm.reset();
         this.successSnackBar(this.translate.instant('NEW_DISCOUNT_FORM.SUCCESS_SAVE_SNACKBAR'), '');
         this.resetControlsErrors(this.vendorForm);
-        // this.router.navigate(['/vendors', res.vendorId]);
+        this.router.navigate(['/vendors', res.vendorId]);
       });
   }
 

@@ -24,7 +24,7 @@
       </agm-info-window>
 
     </agm-marker>
-    <agm-marker [latitude]="(locationSelected$ | async).latitude + 0.2"
+    <agm-marker [latitude]="(locationSelected$ | async).latitude"
                 [longitude]="(locationSelected$ | async).longitude"
                 [label]="'👇'"
     >

@@ -31,7 +31,6 @@ export class MapComponent implements OnInit, OnDestroy {
     private ref: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) data
   ) {
-    console.log(data.value);
     if (data.value.latitude && data.value.longitude) {
       this.coordinates.latitude = data.value.latitude;
       this.coordinates.longitude = data.value.longitude;
@@ -93,6 +92,7 @@ export class MapComponent implements OnInit, OnDestroy {
       this.coordinates.longitude = point.longitude;
       this.point.patchValue(point);
     }
+    this.ref.detectChanges();
   }
 
   getCoordinates(): void {
