@@ -1,105 +1,117 @@
 <div class="vendors">
-  <section class="vendors-detail">
-    <mat-accordion>
-      <mat-expansion-panel (opened)="panelOpenState = true"
-                           (closed)="panelOpenState = false">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <div class="vendors-label" fxLayout="column">
-              <h2 class="vendors-label__vendor-name">
-                {{(vendor$ | async)?.vendorName}}
-              </h2>
+  <article class="vendors-detail">
+    <p class="go_back_main">
+      <a class="go-back__link" fxLayoutAlign="start center" (click)="goBack()">
+        <mat-icon class="go-back__link_icon">keyboard_backspace</mat-icon>
+        <span class="go-back__link_text" matTooltip="{{ 'VENDOR_PAGE.VENDOR_DETAIL.TOOLTIP_GO_BACK' | translate }}"
+              matTooltipPosition="right">
+          {{"BUTTON_BACK_LOCATION" | translate }}
+        </span>
+      </a>
+    </p>
 
-              <div class="vendors-label__rating"
-                   fxLayout="row"
-                   fxLayoutGap=".1em"
-              >
-              <span class="rating__amount" fxLayoutAlign="center center">
-          {{(vendor$ | async)?.vendorRating | number: '.1-2'}}
-              </span>
-                <mat-icon class="rating__icon" fxLayoutAlign="center center">
-                  {{(vendor$ | async)?.vendorRating ? 'star_rate' : 'star_border'}}
-                </mat-icon>
-              </div>
-            </div>
-            <div class="vendor-content__field">
-              <ul class="vendor-content__social" fxLayout="row" fxLayoutGap=" .1em">
-                <li *ngFor="let social of (vendor$ | async)?.socialLinks">
-                  <a
-                    href="{{social.path}}"
-                    target="_blank"
-                    title="{{social.name}}"
-                    ngSwitch="{{social.name}}"
-                  >
-                    <mat-icon *ngSwitchCase="'facebook'" class="social-icon">facebook</mat-icon>
-                    <img *ngSwitchCase="'instagram'" src="./assets/img/instagram.svg" alt="instagram"
-                         class="social-icon">
-                    <i *ngSwitchCase="'instagram'" class="fab fa-instagram"></i>
-                    <mat-icon *ngSwitchDefault class="social-icon">language</mat-icon>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </mat-panel-title>
-          <mat-panel-description>
-            <section class="vendors-detail__actions" fxLayout="column">
-              <mat-icon *appVerifyUserRoles='["Moderator"]'
-                        matTooltip='{{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_EDIT" | translate}}'
-                        (click)="onEditVendor(vendorId)"
-              >
-                mode_edit
-              </mat-icon>
-            </section>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <div class="vendor-content__field">
-          <p class="vendor-content__field_description">
-            {{(vendor$ | async)?.description}}
-          </p>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                          (closed)="panelOpenState = false">
+    <mat-expansion-panel-header >
+      <mat-panel-title>
+        <div class="vendors-label" fxLayout="column">
+          <h2 class="vendors-label__vendor-name">
+            {{(vendor$ | async)?.vendorName}}
+          </h2>
+
+          <div class="vendors-label__rating"
+                fxLayout="row"
+                fxLayoutGap=".1em"
+          >
+            <span class="rating__amount" fxLayoutAlign="center center">
+        {{(vendor$ | async)?.vendorRating | number: '.1-2'}}
+            </span>
+            <mat-icon class="rating__icon"
+                      fxLayoutAlign="center center"
+                      matTooltip="{{'VENDOR_PAGE.VENDOR_DETAIL.DETAIL_RATING_LABEL' | translate}}"
+                      matTooltipPosition="right">
+              {{(vendor$ | async)?.vendorRating ? 'star_rate' : 'star_border'}}
+            </mat-icon>
+          </div>
         </div>
-        <mat-divider></mat-divider>
-        <div class="vendors-detail__content">
-          <ul class="vendor-content">
-            <li class="vendor-content__field address" fxLayout="row" fxLayoutGap=".3em" fxLayout.xs="column">
-              <div class="vendor-content__field_label" fxLayout="row" fxLayout.xs="row" fxLayoutGap.xs=".3em">
-                <mat-icon class="vendor-content__mat-icon">business</mat-icon>
-                <p class="vendor-content__field_label-text">
-                  {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_ADDRESS" | translate}}
-                </p>
-              </div>
-              <p class="vendor-content__field_text">
-                {{(vendor$ | async)?.address}}
-              </p>
-            </li>
-
-            <li class="vendor-content__field" fxLayout="row" fxLayoutGap=".3em" fxLayout.xs="column">
-              <div class="vendor-content__field_label" fxLayout="row" fxLayout.xs="row">
-                <mat-icon class="vendor-content__mat-icon">mail_outline</mat-icon>
-                <p class="vendor-content__field_label-text">
-                  {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_EMAIL" | translate}}
-                </p>
-              </div>
-              <p class="vendor-content__field_text">
-                {{(vendor$ | async)?.email}}
-              </p>
-            </li>
-
-            <li class="vendor-content__field" fxLayout="row" fxLayoutGap=".3em" fxLayout.xs="column">
-              <div class="vendor-content__field_label" fxLayout="row" fxLayout.xs="row">
-                <mat-icon class="vendor-content__mat-icon">phone</mat-icon>
-                <p class="vendor-content__field_label-text">
-                  {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_PHONE" | translate}}
-                </p>
-              </div>
-              <p class="vendor-content__field_text">
-                {{(vendor$ | async)?.phone}}
-              </p>
+        <div class="vendor-content__social">
+          <ul class="vendor-content__social-field" fxLayout="row" fxLayoutGap=" .1em">
+            <li *ngFor="let social of (vendor$ | async)?.socialLinks">
+              <a
+                href="{{social.path}}"
+                target="_blank"
+                title="{{social.name}}"
+                ngSwitch="{{social.name}}"
+              >
+                <mat-icon *ngSwitchCase="'facebook'" class="social-icon">facebook</mat-icon>
+                <img *ngSwitchCase="'instagram'" src="./assets/img/instagram.svg" alt="instagram" class="social-icon instagram">
+                <mat-icon *ngSwitchDefault class="social-icon">public</mat-icon>
+              </a>
             </li>
           </ul>
         </div>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </section>
+      </mat-panel-title>
+      <mat-panel-description>
+        <section class="vendors-detail__actions" fxLayout="column">
+          <mat-icon *appVerifyUserRoles='["Moderator"]'
+                  matTooltip='{{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_EDIT" | translate}}'
+                  (click)="onEditVendor(vendorId)"
+          >
+            mode_edit
+          </mat-icon>
+        </section>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="vendor-content__field">
+      <p class="vendor-content__field-description">
+        {{(vendor$ | async)?.description}}
+      </p>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="vendors-detail__content">
+      <ul class="vendor-content">
+        <li class="vendor-content__field address" fxLayout="row" fxLayoutGap=".3em" fxLayout.xs="column" >
+          <div class="vendor-content__field-label" fxLayout="row" fxLayoutGap.xs=".3em">
+            <mat-icon class="vendor-content__mat-icon">business</mat-icon>
+            <p class="vendor-content__field-label-text">
+              {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_ADDRESS" | translate}}:
+            </p>
+          </div>
+          <p class="vendor-content__field-text">
+            {{(vendor$ | async)?.address}}
+          </p>
+        </li>
+
+        <li class="vendor-content__field" fxLayout="row" fxLayoutGap=".3em" fxLayout.xs="column" >
+          <div class="vendor-content__field-label" fxLayout="row">
+            <mat-icon class="vendor-content__mat-icon">mail_outline</mat-icon>
+            <p class="vendor-content__field-label-text">
+              {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_EMAIL" | translate}}:
+            </p>
+          </div>
+          <p class="vendor-content__field-text">
+            {{(vendor$ | async)?.email}}
+          </p>
+        </li>
+
+        <li class="vendor-content__field" fxLayout="row" fxLayoutGap=".3em" fxLayout.xs="column" >
+          <div class="vendor-content__field-label" fxLayout="row">
+            <mat-icon class="vendor-content__mat-icon">phone</mat-icon>
+            <p class="vendor-content__field-label-text">
+              {{"VENDOR_PAGE.VENDOR_DETAIL.DETAIL_CONTENT.VENDOR_PHONE" | translate}}:
+            </p>
+          </div>
+          <p class="vendor-content__field-text">
+            {{(vendor$ | async)?.phone}}
+          </p>
+        </li>
+      </ul>
+    </div>
+    </mat-expansion-panel>
+
+  </article>
+
+<section class="vendors-discounts">
   <mat-tab-group>
     <mat-tab label="{{'VENDOR_PAGE.VENDOR_DETAIL.MAT_TAB_VENDOR_DISCOUNTS' | translate}}">
       <app-discounts-list
@@ -121,5 +133,6 @@
       ></app-discounts-map>
     </mat-tab>
   </mat-tab-group>
+</section>
 </div>
 <ng-template appRef></ng-template>

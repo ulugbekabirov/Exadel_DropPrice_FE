@@ -164,7 +164,7 @@
     "TOOLTIP_VENDOR_RAT": "Рейтинг вендора"
   },
   "VENDOR_PAGE": {
-    "PAGE_TITLE": "Информация о вендоре",
+    "TOOLTIP_GO_BACK": "Вернуться",
     "VENDOR_DETAIL": {
       "DETAIL_RATING_LABEL": "Рейтинг вендора",
       "DETAIL_CONTENT": {
