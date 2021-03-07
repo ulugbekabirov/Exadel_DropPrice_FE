@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { Location } from '../models/location';
+import { Location } from '../../models/location';
 
 
 @Injectable({

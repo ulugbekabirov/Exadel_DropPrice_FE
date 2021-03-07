@@ -3,9 +3,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { concatMap, tap } from 'rxjs/operators';
 import { ActiveUser, AuthUser } from '../../models';
 import { AuthInfo } from '../../models';
-import { ApiDataService } from '../../services/api-data.service';
+import { ApiDataService } from '../../services/api-data/api-data.service';
 import { KEY_AUTH_TOKEN } from '../../../constants';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../services/user/user.service';
 import { Router } from '@angular/router';
 
 

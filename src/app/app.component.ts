@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from './auth/services/auth.service';
 import { AuthInfo } from './models';
-import { LanguageService } from './services/language.service';
+import { LanguageService } from './services/language/language.service';
 import { Observable, Subscription } from 'rxjs';
-import { LoadingService } from './services/loading.service';
+import { LoadingService } from './services/loading/loading.service';
 import { delay } from 'rxjs/operators';
 
 @Component({

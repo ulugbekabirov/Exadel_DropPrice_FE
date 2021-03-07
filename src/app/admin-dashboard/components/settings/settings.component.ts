@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ApiDataService } from '../../../services/api-data.service';
+import { ApiDataService } from '../../../services/api-data/api-data.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Setting } from '../../../models/setting';
 import { Subject } from 'rxjs';

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { PointOfSales } from '../../../models/point-of-sales';
-import { UserService } from '../../../services/user.service';
+import { UserService } from '../../../services/user/user.service';
 
 
 @Component({

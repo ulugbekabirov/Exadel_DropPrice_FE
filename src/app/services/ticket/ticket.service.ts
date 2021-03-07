@@ -1,6 +1,6 @@
 import { ComponentFactoryResolver, Injectable } from '@angular/core';
-import { Ticket } from '../models';
-import { TicketComponent } from '../shared/components/ticket/ticket.component';
+import { Ticket } from '../../models';
+import { TicketComponent } from '../../shared/components/ticket/ticket.component';
 
 
 @Injectable({

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ApiDataService } from './api-data.service';
+import { ApiDataService } from '../api-data/api-data.service';
 import { BehaviorSubject, Observable, of, } from 'rxjs';
-import { ActiveUser } from '../models';
-import { KEY_ACTIVE_USER } from '../../constants';
+import { ActiveUser } from '../../models';
+import { KEY_ACTIVE_USER } from '../../../constants';
 import { map, pluck, tap } from 'rxjs/operators';
-import { LanguageService } from './language.service';
+import { LanguageService } from '../language/language.service';
 
 
 @Injectable({

@@ -4,8 +4,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { Location } from '../../models/location';
-import { GeocodeService } from '../../services/geocode.service';
-import { UserService } from '../../services/user.service';
+import { GeocodeService } from '../../services/geocode/geocode.service';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-map',

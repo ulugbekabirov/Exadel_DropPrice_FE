@@ -8,8 +8,8 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { forkJoin, Observable, ReplaySubject, Subject, throwError } from 'rxjs';
 import { catchError, debounceTime, filter, map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { Discount, Vendor } from '../../../models';
-import { DiscountsService } from '../../../services/discounts.service';
-import { VendorsService } from '../../../services/vendors.service';
+import { DiscountsService } from '../../../services/discounts/discounts.service';
+import { VendorsService } from '../../../services/vendors/vendors.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
