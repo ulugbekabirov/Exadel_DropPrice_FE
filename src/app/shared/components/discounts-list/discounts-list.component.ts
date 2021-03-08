@@ -43,54 +43,8 @@ export class DiscountsListComponent implements OnInit, OnDestroy {
   mainSortBy: FormControl = new FormControl();
   locationSort: FormControl = new FormControl();
 
-  private cache = [];
-  private pageByManual$ = new BehaviorSubject(1);
   private itemHeight = 280;
   private numberOfItems = 6;
-
-  private pageByScroll$ = fromEvent(window, 'scroll')
-    .pipe(
-      map(() => window.scrollY),
-      filter(current => current >= document.body.clientHeight - window.innerHeight),
-      debounceTime(200),
-      distinct(),
-      map(y => Math.ceil((y + window.innerHeight) / (this.itemHeight * this.numberOfItems)))
-    );
-
-  private pageByResize$ = fromEvent(window, 'resize')
-    .pipe(
-      debounceTime(200),
-      map(_ => Math.ceil(
-        (window.innerHeight + document.body.scrollTop) /
-        (this.itemHeight * this.numberOfItems)
-      ))
-    );
-
-  private pageToLoad$ = merge(this.pageByManual$, this.pageByScroll$, this.pageByResize$)
-    .pipe(
-      tap(next => console.log('PAGE', next)),
-      distinct(),
-      filter(page => this.cache[page - 1] === undefined)
-    );
-
-  itemResults$ = this.pageToLoad$
-    .pipe(
-      tap(page => this.requestStore.set('skip', (12 * (page - 1)))),
-      switchMap((page: number) => {
-        return this.discounts$
-          .pipe(
-            tap(resp => {
-              this.cache[page - 1] = resp;
-              console.log('CACHE1', this.cache);
-              if ((this.itemHeight * this.numberOfItems * page) < window.innerHeight) {
-                this.pageByManual$.next(page + 1);
-              }
-            })
-          );
-      }),
-      map(() => this.cache.reduce((acc, val) => [...acc, ...val])),
-      tap(() => console.log(this.cache))
-    );
 
   ngOnInit(): void {
 
@@ -101,7 +55,6 @@ export class DiscountsListComponent implements OnInit, OnDestroy {
       }),
       takeUntil(this.unsubscribe$)
     ).subscribe(next => {
-      this.cache = [];
       this.sortChange.emit(next);
     });
 
@@ -112,7 +65,6 @@ export class DiscountsListComponent implements OnInit, OnDestroy {
       }),
       takeUntil(this.unsubscribe$)
     ).subscribe(next => {
-      this.cache = [];
       this.locationChange.emit(next);
     });
   }

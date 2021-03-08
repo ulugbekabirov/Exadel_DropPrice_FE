@@ -1,5 +1,6 @@
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { AppModule } from '../app.module';
 import { CountdownTimerComponent } from './components/countdown-timer/countdown-timer.component';
 import { MapComponent } from './../components/map/map.component';
 import { NgModule } from '@angular/core';
@@ -20,10 +21,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { VerifyUserRolesDirective } from '../directives/verify-user-roles.directive';
+import { VerifyUserRolesDirective } from '../directives/verify-user-roles/verify-user-roles.directive';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { NotFoundComponent } from './components/not-found.components/not-found.component';
-import { RefDirective } from '../directives/ref.directive';
+import { RefDirective } from '../directives/ref/ref.directive';
 import { ModalComponent } from './components/modal.component/modal.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -43,6 +44,7 @@ import { TagsFilterComponent } from './components/tags-filter/tags-filter.compon
 import { FormatTimePipe } from '../pipes/format-time.pipe';
 import { TruncateStringPipe } from '../pipes/truncate-string.pipe';
 import { DiscountsMapComponent } from './components/discounts-map/discounts-map.component';
+import { GoToTopComponent } from './components/go-to-top/go-to-top.component';
 
 
 @NgModule({
@@ -63,6 +65,7 @@ import { DiscountsMapComponent } from './components/discounts-map/discounts-map.
     FormatTimePipe,
     TruncateStringPipe,
     DiscountsMapComponent,
+    GoToTopComponent,
   ],
 
   imports: [
@@ -94,7 +97,7 @@ import { DiscountsMapComponent } from './components/discounts-map/discounts-map.
     MatExpansionModule,
     MatToolbarModule,
     MatCheckboxModule,
-    ScrollingModule
+    ScrollingModule,
   ],
 
   providers: [GoogleMapsAPIWrapper],

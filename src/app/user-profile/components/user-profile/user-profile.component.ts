@@ -4,7 +4,7 @@ import { ActiveUser, Discount, Ticket } from '../../../models';
 import { UserService } from '../../../services/user.service';
 import { UserFacadeService } from '../../services/user-facade.service';
 import { TicketService } from '../../../services/ticket.service';
-import { RefDirective } from '../../../directives/ref.directive';
+import { RefDirective } from '../../../directives/ref/ref.directive';
 import { filter, map } from 'rxjs/operators';
 
 @Component({

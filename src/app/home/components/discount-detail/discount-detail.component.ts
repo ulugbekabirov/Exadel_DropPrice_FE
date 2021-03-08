@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { Discount } from '../../../models';
 import { Observable, Subject } from 'rxjs';
-import { RefDirective } from '../../../directives/ref.directive';
+import { RefDirective } from '../../../directives/ref/ref.directive';
 import { PointOfSales } from '../../../models/point-of-sales';
 import { DiscountsFacadeService } from '../../services/discounts-facade.service';
 import { DiscountsRequestStore } from '../../services/discounts-request-store';
