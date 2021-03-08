@@ -24,17 +24,7 @@
       </agm-info-window>
 
     </agm-marker>
-    <agm-marker [latitude]="(locationSelected$ | async).latitude + 0.2"
-                [longitude]="(locationSelected$ | async).longitude"
-                [label]="'👇'"
-    >
-      <agm-info-window>
-        <p>
-          <strong>{{'you are here'}}</strong>
-        </p>
-      </agm-info-window>
-    </agm-marker>
-    <agm-rectangle>
-    </agm-rectangle>
+
   </agm-map>
 </div>
+

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ApiDataService } from './api-data.service';
+import { ApiDataService } from '../api-data/api-data.service';
 import { Observable } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
-import { Vendor } from '../models';
+import { Vendor } from '../../models';
 
 @Injectable({
   providedIn: 'root'

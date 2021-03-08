@@ -31,7 +31,8 @@
   "MAIN_PAGE": {
     "SEARCH": "Search",
     "BUTTONS": {
-      "TICKET": "Get the discount"
+      "TICKET": "Get the discount",
+      "DISCOUNT_INACTIVE": "Not available"
     },
     "FILTER": {
       "SORT_BY": {
@@ -156,19 +157,20 @@
     "EDIT_BUTTON_LABEL": "Edit",
     "ARCHIVE_BUTTON_LABEL": "Archive",
     "TICKET_BUTTON_LABEL": "Get the discount",
+    "TICKET_BUTTON_LABEL_DISCOUNT_INACTIVE": "Not available",
     "MAT_TAB_ABOUT": "About",
-    "MAT_TAB_POINTS_OF_SALE": "Discount's points of sales",
+    "MAT_TAB_POINTS_OF_SALE": "Discount location map",
     "TOOLTIP_GO_BACK": "Go back",
     "TOOLTIP_VENDOR": "Vendor",
     "TOOLTIP_FAVORITES": "Add to favorites",
     "TOOLTIP_VENDOR_RAT": "Vendor rating"
   },
   "VENDOR_PAGE": {
-    "PAGE_TITLE": "About vendor",
+    "TOOLTIP_GO_BACK": "Go back",
     "VENDOR_DETAIL": {
       "DETAIL_RATING_LABEL": "Vendor rating",
       "MAT_TAB_VENDOR_DISCOUNTS": "Vendor's discounts",
-      "MAT_TAB_VENDOR_POINTS_OF_SALES": "Vendor's points of sales",
+      "MAT_TAB_VENDOR_POINTS_OF_SALES": "Vendor's points of sales map",
       "DETAIL_CONTENT": {
         "VENDOR_NAME": "Vendor Name",
         "VENDOR_ADDRESS": "Address",

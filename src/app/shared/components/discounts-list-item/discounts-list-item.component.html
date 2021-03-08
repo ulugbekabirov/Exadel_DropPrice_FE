@@ -4,19 +4,28 @@
       {{ discount.discountAmount }} %
     </span>
   </div>
- 
+
   <div class="titles" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-    <div>
+    <div fxShow fxHide.sm>
       <h2>
         <a class="discount-card__vendor_link" [routerLink]="['/vendors', discount.vendorId]"
-          matTooltip="{{ discount.vendorName }}" matTooltipPosition="right">
+           matTooltip="{{ discount.vendorName }}" matTooltipPosition="right">
           {{ discount.vendorName | truncateString:15 }}
         </a>
       </h2>
     </div>
+    <div fxHide fxShow.sm>
+      <h2>
+        <a class="discount-card__vendor_link" [routerLink]="['/vendors', discount.vendorId]"
+          matTooltip="{{ discount.vendorName }}" matTooltipPosition="right">
+          {{ discount.vendorName }}
+        </a>
+      </h2>
+    </div>
     <mat-icon class="favorite" fxLayoutAlign="center center"
-      matTooltip="{{'MAIN_PAGE.DISCOUNT_CARD.TOOLTIP_FAVORITE' | translate}}" matTooltipPosition="right"
-      [ngStyle]="{'color': discount.isSaved ? '#da8171' : '#adadaf'}" (click)="toggleFavorites(discount.discountId)">
+              matTooltip="{{'MAIN_PAGE.DISCOUNT_CARD.TOOLTIP_FAVORITE' | translate}}" matTooltipPosition="right"
+              [ngStyle]="{'color': discount.isSaved ? '#da8171' : '#adadaf'}"
+              (click)="toggleFavorites(discount.discountId)">
       favorite
     </mat-icon>
   </div>
@@ -25,7 +34,7 @@
     <div>
       <p class="discount-card__header_title">
         <a [routerLink]="['/discounts', discount.discountId]"
-          matTooltip="{{ discount.discountName }}" matTooltipPosition="below">
+           matTooltip="{{ discount.discountName }}" matTooltipPosition="below">
           {{ discount.discountName | truncateString:50 }}
         </a>
       </p>
@@ -43,7 +52,7 @@
     <div class="rating-main" fxLayout="row" fxLayoutAlign="space-between center">
       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2px">
         <span class="rating__amount" matTooltip="{{'MAIN_PAGE.DISCOUNT_CARD.TOOLTIP_RATING' | translate}}"
-          matTooltipPosition="right">
+              matTooltipPosition="right">
           {{discount.discountRating | number: '.1-1'}}
         </span>
         <mat-icon *ngIf="discount.discountRating > 0" class="rating__icon">star_rate
@@ -51,8 +60,18 @@
       </div>
     </div>
     <div>
-      <button class="action__ticket" mat-stroked-button color="primary" (click)="ticketHandler(discount.discountId)">
-        {{ "MAIN_PAGE.BUTTONS.TICKET" | translate }}
+      <button class="action__ticket"
+              mat-stroked-button
+              color="primary"
+              (click)="ticketHandler(discount.discountId)"
+              [class.discountAvailable]="!discount.discountAvailable"
+              [disabled]="!discount.discountAvailable"
+      >
+        {{
+        discount.discountAvailable
+          ? ("MAIN_PAGE.BUTTONS.TICKET" | translate)
+          : ("MAIN_PAGE.BUTTONS.DISCOUNT_INACTIVE" | translate)
+        }}
       </button>
     </div>
   </div>

@@ -5,10 +5,10 @@ import { SORTS } from '../../../constants';
 import { ActiveUser, Discount, Tag, Town } from '../../models';
 import { PointOfSales } from '../../models/point-of-sales';
 import { Sort } from '../../models/sort';
-import { ApiDataService } from '../../services/api-data.service';
-import { DiscountsService } from '../../services/discounts.service';
-import { TicketService } from '../../services/ticket.service';
-import { UserService } from '../../services/user.service';
+import { ApiDataService } from '../../services/api-data/api-data.service';
+import { DiscountsService } from '../../services/discounts/discounts.service';
+import { TicketService } from '../../services/ticket/ticket.service';
+import { UserService } from '../../services/user/user.service';
 import { DiscountsRequestStore } from './discounts-request-store';
 import { DiscountsStore } from './discounts-store';
 
@@ -109,6 +109,14 @@ export class DiscountsFacadeService {
           };
           return this.discountsService.searchDiscounts(req)
             .pipe(
+              map(discounts => {
+                return discounts.map(discount => {
+                  const {endDate, startDate} = discount;
+                  const dateNow = Date.now();
+                  const discountAvailable = (dateNow > new Date(startDate).getTime() && dateNow < new Date(endDate).getTime());
+                  return {...discount, discountAvailable};
+                });
+              }),
               tap(discounts => this.store.set('discounts', discounts)),
             );
         })
@@ -118,6 +126,12 @@ export class DiscountsFacadeService {
   getDiscount(discountId, request): Observable<Discount> {
     return this.discountsService.getDiscountById(discountId, request)
       .pipe(
+        map(discount => {
+          const {endDate, startDate} = discount;
+          const dateNow = Date.now();
+          const discountAvailable = (dateNow > new Date(startDate).getTime() && dateNow < new Date(endDate).getTime());
+          return {...discount, discountAvailable};
+        }),
         tap(discount => this.store.set('activeDiscount', discount)),
       );
   }
@@ -130,6 +144,15 @@ export class DiscountsFacadeService {
   }
 
   loadDiscountData(discountId): Observable<any> {
+    if (!this.ifLocationDefined()) {
+      const user: ActiveUser = this.userService.activeUserValue;
+      const location = {
+        townName: 'My location',
+        latitude: user.latitude ? user.latitude : user.officeLatitude,
+        longitude: user.longitude ? user.longitude : user.officeLongitude,
+      };
+      this.requestDiscountsStore.set('location', location);
+    }
     return this.requestDiscountsStore.requestData$
       .pipe(
         switchMap((request) => {

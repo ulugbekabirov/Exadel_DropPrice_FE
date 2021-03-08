@@ -109,66 +109,84 @@
 
 }
 
-.discount-detail__content {
-  margin-top: 20px;
-
-  .discount-content__description {
-    margin-bottom: 20px;
-
-    .discount-icons {
-      display: flex;
-      gap: 10px;
-
-      @media screen and (max-width: 600px) {
-        flex-direction: column;
+.discount_details__tabs{
+  .mat-tab-labels{
+    justify-content: flex-start;
+  }
+  .discount-detail__content {
+    margin-top: 20px;
+  
+    .discount-content__description {
+      margin-bottom: 20px;
+  
+      .discount-icons {
+        display: flex;
+        gap: 10px;
+  
+        @media screen and (max-width: 600px) {
+          flex-direction: column;
+        }
+      }
+  
+      .action__icon {
+        cursor: pointer;
+        border: none;
+        outline: none;
+      }
+  
+      .action__icon:hover,
+      .action__icon:active,
+      .action__icon:focus {
+        opacity: .8;
       }
     }
-
-    .action__icon {
+  
+    .action__button {
       cursor: pointer;
-      border: none;
-      outline: none;
-    }
-
-    .action__icon:hover,
-    .action__icon:active,
-    .action__icon:focus {
-      opacity: .8;
-    }
-  }
-
-  .action__button {
-    cursor: pointer;
-    margin-top: 2rem;
-
-    &:active,
-    &:hover,
-    &:focus {
-      opacity: .9;
+      margin-top: 2rem;
+  
+      &:active,
+      &:hover,
+      &:focus {
+        opacity: .9;
+      }
     }
   }
-}
+  
+  .highliter {
+    font-weight: 700;
+    font-size: 1rem;
+  
+    @media screen and (max-width: 600px) {
+      font-weight: 600;
+      font-size: .9rem;
+    }
 
-.highliter {
-  font-weight: 700;
-  font-size: 1rem;
+    &.discountAvailable {
+      background: $main_gray;
+      color: inherit;
+      cursor: default;
 
-  @media screen and (max-width: 600px) {
-    font-weight: 600;
-    font-size: .9rem;
+      &:active,
+      &:hover,
+      &:focus {
+        opacity: 1;
+      }
+    }
   }
-}
-
-.discount-detail__actions {
-  width: 100%;
-
-  .ticket {
-    width: 25%;
-  }
-
-  @media screen and (max-width: 600px) {
+  
+  .discount-detail__actions {
+    width: 100%;
+  
     .ticket {
-      width: 100%;
+      width: 25%;
+    }
+  
+    @media screen and (max-width: 600px) {
+      .ticket {
+        width: 100%;
+      }
     }
   }
 }
+

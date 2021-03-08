@@ -8,7 +8,8 @@ export const environment = {
   defaultLocale: 'ru',
   identityUrl: 'https://localhost:44360/api/',
   webApiUrl: 'https://localhost:44395/api/',
-  googleMapApi: 'AIzaSyAV9lV_tJu_h60k4vDfpcSjaVMHfw2aEqw',
+  // googleMapApi: 'AIzaSyAV9lV_tJu_h60k4vDfpcSjaVMHfw2aEqw',
+  googleMapApi: 'AIzaSyCV5eUy0ukaXfoWo4FJ9i7vsbUfbG87YwQ',
 };
 
 /*

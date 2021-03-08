@@ -31,7 +31,8 @@
   "MAIN_PAGE": {
     "SEARCH": "Поиск",
     "BUTTONS": {
-      "TICKET": "Получить скидку"
+      "TICKET": "Получить скидку",
+      "DISCOUNT_INACTIVE": "Скидка не доступна"
     },
     "FILTER": {
       "SORT_BY": {
@@ -123,7 +124,7 @@
     "START_DATE_ERROR": "Невернная дата начала",
     "END_DATE_ERROR": "Неверная дата окончания",
     "MIN_MAX_PERCENT": "Диапазон",
-    "ACTIVITY_STATUS": "Статус скидки:",
+    "ACTIVITY_STATUS": "Активность скидки",
     "NAME_LABEL": "Введите название места*",
     "ADDRESS_LABEL": "Введите адрес места*",
     "ADDRESS_PLACEHOLDER": "Напр.: г. Минск, ул. Ольшевского, 11-4",
@@ -154,15 +155,16 @@
     "EDIT_BUTTON_LABEL": "Редактировать",
     "ARCHIVE_BUTTON_LABEL": "Архивировать",
     "TICKET_BUTTON_LABEL": "Получить скидку",
-    "MAT_TAB_ABOUT": "о скидке",
-    "MAT_TAB_POINTS_OF_SALE": "Точки продаж скидки",
+    "TICKET_BUTTON_LABEL_DISCOUNT_INACTIVE": "Скидка не доступна",
+    "MAT_TAB_ABOUT": "О скидке",
+    "MAT_TAB_POINTS_OF_SALE": "Карта местоположения скидки",
     "TOOLTIP_GO_BACK": "Вернуться к списку",
     "TOOLTIP_VENDOR": "Вендор",
     "TOOLTIP_FAVORITES": "Добавить в избранные",
     "TOOLTIP_VENDOR_RAT": "Рейтинг вендора"
   },
   "VENDOR_PAGE": {
-    "PAGE_TITLE": "Информация о вендоре",
+    "TOOLTIP_GO_BACK": "Вернуться",
     "VENDOR_DETAIL": {
       "DETAIL_RATING_LABEL": "Рейтинг вендора",
       "DETAIL_CONTENT": {
@@ -173,8 +175,8 @@
         "VENDOR_PHONE": "Контактный телефон",
         "VENDOR_EDIT": "Редактировать вендора"
       },
-      "MAT_TAB_VENDOR_DISCOUNTS": "Скидки Вендора",
-      "MAT_TAB_VENDOR_POINTS_OF_SALES": "Точки продаж вендора",
+      "MAT_TAB_VENDOR_DISCOUNTS": "Скидки вендора",
+      "MAT_TAB_VENDOR_POINTS_OF_SALES": "Карта точек продаж вендора",
       "DETAIL_ACTIONS": {
         "EDIT": "Редактировать"
       }

@@ -49,8 +49,9 @@
     </div>
   </section>
 
+
   <mat-tab-group animationDuration="0ms">
-    <mat-tab label="{{ 'DISCOUNT_DETAIL.MAT_TAB_ABOUT' | translate }}">
+    <mat-tab label="{{ 'DISCOUNT_DETAIL.MAT_TAB_ABOUT' | translate | uppercase }}">
       <section class="discount-detail__content">
         <div class="discount-content__description" fxLayoutGap="20px" fxLayout="row" fxLayoutAlign="start">
           <p class="discount-content__description_text">
@@ -58,7 +59,8 @@
           </p>
           <div class="discount-icons">
             <mat-icon *appVerifyUserRoles='["Moderator"]' class="action__icon edit" color="primary"
-                      matTooltip="Edit Discount" routerLink="edit"
+                      matTooltip="Edit Discount"
+                      routerLink="edit"
                       matTooltip="{{ 'DISCOUNT_DETAIL.EDIT_BUTTON_LABEL' | translate }}"
                       (click)="onEditDiscount(discountId)">edit
             </mat-icon>
@@ -140,14 +142,22 @@
         </section>
 
         <section class="discount-detail__actions" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="center start">
-          <button class="action__button ticket" mat-flat-button color="primary"
-                  (click)="ticketHandler(discountId)">
-            {{ "DISCOUNT_DETAIL.TICKET_BUTTON_LABEL" | translate }}
+          <button class="action__button ticket"
+                  mat-flat-button color="primary"
+                  (click)="ticketHandler(discountId)"
+                  [class.discountAvailable]="!(discount$ | async)?.discountAvailable"
+                  [disabled]="!(discount$ | async)?.discountAvailable"
+          >
+            {{
+            (discount$ | async)?.discountAvailable
+              ? ("DISCOUNT_DETAIL.TICKET_BUTTON_LABEL" | translate)
+              : ("DISCOUNT_DETAIL.TICKET_BUTTON_LABEL_DISCOUNT_INACTIVE" | translate)
+            }}
           </button>
         </section>
       </section>
     </mat-tab>
-    <mat-tab label="{{'DISCOUNT_DETAIL.MAT_TAB_POINTS_OF_SALE' | translate}}">
+    <mat-tab label="{{'DISCOUNT_DETAIL.MAT_TAB_POINTS_OF_SALE' | translate | uppercase}}">
       <app-discounts-map
         [pointsOfSales$]="pointsOfSales$"
         [locationSelected$]="locationSelected$"

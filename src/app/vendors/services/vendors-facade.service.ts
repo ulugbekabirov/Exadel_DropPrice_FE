@@ -5,11 +5,11 @@ import { SORTS } from '../../../constants';
 import { ActiveUser, Tag, Town } from '../../models';
 import { PointOfSales } from '../../models/point-of-sales';
 import { Sort } from '../../models/sort';
-import { ApiDataService } from '../../services/api-data.service';
-import { DiscountsService } from '../../services/discounts.service';
-import { TicketService } from '../../services/ticket.service';
-import { UserService } from '../../services/user.service';
-import { VendorsService } from '../../services/vendors.service';
+import { ApiDataService } from '../../services/api-data/api-data.service';
+import { DiscountsService } from '../../services/discounts/discounts.service';
+import { TicketService } from '../../services/ticket/ticket.service';
+import { UserService } from '../../services/user/user.service';
+import { VendorsService } from '../../services/vendors/vendors.service';
 import { VendorsRequestStore } from './vendors-request-store';
 import { VendorsStore } from './vendors-store';
 
@@ -110,6 +110,14 @@ export class VendorsFacadeService {
 
   getVendorDiscounts(vendorId, reqOpt): Observable<any> {
     return this.vendorsService.getVendorsDiscounts(vendorId, reqOpt).pipe(
+      map(discounts => {
+        return discounts.map(discount => {
+          const {endDate, startDate} = discount;
+          const dateNow = Date.now();
+          const discountAvailable = (dateNow > new Date(startDate).getTime() && dateNow < new Date(endDate).getTime());
+          return {...discount, discountAvailable};
+        });
+      }),
       tap(discounts => this.store.set('vendorDiscounts', discounts))
     );
   }

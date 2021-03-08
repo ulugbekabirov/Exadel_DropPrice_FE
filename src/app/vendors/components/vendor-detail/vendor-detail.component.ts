@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { PointOfSales } from '../../../models/point-of-sales';
 import { Sort } from '../../../models/sort';
 import { Observable, Subject } from 'rxjs';
@@ -27,7 +28,7 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
   sorts$: Observable<Sort[]>;
   sortBySelected$: Observable<Sort>;
   locationSelected$: Observable<Town>;
-  pointsOfSales$: Observable<PointOfSales[]>
+  pointsOfSales$: Observable<PointOfSales[]>;
   vendorSelect = new FormControl();
   private unsubscribe$ = new Subject<void>();
   @ViewChild(RefDirective, {static: false}) refDir: RefDirective;
@@ -37,7 +38,8 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private facade: VendorsFacadeService,
     private store: VendorsStore,
-    private sortStore: VendorsRequestStore
+    private sortStore: VendorsRequestStore,
+    private location: Location
   ) {
     this.vendor$ = this.store.select('activeVendor');
     this.vendorsList$ = this.store.select('vendors');
@@ -91,6 +93,10 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
       });
       this.store.set('vendorDiscounts', discounts);
     });
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
   onSortChange(sortBy): void {

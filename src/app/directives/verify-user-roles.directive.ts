@@ -1,7 +1,7 @@
 import { Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { pluck } from 'rxjs/operators';
-import { UserService } from '../services/user.service';
+import { UserService } from '../services/user/user.service';
 import { ActiveUser } from '../models';
 
 @Directive({
