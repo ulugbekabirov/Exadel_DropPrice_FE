@@ -104,9 +104,9 @@
           opacity: 0.8;
         }
 
-        @media screen and (max-width: 680px) {
-          margin-top: .3em;
-        }
+        // @media screen and (max-width: 680px) {
+        //   margin-top: .3em;
+        // }
       }
 
       &__field-description {
@@ -185,6 +185,7 @@
       @media screen and (max-width: 400px) {
         font-size: 1.2rem;
         font-weight: 500;
+        margin-bottom: 0;
       }
     }
 
