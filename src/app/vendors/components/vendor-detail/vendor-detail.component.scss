@@ -6,8 +6,6 @@
 
 .vendors {
 
-  // padding: 2.7em 0 0 0;
-  // margin-top: 1.3em;
   margin-top: 20px;
 
   .go_back_main {
@@ -62,6 +60,17 @@
       line-height: 1.5;
     }
 
+    &__actions {
+      mat-icon {
+        position: relative;
+        top: 32%;
+      }
+
+      mat-icon:hover {
+        opacity: 0.8;
+      }
+    }
+
     &__header {
 
       padding: 2em 1em 1em;
@@ -79,39 +88,6 @@
         }
       }
 
-      &__actions {
-        mat-icon {
-          position: relative;
-          top: 32%;
-        }
-
-        mat-icon:hover {
-          opacity: 0.8;
-        }
-      }
-
-      .vendor-content__social-field {
-        margin-top: .4em;
-
-        :hover {
-          opacity: 0.8;
-        }
-
-        @media screen and (max-width: 680px) {
-          margin-top: .3em;
-        }
-      }
-
-      mat-expansion-panel-header {
-        height: auto;
-      }
-
-      .social-icon,
-      mat-icon {
-        width: 24px;
-        color: #3F51B5;
-      }
-
       @media screen and (min-width: 767.98px) {
 
         grid-column: 1/2;
@@ -120,6 +96,18 @@
     }
 
     .vendor-content {
+
+      &__social-field {
+        margin-top: .4em;
+
+        :hover {
+          opacity: 0.8;
+        }
+
+        // @media screen and (max-width: 680px) {
+        //   margin-top: .3em;
+        // }
+      }
 
       &__field-description {
         font-size: 1rem;
@@ -183,7 +171,7 @@
     }
 
     .mat-expansion-panel-header {
-      margin: 1em 0 1em 0;
+      margin: 1.5em 0 1.5em 0;
     }
 
     .mat-expansion-panel-header-description {
@@ -192,11 +180,12 @@
     }
 
     .rating__icon {
-      margin-bottom: .2em;
+      margin-bottom: .1em;
 
       @media screen and (max-width: 400px) {
         font-size: 1.2rem;
         font-weight: 500;
+        margin-bottom: 0;
       }
     }
 
@@ -240,5 +229,10 @@
 
   mat-tab-group {
     padding-top: 1em;
+  }
+
+  mat-icon {
+    width: 24px;
+    color: #3F51B5;
   }
 }
