@@ -8,4 +8,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class ModeratorDashboardComponent {
   hasUnsavedChanges = true;
+
+  changeHasUnsavedChanges(event: any): void {
+    this.hasUnsavedChanges = event;
+  }
 }

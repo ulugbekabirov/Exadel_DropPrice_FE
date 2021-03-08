@@ -5,11 +5,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { switchMap, take, takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { UserService } from '../../../services/user.service';
+import { UserService } from '../../../services/user/user.service';
 
 
 @Component({

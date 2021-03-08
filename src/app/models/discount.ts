@@ -19,4 +19,5 @@ export interface Discount {
   isOrdered: boolean;
   address: string;
   tags: string[];
+  discountAvailable?: boolean;
 }

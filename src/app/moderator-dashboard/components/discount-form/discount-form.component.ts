@@ -1,5 +1,5 @@
 import { ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
@@ -8,8 +8,8 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { forkJoin, Observable, ReplaySubject, Subject, throwError } from 'rxjs';
 import { catchError, debounceTime, filter, map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { Discount, Vendor } from '../../../models';
-import { DiscountsService } from '../../../services/discounts.service';
-import { VendorsService } from '../../../services/vendors.service';
+import { DiscountsService } from '../../../services/discounts/discounts.service';
+import { VendorsService } from '../../../services/vendors/vendors.service';
 import { TranslateService } from '@ngx-translate/core';
 
 
@@ -26,6 +26,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
   discountId: number;
   private unsubscribe$ = new Subject<void>();
   isEditMode: boolean = (this.router.url).includes('edit');
+  @Output() changeHasUnsavedChanges = new EventEmitter();
   hasUnsavedChanges = false;
   vendorsList;
   filteredList;
@@ -261,6 +262,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
     const discount = {...this.discountForm.getRawValue(), pointOfSales: this.pointOfSalesForm.getRawValue().filter(point => point.checked)};
     const {checked, ...newDiscount} = discount;
     this.hasUnsavedChanges = false;
+    this.changeHasUnsavedChanges.emit(false);
     if (this.isEditMode) {
       this.updateDiscount(newDiscount, this.discountId);
     } else {

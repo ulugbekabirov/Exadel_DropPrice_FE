@@ -161,6 +161,18 @@
       font-weight: 600;
       font-size: .9rem;
     }
+
+    &.discountAvailable {
+      background: $main_gray;
+      color: inherit;
+      cursor: default;
+
+      &:active,
+      &:hover,
+      &:focus {
+        opacity: 1;
+      }
+    }
   }
   
   .discount-detail__actions {

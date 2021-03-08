@@ -8,7 +8,7 @@
           {{"BUTTON_BACK_LOCATION" | translate }}
         </span>
       </a>
-    </p>  
+    </p>
     <mat-expansion-panel (opened)="panelOpenState = true"
                           (closed)="panelOpenState = false">
     <mat-expansion-panel-header >
@@ -25,7 +25,7 @@
             <span class="rating__amount" fxLayoutAlign="center center">
         {{(vendor$ | async)?.vendorRating | number: '.1-2'}}
             </span>
-            <mat-icon class="rating__icon" 
+            <mat-icon class="rating__icon"
                       fxLayoutAlign="center center"
                       matTooltip="{{'VENDOR_PAGE.VENDOR_DETAIL.DETAIL_RATING_LABEL' | translate}}"
                       matTooltipPosition="right">

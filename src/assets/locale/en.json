@@ -31,7 +31,8 @@
   "MAIN_PAGE": {
     "SEARCH": "Search",
     "BUTTONS": {
-      "TICKET": "Get the discount"
+      "TICKET": "Get the discount",
+      "DISCOUNT_INACTIVE": "Not available"
     },
     "FILTER": {
       "SORT_BY": {
@@ -156,6 +157,7 @@
     "EDIT_BUTTON_LABEL": "Edit",
     "ARCHIVE_BUTTON_LABEL": "Archive",
     "TICKET_BUTTON_LABEL": "Get the discount",
+    "TICKET_BUTTON_LABEL_DISCOUNT_INACTIVE": "Not available",
     "MAT_TAB_ABOUT": "About",
     "MAT_TAB_POINTS_OF_SALE": "Discount location map",
     "TOOLTIP_GO_BACK": "Go back",

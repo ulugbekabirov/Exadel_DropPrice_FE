@@ -5,6 +5,8 @@
 }
 
 .vendors {
+
+  padding: 2.7em 0 0 0;
   margin-top: 1.3em;
 
   .go-back__link_text {
@@ -17,7 +19,8 @@
 
   .vendors-label {
     margin-right: .5em;
-    &__vendor-name{
+
+    &__vendor-name {
       font-size: 1.7rem;
       font-weight: 700;
 
@@ -35,7 +38,7 @@
       &__amount {
         font-size: 1.2rem;
         font-weight: 500;
-        color: $discount_card_text_color;
+        color: $main_black;
       }
 
       &__icon {
@@ -69,159 +72,163 @@
           font-weight: 500;
           color: $gray_text_color;
         }
-    }
-
-    &__actions {
-      mat-icon {
-        position: relative;
-        top: 32%;
-      }
-      mat-icon:hover {
-        opacity: 0.8;
-      }
-    }
-
-    .vendor-content__social-field {
-      margin-top: .4em;
-      
-      :hover {
-        opacity: 0.8;
-      }
-      @media screen and (max-width: 680px) {
-        margin-top: .3em;
-      }
-    }
-
-    mat-expansion-panel-header {
-      height: auto;
-    }
-
-    .social-icon,
-    mat-icon {
-      width: 24px;
-      color: #3F51B5;
-    }
-
-    @media screen and (min-width: 767.98px) {
-
-      grid-column: 1/2;
-
-    }
-  }
-
-  .vendor-content {
-
-    &__field-description {
-      font-size: 1rem;
-      font-weight: 500;
-
-      @media screen and (max-width: 680px) {
-        font-size: .9rem;
-      }
-    }
-
-    &__field-label {
-      flex: 1 1 100%;
-      box-sizing: border-box;
-      max-width: 30%;
-      margin-right: 20px;
-      
-      @media screen and (max-width: 960px) {
-        max-width: 40%;
       }
 
-      @media screen and (max-width: 680px) {
-        max-width: 72%;
-        font-size: .9rem;
-        
+      &__actions {
         mat-icon {
-          display: none;
+          position: relative;
+          top: 32%;
+        }
+
+        mat-icon:hover {
+          opacity: 0.8;
+        }
+      }
+
+      .vendor-content__social-field {
+        margin-top: .4em;
+
+        :hover {
+          opacity: 0.8;
+        }
+
+        @media screen and (max-width: 680px) {
+          margin-top: .3em;
+        }
+      }
+
+      mat-expansion-panel-header {
+        height: auto;
+      }
+
+      .social-icon,
+      mat-icon {
+        width: 24px;
+        color: #3F51B5;
+      }
+
+      @media screen and (min-width: 767.98px) {
+
+        grid-column: 1/2;
+
+      }
+    }
+
+    .vendor-content {
+
+      &__field-description {
+        font-size: 1rem;
+        font-weight: 500;
+
+        @media screen and (max-width: 680px) {
+          font-size: .9rem;
+        }
+      }
+
+      &__field-label {
+        flex: 1 1 100%;
+        box-sizing: border-box;
+        max-width: 30%;
+        margin-right: 20px;
+
+        @media screen and (max-width: 960px) {
+          max-width: 40%;
+        }
+
+        @media screen and (max-width: 680px) {
+          max-width: 72%;
+          font-size: .9rem;
+
+          mat-icon {
+            display: none;
+          }
+        }
+      }
+
+      &__field-label-text {
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1.7;
+        margin-left: 0.3em;
+
+        @media screen and (max-width: 680px) {
+          font-size: .9rem;
+          font-weight: 600;
+          margin: 0;
+        }
+      }
+
+      &__field-text {
+        flex: 1 1 100%;
+        max-width: 65%;
+        box-sizing: border-box;
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1.7;
+
+        @media screen and (max-width: 680px) {
+          font-size: .9rem;
+          max-width: 95%;
         }
       }
     }
 
-    &__field-label-text {
-      font-size: 1rem;
-      font-weight: 700;
-      line-height: 1.7;
-      margin-left: 0.3em;
+    mat-divider {
+      margin-bottom: 1em;
+    }
 
-      @media screen and (max-width: 680px) {
-        font-size: .9rem;
-        font-weight: 600;
-        margin: 0;
+    .mat-expansion-panel-header {
+      margin: 1em 0 1em 0;
+    }
+
+    .mat-expansion-panel-header-description {
+      flex-grow: 0;
+      margin-right: 8px;
+    }
+
+    .rating__icon {
+      margin-bottom: .2em;
+
+      @media screen and (max-width: 400px) {
+        font-size: 1.2rem;
+        font-weight: 500;
       }
     }
 
-    &__field-text { 
-      flex: 1 1 100%;
-      max-width: 65%;
-      box-sizing: border-box;
-      font-size: 1rem;
-      font-weight: 500;
-      line-height: 1.7;
-        
-      @media screen and (max-width: 680px) {
-        font-size: .9rem;
-        max-width: 95%;
+    .vendors-discounts {
+      @media screen and (min-width: 767.98px) {
+
+        grid-column: 2/3;
+
+        @media screen and (min-width: 927.98px) {
+
+          grid-column: 2/4;
+
+        }
       }
     }
-  }
 
-  mat-divider {
-    margin-bottom: 1em;
-  }
-
-  .mat-expansion-panel-header {
-    margin: 1em 0 1em 0;
-  }
-
-  .mat-expansion-panel-header-description {
-    flex-grow: 0;
-    margin-right: 8px;
-  }
-
-  .rating__icon {
-    margin-bottom: .2em;
-
-    @media screen and (max-width: 400px) {
-      font-size: 1.2rem;
-      font-weight: 500;
-    }
-  }
-
-  .vendors-discounts {
     @media screen and (min-width: 767.98px) {
 
-      grid-column: 2/3;
+      grid-template-columns: 1fr 1fr;
+      gap: 1em;
 
       @media screen and (min-width: 927.98px) {
-
-        grid-column: 2/4;
-
+        grid-template-columns: repeat(3, 1fr);
       }
     }
   }
 
-  @media screen and (min-width: 767.98px) {
-
-    grid-template-columns: 1fr 1fr;
-    gap: 1em;
-
-    @media screen and (min-width: 927.98px) {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  .admin-dashboard {
+    padding-top: 2rem;
   }
-}
 
-.admin-dashboard {
-  padding-top: 2rem;
-}
-.mat-tab-labels{
-  display: flex;
-  justify-content: center;
-}
+  .mat-tab-labels {
+    display: flex;
+    justify-content: center;
+  }
 
-mat-tab-group {
-  padding-top: 1em;
+  mat-tab-group {
+    padding-top: 1em;
+  }
 }

@@ -3,9 +3,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { pluck } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { KEY_ACTIVE_USER } from '../../constants';
-import { ActiveUser } from '../models';
-import { ApiDataService } from './api-data.service';
+import { KEY_ACTIVE_USER } from '../../../constants';
+import { ActiveUser } from '../../models';
+import { ApiDataService } from '../api-data/api-data.service';
 
 export interface Language {
   activeLanguage: string;

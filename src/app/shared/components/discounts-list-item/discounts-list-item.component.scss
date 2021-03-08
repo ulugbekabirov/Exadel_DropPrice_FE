@@ -131,7 +131,7 @@
     }
   }
 
-  .discount-disctance {
+  .discount-distance {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -159,6 +159,12 @@
       font-size: 1rem;
       margin: auto 0 0 0;
       color: $indigo;
+
+      &.discountAvailable {
+        background: $main_gray;
+        color: white;
+        cursor: default;
+      }
     }
   }
 }
