@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { DISCOUNTS_ENDPOINT, END_EDIT_SESSION_ENDPOINT, START_EDIT_SESSION_ENDPOINT } from '../../constants';
-import { environment } from '../../environments/environment';
-import { ApiDataService } from './api-data.service';
+import { DISCOUNTS_ENDPOINT, END_EDIT_SESSION_ENDPOINT, START_EDIT_SESSION_ENDPOINT } from '../../../constants';
+import { environment } from '../../../environments/environment';
+import { ApiDataService } from '../api-data/api-data.service';
 import { Observable } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
 

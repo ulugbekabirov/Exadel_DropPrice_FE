@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ActiveUser, Discount, Ticket } from '../../../models';
-import { UserService } from '../../../services/user.service';
+import { UserService } from '../../../services/user/user.service';
 import { UserFacadeService } from '../../services/user-facade.service';
-import { TicketService } from '../../../services/ticket.service';
-import { RefDirective } from '../../../directives/ref/ref.directive';
+import { TicketService } from '../../../services/ticket/ticket.service';
+import { RefDirective } from 'src/app/directives/ref/ref.directive';
 import { filter, map } from 'rxjs/operators';
 
 @Component({

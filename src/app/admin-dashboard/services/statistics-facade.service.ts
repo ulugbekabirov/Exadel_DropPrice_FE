@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { VendorsService } from '../../services/vendors.service';
-import { DiscountsService } from '../../services/discounts.service';
+import { VendorsService } from '../../services/vendors/vendors.service';
+import { DiscountsService } from '../../services/discounts/discounts.service';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
 import { combineLatest } from 'rxjs/internal/observable/combineLatest';

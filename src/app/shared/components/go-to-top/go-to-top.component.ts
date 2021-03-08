@@ -1,11 +1,11 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 
 @Component({
   selector: 'app-go-to-top',
   templateUrl: './go-to-top.component.html',
   styleUrls: ['./go-to-top.component.scss']
 })
-export class GoToTopComponent implements OnInit {
+export class GoToTopComponent {
   @Input()
   windowScrolled: boolean;
   @HostListener('window:scroll', [])

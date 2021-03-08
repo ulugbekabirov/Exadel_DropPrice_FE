@@ -1,5 +1,9 @@
 <div class="map-wrapper" fxLayoutGap.xs="10px" fxLayout.xs="column">
-  <mat-icon mat-dialog-close (click)="close()">close</mat-icon>
+  <mat-icon
+    mat-dialog-close
+    (click)="close()"
+  >close
+  </mat-icon>
   <div mat-dialog-content>
     <agm-map
       [latitude]="coordinates.latitude"
@@ -14,8 +18,39 @@
     </agm-map>
   </div>
 
-  <mat-dialog-actions fxLayoutAlign="start center">
+  <mat-dialog-actions>
+    <form class="map__form"
+          [formGroup]="point"
+          (ngSubmit)="showLocation()"
+    >
+      <mat-form-field class="point__name">
+        <mat-label>{{ "NEW_DISCOUNT_FORM.NAME_LABEL" | translate }}</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="name"/>
+      </mat-form-field>
+      <mat-form-field class="point__address">
+        <mat-label>{{"NEW_DISCOUNT_FORM.ADDRESS_LABEL" | translate}}</mat-label>
+        <input
+          matInput
+          placeholder="{{'NEW_DISCOUNT_FORM.ADDRESS_PLACEHOLDER' | translate}}"
+          formControlName="address"
+        />
+      </mat-form-field>
+      <button
+        class="action__search_submit"
+        type="submit"
+        mat-icon-button
+        matTooltip="search address"
+        color="primary"
+        aria-label="Submit search location"
+      >
+        <mat-icon>search</mat-icon>
+      </button>
+    </form>
     <button
+      class="action__add-point"
       mat-raised-button
       color="accent"
       [mat-dialog-close]="true"

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ActiveUser, AuthInfo, AuthUser, Vendor } from '../models';
+import { ActiveUser, AuthInfo, AuthUser, Vendor } from '../../models';
 import {
   AUTH_ENDPOINT,
   DISCOUNTS_ENDPOINT,
@@ -21,8 +21,8 @@ import {
   PUT_ASSESS_DISCOUNTS_ENDPOINT,
   USER_SAVED_ENDPOINT,
   USER_TICKETS_ENDPOINT, START_EDIT_SESSION_ENDPOINT, END_EDIT_SESSION_ENDPOINT,
-} from '../../constants';
-import { environment } from '../../environments/environment';
+} from '../../../constants';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

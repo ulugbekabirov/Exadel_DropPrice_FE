@@ -1,14 +1,9 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { BehaviorSubject, fromEvent, merge, Observable, Subject } from 'rxjs';
-import { debounceTime, distinct, distinctUntilChanged, filter, flatMap, map, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { DiscountsStatStore } from '../../../admin-dashboard/services/discounts-stat-store';
-import { DiscountsFacadeService } from '../../../home/services/discounts-facade.service';
-import { DiscountsRequestStore } from '../../../home/services/discounts-request-store';
-import { DiscountsStore } from '../../../home/services/discounts-store';
+import { Observable, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs/operators';
 import { LocationCoords, Town } from '../../../models';
 import { Sort } from '../../../models/sort';
-import { DiscountsService } from '../../../services/discounts.service';
 
 @Component({
   selector: 'app-discounts-list',
@@ -18,15 +13,6 @@ import { DiscountsService } from '../../../services/discounts.service';
 })
 
 export class DiscountsListComponent implements OnInit, OnDestroy {
-
-  constructor(
-    private facade: DiscountsFacadeService,
-    private requestStore: DiscountsRequestStore,
-    private discountsService: DiscountsService,
-    private store: DiscountsStore
-  ) {
-  }
-
   @Output() locationChange = new EventEmitter<any>();
   @Output() sortChange = new EventEmitter<any>();
   @Output() getTicket = new EventEmitter<any>();
@@ -42,12 +28,10 @@ export class DiscountsListComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>();
   mainSortBy: FormControl = new FormControl();
   locationSort: FormControl = new FormControl();
-
   private itemHeight = 280;
   private numberOfItems = 6;
 
   ngOnInit(): void {
-
     this.sortBySelected$.pipe(
       switchMap((sortBy) => {
         this.mainSortBy.patchValue(sortBy);
@@ -60,7 +44,7 @@ export class DiscountsListComponent implements OnInit, OnDestroy {
 
     this.locationSelected$.pipe(
       switchMap((coords) => {
-        this.locationSort.patchValue(coords);
+        this.locationSort.patchValue(coords, {emitModelToViewChange: true});
         return this.throttle(this.locationSort.valueChanges);
       }),
       takeUntil(this.unsubscribe$)
@@ -75,6 +59,10 @@ export class DiscountsListComponent implements OnInit, OnDestroy {
 
   getToggleFavourites(id: number): void {
     this.toggleFavourites.emit(id);
+  }
+
+  myCoords($event: MouseEvent): void {
+    this.toggleCoordinates.emit($event);
   }
 
   throttle(source$: Observable<string>): any {

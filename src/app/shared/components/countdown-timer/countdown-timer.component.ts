@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { interval } from 'rxjs';
 import { finalize, mapTo, scan, switchMap, takeWhile, tap } from 'rxjs/operators';
 
@@ -12,7 +12,8 @@ interface EditSession {
 @Component({
   selector: 'app-countdown-timer',
   templateUrl: './countdown-timer.component.html',
-  styleUrls: ['./countdown-timer.component.scss']
+  styleUrls: ['./countdown-timer.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CountdownTimerComponent implements OnInit {
   @Input() editSession$;

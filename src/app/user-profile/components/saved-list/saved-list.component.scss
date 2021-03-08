@@ -5,14 +5,14 @@
 }
 
 .saved-list {
-  background: $white;
+  background: $main_header_txtColor;
   box-shadow: 0 16px 24px 0 rgba(0, 0, 0, .1);
   border-radius: 4px;
   overflow: hidden;
 
   .saved-list-header {
     background: $main-gray;
-    color: $white;
+    color: $main_header_txtColor;
     padding: 0 1.8em;
     text-align: center;
     margin: 0;
@@ -20,7 +20,7 @@
 
   h3 {
     background: $main-gray;
-    color: $white;
+    color: $main_header_txtColor;
     padding: 10px;
     text-align: center;
     margin: 0;
@@ -40,7 +40,7 @@
     display: block;
     font-size: 1.1em;
     font-weight: 500;
-    color: $white;
+    color: $main_header_txtColor;
   }
 
   .mat-expansion-panel-header:hover {

@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation} from '@angular/core';
 import { AuthService } from '../../auth/services/auth.service';
 import { AuthInfo } from '../../models';
 import { Observable } from 'rxjs';
-import { LanguageService } from '../../services/language.service';
+import { LanguageService } from '../../services/language/language.service';
 
 @Component({
   selector: 'app-header',

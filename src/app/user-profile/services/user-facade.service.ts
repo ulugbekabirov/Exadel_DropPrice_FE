@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { distinctUntilChanged, map, pluck, switchMap } from 'rxjs/operators';
 import { Discount, Ticket } from '../../models';
-import { DiscountsService } from '../../services/discounts.service';
-import { TicketService } from '../../services/ticket.service';
-import { ApiDataService } from '../../services/api-data.service';
+import { DiscountsService } from '../../services/discounts/discounts.service';
+import { TicketService } from '../../services/ticket/ticket.service';
+import { ApiDataService } from '../../services/api-data/api-data.service';
 
 class UserProfileState {
   discounts: Discount[];

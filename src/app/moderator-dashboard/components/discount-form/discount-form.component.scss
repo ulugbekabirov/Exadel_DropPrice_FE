@@ -43,10 +43,14 @@ mat-card {
     width: 100%;
   }
 
+  .mat-slide-toggle-bar {
+    margin-bottom: 4px;
+  }
+
 }
 
 .activity-date {
-  margin-top: 5px;
+  margin-top: 17px;
 }
 
 .full-width {
@@ -86,6 +90,11 @@ button {
 
 mat-icon {
   cursor: pointer;
+}
+
+.mat-card-subtitle {
+  margin-bottom: 0;
+  color: #FF473E;
 }
 
 .mat-slide-toggle {
@@ -128,14 +137,14 @@ mat-icon {
 
 .points {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   gap: 1em;
   flex-wrap: nowrap;
 
   @media screen and (max-width: 660px) {
     gap: 2em;
-    align-items: start;
+    align-items: flex-start;
   }
 
   &__info{
@@ -148,5 +157,4 @@ mat-icon {
       flex-direction: column;
     }
   }
-
 }

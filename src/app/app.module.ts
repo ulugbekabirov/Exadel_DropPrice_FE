@@ -13,14 +13,14 @@ import {
 import { AgmCoreModule } from '@agm/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthInterceptor } from './auth/services/auth.interceptor';
-import { HttpErrorInterceptor } from './services/http.error.interceptor';
+import { HttpErrorInterceptor } from './interceptors/http-error/http.error.interceptor';
 
 import { AppComponent } from './app.component';
-import { MissingTranslationService } from './services/missing-translation.service';
+import { MissingTranslationService } from './services/missing-translation/missing-translation.service';
 import { HeaderComponent } from './components/header/header.component';
 import { AppRoutingModule } from './app-routing/app.routing.module';
 import { MapComponent } from './components/map/map.component';
-import { LoadingInterceptor } from './services/loading.interceptor';
+import { LoadingInterceptor } from './interceptors/loading/loading.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
