@@ -29,7 +29,6 @@ export class DiscountsListComponent implements OnInit, OnDestroy {
   mainSortBy: FormControl = new FormControl();
   locationSort: FormControl = new FormControl();
   private itemHeight = 280;
-  private numberOfItems = 6;
 
   ngOnInit(): void {
     this.sortBySelected$.pipe(

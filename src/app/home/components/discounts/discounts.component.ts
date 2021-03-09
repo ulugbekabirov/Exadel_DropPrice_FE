@@ -28,7 +28,7 @@ export class DiscountsComponent implements OnInit, OnDestroy {
   private cache = [];
   private pageByManual$ = new BehaviorSubject(1);
   private itemHeight = 280;
-  private numberOfItems = 6;
+  private numberOfItems = 8;
 
   private pageByScroll$ = fromEvent(window, 'scroll')
     .pipe(
@@ -65,7 +65,7 @@ export class DiscountsComponent implements OnInit, OnDestroy {
   discounts$ = this.pageToLoad$
     .pipe(
       tap(next => console.log('PAGE', next)),
-      tap(page => this.sortStore.set('skip', (12 * (page - 1)))),
+      tap(page => this.sortStore.set('skip', (8 * (page - 1)))),
       switchMap((page: number) => {
         console.log('page', page);
         return this.store.select('discounts')
