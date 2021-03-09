@@ -88,7 +88,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
         )
         .subscribe(([vendor, points]) => {
           const socialLinks = JSON.parse(vendor.socialLinks);
-          for (let key in socialLinks) {
+          for (const key in socialLinks) {
             if (socialLinks[key]) {
               socialLinks[key] = socialLinks[key].trim();
             }
