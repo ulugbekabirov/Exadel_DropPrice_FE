@@ -56,6 +56,14 @@ export class UserFacadeService {
     combineLatest(skip$, take$).pipe(
       switchMap(([skip, take]) => {
         return this.discountsService.getUserSavedDiscounts({skip, take}).pipe(
+          map(discounts => {
+            return discounts.map(discount => {
+              const {endDate, startDate} = discount;
+              const dateNow = Date.now();
+              const discountAvailable = (dateNow > new Date(startDate).getTime() && dateNow < new Date(endDate).getTime());
+              return {...discount, discountAvailable};
+            });
+          }),
         );
       })
     ).subscribe(this.updateSavedUserDiscounts.bind(this));
@@ -79,6 +87,7 @@ export class UserFacadeService {
   }
 
   updateOrderedUserDiscounts(data): void {
+    console.log(data)
     this.set('tickets', data);
   }
 
