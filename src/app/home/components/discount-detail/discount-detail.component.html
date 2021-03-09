@@ -117,8 +117,12 @@
                 {{ "DISCOUNT_DETAIL.DATES_LABEL" | translate }}:
               </span>
               <span class="discount-content__date_end" fxFlex="75">
-                {{(discount$ | async)?.startDate | date:"dd.MM.yyyy"}}
-                &mdash; {{(discount$ | async)?.endDate | date:"dd.MM.yyyy"}}
+                <span
+                  [ngStyle]="{'background': (discount$ | async)?.discountAvailable ? 'initial' : '#da8171'}"
+                >
+                  {{(discount$ | async)?.startDate | date:"dd.MM.yyyy"}}
+                  &mdash; {{(discount$ | async)?.endDate | date:"dd.MM.yyyy"}}
+                </span>
               </span>
             </p>
           </li>
@@ -146,10 +150,10 @@
                   mat-flat-button color="primary"
                   (click)="ticketHandler(discountId)"
                   [class.discountAvailable]="!(discount$ | async)?.discountAvailable"
-                  [disabled]="!(discount$ | async)?.discountAvailable"
+                  [disabled]="!(discount$ | async)?.discountAvailable || !(discount$ | async)?.activityStatus"
           >
             {{
-            (discount$ | async)?.discountAvailable
+            (discount$ | async)?.discountAvailable && (discount$ | async)?.activityStatus
               ? ("DISCOUNT_DETAIL.TICKET_BUTTON_LABEL" | translate)
               : ("DISCOUNT_DETAIL.TICKET_BUTTON_LABEL_DISCOUNT_INACTIVE" | translate)
             }}
