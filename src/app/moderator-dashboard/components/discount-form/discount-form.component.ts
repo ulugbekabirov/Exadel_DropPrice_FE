@@ -31,7 +31,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
   vendorsList;
   filteredList;
   editSession$;
-  allPointsChecked: boolean = false;
+  allPointsChecked = false;
 
   discountForm: FormGroup = this.fb.group({
     vendorId: ['', this.requireMatch.bind(this)],
