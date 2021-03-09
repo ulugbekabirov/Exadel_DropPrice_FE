@@ -87,13 +87,25 @@ export class VendorFormComponent implements OnInit, OnDestroy {
           takeUntil(this.unsubscribe$)
         )
         .subscribe(([vendor, points]) => {
+          const socialLinks = JSON.parse(vendor.socialLinks);
+          for (const key in socialLinks) {
+            if (socialLinks[key]) {
+              socialLinks[key] = socialLinks[key].trim();
+            }
+          }
           const editingVendor = {
             ...vendor,
             pointOfSales: points,
-            socialLinks: vendor.socialLinks ? JSON.parse(vendor.socialLinks) : {}
           };
           this.patchPointsOfSales(points);
           this.vendorForm.patchValue(editingVendor);
+          this.vendorForm.patchValue({
+            socialLinks: {
+              instagram: (socialLinks.instagram),
+              facebook: (socialLinks.facebook),
+              website: (socialLinks.webSite),
+            }
+          });
           this.coordinateIsEmpty = false;
           this.hasUnsavedChanges = true;
           this.vendorForm.markAsPristine();
