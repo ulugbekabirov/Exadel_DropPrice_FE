@@ -21,7 +21,7 @@ describe('UserService', () => {
     });
     service = TestBed.inject(UserService);
     reject = jasmine.createSpy('reject');
-  
+
     resolve = jasmine.createSpy('resolve');
 
   });

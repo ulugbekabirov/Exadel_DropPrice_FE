@@ -42,7 +42,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
     promoCode: [''],
     startDate: ['', [Validators.required]],
     endDate: ['', [Validators.required]],
-    activityStatus: [true, [Validators.requiredTrue]],
+    activityStatus: [true, [Validators.required]],
     tags: this.fb.array([], Validators.required),
     pointOfSales: this.fb.array([], [Validators.required, this.checkPoints.bind(this)]),
   });

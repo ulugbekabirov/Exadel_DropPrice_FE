@@ -19,7 +19,7 @@ describe('LoginFormComponent', () => {
   const blankUser = {
     username: '',
     password: ''
-  }
+  };
 
   function updateForm(username: string, password: string): void {
     component.loginForm.controls.password.setValue(password);
