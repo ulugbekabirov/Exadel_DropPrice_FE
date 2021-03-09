@@ -87,7 +87,6 @@ export class UserFacadeService {
   }
 
   updateOrderedUserDiscounts(data): void {
-    console.log(data)
     this.set('tickets', data);
   }
 
