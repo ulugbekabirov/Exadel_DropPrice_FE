@@ -7,7 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { forkJoin, Observable, ReplaySubject, Subject, throwError } from 'rxjs';
 import { catchError, debounceTime, filter, map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { Discount, Vendor } from '../../../models';
+import { Discount, Tag, Vendor } from '../../../models';
 import { DiscountsService } from '../../../services/discounts/discounts.service';
 import { VendorsService } from '../../../services/vendors/vendors.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -31,6 +31,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
   vendorsList;
   filteredList;
   editSession$;
+  allPointsChecked: boolean = false;
 
   discountForm: FormGroup = this.fb.group({
     vendorId: ['', this.requireMatch.bind(this)],
@@ -161,7 +162,25 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
       }),
       filter((next) => typeof next === 'number'),
       switchMap(vendorId => {
-        return this.vendorsService.getVendorPointsOfSales(vendorId);
+        if (this.isEditMode) {
+          return forkJoin(
+            this.vendorsService.getVendorPointsOfSales(vendorId),
+            this.discountsService.getPointsOfSalesByDiscountId(this.discountId)
+          ).pipe(
+            map(([vendorsPoints, discountPoints]) => {
+              return vendorsPoints.map(vendorPoint => {
+                const find = discountPoints.find(discountPoint => vendorPoint.id === discountPoint.id);
+                if (find) {
+                  return {...vendorPoint, checked: true};
+                } else {
+                  return {...vendorPoint, checked: false};
+                }
+              });
+            }),
+          );
+        } else {
+          return this.vendorsService.getVendorPointsOfSales(vendorId);
+        }
       }),
       takeUntil(this.unsubscribe$),
     ).subscribe(points => {
@@ -201,10 +220,30 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
       control.get('name').disable();
       control.get('address').disable();
     });
+    this.checkIfAllPointsChecked();
   }
 
   addPointOfSales(point): void {
     this.pointOfSalesForm.push(this.createPointOfSales(point));
+  }
+
+  checkIfAllPointsChecked(): void {
+    this.allPointsChecked =  this.pointOfSalesForm.controls.every(point => point.value.checked);
+  }
+
+  somePointsChecked(): boolean {
+    return this.pointOfSalesForm.controls.filter(point => point.value.checked).length > 0 && !this.allPointsChecked;
+  }
+
+  setAllPointsOfSalesChecked(checked: boolean): void {
+    this.allPointsChecked = true;
+    if (!this.pointOfSalesForm.value) {
+      return;
+    }
+    this.pointOfSalesForm.controls.forEach(control => {
+      const updateChecked = {checked};
+      control.patchValue(updateChecked);
+    });
   }
 
   createPointOfSales(point): FormGroup {
@@ -213,7 +252,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
       address: point.address || '',
       latitude: point.latitude || '',
       longitude: point.longitude || '',
-      checked: false,
+      checked: point.checked || false,
     });
   }
 
@@ -248,16 +287,6 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  setAllPointsOfSalesChecked(checked: boolean): void {
-    if (!this.pointOfSalesForm.value) {
-      return;
-    }
-    this.pointOfSalesForm.controls.forEach(control => {
-      const updateChecked = {checked};
-      control.patchValue(updateChecked);
-    });
-  }
-
   onSubmit(): void {
     const discount = {...this.discountForm.getRawValue(), pointOfSales: this.pointOfSalesForm.getRawValue().filter(point => point.checked)};
     const {checked, ...newDiscount} = discount;
@@ -283,7 +312,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
         this.discountForm.reset();
         this.successSnackBar(this.translate.instant('NEW_DISCOUNT_FORM.SUCCESS_SAVE_SNACKBAR'), '');
         this.resetControlsErrors(this.discountForm);
-        this.router.navigate(['/vendors', res.vendorId]);
+        this.router.navigate(['/discounts', res.discountId]);
       });
   }
 
@@ -301,7 +330,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
         this.discountForm.reset();
         this.successSnackBar(this.translate.instant('NEW_DISCOUNT_FORM.SUCCESS_UPDATE_SNACKBAR'), '');
         this.resetControlsErrors(this.discountForm);
-        this.router.navigate(['/vendors', res.vendorId]);
+        this.router.navigate(['/discounts', res.discountId]);
       });
   }
 

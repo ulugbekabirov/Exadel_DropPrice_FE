@@ -51,7 +51,7 @@ export class UserFacadeService {
 
   getUserSavedDiscounts(debounceMs = 500): any {
     const skip$ = of(0);
-    const take$ = of(10);
+    const take$ = of(50);
 
     combineLatest(skip$, take$).pipe(
       switchMap(([skip, take]) => {
@@ -64,7 +64,7 @@ export class UserFacadeService {
 
   getUserOrderedDiscounts(debounceMs = 500): any {
     const skip$ = of(0);
-    const take$ = of(20);
+    const take$ = of(50);
     combineLatest(skip$, take$).pipe(
       switchMap(([skip, take]) => {
         return this.discountsService.getUserOrderedDiscounts({skip, take}).pipe(
