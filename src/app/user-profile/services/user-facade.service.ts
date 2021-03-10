@@ -76,6 +76,14 @@ export class UserFacadeService {
     combineLatest(skip$, take$).pipe(
       switchMap(([skip, take]) => {
         return this.discountsService.getUserOrderedDiscounts({skip, take}).pipe(
+          map(tickets => {
+            return tickets.map(ticket => {
+              const {discountStartDate, discountEndDate} = ticket;
+              const dateNow = Date.now();
+              const discountAvailable = (dateNow > new Date(discountStartDate).getTime() && dateNow < new Date(discountEndDate).getTime());
+              return {...ticket, discountAvailable};
+            });
+          }),
         );
       })
     ).subscribe(this.updateOrderedUserDiscounts.bind(this));

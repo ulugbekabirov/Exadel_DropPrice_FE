@@ -6,14 +6,14 @@
   >
     {{ ticket?.discountName }}
   </p>
-  
+
   <div fxLayout="row" fxLayoutGap=".5em">
     <p class="list-item__subtitle"
-     [routerLink]="['/vendors', ticket.vendorId]"
-     matTooltip='{{ "USER_PROFILE.LIST_ITEM.TOOLTIP_VENDOR" | translate }}'
-     matTooltipPosition="above"
-  >
-    {{ ticket?.vendorName }}
+       [routerLink]="['/vendors', ticket.vendorId]"
+       matTooltip='{{ "USER_PROFILE.LIST_ITEM.TOOLTIP_VENDOR" | translate }}'
+       matTooltipPosition="above"
+    >
+      {{ ticket?.vendorName }}
     </p>
     <div class="list-item__actions_favorite">
       <mat-icon class="list-item__icon_favorite"
@@ -26,11 +26,12 @@
       </mat-icon>
     </div>
   </div>
-  
+
   <p class="list-item__date"
-    [class.isExpired]="ticket.isExpired || !ticket.discountActivity">
+     [class.isExpired]="ticket.isExpired || !ticket.discountActivity">
     <span class="list-item__date_label">
-      <small>{{"USER_PROFILE.LIST_ITEM.DATE_ORDER" | translate}}: {{ticket.orderDate | date: 'dd/MM/yyyy, HH:mm '}}</small>
+      <small>{{"USER_PROFILE.LIST_ITEM.DATE_ORDER" | translate}}
+        : {{ticket.orderDate | date: 'dd/MM/yyyy, HH:mm '}}</small>
     </span>
   </p>
   <div class="list-item__actions">
@@ -39,16 +40,19 @@
               mat-raised-button
               matTooltip='{{ "USER_PROFILE.TICKET_BUTTON.TOOLTIP_TICKET" | translate }}'
               (click)="ticketHandler(ticket.discountId)"
-              [class.discountInActive]="!ticket.discountActivity"
-              [disabled]="!ticket.discountActivity"
+              [class.discountInActive]="(!ticket.discountActivity || !ticket.discountAvailable) && ticket.isExpired"
+              [disabled]="(!ticket.discountActivity || !ticket.discountAvailable) && ticket.isExpired"
       >
         {{
-        ticket.discountActivity
+        ticket.discountActivity && ticket.discountAvailable
           ?
-        ticket.isExpired
-          ? ("USER_PROFILE.TICKET_BUTTON.ORDER_TICKET" | translate)
-          : ("USER_PROFILE.TICKET_BUTTON.SHOW_TICKET" | translate)
-          : ("USER_PROFILE.TICKET_BUTTON.DISCOUNT_INACTIVE" | translate)
+          ticket.isExpired
+            ? ("USER_PROFILE.TICKET_BUTTON.ORDER_TICKET" | translate)
+            : ("USER_PROFILE.TICKET_BUTTON.SHOW_TICKET" | translate)
+          :
+          ticket.isExpired
+            ? ("USER_PROFILE.TICKET_BUTTON.DISCOUNT_INACTIVE" | translate)
+            : ("USER_PROFILE.TICKET_BUTTON.SHOW_TICKET" | translate)
         }}
       </button>
     </div>

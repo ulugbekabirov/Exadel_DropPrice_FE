@@ -7,9 +7,10 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditSessionComponent {
-@Input() editMessage;
-@Input() editSession;
-@Output() onResumeEditSession: EventEmitter<any> = new EventEmitter();
+  @Input() editMessage;
+  @Input() editSession;
+  @Output() onResumeEditSession: EventEmitter<any> = new EventEmitter();
+
   resumeEditSession($event): void {
     this.onResumeEditSession.emit($event);
   }
