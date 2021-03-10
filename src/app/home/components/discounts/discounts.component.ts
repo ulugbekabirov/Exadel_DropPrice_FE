@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { BehaviorSubject, fromEvent, merge, Observable, Subject } from 'rxjs';
 import { debounceTime, distinct, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { RefDirective } from '../../../directives/ref/ref.directive';
@@ -28,7 +28,8 @@ export class DiscountsComponent implements OnInit, OnDestroy {
   private cache = [];
   private pageByManual$ = new BehaviorSubject(1);
   private itemHeight = 280;
-  private numberOfItems = 8;
+  private numberOfItems = 12;
+  columnItems;
 
   private pageByScroll$ = fromEvent(window, 'scroll')
     .pipe(
@@ -36,7 +37,13 @@ export class DiscountsComponent implements OnInit, OnDestroy {
       filter(current => current >= document.body.clientHeight - window.innerHeight),
       debounceTime(200),
       distinct(),
-      map(y => Math.ceil((y + window.innerHeight) / (this.itemHeight * this.numberOfItems))),
+      map(y => {
+        console.log(y);
+        console.log(window.innerHeight);
+        console.log(window.innerWidth / this.itemHeight);
+        console.log(this.columnItems);
+        return Math.ceil((y + window.innerHeight) / (this.itemHeight * this.numberOfItems / this.columnItems));
+      }),
       tap(scroll => console.log('PAGE_BY_SCROLL', scroll))
     );
 
@@ -65,7 +72,7 @@ export class DiscountsComponent implements OnInit, OnDestroy {
   discounts$ = this.pageToLoad$
     .pipe(
       tap(next => console.log('PAGE', next)),
-      tap(page => this.sortStore.set('skip', (8 * (page - 1)))),
+      tap(page => this.sortStore.set('skip', (12 * (page - 1)))),
       switchMap((page: number) => {
         console.log('page', page);
         return this.store.select('discounts')
@@ -100,6 +107,10 @@ export class DiscountsComponent implements OnInit, OnDestroy {
     this.activeTags$ = this.sortStore.select('tags');
     this.sortBy$ = this.sortStore.select('sortBy');
     this.location$ = this.sortStore.select('location');
+  }
+
+  setColumnItems(column): void {
+    this.columnItems = column;
   }
 
   getTicket(discountId: number): void {

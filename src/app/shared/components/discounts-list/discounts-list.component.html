@@ -29,9 +29,12 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <ul class="discounts-box__list">
+  <ul class="discounts-box__list"
+      #scrollList
+  >
     <li *ngFor="let discount of discounts$ | async ; let i = index"
-        [style.height]="itemHeight + 'px'">
+        #scrollItem
+    >
       {{i + 1}}
       <app-discounts-list-item
         [discount]="discount"
