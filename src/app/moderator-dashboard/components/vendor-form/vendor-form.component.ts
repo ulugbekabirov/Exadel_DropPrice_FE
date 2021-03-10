@@ -38,7 +38,7 @@ export class VendorFormComponent implements OnInit, OnDestroy {
       ],
     ],
     email: ['', [Validators.required, Validators.email]],
-    pointOfSales: this.fb.array([]),
+    pointOfSales: this.fb.array([], [Validators.required]),
     socialLinks: this.fb.group({
       instagram: ['',
         [Validators.pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/)]
@@ -87,13 +87,25 @@ export class VendorFormComponent implements OnInit, OnDestroy {
           takeUntil(this.unsubscribe$)
         )
         .subscribe(([vendor, points]) => {
+          const socialLinks = JSON.parse(vendor.socialLinks);
+          for (const key in socialLinks) {
+            if (socialLinks[key]) {
+              socialLinks[key] = socialLinks[key].trim();
+            }
+          }
           const editingVendor = {
             ...vendor,
             pointOfSales: points,
-            socialLinks: vendor.socialLinks ? JSON.parse(vendor.socialLinks) : {}
           };
           this.patchPointsOfSales(points);
           this.vendorForm.patchValue(editingVendor);
+          this.vendorForm.patchValue({
+            socialLinks: {
+              instagram: (socialLinks.instagram),
+              facebook: (socialLinks.facebook),
+              website: (socialLinks.webSite),
+            }
+          });
           this.coordinateIsEmpty = false;
           this.hasUnsavedChanges = true;
           this.vendorForm.markAsPristine();
@@ -127,7 +139,6 @@ export class VendorFormComponent implements OnInit, OnDestroy {
 
   deletePoint(currentSaleObj): void {
     this.pointOfSalesForm.removeAt(currentSaleObj);
-    this.coordinateIsEmpty = true;
   }
 
   addPoint(): void {
@@ -153,10 +164,10 @@ export class VendorFormComponent implements OnInit, OnDestroy {
         takeUntil(this.unsubscribe$)
       )
       .subscribe((data) => {
-      if (data) {
-        this.pointOfSalesForm.controls[currentSaleObj].patchValue(data);
-      }
-    });
+        if (data) {
+          this.pointOfSalesForm.controls[currentSaleObj].patchValue(data);
+        }
+      });
     this.coordinateIsEmpty = false;
   }
 
