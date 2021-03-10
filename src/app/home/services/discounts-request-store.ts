@@ -31,7 +31,7 @@ const INITIAL_REQUEST_DISCOUNTS: RequestDiscounts = {
       longitude: null,
       townName: ''
     },
-    take: 12,
+    take: 16,
     skip: 0,
     tags: [],
   }

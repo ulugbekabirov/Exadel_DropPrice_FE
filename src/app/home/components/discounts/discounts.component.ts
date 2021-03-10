@@ -28,7 +28,7 @@ export class DiscountsComponent implements OnInit, OnDestroy {
   private cache = [];
   private pageByManual$ = new BehaviorSubject(1);
   private itemHeight = 280;
-  private numberOfItems = 12;
+  private numberOfItems = 16;
   columnItems;
 
   private pageByScroll$ = fromEvent(window, 'scroll')

@@ -1,13 +1,17 @@
 <div class="new-discount-wrapper" fxLayout="column" fxLayoutAlign="center center">
   <mat-card>
-    <div *ngIf="editSession$">
+    <div *ngIf="editSession">
       <mat-card-subtitle class="mat-card-subtitle">
-        {{(editSession$ | async)?.discountArchive
+        {{
+        editSession?.discountArchive
         ? ("NEW_DISCOUNT_FORM.EDIT_SESSION_DISCOUNT_ARCHIVED" | translate)
         : ("NEW_DISCOUNT_FORM.EDIT_SESSION_DISCOUNT_AVAILABLE" | translate)
         }}
       </mat-card-subtitle>
-      <app-edit-session [editSession$]="editSession$" (onResumeEditSession)="refreshEditSession($event)">
+      <app-edit-session
+        [editMessage]="editSession?.message"
+        [editSession]="editSession"
+        (onResumeEditSession)="refreshEditSession($event)">
       </app-edit-session>
     </div>
     <mat-card-content>
