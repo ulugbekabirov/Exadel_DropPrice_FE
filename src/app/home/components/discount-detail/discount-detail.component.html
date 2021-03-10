@@ -49,22 +49,27 @@
     </div>
   </section>
 
-
   <mat-tab-group class="discount_details__tabs" animationDuration="0ms">
     <mat-tab label="{{ 'DISCOUNT_DETAIL.MAT_TAB_ABOUT' | translate | uppercase }}">
       <section class="discount-detail__content">
-        <div class="discount-content__description" fxLayoutGap="20px" fxLayout="row" fxLayoutAlign="start">
+        <div class="discount-content__description"
+             fxLayoutGap="20px"
+             fxLayout="row"
+             fxLayoutAlign="start"
+        >
           <p class="discount-content__description_text">
             {{(discount$ | async)?.description}}
           </p>
           <div class="discount-icons">
-            <mat-icon *appVerifyUserRoles='["Moderator"]' class="action__icon edit" color="primary"
+            <mat-icon *appVerifyUserRoles='["Moderator"]'
+                      class="action__icon edit" color="primary"
                       matTooltip="Edit Discount"
                       routerLink="edit"
                       matTooltip="{{ 'DISCOUNT_DETAIL.EDIT_BUTTON_LABEL' | translate }}"
                       (click)="onEditDiscount(discountId)">edit
             </mat-icon>
-            <mat-icon *appVerifyUserRoles='["Moderator"]' class="action__icon archive"
+            <mat-icon *appVerifyUserRoles='["Moderator"]'
+                      class="action__icon archive"
                       matTooltip="{{ 'DISCOUNT_DETAIL.ARCHIVE_BUTTON_LABEL' | translate }}"
                       [ngStyle]="{'color': (discount$ | async)?.activityStatus ? '#3F51B5' : '#FF6347'}"
                       (click)="archiveDiscount(discountId)">archive

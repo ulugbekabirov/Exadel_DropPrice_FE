@@ -14,4 +14,5 @@ export interface Ticket {
   discountId: number;
   vendorId: number;
   isSavedDiscount: boolean;
+  discountAvailable?: boolean;
 }

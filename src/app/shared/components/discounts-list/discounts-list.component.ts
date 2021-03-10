@@ -59,10 +59,6 @@ export class DiscountsListComponent implements OnInit, OnDestroy {
     this.toggleFavourites.emit(id);
   }
 
-  myCoords($event: MouseEvent): void {
-    this.toggleCoordinates.emit($event);
-  }
-
   throttle(source$: Observable<string>): any {
     return source$.pipe(debounceTime(500), distinctUntilChanged());
   }
