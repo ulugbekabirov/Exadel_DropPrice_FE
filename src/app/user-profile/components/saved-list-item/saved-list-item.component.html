@@ -7,13 +7,13 @@
   >
     {{ discount?.discountName }}
   </p>
-  
+
   <div class="corner-ribbon-6 corner-ribbon-6-top-right">
     <span class="discount-card__amount_text">
       {{ discount.discountAmount }} %
     </span>
   </div>
-  
+
   <div class="list-item__vendor-field" fxLayout="row" fxLayoutGap=".5em">
     <p class="list-item__subtitle"
           [routerLink]="['/vendors', discount.vendorId]"
@@ -46,18 +46,18 @@
     </span>
   </p>
 
-  <div class="list-item__actions" 
+  <div class="list-item__actions"
        fxLayout="row">
     <div class="list-item__actions_ticket">
       <button class="action__ticket"
-              mat-raised-button 
+              mat-raised-button
               matTooltip='{{ "USER_PROFILE.TICKET_BUTTON.TOOLTIP_TICKET" | translate }}'
               (click)="ticketHandler(discount.discountId)"
-              [class.discountInActive]="!discount.activityStatus"
-              [disabled]="!discount.activityStatus"
+              [class.discountInActive]="!discount.activityStatus || !discount.discountAvailable"
+              [disabled]="!discount.activityStatus || !discount.discountAvailable"
       >
         {{
-        discount.activityStatus
+        discount.activityStatus && discount.discountAvailable
           ?
         discount.isOrdered
           ? ("USER_PROFILE.TICKET_BUTTON.TICKET_LABEL" | translate)

@@ -29,7 +29,6 @@ describe('DiscountFormComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         MatAutocompleteModule,
-        RouterTestingModule,
         MatSnackBarModule,
         MatSlideToggleModule,
         TranslateModule.forRoot()

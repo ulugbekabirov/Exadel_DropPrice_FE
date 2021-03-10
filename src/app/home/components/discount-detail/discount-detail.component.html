@@ -50,7 +50,7 @@
   </section>
 
 
-  <mat-tab-group animationDuration="0ms">
+  <mat-tab-group class="discount_details__tabs" animationDuration="0ms">
     <mat-tab label="{{ 'DISCOUNT_DETAIL.MAT_TAB_ABOUT' | translate | uppercase }}">
       <section class="discount-detail__content">
         <div class="discount-content__description" fxLayoutGap="20px" fxLayout="row" fxLayoutAlign="start">
@@ -76,7 +76,7 @@
         <ul class="characteristics-list">
           <li>
             <p class="discount-content__amount" fxLayout="row" fxLayoutGap="20px">
-              <span class="discount-content__amount_label highliter" fxFlex="25">
+              <span class="discount-content__amount_label highlighter" fxFlex="25">
                 {{ "DISCOUNT_DETAIL.AMOUNT_LABEL" | translate }}:
               </span>
               <span class="discount-content__amount_text" fxFlex="75">
@@ -86,7 +86,7 @@
           </li>
           <li *ngIf="(discount$ | async)?.promoCode">
             <p class="discount-content__promoCode" fxLayout="row" fxLayoutGap="20px">
-              <span class="discount-content__promoCode_label highliter" fxFlex="25">
+              <span class="discount-content__promoCode_label highlighter" fxFlex="25">
                 {{ "DISCOUNT_DETAIL.PROMO_CODE_LABEL" | translate }}:
               </span>
               <span class="discount-content__promoCode_text" fxFlex="75">
@@ -96,7 +96,7 @@
           </li>
           <li>
             <p class="discount-content__address" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center start">
-              <span class="discount-content__address_label highliter" fxFlex="25">
+              <span class="discount-content__address_label highlighter" fxFlex="25">
                 {{ "DISCOUNT_DETAIL.ADDRESS_LABEL" | translate }}:
               </span>
               <span class="discount-content__address_text" fxFlex="75">
@@ -106,19 +106,23 @@
           </li>
           <li>
             <p class="discount-content__distance" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center end">
-              <span class="discount-content__distance_label highliter"
+              <span class="discount-content__distance_label highlighter"
                     fxFlex="25">{{ "DISCOUNT_DETAIL.DISTANCE" | translate }}: </span>
               <span fxFlex="75">{{(discount$ | async)?.distanceInMeters | metersToKilometers}}</span>
             </p>
           </li>
           <li>
             <p class="discount-content__date" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center end">
-              <span class="discount-content__date_label highliter" fxFlex="25">
+              <span class="discount-content__date_label highlighter" fxFlex="25">
                 {{ "DISCOUNT_DETAIL.DATES_LABEL" | translate }}:
               </span>
               <span class="discount-content__date_end" fxFlex="75">
-                {{(discount$ | async)?.startDate | date:"dd.MM.yyyy"}}
-                &mdash; {{(discount$ | async)?.endDate | date:"dd.MM.yyyy"}}
+                <span
+                  [ngStyle]="{'background': (discount$ | async)?.discountAvailable ? 'initial' : '#da8171'}"
+                >
+                  {{(discount$ | async)?.startDate | date:"dd.MM.yyyy"}}
+                  &mdash; {{(discount$ | async)?.endDate | date:"dd.MM.yyyy"}}
+                </span>
               </span>
             </p>
           </li>
@@ -127,7 +131,7 @@
         <section *ngIf="(discount$ | async)?.isOrdered" class="discount-detail__rating" fxLayout="row"
                  fxLayoutGap="20px"
                  fxLayoutAlign="center center">
-          <span class="rating__label highliter" fxFlex="25">
+          <span class="rating__label highlighter" fxFlex="25">
             {{ "DISCOUNT_DETAIL.ASSESSMENT_LABEL" | translate }}:
           </span>
           <div class="stars" fxLayout="row" fxFlex="75" fxLayoutGap="1rem">
@@ -146,10 +150,10 @@
                   mat-flat-button color="primary"
                   (click)="ticketHandler(discountId)"
                   [class.discountAvailable]="!(discount$ | async)?.discountAvailable"
-                  [disabled]="!(discount$ | async)?.discountAvailable"
+                  [disabled]="!(discount$ | async)?.discountAvailable || !(discount$ | async)?.activityStatus"
           >
             {{
-            (discount$ | async)?.discountAvailable
+            (discount$ | async)?.discountAvailable && (discount$ | async)?.activityStatus
               ? ("DISCOUNT_DETAIL.TICKET_BUTTON_LABEL" | translate)
               : ("DISCOUNT_DETAIL.TICKET_BUTTON_LABEL_DISCOUNT_INACTIVE" | translate)
             }}
