@@ -57,12 +57,4 @@ export class TagsFilterComponent implements OnInit {
     }
     this.chipSelected.emit(this.selectedTags);
   }
-
-  mouseWheelUpFunc(event: any) {
-    console.log(event);
-  }
-
-  mouseWheelDownFunc(event: any) {
-    console.log(event);
-  }
 }

@@ -9,7 +9,7 @@
         }}
       </mat-card-subtitle>
       <app-edit-session
-        [editMessage]="editSession?.message"
+        [editMessage]="editSession?.isEditedDisount ? editSession?.message : null"
         [editSession]="editSession"
         (onResumeEditSession)="refreshEditSession($event)">
       </app-edit-session>

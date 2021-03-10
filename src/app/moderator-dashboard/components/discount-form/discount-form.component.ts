@@ -124,7 +124,6 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
         takeUntil(this.unsubscribe$)
       ).subscribe(session => {
         this.editSession = {...session, editTime: (session.editTime * 60), discountArchive: true};
-        console.log(this.editSession)
       });
   }
 
@@ -142,8 +141,6 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
         takeUntil(this.unsubscribe$)
       ).subscribe(session => {
         this.editSession = {...session, discountArchive: false};
-      console.log(this.editSession)
-
     });
   }
 

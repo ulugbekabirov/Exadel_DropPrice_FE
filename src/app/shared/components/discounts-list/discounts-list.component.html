@@ -29,13 +29,8 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <ul class="discounts-box__list"
-      #scrollList
-  >
-    <li *ngFor="let discount of discounts$ | async ; let i = index"
-        #scrollItem
-    >
-      {{i + 1}}
+  <ul class="discounts-box__list">
+    <li *ngFor="let discount of discounts$ | async ">
       <app-discounts-list-item
         [discount]="discount"
         (changeFavourites)="getToggleFavourites($event)"
