@@ -1,24 +1,82 @@
-<mat-card [formGroup]="settingEdit">
+<mat-card *ngIf="setting?.dataType === 'number'">
   <mat-card-title>
     {{"ADMIN_DASHBOARD.SETTINGS_TITLE" | translate}} - {{setting?.configName}}
   </mat-card-title>
   <mat-form-field appearance="fill">
     <mat-label>{{setting?.configDescription}}</mat-label>
-    <input matInput type="text" formControlName="settingValue">
+    <input
+      matInput
+      type="number"
+      [formControl]="settingControl"
+    >
     <button
       mat-button
       matSuffix
       mat-icon-button
       color="primary"
       aria-label="Send"
-      [disabled]="settingEdit.invalid"
-      (click)="changeConfig(setting?.configId)"
+      matTooltip="apply setting"
+      (click)="changeConfig(setting?.configId, settingControl.value)"
     >
       <mat-icon>send</mat-icon>
     </button>
   </mat-form-field>
   <mat-card-content>
-    <mat-card-subtitle>{{setting?.configName}} : {{setting?.configValue}}</mat-card-subtitle>
+    <mat-card-subtitle>
+      {{setting?.configName}} : {{setting?.configValue}}
+    </mat-card-subtitle>
+    <hr>
+    {{setting?.configDescription}}
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="setting?.dataType === 'bool'">
+  <mat-card-title>
+    {{"ADMIN_DASHBOARD.SETTINGS_TITLE" | translate}} - {{setting?.configName}}
+  </mat-card-title>
+  <mat-slide-toggle class="example-margin"
+                    [formControl]="settingControl"
+                    (change)="changeConfig(setting?.configId, settingControl.value)"
+  >
+    {{setting?.configValue === 'true' ? 'Off' : 'On'}}
+  </mat-slide-toggle>
+  <mat-card-content>
+    <mat-card-subtitle>
+      {{setting?.configName}} : {{setting?.configValue === 'true' ? 'On' : 'Off'}}
+    </mat-card-subtitle>
+    <hr>
+    {{setting?.configDescription}}
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="setting?.dataType === 'string'">
+  <mat-card-title>
+    {{"ADMIN_DASHBOARD.SETTINGS_TITLE" | translate}} - {{setting?.configName}}
+  </mat-card-title>
+  <mat-form-field appearance="fill" class="setting__textarea">
+    <mat-label>{{setting?.configDescription}}</mat-label>
+    <textarea
+      matInput
+      type="text"
+      [formControl]="settingControl"
+    ></textarea>
+    <button
+      mat-button
+      matSuffix
+      mat-icon-button
+      matTooltip="apply setting"
+      color="primary"
+      aria-label="Send"
+      (click)="changeConfig(setting?.configId, settingControl.value)"
+    >
+      <mat-icon>send</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-card-content>
+    <mat-card-subtitle>
+      {{setting?.configName}} : {{setting?.configValue}}
+    </mat-card-subtitle>
+    <hr>
     {{setting?.configDescription}}
   </mat-card-content>
 </mat-card>
