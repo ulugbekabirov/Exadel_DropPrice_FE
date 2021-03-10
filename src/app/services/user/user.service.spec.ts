@@ -1,7 +1,5 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 
-// import { ApiDataService } from './api-data.service';
-// import { ActiveUser } from '../models';
 import { UserService } from './user.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { promise } from 'selenium-webdriver';
@@ -17,7 +15,6 @@ describe('UserService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ HttpClientTestingModule],
-      // providers: [ ApiDataService ]
     });
     service = TestBed.inject(UserService);
     reject = jasmine.createSpy('reject');
