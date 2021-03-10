@@ -54,6 +54,7 @@ export class DiscountDetailComponent implements OnInit, OnDestroy {
         }),
         takeUntil(this.unsubscribe$)
       ).subscribe();
+
   }
 
   ticketHandler(discountId: number): void {

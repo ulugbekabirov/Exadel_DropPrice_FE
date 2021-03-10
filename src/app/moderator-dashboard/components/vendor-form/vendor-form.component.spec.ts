@@ -29,7 +29,7 @@ describe('NewVendorComponent', () => {
       ],
       declarations: [VendorFormComponent],
       providers: [
-        FormBuilder, 
+        FormBuilder,
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialog, useValue: {} }
       ]
@@ -84,7 +84,7 @@ describe('NewVendorComponent', () => {
     component.vendorForm.controls.description.setValue('');
     component.vendorForm.controls.phone.setValue('');
     component.vendorForm.controls.email.setValue('');
-    
+
     fixture.detectChanges();
     expect(el.querySelector('button').disabled).toBeTruthy();
   }));
