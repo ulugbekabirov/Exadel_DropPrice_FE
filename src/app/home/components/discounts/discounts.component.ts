@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { merge, Observable, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
-import { RefDirective } from '../../../directives/ref.directive';
+import { RefDirective } from '../../../directives/ref/ref.directive';
 import { Discount, Tag, Town } from '../../../models';
 import { Sort } from '../../../models/sort';
 import { DiscountsRequestStore } from '../../services/discounts-request-store';
@@ -76,12 +76,10 @@ export class DiscountsComponent implements OnInit, OnDestroy {
   }
 
   onLocationChange(location): void {
-    this.sortStore.set('skip', 0);
     this.sortStore.set('location', {...location});
   }
 
   onSortChange(sortBy): void {
-    this.sortStore.set('skip', 0);
     this.sortStore.set('sortBy', sortBy);
   }
 
@@ -91,12 +89,10 @@ export class DiscountsComponent implements OnInit, OnDestroy {
   }
 
   searchTermChange(searchQuery: string): void {
-    this.sortStore.set('skip', 0);
     this.sortStore.set('searchQuery', searchQuery);
   }
 
   searchTagChange(tags): void {
-    this.sortStore.set('skip', 0);
     this.sortStore.set('tags', tags);
   }
 

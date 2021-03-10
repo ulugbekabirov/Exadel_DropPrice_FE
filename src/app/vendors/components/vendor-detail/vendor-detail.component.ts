@@ -7,7 +7,7 @@ import { PointOfSales } from '../../../models/point-of-sales';
 import { Sort } from '../../../models/sort';
 import { Observable, Subject } from 'rxjs';
 import { Discount, Town, Vendor } from '../../../models';
-import { RefDirective } from '../../../directives/ref.directive';
+import { RefDirective } from '../../../directives/ref/ref.directive';
 import { VendorsFacadeService } from '../../services/vendors-facade.service';
 import { VendorsRequestStore } from '../../services/vendors-request-store';
 import { VendorsStore } from '../../services/vendors-store';

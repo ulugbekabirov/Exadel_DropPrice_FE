@@ -1,0 +1,28 @@
+.topAction {
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.2em;
+  height: 2.6em;
+  position: fixed;
+  border: 2px solid #8d847f;
+  border-radius: .4em;
+  z-index: 30;
+  cursor: pointer;
+  top: 90%;
+  left: 80%;
+  opacity: 0;
+  background: rgba(141, 132, 127, .2);
+  transition: all .2s ease-in-out;
+
+  .go-top__icon {
+    transform: rotate(-90deg);
+    color: #8d847f;
+  }
+}
+
+.show-topAction {
+  opacity: 1;
+  transition: all .2s ease-in-out;
+}
