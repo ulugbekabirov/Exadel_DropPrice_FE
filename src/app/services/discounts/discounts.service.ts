@@ -26,10 +26,6 @@ export class DiscountsService {
     return this.restApi.getDiscounts(options);
   }
 
-  getTowns(): Observable<any> {
-    return this.restApi.getTowns();
-  }
-
   getTags(skip, take): Observable<any> {
     const options: { params: HttpParams } = {
       params: new HttpParams()

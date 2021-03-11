@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { combineLatest, forkJoin, Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { SORTS } from '../../../constants';
@@ -8,6 +9,7 @@ import { Sort } from '../../models/sort';
 import { ApiDataService } from '../../services/api-data/api-data.service';
 import { DiscountsService } from '../../services/discounts/discounts.service';
 import { TicketService } from '../../services/ticket/ticket.service';
+import { TownsService } from '../../services/towns/towns.service';
 import { UserService } from '../../services/user/user.service';
 import { VendorsService } from '../../services/vendors/vendors.service';
 import { VendorsRequestStore } from './vendors-request-store';
@@ -26,6 +28,8 @@ export class VendorsFacadeService {
     private ticketService: TicketService,
     private restApi: ApiDataService,
     private discountsService: DiscountsService,
+    private townsService: TownsService,
+    private translate: TranslateService,
   ) {
   }
 
@@ -35,12 +39,12 @@ export class VendorsFacadeService {
 
   getUserLocation(): any {
     const userCurrentLocation: Town = {
-      townName: 'My location',
+      townName: this.translate.instant('MAIN_PAGE.FILTER.LOCATION_SORT.CURRENT'),
       longitude: this.userService.activeUserValue.longitude,
       latitude: this.userService.activeUserValue.latitude,
     };
     const userOfficeLocation: Town = {
-      townName: 'My Office Location',
+      townName: this.translate.instant('MAIN_PAGE.FILTER.LOCATION_SORT.OFFICE'),
       longitude: this.userService.activeUserValue.officeLongitude,
       latitude: this.userService.activeUserValue.officeLatitude,
     };
@@ -57,7 +61,7 @@ export class VendorsFacadeService {
     if (!this.ifLocationDefined()) {
       const user: ActiveUser = this.userService.activeUserValue;
       const location = {
-        townName: 'My location',
+        townName: this.translate.instant('MAIN_PAGE.FILTER.LOCATION_SORT.CURRENT'),
         latitude: user.latitude ? user.latitude : user.officeLatitude,
         longitude: user.longitude ? user.longitude : user.officeLongitude,
       };
@@ -71,10 +75,10 @@ export class VendorsFacadeService {
   }
 
   getTowns(): Observable<Town[]> {
-    return this.discountsService.getTowns()
+    return this.townsService.getTowns()
       .pipe(
         map(towns => [...this.getUserLocation(), ...towns]),
-        tap(towns => this.store.set('towns', towns))
+        tap(towns => this.townsService.set('towns', towns))
       );
   }
 

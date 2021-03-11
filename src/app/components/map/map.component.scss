@@ -23,6 +23,7 @@ mat-dialog-actions{
   .map__form {
     font-size: 1rem;
     display: flex;
+    flex-flow: row wrap;
     justify-content: start;
     align-items: center;
     gap: 1em;

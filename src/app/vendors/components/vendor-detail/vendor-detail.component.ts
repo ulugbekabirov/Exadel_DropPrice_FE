@@ -7,6 +7,7 @@ import { PointOfSales } from '../../../models/point-of-sales';
 import { Sort } from '../../../models/sort';
 import { Observable, Subject } from 'rxjs';
 import { Discount, Town, Vendor } from '../../../models';
+import { TownsService } from '../../../services/towns/towns.service';
 import { RefDirective } from '../../../directives/ref/ref.directive';
 import { VendorsFacadeService } from '../../services/vendors-facade.service';
 import { VendorsRequestStore } from '../../services/vendors-request-store';
@@ -39,11 +40,12 @@ export class VendorDetailComponent implements OnInit, OnDestroy {
     private facade: VendorsFacadeService,
     private store: VendorsStore,
     private sortStore: VendorsRequestStore,
-    private location: Location
+    private location: Location,
+    private townsService: TownsService
   ) {
     this.vendor$ = this.store.select('activeVendor');
     this.vendorsList$ = this.store.select('vendors');
-    this.towns$ = this.store.select('towns');
+    this.towns$ = this.townsService.select('towns');
     this.sorts$ = this.store.select('sorts');
     this.vendorDiscounts$ = this.store.select('vendorDiscounts');
     this.locationSelected$ = this.sortStore.select('location');

@@ -42,7 +42,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
     promoCode: [''],
     startDate: ['', [Validators.required]],
     endDate: ['', [Validators.required]],
-    activityStatus: [true, [Validators.required]],
+    activityStatus: [false, [Validators.required]],
     tags: this.fb.array([], Validators.required),
     pointOfSales: this.fb.array([], [Validators.required, this.checkPoints.bind(this)]),
   });
@@ -88,7 +88,8 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
         this.vendorsList = this.filteredList = vendors;
         this.discountForm.patchValue(discount);
         this.discountForm.controls.vendorId.disable();
-        this.discountForm.markAsPristine();
+        this.discountForm.markAsUntouched();
+        this.hasUnsavedChanges = false;
       });
     } else {
       this.vendorsService.getVendors().pipe(
@@ -97,9 +98,16 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
       ).subscribe(res => {
         this.vendorsList = this.filteredList = res;
       });
+
+      this.discountForm.valueChanges.pipe(
+        takeUntil(this.unsubscribe$)
+      )
+        .subscribe(() => {
+          this.hasUnsavedChanges = true;
+          this.changeHasUnsavedChanges.emit(true);
+        });
     }
     this.vendorNameChanges();
-    this.hasUnsavedChanges = true;
   }
 
   refreshEditSession(condition): void {
@@ -123,8 +131,8 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
         }),
         takeUntil(this.unsubscribe$)
       ).subscribe(session => {
-        this.editSession = {...session, editTime: (session.editTime * 60), discountArchive: true};
-      });
+      this.editSession = {...session, editTime: (session.editTime * 60), discountArchive: true};
+    });
   }
 
   endEditDiscount(discountId): void {
@@ -140,7 +148,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
         }),
         takeUntil(this.unsubscribe$)
       ).subscribe(session => {
-        this.editSession = {...session, discountArchive: false};
+      this.editSession = {...session, discountArchive: false};
     });
   }
 
@@ -232,7 +240,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
   }
 
   checkIfAllPointsChecked(): void {
-    this.allPointsChecked =  this.pointOfSalesForm.controls.every(point => point.value.checked);
+    this.allPointsChecked = this.pointOfSalesForm.controls.every(point => point.value.checked);
   }
 
   somePointsChecked(): boolean {
@@ -275,6 +283,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
     if (input) {
       input.value = '';
     }
+    this.discountForm.markAsTouched();
   }
 
   removeTag(tag: any): void {
@@ -289,6 +298,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
         this.tags.controls.splice(indx, 1);
       }
     });
+    this.discountForm.markAsTouched();
   }
 
   onSubmit(): void {

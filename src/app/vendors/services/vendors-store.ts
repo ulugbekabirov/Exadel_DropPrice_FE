@@ -7,7 +7,6 @@ import { Sort } from '../../models/sort';
 
 export interface VendorState {
   sorts: Sort[] | [];
-  towns: Town[] | [];
   vendors: Vendor[] | [];
   discounts: Discount[] | [];
   activeDiscount: Discount | {};
@@ -17,7 +16,6 @@ export interface VendorState {
 
 const VENDOR_INITIAL_STATE: VendorState = {
   sorts: [],
-  towns: [],
   vendors: [],
   discounts: [],
   activeDiscount: {},

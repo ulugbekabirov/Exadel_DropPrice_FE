@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { DiscountsRequestStore } from '../../home/services/discounts-request-store';
+import { VendorsRequestStore } from '../../vendors/services/vendors-request-store';
 import { ApiDataService } from '../api-data/api-data.service';
 import { BehaviorSubject, Observable, of, } from 'rxjs';
 import { ActiveUser } from '../../models';
@@ -16,7 +18,9 @@ export class UserService {
 
   constructor(
     private restApi: ApiDataService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private requestVendors: VendorsRequestStore,
+    private requestDiscounts: DiscountsRequestStore
   ) {
     this.activeUserSubject = new BehaviorSubject<ActiveUser>(JSON.parse(localStorage.getItem(KEY_ACTIVE_USER)));
     this.activeUser$ = this.activeUserSubject.asObservable();

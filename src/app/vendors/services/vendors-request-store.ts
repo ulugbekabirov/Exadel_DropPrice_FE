@@ -69,4 +69,8 @@ export class VendorsRequestStore {
     };
     this.requestSubject.next(newRequest);
   }
+
+  reset(): void {
+    this.requestSubject.next(INITIAL_REQUEST_VENDORS_DISCOUNTS);
+  }
 }
