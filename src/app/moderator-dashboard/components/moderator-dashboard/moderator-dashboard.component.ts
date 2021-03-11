@@ -7,7 +7,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class ModeratorDashboardComponent {
-  hasUnsavedChanges = true;
+  hasUnsavedChanges = false;
 
   changeHasUnsavedChanges(event: any): void {
     this.hasUnsavedChanges = event;

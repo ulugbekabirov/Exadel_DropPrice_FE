@@ -107,9 +107,16 @@ export class VendorFormComponent implements OnInit, OnDestroy {
             }
           });
           this.coordinateIsEmpty = false;
-          this.hasUnsavedChanges = true;
           this.vendorForm.markAsPristine();
+          this.hasUnsavedChanges = false;
         });
+    } else {
+      this.vendorForm.valueChanges.pipe(
+        takeUntil(this.unsubscribe$)
+      ).subscribe(() => {
+        this.hasUnsavedChanges = true;
+        this.changeHasUnsavedChanges.emit(true);
+      });
     }
   }
 

@@ -89,6 +89,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
         this.discountForm.patchValue(discount);
         this.discountForm.controls.vendorId.disable();
         this.discountForm.markAsPristine();
+        this.hasUnsavedChanges = false;
       });
     } else {
       this.vendorsService.getVendors().pipe(
@@ -97,9 +98,16 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
       ).subscribe(res => {
         this.vendorsList = this.filteredList = res;
       });
+
+      this.discountForm.valueChanges.pipe(
+        takeUntil(this.unsubscribe$)
+      )
+        .subscribe(() => {
+          this.hasUnsavedChanges = true;
+          this.changeHasUnsavedChanges.emit(true);
+        });
     }
     this.vendorNameChanges();
-    this.hasUnsavedChanges = true;
   }
 
   refreshEditSession(condition): void {
@@ -123,8 +131,8 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
         }),
         takeUntil(this.unsubscribe$)
       ).subscribe(session => {
-        this.editSession = {...session, editTime: (session.editTime * 60), discountArchive: true};
-      });
+      this.editSession = {...session, editTime: (session.editTime * 60), discountArchive: true};
+    });
   }
 
   endEditDiscount(discountId): void {
@@ -140,7 +148,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
         }),
         takeUntil(this.unsubscribe$)
       ).subscribe(session => {
-        this.editSession = {...session, discountArchive: false};
+      this.editSession = {...session, discountArchive: false};
     });
   }
 
@@ -232,7 +240,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
   }
 
   checkIfAllPointsChecked(): void {
-    this.allPointsChecked =  this.pointOfSalesForm.controls.every(point => point.value.checked);
+    this.allPointsChecked = this.pointOfSalesForm.controls.every(point => point.value.checked);
   }
 
   somePointsChecked(): boolean {
