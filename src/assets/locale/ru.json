@@ -70,6 +70,11 @@
       "TOOLTIP_RATING": "Рейтинг скидки"
     }
   },
+  "NOT_FOUND": {
+    "HIGHLIGHTER_TEXT": "Похоже, вы потерялись,",
+    "TEXT": "страница, которую вы ищете, недоступна!",
+    "BUTTON": "Перейти на главную"
+  },
   "MODERATOR_DASHBOARD": {
     "NEW_VENDOR_FORM": "Форма добавления вендора",
     "NEW_DISCOUNT_FORM": "Форма добавления скидки"

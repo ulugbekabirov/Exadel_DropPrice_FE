@@ -5,9 +5,9 @@
     </div>
     <div class="page_404__container_content">
       <p><span class="highlighter">
-          Look like you're lost
-        </span>the page you are looking for not avaible!</p>
-      <a class="link-go_home" [routerLink]="['/']">Go Home</a>
+        {{"NOT_FOUND.HIGHLIGHTER_TEXT" | translate}}
+        </span>{{"NOT_FOUND.TEXT" | translate}}</p>
+      <a class="link-go_home" [routerLink]="['/']">{{"NOT_FOUND.BUTTON" | translate}}</a>
     </div>
   </div>
 </section>
