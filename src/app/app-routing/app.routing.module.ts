@@ -1,5 +1,6 @@
 ﻿import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from '../guards/auth.guard';
 import { NotFoundComponent } from '../shared/components/not-found.components/not-found.component';
 
 const appRoutes: Routes = [
@@ -10,7 +11,11 @@ const appRoutes: Routes = [
   {path: 'admin', loadChildren: () => import('../admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule)},
   {path: 'add-new', loadChildren: () => import('../moderator-dashboard/moderator-dashboard.module').then(m => m.ModeratorDashboardModule)},
   {path: '', redirectTo: '/discounts', pathMatch: 'full'},
-  {path: '**', component: NotFoundComponent}
+  {
+    path: '**',
+    component: NotFoundComponent,
+    canActivate: [AuthGuard],
+  }
 ];
 
 @NgModule({

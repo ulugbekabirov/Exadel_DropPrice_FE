@@ -42,7 +42,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
     promoCode: [''],
     startDate: ['', [Validators.required]],
     endDate: ['', [Validators.required]],
-    activityStatus: [true, [Validators.required]],
+    activityStatus: [false, [Validators.required]],
     tags: this.fb.array([], Validators.required),
     pointOfSales: this.fb.array([], [Validators.required, this.checkPoints.bind(this)]),
   });
@@ -88,7 +88,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
         this.vendorsList = this.filteredList = vendors;
         this.discountForm.patchValue(discount);
         this.discountForm.controls.vendorId.disable();
-        this.discountForm.markAsPristine();
+        this.discountForm.markAsUntouched();
         this.hasUnsavedChanges = false;
       });
     } else {
@@ -283,6 +283,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
     if (input) {
       input.value = '';
     }
+    this.discountForm.markAsTouched();
   }
 
   removeTag(tag: any): void {
@@ -297,6 +298,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
         this.tags.controls.splice(indx, 1);
       }
     });
+    this.discountForm.markAsTouched();
   }
 
   onSubmit(): void {

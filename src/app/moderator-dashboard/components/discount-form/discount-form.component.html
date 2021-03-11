@@ -166,7 +166,7 @@
         <mat-error *ngIf="pointOfSalesForm.errors?.checkPoints">
           {{"NEW_DISCOUNT_FORM.EMPTY_COORDINATES_POINT" | translate}}</mat-error>
         <button mat-raised-button color="primary" type="submit"
-                [disabled]="discountForm.pristine || discountForm.invalid ">
+                [disabled]="discountForm.untouched || discountForm.invalid ">
           {{ "NEW_DISCOUNT_FORM.BTN_TITLE" | translate }}
         </button>
       </form>
