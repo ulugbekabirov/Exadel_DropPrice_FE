@@ -3,31 +3,44 @@
     <ng-content></ng-content>
   </h3>
   <div class="discounts-box__settings">
+
     <mat-form-field class="filter-selector">
-      <mat-label fxLayoutAlign="center center" >
-        {{"MAIN_PAGE.FILTER.SORT_BY.TITLE" | translate}}:
+      <mat-label class="filter-label" fxLayoutAlign="start center">
+        {{"MAIN_PAGE.FILTER.SORT_BY.TITLE" | translate}} :
       </mat-label>
-      <mat-select [formControl]="mainSortBy">
+      <input type="text"
+             matInput
+             [formControl]="mainSortBy"
+             [matAutocomplete]="sortBy"
+      />
+      <mat-autocomplete #sortBy="matAutocomplete" [displayWith]="displaySort.bind(this)">
         <mat-option *ngFor="let sort of sorts$ | async "
                     [value]="sort"
         >
           {{sort.name | translate}}
         </mat-option>
-      </mat-select>
+      </mat-autocomplete>
     </mat-form-field>
+
     <mat-form-field class="form-field-location">
-      <mat-label fxLayoutAlign="center center">
+      <mat-label class="filter-label" fxLayoutAlign="start center">
         <mat-icon class="location__icon">room</mat-icon>
-        {{"MAIN_PAGE.FILTER.LOCATION_SORT.TITLE" | translate}}:
+        {{"MAIN_PAGE.FILTER.LOCATION_SORT.TITLE" | translate}} :
       </mat-label>
-      <mat-select [formControl]="locationSort">
+      <input type="text"
+             matInput
+             [formControl]="locationSort"
+             [matAutocomplete]="location"
+      />
+      <mat-autocomplete #location="matAutocomplete" [displayWith]="displayTown.bind(this)">
         <mat-option *ngFor="let town of towns$ | async"
                     [value]="town"
         >
           {{town.townName}}
         </mat-option>
-      </mat-select>
+      </mat-autocomplete>
     </mat-form-field>
+
   </div>
   <ul class="discounts-box__list">
     <li *ngFor="let discount of discounts$ | async ">

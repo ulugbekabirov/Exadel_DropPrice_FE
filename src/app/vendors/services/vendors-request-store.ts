@@ -29,7 +29,7 @@ const INITIAL_REQUEST_VENDORS_DISCOUNTS: RequestVendorsDiscounts = {
       longitude: null,
       townName: ''
     },
-    take: 10,
+    take: 20,
     skip: 0,
   }
 };

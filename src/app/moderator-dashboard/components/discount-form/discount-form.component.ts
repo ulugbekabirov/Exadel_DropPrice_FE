@@ -332,9 +332,6 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
   }
 
   private updateDiscount(discount: Discount, discountId: number): void {
-    const newObserver = new ReplaySubject();
-    const error = null;
-    const close = null;
     this.discountsService.updateDiscount(discount, discountId).pipe(
       takeUntil(this.unsubscribe$),
       catchError(error => {
