@@ -5,9 +5,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { forkJoin, Observable, ReplaySubject, Subject, throwError } from 'rxjs';
+import { forkJoin, ReplaySubject, Subject, throwError } from 'rxjs';
 import { catchError, debounceTime, filter, map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { Discount, Tag, Vendor } from '../../../models';
+import { Discount, Vendor } from '../../../models';
 import { DiscountsService } from '../../../services/discounts/discounts.service';
 import { VendorsService } from '../../../services/vendors/vendors.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -30,7 +30,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
   hasUnsavedChanges = false;
   vendorsList;
   filteredList;
-  editSession$;
+  editSession;
   allPointsChecked = false;
 
   discountForm: FormGroup = this.fb.group({
@@ -57,7 +57,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private discountsService: DiscountsService,
     private vendorsService: VendorsService,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) {
   }
 
@@ -82,9 +82,9 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
           }
           return [editingDiscount, vendors];
         }),
-        tap(() => this.editSession$ = this.beginEditDiscount(this.discountId)),
         takeUntil(this.unsubscribe$)
       ).subscribe(([discount, vendors]) => {
+        this.beginEditDiscount(this.discountId);
         this.vendorsList = this.filteredList = vendors;
         this.discountForm.patchValue(discount);
         this.discountForm.controls.vendorId.disable();
@@ -104,14 +104,14 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
 
   refreshEditSession(condition): void {
     if (condition) {
-      this.editSession$ = this.beginEditDiscount(this.discountId);
+      this.beginEditDiscount(this.discountId);
     } else {
-      this.editSession$ = this.endEditDiscount(this.discountId);
+      this.endEditDiscount(this.discountId);
     }
   }
 
-  beginEditDiscount(discountId): Observable<any> {
-    return this.discountsService.beginEditDiscount(discountId)
+  beginEditDiscount(discountId): void {
+    this.discountsService.beginEditDiscount(discountId)
       .pipe(
         tap(next => {
           this.snackBar.open(next.message, '', {
@@ -121,12 +121,14 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
             verticalPosition: 'top'
           });
         }),
-        map(session => ({...session, editTime: (session.editTime * 60), discountArchive: true}))
-      );
+        takeUntil(this.unsubscribe$)
+      ).subscribe(session => {
+        this.editSession = {...session, editTime: (session.editTime * 60), discountArchive: true};
+      });
   }
 
-  endEditDiscount(discountId): Observable<any> {
-    return this.discountsService.endEditDiscount(discountId)
+  endEditDiscount(discountId): void {
+    this.discountsService.endEditDiscount(discountId)
       .pipe(
         tap(next => {
           this.snackBar.open(next.message, '', {
@@ -136,8 +138,10 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
             verticalPosition: 'top'
           });
         }),
-        map(session => ({...session, discountArchive: false}))
-      );
+        takeUntil(this.unsubscribe$)
+      ).subscribe(session => {
+        this.editSession = {...session, discountArchive: false};
+    });
   }
 
   displayFn(value?: number | string): any {
@@ -293,6 +297,7 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
     this.hasUnsavedChanges = false;
     this.changeHasUnsavedChanges.emit(false);
     if (this.isEditMode) {
+      this.endEditDiscount(this.discountId);
       this.updateDiscount(newDiscount, this.discountId);
     } else {
       this.createDiscount(newDiscount);
@@ -395,9 +400,6 @@ export class DiscountFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.isEditMode) {
-      this.endEditDiscount(this.discountId);
-    }
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }

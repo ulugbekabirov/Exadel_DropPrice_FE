@@ -64,11 +64,11 @@
               mat-stroked-button
               color="primary"
               (click)="ticketHandler(discount.discountId)"
-              [class.discountAvailable]="!discount.discountAvailable"
-              [disabled]="!discount.discountAvailable"
+              [class.discountAvailable]="!discount.discountAvailable || !discount.activityStatus"
+              [disabled]="!discount.discountAvailable || !discount.activityStatus"
       >
         {{
-        discount.discountAvailable
+        discount.discountAvailable && discount.activityStatus
           ? ("MAIN_PAGE.BUTTONS.TICKET" | translate)
           : ("MAIN_PAGE.BUTTONS.DISCOUNT_INACTIVE" | translate)
         }}

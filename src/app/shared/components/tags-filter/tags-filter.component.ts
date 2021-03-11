@@ -57,5 +57,4 @@ export class TagsFilterComponent implements OnInit {
     }
     this.chipSelected.emit(this.selectedTags);
   }
-
 }

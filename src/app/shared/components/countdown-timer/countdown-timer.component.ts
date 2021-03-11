@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { interval } from 'rxjs';
-import { finalize, mapTo, scan, switchMap, takeWhile, tap } from 'rxjs/operators';
+import {
+  ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild, OnChanges, SimpleChanges
+} from '@angular/core';
+import { interval, Observable, of } from 'rxjs';
+import { mapTo, scan, switchMap, takeWhile, tap } from 'rxjs/operators';
 
 interface EditSession {
   message: string;
@@ -15,29 +17,33 @@ interface EditSession {
   styleUrls: ['./countdown-timer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CountdownTimerComponent implements OnInit {
-  @Input() editSession$;
+export class CountdownTimerComponent implements OnChanges {
+  @Input() editSession: EditSession;
   @Output() counterRefresh: EventEmitter<any> = new EventEmitter();
-  countDown$;
-  counter: number;
+  countDown$: Observable<number>;
   tick = 1000;
 
   @ViewChild('reset', {static: true})
   refreshBtn: ElementRef;
 
-  ngOnInit(): void {
-    this.countDown$ = this.editSession$.pipe(
-      switchMap((session: EditSession) => {
-        this.counter = session.editTime;
-        return interval(this.tick)
-          .pipe(
-            mapTo(-1),
-            scan((acc, curr) => (curr ? curr + acc : acc), this.counter),
-            takeWhile(count => count >= 0),
-            finalize(() => this.counterRefresh.emit(false))
-          );
-      }),
-    );
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.editSession.currentValue) {
+      this.countDown$ = of(changes.editSession.currentValue).pipe(
+        switchMap(({editTime}) => {
+          return interval(this.tick)
+            .pipe(
+              mapTo(-1),
+              scan((acc, curr) => (curr ? curr + acc : acc), editTime),
+              takeWhile(count => count >= 0),
+              tap(count => {
+                if (count === 0) {
+                  this.counterRefresh.emit(false);
+                }
+              })
+            );
+        }),
+      );
+    }
   }
 
   refreshSession($event: MouseEvent): void {
