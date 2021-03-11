@@ -161,8 +161,9 @@
       color: $indigo;
 
       &.discountAvailable {
-        background: $main_gray;
-        color: white;
+        background: #f3f3f3;
+        border: none;
+        color: $discount_list_item_sale;
         cursor: default;
       }
     }

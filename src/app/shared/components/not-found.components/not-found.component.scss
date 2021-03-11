@@ -1,6 +1,45 @@
-p {
-  font-size: 50px;
-  padding: 50px;
-  display: flex;
-  justify-content: center;
+@import "src/variables";
+
+.page_404 {
+
+  &__container {
+    padding: 40px 0;
+    font-size: 20px;
+
+    &_bg {
+      background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+      height: 400px;
+      background-position: center;
+
+      &-text {
+        font-size: 80px;
+        font-weight: 500;
+        text-align: center;
+        color: $main_header_bgColor;
+      }
+    }
+
+    &_content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: -50px;
+      display: flex;
+
+      .highlighter {
+        color: $main_header_bgColor;
+        font-weight: 500;
+      }
+
+      .link-go_home {
+        color: $main_header_txtColor;
+        background-color: $main_header_bgColor;
+        font-size: 18px;
+        padding: 10px 20px;
+        margin: 20px 0;
+        border-radius: 4px;
+      }
+    }
+  }
 }
