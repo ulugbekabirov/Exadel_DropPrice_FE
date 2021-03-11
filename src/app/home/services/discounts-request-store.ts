@@ -70,4 +70,8 @@ export class DiscountsRequestStore {
     };
     this.requestSubject.next(newRequest);
   }
+
+  reset(): void {
+    this.requestSubject.next(INITIAL_REQUEST_DISCOUNTS);
+  }
 }

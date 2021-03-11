@@ -1,4 +1,4 @@
-import { GeocoderResult, GeocoderStatus, MapsAPILoader } from '@agm/core';
+import { MapsAPILoader } from '@agm/core';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
@@ -18,7 +18,6 @@ export class GeocodeService {
   }
 
   private initGeocoder(): void {
-    console.log('Init geocoder!');
     // @ts-ignore
     this.geocoder = new google.maps.Geocoder();
   }
@@ -35,18 +34,14 @@ export class GeocodeService {
   }
 
   geocodeAddress(location: string): Observable<Location> {
-    console.log('Start geocoding!');
     return this.waitForMapsToLoad().pipe(
-      // filter(loaded => loaded),
       switchMap((): Observable<any> => {
         return new Observable(observer => {
           this.geocoder.geocode({address: location}, (results, status) => {
             // @ts-ignore
             if (status === google.maps.GeocoderStatus.OK) {
-              console.log('Geocoding complete!');
               observer.next(results);
             } else {
-              console.log('Error - ', results, ' & Status - ', status);
               observer.next({lat: 0, lng: 0});
             }
             observer.complete();
@@ -68,10 +63,8 @@ export class GeocodeService {
           }, (results, status) => {
             // @ts-ignore
             if (status === google.maps.GeocoderStatus.OK) {
-              console.log('Geocoding complete!');
               observer.next(results);
             } else {
-              console.log('Error - ', results, ' & Status - ', status);
               observer.next({lat: 0, lng: 0});
             }
             observer.complete();
