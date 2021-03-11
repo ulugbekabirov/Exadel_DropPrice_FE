@@ -4,6 +4,7 @@ import { switchMap, takeUntil } from 'rxjs/operators';
 import { RefDirective } from '../../../directives/ref.directive';
 import { Discount, Tag, Town } from '../../../models';
 import { Sort } from '../../../models/sort';
+import { TownsService } from '../../../services/towns/towns.service';
 import { DiscountsRequestStore } from '../../services/discounts-request-store';
 import { DiscountsFacadeService } from '../../services/discounts-facade.service';
 import { DiscountsStore } from '../../services/discounts-store';
@@ -30,6 +31,7 @@ export class DiscountsComponent implements OnInit, OnDestroy {
     private store: DiscountsStore,
     private facade: DiscountsFacadeService,
     private sortStore: DiscountsRequestStore,
+    private townsService: TownsService
   ) {
   }
 
@@ -43,7 +45,7 @@ export class DiscountsComponent implements OnInit, OnDestroy {
       );
     this.sorts$ = this.store.select('sorts');
     this.tags$ = this.store.select('tags');
-    this.towns$ = this.store.select('towns');
+    this.towns$ = this.townsService.select('towns');
 
     this.searchTerm$ = this.sortStore.select('searchQuery');
     this.activeTags$ = this.sortStore.select('tags');
