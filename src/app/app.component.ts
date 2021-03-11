@@ -3,9 +3,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from './auth/services/auth.service';
 import { AuthInfo } from './models';
 import { LanguageService } from './services/language/language.service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { LoadingService } from './services/loading/loading.service';
-import { delay } from 'rxjs/operators';
+import { delay, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -14,10 +14,9 @@ import { delay } from 'rxjs/operators';
 })
 export class AppComponent implements OnInit, OnDestroy {
   private authUser: AuthInfo;
-  private subscription: Subscription;
   public title = 'InternshipFe';
   loading$: Observable<boolean>;
-
+  private unsubscribe$ = new Subject<void>();
 
   constructor(
     private translateService: TranslateService,
@@ -25,11 +24,17 @@ export class AppComponent implements OnInit, OnDestroy {
     private languageService: LanguageService,
     private loadingService: LoadingService
   ) {
-    this.subscription = this.auth.authUser.subscribe(user => this.authUser = user);
+    this.auth.authUser.pipe(
+      takeUntil(this.unsubscribe$)
+    )
+      .subscribe(user => this.authUser = user);
   }
 
   ngOnInit(): void {
     this.languageService.select('activeLanguage')
+      .pipe(
+        takeUntil(this.unsubscribe$)
+      )
       .subscribe((next: string) => this.translateService.use(next));
     this.loading$ = this.loadingService.isLoading$.pipe(
       delay(0)
@@ -37,6 +42,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

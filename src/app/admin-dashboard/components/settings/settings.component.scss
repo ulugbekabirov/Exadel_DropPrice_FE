@@ -1,23 +1,19 @@
 @import "src/variables";
 
 .settings {
-  width: 100%;
   font-size: 1rem;
-  position: relative;
-  min-height: 100vh;
-  padding: 2em 0;
+  padding: 1rem 0;
   color: $main_black;
 
   .grid {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-gap: 2em;
-    justify-items: stretch;
-    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 1rem;
+
 
     > article {
       display: flex;
-      width: 100%;
       border-radius: $border-radius;
       box-shadow: $box-shadow;
     }
@@ -25,6 +21,6 @@
 
   @media screen and (max-width: 767px) {
     position: static;
-    width: 100%;
+    //width: 100%;
   }
 }

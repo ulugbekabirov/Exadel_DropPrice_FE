@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, pluck } from 'rxjs/operators';
-import { Discount, Tag, Town, Vendor } from '../../models';
+import { Discount, Tag } from '../../models';
 import { PointOfSales } from '../../models/point-of-sales';
 import { Sort } from '../../models/sort';
 
 export interface HomeState {
   sorts: Sort[] | [];
   tags: Tag[] | [];
-  towns: Town[] | [];
   discounts: Discount[] | [];
   activeDiscount: Discount | {};
   pointsOfSales: PointOfSales[] | [];
@@ -17,7 +16,6 @@ export interface HomeState {
 const HOME_INITIAL_STATE: HomeState = {
   sorts: [],
   tags: [],
-  towns: [],
   discounts: [],
   activeDiscount: {},
   pointsOfSales: [],

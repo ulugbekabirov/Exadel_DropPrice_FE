@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, EventEmitter, Input } from '@angular/core';
-import { Output } from '@angular/core';
+import { ChangeDetectionStrategy, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Component } from '@angular/core';
 import { Setting } from '../../../models/setting';
-import { FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-setting-item',
@@ -11,15 +10,21 @@ import { FormGroup } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class SettingItemComponent {
-  @Input()
-  setting: Setting;
-  @Output()
-  onSettingChange = new EventEmitter();
-  @Input()
-  settingEdit: FormGroup;
+export class SettingItemComponent implements OnInit {
+  @Input() setting: Setting;
+  @Output() onSettingChange = new EventEmitter();
+  settingControl;
 
-  changeConfig(configId: number): void {
-    this.onSettingChange.emit(configId);
+  ngOnInit(): void {
+    this.settingControl = new FormControl('');
+    if (this.setting.dataType === 'bool') {
+      this.settingControl.patchValue(this.setting.configValue === 'true');
+      return;
+    }
+    this.settingControl.patchValue(this.setting.configValue);
+  }
+
+  changeConfig(configId: number, newValue): void {
+    this.onSettingChange.emit({configId, newValue});
   }
 }
