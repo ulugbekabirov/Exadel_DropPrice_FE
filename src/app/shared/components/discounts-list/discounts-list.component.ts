@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs/operators';
 import { LocationCoords, Town } from '../../../models';
@@ -29,6 +30,11 @@ export class DiscountsListComponent implements OnInit, OnDestroy {
   mainSortBy: FormControl = new FormControl();
   locationSort: FormControl = new FormControl();
 
+  constructor(
+    private translate: TranslateService
+  ) {}
+
+
   ngOnInit(): void {
     this.sortBySelected$.pipe(
       switchMap((sortBy) => {
@@ -49,6 +55,22 @@ export class DiscountsListComponent implements OnInit, OnDestroy {
     ).subscribe(next => {
       this.locationChange.emit(next);
     });
+  }
+
+  displayTown(value?: Town): string {
+    if (!value) {
+      return;
+    }
+    const {townName} = value;
+    return townName;
+  }
+
+  displaySort(value?: Sort): string {
+    if (!value) {
+      return;
+    }
+    const {name} = value;
+    return this.translate.instant(name);
   }
 
   requestTicket(discountId: any): void {

@@ -10,15 +10,28 @@
     justify-content: space-between;
     font-size: 1rem;
     color: $gray_text_color;
+    padding: 0 2rem;
+    gap: 3rem;
 
     .mat-form-field {
-      flex-basis: 25%;
+      flex: 0 1 auto;
       font-weight: 500;
+      width: 18rem;
+
+      .filter-label {
+       padding: 0 1rem .6rem 1rem;
+      }
+
+      input {
+        padding: 0 1rem;
+      }
+      
     }
 
     @media screen and (max-width: 767px) {
       flex-direction: column;
       flex-wrap: wrap;
+      gap: 1rem;
 
       .mat-form-field {
         width: 100%;

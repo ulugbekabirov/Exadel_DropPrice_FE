@@ -115,36 +115,36 @@
   }
   .discount-detail__content {
     margin-top: 20px;
-  
+
     .discount-content__description {
       margin-bottom: 20px;
-  
+
       .discount-icons {
         display: flex;
         gap: 10px;
-  
+
         @media screen and (max-width: 600px) {
           flex-direction: column;
         }
       }
-  
+
       .action__icon {
         cursor: pointer;
         border: none;
         outline: none;
       }
-  
+
       .action__icon:hover,
       .action__icon:active,
       .action__icon:focus {
         opacity: .8;
       }
     }
-  
+
     .action__button {
       cursor: pointer;
       margin-top: 2rem;
-  
+
       &:active,
       &:hover,
       &:focus {
@@ -152,12 +152,12 @@
       }
     }
   }
-  
+
   .highlighter {
     font-weight: 700;
     font-size: 1rem;
-    
-  
+
+
     @media screen and (max-width: 600px) {
       font-weight: 600;
       font-size: .9rem;
@@ -175,14 +175,14 @@
       }
     }
   }
-  
+
   .discount-detail__actions {
     width: 100%;
-  
+
     .ticket {
       width: 25%;
     }
-  
+
     @media screen and (max-width: 600px) {
       .ticket {
         width: 100%;

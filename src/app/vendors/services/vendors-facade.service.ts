@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { combineLatest, forkJoin, Observable, of } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { SORTS } from '../../../constants';
-import { ActiveUser, Tag, Town } from '../../models';
+import { ActiveUser, Town } from '../../models';
 import { PointOfSales } from '../../models/point-of-sales';
 import { Sort } from '../../models/sort';
 import { ApiDataService } from '../../services/api-data/api-data.service';
@@ -136,10 +136,11 @@ export class VendorsFacadeService {
             latitude: request.location.latitude,
             longitude: request.location.longitude,
           };
+          const {location, ...requestOpt} = reqOpt;
           return forkJoin(
             this.getVendor(vendorId),
             this.getVendors(),
-            this.getVendorDiscounts(vendorId, reqOpt),
+            this.getVendorDiscounts(vendorId, requestOpt),
             this.getVendorsPointsOfSales(vendorId)
           );
         })
