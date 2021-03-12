@@ -12,7 +12,7 @@
   },
   "HEADER": {
     "SELECTOR_TITLE": "Язык",
-    "ADMIN_PANEL_LINK_TITLE": "Статистика",
+    "ADMIN_PANEL_LINK_TITLE": "Панель администратора",
     "MODERATOR_PANEL_LINK_TITLE": "Добавить",
     "USER_PROFILE": "Мой профиль",
     "CHANGE_LANGUAGE": "Изменить язык",
@@ -69,6 +69,11 @@
       "TOOLTIP_DISCOUNT": "Подробнее о скидке",
       "TOOLTIP_RATING": "Рейтинг скидки"
     }
+  },
+  "NOT_FOUND": {
+    "HIGHLIGHTER_TEXT": "Похоже, вы потерялись,",
+    "TEXT": "страница, которую вы ищете, недоступна!",
+    "BUTTON": "Перейти на главную"
   },
   "MODERATOR_DASHBOARD": {
     "NEW_VENDOR_FORM": "Форма добавления вендора",

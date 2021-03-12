@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { UnsavedChangesGuard } from '../guards/unsaved-changes/unsaved-changes.guard';
 import { ModeratorDashboardComponent } from './components/moderator-dashboard/moderator-dashboard.component';
 import { VendorFormComponent } from './components/vendor-form/vendor-form.component';
 import { AuthGuard } from '../guards/auth.guard';
@@ -14,17 +13,14 @@ const routes: Routes = [
     path: '',
     component: ModeratorDashboardComponent,
     canActivate: [AuthGuard],
-    canDeactivate: [UnsavedChangesGuard]
   },
   {
     path: 'discounts/edit/:id',
     component: DiscountFormComponent,
-    canDeactivate: [UnsavedChangesGuard]
   },
   {
     path: 'vendors/edit/:id',
     component: VendorFormComponent,
-    canDeactivate: [UnsavedChangesGuard]
   },
 ];
 

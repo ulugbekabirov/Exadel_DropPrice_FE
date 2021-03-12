@@ -65,7 +65,11 @@ export class DiscountsFacadeService {
       };
       this.requestDiscountsStore.set('location', location);
     }
-    return forkJoin(this.getSorts(), this.getTags(), this.getTowns()).pipe(
+    return forkJoin(
+      this.getSorts(),
+      this.getTags(),
+      this.getTowns()
+    ).pipe(
       switchMap(() => {
         return this.getDiscounts();
       })
@@ -112,7 +116,8 @@ export class DiscountsFacadeService {
             latitude: request.location.latitude,
             longitude: request.location.longitude,
           };
-          return this.discountsService.searchDiscounts(req)
+          const {location, ...fixRequest} = req;
+          return this.discountsService.searchDiscounts(fixRequest)
             .pipe(
               map(discounts => {
                 return discounts.map(discount => {

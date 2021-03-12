@@ -123,7 +123,7 @@
               </span>
               <span class="discount-content__date_end" fxFlex="75">
                 <span
-                  [ngStyle]="{'background': (discount$ | async)?.discountAvailable ? 'initial' : '#da8171'}"
+                  [ngStyle]="{'background': (discount$ | async)?.discountAvailable ? 'initial' : 'rgba(218,129,113,0.6)'}"
                 >
                   {{(discount$ | async)?.startDate | date:"dd.MM.yyyy"}}
                   &mdash; {{(discount$ | async)?.endDate | date:"dd.MM.yyyy"}}

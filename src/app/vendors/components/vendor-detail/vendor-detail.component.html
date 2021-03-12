@@ -20,7 +20,7 @@
             <div class="vendors-label__rating" fxLayout="row" fxLayoutGap=".1em">
               <span class="rating__amount" fxLayoutAlign="center center"
                 matTooltip="{{'VENDOR_PAGE.VENDOR_DETAIL.DETAIL_RATING_LABEL' | translate}}">
-                {{(vendor$ | async)?.vendorRating | number: '.1-2'}}
+                {{(vendor$ | async)?.vendorRating | number: '.1-1'}}
               </span>
               <mat-icon class="rating__icon" fxLayoutAlign="center center" matTooltipPosition="right">
                 {{(vendor$ | async)?.vendorRating ? 'star_rate' : 'star_border'}}
